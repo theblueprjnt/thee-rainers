@@ -1,34 +1,34 @@
 ---
 import Layout from '../layouts/Base.astro';
 ---
-<Layout title="Thee Rainers — Engineered for the ring.">
+<Layout title="Thee Rainers — Better training. Better results.">
 
-  <!-- HERO: 55/45 — Dominant type left, fighter right -->
-  <section class="w-full md:min-h-screen overflow-hidden grid grid-cols-1 md:grid-cols-[55%_45%] bg-white border-b border-[#0A0A0A]/8">
+  <!-- HERO: 60/40 — type left, fighter right -->
+  <section class="w-full md:min-h-screen overflow-hidden grid grid-cols-1 md:grid-cols-[60%_40%] bg-white border-b border-[#0A0A0A]/8">
 
     <!-- Left: Mission -->
-    <div class="flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-28 pb-12 md:py-0 relative z-10">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Systemic Boxing Performance</p>
+    <div class="flex flex-col justify-center px-8 md:px-14 lg:px-20 pt-28 pb-12 md:py-0 relative z-10 overflow-hidden">
+      <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-5">Boxing Tech · @theerainers</p>
       <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-8"
-        style="font-size: clamp(3rem, 9vw, 7rem); line-height: 0.82;">
+        style="font-size: clamp(2.5rem, 5.5vw, 4.5rem); line-height: 0.85;">
         Engineered<br/>for the ring.
       </h1>
       <p class="text-[#0A0A0A]/55 mb-10 max-w-[400px] text-base leading-relaxed">
         Your ambition is ahead of your gym. This closes that gap.
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
-        <a href="#gate"
+        <a href="/footwork-foundation"
           class="blue-btn inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
-          Enter the System
+          Get Free Protocol →
         </a>
         <a href="/vault"
-          class="inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/70">
-          View Products
+          class="inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border border-[#0A0A0A]/20 text-[#0A0A0A]/50 bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:border-[#0A0A0A]/40 hover:text-[#0A0A0A]/80 whitespace-nowrap">
+          See the System →
         </a>
       </div>
     </div>
 
-    <!-- Right 45%: Fighter cutout — desktop only -->
+    <!-- Right 40%: Fighter cutout — desktop only -->
     <div class="hidden md:flex items-end justify-center relative overflow-hidden bg-[#0A0A0A]">
       <img
         src="/images/herocropped.png"
@@ -41,7 +41,7 @@ import Layout from '../layouts/Base.astro';
 
   </section>
 
-  <!-- Mobile fighter strip — visible below hero text on mobile -->
+  <!-- Mobile fighter strip -->
   <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 80vw; max-height: 400px;">
     <img src="/images/herocropped.png" alt="Thee Rainers"
       class="w-full h-full object-contain object-bottom"
@@ -51,63 +51,72 @@ import Layout from '../layouts/Base.astro';
   <!-- GATE: Path Choice -->
   <section id="gate" class="w-full min-h-screen bg-white flex flex-col items-center justify-center px-8 text-center py-24 border-b border-[#0A0A0A]/8">
 
-    <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-10">Two entry points.</p>
+    <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-10">Two paths. Both free.</p>
     <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6 max-w-[720px]"
       style="font-size: clamp(2.5rem, 6vw, 4rem);">
-      Pick your<br/>starting<br/>point.
+      Where does<br/>your training<br/>start?
     </h2>
-    <p class="text-[#0A0A0A]/35 text-sm mb-16 max-w-[420px] leading-relaxed">
-      Competitive or curious — both are free. Both move you forward.
+    <p class="text-[#0A0A0A]/40 text-sm mb-16 max-w-[420px] leading-relaxed">
+      Both paths are free. Neither is more important than the other. Pick where you are right now.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 mb-6">
       <a href="/lever-audit"
-        class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-5 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+        class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A] text-[#0A0A0A] bg-transparent px-10 py-5 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0A0A0A] hover:text-white">
         I Compete →
       </a>
       <a href="/footwork-foundation"
-        class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A]/20 text-[#0A0A0A]/60 bg-transparent px-10 py-5 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/40 hover:text-[#0A0A0A]">
+        class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A] text-[#0A0A0A] bg-transparent px-10 py-5 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0A0A0A] hover:text-white">
         Build the Foundation →
       </a>
     </div>
 
-    <a href="/footwork-foundation"
-      class="text-[#0A0A0A]/25 text-xs tracking-widest uppercase hover:text-[#0A0A0A]/50 transition-colors duration-200 underline underline-offset-4">
-      Not sure yet — start with the foundation
-    </a>
+    <p class="text-[#0A0A0A]/25 text-xs tracking-widest uppercase mt-4">
+      Not sure — either one works. Start with foundation.
+    </p>
 
   </section>
 
-  <!-- OFFER GRID: Product Architecture -->
+  <!-- OFFER STACK -->
   <section class="bg-white py-20 md:py-28 border-b border-[#0A0A0A]/8">
     <div class="mx-auto px-8 md:px-16 lg:px-24 w-full max-w-[1280px]">
 
       <div class="mb-14">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">The Architecture</p>
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85]">Select your<br/>entry point.</h2>
+        <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-4">Everything. Start anywhere.</p>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85]">Better training.<br/>Better results.</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-[1px] bg-[#0A0A0A]/8">
 
-        <!-- LEFT 60%: Private Architecture — Flagship -->
+        <!-- LEFT 60%: Private Architecture -->
         <div class="bg-[#0A0A0A] p-12 md:p-16 flex flex-col justify-between min-h-[540px] group border border-[#6A0DAD]/20 hover:border-[#6A0DAD]/50 transition-colors duration-300">
           <div>
-            <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">By Application Only</span>
+            <span class="text-[#D4A373] text-xs tracking-wide uppercase">Application Only · 1 of 1</span>
             <h3 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Private<br/>Architecture</h3>
-            <p class="text-white/40 text-sm leading-relaxed max-w-[380px]">1 of 1. No templates. No cohorts. A system engineered around your specific fight, body, and mind. This is not coaching — it is architecture.</p>
+            <p class="text-white/40 text-sm leading-relaxed max-w-[380px]">No templates. No cohorts. A system built entirely around your fight, your body, your mind. Not coaching — architecture.</p>
           </div>
           <a href="/command" class="purple-btn inline-flex items-center justify-center font-bold border-2 border-[#6A0DAD] text-[#6A0DAD] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#6A0DAD] hover:text-white self-start mt-10">Apply →</a>
         </div>
 
-        <!-- RIGHT 40%: Supporting Methodology -->
+        <!-- RIGHT 40%: Accessible offers -->
         <div class="flex flex-col gap-[1px] bg-[#0A0A0A]/8">
+
+          <!-- Workshop — urgency first -->
+          <div class="bg-white p-8 flex flex-col justify-between flex-1 group hover:bg-[#F6F6F6] transition-colors duration-300">
+            <div>
+              <span class="text-[#D4A373] text-xs tracking-wide uppercase">$197 · June 27 · Live</span>
+              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">The Calibration<br/>Workshop</h3>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">90 minutes. Real-time correction on your actual movement. Live, not recorded.</p>
+            </div>
+            <a href="/workshop" class="inline-flex items-center gap-2 text-[#0057FF] text-xs font-bold tracking-widest uppercase mt-6 hover:opacity-60 transition-opacity duration-200 group-hover:gap-3">Reserve a Seat →</a>
+          </div>
 
           <!-- 7-Lever Audit -->
           <div class="bg-white p-8 flex flex-col justify-between flex-1 group hover:bg-[#F6F6F6] transition-colors duration-300">
             <div>
-              <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">Free · Competitors</span>
+              <span class="text-[#D4A373] text-xs tracking-wide uppercase">Free · Competitors</span>
               <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">7-Lever<br/>Audit</h3>
-              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Find the leak in your system before your next fight.</p>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Find the leak before your next fight. Seven levers, instant score, free PDF.</p>
             </div>
             <a href="/lever-audit" class="inline-flex items-center gap-2 text-[#0A0A0A]/40 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#0057FF] transition-colors duration-200 group-hover:gap-3">Get the Audit →</a>
           </div>
@@ -115,32 +124,63 @@ import Layout from '../layouts/Base.astro';
           <!-- Footwork Foundation -->
           <div class="bg-white p-8 flex flex-col justify-between flex-1 group hover:bg-[#F6F6F6] transition-colors duration-300">
             <div>
-              <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">Free · Foundation</span>
+              <span class="text-[#D4A373] text-xs tracking-wide uppercase">Free · Everyone</span>
               <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Footwork<br/>Foundation</h3>
-              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">30 days. No equipment. The system starts here.</p>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">30 days. No equipment. The base everything else runs on. Free download.</p>
             </div>
             <a href="/footwork-foundation" class="inline-flex items-center gap-2 text-[#0A0A0A]/40 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#0057FF] transition-colors duration-200 group-hover:gap-3">Start Here →</a>
           </div>
 
-          <!-- Workshop -->
-          <div class="bg-white p-8 flex flex-col justify-between flex-1 group hover:bg-[#F6F6F6] transition-colors duration-300">
-            <div>
-              <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">$197 · June 27</span>
-              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">The Calibration<br/>Workshop</h3>
-              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Live implementation. Coached in real-time.</p>
-            </div>
-            <a href="/workshop" class="inline-flex items-center gap-2 text-[#0A0A0A]/40 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#0057FF] transition-colors duration-200 group-hover:gap-3">Reserve a Seat →</a>
-          </div>
-
         </div>
+      </div>
+
+      <!-- Blueprints row — visible, purchaseable -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-[#0A0A0A]/8 mt-[1px]">
+
+        <div class="bg-[#F6F6F6] p-8 flex flex-col justify-between group hover:bg-white transition-colors duration-300">
+          <div>
+            <span class="text-[#0A0A0A]/30 text-xs tracking-wide uppercase">Blueprint · $47</span>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Footwork<br/>Blueprint</h3>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Full video breakdown. 56 drill rounds. 30-day progression. Win fights with footwork.</p>
+          </div>
+          <a href="https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k" target="_blank"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white mt-8">
+            Buy Now — $47 →
+          </a>
+        </div>
+
+        <div class="bg-[#F6F6F6] p-8 flex flex-col justify-between group hover:bg-white transition-colors duration-300">
+          <div>
+            <span class="text-[#0A0A0A]/30 text-xs tracking-wide uppercase">Blueprint · $47</span>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Shadowboxing<br/>Blueprint</h3>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Turn shadowboxing into realistic boxing. Skill tests, rhythm, range control.</p>
+          </div>
+          <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l" target="_blank"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white mt-8">
+            Buy Now — $47 →
+          </a>
+        </div>
+
+        <div class="bg-[#0A0A0A] p-8 flex flex-col justify-between group hover:bg-[#0D1F1F] transition-colors duration-300">
+          <div>
+            <span class="text-[#D4A373] text-xs tracking-wide uppercase">Bundle · Best Value</span>
+            <h3 class="font-black text-white uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Both<br/>Blueprints</h3>
+            <p class="text-white/40 text-xs leading-relaxed">Footwork + Shadowboxing. 106 drill rounds. The full system. Monthly Q&A included.</p>
+          </div>
+          <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white mt-8">
+            Buy Now — $87 →
+          </a>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- SOCIAL PROOF: Community reach -->
+  <!-- SOCIAL PROOF -->
   <section class="bg-white py-16 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto px-8 md:px-16 lg:px-24">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-10 text-center">The Community</p>
+      <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-10 text-center">The Community</p>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-[1px] bg-[#0A0A0A]/8">
 
         <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
@@ -179,13 +219,10 @@ import Layout from '../layouts/Base.astro';
         </a>
 
       </div>
-      <p class="text-center text-[#0A0A0A]/20 text-xs tracking-wide mt-8">
-        @theerainers
-      </p>
     </div>
   </section>
 
-  <!-- SCRIPTURE ANCHOR -->
+  <!-- SCRIPTURE -->
   <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-28">
     <div class="max-w-[720px] mx-auto w-full">
       <p class="font-black uppercase tracking-tighter leading-[0.88] mb-6 text-white/10"
