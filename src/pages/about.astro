@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Base.astro';
+---
+<Layout title="About — Thee Rainers">
+  <Fragment slot="head">
+    <meta name="description" content="The identity behind the system. Grounded in faith, disciplined by virtue, built for those who refuse to run aimlessly." />
+  </Fragment>
+
+  <!-- Identity -->
+  <section class="bg-[#0A0A0A] min-h-screen px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
+    <div class="max-w-[1280px] mx-auto w-full">
+
+      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24 mb-24">
+        <div>
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">The Identity</p>
+          <h1 class="font-black text-white uppercase tracking-tighter text-5xl md:text-7xl leading-[0.82] mb-10">Not a brand.<br/>A standard.</h1>
+          <p class="text-white/50 text-base leading-relaxed max-w-[480px] mb-8">
+              Thee Rainers is the operating system I built because the gym gave me fragments. No structure, no sequence, no source. I had to build it from the floor up — from the Word, from the film, from the data my own body gave me.
+          </p>
+          <p class="text-white/30 text-sm leading-relaxed max-w-[480px]">
+            The mission is not to produce fighters. It is to produce people who think, move, and operate with systemic precision — and give the glory back to God when they do.
+          </p>
+        </div>
+        <div class="hidden md:flex items-center justify-center">
+          <div class="w-full max-w-[320px] aspect-[3/4] overflow-hidden border border-white/5">
+            <img
+              src="/images/rainers-hero.jpg"
+              alt="Thee Rainers"
+              class="w-full h-full object-cover object-top hero-matte"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- The Standard -->
+      <div class="border-t border-white/5 pt-20 mb-20">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">The Standard — 7 Holy Virtues</p>
+        <div class="flex flex-col divide-y divide-white/5">
+          {[
+            { virtue: 'Humility',    line: 'Know your source. The strength is not yours.' },
+            { virtue: 'Charity',     line: 'Give the work freely. Keep the system sacred.' },
+            { virtue: 'Patience',    line: 'Absorb. Return. The SSC is patience made physical.' },
+            { virtue: 'Diligence',   line: '10 minutes of film. Every day. No exceptions.' },
+            { virtue: 'Temperance',  line: 'One range at a time. Adaptable in form, fixed in purpose.' },
+            { virtue: 'Kindness',    line: 'The community is the compound. Build it right.' },
+            { virtue: 'Chastity',    line: 'Whole-body discipline. Every punch from the floor.' },
+          ].map(v => (
+            <div class="grid grid-cols-[140px_1fr] py-6 gap-6 items-baseline tr-card">
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">{v.virtue}</p>
+              <p class="text-white/40 text-sm leading-relaxed">{v.line}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Scripture -->
+      <div class="border-t border-white/5 pt-20 mb-20">
+        <p class="font-black text-white/12 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] max-w-[640px] mb-6">
+          "Run in such a way as to get the prize. Every athlete exercises self-control in all things. So I do not run aimlessly; I do not box as one beating the air."
+        </p>
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:24–26 · The Source Code</p>
+      </div>
+
+      <!-- CTA -->
+      <div class="border-t border-white/5 pt-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <p class="text-white/30 text-sm max-w-[400px] leading-relaxed">If this is the standard you hold yourself to, the next step is the application.</p>
+        <a href="/command" class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">Apply →</a>
+      </div>
+
+    </div>
+  </section>
+</Layout>

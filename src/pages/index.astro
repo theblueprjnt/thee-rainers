@@ -1,63 +1,142 @@
 ---
 import Layout from '../layouts/Base.astro';
-import Rule from '../components/primitives/Rule.astro';
 ---
-<Layout title="Thee Rainers — Boxing built on structure, not exhaustion.">
-  <div class="relative" style="height: 88vh; min-height: 520px;">
-    <img src="/images/rainers-hero.jpg" alt="Rainers in the gym" class="absolute inset-0 w-full h-full object-cover object-center" width="1440" height="900" />
-    <div class="absolute inset-0 bg-navy/55"></div>
-    <div class="relative h-full flex items-center">
-      <div class="mx-auto px-6 w-full max-w-[960px]">
-        <h1 class="font-bold text-white mb-5 text-5xl md:text-6xl leading-[1.05]">Composure is a physical state.</h1>
-        <p class="text-white/80 mb-8 max-w-[540px] text-lg leading-[1.55]">Calm is not a personality. It is knowing where you are when it gets fast.</p>
-        <a href="/footwork-foundation" class="inline-flex items-center justify-center font-semibold transition-all duration-200 cursor-pointer no-underline bg-terracotta text-white px-8 py-3.5 text-sm tracking-wide hover:opacity-90 active:opacity-80">Get the Free Blueprint</a>
+<Layout title="Thee Rainers — Engineered for the ring.">
+
+  <!-- HERO: Full-bleed cinematic -->
+  <section class="relative w-full h-screen overflow-hidden">
+    <img
+      src="/images/coldfightpic2.jpg"
+      alt="Thee Rainers — in the ring"
+      class="absolute inset-0 w-full h-full object-cover object-center hero-matte"
+      width="1240"
+      height="1860"
+    />
+    <div class="hero-overlay absolute inset-0"></div>
+    <div class="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 lg:px-24 max-w-[620px]">
+      <h1 class="font-black text-brand-light uppercase tracking-tighter mb-8 text-5xl md:text-7xl leading-[0.8]">Engineered<br/>for the ring.</h1>
+      <p class="text-brand-light/60 mb-10 max-w-[420px] text-base leading-relaxed">Your ambition is ahead of your gym. This closes that gap.</p>
+      <div>
+        <a href="/footwork-foundation" class="inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:bg-[#D4A373] hover:text-black">Enter the System</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="bg-cream py-5">
-    <div class="mx-auto px-6 w-full max-w-[960px] text-center">
-      <p class="text-muted tracking-widest text-xs uppercase">Over 120 fighters coached. Riga, Latvia.</p>
+  <!-- TRUTH THRESHOLD: The Gate -->
+  <section id="gate" class="w-full h-screen bg-[#0A0A0A] flex flex-col items-center justify-center px-8 text-center">
+
+    <div id="gate-question" class="flex flex-col items-center">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-10">Before you continue.</p>
+      <h2 class="font-black text-white uppercase tracking-tighter text-4xl md:text-[3.5rem] leading-[0.85] mb-16 max-w-[680px]">Are you building<br/>a system — or trying<br/>to get fit?</h2>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button
+          id="btn-system"
+          class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 cursor-pointer hover:bg-[#D4A373] hover:text-black"
+        >I'm building a system.</button>
+        <button
+          id="btn-fit"
+          class="inline-flex items-center justify-center font-bold border-2 border-white/15 text-white/25 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 cursor-pointer hover:border-white/30 hover:text-white/40"
+        >I'm looking to get fit.</button>
+      </div>
     </div>
-  </div>
 
-  <section class="bg-bg py-16 md:py-20" id="paths">
-    <div class="mx-auto px-6 w-full max-w-[960px]">
-      <Rule />
-      <h2 class="font-bold text-navy mb-8 text-3xl">Find your path in.</h2>
+    <div id="gate-rejection" style="display:none" class="flex flex-col items-center">
+      <p class="text-white/30 text-[11px] tracking-widest uppercase mb-10">Understood.</p>
+      <h2 class="font-black text-white uppercase tracking-tighter text-4xl md:text-[3.5rem] leading-[0.85] mb-8 max-w-[560px]">This program<br/>isn't built for that.</h2>
+      <p class="text-white/40 text-base max-w-[380px] leading-relaxed mb-10">The Footwork Foundation is free. Start there. Come back when the question changes.</p>
+      <a href="/footwork-foundation" class="inline-flex items-center gap-2 text-[#D4A373] text-sm font-bold tracking-widest uppercase hover:opacity-60 transition-opacity duration-200">The Footwork Foundation →</a>
+    </div>
 
-      <div class="divide-y divide-rule">
-        <div class="py-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3">
-          <h3 class="font-semibold text-navy text-xl">The Footwork Foundation</h3>
-          <div class="flex items-baseline gap-6 shrink-0">
-            <span class="text-muted text-sm">Free</span>
-            <a href="/footwork-foundation" class="text-ink underline underline-offset-4 text-sm font-semibold hover:text-terracotta">Get the guide</a>
+  </section>
+
+  <!-- OFFER GRID: 60/40 Asymmetric -->
+  <section class="bg-[#0A0A0A] py-20 md:py-28" id="paths" style="display:none">
+    <div class="mx-auto px-8 md:px-16 lg:px-24 w-full max-w-[1280px]">
+
+      <div class="mb-14">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">The Architecture</p>
+        <h2 class="font-black text-white uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85]">Select your<br/>entry point.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-[2px]">
+
+        <!-- LEFT 60%: Private Architecture — Flagship -->
+        <div class="bg-[#0D2828] p-12 md:p-16 flex flex-col justify-between min-h-[540px] group border border-[#D4A373]/20 hover:border-[#D4A373]/50 transition-colors duration-300">
+          <div>
+            <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">By Application Only</span>
+            <h3 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Private<br/>Architecture</h3>
+            <p class="text-white/50 text-sm leading-relaxed max-w-[380px]">1 of 1. No templates. No cohorts. A system engineered around your specific fight, body, and mind. This is not coaching — it is architecture.</p>
           </div>
+          <a href="/command" class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black self-start mt-10 group-hover:gap-3">Apply →</a>
         </div>
 
-        <div class="py-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3">
-          <h3 class="font-semibold text-navy text-xl">The Blueprints (Bundle)</h3>
-          <div class="flex items-baseline gap-6 shrink-0">
-            <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank" class="text-ink underline underline-offset-4 text-sm font-semibold hover:text-terracotta">Buy the Bundle</a>
-          </div>
-        </div>
+        <!-- RIGHT 40%: Supporting Methodology — Stacked -->
+        <div class="flex flex-col gap-[2px]">
 
-        <div class="py-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3">
-          <h3 class="font-semibold text-navy text-xl">The Workshop</h3>
-          <div class="flex items-baseline gap-6 shrink-0">
-            <span class="text-muted text-sm">$197, June 27</span>
-            <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank" class="text-ink underline underline-offset-4 text-sm font-semibold hover:text-terracotta">Reserve a seat</a>
+          <!-- Footwork Foundation -->
+          <div class="bg-[#111111] p-8 flex flex-col justify-between flex-1 border border-white/5 hover:border-[#D4A373]/20 transition-colors duration-300 group">
+            <div>
+              <span class="text-white/30 text-[11px] tracking-widest uppercase">Free · Entry Protocol</span>
+              <h3 class="font-black text-white uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Footwork<br/>Foundation</h3>
+              <p class="text-white/40 text-xs leading-relaxed">The base layer. Required before anything else.</p>
+            </div>
+            <a href="/footwork-foundation" class="inline-flex items-center gap-2 text-white/50 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#D4A373] transition-colors duration-200 group-hover:gap-3">Start Here →</a>
           </div>
-        </div>
 
-        <div class="py-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3">
-          <h3 class="font-semibold text-navy text-xl">1-on-1 Coaching</h3>
-          <div class="flex items-baseline gap-6 shrink-0">
-            <span class="text-muted text-sm">By application</span>
-            <a href="/coaching" class="text-ink underline underline-offset-4 text-sm font-semibold hover:text-terracotta">Apply</a>
+          <!-- Blueprints -->
+          <div class="bg-[#111111] p-8 flex flex-col justify-between flex-1 border border-white/5 hover:border-[#D4A373]/20 transition-colors duration-300 group">
+            <div>
+              <span class="text-white/30 text-[11px] tracking-widest uppercase">Tactical Bundle</span>
+              <h3 class="font-black text-white uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Tactical<br/>Blueprints</h3>
+              <p class="text-white/40 text-xs leading-relaxed">Mapped, sequenced, built for fighters who think in systems.</p>
+            </div>
+            <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank" class="inline-flex items-center gap-2 text-white/50 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#D4A373] transition-colors duration-200 group-hover:gap-3">Get the System →</a>
           </div>
+
+          <!-- Lab Session -->
+          <div class="bg-[#111111] p-8 flex flex-col justify-between flex-1 border border-white/5 hover:border-[#D4A373]/20 transition-colors duration-300 group">
+            <div>
+              <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">$197 · June 27</span>
+              <h3 class="font-black text-white uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">The Lab<br/>Session</h3>
+              <p class="text-white/40 text-xs leading-relaxed">Live implementation. Coached in real-time.</p>
+            </div>
+            <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank" class="inline-flex items-center gap-2 text-white/50 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#D4A373] transition-colors duration-200 group-hover:gap-3">Reserve a Seat →</a>
+          </div>
+
         </div>
       </div>
     </div>
   </section>
+
+
+<script>
+  const gate = document.getElementById('gate');
+  const gateQuestion = document.getElementById('gate-question');
+  const gateRejection = document.getElementById('gate-rejection');
+  const paths = document.getElementById('paths');
+
+  document.getElementById('btn-system')?.addEventListener('click', () => {
+    gate.style.transition = 'opacity 0.35s ease';
+    gate.style.opacity = '0';
+    setTimeout(() => {
+      gate.style.display = 'none';
+      paths.style.display = 'block';
+      paths.scrollIntoView({ behavior: 'smooth' });
+    }, 350);
+  });
+
+  document.getElementById('btn-fit')?.addEventListener('click', () => {
+    gateQuestion.style.transition = 'opacity 0.25s ease';
+    gateQuestion.style.opacity = '0';
+    setTimeout(() => {
+      gateQuestion.style.display = 'none';
+      gateRejection.style.display = 'flex';
+      gateRejection.style.flexDirection = 'column';
+      gateRejection.style.alignItems = 'center';
+      gateRejection.style.opacity = '0';
+      gateRejection.style.transition = 'opacity 0.35s ease';
+      requestAnimationFrame(() => { gateRejection.style.opacity = '1'; });
+    }, 250);
+  });
+</script>
 </Layout>

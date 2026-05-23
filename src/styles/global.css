@@ -2,13 +2,17 @@
 @import "@fontsource-variable/bricolage-grotesque/index.css";
 
 @theme {
-  --color-bg: #f7f5f2;
-  --color-navy: #1e3a5f;
+  --color-bg: #0D0D0D;
+  --color-navy: #E8E6E1;
   --color-terracotta: #c84d3a;
-  --color-ink: #141414;
-  --color-cream: #efeae3;
-  --color-muted: #6b6b6b;
-  --color-rule: #d9d4cc;
+  --color-ink: #A8A59E;
+  --color-cream: #161616;
+  --color-muted: #555555;
+  --color-rule: #222222;
+
+  --color-brand-dark: #121212;
+  --color-brand-teal: #0A3535;
+  --color-brand-light: #F5F5F5;
 
   --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
   --font-serif: Georgia, ui-serif, serif;
@@ -45,5 +49,49 @@
     background-color: var(--color-bg);
     border-bottom: 1px solid var(--color-rule);
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0.35), rgba(18, 18, 18, 0.97));
+  }
+
+  .hero-img {
+    filter: brightness(0.90);
+  }
+
+  .hero-overlay {
+    background: linear-gradient(90deg, #0A0A0A 0%, rgba(10, 10, 10, 0.6) 100%);
+  }
+
+  /* Matte cinematic filter — GPU composited via filter */
+  .hero-matte {
+    filter: contrast(0.82) saturate(0.72) brightness(0.88);
+    will-change: transform;
+    transform: translateZ(0);
+    animation: hero-settle 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes hero-settle {
+    from { transform: scale(1.04) translateZ(0); }
+    to   { transform: scale(1)    translateZ(0); }
+  }
+
+  /* Card micro-lift — GPU composited, 120fps-safe */
+  .tr-card {
+    will-change: transform;
+    transform: translateZ(0);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .tr-card:hover {
+    transform: translateY(-3px) translateZ(0);
+  }
+
+  /* Copper button — isolate compositing layer */
+  .copper-btn {
+    will-change: background-color, color;
+    transform: translateZ(0);
   }
 }

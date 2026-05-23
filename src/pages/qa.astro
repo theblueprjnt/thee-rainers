@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Base.astro';
+---
+<Layout title="Monthly Q&A — Thee Rainers">
+  <Fragment slot="head">
+    <meta name="description" content="Monthly live Q&A included with every paid product. One hour. Real-time diagnosis through the 7 levers." />
+  </Fragment>
+
+  <!-- Hero -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
+    <div class="max-w-[1280px] mx-auto w-full">
+      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24 items-start">
+
+        <div>
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Included with every paid product</p>
+          <h1 class="font-black text-white uppercase tracking-tighter text-5xl md:text-7xl leading-[0.82] mb-10">Live Q&A.<br/>Real diagnosis.</h1>
+          <p class="text-white/50 text-base leading-relaxed mb-6 max-w-[480px]">
+            The System Baseline gives you the protocol. The Library gives you the depth. This is where you bring what is not transferring — and we map it to the lever in real time.
+          </p>
+          <p class="text-white/35 text-sm leading-relaxed mb-14 max-w-[480px]">
+            One hour. One Saturday per month. No fluff, no performance, no upsell. You show up with a problem. We apply the operating system to it — live. Included with any Vault product or Workshop.
+          </p>
+          <a href="/vault" class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black self-start">
+            Get Access via the Vault →
+          </a>
+        </div>
+
+        <div class="flex flex-col gap-[2px]">
+          <div class="bg-[#111111] border border-white/5 p-8">
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Perceptual</p>
+            <p class="text-white/40 text-sm leading-relaxed">You are not reading the cue early enough. Bring the sparring problem. We diagnose the perceptual leak and prescribe the drill.</p>
+          </div>
+          <div class="bg-[#111111] border border-white/5 p-8">
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Mechanical</p>
+            <p class="text-white/40 text-sm leading-relaxed">The chain is breaking between the floor and the fist. Show the movement. We find the break. One correction — not five.</p>
+          </div>
+          <div class="bg-[#111111] border border-white/5 p-8">
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Existential</p>
+            <p class="text-white/40 text-sm leading-relaxed">The mechanics are there in drilling. They dissolve under pressure. Layer 3 problem — identity, presence, internal standard. We address it directly.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripture + Upgrade -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+    <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-16">
+      <div class="max-w-[560px]">
+        <p class="font-black text-white/10 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-6">"Iron sharpens iron, and one man sharpens another."</p>
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-10">Proverbs 27:17</p>
+        <p class="text-white/30 text-sm leading-relaxed">The free tier builds the foundation. The Q&A is where the system compounds — in community, under a standard, with direct access to the architect. Unlock it with any paid product.</p>
+      </div>
+      <div class="flex flex-col gap-4 shrink-0">
+        <a href="/vault" class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+          Enter the Vault →
+        </a>
+        <a href="/command" class="inline-flex items-center justify-center font-bold border border-white/15 text-white/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/50">
+          Apply for 1-on-1 →
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

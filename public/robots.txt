@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /gate
+Disallow: /thank-you/
+
+Sitemap: https://theerainers.com/sitemap.xml

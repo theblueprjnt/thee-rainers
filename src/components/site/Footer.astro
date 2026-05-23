@@ -1,64 +1,19 @@
 ---
-const columns = [
-  {
-    heading: 'Paths',
-    links: [
-      { label: 'Workshop', href: '/workshop' },
-      { label: 'Coaching', href: '/coaching' },
-      { label: 'Training Plans', href: '/training' },
-    ],
-  },
-  {
-    heading: 'Shop',
-    links: [
-      { label: 'All Products', href: '/shop' },
-      { label: 'Gear', href: '/shop/gear' },
-      { label: 'Programs', href: '/shop/programs' },
-    ],
-  },
-  {
-    heading: 'Journal',
-    links: [
-      { label: 'All Posts', href: '/journal' },
-      { label: 'Technique', href: '/journal/technique' },
-      { label: 'Mindset', href: '/journal/mindset' },
-    ],
-  },
-  {
-    heading: 'Legal',
-    links: [
-      { label: 'Privacy', href: '/privacy' },
-      { label: 'Terms', href: '/terms' },
-      { label: 'Refund Policy', href: '/refunds' },
-      { label: 'Contact', href: '/contact' },
-    ],
-  },
-];
-
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-navy text-white">
-  <div class="max-w-[1140px] mx-auto px-6 py-20">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
-      {columns.map(col => (
-        <div>
-          <h4 class="text-xs font-semibold tracking-widest uppercase text-white/40 mb-5">{col.heading}</h4>
-          <ul class="space-y-3 list-none p-0 m-0">
-            {col.links.map(link => (
-              <li>
-                <a href={link.href} class="text-small text-white/60 hover:text-white transition-colors duration-200">
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-    <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <span class="text-small font-bold tracking-[0.2em] uppercase">THEE RAINERS</span>
-      <p class="text-xs text-white/30 m-0">© {year} Thee Rainers. All rights reserved.</p>
+<footer class="bg-[#0A0A0A] border-t border-white/5">
+  <div class="max-w-[1140px] mx-auto px-6 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+    <a href="/" class="flex items-center">
+      <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity duration-200" />
+    </a>
+    <div class="flex items-center gap-6 flex-wrap">
+      <a href="/qa" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">Q&A</a>
+      <a href="/feedback" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">Feedback</a>
+      <a href="/lever-audit" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">7-Lever Audit</a>
+      <a href="/privacy" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">Privacy</a>
+      <a href="/terms" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">Terms</a>
+      <span class="text-xs text-white/15">© {year} Thee Rainers</span>
     </div>
   </div>
 </footer>

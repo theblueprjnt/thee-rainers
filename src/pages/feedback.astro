@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Base.astro';
+---
+<Layout title="Feedback — Thee Rainers">
+  <Fragment slot="head">
+    <meta name="description" content="The improvement loop. Active listening for continuous system refinement." />
+  </Fragment>
+
+  <section class="bg-[#0A0A0A] min-h-screen px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
+    <div class="max-w-[1280px] mx-auto w-full">
+      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24">
+
+        <!-- Left: Form -->
+        <div>
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">The Improvement Loop</p>
+          <h1 class="font-black text-white uppercase tracking-tighter text-5xl md:text-6xl leading-[0.82] mb-8">The system<br/>listens.</h1>
+          <p class="text-white/40 text-base leading-relaxed mb-14 max-w-[440px]">Every data point refines the architecture. If something in the system is not transferring, that is information. Submit it here.</p>
+
+          <form id="feedback-form" class="flex flex-col gap-10">
+            <div class="flex flex-col gap-2">
+              <label for="name" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Name (optional)</label>
+              <input type="text" id="name" placeholder="—"
+                class="border-b border-white/15 bg-transparent py-3 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20" />
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="lever" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Which lever are you working on?</label>
+              <select id="lever" required
+                class="border-b border-white/15 bg-[#0A0A0A] py-3 text-white/60 text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 appearance-none cursor-pointer">
+                <option value="" disabled selected>—</option>
+                <option value="cue-reading">Cue Reading</option>
+                <option value="kinetic-chain">Kinetic Chain</option>
+                <option value="reactive-stiffness">Reactive Stiffness</option>
+                <option value="range-fluency">Range Fluency</option>
+                <option value="defensive-responsibility">Defensive Responsibility</option>
+                <option value="transfer-to-live">Transfer to Live</option>
+                <option value="identity-presence">Identity & Presence</option>
+              </select>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="gap" class="text-[#D4A373] text-[10px] tracking-widest uppercase">What is not transferring from closed drill to live?</label>
+              <textarea id="gap" rows="3" required placeholder="—"
+                class="border border-white/10 bg-transparent p-3 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-white/20"></textarea>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="suggestion" class="text-[#D4A373] text-[10px] tracking-widest uppercase">What would make the system more useful?</label>
+              <textarea id="suggestion" rows="3" placeholder="—"
+                class="border border-white/10 bg-transparent p-3 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-white/20"></textarea>
+            </div>
+
+            <div>
+              <button type="submit"
+                class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+                Submit
+              </button>
+              <p id="form-status" class="hidden text-[#D4A373] text-sm tracking-wide mt-6"></p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Context -->
+        <div class="hidden md:flex flex-col justify-center">
+          <div class="border-l border-white/10 pl-12 flex flex-col gap-10">
+            <p class="text-white/20 text-[11px] tracking-widest uppercase">Why this exists</p>
+            <p class="text-white/40 text-sm leading-relaxed">Every piece of feedback is a data point. The system is not fixed — it is a living architecture. What you submit here is heard, reviewed, and integrated where it improves the output.</p>
+            <div class="border-l-2 border-[#D4A373]/30 pl-5">
+              <p class="text-white/20 text-xs leading-relaxed italic">"Iron sharpens iron, and one man sharpens another."</p>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mt-2">Proverbs 27:17</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('feedback-form') as HTMLFormElement;
+    const status = document.getElementById('form-status')!;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.classList.remove('hidden');
+      status.innerText = 'Submitting...';
+
+      const payload = {
+        name: (document.getElementById('name') as HTMLInputElement).value || 'Anonymous',
+        lever: (document.getElementById('lever') as HTMLSelectElement).value,
+        gap: (document.getElementById('gap') as HTMLTextAreaElement).value,
+        suggestion: (document.getElementById('suggestion') as HTMLTextAreaElement).value,
+        source: 'Feedback Loop',
+      };
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          form.reset();
+          status.innerText = 'Received. It is in the loop.';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        status.innerText = 'Something went wrong. Try again.';
+      }
+    });
+  </script>
+</Layout>

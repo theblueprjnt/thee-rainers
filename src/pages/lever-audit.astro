@@ -1,0 +1,176 @@
+---
+import Layout from '../layouts/Base.astro';
+
+const levers = [
+  { num: '01', virtue: 'Diligence',  lever: 'Cue Reading',                   scripture: 'Watch and pray — Mt 26:41' },
+  { num: '02', virtue: 'Chastity',   lever: 'Kinetic Chain',                 scripture: 'Work at it with all your heart — Col 3:23' },
+  { num: '03', virtue: 'Fortitude',  lever: 'Reactive Stiffness',            scripture: 'They will run and not grow weary — Is 40:31' },
+  { num: '04', virtue: 'Temperance', lever: 'Range Fluency',                 scripture: 'I have become all things to all people — 1 Cor 9:22' },
+  { num: '05', virtue: 'Justice',    lever: 'Defensive Responsibility',      scripture: 'Put on the full armor of God — Eph 6:11' },
+  { num: '06', virtue: 'Faith',      lever: 'Transfer to Live',              scripture: 'Be doers of the word, not hearers only — Jas 1:22' },
+  { num: '07', virtue: 'Humility',   lever: 'Identity & Presence',          scripture: 'I have fought the good fight — 2 Tim 4:7' },
+];
+---
+
+<Layout title="7-Lever Audit — Thee Rainers">
+  <Fragment slot="head">
+    <meta name="description" content="Free self-assessment. Find the leak in your system. The 7-Lever Audit maps your training gaps to the specific inputs your performance needs." />
+    <meta property="og:title" content="7-Lever Audit — Thee Rainers" />
+    <meta property="og:description" content="Find the leak. Fix the system. Free." />
+  </Fragment>
+
+  <!-- Hero -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
+    <div class="max-w-[1280px] mx-auto w-full">
+      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24 items-start">
+
+        <div>
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Free · Self-Assessment</p>
+          <h1 class="font-black text-white uppercase tracking-tighter text-5xl md:text-7xl leading-[0.82] mb-10">Find the leak.<br/>Fix the system.</h1>
+          <p class="text-white/50 text-base leading-relaxed mb-6 max-w-[480px]">
+            Most fighters train hard. Few know which lever is actually broken. The 7-Lever Audit maps your gaps to the specific system inputs you need — and tells you exactly where to start.
+          </p>
+          <p class="text-white/30 text-sm leading-relaxed mb-14 max-w-[480px]">
+            Seven levers. Seven virtues. One operating standard. Enter your email and receive the audit framework — free.
+          </p>
+
+          <!-- Inline lead form -->
+          <div id="audit-form-wrapper">
+            <form id="audit-form" class="flex flex-col sm:flex-row gap-3 max-w-[480px]">
+              <input
+                type="email"
+                id="audit-email"
+                required
+                placeholder="your@email.com"
+                class="flex-1 border border-white/15 bg-transparent px-5 py-4 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20"
+              />
+              <button
+                type="submit"
+                id="audit-submit"
+                class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black whitespace-nowrap"
+              >
+                Send the Audit →
+              </button>
+            </form>
+            <p id="audit-success" class="hidden text-[#D4A373] text-sm tracking-wide mt-6">The audit is in your inbox. Check it now.</p>
+            <p id="audit-error" class="hidden text-white/40 text-sm tracking-wide mt-6">Something went wrong. Try again.</p>
+            <p class="text-white/20 text-xs tracking-wide mt-4">No spam. Unsubscribe anytime.</p>
+          </div>
+        </div>
+
+        <!-- Right: lever preview -->
+        <div class="flex flex-col gap-[2px]">
+          {levers.slice(0, 3).map(l => (
+            <div class="bg-[#111111] border border-white/5 p-8">
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">{l.num} — {l.virtue}</p>
+              <p class="text-white/60 text-sm font-bold tracking-tight mb-1">{l.lever}</p>
+              <p class="text-white/20 text-[10px] italic">{l.scripture}</p>
+            </div>
+          ))}
+          <div class="bg-[#111111] border border-white/5 p-8 text-center">
+            <p class="text-white/20 text-xs tracking-widest uppercase">+ 4 more levers inside</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- The 7 Levers -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+    <div class="max-w-[1280px] mx-auto w-full">
+
+      <div class="mb-16">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The Architecture</p>
+        <h2 class="font-black text-white uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] max-w-[560px]">Seven levers.<br/>Every one trainable.</h2>
+      </div>
+
+      <div class="flex flex-col divide-y divide-white/5">
+        {levers.map(l => (
+          <div class="grid grid-cols-[60px_1fr_1fr_1fr] py-8 items-start gap-6 tr-card">
+            <p class="text-white/15 font-black text-2xl leading-none">{l.num}</p>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">{l.virtue}</p>
+            <p class="text-white/60 text-sm">{l.lever}</p>
+            <p class="text-white/20 text-xs leading-relaxed italic">{l.scripture}</p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="bg-[#0D1F1F] px-8 md:px-16 lg:px-24 py-24 border-t border-[#D4A373]/10">
+    <div class="max-w-[1280px] mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div>
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Step 01</p>
+        <p class="text-white/60 text-sm leading-relaxed">Receive the audit. Rate yourself on each of the 7 levers. Honest numbers only — the system diagnoses what you give it.</p>
+      </div>
+      <div>
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Step 02</p>
+        <p class="text-white/60 text-sm leading-relaxed">Identify your lowest-scoring lever. That is your primary bottleneck — the constraint that limits every other lever in the system.</p>
+      </div>
+      <div>
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Step 03</p>
+        <p class="text-white/60 text-sm leading-relaxed">Use the prescribed drill block for that lever. The audit maps each gap to a specific training intervention. Fix the base. Stack the system.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripture + CTA -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+    <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-16">
+      <div class="max-w-[560px]">
+        <p class="font-black text-white/10 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-6">"I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."</p>
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-10">1 Corinthians 9:26–27</p>
+        <p class="text-white/30 text-sm leading-relaxed">The audit is the diagnostic. The Vault is the prescription. Private Architecture is the custom build.</p>
+      </div>
+      <div class="flex flex-col gap-4 shrink-0">
+        <a href="/vault" class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+          Enter the Vault →
+        </a>
+        <a href="/command" class="inline-flex items-center justify-center font-bold border border-white/15 text-white/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/50">
+          Apply for 1-on-1 →
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById('audit-form') as HTMLFormElement;
+  const wrapper = document.getElementById('audit-form-wrapper')!;
+  const success = document.getElementById('audit-success')!;
+  const error = document.getElementById('audit-error')!;
+  const submit = document.getElementById('audit-submit') as HTMLButtonElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submit.disabled = true;
+    submit.textContent = 'Sending...';
+    error.classList.add('hidden');
+
+    const email = (document.getElementById('audit-email') as HTMLInputElement).value.trim();
+
+    try {
+      const res = await fetch('/api/lead-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'lever-audit', full_name: '', phone: '' }),
+      });
+
+      const body = await res.json() as { success: boolean };
+
+      if (body.success) {
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      } else {
+        throw new Error();
+      }
+    } catch {
+      error.classList.remove('hidden');
+      submit.disabled = false;
+      submit.textContent = 'Send the Audit →';
+    }
+  });
+</script>

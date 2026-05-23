@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Base.astro';
+---
+<Layout title="Apply — Private Architecture | Thee Rainers">
+  <Fragment slot="head">
+    <meta name="description" content="Private Architecture. 1 of 1 systemic performance coaching. Application only. No templates. No cohorts." />
+  </Fragment>
+
+  <section class="min-h-screen bg-[#0A0A0A] flex flex-col justify-center px-8 md:px-16 lg:px-24 py-32">
+    <div class="max-w-[1280px] mx-auto w-full">
+      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24">
+
+        <!-- Left: Form (60%) -->
+        <div>
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Application Protocol</p>
+          <h1 class="font-black text-white uppercase tracking-tighter text-5xl md:text-6xl leading-[0.85] mb-8">Structure beats<br/>dependence.</h1>
+          <p class="text-white/40 text-base leading-relaxed mb-10 max-w-[440px]">Private Architecture is not coaching. It is a system built around your specific fight, body, and mind. If accepted, you receive the blueprint. Apply below.</p>
+
+          <div class="border-l-2 border-[#D4A373]/40 pl-6 mb-14">
+            <p class="text-white/25 text-sm leading-relaxed italic mb-3">"I do not run aimlessly. I do not fight like a boxer beating the air. I strike a blow to my body and make it my slave — so that after I have preached to others, I myself will not be disqualified."</p>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:26–27 · The Source Code</p>
+          </div>
+
+          <form id="command-form" class="flex flex-col gap-10">
+            <div class="flex flex-col gap-2">
+              <label for="name" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Full Name</label>
+              <input type="text" id="name" required placeholder="—"
+                class="border-b border-white/15 bg-transparent py-3 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20" />
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="email" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Email</label>
+              <input type="email" id="email" required placeholder="—"
+                class="border-b border-white/15 bg-transparent py-3 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20" />
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="record" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Current fight record and training structure</label>
+              <textarea id="record" rows="3" required placeholder="—"
+                class="border border-white/10 bg-transparent p-3 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-white/20"></textarea>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="flaw" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Where do your mechanics break down under pressure?</label>
+              <textarea id="flaw" rows="3" required placeholder="—"
+                class="border border-white/10 bg-transparent p-3 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-white/20"></textarea>
+            </div>
+
+            <div class="flex flex-col gap-2">
+              <label for="goal" class="text-[#D4A373] text-[10px] tracking-widest uppercase">What systemic change are you trying to make?</label>
+              <textarea id="goal" rows="3" required placeholder="—"
+                class="border border-white/10 bg-transparent p-3 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-white/20"></textarea>
+            </div>
+
+            <div>
+              <button type="submit"
+                class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+                Submit Application
+              </button>
+              <p id="form-status" class="hidden text-[#D4A373] text-sm tracking-wide mt-6"></p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Context (40%) -->
+        <div class="hidden md:flex flex-col justify-center">
+          <div class="border-l border-white/10 pl-12 flex flex-col gap-10">
+            <p class="text-white/20 text-[11px] tracking-widest uppercase">What this is</p>
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">01</p>
+              <p class="text-white/50 text-sm leading-relaxed">One system. No templates. No cohorts. Engineered entirely around your mechanics, schedule, and objective.</p>
+            </div>
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">02</p>
+              <p class="text-white/50 text-sm leading-relaxed">Application-only. Not because of scarcity — because architecture requires the right input to produce the right output.</p>
+            </div>
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">03</p>
+              <p class="text-white/50 text-sm leading-relaxed">Systemic performance is the output. Not motivation. Not conditioning. A repeatable, pressure-tested operating system.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('command-form') as HTMLFormElement;
+    const status = document.getElementById('form-status')!;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.classList.remove('hidden');
+      status.innerText = 'Transmitting...';
+
+      const payload = {
+        name: (document.getElementById('name') as HTMLInputElement).value,
+        email: (document.getElementById('email') as HTMLInputElement).value,
+        record: (document.getElementById('record') as HTMLTextAreaElement).value,
+        flaw: (document.getElementById('flaw') as HTMLTextAreaElement).value,
+        goal: (document.getElementById('goal') as HTMLTextAreaElement).value,
+        source: 'Private Architecture — Command',
+      };
+
+      try {
+        const res = await fetch('/api/coaching-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          form.reset();
+          status.innerText = 'Application received. I will review your structure.';
+        } else {
+          throw new Error();
+        }
+      } catch {
+        status.innerText = 'Transmission failed. Contact directly on Instagram.';
+      }
+    });
+  </script>
+</Layout>

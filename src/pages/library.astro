@@ -1,0 +1,190 @@
+---
+import Layout from '../layouts/Base.astro';
+
+// ── VIDEO LIBRARY DATA ────────────────────────────────────────────────────────
+// Add your videos here. Each entry becomes a card in the archive.
+// YouTube embed format: https://www.youtube.com/embed/VIDEO_ID
+// YouTube thumbnail:    https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg
+// Set featured: true on the video you want pinned to the top slot.
+
+const videos = [
+  {
+    id: 'featured-01',
+    title: 'Why Boxing Classes Don\'t Work (And What Actually Does)',
+    description: 'You don\'t need more cardio. You need structure. This is what most gym classes hide from you — and what replaces it.',
+    embedUrl: 'https://www.youtube.com/embed/3N5GgvuvrVo',
+    thumbnailUrl: 'https://img.youtube.com/vi/3N5GgvuvrVo/maxresdefault.jpg',
+    label: 'System Logic · Why Structure Beats Volume',
+    featured: true,
+  },
+  {
+    id: 'archive-01',
+    title: 'Your Footwork Is Wrong (And It\'s Not Your Fault)',
+    description: 'The foot tripod, the kinetic chain, and why 60–70% of punching power originates at the floor. The base layer of the system.',
+    embedUrl: 'https://www.youtube.com/embed/KVIFV565qHQ',
+    thumbnailUrl: 'https://img.youtube.com/vi/KVIFV565qHQ/maxresdefault.jpg',
+    label: 'Kinetic Chain · Footwork Foundation',
+    featured: false,
+  },
+  {
+    id: 'archive-02',
+    title: 'You\'re Shadowboxing Wrong (And It\'s Costing You)',
+    description: 'Why shadowboxing doesn\'t transfer to sparring — and the structural correction that makes every round compound.',
+    embedUrl: 'https://www.youtube.com/embed/kv8GhNU_3UQ',
+    thumbnailUrl: 'https://img.youtube.com/vi/kv8GhNU_3UQ/maxresdefault.jpg',
+    label: 'Neural Boxing · Shadowboxing',
+    featured: false,
+  },
+  {
+    id: 'archive-03',
+    title: 'You\'re Doing Boxing Cardio Wrong (And It\'s Making You Worse)',
+    description: 'Chase the sprint cycle, not exhaustion. The conditioning protocol that builds the fighter without breaking the chain.',
+    embedUrl: 'https://www.youtube.com/embed/Tpzuvc1exo4',
+    thumbnailUrl: 'https://img.youtube.com/vi/Tpzuvc1exo4/maxresdefault.jpg',
+    label: 'Systemic Performance · Conditioning',
+    featured: false,
+  },
+  {
+    id: 'archive-04',
+    title: 'Stop Throwing Combos in Boxing (For Now)',
+    description: 'Combinations before foundation is backwards. This is the sequence that builds the kinetic chain correctly — before layering complexity.',
+    embedUrl: 'https://www.youtube.com/embed/CxPamPvyOBo',
+    thumbnailUrl: 'https://img.youtube.com/vi/CxPamPvyOBo/maxresdefault.jpg',
+    label: 'Structural Training · Foundation First',
+    featured: false,
+  },
+  {
+    id: 'archive-05',
+    title: 'STOP Learning Combos in Boxing (For Now)',
+    description: 'The case against learning combinations before your base is locked. Build the platform first. The combos will mean something when you do.',
+    embedUrl: 'https://www.youtube.com/embed/uGIcZ7RZ12o',
+    thumbnailUrl: 'https://img.youtube.com/vi/uGIcZ7RZ12o/maxresdefault.jpg',
+    label: 'Structural Training · Foundation First',
+    featured: false,
+  },
+  {
+    id: 'archive-06',
+    title: 'Start Boxing Like This (Or You\'ll Waste Months)',
+    description: 'The correct entry sequence for serious fighters. Skip this and you spend months unlearning bad patterns. This is the right start.',
+    embedUrl: 'https://www.youtube.com/embed/v0hxUp6-oqI',
+    thumbnailUrl: 'https://img.youtube.com/vi/v0hxUp6-oqI/maxresdefault.jpg',
+    label: 'System Baseline · Entry Protocol',
+    featured: false,
+  },
+  {
+    id: 'archive-07',
+    title: 'Use AI to Get Better at Sports',
+    description: 'The fighter who learns faster wins. How to use AI tools to accelerate film study, pattern recognition, and skill acquisition.',
+    embedUrl: 'https://www.youtube.com/embed/wkcb7_23tsQ',
+    thumbnailUrl: 'https://img.youtube.com/vi/wkcb7_23tsQ/maxresdefault.jpg',
+    label: 'Performance Tech · AI in Training',
+    featured: false,
+  },
+  {
+    id: 'archive-08',
+    title: 'Best 16 Oz Boxing Gloves of 2025? (My Honest Review)',
+    description: 'An honest breakdown of the 16 oz gloves tested across real training sessions. What performs under pressure. What doesn\'t.',
+    embedUrl: 'https://www.youtube.com/embed/F5VJX0qMUHI',
+    thumbnailUrl: 'https://img.youtube.com/vi/F5VJX0qMUHI/maxresdefault.jpg',
+    label: 'Gear · Equipment',
+    featured: false,
+  },
+];
+
+const featured = videos.find(v => v.featured);
+const archive = videos.filter(v => !v.featured);
+---
+<Layout title="Library — Knowledge Archive | Thee Rainers">
+  <Fragment slot="head">
+    <meta name="description" content="Deep-format sessions on autonomic regulation, systemic performance, and neural boxing. The knowledge archive of Thee Rainers." />
+  </Fragment>
+
+  <!-- Featured Video -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-20">
+    <div class="max-w-[1280px] mx-auto w-full">
+
+      <div class="mb-12">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The Library</p>
+        <h1 class="font-black text-white uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">Knowledge<br/>archive.</h1>
+        <p class="text-white/40 text-base max-w-[480px] leading-relaxed">Deep-format sessions on autonomic regulation, systemic performance, and neural boxing. Every video is a module. Every module is a data point.</p>
+      </div>
+
+      {featured && (
+        <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-8 mb-4">
+          <div class="relative w-full aspect-video bg-[#111111] border border-white/5">
+            <iframe
+              src={featured.embedUrl}
+              title={featured.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="absolute inset-0 w-full h-full"
+            ></iframe>
+          </div>
+          <div class="flex flex-col justify-center">
+            <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">{featured.label}</p>
+            <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.85] mb-6">{featured.title}</h2>
+            <p class="text-white/40 text-sm leading-relaxed">{featured.description}</p>
+          </div>
+        </div>
+      )}
+
+    </div>
+  </section>
+
+  <!-- Archive Grid -->
+  {archive.length > 0 && (
+    <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20 border-t border-white/5">
+      <div class="max-w-[1280px] mx-auto w-full">
+
+        <div class="mb-12">
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Archive</p>
+          <h2 class="font-black text-white uppercase tracking-tighter text-3xl md:text-4xl leading-[0.85]">All sessions.</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[2px]">
+          {archive.map(video => (
+            <div class="bg-[#111111] border border-white/5 hover:border-[#D4A373]/20 transition-colors duration-300 group">
+              <div class="relative aspect-video overflow-hidden">
+                <img
+                  src={video.thumbnailUrl}
+                  alt={video.title}
+                  class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+                />
+              </div>
+              <div class="p-8">
+                <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">{video.label}</p>
+                <h3 class="font-black text-white uppercase tracking-tight text-lg leading-tight mb-3">{video.title}</h3>
+                <p class="text-white/40 text-xs leading-relaxed mb-6">{video.description}</p>
+                <a href={video.embedUrl.replace('/embed/', '/watch?v=')} target="_blank"
+                  class="text-[#D4A373] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity duration-200">
+                  Watch →
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20 border-t border-white/5">
+    <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div>
+        <p class="text-white/25 text-[11px] tracking-widest uppercase mb-3">Ready to go deeper?</p>
+        <p class="text-white/50 text-sm max-w-[440px] leading-relaxed">The Library is context. The Vault is the entry point. Private Architecture is the system.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+        <a href="/vault"
+          class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+          Get the System →
+        </a>
+        <a href="/command"
+          class="inline-flex items-center justify-center font-bold border border-white/15 text-white/40 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/60">
+          Apply →
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

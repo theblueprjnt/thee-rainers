@@ -1,27 +1,33 @@
 ---
 ---
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-bg/95 backdrop-blur-md border-b border-rule/50">
-  <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center justify-between relative">
-    <a href="/" class="text-navy font-bold text-small tracking-[0.2em] uppercase z-50">THEE RAINERS</a>
+  <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="z-50 flex items-center">
+      <img src="/images/logo-trb.png" alt="Thee Rainers Blueprint" class="h-10 w-auto" />
+    </a>
 
-    <nav aria-label="Main navigation" class="hidden md:block">
-      <ul class="flex items-center gap-8 list-none m-0 p-0">
-        <li><a href="/workshop" class="text-small font-medium text-ink hover:text-terracotta transition-colors duration-200">Workshop</a></li>
-        <li><a href="/coaching" class="text-small font-medium text-ink hover:text-terracotta transition-colors duration-200">Coaching</a></li>
-        <li><a href="/shop" class="text-small font-medium text-ink hover:text-terracotta transition-colors duration-200">Shop</a></li>
-      </ul>
+    <nav class="hidden md:flex items-center gap-8 mr-8">
+      <a href="/arena" class="text-white/35 text-[11px] tracking-widest uppercase hover:text-[#D4A373] transition-colors duration-200">Arena</a>
+      <a href="/library" class="text-white/35 text-[11px] tracking-widest uppercase hover:text-[#D4A373] transition-colors duration-200">Library</a>
+      <a href="/vault" class="text-white/35 text-[11px] tracking-widest uppercase hover:text-[#D4A373] transition-colors duration-200">Vault</a>
+      <a href="/workshop" class="text-[#D4A373] text-[11px] tracking-widest uppercase hover:opacity-70 transition-opacity duration-200">Workshop</a>
+      <a href="/about" class="text-white/35 text-[11px] tracking-widest uppercase hover:text-[#D4A373] transition-colors duration-200">About</a>
     </nav>
+    <a href="/command" class="hidden md:inline-flex items-center justify-center font-bold text-xs tracking-widest uppercase px-6 py-2.5 border-2 border-[#D4A373] text-[#D4A373] bg-transparent hover:bg-[#D4A373] hover:text-black transition-all duration-200">Apply</a>
 
-    <button id="mobile-menu-btn" class="md:hidden z-50 p-2 text-navy focus:outline-none" aria-label="Toggle Menu">
+    <button id="mobile-menu-btn" class="md:hidden z-50 p-2 text-white/60 focus:outline-none" aria-label="Toggle Menu">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-bg z-40 flex-col items-center justify-center gap-8 hidden pt-24 pb-8 px-6 overflow-y-auto">
-      <a href="/workshop" class="text-2xl font-bold text-navy hover:text-terracotta mobile-link">Workshop</a>
-      <a href="/coaching" class="text-2xl font-bold text-navy hover:text-terracotta mobile-link">Coaching</a>
-      <a href="/shop" class="text-2xl font-bold text-navy hover:text-terracotta mobile-link">Shop</a>
+    <div id="mobile-menu" class="fixed inset-0 bg-[#0A0A0A] z-40 flex-col items-center justify-center gap-8 hidden">
+      <a href="/arena" class="text-xl font-bold text-white/50 tracking-widest uppercase hover:text-[#D4A373] transition-colors mobile-link">Arena</a>
+      <a href="/library" class="text-xl font-bold text-white/50 tracking-widest uppercase hover:text-[#D4A373] transition-colors mobile-link">Library</a>
+      <a href="/vault" class="text-xl font-bold text-white/50 tracking-widest uppercase hover:text-[#D4A373] transition-colors mobile-link">Vault</a>
+      <a href="/workshop" class="text-xl font-bold text-[#D4A373] tracking-widest uppercase hover:opacity-70 transition-opacity mobile-link">Workshop</a>
+      <a href="/about" class="text-xl font-bold text-white/50 tracking-widest uppercase hover:text-[#D4A373] transition-colors mobile-link">About</a>
+      <a href="/command" class="text-xl font-bold border-2 border-[#D4A373] text-[#D4A373] px-10 py-4 tracking-widest uppercase hover:bg-[#D4A373] hover:text-black transition-all mobile-link">Apply</a>
     </div>
   </div>
 </header>

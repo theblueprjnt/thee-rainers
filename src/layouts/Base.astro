@@ -11,14 +11,48 @@ interface Props {
 
 const {
   title = 'Thee Rainers',
-  description = 'Real mechanics, clear structure, no wasted reps.',
+  description = 'Systemic boxing performance. Seven levers. Autonomic regulation. Built for fighters who think in structures, not sessions.',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
+
+const siteSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://theerainers.com/#organization",
+      "name": "Thee Rainers",
+      "url": "https://theerainers.com",
+      "logo": "https://theerainers.com/images/logo-trb.png",
+      "sameAs": ["https://www.youtube.com/@Rainers"],
+      "description": "Systemic boxing performance methodology. The Rainers Blueprint is a vertically integrated operating system built on the 7 Holy Virtues, 7 Performance Levers, and the Word of God."
+    },
+    {
+      "@type": "Person",
+      "@id": "https://theerainers.com/#founder",
+      "name": "Rainers",
+      "url": "https://theerainers.com/about",
+      "jobTitle": "Boxing Performance Architect",
+      "worksFor": { "@id": "https://theerainers.com/#organization" },
+      "knowsAbout": [
+        "Systemic Boxing Performance",
+        "Kinetic Chain Integrity",
+        "Autonomic Regulation",
+        "Perceptual Training",
+        "Neural Boxing",
+        "Footwork Methodology"
+      ]
+    }
+  ]
+});
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -26,7 +60,13 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta property="og:site_name" content="Thee Rainers" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@theerainers" />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={siteSchema} />
     <Analytics />
     <slot name="head" />
   </head>
