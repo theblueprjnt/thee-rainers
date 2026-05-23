@@ -45,13 +45,24 @@ Universal bio link hub. Used on all platform bios. Order: Free Protocol → YouT
 - All POST to Make.com webhook if env var is set
 
 ## Automation backend
-- Make.com scenario: Custom Webhook → Airtable (Create a Record) — already built and tested
-- Webhook URL must be set as `MAKE_LEAD_WEBHOOK_URL` in Cloudflare Pages env vars
+- Make.com scenario: Custom Webhook → Airtable (Create a Record)
+- MAKE_LEAD_WEBHOOK_URL is SET in Cloudflare Pages env vars — confirmed
 - Airtable is the lead database (not Google Sheets)
+- KNOWN BUG: Airtable `source` field is Single Select type — the API sends values like "footwork-foundation", "lever-audit", "lever-audit-quiz" that don't exist as options → Make.com returns [422] error and all leads are silently dropped
+- FIX: In Airtable, change the `source` field type from Single Select to Single line text
 
 ## PDFs
 - `/public/pdfs/footwork-foundation.pdf` — real PDF, wired correctly
-- `/public/pdfs/lever-audit.pdf` — PLACEHOLDER (copy of footwork PDF). Needs real design + export.
+- `/public/pdfs/lever-audit.pdf` — PLACEHOLDER. Real source is at `/public/lever-audit-print.html`
+- TO GENERATE: Open `/lever-audit-print.html` in Chrome → Print → Save as PDF → save to `/public/pdfs/lever-audit.pdf`
+
+## Products — Stripe links
+- Workshop ($197): https://buy.stripe.com/7sY28r8lt1D06XU6446J20n
+- Workshop Replay ($47): https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p
+- Footwork Blueprint ($47): https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k
+- Shadowboxing Blueprint ($47): https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l
+- Bundle ($87): https://buy.stripe.com/14A4gz59hgxUaa65006J20m
+- Gumroad: no longer used — all purchases go through Stripe
 
 ## Featured YouTube video
 - ID: SrFywBFkmik
@@ -63,9 +74,9 @@ Universal bio link hub. Used on all platform bios. Order: Free Protocol → YouT
 - Always route through the site page first (/workshop), not direct Stripe links
 
 ## Key pending items
-1. Set MAKE_LEAD_WEBHOOK_URL in Cloudflare Pages env vars — currently losing all email leads
-2. Design and export real 7-Lever Audit PDF
-3. Update Instagram bio to theerainers.com/links
+1. Fix Airtable source field — change from Single Select to Single line text (in Airtable, not code)
+2. Generate lever-audit.pdf — open /lever-audit-print.html in Chrome, Print → Save as PDF → /public/pdfs/lever-audit.pdf
+3. Update platform bios (Instagram, TikTok, Facebook, Threads) to theerainers.com/links
 4. Add date + format to /qa for Monthly Q&A
 5. Add seats remaining / social proof to /workshop for urgency
 

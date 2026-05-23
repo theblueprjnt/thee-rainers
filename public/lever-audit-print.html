@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>7-Lever Audit — Thee Rainers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800;12..96,900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Bricolage Grotesque', 'Arial Black', Arial, sans-serif;
+      background: white;
+      color: #0A0A0A;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 18mm 20mm;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media print {
+      html, body { width: 210mm; background: white; }
+      .page { page-break-after: always; break-after: page; }
+      .page:last-child { page-break-after: avoid; }
+      .print-btn { display: none !important; }
+    }
+
+    @media screen {
+      body { background: #ccc; padding: 20px; }
+      .page { margin: 0 auto 24px; box-shadow: 0 4px 40px rgba(0,0,0,0.25); background: white; }
+    }
+
+    .print-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: #0057FF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #D4A373;
+    }
+
+    .label-faint { color: rgba(255,255,255,0.25); }
+    .label-dark  { color: rgba(10,10,10,0.25); }
+
+    /* ── COVER ──────────────────────────────────────────────── */
+    .cover { background: #0A0A0A; justify-content: space-between; }
+
+    /* ── LEVER BLOCK ────────────────────────────────────────── */
+    .lever-block {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 10px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(10,10,10,0.07);
+    }
+
+    .lever-num {
+      font-size: 20px;
+      font-weight: 900;
+      color: rgba(10,10,10,0.07);
+      line-height: 1.1;
+      padding-top: 3px;
+    }
+
+    .lever-virtue {
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #D4A373;
+      margin-bottom: 2px;
+    }
+
+    .lever-name {
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: #0A0A0A;
+      margin-bottom: 3px;
+    }
+
+    .lever-q {
+      font-size: 9.5px;
+      color: rgba(10,10,10,0.4);
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .r-box {
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(10,10,10,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      color: rgba(10,10,10,0.35);
+      flex-shrink: 0;
+    }
+
+    .r-labels {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-left: 4px;
+      padding-top: 2px;
+    }
+
+    .r-label {
+      font-size: 7.5px;
+      color: rgba(10,10,10,0.2);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    .lever-scripture {
+      font-size: 7.5px;
+      color: rgba(10,10,10,0.13);
+      font-style: italic;
+      margin-top: 5px;
+    }
+
+    /* ── SCORE TABLE ────────────────────────────────────────── */
+    .score-table { margin-top: 14px; padding: 13px; border: 1px solid rgba(10,10,10,0.07); background: #F8F8F8; }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 108px 1fr 28px 30px;
+      gap: 6px;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(10,10,10,0.05);
+    }
+
+    .score-lever { font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(10,10,10,0.35); }
+
+    .score-bar { height: 2px; background: rgba(10,10,10,0.06); }
+
+    .score-denom { font-size: 8px; color: rgba(10,10,10,0.2); text-align: right; }
+
+    .score-box { width: 30px; height: 26px; border: 1px solid rgba(10,10,10,0.15); }
+
+    /* ── RESULT BANDS ───────────────────────────────────────── */
+    .result-band {
+      border-left: 2px solid #D4A373;
+      padding: 9px 0 9px 13px;
+      margin-bottom: 9px;
+    }
+
+    .result-score { font-size: 10px; font-weight: 900; color: #0A0A0A; text-transform: uppercase; letter-spacing: 0.04em; }
+    .result-verdict { font-size: 9px; color: rgba(10,10,10,0.45); line-height: 1.55; margin-top: 3px; }
+    .result-action  { font-size: 8.5px; font-weight: 800; color: #0057FF; text-transform: uppercase; letter-spacing: 0.07em; margin-top: 4px; }
+
+    /* ── CONSTRAINT TABLE ───────────────────────────────────── */
+    .constraint-row {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(10,10,10,0.04);
+      gap: 8px;
+    }
+
+    .c-lever { font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #D4A373; }
+    .c-focus  { font-size: 8.5px; color: rgba(10,10,10,0.45); line-height: 1.45; }
+
+    .page-footer {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid rgba(10,10,10,0.05);
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Print → Save as PDF</button>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 1 — COVER
+════════════════════════════════════════════════════════════ -->
+<div class="page cover">
+
+  <p class="label label-faint">Thee Rainers · Systemic Boxing Performance</p>
+
+  <div>
+    <p class="label label-faint" style="margin-bottom: 18px;">Self-Assessment Tool · For Fighters</p>
+    <h1 style="font-size: 84px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.82; color: white; margin-bottom: 20px;">7-Lever<br/>Audit</h1>
+    <p style="color: rgba(255,255,255,0.35); font-size: 12px; line-height: 1.7; max-width: 340px;">
+      Seven questions. Rate yourself as the sparring version — not the drilling version. Your lowest lever is your primary constraint. That is where the system starts.
+    </p>
+    <div style="margin-top: 20px; border-left: 2px solid rgba(212,163,115,0.4); padding-left: 14px;">
+      <p style="font-size: 11px; color: rgba(255,255,255,0.12); font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.3;">"I do not run aimlessly.<br/>I do not box as one beating the air.<br/>I discipline my body and keep it under control."</p>
+      <p class="label" style="margin-top: 6px;">1 Corinthians 9:26–27</p>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+    <p class="label" style="color: rgba(255,255,255,0.18);">Take the interactive quiz → theerainers.com/lever-audit-quiz</p>
+    <p class="label" style="color: rgba(255,255,255,0.18);">theerainers.com</p>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 2 — LEVERS 01–04
+════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(10,10,10,0.07);">
+    <p class="label">Rating Guide</p>
+    <p class="label label-dark">1 = Breaks consistently under pressure &nbsp;·&nbsp; 5 = Fully automatic</p>
+  </div>
+
+  <div style="border-left: 2px solid rgba(212,163,115,0.5); padding: 8px 0 8px 12px; margin-bottom: 14px;">
+    <p style="font-size: 9px; color: rgba(10,10,10,0.45); line-height: 1.6;">Rate based on your <strong>sparring performance</strong> — not drilling, not shadowboxing. Score 1 if it breaks under live pressure. Score 5 if it holds without conscious thought. Honest self-assessment is the only input that produces accurate output.</p>
+  </div>
+
+  <!-- LEVER 01 -->
+  <div class="lever-block">
+    <div class="lever-num">01</div>
+    <div>
+      <p class="lever-virtue">Diligence</p>
+      <p class="lever-name">Cue Reading</p>
+      <p class="lever-q">"In sparring — do you see punches arriving, or feel them landing?"</p>
+      <div class="rating-row">
+        <div class="r-box">1</div><div class="r-box">2</div><div class="r-box">3</div><div class="r-box">4</div><div class="r-box">5</div>
+        <div class="r-labels">
+          <p class="r-label">1 — Reactive. Surprised by most shots arriving.</p>
+          <p class="r-label">5 — Reads telegraphs early. Adjusts without thought.</p>
+        </div>
+      </div>
+      <p class="lever-scripture">"Watch and pray" — Matthew 26:41</p>
+    </div>
+  </div>
+
+  <!-- LEVER 02 -->
+  <div class="lever-block">
+    <div class="lever-num">02</div>
+    <div>
+      <p class="lever-virtue">Chastity</p>
+      <p class="lever-name">Kinetic Chain</p>
+      <p class="lever-q">"Do your punches come from your legs and hip — or your shoulder and arm?"</p>
+      <div class="rating-row">
+        <div class="r-box">1</div><div class="r-box">2</div><div class="r-box">3</div><div class="r-box">4</div><div class="r-box">5</div>
+        <div class="r-labels">
+          <p class="r-label">1 — Arm-only. Loses pop by round 3.</p>
+          <p class="r-label">5 — Full chain: floor → hip → shoulder → fist, every punch.</p>
+        </div>
+      </div>
+      <p class="lever-scripture">"Work at it with all your heart" — Colossians 3:23</p>
+    </div>
+  </div>
+
+  <!-- LEVER 03 -->
+  <div class="lever-block">
+    <div class="lever-num">03</div>
+    <div>
+      <p class="lever-virtue">Fortitude</p>
+      <p class="lever-name">Reactive Stiffness</p>
+      <p class="lever-q">"Does your footwork feel springy by round 4 — or flat and heavy?"</p>
+      <div class="rating-row">
+        <div class="r-box">1</div><div class="r-box">2</div><div class="r-box">3</div><div class="r-box">4</div><div class="r-box">5</div>
+        <div class="r-labels">
+          <p class="r-label">1 — Planted, slow, heavy legs under pressure.</p>
+          <p class="r-label">5 — Elastic. Re-loads automatically through all rounds.</p>
+        </div>
+      </div>
+      <p class="lever-scripture">"They will run and not grow weary" — Isaiah 40:31</p>
+    </div>
+  </div>
+
+  <!-- LEVER 04 -->
+  <div class="lever-block" style="border-bottom: none;">
+    <div class="lever-num">04</div>
+    <div>
+      <p class="lever-virtue">Temperance</p>
+      <p class="lever-name">Range Fluency</p>
+      <p class="lever-q">"Can you generate offence at all three ranges — or do you have one home?"</p>
+      <div class="rating-row">
+        <div class="r-box">1</div><div class="r-box">2</div><div class="r-box">3</div><div class="r-box">4</div><div class="r-box">5</div>
+        <div class="r-labels">
+          <p class="r-label">1 — Effective only at one range. Exploitable.</p>
+          <p class="r-label">5 — Comfortable and productive at long, mid, and close range.</p>
+        </div>
+      </div>
+      <p class="lever-scripture">"I have become all things to all people" — 1 Corinthians 9:22</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <p class="label label-dark">Thee Rainers · 7-Lever Audit</p>
+    <p class="label label-dark">Levers 01–04 of 07</p>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 3 — LEVERS 05–07 + SCORING
+════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(10,10,10,0.07);">
+    <p class="label">Levers 05–07</p>
+    <p class="label label-dark">1 = Breaks consistently &nbsp;·&nbsp; 5 = Automatic</p>
+  </div>
+
+  <!-- LEVER 05 -->
+  <div class="lever-block">
+    <div class="lever-num">05</div>
+    <div>
+      <p class="lever-virtue">Justice</p>
+      <p class="lever-name">Defensive Responsibility</p>
+      <p class="lever-q">"When you throw combinations — does your guard hold, or does your chin get exposed?"</p>
+      <div class="rating-row">
+        <div class="r-box">1</div><div class="r-box">2</div><div class="r-box">3</div><div class="r-box">4</div><div class="r-box">5</div>
+        <div class="r-labels">
+          <p class="r-label">1 — Chin exposed. Hand drops after every combination.</p>
+          <p class="r-label">5 — Defence built into offence. Hands return automatically.</p>
+        </div>
+      </div>
+      <p class="lever-scripture">"Put on the full armor of God" — Ephesians 6:11–13</p>
+    </div>
+  </div>
+
+  <!-- LEVER 06 -->
+  <div class="lever-block">
+    <div class="lever-num">06</div>
+    <div>
+      <p class="lever-virtue">Faith</p>
+      <p class="lever-name">Transfer to Live</p>
+      <p class="lever-q">"Is your sparring the same standard as your pad work — or does pressure strip the technique?"</p>
+      <div class="rating-row">
+        <div class="r-box">1</div><div class="r-box">2</div><div class="r-box">3</div><div class="r-box">4</div><div class="r-box">5</div>
+        <div class="r-labels">
+          <p class="r-label">1 — Technique disappears under live pressure.</p>
+          <p class="r-label">5 — Sparring quality matches or exceeds drilling quality.</p>
+        </div>
+      </div>
+      <p class="lever-scripture">"Be doers of the word, not hearers only" — James 1:22</p>
+    </div>
+  </div>
+
+  <!-- LEVER 07 -->
+  <div class="lever-block">
+    <div class="lever-num">07</div>
+    <div>
+      <p class="lever-virtue">Humility</p>
+      <p class="lever-name">Identity &amp; Presence</p>
+      <p class="lever-q">"When hurt and behind — do you fight your system, or contract and wait for the round to end?"</p>
+      <div class="rating-row">
+        <div class="r-box">1</div><div class="r-box">2</div><div class="r-box">3</div><div class="r-box">4</div><div class="r-box">5</div>
+        <div class="r-labels">
+          <p class="r-label">1 — Shuts down when hurt. Contracts and survives.</p>
+          <p class="r-label">5 — Presence holds under adversity. Executes the system when it matters.</p>
+        </div>
+      </div>
+      <p class="lever-scripture">"I have fought the good fight, I have finished the race" — 2 Timothy 4:7</p>
+    </div>
+  </div>
+
+  <!-- SCORE SUMMARY -->
+  <div class="score-table" style="margin-top: 16px;">
+    <p class="label label-dark" style="margin-bottom: 10px;">Score Summary — Total your 7 ratings</p>
+    <div class="score-row"><p class="score-lever">01 Cue Reading</p><div class="score-bar"></div><p class="score-denom">/ 5</p><div class="score-box"></div></div>
+    <div class="score-row"><p class="score-lever">02 Kinetic Chain</p><div class="score-bar"></div><p class="score-denom">/ 5</p><div class="score-box"></div></div>
+    <div class="score-row"><p class="score-lever">03 React. Stiffness</p><div class="score-bar"></div><p class="score-denom">/ 5</p><div class="score-box"></div></div>
+    <div class="score-row"><p class="score-lever">04 Range Fluency</p><div class="score-bar"></div><p class="score-denom">/ 5</p><div class="score-box"></div></div>
+    <div class="score-row"><p class="score-lever">05 Def. Responsibility</p><div class="score-bar"></div><p class="score-denom">/ 5</p><div class="score-box"></div></div>
+    <div class="score-row"><p class="score-lever">06 Transfer to Live</p><div class="score-bar"></div><p class="score-denom">/ 5</p><div class="score-box"></div></div>
+    <div class="score-row" style="border-bottom: none;"><p class="score-lever">07 Identity &amp; Presence</p><div class="score-bar"></div><p class="score-denom">/ 5</p><div class="score-box"></div></div>
+    <div style="display: flex; justify-content: flex-end; margin-top: 8px; padding-top: 8px; border-top: 2px solid rgba(10,10,10,0.1); gap: 8px; align-items: center;">
+      <p style="font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(10,10,10,0.3);">Total</p>
+      <div style="width: 40px; height: 32px; border: 2px solid rgba(10,10,10,0.18); display: flex; align-items: center; justify-content: center;">
+        <span style="font-size: 8px; color: rgba(10,10,10,0.18);">/ 35</span>
+      </div>
+    </div>
+    <p style="font-size: 7.5px; color: rgba(10,10,10,0.22); margin-top: 7px;">Circle your lowest lever — that is your Primary Constraint. Address it before anything else. Every other improvement compounds on it.</p>
+  </div>
+
+  <div class="page-footer">
+    <p class="label label-dark">Thee Rainers · 7-Lever Audit</p>
+    <p class="label label-dark">Levers 05–07 of 07</p>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PAGE 4 — RESULTS + NEXT STEPS
+════════════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid rgba(10,10,10,0.07);">
+    <p class="label">Score Interpretation &amp; Next Steps</p>
+    <p class="label label-dark">theerainers.com</p>
+  </div>
+
+  <div class="result-band">
+    <p class="result-score">7–16 · The Foundation Is Incomplete</p>
+    <p class="result-verdict">The base layer needs work before the system can compound. Your bottleneck is structural, not technical. Technique stacked on a broken platform produces inconsistency — not improvement. Start at the ground and build up.</p>
+    <p class="result-action">→ Start Free: 30-Day Footwork Foundation · theerainers.com/footwork-foundation</p>
+  </div>
+
+  <div class="result-band">
+    <p class="result-score">17–27 · The Mechanics Are There. Structure Is Missing.</p>
+    <p class="result-verdict">Your base is solid enough to build on — but the levers haven't been integrated into a connected system. One session locks them into structure. You're training hard. You need to train connected.</p>
+    <p class="result-action">→ Next: The Calibration Workshop · theerainers.com/workshop</p>
+  </div>
+
+  <div class="result-band">
+    <p class="result-score">28–35 · The System Is Close. One Lever Is The Cap.</p>
+    <p class="result-verdict">Your overall system is strong. One lever is suppressing every improvement above it. That constraint — when addressed as a system, not a drill — compounds everything else. This is the Private Architecture case.</p>
+    <p class="result-action">→ Apply: Private Architecture · theerainers.com/command</p>
+  </div>
+
+  <!-- PRIMARY CONSTRAINT TABLE -->
+  <div style="margin-top: 16px; padding: 12px; border: 1px solid rgba(10,10,10,0.07); background: #F8F8F8;">
+    <p class="label label-dark" style="margin-bottom: 9px;">Primary Constraint → Prescribed Focus</p>
+    <div>
+      <div class="constraint-row" style="padding-top: 0;">
+        <p class="c-lever">Cue Reading</p>
+        <p class="c-focus">Slow sparring with cue-identification only. No counters. Just see the telegraphs.</p>
+      </div>
+      <div class="constraint-row">
+        <p class="c-lever">Kinetic Chain</p>
+        <p class="c-focus">Single-punch kinetic drills: floor → hip → shoulder → fist. Pause at each node.</p>
+      </div>
+      <div class="constraint-row">
+        <p class="c-lever">React. Stiffness</p>
+        <p class="c-focus">Single-leg loading, pogo hops, lateral bound-and-land. Build the elastic reload.</p>
+      </div>
+      <div class="constraint-row">
+        <p class="c-lever">Range Fluency</p>
+        <p class="c-focus">Prescribed rounds at each range. No crossover. Long / mid / close rotations with purpose.</p>
+      </div>
+      <div class="constraint-row">
+        <p class="c-lever">Def. Responsibility</p>
+        <p class="c-focus">After every combination: 3-count guard check. Ingrain the return before adding speed.</p>
+      </div>
+      <div class="constraint-row">
+        <p class="c-lever">Transfer to Live</p>
+        <p class="c-focus">Pressure escalation: drilling → light contact → sparring. Same technique at every stage.</p>
+      </div>
+      <div class="constraint-row" style="border-bottom: none;">
+        <p class="c-lever">Identity &amp; Presence</p>
+        <p class="c-focus">Adversity conditioning: start each round deliberately behind. Execute the system through it.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL DARK CTA -->
+  <div style="background: #0A0A0A; padding: 16px; margin-top: 14px; flex-shrink: 0;">
+    <p class="label" style="margin-bottom: 6px;">Thee Rainers · Systemic Boxing Performance</p>
+    <p style="font-size: 10px; font-weight: 900; text-transform: uppercase; color: rgba(255,255,255,0.1); letter-spacing: -0.01em; line-height: 1.25; margin-bottom: 8px;">"I do not run aimlessly. I do not box as one beating the air."</p>
+    <p style="font-size: 7.5px; color: rgba(255,255,255,0.28); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px;">Interactive quiz with instant scoring → theerainers.com/lever-audit-quiz</p>
+    <p style="font-size: 7.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px;">The Calibration Workshop → theerainers.com/workshop</p>
+    <p style="font-size: 7.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.1em; text-transform: uppercase;">Apply for Private Architecture → theerainers.com/command</p>
+  </div>
+
+  <div class="page-footer">
+    <p class="label label-dark">theerainers.com/lever-audit</p>
+    <p class="label label-dark">© Thee Rainers</p>
+  </div>
+
+</div>
+
+</body>
+</html>
