@@ -1,166 +1,230 @@
 ---
-// PDF is served from /pdfs/footwork-foundation.pdf
-// Replace public/pdfs/footwork-foundation.pdf with the real file before launch.
-import Base from '../layouts/Base.astro';
-import Container from '../components/primitives/Container.astro';
-import Section from '../components/primitives/Section.astro';
-import Rule from '../components/primitives/Rule.astro';
-import Pill from '../components/primitives/Pill.astro';
-import LeadForm from '../components/blocks/LeadForm.astro';
+import Layout from '../layouts/Base.astro';
+
+const stats = [
+  {
+    num: '76%',
+    label: 'of punch power',
+    detail: 'originates at the floor — not the arm. The kinetic chain starts at your feet.',
+  },
+  {
+    num: '+24%',
+    label: 'VO2 max gains',
+    detail: 'in 8 weeks of structured boxing. Cardio alone does not produce this. Neither does lifting.',
+  },
+  {
+    num: '50%',
+    label: 'depression reduction',
+    detail: 'in non-contact boxing trials. 2022 scoping review, University of Toronto & CAMH.',
+  },
+  {
+    num: '17/100',
+    label: 'gym members stay',
+    detail: 'past 12 months. Not because they were lazy. Because fragmentation doesn\'t work.',
+  },
+];
 ---
 
-<Base
-  title="System Baseline — Footwork Protocol | Thee Rainers"
-  description="The kinetic foundation of the system. Four bases, 56 drill rounds, 30-day progression. Autonomic regulation begins here. Free."
+<Layout
+  title="Footwork Protocol — System Baseline | Thee Rainers"
+  description="The foundation the gym never taught you. Four kinetic bases, 56 drill rounds, 30-day progression. Free. Autonomic regulation begins here."
 >
   <Fragment slot="head">
-    <meta property="og:title" content="System Baseline — Footwork Protocol | Thee Rainers" />
-    <meta property="og:description" content="The kinetic foundation of the system. Four bases, 56 drill rounds, 30-day progression. Autonomic regulation begins here. Free." />
-    <meta property="og:image" content="/og-footwork-foundation.jpg" />
+    <meta property="og:title" content="Footwork Protocol — System Baseline | Thee Rainers" />
+    <meta property="og:description" content="The foundation the gym never taught you. 76% of punch power starts at the floor. Four kinetic bases, 56 drill rounds, 30-day progression. Free." />
     <meta property="og:type" content="website" />
   </Fragment>
 
-  <!-- ── 1. Hero ─────────────────────────────────────────────────── -->
-  <section class="bg-[#0A0A0A] pt-36 pb-20 md:pt-44 md:pb-28">
-    <Container size="prose">
-      <div class="mb-6">
-        <Pill>Free · System Baseline</Pill>
+  <!-- Hero -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
+    <div class="max-w-[720px] mx-auto w-full">
+
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Free · System Baseline</p>
+      <h1 class="font-black text-white uppercase tracking-tighter mb-6"
+        style="font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 0.88;">
+        The foundation<br/>the gym never<br/>taught you.
+      </h1>
+      <p class="text-white/40 text-base leading-relaxed mb-12 max-w-[520px]">
+        Four kinetic bases. 56 drill rounds. 30-day progression. This is not a workout guide — it is the mechanical platform that everything else runs on. Free.
+      </p>
+
+      <!-- Inline form -->
+      <div id="hero-form-wrapper">
+        <form id="hero-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
+          <input
+            type="email"
+            id="hero-email"
+            required
+            placeholder="your@email.com"
+            class="flex-1 border border-white/15 bg-transparent px-5 py-4 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20"
+          />
+          <button
+            type="submit"
+            id="hero-submit"
+            class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black whitespace-nowrap"
+          >
+            Send the Guide →
+          </button>
+        </form>
+        <p id="hero-success" class="hidden text-[#D4A373] text-sm tracking-wide mt-6">The guide is in your inbox.</p>
+        <p id="hero-error" class="hidden text-white/40 text-sm mt-4">Something went wrong. Try again.</p>
+        <p class="text-white/20 text-xs tracking-wide mt-4">No spam. Unsubscribe anytime.</p>
       </div>
 
-      <h1
-        class="font-black text-white uppercase tracking-tighter mb-5"
-        style="font-size: clamp(2.25rem, 5.5vw, 3rem); line-height: 0.9;"
-      >
-        Footwork Protocol:<br/>System Baseline.
-      </h1>
-
-      <p
-        class="text-white/40 leading-[1.55] mb-10 max-w-[520px]"
-        style="font-size: var(--font-size-body);"
-      >
-        Autonomic regulation begins at the floor. Four kinetic bases, 56 drill rounds,
-        30-day progression structure. This is not a workout guide —
-        it is the foundation layer of the system.
-      </p>
-
-      <LeadForm id="hero-form" />
-
-      <p class="text-white/25 mt-4 m-0" style="font-size: var(--font-size-small);">
-        No spam. Unsubscribe anytime.
-      </p>
-    </Container>
+    </div>
   </section>
 
-  <!-- ── 2. System Architecture ────────────────────────────────── -->
-  <Section padding="lg" class="bg-[#0D0D0D]">
-    <Container size="prose">
-      <div class="border-t border-white/5 pt-12 mb-12"></div>
+  <!-- Research Stats from the video -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20 border-t border-white/5">
+    <div class="max-w-[1280px] mx-auto w-full">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">The Research</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[2px]">
+        {stats.map(s => (
+          <div class="bg-[#111111] border border-white/5 p-10">
+            <p class="font-black text-white text-4xl leading-none mb-2">{s.num}</p>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">{s.label}</p>
+            <p class="text-white/35 text-xs leading-relaxed">{s.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What's inside -->
+  <section class="bg-[#0D0D0D] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+    <div class="max-w-[720px] mx-auto w-full">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">System Architecture</p>
-      <h2
-        class="font-black text-white uppercase tracking-tighter mb-10"
-        style="font-size: var(--font-size-h2); line-height: 0.9;"
-      >
+      <h2 class="font-black text-white uppercase tracking-tighter mb-12"
+        style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 0.9;">
         What is inside.
       </h2>
-      <div class="flex flex-col gap-8">
-        <div>
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 01 — Kinetic Bases</p>
-          <p class="text-white/50 leading-[1.6]" style="font-size: var(--font-size-body);">
-            Four bases. Steps. Galloping. Pivoting. Pendulum. Each one a mechanical input that trains the nervous system to generate floor-up power without cognitive overhead.
-          </p>
+      <div class="flex flex-col gap-10">
+        <div class="border-t border-white/5 pt-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Layer 01 — Kinetic Bases</p>
+          <p class="text-white/50 text-sm leading-relaxed">Four bases. Steps. Galloping. Pivoting. Pendulum. Each one a mechanical input that trains the nervous system to generate floor-up power without cognitive overhead. 76% of your output begins here.</p>
         </div>
-        <div>
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 02 — Drill Rounds</p>
-          <p class="text-white/50 leading-[1.6]" style="font-size: var(--font-size-body);">
-            56 structured rounds organized by distance management, angle creation, and exit lines. Usable for solo training, gym warmups, and mechanical correction.
-          </p>
+        <div class="border-t border-white/5 pt-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Layer 02 — Drill Rounds</p>
+          <p class="text-white/50 text-sm leading-relaxed">56 structured rounds organized by distance management, angle creation, and exit lines. Usable for solo training, gym warmups, and mechanical correction. No partner required.</p>
         </div>
-        <div>
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 03 — Progression Structure</p>
-          <p class="text-white/50 leading-[1.6]" style="font-size: var(--font-size-body);">
-            30-day sequencing that builds kinetic integrity before layering complexity. The system does not skip foundations. Neither should the fighter.
-          </p>
+        <div class="border-t border-white/5 pt-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Layer 03 — Progression Structure</p>
+          <p class="text-white/50 text-sm leading-relaxed">30-day sequencing that builds kinetic integrity before layering complexity. The system does not skip foundations. Most fighters spend years fixing what this protocol installs in the first week.</p>
         </div>
       </div>
-    </Container>
-  </Section>
+    </div>
+  </section>
 
-  <!-- ── 3. Qualification ──────────────────────────────────────── -->
-  <Section padding="lg" class="bg-[#0A0A0A]">
-    <Container size="prose">
-      <div class="border-t border-white/5 pt-12 mb-12"></div>
+  <!-- Who this is for -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+    <div class="max-w-[720px] mx-auto w-full">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Who this is for</p>
-      <h2
-        class="font-black text-white uppercase tracking-tighter mb-8"
-        style="font-size: var(--font-size-h2); line-height: 0.9;"
-      >
-        System builders.<br/>Not fitness consumers.
+      <h2 class="font-black text-white uppercase tracking-tighter mb-8"
+        style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 0.9;">
+        The 17 who stayed.<br/>And the 83 who<br/>already know why.
       </h2>
-      <p class="text-white/50 leading-[1.6]" style="font-size: var(--font-size-body);">
-        Fighters whose mechanics fragment under pressure. Athletes who train volume
-        but feel the kinetic chain disconnect in sparring. Coaches who want a structure
-        that is repeatable, measurable, and not dependent on motivation.
-        Anyone who has already understood that working harder is not the cure.
+      <p class="text-white/50 text-sm leading-relaxed mb-6 max-w-[560px]">
+        The gym fragments you. Weight room here. Cardio there. Mobility app on your phone. Every modality trains one piece of you in isolation — but life never asks you to be fit in isolation.
       </p>
-    </Container>
-  </Section>
+      <p class="text-white/35 text-sm leading-relaxed max-w-[560px]">
+        This protocol is for the fighter who already understood that working harder on the wrong foundation produces more of the same. The foundation is the fix. Start here.
+      </p>
+    </div>
+  </section>
 
-  <!-- ── 4. Integration ────────────────────────────────────────── -->
-  <Section padding="lg" class="bg-[#0D0D0D]">
-    <Container size="prose">
-      <div class="border-t border-white/5 pt-12 mb-12"></div>
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">System Integration</p>
-      <h2
-        class="font-black text-white uppercase tracking-tighter mb-8"
-        style="font-size: var(--font-size-h2); line-height: 0.9;"
-      >
-        The loop.
-      </h2>
-      <p class="text-white/50 leading-[1.6] mb-10" style="font-size: var(--font-size-body);">
-        Everyone who downloads the protocol is invited to the monthly live Q&A session.
-        One hour. One Saturday per month. Unfiltered questions, no upsell.
-        The protocol is the entry point. The loop is where the system compounds.
+  <!-- Scripture -->
+  <section class="bg-[#0D1F1F] px-8 md:px-16 lg:px-24 py-24 border-t border-[#D4A373]/10">
+    <div class="max-w-[720px] mx-auto w-full">
+      <p class="font-black text-white/10 uppercase tracking-tighter leading-[0.88] mb-6"
+        style="font-size: clamp(1.5rem, 3.5vw, 2rem);">
+        "I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."
       </p>
-      <a href="/qa" class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
-        Join the Monthly Q&A →
-      </a>
-    </Container>
-  </Section>
+      <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-12">1 Corinthians 9:26–27</p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/vault" class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+          Enter the Vault →
+        </a>
+        <a href="/lever-audit" class="inline-flex items-center justify-center font-bold border border-white/15 text-white/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/50">
+          Find Your Leak →
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <!-- ── 5. Final CTA ───────────────────────────────────────────── -->
-  <Section padding="lg" class="bg-[#0A0A0A]">
-    <Container size="prose">
-      <div class="border-t border-white/5 pt-12 mb-12"></div>
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Initialize</p>
-      <h2
-        class="font-black text-white uppercase tracking-tighter mb-8"
-        style="font-size: var(--font-size-h2); line-height: 0.9;"
-      >
-        Access the protocol.
+  <!-- Final CTA -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+    <div class="max-w-[720px] mx-auto w-full">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Access the Protocol</p>
+      <h2 class="font-black text-white uppercase tracking-tighter mb-10"
+        style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 0.9;">
+        Start from<br/>the floor.
       </h2>
-      <LeadForm id="footer-form" submitText="Access the Protocol" />
-      <p class="text-white/25 mt-4 m-0" style="font-size: var(--font-size-small);">
-        No spam. Unsubscribe anytime.
-      </p>
-    </Container>
-  </Section>
-</Base>
+
+      <div id="footer-form-wrapper">
+        <form id="footer-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
+          <input
+            type="email"
+            id="footer-email"
+            required
+            placeholder="your@email.com"
+            class="flex-1 border border-white/15 bg-transparent px-5 py-4 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20"
+          />
+          <button
+            type="submit"
+            id="footer-submit"
+            class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black whitespace-nowrap"
+          >
+            Access the Protocol →
+          </button>
+        </form>
+        <p id="footer-success" class="hidden text-[#D4A373] text-sm tracking-wide mt-6">The protocol is in your inbox.</p>
+        <p id="footer-error" class="hidden text-white/40 text-sm mt-4">Something went wrong. Try again.</p>
+        <p class="text-white/20 text-xs tracking-wide mt-4">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
 
 <script>
-  // Show inline error banner if redirected back with ?error= query param (no-JS failure path).
+  function wireForm(formId: string, emailId: string, submitId: string, successId: string, errorId: string) {
+    const form = document.getElementById(formId) as HTMLFormElement | null;
+    const submit = document.getElementById(submitId) as HTMLButtonElement | null;
+    const success = document.getElementById(successId)!;
+    const error = document.getElementById(errorId)!;
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submit) { submit.disabled = true; submit.textContent = 'Sending...'; }
+      error.classList.add('hidden');
+
+      const email = (document.getElementById(emailId) as HTMLInputElement).value.trim();
+
+      try {
+        const res = await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, source: 'footwork-foundation', full_name: '', phone: '' }),
+        });
+        const body = await res.json() as { success: boolean };
+        if (body.success) {
+          form?.classList.add('hidden');
+          success.classList.remove('hidden');
+        } else { throw new Error(); }
+      } catch {
+        error.classList.remove('hidden');
+        if (submit) { submit.disabled = false; submit.textContent = 'Send the Guide →'; }
+      }
+    });
+  }
+
+  wireForm('hero-form', 'hero-email', 'hero-submit', 'hero-success', 'hero-error');
+  wireForm('footer-form', 'footer-email', 'footer-submit', 'footer-success', 'footer-error');
+
+  // Show error from redirect fallback
   const params = new URLSearchParams(window.location.search);
   const errorCode = params.get('error');
   if (errorCode) {
-    const messages: Record<string, string> = {
-      invalid_email: 'Please enter a valid email address.',
-      delivery_failed: 'Delivery failed. Please try again.',
-      bad_request: 'Something went wrong. Please try again.',
-    };
-    const msg = messages[errorCode] || 'Something went wrong. Please try again.';
-    const errorEl = document.querySelector<HTMLElement>('[data-lead-error]');
-    if (errorEl) {
-      errorEl.textContent = msg;
-      errorEl.classList.remove('hidden');
-    }
+    const el = document.getElementById('hero-error');
+    if (el) { el.textContent = 'Something went wrong. Try again.'; el.classList.remove('hidden'); }
   }
 </script>
