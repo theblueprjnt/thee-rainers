@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7-Lever Performance Audit — Thee Rainers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0A0A0A;
+      --copper: #D4A373;
+      --blue: #0057FF;
+      --purple: #6A0DAD;
+      --rule: #E8E8E8;
+      --soft: #F6F6F6;
+    }
+
+    html { font-size: 10pt; }
+
+    body {
+      font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.5;
+    }
+
+    /* ── PAGE SETUP ── */
+    @page {
+      size: A4;
+      margin: 14mm 16mm;
+    }
+
+    .page {
+      width: 100%;
+      page-break-after: always;
+      padding: 10mm 0;
+    }
+
+    .page:last-child { page-break-after: avoid; }
+
+    /* ── COVER ── */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 267mm;
+    }
+
+    .cover-top { border-bottom: 1px solid var(--rule); padding-bottom: 8mm; }
+
+    .brand-line {
+      font-size: 7pt;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 2mm;
+    }
+
+    .cover-title {
+      font-size: 42pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 0.85;
+      color: var(--ink);
+      margin: 6mm 0 4mm;
+    }
+
+    .cover-sub {
+      font-size: 9pt;
+      color: rgba(10,10,10,0.4);
+      max-width: 120mm;
+      line-height: 1.6;
+    }
+
+    .cover-instructions {
+      border-left: 2px solid var(--copper);
+      padding-left: 5mm;
+      margin-top: 8mm;
+    }
+
+    .cover-instructions p {
+      font-size: 8pt;
+      color: rgba(10,10,10,0.5);
+      line-height: 1.7;
+    }
+
+    .cover-middle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2mm;
+      margin: 8mm 0;
+    }
+
+    .lever-index-item {
+      border: 1px solid var(--rule);
+      padding: 4mm 5mm;
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+    }
+
+    .lever-num-small {
+      font-size: 7pt;
+      font-weight: 800;
+      color: var(--copper);
+      letter-spacing: 0.1em;
+      min-width: 8mm;
+    }
+
+    .lever-name-small {
+      font-size: 8pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(10,10,10,0.6);
+    }
+
+    .cover-bottom {
+      border-top: 1px solid var(--rule);
+      padding-top: 5mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .cover-bottom-left p {
+      font-size: 7pt;
+      color: rgba(10,10,10,0.25);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 2;
+    }
+
+    .scripture {
+      font-size: 7pt;
+      color: rgba(10,10,10,0.18);
+      text-align: right;
+      font-style: italic;
+      max-width: 60mm;
+      line-height: 1.6;
+    }
+
+    /* ── LEVER PAGES ── */
+    .lever-block {
+      border: 1px solid var(--rule);
+      margin-bottom: 5mm;
+      page-break-inside: avoid;
+    }
+
+    .lever-header {
+      display: flex;
+      align-items: baseline;
+      gap: 4mm;
+      padding: 4mm 6mm 3mm;
+      border-bottom: 1px solid var(--rule);
+      background: var(--soft);
+    }
+
+    .lever-number {
+      font-size: 7pt;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: var(--copper);
+      text-transform: uppercase;
+    }
+
+    .lever-name {
+      font-size: 14pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .lever-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .lever-col {
+      padding: 4mm 6mm;
+    }
+
+    .lever-col + .lever-col {
+      border-left: 1px solid var(--rule);
+    }
+
+    .col-label {
+      font-size: 6.5pt;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 2mm;
+    }
+
+    .col-text {
+      font-size: 8pt;
+      color: rgba(10,10,10,0.55);
+      line-height: 1.65;
+    }
+
+    .lever-bottom {
+      border-top: 1px solid var(--rule);
+      padding: 4mm 6mm;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6mm;
+      align-items: start;
+    }
+
+    .drill-label {
+      font-size: 6.5pt;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 2mm;
+    }
+
+    .drill-text {
+      font-size: 7.5pt;
+      color: rgba(10,10,10,0.5);
+      line-height: 1.65;
+    }
+
+    .rating-box {
+      border: 1px solid var(--rule);
+      padding: 3mm 5mm;
+      min-width: 32mm;
+      text-align: center;
+    }
+
+    .rating-label {
+      font-size: 6pt;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(10,10,10,0.3);
+      margin-bottom: 2mm;
+    }
+
+    .rating-scale {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1mm;
+      margin-bottom: 2mm;
+    }
+
+    .rating-dot {
+      width: 3mm;
+      height: 3mm;
+      border: 1px solid var(--rule);
+      border-radius: 50%;
+    }
+
+    .rating-ends {
+      display: flex;
+      justify-content: space-between;
+      font-size: 6pt;
+      color: rgba(10,10,10,0.25);
+    }
+
+    .self-check {
+      background: #FEFAF5;
+      border-top: 1px solid rgba(212,163,115,0.2);
+      padding: 3mm 6mm;
+    }
+
+    .self-check-label {
+      font-size: 6.5pt;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 1.5mm;
+    }
+
+    .self-check-q {
+      font-size: 8pt;
+      color: rgba(10,10,10,0.6);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    /* ── SCORE PAGE ── */
+    .score-page-title {
+      font-size: 22pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.9;
+      margin-bottom: 6mm;
+      color: var(--ink);
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2mm;
+      margin-bottom: 6mm;
+    }
+
+    .score-cell {
+      border: 1px solid var(--rule);
+      padding: 3mm 2mm;
+      text-align: center;
+    }
+
+    .score-cell-label {
+      font-size: 6pt;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 2mm;
+      line-height: 1.3;
+    }
+
+    .score-cell-line {
+      border-bottom: 1px solid var(--ink);
+      height: 5mm;
+      margin: 0 2mm 1mm;
+    }
+
+    .score-cell-sub {
+      font-size: 5.5pt;
+      color: rgba(10,10,10,0.25);
+    }
+
+    .score-total-box {
+      border: 2px solid var(--ink);
+      padding: 4mm 6mm;
+      margin-bottom: 6mm;
+      display: flex;
+      align-items: center;
+      gap: 6mm;
+    }
+
+    .score-total-label {
+      font-size: 7pt;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(10,10,10,0.4);
+    }
+
+    .score-total-line {
+      border-bottom: 2px solid var(--ink);
+      flex: 1;
+      height: 6mm;
+    }
+
+    .score-total-denom {
+      font-size: 10pt;
+      font-weight: 800;
+      color: rgba(10,10,10,0.2);
+    }
+
+    .routing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2mm;
+      margin-bottom: 6mm;
+    }
+
+    .routing-band {
+      border: 1px solid var(--rule);
+      padding: 4mm 5mm;
+    }
+
+    .routing-range {
+      font-size: 10pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 1mm;
+    }
+
+    .routing-verdict {
+      font-size: 7pt;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 2mm;
+    }
+
+    .routing-text {
+      font-size: 7.5pt;
+      color: rgba(10,10,10,0.45);
+      line-height: 1.55;
+    }
+
+    .routing-url {
+      font-size: 7pt;
+      font-weight: 800;
+      color: var(--blue);
+      margin-top: 2mm;
+      letter-spacing: 0.05em;
+    }
+
+    .routing-url-purple { color: var(--purple); }
+
+    .primary-constraint {
+      border: 1px solid var(--copper);
+      padding: 4mm 6mm;
+      margin-bottom: 6mm;
+    }
+
+    .pc-label {
+      font-size: 6.5pt;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 2mm;
+    }
+
+    .pc-line {
+      font-size: 9pt;
+      color: rgba(10,10,10,0.2);
+    }
+
+    .pc-note {
+      font-size: 7pt;
+      color: rgba(10,10,10,0.35);
+      margin-top: 2mm;
+      line-height: 1.5;
+    }
+
+    .score-footer {
+      border-top: 1px solid var(--rule);
+      padding-top: 4mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .score-footer-cta p {
+      font-size: 7pt;
+      color: rgba(10,10,10,0.25);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 2;
+    }
+
+    /* ── PRINT OVERRIDES ── */
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* ── SCREEN PREVIEW ── */
+    @media screen {
+      body { max-width: 210mm; margin: 0 auto; padding: 10mm; background: #E8E8E8; }
+      .page { background: #fff; padding: 14mm 16mm; margin-bottom: 8mm; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ COVER ═══════════════════════════════════ -->
+<div class="page">
+  <div class="cover">
+
+    <div class="cover-top">
+      <p class="brand-label" style="font-size:7pt;letter-spacing:0.2em;text-transform:uppercase;color:#D4A373;margin-bottom:4mm;">Thee Rainers · Systemic Boxing Performance</p>
+      <h1 class="cover-title">7-Lever<br/>Performance<br/>Audit</h1>
+      <p class="cover-sub">Find the leak before your next fight. Rate yourself honestly on each lever. The lowest score is always the primary constraint — and the primary target.</p>
+      <div class="cover-instructions">
+        <p>Rate each lever 1–10. 1 = this breaks down under any pressure. 10 = this runs automatically in competition. Do not rate the drill version of yourself. Rate the sparring version.</p>
+      </div>
+    </div>
+
+    <div class="cover-middle">
+      <div class="lever-index-item">
+        <span class="lever-num-small">01</span>
+        <span class="lever-name-small">Cue Reading</span>
+      </div>
+      <div class="lever-index-item">
+        <span class="lever-num-small">02</span>
+        <span class="lever-name-small">Kinetic Chain</span>
+      </div>
+      <div class="lever-index-item">
+        <span class="lever-num-small">03</span>
+        <span class="lever-name-small">Reactive Stiffness</span>
+      </div>
+      <div class="lever-index-item">
+        <span class="lever-num-small">04</span>
+        <span class="lever-name-small">Range Fluency</span>
+      </div>
+      <div class="lever-index-item">
+        <span class="lever-num-small">05</span>
+        <span class="lever-name-small">Defensive Responsibility</span>
+      </div>
+      <div class="lever-index-item">
+        <span class="lever-num-small">06</span>
+        <span class="lever-name-small">Transfer to Live</span>
+      </div>
+      <div class="lever-index-item">
+        <span class="lever-num-small">07</span>
+        <span class="lever-name-small">Identity & Presence</span>
+      </div>
+      <div class="lever-index-item" style="border-color:#D4A373;">
+        <span class="lever-num-small" style="color:#0A0A0A;">Σ</span>
+        <span class="lever-name-small">Score Sheet → Page 4</span>
+      </div>
+    </div>
+
+    <div class="cover-bottom">
+      <div class="cover-bottom-left">
+        <p>theerainers.com</p>
+        <p>@theerainers</p>
+      </div>
+      <p class="scripture">"I do not run aimlessly. I do not fight like a boxer beating the air."<br/>1 Corinthians 9:26</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ LEVERS 01–04 ═══════════════════════════════════ -->
+<div class="page">
+
+  <!-- LEVER 01 -->
+  <div class="lever-block">
+    <div class="lever-header">
+      <span class="lever-number">Lever 01</span>
+      <span class="lever-name">Cue Reading</span>
+    </div>
+    <div class="self-check">
+      <p class="self-check-label">Self-Check</p>
+      <p class="self-check-q">In sparring, do you see punches arriving before they land — or do you feel them hitting before you've processed what happened?</p>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <p class="col-label">What it is</p>
+        <p class="col-text">Your ability to read incoming information — weight shifts, shoulder dips, rhythm breaks — before the punch launches. This is the perceptual layer. Without it, you're reacting to contact instead of anticipating movement.</p>
+      </div>
+      <div class="lever-col">
+        <p class="col-label">How it breaks under pressure</p>
+        <p class="col-text">When pace increases, you stop scanning and start reacting. Your eyes fix on the gloves instead of reading the chest and shoulders. You lose wide-field perception. Fast opponents confuse you; slow predictable ones don't.</p>
+      </div>
+    </div>
+    <div class="lever-bottom">
+      <div>
+        <p class="drill-label">Prescribed Drill</p>
+        <p class="drill-text">Peripheral tracking shadow. Face a wall. Partner stands to your side — you track their hand movements in peripheral vision without looking directly. Progress: partner initiates a body tell 0.3 seconds before calling a combo number. You respond to the tell, not the call.</p>
+      </div>
+      <div class="rating-box">
+        <p class="rating-label">My Rating</p>
+        <div class="rating-scale">
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div>
+        </div>
+        <div class="rating-ends"><span>1</span><span>10</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVER 02 -->
+  <div class="lever-block">
+    <div class="lever-header">
+      <span class="lever-number">Lever 02</span>
+      <span class="lever-name">Kinetic Chain</span>
+    </div>
+    <div class="self-check">
+      <p class="self-check-label">Self-Check</p>
+      <p class="self-check-q">When you throw your cross, do you feel the power originating from your rear foot and hip — or primarily from your shoulder and arm?</p>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <p class="col-label">What it is</p>
+        <p class="col-text">The sequential ground → foot → hip → shoulder → fist activation that generates force. 76% of punch power originates below the waist (Journal of Sports Sciences). A broken chain produces arm shots — fast, tiring, low-damage.</p>
+      </div>
+      <div class="lever-col">
+        <p class="col-label">How it breaks under pressure</p>
+        <p class="col-text">Under fatigue, the chain shortens. You stop loading the floor and start throwing from the shoulder. Punches look big but opponents don't respect them. You gas early from punching. This is why fighters look slow when tired — they're not slower, they're smaller.</p>
+      </div>
+    </div>
+    <div class="lever-bottom">
+      <div>
+        <p class="drill-label">Prescribed Drill</p>
+        <p class="drill-text">Wall-load drill. Stand 12 inches from a wall. Slow-motion cross: push through the rear foot, rotate the hip FIRST, feel that hip rotation pull the shoulder through, press fist against the wall at endpoint. Hold. Feel where the pressure originates. Rebuild the sequence from the floor — 3×10 each side.</p>
+      </div>
+      <div class="rating-box">
+        <p class="rating-label">My Rating</p>
+        <div class="rating-scale">
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div>
+        </div>
+        <div class="rating-ends"><span>1</span><span>10</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVER 03 -->
+  <div class="lever-block">
+    <div class="lever-header">
+      <span class="lever-number">Lever 03</span>
+      <span class="lever-name">Reactive Stiffness</span>
+    </div>
+    <div class="self-check">
+      <p class="self-check-label">Self-Check</p>
+      <p class="self-check-q">Does your footwork feel like you're bouncing on springs — or pushing off concrete? Does your movement quality drop noticeably in rounds 4 and beyond?</p>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <p class="col-label">What it is</p>
+        <p class="col-text">The plyometric quality of your musculotendinous system. Reactive stiffness makes footwork feel light and explosive. It lives in the tendons, not the muscles. Heavy gym training focused on slow concentric movements often destroys it.</p>
+      </div>
+      <div class="lever-col">
+        <p class="col-label">How it breaks under pressure</p>
+        <p class="col-text">Fatigue drops reactive stiffness first. You start flat-footing. Entries become telegraphed because the bounce disappears. You get hit more in later rounds not because you're slower — but because your tendon elasticity has depleted and every step announces itself.</p>
+      </div>
+    </div>
+    <div class="lever-bottom">
+      <div>
+        <p class="drill-label">Prescribed Drill</p>
+        <p class="drill-text">Bilateral ankle hops — 3×20 with minimum ground contact time. Target: under 200ms contact. Progress: lateral hops → figure-eight → reactive drop-step with directional change on visual cue. This is tendon conditioning, not cardio. Do not fatigue into it — quality over volume.</p>
+      </div>
+      <div class="rating-box">
+        <p class="rating-label">My Rating</p>
+        <div class="rating-scale">
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div>
+        </div>
+        <div class="rating-ends"><span>1</span><span>10</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVER 04 -->
+  <div class="lever-block">
+    <div class="lever-header">
+      <span class="lever-number">Lever 04</span>
+      <span class="lever-name">Range Fluency</span>
+    </div>
+    <div class="self-check">
+      <p class="self-check-label">Self-Check</p>
+      <p class="self-check-q">At which range are you most dangerous? Now — what happens to your offence when an opponent takes that range away?</p>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <p class="col-label">What it is</p>
+        <p class="col-text">Your ability to operate cleanly across all three ranges — long (jab), mid (cross/hook), close (uppercut/clinch) — and transition between them without losing structural integrity. Most fighters have one home range. Opponents locate it in round one.</p>
+      </div>
+      <div class="lever-col">
+        <p class="col-label">How it breaks under pressure</p>
+        <p class="col-text">When uncomfortable, fighters retreat to their home range and try to survive there. If an opponent takes that range, the fighter has no secondary system. Offence disappears completely. This is why a shorter fighter who smothers you can completely neutralise your game.</p>
+      </div>
+    </div>
+    <div class="lever-bottom">
+      <div>
+        <p class="drill-label">Prescribed Drill</p>
+        <p class="drill-text">Three-zone constraint sparring. Mark long/mid/close on the floor. 90-second rounds: 30 seconds forced in each zone generating offence — not surviving. You cannot leave a zone until the time is up. Rotate weekly. The zone that produces panic is the gap to address next.</p>
+      </div>
+      <div class="rating-box">
+        <p class="rating-label">My Rating</p>
+        <div class="rating-scale">
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div>
+        </div>
+        <div class="rating-ends"><span>1</span><span>10</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════ LEVERS 05–07 ═══════════════════════════════════ -->
+<div class="page">
+
+  <!-- LEVER 05 -->
+  <div class="lever-block">
+    <div class="lever-header">
+      <span class="lever-number">Lever 05</span>
+      <span class="lever-name">Defensive Responsibility</span>
+    </div>
+    <div class="self-check">
+      <p class="self-check-label">Self-Check</p>
+      <p class="self-check-q">When you throw combinations, does your chin get exposed? Does your lead hand drop after the jab? Do you stand square at the end of exchanges?</p>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <p class="col-label">What it is</p>
+        <p class="col-text">Structural defence that runs automatically — your guard holds when you punch, your head moves by default when you enter range, exit angles are built into your attacks. Defensive responsibility means offence and defence are the same movement, not two decisions.</p>
+      </div>
+      <div class="lever-col">
+        <p class="col-label">How it breaks under pressure</p>
+        <p class="col-text">Under fatigue, offence and defence desynchronise. The mind prioritises output and strips structural maintenance. You expose your chin on the cross, drop the lead after the jab, stand square after combinations. You only notice the exposure after you've been hit.</p>
+      </div>
+    </div>
+    <div class="lever-bottom">
+      <div>
+        <p class="drill-label">Prescribed Drill</p>
+        <p class="drill-text">Combination-to-defence constraint. Every combination ends with a defensive movement before reset — slip, roll, pivot, or exit angle. No combination ends in a stationary position. Drill this until the defence is automatic enough that removing the constraint doesn't remove the movement. Test in sparring: same rule applies.</p>
+      </div>
+      <div class="rating-box">
+        <p class="rating-label">My Rating</p>
+        <div class="rating-scale">
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div>
+        </div>
+        <div class="rating-ends"><span>1</span><span>10</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVER 06 -->
+  <div class="lever-block">
+    <div class="lever-header">
+      <span class="lever-number">Lever 06</span>
+      <span class="lever-name">Transfer to Live</span>
+    </div>
+    <div class="self-check">
+      <p class="self-check-label">Self-Check</p>
+      <p class="self-check-q">Does your technique from pads and shadow show up in sparring at the same standard — or does everything revert to instinct the moment someone is actually hitting back?</p>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <p class="col-label">What it is</p>
+        <p class="col-text">The degree to which closed-drill technique survives contact, chaos, and fatigue. This is the most important lever and the hardest to build. Clean technique in drilling is not evidence of transfer — it is the starting point. Transfer has to be built separately.</p>
+      </div>
+      <div class="lever-col">
+        <p class="col-label">How it breaks under pressure</p>
+        <p class="col-text">Closed drills build pattern recognition in low-threat environments. Live sparring introduces chaos, threat, and fatigue — three variables that revert the nervous system to older, ingrained patterns. If the drill was never taken through graduated live pressure, it will not transfer.</p>
+      </div>
+    </div>
+    <div class="lever-bottom">
+      <div>
+        <p class="drill-label">Prescribed Drill</p>
+        <p class="drill-text">Graduated constraint sparring. Isolate one technical element — the slip, the pivot exit, the jab-cross-slip sequence. Spar with the rule that you can ONLY use that element defensively. No other defence allowed. The constraint forces the technique into live conditions. Progress the constraint bi-weekly. This is the only reliable transfer protocol known to work at scale.</p>
+      </div>
+      <div class="rating-box">
+        <p class="rating-label">My Rating</p>
+        <div class="rating-scale">
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div>
+        </div>
+        <div class="rating-ends"><span>1</span><span>10</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVER 07 -->
+  <div class="lever-block">
+    <div class="lever-header">
+      <span class="lever-number">Lever 07</span>
+      <span class="lever-name">Identity & Presence</span>
+    </div>
+    <div class="self-check">
+      <p class="self-check-label">Self-Check</p>
+      <p class="self-check-q">When you're hurt, behind, or in deep water — do you fight your system or contract into survival mode and wait for the round to end?</p>
+    </div>
+    <div class="lever-body">
+      <div class="lever-col">
+        <p class="col-label">What it is</p>
+        <p class="col-text">Whether you operate as the fighter you are building — or a smaller, more cautious version under pressure. This is the integration lever. A technical system deployed by a contracted identity produces contracted results. The identity ceiling determines the performance ceiling.</p>
+      </div>
+      <div class="lever-col">
+        <p class="col-label">How it breaks under pressure</p>
+        <p class="col-text">Pressure reveals the self-concept. If you carry a narrative of "I always fade late" or "I can't take a good shot" — that narrative becomes a performance ceiling. The mechanics exist. The identity undermines their deployment at the moment they are most needed.</p>
+      </div>
+    </div>
+    <div class="lever-bottom">
+      <div>
+        <p class="drill-label">The Protocol — this lever has no drill. It has a document.</p>
+        <p class="drill-text">Write 10 specific attributes of the fighter you are becoming. Not aspirational — architectural. ("I am a fighter who stays composed in the late rounds." Not "I want to be.") Read before every session. For one round per session, perform as that fighter regardless of outcome. Identity rehearsal. The transfer is presence under load.</p>
+      </div>
+      <div class="rating-box">
+        <p class="rating-label">My Rating</p>
+        <div class="rating-scale">
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div><div class="rating-dot"></div><div class="rating-dot"></div>
+          <div class="rating-dot"></div>
+        </div>
+        <div class="rating-ends"><span>1</span><span>10</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════ SCORE PAGE ═══════════════════════════════════ -->
+<div class="page">
+
+  <p style="font-size:7pt;letter-spacing:0.2em;text-transform:uppercase;color:#D4A373;margin-bottom:4mm;">Score Sheet · Thee Rainers 7-Lever Audit</p>
+  <h2 class="score-page-title">Tally.<br/>Find the leak.</h2>
+
+  <div class="score-grid">
+    <div class="score-cell">
+      <p class="score-cell-label">Cue<br/>Reading</p>
+      <div class="score-cell-line"></div>
+      <p class="score-cell-sub">/ 10</p>
+    </div>
+    <div class="score-cell">
+      <p class="score-cell-label">Kinetic<br/>Chain</p>
+      <div class="score-cell-line"></div>
+      <p class="score-cell-sub">/ 10</p>
+    </div>
+    <div class="score-cell">
+      <p class="score-cell-label">Reactive<br/>Stiffness</p>
+      <div class="score-cell-line"></div>
+      <p class="score-cell-sub">/ 10</p>
+    </div>
+    <div class="score-cell">
+      <p class="score-cell-label">Range<br/>Fluency</p>
+      <div class="score-cell-line"></div>
+      <p class="score-cell-sub">/ 10</p>
+    </div>
+    <div class="score-cell">
+      <p class="score-cell-label">Defensive<br/>Resp.</p>
+      <div class="score-cell-line"></div>
+      <p class="score-cell-sub">/ 10</p>
+    </div>
+    <div class="score-cell">
+      <p class="score-cell-label">Transfer<br/>to Live</p>
+      <div class="score-cell-line"></div>
+      <p class="score-cell-sub">/ 10</p>
+    </div>
+    <div class="score-cell">
+      <p class="score-cell-label">Identity<br/>& Presence</p>
+      <div class="score-cell-line"></div>
+      <p class="score-cell-sub">/ 10</p>
+    </div>
+  </div>
+
+  <div class="score-total-box">
+    <span class="score-total-label">Total Score</span>
+    <div class="score-total-line"></div>
+    <span class="score-total-denom">/ 70</span>
+  </div>
+
+  <div class="primary-constraint">
+    <p class="pc-label">Primary Constraint — Lowest Lever</p>
+    <p class="pc-line">Lever ___ : _________________________________ Score: ___ / 10</p>
+    <p class="pc-note">This is your bottleneck. Fix this before anything else. All other levers are constrained by the lowest one — not by the average. The system is only as strong as its weakest active link.</p>
+  </div>
+
+  <div class="routing-grid">
+    <div class="routing-band">
+      <p class="routing-verdict">Under 35 · Foundation Gap</p>
+      <p class="routing-range">0 – 34</p>
+      <p class="routing-text">Critical structural gaps. The base layer must be rebuilt before technique can be applied. Start here — no shortcuts.</p>
+      <p class="routing-url">theerainers.com/footwork-foundation</p>
+    </div>
+    <div class="routing-band">
+      <p class="routing-verdict">35–49 · Mid-Build</p>
+      <p class="routing-range">35 – 49</p>
+      <p class="routing-text">Some levers are working. Others are costing you rounds. One session of real-time diagnosis maps the exact gap to the exact fix.</p>
+      <p class="routing-url">theerainers.com/workshop</p>
+    </div>
+    <div class="routing-band">
+      <p class="routing-verdict">50–59 · Refinement</p>
+      <p class="routing-range">50 – 59</p>
+      <p class="routing-text">The structure is there but not automated under pressure. The ceiling is a specific lever, not a general deficit. Requires targeted architecture.</p>
+      <p class="routing-url">theerainers.com/workshop</p>
+    </div>
+    <div class="routing-band" style="border-color:#6A0DAD20;">
+      <p class="routing-verdict" style="color:#6A0DAD;">60–70 · Performance Architecture</p>
+      <p class="routing-range">60 – 70</p>
+      <p class="routing-text">The system is largely in place. One lever is holding the others back — and requires a custom system built around your specific fight. Application only.</p>
+      <p class="routing-url routing-url-purple">theerainers.com/command</p>
+    </div>
+  </div>
+
+  <div class="score-footer">
+    <div class="score-footer-cta">
+      <p>Free Protocol · theerainers.com/footwork-foundation</p>
+      <p>The Calibration Workshop · theerainers.com/workshop</p>
+      <p>Private Architecture · theerainers.com/command</p>
+    </div>
+    <p class="scripture" style="font-size:7pt;color:rgba(10,10,10,0.15);font-style:italic;text-align:right;max-width:55mm;line-height:1.6;">"I strike a blow to my body and make it my slave."<br/>1 Corinthians 9:27</p>
+  </div>
+
+</div>
+
+</body>
+</html>
