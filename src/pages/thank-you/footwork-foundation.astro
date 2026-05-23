@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import Container from '../../components/primitives/Container.astro';
+import Section from '../../components/primitives/Section.astro';
+import Rule from '../../components/primitives/Rule.astro';
+import Button from '../../components/primitives/Button.astro';
+
+// YouTube channel placeholder — replace before launch
+const YOUTUBE_CHANNEL = 'https://www.youtube.com/@theerainers';
+---
+
+<Base
+  title="Check your inbox — Thee Rainers"
+  description="Your copy of The Footwork Foundation is on its way."
+>
+  <section class="bg-bg pt-36 pb-24 md:pt-44 md:pb-32">
+    <Container size="prose">
+      <h1
+        class="font-bold text-navy mb-6"
+        style="font-size: var(--font-size-h1); line-height: 1.1;"
+      >
+        Check your inbox.
+      </h1>
+
+      <p class="text-ink leading-[1.55] mb-6" style="font-size: var(--font-size-body);">
+        Your copy of The Footwork Foundation is on its way. Look for it in the next
+        two minutes. If you don't see it, check your spam folder.
+      </p>
+
+      <p class="text-muted leading-[1.55]" style="font-size: var(--font-size-body);">
+        While you're here, here's where to go next.
+      </p>
+
+      <Rule class="my-12" />
+
+      <nav aria-label="Next steps">
+        <ul class="flex flex-col gap-5 list-none p-0 m-0">
+          <li>
+            <Button href={YOUTUBE_CHANNEL} variant="tertiary" target="_blank" rel="noopener noreferrer">
+              Watch the latest video on the channel
+            </Button>
+          </li>
+          <li>
+            <Button href="/workshop" variant="tertiary">
+              Reserve a seat in the next live workshop
+            </Button>
+          </li>
+          <li>
+            <Button href="/coaching" variant="tertiary">
+              See what 1-on-1 coaching looks like
+            </Button>
+          </li>
+        </ul>
+      </nav>
+    </Container>
+  </section>
+</Base>

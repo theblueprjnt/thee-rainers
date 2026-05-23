@@ -1,0 +1,19 @@
+{
+  "sort_order": 3,
+  "eyebrow": "Bundle",
+  "title": "The Rainers Bundle",
+  "focus": "Footwork + Shadowboxing. 100+ rounds.",
+  "price": "$87",
+  "price_note": "Save $7 versus buying separately.",
+  "description": "Footwork + Shadowboxing. The complete operating system.",
+  "includes": "All 106 drill rounds from both programs.",
+  "benefits_list": [
+    "Everything in the Footwork Blueprint",
+    "Everything in the Shadowboxing Blueprint",
+    "The spatial geometry and kinetic chain trained in sequence",
+    "A self-sufficient system you can run without a coach in the room"
+  ],
+  "stripe_link": "https://buy.stripe.com/PLACEHOLDER_BUNDLE",
+  "cta_text": "Buy Bundle",
+  "featured": true
+}

@@ -1,0 +1,18 @@
+{
+  "sort_order": 2,
+  "eyebrow": "Blueprint",
+  "title": "Shadowboxing Blueprint",
+  "focus": "6 Punches. Range. Exits.",
+  "price": "$47",
+  "description": "Done-with-me sessions. Skill standards. Rhythm.",
+  "includes": "50+ rounds with clear intent for every minute of work.",
+  "benefits_list": [
+    "All six punches drilled in deliberate sequence",
+    "Range management — long, mid, and close structured separately",
+    "Exit lines trained as a reflex, not an afterthought",
+    "Cognitive perception drills to see punches before they land"
+  ],
+  "stripe_link": "https://buy.stripe.com/PLACEHOLDER_SHADOWBOXING",
+  "cta_text": "Buy Now",
+  "featured": false
+}

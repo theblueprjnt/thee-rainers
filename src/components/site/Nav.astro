@@ -1,0 +1,40 @@
+---
+const links = [
+  { label: 'Workshop', href: '/workshop' },
+  { label: 'Coaching', href: '/coaching' },
+  { label: 'Shop', href: '/shop' },
+  { label: 'Journal', href: '/journal' },
+];
+---
+
+<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/" class="text-navy font-bold text-small tracking-[0.2em] uppercase">THEE RAINERS</a>
+    <nav aria-label="Main navigation">
+      <ul class="flex items-center gap-8 list-none m-0 p-0">
+        {links.map(link => (
+          <li>
+            <a href={link.href} class="text-small font-medium text-ink hover:text-terracotta transition-colors duration-200">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const nav = document.getElementById('site-nav');
+
+  function updateNav() {
+    if (window.scrollY > 20) {
+      nav?.classList.add('is-scrolled');
+    } else {
+      nav?.classList.remove('is-scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+</script>

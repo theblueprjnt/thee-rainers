@@ -1,0 +1,231 @@
+---
+import Base from '../layouts/Base.astro';
+import Container from '../components/primitives/Container.astro';
+import Pill from '../components/primitives/Pill.astro';
+import Rule from '../components/primitives/Rule.astro';
+
+const inputClass =
+  'block w-full px-4 py-3.5 border border-rule bg-white text-ink ' +
+  'placeholder:text-muted focus:outline-none focus:border-navy ' +
+  'transition-colors duration-200';
+const labelClass = 'block font-medium text-navy mb-2';
+---
+
+<Base
+  title="Contact — Thee Rainers"
+  description="For partnerships, press, and anything that needs a human reply."
+>
+  <section class="bg-bg pt-36 pb-24 md:pt-44 md:pb-32">
+    <Container size="page">
+      <div class="max-w-[540px] mx-auto">
+
+        <!-- Hero -->
+        <div class="mb-12">
+          <div class="mb-5">
+            <Pill>Get in touch</Pill>
+          </div>
+          <h1
+            class="font-bold text-navy mb-4"
+            style="font-size: var(--font-size-h1); line-height: 1.1;"
+          >
+            Reach out.
+          </h1>
+          <p class="text-muted leading-[1.55]" style="font-size: var(--font-size-body);">
+            For partnerships, press, and anything that needs a human reply.
+          </p>
+        </div>
+
+        <Rule class="mb-12" />
+
+        <!-- Contact form -->
+        <form
+          id="contact-form"
+          method="POST"
+          action="/api/contact"
+          class="flex flex-col gap-5"
+        >
+          <div>
+            <label for="contact-name" class={labelClass} style="font-size: var(--font-size-small);">
+              Full name
+            </label>
+            <input
+              type="text"
+              name="full_name"
+              id="contact-name"
+              required
+              autocomplete="name"
+              placeholder="Your full name"
+              class={inputClass}
+              style="font-size: var(--font-size-body);"
+            />
+          </div>
+
+          <div>
+            <label for="contact-email" class={labelClass} style="font-size: var(--font-size-small);">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="contact-email"
+              required
+              autocomplete="email"
+              placeholder="you@example.com"
+              class={inputClass}
+              style="font-size: var(--font-size-body);"
+            />
+          </div>
+
+          <div>
+            <label for="contact-phone" class={labelClass} style="font-size: var(--font-size-small);">
+              Phone (with country code)
+            </label>
+            <input
+              type="tel"
+              name="phone"
+              id="contact-phone"
+              required
+              autocomplete="tel"
+              placeholder="+371 20 000 000"
+              class={inputClass}
+              style="font-size: var(--font-size-body);"
+            />
+          </div>
+
+          <div>
+            <label for="contact-reason" class={labelClass} style="font-size: var(--font-size-small);">
+              Reason
+            </label>
+            <div class="relative">
+              <select
+                name="reason"
+                id="contact-reason"
+                required
+                class={`${inputClass} appearance-none pr-10 cursor-pointer`}
+                style="font-size: var(--font-size-body);"
+              >
+                <option value="" disabled selected>Select a reason</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Coaching">Coaching</option>
+                <option value="Partnership">Partnership</option>
+                <option value="Press">Press</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted">
+                <svg width="12" height="7" viewBox="0 0 12 7" fill="none" aria-hidden="true">
+                  <path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="contact-message" class={labelClass} style="font-size: var(--font-size-small);">
+              Message
+            </label>
+            <textarea
+              name="message"
+              id="contact-message"
+              rows={4}
+              required
+              placeholder="Your message"
+              class={`${inputClass} resize-y`}
+              style="font-size: var(--font-size-body);"
+            ></textarea>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              id="contact-submit"
+              class="inline-flex items-center justify-center
+                     bg-terracotta text-white
+                     px-8 py-3.5
+                     font-semibold tracking-wide
+                     hover:opacity-90 active:opacity-80
+                     transition-opacity duration-200
+                     cursor-pointer
+                     w-full sm:w-auto"
+              style="font-size: var(--font-size-small);"
+            >
+              Send
+            </button>
+          </div>
+
+          <p class="text-muted m-0" style="font-size: var(--font-size-small);">
+            We reply within two business days. We honor the Sabbath, so Saturday messages get a Monday reply.
+          </p>
+        </form>
+
+        <p
+          id="contact-error"
+          class="hidden mt-4 text-terracotta"
+          style="font-size: var(--font-size-small);"
+          aria-live="polite"
+        >
+          Something went wrong. Please try again.
+        </p>
+
+      </div>
+    </Container>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+  const errorEl = document.getElementById('contact-error') as HTMLElement | null;
+
+  // Show error from no-JS redirect path
+  const params = new URLSearchParams(window.location.search);
+  const errorCode = params.get('error');
+  if (errorCode && errorEl) {
+    const messages: Record<string, string> = {
+      invalid_email:   'Please enter a valid email address.',
+      invalid_phone:   'Please enter a valid phone number with at least 7 digits.',
+      missing_fields:  'All fields are required.',
+      delivery_failed: 'Delivery failed. Please try again.',
+      bad_request:     'Something went wrong. Please try again.',
+    };
+    errorEl.textContent = messages[errorCode] || 'Something went wrong. Please try again.';
+    errorEl.classList.remove('hidden');
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (submitBtn) submitBtn.disabled = true;
+    if (errorEl) errorEl.classList.add('hidden');
+
+    const data = new FormData(form);
+    const payload = {
+      full_name: (data.get('full_name') as string ?? '').trim(),
+      email:     (data.get('email')     as string ?? '').trim(),
+      phone:     (data.get('phone')     as string ?? '').trim(),
+      reason:    (data.get('reason')    as string ?? '').trim(),
+      message:   (data.get('message')   as string ?? '').trim(),
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const body = await res.json() as { success: boolean; error?: string };
+
+      if (body.success) {
+        window.location.href = '/thank-you/contact';
+      } else {
+        if (errorEl) {
+          errorEl.textContent = body.error || 'Something went wrong. Please try again.';
+          errorEl.classList.remove('hidden');
+        }
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    } catch {
+      if (errorEl) errorEl.classList.remove('hidden');
+      if (submitBtn) submitBtn.disabled = false;
+    }
+  });
+</script>

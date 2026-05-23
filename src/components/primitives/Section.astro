@@ -1,0 +1,21 @@
+---
+interface Props {
+  padding?: 'sm' | 'md' | 'lg';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { padding = 'md', class: className, ...rest } = Astro.props;
+
+const paddings: Record<string, string> = {
+  sm: 'py-12',
+  md: 'py-20',
+  lg: 'py-32',
+};
+
+const classes = [paddings[padding], className].filter(Boolean).join(' ');
+---
+
+<section class={classes} {...rest}>
+  <slot />
+</section>

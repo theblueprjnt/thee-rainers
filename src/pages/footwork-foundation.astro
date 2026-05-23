@@ -1,0 +1,148 @@
+---
+// PDF is served from /pdfs/footwork-foundation.pdf
+// Replace public/pdfs/footwork-foundation.pdf with the real file before launch.
+import Base from '../layouts/Base.astro';
+import Container from '../components/primitives/Container.astro';
+import Section from '../components/primitives/Section.astro';
+import Rule from '../components/primitives/Rule.astro';
+import Pill from '../components/primitives/Pill.astro';
+import LeadForm from '../components/blocks/LeadForm.astro';
+---
+
+<Base
+  title="The Footwork Foundation — Free Guide — Thee Rainers"
+  description="The four bases. 56 rounds of drills. The mechanical foundation that wins fights. Free."
+>
+  <Fragment slot="head">
+    <meta property="og:title" content="The Footwork Foundation — Free Guide — Thee Rainers" />
+    <meta property="og:description" content="The four bases. 56 rounds of drills. The mechanical foundation that wins fights. Free." />
+    <meta property="og:image" content="/og-footwork-foundation.jpg" />
+    <meta property="og:type" content="website" />
+  </Fragment>
+
+  <!-- ── 1. Hero ─────────────────────────────────────────────────── -->
+  <section class="bg-bg pt-36 pb-20 md:pt-44 md:pb-28">
+    <Container size="prose">
+      <div class="mb-6">
+        <Pill>Free guide</Pill>
+      </div>
+
+      <h1
+        class="font-bold text-navy mb-5"
+        style="font-size: clamp(2.25rem, 5.5vw, 3rem); line-height: 1.1;"
+      >
+        The Footwork Foundation.
+      </h1>
+
+      <p
+        class="text-muted leading-[1.55] mb-10"
+        style="font-size: var(--font-size-body);"
+      >
+        The four bases. 56 rounds of drills. The same mechanical foundation
+        that wins fights. Yours free.
+      </p>
+
+      <LeadForm id="hero-form" />
+
+      <p class="text-muted mt-4 m-0" style="font-size: var(--font-size-small);">
+        No spam. Unsubscribe anytime.
+      </p>
+    </Container>
+  </section>
+
+  <!-- ── 2. What's inside ──────────────────────────────────────── -->
+  <Section padding="lg" class="bg-cream">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-8"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        What's inside.
+      </h2>
+      <div class="flex flex-col gap-6">
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          The four footwork bases that every fighter needs. Steps. Galloping. Pivoting. Pendulum.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          56 rounds of structured drills organized for solo training, gym warmups, and skill correction.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          A 30-day structure to apply the bases without guessing.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ── 3. Who it's for ───────────────────────────────────────── -->
+  <Section padding="lg" class="bg-bg">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-8"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        Who it's for.
+      </h2>
+      <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+        Fighters who shadowbox a lot but feel the chain disconnect when they spar. Beginners who refuse
+        to skip foundations. Coaches who want a structure they can run again and again. Anyone who has
+        noticed that working harder is not the cure.
+      </p>
+    </Container>
+  </Section>
+
+  <!-- ── 4. Community tier ─────────────────────────────────────── -->
+  <Section padding="lg" class="bg-cream">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-8"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        Plus one more thing.
+      </h2>
+      <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+        Everyone who downloads the guide is invited to the monthly free Q&A live call.
+        One hour, one Saturday a month, unfiltered questions, no upsell. Brotherhood starts
+        in the work, not the buy.
+      </p>
+    </Container>
+  </Section>
+
+  <!-- ── 5. Final CTA ───────────────────────────────────────────── -->
+  <Section padding="lg" class="bg-bg">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-8"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        Get the guide.
+      </h2>
+      <LeadForm id="footer-form" submitText="Get the guide" />
+      <p class="text-muted mt-4 m-0" style="font-size: var(--font-size-small);">
+        No spam. Unsubscribe anytime.
+      </p>
+    </Container>
+  </Section>
+</Base>
+
+<script>
+  // Show inline error banner if redirected back with ?error= query param (no-JS failure path).
+  const params = new URLSearchParams(window.location.search);
+  const errorCode = params.get('error');
+  if (errorCode) {
+    const messages: Record<string, string> = {
+      invalid_email: 'Please enter a valid email address.',
+      delivery_failed: 'Delivery failed. Please try again.',
+      bad_request: 'Something went wrong. Please try again.',
+    };
+    const msg = messages[errorCode] || 'Something went wrong. Please try again.';
+    const errorEl = document.querySelector<HTMLElement>('[data-lead-error]');
+    if (errorEl) {
+      errorEl.textContent = msg;
+      errorEl.classList.remove('hidden');
+    }
+  }
+</script>

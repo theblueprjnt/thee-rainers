@@ -1,0 +1,18 @@
+{
+  "sort_order": 1,
+  "eyebrow": "Blueprint",
+  "title": "Footwork Blueprint",
+  "focus": "Bases. Balance. Intention.",
+  "price": "$47",
+  "description": "56 rounds of drills. The foundation of movement.",
+  "includes": "56 drill rounds structured around distance, angles, and exits.",
+  "benefits_list": [
+    "The four bases of footwork and when to use each",
+    "Balance drills that hold under pressure",
+    "Intentional movement patterns — not reflexive shuffling",
+    "Entry and exit lines built into every round"
+  ],
+  "stripe_link": "https://buy.stripe.com/PLACEHOLDER_FOOTWORK",
+  "cta_text": "Buy Now",
+  "featured": false
+}

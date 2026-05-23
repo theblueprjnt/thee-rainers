@@ -1,0 +1,29 @@
+---
+import Button from '../primitives/Button.astro';
+import Container from '../primitives/Container.astro';
+---
+
+<section class="bg-bg pt-36 pb-28 md:pt-44 md:pb-36">
+  <Container size="page">
+    <div class="max-w-[680px]">
+      <h1
+        class="text-navy font-bold leading-[1.1] mb-6"
+        style="font-size: var(--font-size-h1);"
+      >
+        Composure is a physical state.
+      </h1>
+      <p
+        class="text-muted leading-[1.55] mb-10"
+        style="font-size: var(--font-size-body);"
+      >
+        Most gyms teach you to brawl. We teach you to operate. Real mechanics, clear structure, no wasted reps.
+      </p>
+      <div class="mb-8">
+        <Button href="/workshop" variant="primary">Step into the ring</Button>
+      </div>
+      <p class="text-muted m-0" style="font-size: var(--font-size-small);">
+        120+ fighters trained. 24-hour money-back guarantee on every workshop.
+      </p>
+    </div>
+  </Container>
+</section>

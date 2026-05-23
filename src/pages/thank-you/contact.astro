@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import Container from '../../components/primitives/Container.astro';
+import Rule from '../../components/primitives/Rule.astro';
+import Button from '../../components/primitives/Button.astro';
+---
+
+<Base
+  title="Message received — Thee Rainers"
+  description="Thank you for reaching out. We reply within two business days."
+>
+  <section class="bg-bg pt-36 pb-24 md:pt-44 md:pb-32">
+    <Container size="prose">
+      <h1
+        class="font-bold text-navy mb-6"
+        style="font-size: var(--font-size-h1); line-height: 1.1;"
+      >
+        Message received.
+      </h1>
+
+      <p class="text-ink leading-[1.55] mb-4" style="font-size: var(--font-size-body);">
+        Thank you for reaching out. We reply within two business days.
+      </p>
+
+      <Rule class="my-12" />
+
+      <nav aria-label="Next steps">
+        <ul class="flex flex-col gap-5 list-none p-0 m-0">
+          <li>
+            <Button href="/" variant="tertiary">Back to home</Button>
+          </li>
+          <li>
+            <Button href="/workshop" variant="tertiary">See the next workshop</Button>
+          </li>
+          <li>
+            <Button href="/journal" variant="tertiary">Read the journal</Button>
+          </li>
+        </ul>
+      </nav>
+    </Container>
+  </section>
+</Base>

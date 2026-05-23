@@ -1,0 +1,170 @@
+---
+interface Props {
+  id?: string;
+  source?: string;
+  submitText?: string;
+}
+
+const {
+  id = 'lead-form',
+  source = 'footwork-foundation',
+  submitText = 'Send me the guide',
+} = Astro.props;
+---
+
+<div data-lead-wrapper id={`${id}-wrapper`} class="w-full">
+  <form
+    id={id}
+    data-lead-form
+    method="POST"
+    action="/api/lead-capture"
+    class="flex flex-col gap-4"
+  >
+    <input type="hidden" name="source" value={source} />
+
+    <div>
+      <label
+        for={`${id}-name`}
+        class="block font-medium text-navy mb-2"
+        style="font-size: var(--font-size-small);"
+      >
+        Full name
+      </label>
+      <input
+        type="text"
+        name="full_name"
+        id={`${id}-name`}
+        required
+        autocomplete="name"
+        placeholder="Your full name"
+        class="block w-full px-4 py-3.5 border border-rule bg-white text-ink
+               placeholder:text-muted focus:outline-none focus:border-navy
+               transition-colors duration-200"
+        style="font-size: var(--font-size-body);"
+      />
+    </div>
+
+    <div>
+      <label
+        for={`${id}-email`}
+        class="block font-medium text-navy mb-2"
+        style="font-size: var(--font-size-small);"
+      >
+        Email
+      </label>
+      <input
+        type="email"
+        name="email"
+        id={`${id}-email`}
+        required
+        autocomplete="email"
+        placeholder="you@example.com"
+        class="block w-full px-4 py-3.5 border border-rule bg-white text-ink
+               placeholder:text-muted focus:outline-none focus:border-navy
+               transition-colors duration-200"
+        style="font-size: var(--font-size-body);"
+      />
+    </div>
+
+    <div>
+      <label
+        for={`${id}-phone`}
+        class="block font-medium text-navy mb-2"
+        style="font-size: var(--font-size-small);"
+      >
+        Phone (with country code)
+      </label>
+      <input
+        type="tel"
+        name="phone"
+        id={`${id}-phone`}
+        required
+        autocomplete="tel"
+        placeholder="+371 20 000 000"
+        class="block w-full px-4 py-3.5 border border-rule bg-white text-ink
+               placeholder:text-muted focus:outline-none focus:border-navy
+               transition-colors duration-200"
+        style="font-size: var(--font-size-body);"
+      />
+    </div>
+
+    <button
+      type="submit"
+      data-lead-submit
+      class="inline-flex items-center justify-center
+             bg-terracotta text-white
+             px-8 py-3.5
+             font-semibold tracking-wide
+             hover:opacity-90 active:opacity-80
+             transition-opacity duration-200
+             cursor-pointer
+             w-full sm:w-auto self-start"
+      style="font-size: var(--font-size-small);"
+    >
+      {submitText}
+    </button>
+  </form>
+
+  <p
+    data-lead-success
+    class="hidden font-semibold text-navy py-4"
+    style="font-size: var(--font-size-body);"
+    aria-live="polite"
+  >
+    You're in. Check your inbox in the next two minutes.
+  </p>
+
+  <p
+    data-lead-error
+    class="hidden mt-3 text-terracotta"
+    style="font-size: var(--font-size-small);"
+    aria-live="polite"
+  >
+    Something went wrong. Please try again.
+  </p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-lead-wrapper]').forEach((wrapper) => {
+    const form = wrapper.querySelector<HTMLFormElement>('[data-lead-form]');
+    const successEl = wrapper.querySelector<HTMLElement>('[data-lead-success]');
+    const errorEl = wrapper.querySelector<HTMLElement>('[data-lead-error]');
+    const submitBtn = wrapper.querySelector<HTMLButtonElement>('[data-lead-submit]');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submitBtn) submitBtn.disabled = true;
+
+      const data = new FormData(form);
+      const full_name = (data.get('full_name') as string ?? '').trim();
+      const email = (data.get('email') as string ?? '').trim();
+      const phone = (data.get('phone') as string ?? '').trim();
+      const source = (data.get('source') as string) || 'footwork-foundation';
+
+      try {
+        const res = await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ full_name, email, phone, source }),
+        });
+
+        const body = await res.json() as { success: boolean; error?: string };
+
+        if (body.success) {
+          form.classList.add('hidden');
+          if (successEl) successEl.classList.remove('hidden');
+        } else {
+          if (errorEl) {
+            errorEl.textContent = body.error || 'Something went wrong. Please try again.';
+            errorEl.classList.remove('hidden');
+          }
+          if (submitBtn) submitBtn.disabled = false;
+        }
+      } catch {
+        if (errorEl) errorEl.classList.remove('hidden');
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  });
+</script>

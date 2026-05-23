@@ -1,0 +1,349 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/primitives/Button.astro';
+import Container from '../components/primitives/Container.astro';
+import Section from '../components/primitives/Section.astro';
+import Rule from '../components/primitives/Rule.astro';
+import Pill from '../components/primitives/Pill.astro';
+import FAQ from '../components/blocks/FAQ.astro';
+import Testimonial from '../components/blocks/Testimonial.astro';
+import PriceBlock from '../components/blocks/PriceBlock.astro';
+
+const faqItems = [
+  {
+    question: "I shadowbox a lot but it does not translate when I spar. Will this help?",
+    answer: "Yes. The most common reason shadowboxing does not transfer is that the stance breaks down without you noticing. The workshop trains the awareness and the mechanical foundation that makes shadowboxing build real skill instead of muscle memory for bad habits.",
+  },
+  {
+    question: "I have been training for years. Will this be too basic?",
+    answer: "If you can tell me exactly when your heel drops, where your weight transfers in a hook, and why your chain disconnects under fatigue, this is too basic for you. Most fighters with five plus years of training cannot. The workshop fills the gap between experience and structural understanding.",
+  },
+  {
+    question: "I have a fight coming up. Will this be too technical to apply in time?",
+    answer: "The workshop is one session you run again and again. The first pass gives you the mental model. Subsequent passes deepen the nervous system response. Fighters with matches inside 30 days have applied the framework in their next sparring round.",
+  },
+  {
+    question: "I train at a gym that focuses on cardio and conditioning. How does this fit?",
+    answer: "This is a supplement, not a replacement. You keep your gym. You add the structural awareness your classes do not teach. Most attendees apply the framework inside their existing training without changing anything else.",
+  },
+  {
+    question: "I cannot attend live. Will the session be recorded?",
+    answer: "Yes. You receive the full recording within 24 hours. Live attendance is preferred because real-time correction only happens live, but the recording lets you re-run the framework as many times as you need.",
+  },
+  {
+    question: "Can I get a refund if the workshop is not for me?",
+    answer: "Yes. Email rainers@stepintoring.com within 24 hours of the workshop ending and I return your money. No friction. No forms. No questions.",
+  },
+];
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+});
+
+const testimonials = [
+  {
+    name: "Past Attendee",
+    location: "New York, NY",
+    quote:
+      "I had been training for three years and could not explain why I kept eating jabs. After this session I understood exactly what I was doing wrong with my weight transfer. Concrete, technical, and immediately useful.",
+  },
+  {
+    name: "Past Attendee",
+    location: "Chicago, IL",
+    quote:
+      "The framework gave me something to drill between sessions. I went from feeling lost in sparring to having a clear system to return to when things go wrong.",
+  },
+  {
+    name: "Past Attendee",
+    location: "Los Angeles, CA",
+    quote:
+      "My coach had been telling me the same things for months. The workshop explained the mechanical reason behind each correction. That made the difference.",
+  },
+];
+---
+
+<Base
+  title="Workshop — Thee Rainers"
+  description="A 90-minute live workshop. The mechanical structure to hit, exit, and reset. Saturday, June 27. $197."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={faqSchema} />
+    <meta property="og:title" content="Workshop — Thee Rainers" />
+    <meta property="og:description" content="A 90-minute live workshop. The mechanical structure to hit, exit, and reset. Saturday, June 27. $197." />
+    <meta property="og:image" content="/og-workshop.jpg" />
+    <meta property="og:type" content="website" />
+  </Fragment>
+
+  <!-- ── 1. Hero ─────────────────────────────────────────────────── -->
+  <section class="bg-bg pt-36 pb-24 md:pt-44 md:pb-32">
+    <Container size="page">
+      <div class="max-w-[680px]">
+        <div class="mb-6">
+          <Pill>Live online workshop · Saturday, June 27 · 90 minutes</Pill>
+        </div>
+        <h1
+          class="font-bold text-navy mb-6"
+          style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.05;"
+        >
+          Stop brawling. Start operating.
+        </h1>
+        <p
+          class="text-muted leading-[1.55] mb-10"
+          style="font-size: var(--font-size-body);"
+        >
+          A 90-minute live workshop that gives you the mechanical structure to hit, exit, and reset.
+          The same foundation we run with our 1-on-1 fighters.
+        </p>
+        <div class="mb-6">
+          <Button href="#reserve" variant="primary">Reserve your seat — $197</Button>
+        </div>
+        <p class="text-muted m-0" style="font-size: var(--font-size-small);">
+          24-hour money-back guarantee. Backed in writing.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ── 2. Reality Check ───────────────────────────────────────── -->
+  <Section padding="lg" class="bg-cream">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-8"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        The Anatomy of a Brawl.
+      </h2>
+      <div class="flex flex-col gap-6">
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          If you are taking unnecessary punches, feeling lost in the pocket, or watching your technique
+          dissolve the moment adrenaline spikes, you do not have a conditioning problem. You have a structural one.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          You are fighting on the opponent's terms. Dominance is not the ability to endure damage.
+          It is the ability to move through space the opponent cannot reach.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          Most gyms teach you to brawl harder. We teach you to operate cleaner. One workshop. One framework.
+          You run it again and again.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ── 3. What You Walk Away With ────────────────────────────── -->
+  <Section padding="lg" class="bg-bg">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-8"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        What you walk away with.
+      </h2>
+      <div class="flex flex-col gap-6">
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          A clear mental model of how power transfers from the floor through your kinetic chain into a
+          single accurately placed strike.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          The Foot Space Work framework: single-leg balance, weight transfer, alignment, stance, punch.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          The awareness to spot the moment your stance breaks. When you get carried away on the bag.
+          When adrenaline drops your heel. When the chain disconnects mid-combination.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          A 30-day way to apply what you learn inside your normal training.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          Real-time correction on your actual movement. You shadowbox. I see what your coach cannot
+          see from across the gym. We fix it on the spot.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ── 4. Session Structure ───────────────────────────────────── -->
+  <section class="bg-navy py-20 md:py-32">
+    <Container size="page">
+      <div class="border-b border-white/10 pb-10 mb-12">
+        <h2
+          class="font-bold text-white"
+          style="font-size: var(--font-size-h2); line-height: 1.2;"
+        >
+          The structure of the session.
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-12">
+        <div class="border-t border-white/15 pt-8 pb-8 md:pb-0">
+          <p class="uppercase tracking-widest text-white/40 mb-4" style="font-size: 0.75rem;">
+            Foundation · 30 min
+          </p>
+          <h3
+            class="font-semibold text-white mb-4"
+            style="font-size: var(--font-size-h3); line-height: 1.3;"
+          >
+            The base
+          </h3>
+          <p class="text-white/60 leading-[1.55]" style="font-size: var(--font-size-body);">
+            Single-leg balance, weight transfer, kinetic chain alignment, and stance.
+            The mechanics that every subsequent technique depends on.
+          </p>
+        </div>
+        <div class="border-t border-white/15 pt-8 pb-8 md:pb-0">
+          <p class="uppercase tracking-widest text-white/40 mb-4" style="font-size: 0.75rem;">
+            Application · 45 min
+          </p>
+          <h3
+            class="font-semibold text-white mb-4"
+            style="font-size: var(--font-size-h3); line-height: 1.3;"
+          >
+            Live drilling
+          </h3>
+          <p class="text-white/60 leading-[1.55]" style="font-size: var(--font-size-body);">
+            Live drilling with your camera on and your hands up. Real-time correction
+            as you work through the striking pattern. The longest block by design.
+          </p>
+        </div>
+        <div class="border-t border-white/15 pt-8 pb-8 md:pb-0">
+          <p class="uppercase tracking-widest text-white/40 mb-4" style="font-size: 0.75rem;">
+            Integration · 15 min
+          </p>
+          <h3
+            class="font-semibold text-white mb-4"
+            style="font-size: var(--font-size-h3); line-height: 1.3;"
+          >
+            Your plan
+          </h3>
+          <p class="text-white/60 leading-[1.55]" style="font-size: var(--font-size-body);">
+            Your 30-day plan, your personal test, and your next step. You leave with a
+            written progression, not just a memory of what happened in class.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- ── 5. Who This Is For ─────────────────────────────────────── -->
+  <Section padding="lg" class="bg-bg">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-8"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        Who this is for.
+      </h2>
+      <div class="flex flex-col gap-6">
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          Fighters 25 to 40 training at a regular gym who want technical structure their classes don't teach.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          Competitive amateurs preparing for an upcoming match who need foundation, not more cardio.
+        </p>
+        <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+          Coaches looking for a reusable structural framework to plug into their own programming.
+        </p>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ── 6. Who This Is Not For ─────────────────────────────────── -->
+  <Section padding="md" class="bg-bg">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-8"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        Who this is not for.
+      </h2>
+      <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+        If you want a sweat session, a hype reel, or general fitness boxing, this is not the workshop.
+        This is a technical session for people who want to operate, not entertain themselves.
+      </p>
+    </Container>
+  </Section>
+
+  <!-- ── 7. The Composure Guarantee ───────────────────────────── -->
+  <Section padding="lg" class="bg-cream">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-8"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        The Composure Guarantee.
+      </h2>
+      <p class="text-ink leading-[1.55]" style="font-size: var(--font-size-body);">
+        Show up, do the work, and if you do not walk away with a clear framework to improve your
+        training, email rainers@stepintoring.com within 24 hours of the workshop ending and I return
+        your money. No friction. No forms. No questions.
+      </p>
+    </Container>
+  </Section>
+
+  <!-- ── 8. Testimonials ───────────────────────────────────────── -->
+  <Section padding="lg" class="bg-bg">
+    <Container size="page">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-12"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        Voices from past sessions.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+        {testimonials.map((t) => (
+          <Testimonial quote={t.quote} name={t.name} location={t.location} />
+        ))}
+      </div>
+    </Container>
+  </Section>
+
+  <!-- ── 9. Reservation ────────────────────────────────────────── -->
+  <section id="reserve" class="bg-bg py-20 md:py-32">
+    <Container size="page">
+      <PriceBlock />
+    </Container>
+  </section>
+
+  <!-- ── 10. FAQ ───────────────────────────────────────────────── -->
+  <Section padding="lg" class="bg-bg">
+    <Container size="prose">
+      <Rule class="mb-12" />
+      <h2
+        class="font-bold text-navy mb-10"
+        style="font-size: var(--font-size-h2); line-height: 1.2;"
+      >
+        Common questions.
+      </h2>
+      <FAQ items={faqItems} />
+    </Container>
+  </Section>
+
+  <!-- ── 11. Final CTA ─────────────────────────────────────────── -->
+  <section class="bg-navy py-20 md:py-28">
+    <Container size="page">
+      <div class="text-center">
+        <p
+          class="text-white/70 leading-[1.55] mb-8"
+          style="font-size: var(--font-size-body);"
+        >
+          The next cohort is Saturday, June 27. Reserve your seat.
+        </p>
+        <Button href="#reserve" variant="primary">Reserve your seat — $197</Button>
+      </div>
+    </Container>
+  </section>
+</Base>

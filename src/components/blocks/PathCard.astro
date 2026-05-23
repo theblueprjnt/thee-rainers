@@ -1,0 +1,42 @@
+---
+import Button from '../primitives/Button.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  price: string;
+  description: string;
+  cta_text: string;
+  cta_href: string;
+}
+
+const { eyebrow, title, price, description, cta_text, cta_href } = Astro.props;
+---
+
+<div class="bg-cream border border-rule p-8 flex flex-col gap-6 h-full">
+  <div class="flex flex-col gap-2">
+    <p
+      class="uppercase tracking-widest text-muted"
+      style="font-size: 0.7rem;"
+    >
+      {eyebrow}
+    </p>
+    <h3
+      class="font-bold text-navy"
+      style="font-size: var(--font-size-h3); line-height: 1.3;"
+    >
+      {title}
+    </h3>
+    <p class="font-semibold text-terracotta" style="font-size: var(--font-size-small);">
+      {price}
+    </p>
+  </div>
+
+  <p class="text-ink leading-[1.55] flex-1" style="font-size: var(--font-size-body);">
+    {description}
+  </p>
+
+  <div>
+    <Button href={cta_href} variant="secondary">{cta_text}</Button>
+  </div>
+</div>
