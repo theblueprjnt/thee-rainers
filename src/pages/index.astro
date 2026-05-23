@@ -3,17 +3,17 @@ import Layout from '../layouts/Base.astro';
 ---
 <Layout title="Thee Rainers — Engineered for the ring.">
 
-  <!-- HERO: 60/40 — Subject stands on the page -->
-  <section class="w-full min-h-screen overflow-hidden grid grid-cols-1 md:grid-cols-[60%_40%] bg-white border-b border-[#0A0A0A]/8">
+  <!-- HERO: 55/45 — Dominant type left, fighter right -->
+  <section class="w-full md:min-h-screen overflow-hidden grid grid-cols-1 md:grid-cols-[55%_45%] bg-white border-b border-[#0A0A0A]/8">
 
-    <!-- Left 60%: Mission -->
-    <div class="flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-16 md:py-0 relative z-10">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Systemic Boxing Performance</p>
+    <!-- Left: Mission -->
+    <div class="flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-28 pb-12 md:py-0 relative z-10">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Systemic Boxing Performance</p>
       <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-8"
-        style="font-size: clamp(3rem, 7vw, 5rem); line-height: 0.8;">
+        style="font-size: clamp(3rem, 9vw, 7rem); line-height: 0.82;">
         Engineered<br/>for the ring.
       </h1>
-      <p class="text-[#0A0A0A]/55 mb-10 max-w-[420px] text-base leading-relaxed">
+      <p class="text-[#0A0A0A]/55 mb-10 max-w-[400px] text-base leading-relaxed">
         Your ambition is ahead of your gym. This closes that gap.
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
@@ -28,10 +28,10 @@ import Layout from '../layouts/Base.astro';
       </div>
     </div>
 
-    <!-- Right 40%: Subject stands on the page -->
-    <div class="hidden md:flex items-end justify-center relative overflow-hidden">
+    <!-- Right 45%: Fighter cutout — desktop only -->
+    <div class="hidden md:flex items-end justify-center relative overflow-hidden bg-[#0A0A0A]">
       <img
-        src="/images/myherocutout.jpg"
+        src="/images/herocropped.png"
         alt="Thee Rainers"
         class="hero-subject w-auto max-h-[95vh] object-contain object-bottom"
         loading="eager"
@@ -40,6 +40,13 @@ import Layout from '../layouts/Base.astro';
     </div>
 
   </section>
+
+  <!-- Mobile fighter strip — visible below hero text on mobile -->
+  <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 80vw; max-height: 400px;">
+    <img src="/images/herocropped.png" alt="Thee Rainers"
+      class="w-full h-full object-contain object-bottom"
+      loading="eager" />
+  </div>
 
   <!-- GATE: Path Choice -->
   <section id="gate" class="w-full min-h-screen bg-white flex flex-col items-center justify-center px-8 text-center py-24 border-b border-[#0A0A0A]/8">
