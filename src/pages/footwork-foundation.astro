@@ -31,44 +31,79 @@ const stats = [
 >
   <Fragment slot="head">
     <meta property="og:title" content="Footwork Foundation — Free 30-Day Protocol | Thee Rainers" />
-    <meta property="og:description" content="76% of punch power starts at the floor. Four kinetic bases, 56 drill rounds, 30-day progression. Free download." />
+    <meta property="og:description" content="76% of punch power starts at the floor. Build the foundation the gym never taught you. 30-day protocol, free." />
     <meta property="og:type" content="website" />
   </Fragment>
 
+  <!-- Mobile image strip -->
+  <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 55vw; max-height: 320px;">
+    <img src="/images/coldfightpic3.jpg" alt="Rainers — Competition"
+      class="w-full h-full object-cover object-center" loading="eager" />
+  </div>
+
   <!-- Hero -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
-    <div class="max-w-[720px] mx-auto w-full">
+  <section class="bg-white overflow-hidden border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[90vh]">
 
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Free · 30-Day Protocol</p>
-      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-6"
-        style="font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 0.88;">
-        The foundation<br/>the gym never<br/>taught you.
-      </h1>
-      <p class="text-[#0A0A0A]/40 text-base leading-relaxed mb-12 max-w-[520px]">
-        Before anything transfers, your platform has to hold. Stance. Weight distribution. Kinetic chain. 30 days to build what most fighters never had.
-      </p>
+      <!-- Left: Content -->
+      <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-16 md:pb-24 flex flex-col justify-center">
 
-      <!-- Inline form -->
-      <div id="hero-form-wrapper">
-        <form id="hero-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
-          <input
-            type="email"
-            id="hero-email"
-            required
-            placeholder="your@email.com"
-            class="flex-1 border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20"
-          />
-          <button
-            type="submit"
-            id="hero-submit"
-            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap"
-          >
-            Download Free →
-          </button>
-        </form>
-        <p id="hero-success" class="hidden text-[#0057FF] text-sm tracking-wide mt-6">Downloading now — train smart.</p>
-        <p id="hero-error" class="hidden text-[#0A0A0A]/40 text-sm mt-4">Something went wrong. Try again.</p>
-        <p class="text-[#0A0A0A]/20 text-xs tracking-wide mt-4">Your email. Nothing else.</p>
+        <!-- Social proof + label -->
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mb-8">
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase">Free · 30-Day Protocol</p>
+          <span class="text-[#0A0A0A]/15 hidden sm:inline">·</span>
+          <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase">120+ fighters training</p>
+        </div>
+
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-3"
+          style="font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 0.88;">
+          The foundation<br/>the gym never<br/>taught you.
+        </h1>
+
+        <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase mb-8">Rainers · Competitive Boxer · Coach</p>
+
+        <p class="text-[#0A0A0A]/40 text-base leading-relaxed mb-10 max-w-[480px]">
+          Before anything transfers, your platform has to hold. Stance. Weight distribution. Kinetic chain. 30 days to build what most fighters never had.
+        </p>
+
+        <!-- Form -->
+        <div id="hero-form-wrapper">
+          <form id="hero-form" class="flex flex-col sm:flex-row gap-3 max-w-[480px]">
+            <input
+              type="email"
+              id="hero-email"
+              required
+              placeholder="your@email.com"
+              class="flex-1 border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20"
+            />
+            <button
+              type="submit"
+              id="hero-submit"
+              class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap"
+            >
+              Download Free →
+            </button>
+          </form>
+          <p id="hero-success" class="hidden text-[#0057FF] text-sm tracking-wide mt-6">Your protocol is downloading — Day 1 starts when you decide.</p>
+          <p id="hero-error" class="hidden text-[#0A0A0A]/40 text-sm mt-4">Something went wrong. Try again.</p>
+          <p class="text-[#0A0A0A]/20 text-xs tracking-wide mt-4">Your email. Nothing else.</p>
+        </div>
+
+        <!-- Workshop anchor -->
+        <div class="mt-10 pt-8 border-t border-[#0A0A0A]/8">
+          <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase mb-2">When you're ready</p>
+          <a href="/workshop" class="text-[#0A0A0A]/35 text-xs tracking-wide hover:text-[#0057FF] transition-colors duration-200">
+            The Calibration Workshop — $197 · June 27 →
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Right: Fight photo — desktop only -->
+      <div class="hidden md:block relative overflow-hidden">
+        <img src="/images/coldfightpic3.jpg" alt="Rainers — Competition"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager" decoding="async" />
       </div>
 
     </div>
@@ -145,19 +180,30 @@ const stats = [
   </section>
 
   <!-- Who this is for -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-24 border-t border-[#0A0A0A]/8">
-    <div class="max-w-[720px] mx-auto w-full">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Who this is for</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-8"
-        style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 0.9;">
-        The 17 who stayed.<br/>And the 83 who<br/>already know why.
-      </h2>
-      <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-6 max-w-[560px]">
-        The gym fragments you. Weight room here. Cardio there. Mobility app on your phone. Every modality trains one piece of you in isolation — but life never asks you to be fit in isolation.
-      </p>
-      <p class="text-[#0A0A0A]/35 text-sm leading-relaxed max-w-[560px]">
-        You're building an asymmetrical body with tight shoulders and no base. This fixes what most fighters take years to find — in the first week.
-      </p>
+  <section class="bg-white border-t border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%]">
+
+      <!-- Text -->
+      <div class="px-8 md:px-16 lg:px-24 py-24">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Who this is for</p>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-8"
+          style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 0.9;">
+          The 17 who stayed.<br/>And the 83 who<br/>already know why.
+        </h2>
+        <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-6 max-w-[480px]">
+          The gym fragments you. Weight room here. Cardio there. Mobility app on your phone. Every modality trains one piece of you in isolation — but the ring never asks you to be fit in isolation.
+        </p>
+        <p class="text-[#0A0A0A]/35 text-sm leading-relaxed max-w-[480px]">
+          You're building an asymmetrical body with tight shoulders and no base. This fixes what most fighters take years to find — in the first week.
+        </p>
+      </div>
+
+      <!-- Coaching photo -->
+      <div class="hidden md:block relative overflow-hidden min-h-[400px] bg-[#0A0A0A]">
+        <img src="/images/coaching-netherlands.png" alt="Rainers coaching"
+          class="absolute inset-0 w-full h-full object-cover object-center opacity-90" />
+      </div>
+
     </div>
   </section>
 
