@@ -80,7 +80,7 @@ import LinkPage from '../layouts/LinkPage.astro';
       <div class="border-l-2 border-[#D4A373] pl-5 mb-10">
         <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-1">Primary Constraint</p>
         <p id="res-constraint" class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl">—</p>
-        <p id="res-constraint-note" class="text-[#0A0A0A]/40 text-xs leading-relaxed mt-1">This is the lever holding every other one back.</p>
+        <p id="res-constraint-note" class="text-[#0A0A0A]/40 text-xs leading-relaxed mt-1">Address this lever first. Every other improvement compounds on it.</p>
       </div>
 
       <!-- Lever bars -->
@@ -96,8 +96,15 @@ import LinkPage from '../layouts/LinkPage.astro';
         Download PDF again →
       </a>
 
+      <!-- PA visibility -->
+      <div class="border border-[#6A0DAD]/15 p-5 mt-8">
+        <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-1">Application Only</p>
+        <p class="text-[#0A0A0A]/50 text-xs leading-relaxed mb-3">Private Architecture deploys all seven levers as one system — built around your specific structure.</p>
+        <a href="/command" class="text-[#6A0DAD]/70 text-[10px] tracking-widest uppercase hover:text-[#6A0DAD] transition-colors duration-200">See Private Architecture →</a>
+      </div>
+
       <!-- Scripture -->
-      <p class="text-[#0A0A0A]/10 text-[10px] tracking-widest uppercase text-center mt-16">1 Corinthians 9:26–27</p>
+      <p class="text-[#0A0A0A]/10 text-[10px] tracking-widest uppercase text-center mt-12">1 Corinthians 9:26–27</p>
     </div>
   </div>
 
@@ -182,9 +189,9 @@ import LinkPage from '../layouts/LinkPage.astro';
   ];
 
   const ROUTES: Record<string, {verdict: string; url: string; cta: string}> = {
-    foundation: { verdict: 'Foundation first — rebuild the base layer.',      url: '/footwork-foundation', cta: 'Download Free Protocol →' },
-    workshop:   { verdict: 'Calibration needed — target your primary gap.',   url: '/workshop',            cta: 'Reserve Workshop Seat →' },
-    command:    { verdict: 'Architecture — one lever is capping the system.', url: '/command',             cta: 'Apply for Private Architecture →' },
+    foundation: { verdict: 'The base layer needs work before the system can compound.',        url: '/footwork-foundation', cta: 'Start the 30-Day Protocol →' },
+    workshop:   { verdict: 'The mechanics are there. One session locks them into structure.',  url: '/workshop',            cta: 'Reserve Your Workshop Seat →' },
+    command:    { verdict: 'Your system is close. One lever is capping everything above it.', url: '/command',             cta: 'Apply for Private Architecture →' },
   };
 
   const answers: number[] = new Array(7).fill(0);

@@ -1,57 +1,57 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Container from '../../components/primitives/Container.astro';
-import Section from '../../components/primitives/Section.astro';
-import Rule from '../../components/primitives/Rule.astro';
-import Button from '../../components/primitives/Button.astro';
-
-// YouTube channel placeholder — replace before launch
-const YOUTUBE_CHANNEL = 'https://www.youtube.com/@theerainers';
 ---
+<Base title="Protocol Unlocked — Thee Rainers">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
 
-<Base
-  title="Check your inbox — Thee Rainers"
-  description="Your copy of The Footwork Foundation is on its way."
->
-  <section class="bg-bg pt-36 pb-24 md:pt-44 md:pb-32">
-    <Container size="prose">
-      <h1
-        class="font-bold text-navy mb-6"
-        style="font-size: var(--font-size-h1); line-height: 1.1;"
-      >
-        Check your inbox.
+  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
+    <div class="max-w-[720px] mx-auto w-full">
+
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Protocol Unlocked</p>
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-6">
+        The Blueprint<br/>is yours.
       </h1>
-
-      <p class="text-ink leading-[1.55] mb-6" style="font-size: var(--font-size-body);">
-        Your copy of The Footwork Foundation is on its way. Look for it in the next
-        two minutes. If you don't see it, check your spam folder.
+      <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-12 max-w-[440px]">
+        The PDF opened in your browser. Check your email — a follow-up lands there too. Day 1 starts when you decide it does.
       </p>
 
-      <p class="text-muted leading-[1.55]" style="font-size: var(--font-size-body);">
-        While you're here, here's where to go next.
-      </p>
+      <!-- Primary next step -->
+      <div class="border-l-2 border-[#0057FF] pl-6 mb-12">
+        <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-2">Do this before your next session</p>
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">Know your primary constraint.</p>
+        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6 max-w-[400px]">
+          The 30-day protocol works fastest when you know which lever is holding your system back. The 7-lever audit takes 3 minutes. It tells you exactly where to focus first — and routes you to the right next step.
+        </p>
+        <a href="/lever-audit-quiz"
+          class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+          Take the 7-Lever Audit →
+        </a>
+      </div>
 
-      <Rule class="my-12" />
+      <!-- Workshop -->
+      <div class="border border-[#0A0A0A]/8 p-8 mb-[2px]">
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Live Workshop · Saturday, June 27</p>
+        <p class="text-[#0A0A0A]/70 text-sm font-bold mb-2">The Calibration Workshop</p>
+        <p class="text-[#0A0A0A]/35 text-xs leading-relaxed mb-5">90 minutes. The mechanical structure to hit, exit, and reset — live, with real-time correction on your movement. $197.</p>
+        <a href="/workshop"
+          class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0057FF] hover:text-[#0057FF]">
+          Reserve Your Seat →
+        </a>
+      </div>
 
-      <nav aria-label="Next steps">
-        <ul class="flex flex-col gap-5 list-none p-0 m-0">
-          <li>
-            <Button href={YOUTUBE_CHANNEL} variant="tertiary" target="_blank" rel="noopener noreferrer">
-              Watch the latest video on the channel
-            </Button>
-          </li>
-          <li>
-            <Button href="/workshop" variant="tertiary">
-              Reserve a seat in the next live workshop
-            </Button>
-          </li>
-          <li>
-            <Button href="/coaching" variant="tertiary">
-              See what 1-on-1 coaching looks like
-            </Button>
-          </li>
-        </ul>
-      </nav>
-    </Container>
+      <!-- Private Architecture -->
+      <div class="border border-[#6A0DAD]/15 p-8">
+        <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-3">Application Only</p>
+        <p class="text-[#0A0A0A]/70 text-sm font-bold mb-2">Private Architecture</p>
+        <p class="text-[#0A0A0A]/35 text-xs leading-relaxed mb-5">The full operating system. Seven levers deployed together, built around your specific structure. For fighters who are ready to build — not just train.</p>
+        <a href="/command"
+          class="inline-flex items-center justify-center font-bold border border-[#6A0DAD]/25 text-[#6A0DAD]/60 bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#6A0DAD] hover:text-[#6A0DAD]">
+          See Private Architecture →
+        </a>
+      </div>
+
+    </div>
   </section>
 </Base>

@@ -57,22 +57,25 @@ const faqSchema = JSON.stringify({
         <div class="bg-[#0D1F1F] border border-[#D4A373]/20 hover:border-[#D4A373]/55 transition-colors duration-300 p-12 md:p-16 flex flex-col justify-between min-h-[540px] group">
           <div>
             <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">One Session · Reusable Framework</span>
-            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">The Calibration<br/>Workshop</h2>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[380px] mb-10">Foot Space Work: single-leg balance, weight transfer, kinetic chain alignment, stance. The mechanics your gym doesn't teach — live, corrected in real time. You run this framework again and again.</p>
+            <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">The Calibration<br/>Workshop</h2>
+            <p class="text-white/55 text-sm leading-relaxed max-w-[380px] mb-10">Foot Space Work: single-leg balance, weight transfer, kinetic chain alignment, stance. The mechanics your gym doesn't teach — live, corrected in real time. You run this framework again and again.</p>
             <div class="flex flex-col gap-3">
-              <p class="text-[#0A0A0A]/25 text-[10px] tracking-widest uppercase mb-2">Session Structure</p>
-              <p class="text-[#0A0A0A]/50 text-sm">— Foundation (30 min): the four mechanical bases</p>
-              <p class="text-[#0A0A0A]/50 text-sm">— Application (45 min): live drilling, camera on, real-time correction</p>
-              <p class="text-[#0A0A0A]/50 text-sm">— Integration (15 min): your 30-day written progression</p>
+              <p class="text-white/30 text-[10px] tracking-widest uppercase mb-2">Session Structure</p>
+              <p class="text-white/50 text-sm">— Foundation (30 min): the four mechanical bases</p>
+              <p class="text-white/50 text-sm">— Application (45 min): live drilling, camera on, real-time correction</p>
+              <p class="text-white/50 text-sm">— Integration (15 min): your 30-day written progression</p>
               <p class="text-[#D4A373] text-sm">— Full recording delivered within 24 hours</p>
             </div>
           </div>
-          <div class="mt-12 flex items-center justify-between">
-            <span class="text-[#0A0A0A] font-black text-4xl">$197</span>
-            <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
-              class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
-              Reserve Your Seat →
-            </a>
+          <div class="mt-12">
+            <p class="text-white/25 text-[10px] tracking-widest uppercase mb-5">Limited seats · Saturday, June 27</p>
+            <div class="flex items-center justify-between">
+              <span class="text-white font-black text-4xl">$197</span>
+              <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
+                class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+                Reserve Your Seat →
+              </a>
+            </div>
           </div>
         </div>
 
@@ -97,8 +100,44 @@ const faqSchema = JSON.stringify({
         </div>
       </div>
 
+      <!-- Testimonial -->
+      <div class="mt-20 border-t border-[#0A0A0A]/8 pt-16">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">What fighters say</p>
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-[2px]">
+
+          <!-- Video -->
+          <div class="aspect-video bg-[#0A0A0A]">
+            <iframe
+              src="https://www.youtube.com/embed/VCj0Dgfoako"
+              title="Giancarlo — Thee Rainers Workshop"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="w-full h-full"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <!-- Quote -->
+          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex flex-col justify-between">
+            <div>
+              <p class="text-[#0A0A0A]/70 text-base leading-relaxed font-bold mb-6">
+                "The structure that was missing from my entire training."
+              </p>
+              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">
+                Real-time correction on live movement. Not theory — the actual mechanical gaps showing up in sparring, addressed in the session.
+              </p>
+            </div>
+            <div class="mt-8 pt-8 border-t border-[#0A0A0A]/8">
+              <p class="text-[#0A0A0A]/60 text-sm font-bold">Giancarlo</p>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mt-1">Workshop Attendee</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <!-- FAQ -->
-      <div class="mt-28 border-t border-[#0A0A0A]/8 pt-16">
+      <div class="mt-20 border-t border-[#0A0A0A]/8 pt-16">
         <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">Questions</p>
         <div class="flex flex-col divide-y divide-[#0A0A0A]/8 max-w-[720px]">
           {faqItems.map((item) => (
