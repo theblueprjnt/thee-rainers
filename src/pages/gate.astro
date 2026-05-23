@@ -7,21 +7,21 @@ import Layout from '../layouts/Base.astro';
     <meta name="robots" content="noindex" />
   </Fragment>
 
-  <section class="w-full h-screen bg-[#0A0A0A] flex flex-col items-center justify-center px-8 text-center">
+  <section class="w-full h-screen bg-white flex flex-col items-center justify-center px-8 text-center">
 
     <!-- Question state -->
     <div id="gate-question" class="flex flex-col items-center">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-10">Before you continue.</p>
-      <h1 class="font-black text-white uppercase tracking-tighter text-4xl md:text-[3.5rem] leading-[0.85] mb-16 max-w-[680px]">
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-[3.5rem] leading-[0.85] mb-16 max-w-[680px]">
         Are you building<br/>a system — or trying<br/>to get fit?
       </h1>
       <div class="flex flex-col sm:flex-row gap-4">
         <button id="btn-system"
-          class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 cursor-pointer hover:bg-[#D4A373] hover:text-black">
+          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 cursor-pointer hover:bg-[#0057FF] hover:text-white">
           I'm building a system.
         </button>
         <button id="btn-fit"
-          class="inline-flex items-center justify-center font-bold border-2 border-white/15 text-white/25 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 cursor-pointer hover:border-white/30 hover:text-white/40">
+          class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A]/15 text-[#0A0A0A]/25 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 cursor-pointer hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/40">
           I'm looking to get fit.
         </button>
       </div>
@@ -29,11 +29,11 @@ import Layout from '../layouts/Base.astro';
 
     <!-- Rejection state -->
     <div id="gate-rejection" style="display:none" class="flex flex-col items-center">
-      <p class="text-white/30 text-[11px] tracking-widest uppercase mb-10">Understood.</p>
-      <h2 class="font-black text-white uppercase tracking-tighter text-4xl md:text-[3.5rem] leading-[0.85] mb-8 max-w-[560px]">
+      <p class="text-[#0A0A0A]/30 text-[11px] tracking-widest uppercase mb-10">Understood.</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-[3.5rem] leading-[0.85] mb-8 max-w-[560px]">
         This program<br/>isn't built for that.
       </h2>
-      <p class="text-white/40 text-base max-w-[380px] leading-relaxed mb-10">
+      <p class="text-[#0A0A0A]/40 text-base max-w-[380px] leading-relaxed mb-10">
         The Footwork Foundation is free. Start there. Come back when the question changes.
       </p>
       <a href="/footwork-foundation"

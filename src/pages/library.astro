@@ -100,18 +100,18 @@ const archive = videos.filter(v => !v.featured);
   </Fragment>
 
   <!-- Featured Video -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-20">
+  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-20">
     <div class="max-w-[1280px] mx-auto w-full">
 
       <div class="mb-12">
         <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The Library</p>
-        <h1 class="font-black text-white uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">Knowledge<br/>archive.</h1>
-        <p class="text-white/40 text-base max-w-[480px] leading-relaxed">Deep-format sessions on autonomic regulation, systemic performance, and neural boxing. Every video is a module. Every module is a data point.</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">Knowledge<br/>archive.</h1>
+        <p class="text-[#0A0A0A]/40 text-base max-w-[480px] leading-relaxed">Deep-format sessions on autonomic regulation, systemic performance, and neural boxing. Every video is a module. Every module is a data point.</p>
       </div>
 
       {featured && (
         <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-8 mb-4">
-          <div class="relative w-full aspect-video bg-[#111111] border border-white/5">
+          <div class="relative w-full aspect-video bg-[#F6F6F6] border border-[#0A0A0A]/8">
             <iframe
               src={featured.embedUrl}
               title={featured.title}
@@ -122,31 +122,31 @@ const archive = videos.filter(v => !v.featured);
           </div>
 
           <!-- System Summary Sidebar -->
-          <div class="flex flex-col bg-[#111111] border border-white/5 p-8 gap-0">
+          <div class="flex flex-col bg-[#F6F6F6] border border-[#0A0A0A]/8 p-8 gap-0">
             <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-6">System Summary · 3-Layer OS</p>
 
-            <div class="border-t border-white/5 pt-6 pb-6">
+            <div class="border-t border-[#0A0A0A]/8 pt-6 pb-6">
               <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 01 — Perceptual</p>
-              <p class="text-white/40 text-xs leading-relaxed">Cue reading, pattern recognition, distance management. The fighter who sees first controls everything after. Diligence made physical.</p>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Cue reading, pattern recognition, distance management. The fighter who sees first controls everything after. Diligence made physical.</p>
             </div>
 
-            <div class="border-t border-white/5 pt-6 pb-6">
+            <div class="border-t border-[#0A0A0A]/8 pt-6 pb-6">
               <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 02 — Mechanical</p>
-              <p class="text-white/40 text-xs leading-relaxed">Kinetic chain, reactive stiffness, range fluency. 76% of punch power originates at the floor. The body is the system — not the arm, not the gym.</p>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Kinetic chain, reactive stiffness, range fluency. 76% of punch power originates at the floor. The body is the system — not the arm, not the gym.</p>
             </div>
 
-            <div class="border-t border-white/5 pt-6 pb-6">
+            <div class="border-t border-[#0A0A0A]/8 pt-6 pb-6">
               <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 03 — Existential</p>
-              <p class="text-white/40 text-xs leading-relaxed">Identity, presence, internal standard. Mechanics trained in drilling dissolve under pressure when Layer 3 is missing. This is where virtue meets performance.</p>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Identity, presence, internal standard. Mechanics trained in drilling dissolve under pressure when Layer 3 is missing. This is where virtue meets performance.</p>
             </div>
 
-            <div class="border-t border-white/5 pt-6 flex flex-col gap-3">
+            <div class="border-t border-[#0A0A0A]/8 pt-6 flex flex-col gap-3">
               <a href="/footwork-foundation"
-                class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
                 Start the Foundation →
               </a>
               <a href="/vault"
-                class="inline-flex items-center justify-center font-bold border border-white/15 text-white/30 bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/50">
+                class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/30 bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/50">
                 Get the System →
               </a>
             </div>
@@ -159,17 +159,17 @@ const archive = videos.filter(v => !v.featured);
 
   <!-- Archive Grid -->
   {archive.length > 0 && (
-    <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20 border-t border-white/5">
+    <section class="bg-white px-8 md:px-16 lg:px-24 py-20 border-t border-[#0A0A0A]/8">
       <div class="max-w-[1280px] mx-auto w-full">
 
         <div class="mb-12">
           <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Archive</p>
-          <h2 class="font-black text-white uppercase tracking-tighter text-3xl md:text-4xl leading-[0.85]">All sessions.</h2>
+          <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.85]">All sessions.</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[2px]">
           {archive.map(video => (
-            <div class="bg-[#111111] border border-white/5 hover:border-[#D4A373]/20 transition-colors duration-300 group">
+            <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#D4A373]/20 transition-colors duration-300 group">
               <div class="relative aspect-video overflow-hidden">
                 <img
                   src={video.thumbnailUrl}
@@ -179,8 +179,8 @@ const archive = videos.filter(v => !v.featured);
               </div>
               <div class="p-8">
                 <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">{video.label}</p>
-                <h3 class="font-black text-white uppercase tracking-tight text-lg leading-tight mb-3">{video.title}</h3>
-                <p class="text-white/40 text-xs leading-relaxed mb-6">{video.description}</p>
+                <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg leading-tight mb-3">{video.title}</h3>
+                <p class="text-[#0A0A0A]/40 text-xs leading-relaxed mb-6">{video.description}</p>
                 <a href={video.embedUrl.replace('/embed/', '/watch?v=')} target="_blank"
                   class="text-[#D4A373] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity duration-200">
                   Watch →
@@ -195,19 +195,19 @@ const archive = videos.filter(v => !v.featured);
   )}
 
   <!-- CTA -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20 border-t border-white/5">
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-20 border-t border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
       <div>
-        <p class="text-white/25 text-[11px] tracking-widest uppercase mb-3">Ready to go deeper?</p>
-        <p class="text-white/50 text-sm max-w-[440px] leading-relaxed">The Library is context. The Vault is the entry point. Private Architecture is the system.</p>
+        <p class="text-[#0A0A0A]/25 text-[11px] tracking-widest uppercase mb-3">Ready to go deeper?</p>
+        <p class="text-[#0A0A0A]/50 text-sm max-w-[440px] leading-relaxed">The Library is context. The Vault is the entry point. Private Architecture is the system.</p>
       </div>
       <div class="flex flex-col sm:flex-row gap-4 shrink-0">
         <a href="/vault"
-          class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
           Get the System →
         </a>
         <a href="/command"
-          class="inline-flex items-center justify-center font-bold border border-white/15 text-white/40 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/60">
+          class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/60">
           Apply →
         </a>
       </div>

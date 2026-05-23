@@ -3,122 +3,126 @@ import Layout from '../layouts/Base.astro';
 ---
 <Layout title="Thee Rainers — Engineered for the ring.">
 
-  <!-- HERO: 60/40 Command Grid -->
-  <section class="w-full h-screen overflow-hidden grid grid-cols-1 md:grid-cols-[60%_40%]">
+  <!-- HERO: 60/40 — Subject stands on the page -->
+  <section class="w-full min-h-screen overflow-hidden grid grid-cols-1 md:grid-cols-[60%_40%] bg-white border-b border-[#0A0A0A]/8">
 
     <!-- Left 60%: Mission -->
-    <div class="bg-[#0A0A0A] flex flex-col justify-center px-8 md:px-16 lg:px-24 relative z-10">
+    <div class="flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-32 pb-16 md:py-0 relative z-10">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Systemic Boxing Performance</p>
-      <h1 class="font-black text-white uppercase tracking-tighter mb-8"
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-8"
         style="font-size: clamp(3rem, 7vw, 5rem); line-height: 0.8;">
         Engineered<br/>for the ring.
       </h1>
-      <p class="text-white/60 mb-10 max-w-[420px] text-base leading-relaxed">
+      <p class="text-[#0A0A0A]/55 mb-10 max-w-[420px] text-base leading-relaxed">
         Your ambition is ahead of your gym. This closes that gap.
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
-        <a href="/footwork-foundation"
-          class="inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:bg-[#D4A373] hover:text-black">
+        <a href="#gate"
+          class="blue-btn inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:bg-[#0057FF] hover:text-white">
           Enter the System
         </a>
         <a href="/vault"
-          class="inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border border-white/15 text-white/35 bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:border-white/30 hover:text-white/55">
+          class="inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/70">
           View Products
         </a>
       </div>
     </div>
 
-    <!-- Right 40%: Subject (You) — the anchor -->
-    <div class="hidden md:block relative overflow-hidden">
+    <!-- Right 40%: Subject stands on the page -->
+    <div class="hidden md:flex items-end justify-center relative overflow-hidden">
       <img
-        src="/images/rainers-portrait.jpg"
+        src="/images/myherocutout.jpg"
         alt="Thee Rainers"
-        class="absolute inset-0 w-full h-full object-cover object-top"
-        style="mask-image: linear-gradient(to right, transparent 0%, black 28%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%);"
+        class="hero-subject w-auto max-h-[95vh] object-contain object-bottom"
+        loading="eager"
+        decoding="async"
       />
     </div>
 
   </section>
 
-  <!-- TRUTH THRESHOLD: The Gate -->
-  <section id="gate" class="w-full h-screen bg-[#0A0A0A] flex flex-col items-center justify-center px-8 text-center">
+  <!-- GATE: Path Choice -->
+  <section id="gate" class="w-full min-h-screen bg-white flex flex-col items-center justify-center px-8 text-center py-24 border-b border-[#0A0A0A]/8">
 
-    <div id="gate-question" class="flex flex-col items-center">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-10">Before you continue.</p>
-      <h2 class="font-black text-white uppercase tracking-tighter text-4xl md:text-[3.5rem] leading-[0.85] mb-16 max-w-[680px]">Are you building<br/>a system — or trying<br/>to get fit?</h2>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <button
-          id="btn-system"
-          class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 cursor-pointer hover:bg-[#D4A373] hover:text-black"
-        >I'm building a system.</button>
-        <button
-          id="btn-fit"
-          class="inline-flex items-center justify-center font-bold border-2 border-white/15 text-white/25 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 cursor-pointer hover:border-white/30 hover:text-white/40"
-        >I'm looking to get fit.</button>
-      </div>
+    <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-10">Before you continue.</p>
+    <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6 max-w-[720px]"
+      style="font-size: clamp(2.5rem, 6vw, 4rem);">
+      Are you training<br/>to compete —<br/>or building<br/>your foundation?
+    </h2>
+    <p class="text-[#0A0A0A]/35 text-sm mb-16 max-w-[420px] leading-relaxed">
+      Both paths start free. Your answer determines which tool you need first.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 mb-6">
+      <a href="/lever-audit"
+        class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-5 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+        I Want to Compete →
+      </a>
+      <a href="/footwork-foundation"
+        class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A]/20 text-[#0A0A0A]/60 bg-transparent px-10 py-5 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/40 hover:text-[#0A0A0A]">
+        I Want to Get Fit →
+      </a>
     </div>
 
-    <div id="gate-rejection" style="display:none" class="flex flex-col items-center">
-      <p class="text-white/30 text-[11px] tracking-widest uppercase mb-10">Understood.</p>
-      <h2 class="font-black text-white uppercase tracking-tighter text-4xl md:text-[3.5rem] leading-[0.85] mb-8 max-w-[560px]">This program<br/>isn't built for that.</h2>
-      <p class="text-white/40 text-base max-w-[380px] leading-relaxed mb-10">The Footwork Foundation is free. Start there. Come back when the question changes.</p>
-      <a href="/footwork-foundation" class="inline-flex items-center gap-2 text-[#D4A373] text-sm font-bold tracking-widest uppercase hover:opacity-60 transition-opacity duration-200">The Footwork Foundation →</a>
-    </div>
+    <a href="/footwork-foundation"
+      class="text-[#0A0A0A]/25 text-xs tracking-widest uppercase hover:text-[#0A0A0A]/50 transition-colors duration-200 underline underline-offset-4">
+      Not sure yet — start with the foundation
+    </a>
 
   </section>
 
-  <!-- OFFER GRID: 60/40 Asymmetric -->
-  <section class="bg-[#0A0A0A] py-20 md:py-28" id="paths" style="display:none">
+  <!-- OFFER GRID: Product Architecture -->
+  <section class="bg-white py-20 md:py-28 border-b border-[#0A0A0A]/8">
     <div class="mx-auto px-8 md:px-16 lg:px-24 w-full max-w-[1280px]">
 
       <div class="mb-14">
         <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">The Architecture</p>
-        <h2 class="font-black text-white uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85]">Select your<br/>entry point.</h2>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85]">Select your<br/>entry point.</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-[2px]">
+      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-[1px] bg-[#0A0A0A]/8">
 
         <!-- LEFT 60%: Private Architecture — Flagship -->
-        <div class="bg-[#0D2828] p-12 md:p-16 flex flex-col justify-between min-h-[540px] group border border-[#D4A373]/20 hover:border-[#D4A373]/50 transition-colors duration-300">
+        <div class="bg-[#F0EEFF] p-12 md:p-16 flex flex-col justify-between min-h-[540px] group border border-[#6A0DAD]/20 hover:border-[#6A0DAD]/50 transition-colors duration-300">
           <div>
             <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">By Application Only</span>
-            <h3 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Private<br/>Architecture</h3>
-            <p class="text-white/50 text-sm leading-relaxed max-w-[380px]">1 of 1. No templates. No cohorts. A system engineered around your specific fight, body, and mind. This is not coaching — it is architecture.</p>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Private<br/>Architecture</h3>
+            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[380px]">1 of 1. No templates. No cohorts. A system engineered around your specific fight, body, and mind. This is not coaching — it is architecture.</p>
           </div>
-          <a href="/command" class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black self-start mt-10 group-hover:gap-3">Apply →</a>
+          <a href="/command" class="purple-btn inline-flex items-center justify-center font-bold border-2 border-[#6A0DAD] text-[#6A0DAD] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#6A0DAD] hover:text-white self-start mt-10">Apply →</a>
         </div>
 
-        <!-- RIGHT 40%: Supporting Methodology — Stacked -->
-        <div class="flex flex-col gap-[2px]">
+        <!-- RIGHT 40%: Supporting Methodology -->
+        <div class="flex flex-col gap-[1px] bg-[#0A0A0A]/8">
 
-          <!-- Footwork Foundation -->
-          <div class="bg-[#111111] p-8 flex flex-col justify-between flex-1 border border-white/5 hover:border-[#D4A373]/20 transition-colors duration-300 group">
+          <!-- 7-Lever Audit -->
+          <div class="bg-white p-8 flex flex-col justify-between flex-1 group hover:bg-[#F6F6F6] transition-colors duration-300">
             <div>
-              <span class="text-white/30 text-[11px] tracking-widest uppercase">Free · Entry Protocol</span>
-              <h3 class="font-black text-white uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Footwork<br/>Foundation</h3>
-              <p class="text-white/40 text-xs leading-relaxed">The base layer. Required before anything else.</p>
+              <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">Free · Competitors</span>
+              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">7-Lever<br/>Audit</h3>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Find the leak in your system before your next fight.</p>
             </div>
-            <a href="/footwork-foundation" class="inline-flex items-center gap-2 text-white/50 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#D4A373] transition-colors duration-200 group-hover:gap-3">Start Here →</a>
+            <a href="/lever-audit" class="inline-flex items-center gap-2 text-[#0A0A0A]/40 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#0057FF] transition-colors duration-200 group-hover:gap-3">Get the Audit →</a>
           </div>
 
-          <!-- Blueprints -->
-          <div class="bg-[#111111] p-8 flex flex-col justify-between flex-1 border border-white/5 hover:border-[#D4A373]/20 transition-colors duration-300 group">
+          <!-- Footwork Foundation -->
+          <div class="bg-white p-8 flex flex-col justify-between flex-1 group hover:bg-[#F6F6F6] transition-colors duration-300">
             <div>
-              <span class="text-white/30 text-[11px] tracking-widest uppercase">Tactical Bundle</span>
-              <h3 class="font-black text-white uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Tactical<br/>Blueprints</h3>
-              <p class="text-white/40 text-xs leading-relaxed">Mapped, sequenced, built for fighters who think in systems.</p>
+              <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">Free · Foundation</span>
+              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Footwork<br/>Foundation</h3>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">The base layer. 30-day protocol. Required before anything else.</p>
             </div>
-            <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank" class="inline-flex items-center gap-2 text-white/50 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#D4A373] transition-colors duration-200 group-hover:gap-3">Get the System →</a>
+            <a href="/footwork-foundation" class="inline-flex items-center gap-2 text-[#0A0A0A]/40 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#0057FF] transition-colors duration-200 group-hover:gap-3">Start Here →</a>
           </div>
 
           <!-- Lab Session -->
-          <div class="bg-[#111111] p-8 flex flex-col justify-between flex-1 border border-white/5 hover:border-[#D4A373]/20 transition-colors duration-300 group">
+          <div class="bg-white p-8 flex flex-col justify-between flex-1 group hover:bg-[#F6F6F6] transition-colors duration-300">
             <div>
               <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">$197 · June 27</span>
-              <h3 class="font-black text-white uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">The Lab<br/>Session</h3>
-              <p class="text-white/40 text-xs leading-relaxed">Live implementation. Coached in real-time.</p>
+              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">The Lab<br/>Session</h3>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Live implementation. Coached in real-time.</p>
             </div>
-            <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank" class="inline-flex items-center gap-2 text-white/50 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#D4A373] transition-colors duration-200 group-hover:gap-3">Reserve a Seat →</a>
+            <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank" class="inline-flex items-center gap-2 text-[#0A0A0A]/40 text-xs font-bold tracking-widest uppercase mt-6 hover:text-[#0057FF] transition-colors duration-200 group-hover:gap-3">Reserve a Seat →</a>
           </div>
 
         </div>
@@ -126,35 +130,63 @@ import Layout from '../layouts/Base.astro';
     </div>
   </section>
 
+  <!-- SOCIAL PROOF: Community reach -->
+  <section class="bg-white py-16 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-16 lg:px-24">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-10 text-center">The Community</p>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-[1px] bg-[#0A0A0A]/8">
 
-<script>
-  const gate = document.getElementById('gate');
-  const gateQuestion = document.getElementById('gate-question');
-  const gateRejection = document.getElementById('gate-rejection');
-  const paths = document.getElementById('paths');
+        <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
+          class="bg-white flex flex-col items-center justify-center py-10 px-6 group hover:bg-[#F6F6F6] transition-colors duration-200">
+          <p class="font-black text-[#0A0A0A] text-3xl md:text-4xl leading-none mb-2">331K</p>
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Instagram</p>
+          <p class="text-[#0A0A0A]/25 text-[10px] mt-1">@theerainers</p>
+        </a>
 
-  document.getElementById('btn-system')?.addEventListener('click', () => {
-    gate.style.transition = 'opacity 0.35s ease';
-    gate.style.opacity = '0';
-    setTimeout(() => {
-      gate.style.display = 'none';
-      paths.style.display = 'block';
-      paths.scrollIntoView({ behavior: 'smooth' });
-    }, 350);
-  });
+        <a href="https://www.facebook.com/theerainers" target="_blank" rel="noopener"
+          class="bg-white flex flex-col items-center justify-center py-10 px-6 group hover:bg-[#F6F6F6] transition-colors duration-200">
+          <p class="font-black text-[#0A0A0A] text-3xl md:text-4xl leading-none mb-2">110K</p>
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Facebook</p>
+          <p class="text-[#0A0A0A]/25 text-[10px] mt-1">Blueprint Boxing</p>
+        </a>
 
-  document.getElementById('btn-fit')?.addEventListener('click', () => {
-    gateQuestion.style.transition = 'opacity 0.25s ease';
-    gateQuestion.style.opacity = '0';
-    setTimeout(() => {
-      gateQuestion.style.display = 'none';
-      gateRejection.style.display = 'flex';
-      gateRejection.style.flexDirection = 'column';
-      gateRejection.style.alignItems = 'center';
-      gateRejection.style.opacity = '0';
-      gateRejection.style.transition = 'opacity 0.35s ease';
-      requestAnimationFrame(() => { gateRejection.style.opacity = '1'; });
-    }, 250);
-  });
-</script>
+        <a href="https://www.tiktok.com/@theerainers" target="_blank" rel="noopener"
+          class="bg-white flex flex-col items-center justify-center py-10 px-6 group hover:bg-[#F6F6F6] transition-colors duration-200">
+          <p class="font-black text-[#0A0A0A] text-3xl md:text-4xl leading-none mb-2">90K</p>
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">TikTok</p>
+          <p class="text-[#0A0A0A]/25 text-[10px] mt-1">@theerainers</p>
+        </a>
+
+        <a href="https://www.threads.net/@theerainers" target="_blank" rel="noopener"
+          class="bg-white flex flex-col items-center justify-center py-10 px-6 group hover:bg-[#F6F6F6] transition-colors duration-200">
+          <p class="font-black text-[#0A0A0A] text-3xl md:text-4xl leading-none mb-2">20K</p>
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Threads</p>
+          <p class="text-[#0A0A0A]/25 text-[10px] mt-1">@theerainers</p>
+        </a>
+
+        <a href="https://www.youtube.com/@Rainers" target="_blank" rel="noopener"
+          class="bg-white flex flex-col items-center justify-center py-10 px-6 group hover:bg-[#F6F6F6] transition-colors duration-200 col-span-2 md:col-span-1">
+          <p class="font-black text-[#0A0A0A] text-3xl md:text-4xl leading-none mb-2">15K</p>
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">YouTube</p>
+          <p class="text-[#0A0A0A]/25 text-[10px] mt-1">@Rainers</p>
+        </a>
+
+      </div>
+      <p class="text-center text-[#0A0A0A]/25 text-xs tracking-wide mt-8">
+        Follow for daily training content, system breakdowns, and fight prep.
+      </p>
+    </div>
+  </section>
+
+  <!-- SCRIPTURE ANCHOR -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-28">
+    <div class="max-w-[720px] mx-auto w-full">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] mb-6 text-white/10"
+        style="font-size: clamp(1.75rem, 4vw, 2.5rem);">
+        "I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."
+      </p>
+      <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:26–27</p>
+    </div>
+  </section>
+
 </Layout>

@@ -2,17 +2,20 @@
 @import "@fontsource-variable/bricolage-grotesque/index.css";
 
 @theme {
-  --color-bg: #0D0D0D;
-  --color-navy: #E8E6E1;
+  --color-bg: #FFFFFF;
+  --color-navy: #0A0A0A;
   --color-terracotta: #c84d3a;
-  --color-ink: #A8A59E;
-  --color-cream: #161616;
-  --color-muted: #555555;
-  --color-rule: #222222;
+  --color-ink: #0A0A0A;
+  --color-cream: #F6F6F6;
+  --color-muted: #888888;
+  --color-rule: #E0E0E0;
 
-  --color-brand-dark: #121212;
-  --color-brand-teal: #0A3535;
-  --color-brand-light: #F5F5F5;
+  --color-brand-dark: #0A0A0A;
+  --color-brand-teal: #EEF4FF;
+  --color-brand-light: #F6F6F6;
+  --color-blue: #0057FF;
+  --color-copper: #D4A373;
+  --color-purple: #6A0DAD;
 
   --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
   --font-serif: Georgia, ui-serif, serif;
@@ -46,39 +49,34 @@
   }
 
   #site-nav.is-scrolled {
-    background-color: var(--color-bg);
-    border-bottom: 1px solid var(--color-rule);
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+    background-color: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid rgba(10, 10, 10, 0.10);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
   }
 }
 
 @layer components {
   .hero-gradient {
-    background: linear-gradient(to bottom, rgba(18, 18, 18, 0.35), rgba(18, 18, 18, 0.97));
-  }
-
-  .hero-img {
-    filter: brightness(0.90);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 100%);
   }
 
   .hero-overlay {
-    background: linear-gradient(90deg, #0A0A0A 0%, rgba(10, 10, 10, 0.6) 100%);
+    background: linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,0.5) 100%);
   }
 
-  /* Matte cinematic filter — GPU composited via filter */
-  .hero-matte {
-    filter: contrast(0.82) saturate(0.72) brightness(0.88);
+  /* Subject anchor — GPU composited */
+  .hero-subject {
     will-change: transform;
     transform: translateZ(0);
     animation: hero-settle 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   @keyframes hero-settle {
-    from { transform: scale(1.04) translateZ(0); }
+    from { transform: scale(1.03) translateZ(0); }
     to   { transform: scale(1)    translateZ(0); }
   }
 
-  /* Card micro-lift — GPU composited, 120fps-safe */
+  /* Card micro-lift — 120fps-safe */
   .tr-card {
     will-change: transform;
     transform: translateZ(0);
@@ -86,12 +84,30 @@
   }
 
   .tr-card:hover {
-    transform: translateY(-3px) translateZ(0);
+    transform: translateY(-2px) translateZ(0);
   }
 
-  /* Copper button — isolate compositing layer */
+  /* Blue CTA — primary conversion */
+  .blue-btn {
+    will-change: background-color, color;
+    transform: translateZ(0);
+  }
+
+  /* Purple CTA — Private Architecture only */
+  .purple-btn {
+    will-change: background-color, color;
+    transform: translateZ(0);
+  }
+
+  /* Legacy copper-btn — now treated as neutral secondary */
   .copper-btn {
     will-change: background-color, color;
     transform: translateZ(0);
+  }
+
+  /* Scripture block — kept dark for gravitas */
+  .scripture-block {
+    background-color: #0A0A0A;
+    color: rgba(255, 255, 255, 0.10);
   }
 }

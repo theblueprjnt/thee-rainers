@@ -12,26 +12,26 @@ const levers = [
 ];
 ---
 
-<Layout title="7-Lever Audit — Thee Rainers">
+<Layout title="7-Lever Audit — Find Your Leak | Thee Rainers">
   <Fragment slot="head">
-    <meta name="description" content="Free self-assessment. Find the leak in your system. The 7-Lever Audit maps your training gaps to the specific inputs your performance needs." />
-    <meta property="og:title" content="7-Lever Audit — Thee Rainers" />
-    <meta property="og:description" content="Find the leak. Fix the system. Free." />
+    <meta name="description" content="Free self-assessment for competitors. Find the leak in your system before your next fight. The 7-Lever Audit maps your gaps to specific training inputs." />
+    <meta property="og:title" content="7-Lever Audit — Find Your Leak | Thee Rainers" />
+    <meta property="og:description" content="Find the leak. Fix the system. Free download." />
   </Fragment>
 
   <!-- Hero -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
+  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
     <div class="max-w-[1280px] mx-auto w-full">
       <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24 items-start">
 
         <div>
-          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Free · Self-Assessment</p>
-          <h1 class="font-black text-white uppercase tracking-tighter text-5xl md:text-7xl leading-[0.82] mb-10">Find the leak.<br/>Fix the system.</h1>
-          <p class="text-white/50 text-base leading-relaxed mb-6 max-w-[480px]">
-            Most fighters train hard. Few know which lever is actually broken. The 7-Lever Audit maps your gaps to the specific system inputs you need — and tells you exactly where to start.
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Free · For Competitors</p>
+          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.82] mb-10">Find the leak.<br/>Fix the system.</h1>
+          <p class="text-[#0A0A0A]/50 text-base leading-relaxed mb-6 max-w-[480px]">
+            Most fighters train hard. Few know which lever is actually broken before fight night. The 7-Lever Audit maps your gaps to the specific system inputs you need — and tells you exactly where to start.
           </p>
-          <p class="text-white/30 text-sm leading-relaxed mb-14 max-w-[480px]">
-            Seven levers. Seven virtues. One operating standard. Enter your email and receive the audit framework — free.
+          <p class="text-[#0A0A0A]/30 text-sm leading-relaxed mb-14 max-w-[480px]">
+            Seven levers. Seven virtues. One operating standard. Enter your email and the audit downloads instantly — free.
           </p>
 
           <!-- Inline lead form -->
@@ -42,33 +42,33 @@ const levers = [
                 id="audit-email"
                 required
                 placeholder="your@email.com"
-                class="flex-1 border border-white/15 bg-transparent px-5 py-4 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20"
+                class="flex-1 border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20"
               />
               <button
                 type="submit"
                 id="audit-submit"
-                class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black whitespace-nowrap"
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap"
               >
-                Send the Audit →
+                Download Free →
               </button>
             </form>
-            <p id="audit-success" class="hidden text-[#D4A373] text-sm tracking-wide mt-6">The audit is in your inbox. Check it now.</p>
-            <p id="audit-error" class="hidden text-white/40 text-sm tracking-wide mt-6">Something went wrong. Try again.</p>
-            <p class="text-white/20 text-xs tracking-wide mt-4">No spam. Unsubscribe anytime.</p>
+            <p id="audit-success" class="hidden text-[#0057FF] text-sm tracking-wide mt-6">Downloading now — find your leak.</p>
+            <p id="audit-error" class="hidden text-[#0A0A0A]/40 text-sm tracking-wide mt-6">Something went wrong. Try again.</p>
+            <p class="text-[#0A0A0A]/20 text-xs tracking-wide mt-4">No spam. No follow-up. Just the audit.</p>
           </div>
         </div>
 
         <!-- Right: lever preview -->
         <div class="flex flex-col gap-[2px]">
           {levers.slice(0, 3).map(l => (
-            <div class="bg-[#111111] border border-white/5 p-8">
+            <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-8">
               <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">{l.num} — {l.virtue}</p>
-              <p class="text-white/60 text-sm font-bold tracking-tight mb-1">{l.lever}</p>
-              <p class="text-white/20 text-[10px] italic">{l.scripture}</p>
+              <p class="text-[#0A0A0A]/60 text-sm font-bold tracking-tight mb-1">{l.lever}</p>
+              <p class="text-[#0A0A0A]/20 text-[10px] italic">{l.scripture}</p>
             </div>
           ))}
-          <div class="bg-[#111111] border border-white/5 p-8 text-center">
-            <p class="text-white/20 text-xs tracking-widest uppercase">+ 4 more levers inside</p>
+          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-8 text-center">
+            <p class="text-[#0A0A0A]/20 text-xs tracking-widest uppercase">+ 4 more levers inside</p>
           </div>
         </div>
 
@@ -77,21 +77,21 @@ const levers = [
   </section>
 
   <!-- The 7 Levers -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-24 border-t border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto w-full">
 
       <div class="mb-16">
         <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The Architecture</p>
-        <h2 class="font-black text-white uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] max-w-[560px]">Seven levers.<br/>Every one trainable.</h2>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] max-w-[560px]">Seven levers.<br/>Every one trainable.</h2>
       </div>
 
-      <div class="flex flex-col divide-y divide-white/5">
+      <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
         {levers.map(l => (
           <div class="grid grid-cols-[60px_1fr_1fr_1fr] py-8 items-start gap-6 tr-card">
-            <p class="text-white/15 font-black text-2xl leading-none">{l.num}</p>
+            <p class="text-[#0A0A0A]/15 font-black text-2xl leading-none">{l.num}</p>
             <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">{l.virtue}</p>
-            <p class="text-white/60 text-sm">{l.lever}</p>
-            <p class="text-white/20 text-xs leading-relaxed italic">{l.scripture}</p>
+            <p class="text-[#0A0A0A]/60 text-sm">{l.lever}</p>
+            <p class="text-[#0A0A0A]/20 text-xs leading-relaxed italic">{l.scripture}</p>
           </div>
         ))}
       </div>
@@ -104,32 +104,32 @@ const levers = [
     <div class="max-w-[1280px] mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-12">
       <div>
         <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Step 01</p>
-        <p class="text-white/60 text-sm leading-relaxed">Receive the audit. Rate yourself on each of the 7 levers. Honest numbers only — the system diagnoses what you give it.</p>
+        <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Download the audit. Rate yourself honestly on each of the 7 levers. The system diagnoses what you give it — no guessing.</p>
       </div>
       <div>
         <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Step 02</p>
-        <p class="text-white/60 text-sm leading-relaxed">Identify your lowest-scoring lever. That is your primary bottleneck — the constraint that limits every other lever in the system.</p>
+        <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Identify your lowest-scoring lever. That is your primary bottleneck — the constraint that limits every other lever before your next fight.</p>
       </div>
       <div>
         <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Step 03</p>
-        <p class="text-white/60 text-sm leading-relaxed">Use the prescribed drill block for that lever. The audit maps each gap to a specific training intervention. Fix the base. Stack the system.</p>
+        <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Use the prescribed drill block for that lever. The audit maps each gap to a specific training intervention. Fix the base. Stack the system.</p>
       </div>
     </div>
   </section>
 
   <!-- Scripture + CTA -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-24 border-t border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-16">
       <div class="max-w-[560px]">
-        <p class="font-black text-white/10 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-6">"I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."</p>
+        <p class="font-black text-[#0A0A0A]/10 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-6">"I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."</p>
         <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-10">1 Corinthians 9:26–27</p>
-        <p class="text-white/30 text-sm leading-relaxed">The audit is the diagnostic. The Vault is the prescription. Private Architecture is the custom build.</p>
+        <p class="text-[#0A0A0A]/30 text-sm leading-relaxed">The audit is the diagnostic. The Vault is the prescription. Private Architecture is the custom build.</p>
       </div>
       <div class="flex flex-col gap-4 shrink-0">
-        <a href="/vault" class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+        <a href="/vault" class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
           Enter the Vault →
         </a>
-        <a href="/command" class="inline-flex items-center justify-center font-bold border border-white/15 text-white/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/50">
+        <a href="/command" class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/50">
           Apply for 1-on-1 →
         </a>
       </div>
@@ -138,8 +138,16 @@ const levers = [
 </Layout>
 
 <script>
+  function triggerDownload(href: string, filename: string) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
   const form = document.getElementById('audit-form') as HTMLFormElement;
-  const wrapper = document.getElementById('audit-form-wrapper')!;
   const success = document.getElementById('audit-success')!;
   const error = document.getElementById('audit-error')!;
   const submit = document.getElementById('audit-submit') as HTMLButtonElement;
@@ -147,7 +155,7 @@ const levers = [
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     submit.disabled = true;
-    submit.textContent = 'Sending...';
+    submit.textContent = 'Preparing...';
     error.classList.add('hidden');
 
     const email = (document.getElementById('audit-email') as HTMLInputElement).value.trim();
@@ -164,13 +172,14 @@ const levers = [
       if (body.success) {
         form.classList.add('hidden');
         success.classList.remove('hidden');
+        triggerDownload('/pdfs/lever-audit.pdf', '7-Lever-Audit-Thee-Rainers.pdf');
       } else {
         throw new Error();
       }
     } catch {
       error.classList.remove('hidden');
       submit.disabled = false;
-      submit.textContent = 'Send the Audit →';
+      submit.textContent = 'Download Free →';
     }
   });
 </script>

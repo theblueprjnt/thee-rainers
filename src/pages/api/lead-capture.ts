@@ -81,12 +81,6 @@ export async function POST({ request }: APIContext): Promise<Response> {
       : redirectResponse('/footwork-foundation?error=invalid_email');
   }
 
-  if (!phone || phoneDigits(phone) < 7) {
-    return isJson
-      ? jsonResponse({ success: false, error: 'A valid phone number is required.' }, 400, headers)
-      : redirectResponse('/footwork-foundation?error=invalid_phone');
-  }
-
   // ── forward to Make.com webhook ───────────────────────────────────────
   // Skipped gracefully when MAKE_LEAD_WEBHOOK_URL is a placeholder or unset.
   const webhookUrl = import.meta.env.MAKE_LEAD_WEBHOOK_URL ?? '';

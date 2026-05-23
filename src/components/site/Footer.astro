@@ -2,18 +2,32 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-[#0A0A0A] border-t border-white/5">
-  <div class="max-w-[1140px] mx-auto px-6 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-    <a href="/" class="flex items-center">
-      <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-8 w-auto opacity-70 hover:opacity-100 transition-opacity duration-200" />
-    </a>
-    <div class="flex items-center gap-6 flex-wrap">
-      <a href="/qa" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">Q&A</a>
-      <a href="/feedback" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">Feedback</a>
-      <a href="/lever-audit" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">7-Lever Audit</a>
-      <a href="/privacy" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">Privacy</a>
-      <a href="/terms" class="text-xs text-white/30 hover:text-white/60 transition-colors duration-200">Terms</a>
-      <span class="text-xs text-white/15">© {year} Thee Rainers</span>
+<footer class="bg-white border-t border-[#0A0A0A]/8">
+  <div class="max-w-[1140px] mx-auto px-6 py-10 flex flex-col gap-8">
+
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <a href="/" class="flex items-center">
+        <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity duration-200" />
+      </a>
+      <div class="flex items-center gap-5 flex-wrap">
+        <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener" class="text-[10px] text-[#0A0A0A]/35 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Instagram</a>
+        <a href="https://www.tiktok.com/@theerainers" target="_blank" rel="noopener" class="text-[10px] text-[#0A0A0A]/35 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">TikTok</a>
+        <a href="https://www.facebook.com/theerainers" target="_blank" rel="noopener" class="text-[10px] text-[#0A0A0A]/35 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Facebook</a>
+        <a href="https://www.youtube.com/@Rainers" target="_blank" rel="noopener" class="text-[10px] text-[#0A0A0A]/35 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">YouTube</a>
+        <a href="https://www.threads.net/@theerainers" target="_blank" rel="noopener" class="text-[10px] text-[#0A0A0A]/35 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Threads</a>
+      </div>
     </div>
+
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-[#0A0A0A]/8">
+      <div class="flex items-center gap-5 flex-wrap">
+        <a href="/qa" class="text-[10px] text-[#0A0A0A]/25 hover:text-[#0A0A0A]/60 transition-colors duration-200 tracking-wide">Q&A</a>
+        <a href="/lever-audit" class="text-[10px] text-[#0A0A0A]/25 hover:text-[#0A0A0A]/60 transition-colors duration-200 tracking-wide">7-Lever Audit</a>
+        <a href="/footwork-foundation" class="text-[10px] text-[#0A0A0A]/25 hover:text-[#0A0A0A]/60 transition-colors duration-200 tracking-wide">Free Protocol</a>
+        <a href="/about" class="text-[10px] text-[#0A0A0A]/25 hover:text-[#0A0A0A]/60 transition-colors duration-200 tracking-wide">About</a>
+        <a href="/command" class="text-[10px] text-[#0A0A0A]/25 hover:text-[#0A0A0A]/60 transition-colors duration-200 tracking-wide">Apply</a>
+      </div>
+      <span class="text-[10px] text-[#0A0A0A]/15 tracking-wide">© {year} Thee Rainers · theerainers.com</span>
+    </div>
+
   </div>
 </footer>

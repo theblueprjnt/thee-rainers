@@ -26,26 +26,26 @@ const stats = [
 ---
 
 <Layout
-  title="Footwork Protocol — System Baseline | Thee Rainers"
-  description="The foundation the gym never taught you. Four kinetic bases, 56 drill rounds, 30-day progression. Free. Autonomic regulation begins here."
+  title="Footwork Foundation — Free 30-Day Protocol | Thee Rainers"
+  description="The foundation the gym never taught you. Four kinetic bases, 56 drill rounds, 30-day progression. Free. Download instantly."
 >
   <Fragment slot="head">
-    <meta property="og:title" content="Footwork Protocol — System Baseline | Thee Rainers" />
-    <meta property="og:description" content="The foundation the gym never taught you. 76% of punch power starts at the floor. Four kinetic bases, 56 drill rounds, 30-day progression. Free." />
+    <meta property="og:title" content="Footwork Foundation — Free 30-Day Protocol | Thee Rainers" />
+    <meta property="og:description" content="76% of punch power starts at the floor. Four kinetic bases, 56 drill rounds, 30-day progression. Free download." />
     <meta property="og:type" content="website" />
   </Fragment>
 
   <!-- Hero -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
+  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
     <div class="max-w-[720px] mx-auto w-full">
 
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Free · System Baseline</p>
-      <h1 class="font-black text-white uppercase tracking-tighter mb-6"
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Free · 30-Day Protocol</p>
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-6"
         style="font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 0.88;">
         The foundation<br/>the gym never<br/>taught you.
       </h1>
-      <p class="text-white/40 text-base leading-relaxed mb-12 max-w-[520px]">
-        Four kinetic bases. 56 drill rounds. 30-day progression. This is not a workout guide — it is the mechanical platform that everything else runs on. Free.
+      <p class="text-[#0A0A0A]/40 text-base leading-relaxed mb-12 max-w-[520px]">
+        Four kinetic bases. 56 drill rounds. 30-day stance-to-integration progression. This is the mechanical platform everything else runs on — and it is free.
       </p>
 
       <!-- Inline form -->
@@ -56,78 +56,107 @@ const stats = [
             id="hero-email"
             required
             placeholder="your@email.com"
-            class="flex-1 border border-white/15 bg-transparent px-5 py-4 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20"
+            class="flex-1 border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20"
           />
           <button
             type="submit"
             id="hero-submit"
-            class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black whitespace-nowrap"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap"
           >
-            Send the Guide →
+            Download Free →
           </button>
         </form>
-        <p id="hero-success" class="hidden text-[#D4A373] text-sm tracking-wide mt-6">The guide is in your inbox.</p>
-        <p id="hero-error" class="hidden text-white/40 text-sm mt-4">Something went wrong. Try again.</p>
-        <p class="text-white/20 text-xs tracking-wide mt-4">No spam. Unsubscribe anytime.</p>
+        <p id="hero-success" class="hidden text-[#0057FF] text-sm tracking-wide mt-6">Downloading now — train smart.</p>
+        <p id="hero-error" class="hidden text-[#0A0A0A]/40 text-sm mt-4">Something went wrong. Try again.</p>
+        <p class="text-[#0A0A0A]/20 text-xs tracking-wide mt-4">No spam. No follow-up. Just the protocol.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- Research Stats from the video -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20 border-t border-white/5">
+  <!-- Research Stats -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-20 border-t border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto w-full">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">The Research</p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[2px]">
         {stats.map(s => (
-          <div class="bg-[#111111] border border-white/5 p-10">
-            <p class="font-black text-white text-4xl leading-none mb-2">{s.num}</p>
+          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10">
+            <p class="font-black text-[#0A0A0A] text-4xl leading-none mb-2">{s.num}</p>
             <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">{s.label}</p>
-            <p class="text-white/35 text-xs leading-relaxed">{s.detail}</p>
+            <p class="text-[#0A0A0A]/35 text-xs leading-relaxed">{s.detail}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- What's inside -->
-  <section class="bg-[#0D0D0D] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+  <!-- What's inside: 4-Week Plan -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-24 border-t border-[#0A0A0A]/8">
     <div class="max-w-[720px] mx-auto w-full">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">System Architecture</p>
-      <h2 class="font-black text-white uppercase tracking-tighter mb-12"
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The 30-Day Plan</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-12"
         style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 0.9;">
-        What is inside.
+        Week by week.
       </h2>
-      <div class="flex flex-col gap-10">
-        <div class="border-t border-white/5 pt-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Layer 01 — Kinetic Bases</p>
-          <p class="text-white/50 text-sm leading-relaxed">Four bases. Steps. Galloping. Pivoting. Pendulum. Each one a mechanical input that trains the nervous system to generate floor-up power without cognitive overhead. 76% of your output begins here.</p>
+      <div class="flex flex-col gap-0 divide-y divide-[#0A0A0A]/8">
+        <div class="py-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Week 01 — Stance / Base</p>
+          <p class="text-[#0A0A0A] font-bold text-sm mb-2">Master Your Position</p>
+          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">10 min rhythm in stance · 10 min weight shifting · 10 min reset after punches · 10 min plank · 10 min hand positioning · 10 min slips/rolls. Stationary. No punches. Goal: stable, complete stance.</p>
         </div>
-        <div class="border-t border-white/5 pt-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Layer 02 — Drill Rounds</p>
-          <p class="text-white/50 text-sm leading-relaxed">56 structured rounds organized by distance management, angle creation, and exit lines. Usable for solo training, gym warmups, and mechanical correction. No partner required.</p>
+        <div class="py-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Week 02 — Footwork</p>
+          <p class="text-[#0A0A0A] font-bold text-sm mb-2">Stance + Movement</p>
+          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Footwork Blueprint drills 2–4x per week. Clean reps over more reps. Stop before form breaks. Goal: move without losing position.</p>
         </div>
-        <div class="border-t border-white/5 pt-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Layer 03 — Progression Structure</p>
-          <p class="text-white/50 text-sm leading-relaxed">30-day sequencing that builds kinetic integrity before layering complexity. The system does not skip foundations. Most fighters spend years fixing what this protocol installs in the first week.</p>
+        <div class="py-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Week 03 — Adding Punches</p>
+          <p class="text-[#0A0A0A] font-bold text-sm mb-2">Stance + Movement + Output</p>
+          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">3-min rounds: 1-2 orthodox, 1-2 southpaw, 2-3 combinations. Same on bag. Use breath. Use active rest. Goal: punch while balanced.</p>
+        </div>
+        <div class="py-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Week 04 — Integration</p>
+          <p class="text-[#0A0A0A] font-bold text-sm mb-2">Base by Default</p>
+          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">1-1-2 moving left/right · 1-1-1-2-3 moving left/right. Film yourself from the side. Flow over force. Goal: base holds under fatigue — automatic.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Daily Non-Negotiable -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-24 border-t border-[#0A0A0A]/8">
+    <div class="max-w-[720px] mx-auto w-full">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The Daily Non-Negotiable</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-8"
+        style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 0.9;">
+        5 minutes.<br/>Every day.<br/>Even rest days.
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-[2px] mb-10">
+        {['Stance Check', 'Engaging Feet Muscle', 'Balance Test', 'Light Shadowboxing — Emphasising Balance'].map(item => (
+          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 px-6 py-4">
+            <p class="text-[#0A0A0A]/50 text-xs tracking-wide">→ {item}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-[#0A0A0A]/20 text-xs leading-relaxed max-w-[480px]">
+        If you miss a day — continue. Don't restart. Progress compounds on consistency, not perfection.
+      </p>
+    </div>
+  </section>
+
   <!-- Who this is for -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-24 border-t border-[#0A0A0A]/8">
     <div class="max-w-[720px] mx-auto w-full">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Who this is for</p>
-      <h2 class="font-black text-white uppercase tracking-tighter mb-8"
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-8"
         style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 0.9;">
         The 17 who stayed.<br/>And the 83 who<br/>already know why.
       </h2>
-      <p class="text-white/50 text-sm leading-relaxed mb-6 max-w-[560px]">
+      <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-6 max-w-[560px]">
         The gym fragments you. Weight room here. Cardio there. Mobility app on your phone. Every modality trains one piece of you in isolation — but life never asks you to be fit in isolation.
       </p>
-      <p class="text-white/35 text-sm leading-relaxed max-w-[560px]">
-        This protocol is for the fighter who already understood that working harder on the wrong foundation produces more of the same. The foundation is the fix. Start here.
+      <p class="text-[#0A0A0A]/35 text-sm leading-relaxed max-w-[560px]">
+        You're building an asymmetrical body with tight shoulders and zero clarity. The house falls without the foundation. This protocol installs what takes most fighters years to fix — in the first week.
       </p>
     </div>
   </section>
@@ -135,16 +164,16 @@ const stats = [
   <!-- Scripture -->
   <section class="bg-[#0D1F1F] px-8 md:px-16 lg:px-24 py-24 border-t border-[#D4A373]/10">
     <div class="max-w-[720px] mx-auto w-full">
-      <p class="font-black text-white/10 uppercase tracking-tighter leading-[0.88] mb-6"
+      <p class="font-black text-[#0A0A0A]/10 uppercase tracking-tighter leading-[0.88] mb-6"
         style="font-size: clamp(1.5rem, 3.5vw, 2rem);">
         "I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."
       </p>
       <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-12">1 Corinthians 9:26–27</p>
       <div class="flex flex-col sm:flex-row gap-4">
-        <a href="/vault" class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+        <a href="/vault" class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
           Enter the Vault →
         </a>
-        <a href="/lever-audit" class="inline-flex items-center justify-center font-bold border border-white/15 text-white/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/50">
+        <a href="/lever-audit" class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/50">
           Find Your Leak →
         </a>
       </div>
@@ -152,10 +181,10 @@ const stats = [
   </section>
 
   <!-- Final CTA -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-24 border-t border-white/5">
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-24 border-t border-[#0A0A0A]/8">
     <div class="max-w-[720px] mx-auto w-full">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Access the Protocol</p>
-      <h2 class="font-black text-white uppercase tracking-tighter mb-10"
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-10"
         style="font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 0.9;">
         Start from<br/>the floor.
       </h2>
@@ -167,26 +196,42 @@ const stats = [
             id="footer-email"
             required
             placeholder="your@email.com"
-            class="flex-1 border border-white/15 bg-transparent px-5 py-4 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20"
+            class="flex-1 border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20"
           />
           <button
             type="submit"
             id="footer-submit"
-            class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black whitespace-nowrap"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap"
           >
-            Access the Protocol →
+            Download Free →
           </button>
         </form>
-        <p id="footer-success" class="hidden text-[#D4A373] text-sm tracking-wide mt-6">The protocol is in your inbox.</p>
-        <p id="footer-error" class="hidden text-white/40 text-sm mt-4">Something went wrong. Try again.</p>
-        <p class="text-white/20 text-xs tracking-wide mt-4">No spam. Unsubscribe anytime.</p>
+        <p id="footer-success" class="hidden text-[#0057FF] text-sm tracking-wide mt-6">Downloading now — train smart.</p>
+        <p id="footer-error" class="hidden text-[#0A0A0A]/40 text-sm mt-4">Something went wrong. Try again.</p>
+        <p class="text-[#0A0A0A]/20 text-xs tracking-wide mt-4">No spam. No follow-up. Just the protocol.</p>
       </div>
     </div>
   </section>
 </Layout>
 
 <script>
-  function wireForm(formId: string, emailId: string, submitId: string, successId: string, errorId: string) {
+  function triggerDownload(href: string, filename: string) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  function wireForm(
+    formId: string,
+    emailId: string,
+    submitId: string,
+    successId: string,
+    errorId: string,
+    defaultLabel: string
+  ) {
     const form = document.getElementById(formId) as HTMLFormElement | null;
     const submit = document.getElementById(submitId) as HTMLButtonElement | null;
     const success = document.getElementById(successId)!;
@@ -194,7 +239,7 @@ const stats = [
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
-      if (submit) { submit.disabled = true; submit.textContent = 'Sending...'; }
+      if (submit) { submit.disabled = true; submit.textContent = 'Preparing...'; }
       error.classList.add('hidden');
 
       const email = (document.getElementById(emailId) as HTMLInputElement).value.trim();
@@ -209,21 +254,20 @@ const stats = [
         if (body.success) {
           form?.classList.add('hidden');
           success.classList.remove('hidden');
+          triggerDownload('/pdfs/footwork-foundation.pdf', 'Footwork-Foundation-Thee-Rainers.pdf');
         } else { throw new Error(); }
       } catch {
         error.classList.remove('hidden');
-        if (submit) { submit.disabled = false; submit.textContent = 'Send the Guide →'; }
+        if (submit) { submit.disabled = false; submit.textContent = defaultLabel; }
       }
     });
   }
 
-  wireForm('hero-form', 'hero-email', 'hero-submit', 'hero-success', 'hero-error');
-  wireForm('footer-form', 'footer-email', 'footer-submit', 'footer-success', 'footer-error');
+  wireForm('hero-form', 'hero-email', 'hero-submit', 'hero-success', 'hero-error', 'Download Free →');
+  wireForm('footer-form', 'footer-email', 'footer-submit', 'footer-success', 'footer-error', 'Download Free →');
 
-  // Show error from redirect fallback
   const params = new URLSearchParams(window.location.search);
-  const errorCode = params.get('error');
-  if (errorCode) {
+  if (params.get('error')) {
     const el = document.getElementById('hero-error');
     if (el) { el.textContent = 'Something went wrong. Try again.'; el.classList.remove('hidden'); }
   }
