@@ -34,27 +34,36 @@ const levers = [
             Seven levers. Seven virtues. One operating standard. Enter your email and the audit downloads instantly — free.
           </p>
 
-          <!-- Inline lead form -->
+          <!-- Primary: Interactive Quiz -->
+          <div class="mb-6">
+            <a href="/lever-audit-quiz"
+              class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+              Take the Interactive Audit →
+            </a>
+            <p class="text-[#0A0A0A]/20 text-xs tracking-wide mt-3">7 questions · 3 minutes · instant score + PDF download</p>
+          </div>
+
+          <!-- Secondary: Direct PDF download -->
           <div id="audit-form-wrapper">
+            <p class="text-[#0A0A0A]/25 text-xs tracking-wide mb-3 uppercase tracking-widest">or download the PDF directly</p>
             <form id="audit-form" class="flex flex-col sm:flex-row gap-3 max-w-[480px]">
               <input
                 type="email"
                 id="audit-email"
                 required
                 placeholder="your@email.com"
-                class="flex-1 border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20"
+                class="flex-1 border border-[#0A0A0A]/10 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20"
               />
               <button
                 type="submit"
                 id="audit-submit"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap"
+                class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/20 text-[#0A0A0A]/40 bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/40 hover:text-[#0A0A0A]/70 whitespace-nowrap"
               >
-                Download Free →
+                Download PDF →
               </button>
             </form>
             <p id="audit-success" class="hidden text-[#0057FF] text-sm tracking-wide mt-6">Downloading now — find your leak.</p>
             <p id="audit-error" class="hidden text-[#0A0A0A]/40 text-sm tracking-wide mt-6">Something went wrong. Try again.</p>
-            <p class="text-[#0A0A0A]/20 text-xs tracking-wide mt-4">No spam. No follow-up. Just the audit.</p>
           </div>
         </div>
 
