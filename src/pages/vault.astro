@@ -1,296 +1,139 @@
 ---
 import Layout from '../layouts/Base.astro';
+
+const products = [
+  {
+    image: '/images/footworkbp_cover.png',
+    tag: 'Blueprint · Module 01',
+    title: 'Footwork Blueprint',
+    sub: 'Win Fights with Footwork',
+    desc: 'Full video breakdown. 56 drill rounds. 30-day progression. The base everything else runs on.',
+    price: '$47',
+    url: 'https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k',
+  },
+  {
+    image: '/images/shadowboxingbp_cover.jpg',
+    tag: 'Blueprint · Module 02',
+    title: 'Shadowboxing Blueprint',
+    sub: 'Turn Shadowboxing Into Real Boxing',
+    desc: 'Done-with-you session. Skill tests. Range control. The kinetic chain applied in motion.',
+    price: '$47',
+    url: 'https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l',
+  },
+  {
+    image: '/images/bundle_cover.png',
+    tag: 'Bundle · Best Value',
+    title: 'Both Blueprints',
+    sub: '100+ Rounds · Full System',
+    desc: 'Footwork + Shadowboxing. Complete operating system. Monthly Live Q&A included.',
+    price: '$87',
+    url: 'https://buy.stripe.com/14A4gz59hgxUaa65006J20m',
+  },
+];
 ---
-<Layout title="Vault — System Assets | Thee Rainers">
-  <Fragment slot="head">
-    <meta name="description" content="Systemic performance blueprints. Footwork, shadowboxing, and the complete operating system for fighters who think in structures — not reps." />
-  </Fragment>
+<Layout title="Blueprints — Thee Rainers" description="Step-by-step systems built for boxing. Better training for better results.">
 
-  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-20">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <div class="mb-20">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The System</p>
-        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">Greatness<br/>is engineered.</h1>
-        <p class="text-[#0A0A0A]/40 text-base max-w-[480px] leading-relaxed">Three entry points. One system. Built for fighters who think in structures, not sessions.</p>
+  <section class="bg-white px-6 md:px-12 lg:px-20 pt-28 md:pt-36 pb-20">
+    <div class="max-w-[1100px] mx-auto">
+
+      <!-- Header — tight, direct -->
+      <div class="mb-10">
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.88]">Better Training<br/>for Better Results.</h1>
+        <p class="text-[#0A0A0A]/45 text-sm mt-4">Step-by-step systems built for boxing.</p>
       </div>
-    </div>
-  </section>
 
-  <!-- ── BLOCK 01: FOUNDATIONS (Free) ─────────────────────────────────── -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 pb-4">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Block 01 — Foundations · Free Baseline</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-[2px]">
-
-        <!-- Footwork Foundation -->
-        <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#D4A373]/20 transition-colors duration-300 p-10 flex flex-col justify-between group">
-          <div>
-            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase">Free · Entry Protocol</span>
-            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter mt-3 mb-4 text-2xl md:text-3xl leading-[0.88]">Footwork<br/>Foundation</h2>
-            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[380px]">Four kinetic bases. 56 drill rounds. 30-day progression. The mechanical platform that everything else runs on. Free. No catch.</p>
-          </div>
-          <div class="mt-10 flex items-center justify-between">
-            <span class="text-[#0A0A0A]/30 font-bold text-lg tracking-wide">Free</span>
-            <a href="/footwork-foundation"
-              class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
-              Get the Protocol →
-            </a>
-          </div>
-        </div>
-
-        <!-- 7-Lever Audit -->
-        <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#D4A373]/20 transition-colors duration-300 p-10 flex flex-col justify-between group">
-          <div>
-            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase">Free · Diagnostic</span>
-            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter mt-3 mb-4 text-2xl md:text-3xl leading-[0.88]">7-Lever<br/>Audit</h2>
-            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[380px]">Find the leak before it costs you the fight. Map your performance gaps across all seven levers — cue reading, kinetic chain, reactive stiffness, and four more.</p>
-          </div>
-          <div class="mt-10 flex items-center justify-between">
-            <span class="text-[#0A0A0A]/30 font-bold text-lg tracking-wide">Free</span>
-            <a href="/lever-audit"
-              class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
-              Find Your Leak →
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── BLOCK 02: THE SYSTEM (Paid Blueprints) ────────────────────────── -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-4">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Block 02 — The System · Blueprints</p>
-      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-[2px]">
-
-        <!-- Left 60%: Bundle — Flagship -->
-        <div class="bg-[#0D1F1F] border border-[#D4A373]/20 hover:border-[#D4A373]/55 transition-colors duration-300 p-12 md:p-16 flex flex-col justify-between min-h-[540px] group">
-          <div class="flex gap-8">
-            <div class="flex-1">
-              <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">Complete System · Best Value</span>
-              <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">The Rainers<br/>Bundle</h2>
-              <p class="text-white/50 text-sm leading-relaxed max-w-[380px] mb-10">Footwork + Shadowboxing. 106 drill rounds. The complete operating system — spatial geometry and kinetic chain trained in sequence. Not sold separately at this price.</p>
-              <div class="flex flex-col gap-3">
-                <p class="text-white/25 text-[10px] tracking-widest uppercase mb-2">Includes</p>
-                <p class="text-white/50 text-sm">— Everything in the Footwork Blueprint</p>
-                <p class="text-white/50 text-sm">— Everything in the Shadowboxing Blueprint</p>
-                <p class="text-white/50 text-sm">— Spatial geometry and kinetic chain trained in sequence</p>
-                <p class="text-white/50 text-sm">— A self-sufficient system operable without a coach present</p>
-                <p class="text-[#D4A373] text-sm">— Monthly Live Q&A access</p>
+      <!-- 3-column product cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {products.map(p => (
+          <div class="border border-[#0A0A0A]/10 flex flex-col group hover:border-[#0057FF]/40 transition-colors duration-200">
+            <!-- Cover image -->
+            <div class="bg-[#F6F6F6] overflow-hidden">
+              <img src={p.image} alt={p.title}
+                class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
+            </div>
+            <!-- Card body -->
+            <div class="p-5 flex flex-col flex-1">
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">{p.tag}</p>
+              <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-1">{p.title}</h2>
+              <p class="text-[#0A0A0A]/50 text-xs mb-3 font-bold">{p.sub}</p>
+              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">{p.desc}</p>
+              <div class="mt-5 flex items-center justify-between">
+                <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
+                <a href={p.url} target="_blank"
+                  class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+                  Buy Now →
+                </a>
               </div>
             </div>
-            <div class="hidden md:block w-32 shrink-0 self-start mt-8">
-              <img src="/images/blueprint-cover.png" alt="The Rainers Blueprint" class="w-full object-contain opacity-80" />
-            </div>
           </div>
-          <div class="mt-12 flex items-center justify-between">
-            <span class="text-white font-black text-4xl">$87</span>
-            <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank"
-              class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
-              Secure Checkout →
-            </a>
-          </div>
-        </div>
-
-        <!-- Right 40%: Individual Blueprints -->
-        <div class="flex flex-col gap-[2px]">
-
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#D4A373]/20 transition-colors duration-300 p-10 flex flex-col justify-between flex-1 group">
-            <div>
-              <span class="text-[#0A0A0A]/30 text-[11px] tracking-widest uppercase">Blueprint · Module 01</span>
-              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Footwork<br/>Blueprint</h3>
-              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed mb-3">56 rounds. The four bases. Distance, angles, exits. The platform everything else runs on.</p>
-              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">+ Monthly Q&A</p>
-            </div>
-            <div class="flex items-center justify-between mt-8">
-              <span class="text-[#0A0A0A]/60 font-bold text-lg">$47</span>
-              <a href="https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k" target="_blank"
-                class="blue-btn inline-flex items-center justify-center font-bold border border-[#0057FF]/40 text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0057FF] hover:bg-[#0057FF] hover:text-white">
-                Buy Now →
-              </a>
-            </div>
-          </div>
-
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#D4A373]/20 transition-colors duration-300 p-10 flex flex-col justify-between flex-1 group">
-            <div>
-              <span class="text-[#0A0A0A]/30 text-[11px] tracking-widest uppercase">Blueprint · Module 02</span>
-              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-3 text-xl leading-tight">Shadowboxing<br/>Blueprint</h3>
-              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed mb-3">Skill tests, rhythm, range control. The kinetic chain applied in motion without external pressure.</p>
-              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">+ Monthly Q&A</p>
-            </div>
-            <div class="flex items-center justify-between mt-8">
-              <span class="text-[#0A0A0A]/60 font-bold text-lg">$47</span>
-              <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l" target="_blank"
-                class="blue-btn inline-flex items-center justify-center font-bold border border-[#0057FF]/40 text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0057FF] hover:bg-[#0057FF] hover:text-white">
-                Buy Now →
-              </a>
-            </div>
-          </div>
-
-        </div>
+        ))}
       </div>
-    </div>
-  </section>
 
-  <!-- ── BLOCK 03: LIVE CALIBRATION ────────────────────────────────────── -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-4">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Block 03 — Live Calibration · Workshop & Q&A</p>
-      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-[2px]">
+      <!-- Workshop + Q&A row — live offers -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
 
-        <!-- Workshop — Flagship of block -->
-        <div class="bg-[#0D1F1F] border border-[#D4A373]/20 hover:border-[#D4A373]/55 transition-colors duration-300 p-12 md:p-16 flex flex-col justify-between min-h-[400px] group">
+        <div class="border border-[#D4A373]/30 bg-[#0A0A0A] p-8 flex flex-col justify-between group hover:border-[#D4A373]/60 transition-colors duration-200">
           <div>
-            <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">Live · June 27 · 90 Minutes</span>
-            <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">The<br/>Calibration</h2>
-            <p class="text-white/50 text-sm leading-relaxed max-w-[380px]">Camera on. Real-time correction on your actual movement. The mechanical structure to hit, exit, and reset — live, not recorded.</p>
-            <div class="flex flex-col gap-3 mt-8">
-              <p class="text-white/50 text-sm">— Foundation: the four mechanical bases (30 min)</p>
-              <p class="text-white/50 text-sm">— Application: live drilling, camera on, real-time correction (45 min)</p>
-              <p class="text-white/50 text-sm">— Integration: your 30-day written progression (15 min)</p>
-              <p class="text-[#D4A373] text-sm">— Full recording within 24 hours</p>
-            </div>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Live · June 27 · 90 min</p>
+            <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-3">The Calibration</h2>
+            <p class="text-white/40 text-xs leading-relaxed">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset.</p>
           </div>
-          <div class="mt-12 flex items-center justify-between">
-            <span class="text-white font-black text-4xl">$197</span>
+          <div class="flex items-center justify-between mt-8">
+            <span class="font-black text-white text-2xl">$197</span>
             <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
-              class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
-              Reserve Your Seat →
+              class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+              Reserve Seat →
             </a>
           </div>
         </div>
 
-        <div class="flex flex-col gap-[2px]">
-
-          <!-- Workshop Replay -->
-          <div class="bg-white border border-[#0A0A0A]/8 hover:border-[#0057FF]/30 transition-colors duration-300 p-10 flex flex-col justify-between group flex-1">
-            <div>
-              <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">On Demand · Full Recording</span>
-              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-4 text-xl leading-tight">Workshop<br/>Replay</h3>
-              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">90 minutes. Footwork, stance, punch mechanics, defensive structure. Watch before June 27 — arrive knowing the framework.</p>
-            </div>
-            <div class="mt-8 flex items-center justify-between">
-              <span class="font-black text-[#0A0A0A] text-2xl">$47</span>
-              <a href="/workshop-replay"
-                class="inline-flex items-center gap-2 text-[#0A0A0A]/40 text-xs font-bold tracking-widest uppercase hover:text-[#0057FF] transition-colors duration-200">
-                View →
-              </a>
-            </div>
+        <div class="border border-[#0A0A0A]/10 bg-[#F6F6F6] p-8 flex flex-col justify-between group hover:border-[#0057FF]/30 transition-colors duration-200">
+          <div>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">On Demand · Full Recording</p>
+            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-2xl leading-tight mb-3">Workshop Replay</h2>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">90 minutes. Footwork, stance, punch mechanics, defensive structure. Instant access after checkout.</p>
           </div>
-
-          <!-- Q&A -->
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#D4A373]/20 transition-colors duration-300 p-10 flex flex-col justify-between group flex-1">
-            <div>
-              <span class="text-[#0A0A0A]/30 text-[11px] tracking-widest uppercase">Included · Every Paid Product</span>
-              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-4 text-xl leading-tight">Monthly<br/>Live Q&A</h3>
-              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6">One hour. One Saturday per month. You bring the problem — mechanical, perceptual, or existential. We apply the operating system to it in real time.</p>
-              <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"Iron sharpens iron, and one man sharpens another." — Proverbs 27:17</p>
-            </div>
-            <div class="mt-10">
-              <a href="/qa"
-                class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/35 bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/55 w-full">
-                Learn More →
-              </a>
-            </div>
+          <div class="flex items-center justify-between mt-8">
+            <span class="font-black text-[#0A0A0A] text-2xl">$47</span>
+            <a href="/workshop-replay"
+              class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+              Get Replay →
+            </a>
           </div>
-
         </div>
 
       </div>
-    </div>
-  </section>
 
-  <!-- ── CROSS-LINKS ──────────────────────────────────────────────────── -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-16 mt-8">
-    <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-      <div>
-        <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-3">Not sure where to start?</p>
-        <p class="text-white/40 text-sm max-w-[440px] leading-relaxed">The Library explains the system. The Vault is the entry point. Start free — everything compounds from there.</p>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-4 shrink-0">
-        <a href="/footwork-foundation"
-          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
-          Start Free →
-        </a>
-        <a href="/library"
-          class="inline-flex items-center justify-center font-bold border border-white/15 text-white/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/60 whitespace-nowrap">
-          Watch the Library →
+      <!-- PA strip -->
+      <div class="mt-4 border border-[#6A0DAD]/20 bg-[#0A0A0A] p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 group hover:border-[#6A0DAD]/50 transition-colors duration-200">
+        <div>
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Application Only · 1 of 1</p>
+          <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-2">Private Architecture</h2>
+          <p class="text-white/35 text-xs max-w-[500px] leading-relaxed">No templates. No cohorts. A system engineered entirely around your fight, your body, your mind.</p>
+        </div>
+        <a href="/command"
+          class="shrink-0 inline-flex items-center justify-center font-bold border-2 border-[#6A0DAD] text-[#6A0DAD] bg-transparent px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#6A0DAD] hover:text-white transition-all duration-200 whitespace-nowrap">
+          Apply →
         </a>
       </div>
-    </div>
-  </section>
 
-  <!-- ── SEO / GEO Anchor ──────────────────────────────────────────────── -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-20 border-t border-[#0A0A0A]/8 mt-8">
-    <div class="max-w-[1280px] mx-auto w-full grid grid-cols-1 md:grid-cols-3 gap-12">
-      <div>
-        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Systemic Performance</p>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">Every blueprint is a component of a larger system. The goal is not to complete the drill. The goal is to automate the pattern under pressure.</p>
-      </div>
-      <div>
-        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Autonomic Regulation</p>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">When the nervous system is trained correctly, execution becomes autonomous. That is the difference between a fighter who performs and one who survives.</p>
-      </div>
-      <div>
-        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">1 of 1 Output</p>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">These blueprints are the entry point. The ceiling is Private Architecture — a system built entirely around your mechanics. <a href="/command" class="text-[#D4A373] hover:opacity-60 transition-opacity duration-200">Apply here.</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── The Backbone ──────────────────────────────────────────────────── -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-24 border-t border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto w-full">
-
-      <div class="mb-16">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The Foundation</p>
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] max-w-[480px]">Seven virtues.<br/>Seven levers.<br/>One system.</h2>
-      </div>
-
-      <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
-        <div class="grid grid-cols-[1fr_1fr_1fr] py-8 items-start gap-6 tr-card">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Diligence</p>
-          <p class="text-[#0A0A0A]/50 text-sm">Cue Reading</p>
-          <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"Watch and pray" — Mt 26:41</p>
-        </div>
-        <div class="grid grid-cols-[1fr_1fr_1fr] py-8 items-start gap-6 tr-card">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Chastity</p>
-          <p class="text-[#0A0A0A]/50 text-sm">Kinetic Chain</p>
-          <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"Whatever you do, work at it with all your heart" — Col 3:23</p>
-        </div>
-        <div class="grid grid-cols-[1fr_1fr_1fr] py-8 items-start gap-6 tr-card">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Fortitude</p>
-          <p class="text-[#0A0A0A]/50 text-sm">Reactive Stiffness</p>
-          <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"They will run and not grow weary" — Is 40:31</p>
-        </div>
-        <div class="grid grid-cols-[1fr_1fr_1fr] py-8 items-start gap-6 tr-card">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Temperance</p>
-          <p class="text-[#0A0A0A]/50 text-sm">Range Fluency</p>
-          <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"I have become all things to all people" — 1 Cor 9:22</p>
-        </div>
-        <div class="grid grid-cols-[1fr_1fr_1fr] py-8 items-start gap-6 tr-card">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Justice</p>
-          <p class="text-[#0A0A0A]/50 text-sm">Defensive Responsibility</p>
-          <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"Put on the full armor of God" — Eph 6:11–13</p>
-        </div>
-        <div class="grid grid-cols-[1fr_1fr_1fr] py-8 items-start gap-6 tr-card">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Faith</p>
-          <p class="text-[#0A0A0A]/50 text-sm">Transfer to Live</p>
-          <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"Be doers of the word, not hearers only" — Jas 1:22</p>
-        </div>
-        <div class="grid grid-cols-[1fr_1fr_1fr] py-8 items-start gap-6 tr-card">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Humility</p>
-          <p class="text-[#0A0A0A]/50 text-sm">Identity & Presence</p>
-          <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"I have fought the good fight, I have finished the race" — 2 Tim 4:7</p>
-        </div>
-      </div>
-
-      <div class="mt-20 border-t border-[#0A0A0A]/8 pt-16">
-        <p class="font-black text-[#0A0A0A]/10 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] max-w-[640px]">"I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."</p>
-        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mt-6">1 Corinthians 9:26–27</p>
+      <!-- Start free nudge -->
+      <div class="mt-10 pt-10 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <p class="text-[#0A0A0A]/30 text-sm">Not ready to buy? The foundation protocol is free.</p>
+        <a href="/foundation-guide" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Protocol →</a>
       </div>
 
     </div>
   </section>
+
+  <!-- Scripture -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20">
+    <div class="max-w-[680px] mx-auto">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/10 text-2xl md:text-3xl mb-4">
+        "I do not run aimlessly. I do not box as one beating the air."
+      </p>
+      <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:26–27</p>
+    </div>
+  </section>
+
 </Layout>

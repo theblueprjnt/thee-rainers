@@ -1,0 +1,109 @@
+---
+import LinkPage from '../layouts/LinkPage.astro';
+---
+<LinkPage title="30-Day Footwork Foundation — Thee Rainers">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="Free 30-day footwork protocol. Build the base everything else runs on." />
+  </Fragment>
+
+  <div class="max-w-[480px] mx-auto px-6 py-16 flex flex-col gap-10">
+
+    <!-- Identity -->
+    <div class="flex flex-col items-center gap-2 text-center">
+      <a href="/"><img src="/images/logo-trb.png" alt="Thee Rainers" class="h-9 w-auto" /></a>
+      <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Free · 30-Day Protocol</p>
+    </div>
+
+    <!-- Headline -->
+    <div class="text-center">
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl leading-[0.88] mb-4">
+        The Foundation<br/>Protocol
+      </h1>
+      <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">
+        Before technique transfers, the platform has to hold. Stance. Weight distribution. Kinetic chain. 30 days to build what most fighters never had.
+      </p>
+    </div>
+
+    <!-- Why it matters -->
+    <div class="flex flex-col gap-3">
+      <div class="border-l-2 border-[#D4A373] pl-4">
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-1">Kinetic Integrity</p>
+        <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">76% of punch power originates at the floor. A broken base means broken power — no matter how hard you train.</p>
+      </div>
+      <div class="border-l-2 border-[#D4A373] pl-4">
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-1">Autonomic Regulation</p>
+        <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">Drilling builds patterns. Correct patterns automate under pressure. This protocol installs the correct ones.</p>
+      </div>
+      <div class="border-l-2 border-[#D4A373] pl-4">
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-1">Zero Equipment</p>
+        <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">30 days. No gym required. The work is mechanical — your body is the equipment.</p>
+      </div>
+    </div>
+
+    <!-- Email capture -->
+    <div>
+      <p class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase mb-5 text-center">Enter your email. Protocol downloads instantly.</p>
+      <form id="fg-form" class="flex flex-col gap-3">
+        <input type="email" id="fg-email" required placeholder="your@email.com"
+          class="border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20 text-center" />
+        <button type="submit" id="fg-submit"
+          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200">
+          Get the Free Protocol →
+        </button>
+      </form>
+      <p id="fg-success" class="hidden text-[#0057FF] text-sm tracking-wide mt-5 text-center">Your protocol is downloading — Day 1 starts when you decide.</p>
+      <p id="fg-error" class="hidden text-[#0A0A0A]/40 text-sm tracking-wide mt-5 text-center">Something went wrong. Try again.</p>
+      <p class="text-[#0A0A0A]/15 text-[10px] tracking-wide mt-4 text-center">Your email. Nothing else.</p>
+    </div>
+
+    <!-- Scripture -->
+    <p class="text-[#0A0A0A]/12 text-[10px] tracking-widest uppercase text-center">
+      1 Corinthians 9:26–27
+    </p>
+
+  </div>
+</LinkPage>
+
+<script>
+  function triggerDownload(href: string, filename: string) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  const form = document.getElementById('fg-form') as HTMLFormElement;
+  const success = document.getElementById('fg-success')!;
+  const error = document.getElementById('fg-error')!;
+  const submit = document.getElementById('fg-submit') as HTMLButtonElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    submit.disabled = true;
+    submit.textContent = 'Preparing...';
+    error.classList.add('hidden');
+
+    const email = (document.getElementById('fg-email') as HTMLInputElement).value.trim();
+
+    try {
+      const res = await fetch('/api/lead-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'foundation-guide', full_name: '' }),
+      });
+      const body = await res.json() as { success: boolean };
+      if (body.success) {
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+        triggerDownload('/pdfs/footwork-foundation.pdf', '30-Day-Footwork-Foundation-Thee-Rainers.pdf');
+      } else { throw new Error(); }
+    } catch {
+      error.classList.remove('hidden');
+      submit.disabled = false;
+      submit.textContent = 'Get the Free Protocol →';
+    }
+  });
+</script>
