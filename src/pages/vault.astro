@@ -156,20 +156,40 @@ import Layout from '../layouts/Base.astro';
           </div>
         </div>
 
-        <!-- Q&A -->
-        <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#D4A373]/20 transition-colors duration-300 p-10 flex flex-col justify-between group">
-          <div>
-            <span class="text-[#0A0A0A]/30 text-[11px] tracking-widest uppercase">Included · Every Paid Product</span>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-4 text-xl leading-tight">Monthly<br/>Live Q&A</h3>
-            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6">One hour. One Saturday per month. You bring the problem — mechanical, perceptual, or existential. We apply the operating system to it in real time.</p>
-            <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"Iron sharpens iron, and one man sharpens another." — Proverbs 27:17</p>
+        <div class="flex flex-col gap-[2px]">
+
+          <!-- Workshop Replay -->
+          <div class="bg-white border border-[#0A0A0A]/8 hover:border-[#0057FF]/30 transition-colors duration-300 p-10 flex flex-col justify-between group flex-1">
+            <div>
+              <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">On Demand · Full Recording</span>
+              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-4 text-xl leading-tight">Workshop<br/>Replay</h3>
+              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">90 minutes. Footwork, stance, punch mechanics, defensive structure. Watch before June 27 — arrive knowing the framework.</p>
+            </div>
+            <div class="mt-8 flex items-center justify-between">
+              <span class="font-black text-[#0A0A0A] text-2xl">$47</span>
+              <a href="/workshop-replay"
+                class="inline-flex items-center gap-2 text-[#0A0A0A]/40 text-xs font-bold tracking-widest uppercase hover:text-[#0057FF] transition-colors duration-200">
+                View →
+              </a>
+            </div>
           </div>
-          <div class="mt-10">
-            <a href="/qa"
-              class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/35 bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-white/55 w-full">
-              Learn More →
-            </a>
+
+          <!-- Q&A -->
+          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#D4A373]/20 transition-colors duration-300 p-10 flex flex-col justify-between group flex-1">
+            <div>
+              <span class="text-[#0A0A0A]/30 text-[11px] tracking-widest uppercase">Included · Every Paid Product</span>
+              <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight mt-3 mb-4 text-xl leading-tight">Monthly<br/>Live Q&A</h3>
+              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6">One hour. One Saturday per month. You bring the problem — mechanical, perceptual, or existential. We apply the operating system to it in real time.</p>
+              <p class="text-[#0A0A0A]/25 text-xs leading-relaxed italic">"Iron sharpens iron, and one man sharpens another." — Proverbs 27:17</p>
+            </div>
+            <div class="mt-10">
+              <a href="/qa"
+                class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/35 bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/55 w-full">
+                Learn More →
+              </a>
+            </div>
           </div>
+
         </div>
 
       </div>
