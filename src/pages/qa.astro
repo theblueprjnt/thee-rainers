@@ -20,9 +20,36 @@ import Layout from '../layouts/Base.astro';
           <p class="text-white/35 text-sm leading-relaxed mb-14 max-w-[480px]">
             One hour. One Saturday per month. No fluff, no performance, no upsell. You show up with a problem. We apply the operating system to it — live. Included with any Vault product or Workshop.
           </p>
-          <a href="/vault" class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black self-start">
-            Get Access via the Vault →
-          </a>
+          <!-- Quality Filter Form -->
+          <div class="border border-white/5 bg-[#111111] p-8 max-w-[480px]">
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-6">Register for Next Session</p>
+            <form id="qa-form" class="flex flex-col gap-4">
+              <input
+                type="email"
+                id="qa-email"
+                required
+                placeholder="your@email.com"
+                class="border border-white/15 bg-transparent px-5 py-4 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20"
+              />
+              <input
+                type="tel"
+                id="qa-phone"
+                required
+                placeholder="your phone number"
+                class="border border-white/15 bg-transparent px-5 py-4 text-white text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-white/20"
+              />
+              <button
+                type="submit"
+                id="qa-submit"
+                class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black"
+              >
+                Register →
+              </button>
+            </form>
+            <p id="qa-success" class="hidden text-[#D4A373] text-sm tracking-wide mt-4">You're registered. See you on Saturday.</p>
+            <p id="qa-error" class="hidden text-white/40 text-sm mt-4">Something went wrong. Try again.</p>
+            <p class="text-white/20 text-xs tracking-wide mt-4">Phone is for accountability — not spam.</p>
+          </div>
         </div>
 
         <div class="flex flex-col gap-[2px]">
@@ -63,3 +90,35 @@ import Layout from '../layouts/Base.astro';
     </div>
   </section>
 </Layout>
+
+<script>
+  const form = document.getElementById('qa-form') as HTMLFormElement | null;
+  const submit = document.getElementById('qa-submit') as HTMLButtonElement | null;
+  const success = document.getElementById('qa-success')!;
+  const error = document.getElementById('qa-error')!;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (submit) { submit.disabled = true; submit.textContent = 'Registering...'; }
+    error.classList.add('hidden');
+
+    const email = (document.getElementById('qa-email') as HTMLInputElement).value.trim();
+    const phone = (document.getElementById('qa-phone') as HTMLInputElement).value.trim();
+
+    try {
+      const res = await fetch('/api/lead-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, phone, source: 'qa-registration', full_name: '' }),
+      });
+      const body = await res.json() as { success: boolean };
+      if (body.success) {
+        form?.classList.add('hidden');
+        success.classList.remove('hidden');
+      } else { throw new Error(); }
+    } catch {
+      error.classList.remove('hidden');
+      if (submit) { submit.disabled = false; submit.textContent = 'Register →'; }
+    }
+  });
+</script>

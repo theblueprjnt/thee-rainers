@@ -3,23 +3,41 @@ import Layout from '../layouts/Base.astro';
 ---
 <Layout title="Thee Rainers — Engineered for the ring.">
 
-  <!-- HERO: Full-bleed cinematic -->
-  <section class="relative w-full h-screen overflow-hidden">
-    <img
-      src="/images/coldfightpic2.jpg"
-      alt="Thee Rainers — in the ring"
-      class="absolute inset-0 w-full h-full object-cover object-center hero-matte"
-      width="1240"
-      height="1860"
-    />
-    <div class="hero-overlay absolute inset-0"></div>
-    <div class="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 lg:px-24 max-w-[620px]">
-      <h1 class="font-black text-brand-light uppercase tracking-tighter mb-8 text-5xl md:text-7xl leading-[0.8]">Engineered<br/>for the ring.</h1>
-      <p class="text-brand-light/60 mb-10 max-w-[420px] text-base leading-relaxed">Your ambition is ahead of your gym. This closes that gap.</p>
-      <div>
-        <a href="/footwork-foundation" class="inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:bg-[#D4A373] hover:text-black">Enter the System</a>
+  <!-- HERO: 60/40 Command Grid -->
+  <section class="w-full h-screen overflow-hidden grid grid-cols-1 md:grid-cols-[60%_40%]">
+
+    <!-- Left 60%: Mission -->
+    <div class="bg-[#0A0A0A] flex flex-col justify-center px-8 md:px-16 lg:px-24 relative z-10">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Systemic Boxing Performance</p>
+      <h1 class="font-black text-white uppercase tracking-tighter mb-8"
+        style="font-size: clamp(3rem, 7vw, 5rem); line-height: 0.8;">
+        Engineered<br/>for the ring.
+      </h1>
+      <p class="text-white/60 mb-10 max-w-[420px] text-base leading-relaxed">
+        Your ambition is ahead of your gym. This closes that gap.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/footwork-foundation"
+          class="inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:bg-[#D4A373] hover:text-black">
+          Enter the System
+        </a>
+        <a href="/vault"
+          class="inline-flex items-center justify-center font-bold transition-all duration-200 cursor-pointer no-underline border border-white/15 text-white/35 bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:border-white/30 hover:text-white/55">
+          View Products
+        </a>
       </div>
     </div>
+
+    <!-- Right 40%: Subject (You) — the anchor -->
+    <div class="hidden md:block relative overflow-hidden">
+      <img
+        src="/images/rainers-portrait.jpg"
+        alt="Thee Rainers"
+        class="absolute inset-0 w-full h-full object-cover object-top"
+        style="mask-image: linear-gradient(to right, transparent 0%, black 28%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%);"
+      />
+    </div>
+
   </section>
 
   <!-- TRUTH THRESHOLD: The Gate -->

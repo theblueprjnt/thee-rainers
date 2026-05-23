@@ -120,10 +120,36 @@ const archive = videos.filter(v => !v.featured);
               class="absolute inset-0 w-full h-full"
             ></iframe>
           </div>
-          <div class="flex flex-col justify-center">
-            <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">{featured.label}</p>
-            <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.85] mb-6">{featured.title}</h2>
-            <p class="text-white/40 text-sm leading-relaxed">{featured.description}</p>
+
+          <!-- System Summary Sidebar -->
+          <div class="flex flex-col bg-[#111111] border border-white/5 p-8 gap-0">
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-6">System Summary · 3-Layer OS</p>
+
+            <div class="border-t border-white/5 pt-6 pb-6">
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 01 — Perceptual</p>
+              <p class="text-white/40 text-xs leading-relaxed">Cue reading, pattern recognition, distance management. The fighter who sees first controls everything after. Diligence made physical.</p>
+            </div>
+
+            <div class="border-t border-white/5 pt-6 pb-6">
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 02 — Mechanical</p>
+              <p class="text-white/40 text-xs leading-relaxed">Kinetic chain, reactive stiffness, range fluency. 76% of punch power originates at the floor. The body is the system — not the arm, not the gym.</p>
+            </div>
+
+            <div class="border-t border-white/5 pt-6 pb-6">
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 03 — Existential</p>
+              <p class="text-white/40 text-xs leading-relaxed">Identity, presence, internal standard. Mechanics trained in drilling dissolve under pressure when Layer 3 is missing. This is where virtue meets performance.</p>
+            </div>
+
+            <div class="border-t border-white/5 pt-6 flex flex-col gap-3">
+              <a href="/footwork-foundation"
+                class="inline-flex items-center justify-center font-bold border-2 border-[#D4A373] text-[#D4A373] bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#D4A373] hover:text-black">
+                Start the Foundation →
+              </a>
+              <a href="/vault"
+                class="inline-flex items-center justify-center font-bold border border-white/15 text-white/30 bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-white/30 hover:text-white/50">
+                Get the System →
+              </a>
+            </div>
           </div>
         </div>
       )}
