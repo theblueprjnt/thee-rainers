@@ -1,237 +1,63 @@
 ---
-import Base from '../layouts/Base.astro';
-import Button from '../components/primitives/Button.astro';
+import Layout from '../layouts/Base.astro';
 import Rule from '../components/primitives/Rule.astro';
-
-const WORKSHOP_URL = 'https://buy.stripe.com/7sY28r8lt1D06XU6446J20n';
 ---
-
-<Base
-  title="Thee Rainers — Boxing built on structure, not exhaustion."
-  description="Technical boxing coaching for fighters who want to operate with structure, not just survive rounds."
->
-
-  <!-- ── 1. HERO — full-bleed ───────────────────────────────────── -->
+<Layout title="Thee Rainers — Boxing built on structure, not exhaustion.">
   <div class="relative" style="height: 88vh; min-height: 520px;">
-    <img
-      src="/images/rainers-hero.jpg"
-      alt="Rainers in the gym"
-      class="absolute inset-0 w-full h-full object-cover object-center"
-      width="1440"
-      height="900"
-    />
-    <div class="absolute inset-0" style="background-color: rgba(30, 58, 95, 0.55);"></div>
+    <img src="/images/rainers-hero.jpg" alt="Rainers in the gym" class="absolute inset-0 w-full h-full object-cover object-center" width="1440" height="900" />
+    <div class="absolute inset-0 bg-navy/55"></div>
     <div class="relative h-full flex items-center">
       <div class="mx-auto px-6 w-full max-w-[960px]">
-        <h1
-          class="font-bold text-white mb-5"
-          style="font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.05;"
-        >
-          Composure is a physical state.
-        </h1>
-        <p
-          class="text-white/80 mb-8 max-w-[540px] leading-[1.55]"
-          style="font-size: var(--font-size-body);"
-        >
-          Calm is not a personality. It is knowing where you are when it gets fast.
-        </p>
-        <Button href={WORKSHOP_URL} variant="primary">Step into the ring</Button>
+        <h1 class="font-bold text-white mb-5 text-5xl md:text-6xl leading-[1.05]">Composure is a physical state.</h1>
+        <p class="text-white/80 mb-8 max-w-[540px] text-lg leading-[1.55]">Calm is not a personality. It is knowing where you are when it gets fast.</p>
+        <a href="/footwork-foundation" class="inline-flex items-center justify-center font-semibold transition-all duration-200 cursor-pointer no-underline bg-terracotta text-white px-8 py-3.5 text-sm tracking-wide hover:opacity-90 active:opacity-80">Get the Free Blueprint</a>
       </div>
     </div>
   </div>
 
-  <!-- ── 2. PROOF — thin band ──────────────────────────────────── -->
   <div class="bg-cream py-5">
     <div class="mx-auto px-6 w-full max-w-[960px] text-center">
-      <p
-        class="text-muted tracking-widest"
-        style="font-size: var(--font-size-small); font-variant: small-caps;"
-      >
-        Over 120 fighters coached. Riga, Latvia.
-      </p>
+      <p class="text-muted tracking-widest text-xs uppercase">Over 120 fighters coached. Riga, Latvia.</p>
     </div>
   </div>
 
-  <!-- ── 3. THE PROBLEM ────────────────────────────────────────── -->
-  <section class="bg-bg py-16 md:py-20">
-    <div class="mx-auto px-6 w-full max-w-[640px]">
-      <Rule class="mb-10" />
-      <h2
-        class="font-bold text-navy mb-6"
-        style="font-size: var(--font-size-h2); line-height: 1.2;"
-      >
-        Most fighters are taught to brawl.
-      </h2>
-      <p class="text-ink leading-[1.65] mb-5" style="font-size: var(--font-size-body);">
-        They get pushed until the form falls apart, then told to push harder.
-        More rounds, more sweat, less thinking. You end up fit, tired, and still flinching.
-      </p>
-      <p class="text-ink leading-[1.65]" style="font-size: var(--font-size-body);">
-        The skill nobody teaches is reading what is in front of you. Where the feet are,
-        where the gap is, when to leave. Once you see it, the panic stops.
-      </p>
-    </div>
-  </section>
-
-  <!-- ── 4. THE WORK ───────────────────────────────────────────── -->
-  <section class="bg-cream py-16 md:py-20">
+  <section class="bg-bg py-16 md:py-20" id="paths">
     <div class="mx-auto px-6 w-full max-w-[960px]">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-        <div class="overflow-hidden">
-          <img
-            src="/images/rainers-coaching.jpg"
-            alt="Rainers coaching a fighter"
-            class="w-full object-cover object-center"
-            style="aspect-ratio: 4 / 5;"
-            loading="lazy"
-            width="720"
-            height="900"
-          />
-        </div>
-        <div>
-          <Rule class="mb-8" />
-          <h2
-            class="font-bold text-navy mb-5"
-            style="font-size: var(--font-size-h2); line-height: 1.2;"
-          >
-            You do the work. I hand you the structure.
-          </h2>
-          <p class="text-ink leading-[1.65]" style="font-size: var(--font-size-body);">
-            Six years coaching fighters, beginners to competitors.
-            You step in and win. I give you the structure that makes it repeatable.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <Rule />
+      <h2 class="font-bold text-navy mb-8 text-3xl">Find your path in.</h2>
 
-  <!-- ── 5. FOUR PATHS — stacked rows ──────────────────────────── -->
-  <section class="bg-bg py-16 md:py-20">
-    <div class="mx-auto px-6 w-full max-w-[960px]">
-      <Rule class="mb-10" />
-      <h2
-        class="font-bold text-navy mb-8"
-        style="font-size: var(--font-size-h2); line-height: 1.2;"
-      >
-        Find your path in.
-      </h2>
       <div class="divide-y divide-rule">
-
         <div class="py-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3">
-          <h3 class="font-semibold text-navy" style="font-size: var(--font-size-h3);">
-            The Footwork Foundation
-          </h3>
+          <h3 class="font-semibold text-navy text-xl">The Footwork Foundation</h3>
           <div class="flex items-baseline gap-6 shrink-0">
-            <span class="text-muted" style="font-size: var(--font-size-small);">Free</span>
-            <Button href="/footwork-foundation" variant="tertiary">Get the guide</Button>
+            <span class="text-muted text-sm">Free</span>
+            <a href="/footwork-foundation" class="text-ink underline underline-offset-4 text-sm font-semibold hover:text-terracotta">Get the guide</a>
           </div>
         </div>
 
         <div class="py-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3">
-          <h3 class="font-semibold text-navy" style="font-size: var(--font-size-h3);">
-            The Blueprints
-          </h3>
+          <h3 class="font-semibold text-navy text-xl">The Blueprints (Bundle)</h3>
           <div class="flex items-baseline gap-6 shrink-0">
-            <span class="text-muted" style="font-size: var(--font-size-small);">From $29</span>
-            <Button href="/shop" variant="tertiary">See the shop</Button>
+            <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank" class="text-ink underline underline-offset-4 text-sm font-semibold hover:text-terracotta">Buy the Bundle</a>
           </div>
         </div>
 
         <div class="py-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3">
-          <h3 class="font-semibold text-navy" style="font-size: var(--font-size-h3);">
-            The Workshop
-          </h3>
+          <h3 class="font-semibold text-navy text-xl">The Workshop</h3>
           <div class="flex items-baseline gap-6 shrink-0">
-            <span class="text-muted" style="font-size: var(--font-size-small);">$197, June 27</span>
-            <Button href={WORKSHOP_URL} variant="tertiary">Reserve a seat</Button>
+            <span class="text-muted text-sm">$197, June 27</span>
+            <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank" class="text-ink underline underline-offset-4 text-sm font-semibold hover:text-terracotta">Reserve a seat</a>
           </div>
         </div>
 
         <div class="py-6 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-3">
-          <h3 class="font-semibold text-navy" style="font-size: var(--font-size-h3);">
-            1-on-1 Coaching
-          </h3>
+          <h3 class="font-semibold text-navy text-xl">1-on-1 Coaching</h3>
           <div class="flex items-baseline gap-6 shrink-0">
-            <span class="text-muted" style="font-size: var(--font-size-small);">By application</span>
-            <Button href="/coaching" variant="tertiary">Apply</Button>
+            <span class="text-muted text-sm">By application</span>
+            <a href="/coaching" class="text-ink underline underline-offset-4 text-sm font-semibold hover:text-terracotta">Apply</a>
           </div>
         </div>
-
       </div>
     </div>
   </section>
-
-  <!-- ── 6. FOUNDER ────────────────────────────────────────────── -->
-  <section class="bg-cream py-16 md:py-20">
-    <div class="mx-auto px-6 w-full max-w-[960px]">
-      <Rule class="mb-10" />
-      <p class="uppercase tracking-widest text-muted mb-8" style="font-size: 0.7rem;">
-        About Rainers
-      </p>
-
-      <div class="overflow-hidden mb-10">
-        <img
-          src="/images/rainers-portrait.jpg"
-          alt="Rainers"
-          class="w-full object-cover object-top"
-          style="max-height: 480px;"
-          loading="lazy"
-          width="960"
-          height="640"
-        />
-      </div>
-
-      <div class="max-w-[640px] flex flex-col gap-5 mb-12">
-        <p class="text-ink leading-[1.65]" style="font-size: var(--font-size-body);">
-          I was drawn to fighting young. I tried a lot of things. I never made it my only thing.
-        </p>
-        <p class="text-ink leading-[1.65]" style="font-size: var(--font-size-body);">
-          Then I found boxing, and a coach. The day came when I left him, and my first fight
-          after that was on my own.
-        </p>
-        <p class="text-ink leading-[1.65]" style="font-size: var(--font-size-body);">
-          So I trained every day. I competed. I studied the sport like a system. I kept winning,
-          because structure beats dependence.
-        </p>
-        <p class="text-ink leading-[1.65]" style="font-size: var(--font-size-body);">
-          That is what I teach. Not dependence on a coach or a gym. The structure that lets you
-          operate on your own. You win. I hand you the blueprint.
-        </p>
-      </div>
-
-      <figure class="m-0">
-        <div class="overflow-hidden">
-          <img
-            src="/images/rainers-first-fight.jpg"
-            alt="Rainers in his first fight after leaving his coach"
-            class="w-full object-cover object-center"
-            style="max-height: 440px;"
-            loading="lazy"
-            width="960"
-            height="440"
-          />
-        </div>
-        <figcaption
-          class="mt-4 font-serif italic text-muted"
-          style="font-size: var(--font-size-small);"
-        >
-          My first fight after leaving my coach.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ── 7. CLOSE — navy band ───────────────────────────────────── -->
-  <section class="bg-navy py-16 md:py-20">
-    <div class="mx-auto px-6 w-full max-w-[960px] text-center">
-      <h3
-        class="font-semibold text-white mb-8"
-        style="font-size: var(--font-size-h3); line-height: 1.3;"
-      >
-        The next cohort is Saturday, June 27.
-      </h3>
-      <Button href={WORKSHOP_URL} variant="primary">Reserve a seat</Button>
-    </div>
-  </section>
-
-</Base>
+</Layout>

@@ -1,40 +1,49 @@
 ---
-const links = [
-  { label: 'Workshop', href: '/workshop' },
-  { label: 'Coaching', href: '/coaching' },
-  { label: 'Shop', href: '/shop' },
-  { label: 'Journal', href: '/journal' },
-];
 ---
+<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-bg/95 backdrop-blur-md border-b border-rule/50">
+  <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center justify-between relative">
+    <a href="/" class="text-navy font-bold text-small tracking-[0.2em] uppercase z-50">THEE RAINERS</a>
 
-<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="/" class="text-navy font-bold text-small tracking-[0.2em] uppercase">THEE RAINERS</a>
-    <nav aria-label="Main navigation">
+    <nav aria-label="Main navigation" class="hidden md:block">
       <ul class="flex items-center gap-8 list-none m-0 p-0">
-        {links.map(link => (
-          <li>
-            <a href={link.href} class="text-small font-medium text-ink hover:text-terracotta transition-colors duration-200">
-              {link.label}
-            </a>
-          </li>
-        ))}
+        <li><a href="/workshop" class="text-small font-medium text-ink hover:text-terracotta transition-colors duration-200">Workshop</a></li>
+        <li><a href="/coaching" class="text-small font-medium text-ink hover:text-terracotta transition-colors duration-200">Coaching</a></li>
+        <li><a href="/shop" class="text-small font-medium text-ink hover:text-terracotta transition-colors duration-200">Shop</a></li>
       </ul>
     </nav>
+
+    <button id="mobile-menu-btn" class="md:hidden z-50 p-2 text-navy focus:outline-none" aria-label="Toggle Menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-bg z-40 flex-col items-center justify-center gap-8 hidden pt-24 pb-8 px-6 overflow-y-auto">
+      <a href="/workshop" class="text-2xl font-bold text-navy hover:text-terracotta mobile-link">Workshop</a>
+      <a href="/coaching" class="text-2xl font-bold text-navy hover:text-terracotta mobile-link">Coaching</a>
+      <a href="/shop" class="text-2xl font-bold text-navy hover:text-terracotta mobile-link">Shop</a>
+    </div>
   </div>
 </header>
 
 <script>
-  const nav = document.getElementById('site-nav');
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const icon = document.getElementById('menu-icon');
+  const links = document.querySelectorAll('.mobile-link');
 
-  function updateNav() {
-    if (window.scrollY > 20) {
-      nav?.classList.add('is-scrolled');
+  function toggleMenu() {
+    menu.classList.toggle('hidden');
+    menu.classList.toggle('flex');
+    if (menu.classList.contains('hidden')) {
+      icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+      document.body.style.overflow = '';
     } else {
-      nav?.classList.remove('is-scrolled');
+      icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+      document.body.style.overflow = 'hidden';
     }
   }
 
-  window.addEventListener('scroll', updateNav, { passive: true });
-  updateNav();
+  btn.addEventListener('click', toggleMenu);
+  links.forEach(link => link.addEventListener('click', toggleMenu));
 </script>
