@@ -1,45 +1,64 @@
 ---
 export const prerender = false;
 
+import { presignR2GetUrl } from '../../lib/r2-presign';
+
 const { token } = Astro.params;
 
 const airtableKey  = import.meta.env.AIRTABLE_API_KEY  ?? '';
 const airtableBase = import.meta.env.AIRTABLE_BASE_ID  ?? '';
+const r2AccountId  = import.meta.env.R2_ACCOUNT_ID     ?? '';
+const r2AccessKey  = import.meta.env.R2_ACCESS_KEY_ID  ?? '';
+const r2Secret     = import.meta.env.R2_SECRET_ACCESS_KEY ?? '';
+const r2Bucket     = import.meta.env.R2_BUCKET         ?? '';
+
+// Product ID → R2 file key
+const PDF_MAP: Record<string, string> = {
+  'prod_UZreHroYQEDAFU': '', // bundle: both PDFs — handled below
+  'prod_UZrejf6iuDorEA': 'theFOOTWORKBlueprint.pdf',
+  'prod_UZreDlek9325EY': 'the shadowboxing blueprint.pdf',
+};
 
 interface PurchaseRecord {
   product_name:  string;
   email:         string;
+  product_id:    string;
   youtube_url_1: string;
   youtube_url_2: string;
-  pdf_url:       string;
   expires_at:    string;
+  is_active:     boolean | string;
 }
 
 let record: PurchaseRecord | null = null;
-let expired = false;
+let expired  = false;
+let inactive = false;
 let fetchError = false;
 
 if (!token || !airtableKey || !airtableBase) {
   fetchError = true;
 } else {
   try {
-    const formula  = encodeURIComponent(`{access_token}="${token}"`);
-    const url      = `https://api.airtable.com/v0/${airtableBase}/Purchases?filterByFormula=${formula}&maxRecords=1`;
-    const res      = await fetch(url, { headers: { Authorization: `Bearer ${airtableKey}` } });
+    const formula = encodeURIComponent(`{access_token}="${token}"`);
+    const url     = `https://api.airtable.com/v0/${airtableBase}/Purchases?filterByFormula=${formula}&maxRecords=1`;
+    const res     = await fetch(url, { headers: { Authorization: `Bearer ${airtableKey}` } });
 
     if (!res.ok) throw new Error(`Airtable ${res.status}`);
 
-    const data = await res.json() as { records: Array<{ fields: PurchaseRecord }> };
+    const data   = await res.json() as { records: Array<{ fields: PurchaseRecord }> };
     const fields = data.records?.[0]?.fields ?? null;
 
     if (fields) {
+      // is_active check — treat missing field as active (backwards compat)
+      if (fields.is_active === false || fields.is_active === 'false') {
+        inactive = true;
+      }
+
       if (fields.expires_at) {
         const expiry = new Date(fields.expires_at).getTime();
-        if (!isNaN(expiry) && Date.now() > expiry) {
-          expired = true;
-        }
+        if (!isNaN(expiry) && Date.now() > expiry) expired = true;
       }
-      if (!expired) record = fields;
+
+      if (!expired && !inactive) record = fields;
     }
   } catch (err) {
     console.error('[private-architecture] Airtable fetch error:', err);
@@ -47,15 +66,49 @@ if (!token || !airtableKey || !airtableBase) {
   }
 }
 
-const isValid     = record !== null && !expired && !fetchError;
-const showExpired = expired && !fetchError;
-const videoUrls   = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean) as string[];
+const isValid     = record !== null;
+const showExpired = (expired || inactive) && !fetchError;
+
+// Build presigned download URLs
+const pdfLinks: Array<{ label: string; url: string }> = [];
+
+if (isValid && r2AccountId && r2AccessKey && r2Secret && r2Bucket) {
+  const pid = record!.product_id ?? '';
+  const keys: string[] = [];
+
+  if (pid === 'prod_UZreHroYQEDAFU') {
+    // Bundle — both PDFs
+    keys.push('theFOOTWORKBlueprint.pdf', 'the shadowboxing blueprint.pdf');
+  } else if (PDF_MAP[pid]) {
+    keys.push(PDF_MAP[pid]);
+  }
+
+  for (const key of keys) {
+    try {
+      const url = await presignR2GetUrl({
+        accountId: r2AccountId,
+        accessKeyId: r2AccessKey,
+        secretAccessKey: r2Secret,
+        bucket: r2Bucket,
+        key,
+        expiresIn: 3600,
+      });
+      const label = key.toLowerCase().includes('footwork')
+        ? 'Download Footwork Blueprint PDF →'
+        : 'Download Shadowboxing Blueprint PDF →';
+      pdfLinks.push({ label, url });
+    } catch (err) {
+      console.error('[private-architecture] R2 presign error:', err);
+    }
+  }
+}
 
 function embedUrl(raw: string): string {
-  // Accept full YouTube watch URLs or embed URLs — normalise to embed
   const match = raw.match(/(?:v=|\/embed\/|youtu\.be\/)([A-Za-z0-9_-]{11})/);
   return match ? `https://www.youtube.com/embed/${match[1]}` : raw;
 }
+
+const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean) as string[];
 ---
 
 <!DOCTYPE html>
@@ -66,14 +119,12 @@ function embedUrl(raw: string): string {
   <meta name="robots" content="noindex, nofollow" />
   <title>{isValid ? `${record!.product_name} — Thee Rainers` : 'Access — Thee Rainers'}</title>
   <link rel="icon" href="/favicon.ico" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: #0A0A0A;
       color: #fff;
-      font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+      font-family: system-ui, sans-serif;
       min-height: 100svh;
     }
     a { color: inherit; text-decoration: none; }
@@ -81,7 +132,6 @@ function embedUrl(raw: string): string {
 </head>
 <body>
 
-  <!-- NAV -->
   <header style="border-bottom: 1px solid rgba(255,255,255,0.06); padding: 1.25rem 2rem;">
     <a href="/">
       <img src="/images/logo-trb.png" alt="Thee Rainers" style="height: 2rem; width: auto; opacity: 0.7;" />
@@ -127,23 +177,50 @@ function embedUrl(raw: string): string {
           </section>
         )}
 
-        <!-- PDF DOWNLOAD -->
-        {record!.pdf_url && (
+        <!-- PDF DOWNLOADS -->
+        {pdfLinks.length > 0 && (
           <section style="margin-bottom: 3rem;">
             <p style="color: #D4A373; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem;">
-              Your Download
+              {pdfLinks.length === 1 ? 'Your Download' : 'Your Downloads'}
             </p>
-            <a
-              href={record!.pdf_url}
-              download
-              style="display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; border: 2px solid #0057FF; color: #0057FF; background: transparent; padding: 1rem 2.5rem; transition: background 0.2s, color 0.2s; cursor: pointer;"
-              onmouseover="this.style.background='#0057FF';this.style.color='#fff';"
-              onmouseout="this.style.background='transparent';this.style.color='#0057FF';"
-            >
-              Download PDF →
-            </a>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              {pdfLinks.map(({ label, url }) => (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; border: 2px solid #0057FF; color: #0057FF; background: transparent; padding: 1rem 2.5rem; transition: background 0.2s, color 0.2s; cursor: pointer;"
+                  onmouseover="this.style.background='#0057FF';this.style.color='#fff';"
+                  onmouseout="this.style.background='transparent';this.style.color='#0057FF';"
+                >
+                  {label}
+                </a>
+              ))}
+            </div>
+            <p style="color: rgba(255,255,255,0.2); font-size: 0.75rem; margin-top: 1rem; line-height: 1.5;">
+              Download links expire after 1 hour. Refresh this page to generate a fresh link.
+            </p>
           </section>
         )}
+
+        <!-- LIVE Q&A ACCESS -->
+        <section style="margin-bottom: 3rem; padding: 2rem; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02);">
+          <p style="color: #D4A373; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">
+            Monthly Live Q&A
+          </p>
+          <h2 style="font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; font-size: 1.25rem; margin-bottom: 0.75rem;">
+            You're In The Room.
+          </h2>
+          <p style="color: rgba(255,255,255,0.5); font-size: 0.875rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            As a Blueprint buyer, you have access to every Monthly Live Q&A. Real corrections, real answers — no scripts. Check the schedule and join link at the link below.
+          </p>
+          <a
+            href="/qa"
+            style="display: inline-flex; align-items: center; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.125rem;"
+          >
+            Q&A Schedule + Join Link →
+          </a>
+        </section>
 
         <!-- SUPPORT -->
         <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);">
@@ -156,7 +233,6 @@ function embedUrl(raw: string): string {
 
     {!isValid && (
       <>
-        <!-- INVALID / EXPIRED STATE -->
         <div style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
           <p style="color: #D4A373; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">
             {showExpired ? 'Link Expired' : 'Link Not Found'}
@@ -204,7 +280,6 @@ function embedUrl(raw: string): string {
           </p>
         </div>
 
-        <!-- SUPPORT -->
         <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);">
           <p style="color: rgba(255,255,255,0.2); font-size: 0.75rem; line-height: 1.6;">
             Purchased but still having issues? Contact <a href="mailto:rainers@theerainers.com" style="color: rgba(255,255,255,0.35);">rainers@theerainers.com</a> with your order email and we will sort it out.
@@ -215,7 +290,6 @@ function embedUrl(raw: string): string {
 
   </main>
 
-  <!-- SCRIPTURE -->
   <footer style="border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 1.5rem; text-align: center;">
     <p style="font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; color: rgba(255,255,255,0.06); font-size: clamp(0.875rem, 2.5vw, 1.25rem); line-height: 1; margin-bottom: 0.75rem;">
       "I do not run aimlessly. I do not box as one beating the air."

@@ -1,8 +1,15 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
+import Stripe from 'stripe';
 
-// Verify Stripe webhook signature using Web Crypto API (Cloudflare Workers compatible)
+// Product ID → slug map
+const PRODUCT_MAP: Record<string, string> = {
+  'prod_UZreHroYQEDAFU': 'bundle',
+  'prod_UZrejf6iuDorEA': 'footwork',
+  'prod_UZreDlek9325EY': 'shadowboxing',
+};
+
 async function verifyStripeSignature(
   rawBody: string,
   header: string,
@@ -17,7 +24,6 @@ async function verifyStripeSignature(
   const sig = parts['v1'];
   if (!ts || !sig) return false;
 
-  // Reject events older than 5 minutes
   if (Math.abs(Date.now() / 1000 - Number(ts)) > 300) return false;
 
   const enc = new TextEncoder();
@@ -33,7 +39,6 @@ async function verifyStripeSignature(
     .map(b => b.toString(16).padStart(2, '0'))
     .join('');
 
-  // Constant-time comparison
   if (computed.length !== sig.length) return false;
   let diff = 0;
   for (let i = 0; i < computed.length; i++) {
@@ -49,19 +54,19 @@ function generateToken(): string {
 }
 
 export async function POST({ request }: APIContext): Promise<Response> {
-  const secret = import.meta.env.STRIPE_WEBHOOK_SECRET ?? '';
-  const deliveryUrl = import.meta.env.MAKE_DELIVERY_WEBHOOK_URL ?? '';
+  const webhookSecret = import.meta.env.STRIPE_WEBHOOK_SECRET ?? '';
+  const stripeKey     = import.meta.env.STRIPE_SECRET_KEY ?? '';
+  const deliveryUrl   = import.meta.env.MAKE_DELIVERY_WEBHOOK_URL ?? '';
 
-  if (!secret || !deliveryUrl) {
-    console.error('[stripe-webhook] Missing STRIPE_WEBHOOK_SECRET or MAKE_DELIVERY_WEBHOOK_URL');
+  if (!webhookSecret || !stripeKey || !deliveryUrl) {
+    console.error('[stripe-webhook] Missing required env vars');
     return new Response('Misconfigured', { status: 500 });
   }
 
-  // Read raw body BEFORE any other parsing — required for signature verification
-  const rawBody = await request.text();
+  const rawBody  = await request.text();
   const sigHeader = request.headers.get('stripe-signature') ?? '';
 
-  const valid = await verifyStripeSignature(rawBody, sigHeader, secret);
+  const valid = await verifyStripeSignature(rawBody, sigHeader, webhookSecret);
   if (!valid) {
     console.warn('[stripe-webhook] Signature verification failed');
     return new Response('Invalid signature', { status: 400 });
@@ -77,17 +82,34 @@ export async function POST({ request }: APIContext): Promise<Response> {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
     const details = session.customer_details as Record<string, string> | null;
-    const email = details?.email ?? (session.customer_email as string) ?? '';
-    const token = generateToken();
+    const email   = details?.email ?? (session.customer_email as string) ?? '';
+    const token   = generateToken();
+
+    // Extract product ID via Stripe SDK
+    let productId = '';
+    try {
+      const stripe = new Stripe(stripeKey, {
+        apiVersion: '2025-04-30.basil',
+        httpClient: Stripe.createFetchHttpClient(),
+      });
+      const sessionId = session.id as string;
+      const lineItems = await stripe.checkout.sessions.listLineItems(sessionId, { expand: ['data.price.product'] });
+      const first = lineItems.data[0];
+      const product = first?.price?.product;
+      if (product && typeof product === 'object' && 'id' in product) {
+        productId = (product as { id: string }).id;
+      }
+    } catch (err) {
+      console.error('[stripe-webhook] listLineItems error:', err);
+    }
+
+    const productSlug = PRODUCT_MAP[productId] ?? 'unknown';
 
     const payload = {
       email,
-      access_token: token,
-      amount_cents: session.amount_total,
-      payment_link: session.payment_link ?? null,
-      session_id: session.id,
-      access_url: `https://theerainers.com/private-architecture/${token}`,
-      created_at: new Date().toISOString(),
+      product_id: productId,
+      product_slug: productSlug,
+      token,
     };
 
     try {
@@ -99,7 +121,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
       if (!res.ok) throw new Error(`Make.com responded ${res.status}`);
     } catch (err) {
       console.error('[stripe-webhook] Delivery webhook error:', err);
-      // Do not return an error — Stripe must receive 200 to stop retrying
+      // Return 200 regardless — Stripe must not retry on our downstream failures
     }
   }
 
