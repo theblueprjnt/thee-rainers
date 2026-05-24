@@ -1,0 +1,258 @@
+---
+export const prerender = false;
+
+const { token } = Astro.params;
+
+const airtableKey  = import.meta.env.AIRTABLE_API_KEY  ?? '';
+const airtableBase = import.meta.env.AIRTABLE_BASE_ID  ?? '';
+
+interface PurchaseRecord {
+  product_name:  string;
+  email:         string;
+  youtube_url_1: string;
+  youtube_url_2: string;
+  pdf_url:       string;
+  expires_at:    string;
+}
+
+let record: PurchaseRecord | null = null;
+let expired = false;
+let fetchError = false;
+
+if (!token || !airtableKey || !airtableBase) {
+  fetchError = true;
+} else {
+  try {
+    const formula  = encodeURIComponent(`{access_token}="${token}"`);
+    const url      = `https://api.airtable.com/v0/${airtableBase}/Purchases?filterByFormula=${formula}&maxRecords=1`;
+    const res      = await fetch(url, { headers: { Authorization: `Bearer ${airtableKey}` } });
+
+    if (!res.ok) throw new Error(`Airtable ${res.status}`);
+
+    const data = await res.json() as { records: Array<{ fields: PurchaseRecord }> };
+    const fields = data.records?.[0]?.fields ?? null;
+
+    if (fields) {
+      if (fields.expires_at) {
+        const expiry = new Date(fields.expires_at).getTime();
+        if (!isNaN(expiry) && Date.now() > expiry) {
+          expired = true;
+        }
+      }
+      if (!expired) record = fields;
+    }
+  } catch (err) {
+    console.error('[private-architecture] Airtable fetch error:', err);
+    fetchError = true;
+  }
+}
+
+const isValid     = record !== null && !expired && !fetchError;
+const showExpired = expired && !fetchError;
+const videoUrls   = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean) as string[];
+
+function embedUrl(raw: string): string {
+  // Accept full YouTube watch URLs or embed URLs — normalise to embed
+  const match = raw.match(/(?:v=|\/embed\/|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : raw;
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{isValid ? `${record!.product_name} — Thee Rainers` : 'Access — Thee Rainers'}</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0A0A0A;
+      color: #fff;
+      font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+      min-height: 100svh;
+    }
+    a { color: inherit; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header style="border-bottom: 1px solid rgba(255,255,255,0.06); padding: 1.25rem 2rem;">
+    <a href="/">
+      <img src="/images/logo-trb.png" alt="Thee Rainers" style="height: 2rem; width: auto; opacity: 0.7;" />
+    </a>
+  </header>
+
+  <main style="max-width: 860px; margin: 0 auto; padding: 3rem 1.5rem 6rem;">
+
+    {isValid && (
+      <>
+        <!-- PRODUCT HEADER -->
+        <div style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <p style="color: #D4A373; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">
+            Your Access · Thee Rainers
+          </p>
+          <h1 style="font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.88; font-size: clamp(2rem, 6vw, 3.5rem); margin-bottom: 1rem;">
+            {record!.product_name}
+          </h1>
+          <p style="color: rgba(255,255,255,0.35); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
+            Permanent access · {record!.email}
+          </p>
+        </div>
+
+        <!-- VIDEO EMBEDS -->
+        {videoUrls.length > 0 && (
+          <section style="margin-bottom: 3rem;">
+            <p style="color: #D4A373; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem;">
+              {videoUrls.length === 1 ? 'Your Video' : 'Your Videos'}
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              {videoUrls.map((url) => (
+                <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #111; border: 1px solid rgba(255,255,255,0.06);">
+                  <iframe
+                    src={embedUrl(url)}
+                    title={record!.product_name}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    allowfullscreen
+                    style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;"
+                  ></iframe>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- PDF DOWNLOAD -->
+        {record!.pdf_url && (
+          <section style="margin-bottom: 3rem;">
+            <p style="color: #D4A373; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem;">
+              Your Download
+            </p>
+            <a
+              href={record!.pdf_url}
+              download
+              style="display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; border: 2px solid #0057FF; color: #0057FF; background: transparent; padding: 1rem 2.5rem; transition: background 0.2s, color 0.2s; cursor: pointer;"
+              onmouseover="this.style.background='#0057FF';this.style.color='#fff';"
+              onmouseout="this.style.background='transparent';this.style.color='#0057FF';"
+            >
+              Download PDF →
+            </a>
+          </section>
+        )}
+
+        <!-- SUPPORT -->
+        <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);">
+          <p style="color: rgba(255,255,255,0.2); font-size: 0.75rem; line-height: 1.6;">
+            Questions or issues? Email <a href="mailto:rainers@theerainers.com" style="color: rgba(255,255,255,0.4);">rainers@theerainers.com</a> with your order email.
+          </p>
+        </div>
+      </>
+    )}
+
+    {!isValid && (
+      <>
+        <!-- INVALID / EXPIRED STATE -->
+        <div style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <p style="color: #D4A373; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">
+            {showExpired ? 'Link Expired' : 'Link Not Found'}
+          </p>
+          <h1 style="font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.88; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem;">
+            {showExpired ? 'This link\nhas expired.' : 'This link\nis not valid.'}
+          </h1>
+          <p style="color: rgba(255,255,255,0.4); font-size: 0.875rem; line-height: 1.6; max-width: 440px;">
+            {showExpired
+              ? 'Your access link has expired. Enter your purchase email below and we will send a fresh link.'
+              : 'This link was not found or may have already been used. Enter the email you used to purchase and we will resend your access link.'}
+          </p>
+        </div>
+
+        <!-- RESEND FORM -->
+        <div style="max-width: 420px;">
+          <p style="color: rgba(255,255,255,0.25); font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.25rem;">
+            Resend Access Link
+          </p>
+          <form id="resend-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <input
+              type="email"
+              id="resend-email"
+              required
+              placeholder="your@email.com"
+              style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 1rem 1.25rem; font-size: 0.875rem; outline: none; font-family: inherit;"
+              onfocus="this.style.borderColor='rgba(255,255,255,0.4)'"
+              onblur="this.style.borderColor='rgba(255,255,255,0.15)'"
+            />
+            <button
+              type="submit"
+              id="resend-btn"
+              style="font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; border: 2px solid #0057FF; color: #0057FF; background: transparent; padding: 1rem 2rem; cursor: pointer; font-family: inherit; transition: background 0.2s, color 0.2s;"
+              onmouseover="this.style.background='#0057FF';this.style.color='#fff';"
+              onmouseout="this.style.background='transparent';this.style.color='#0057FF';"
+            >
+              Send My Link →
+            </button>
+          </form>
+          <p id="resend-success" style="display:none; color: #0057FF; font-size: 0.875rem; margin-top: 1.25rem; letter-spacing: 0.05em;">
+            If that email has a purchase on file, the link is on its way.
+          </p>
+          <p id="resend-error" style="display:none; color: rgba(255,255,255,0.4); font-size: 0.875rem; margin-top: 1.25rem;">
+            Something went wrong. Email rainers@theerainers.com directly.
+          </p>
+        </div>
+
+        <!-- SUPPORT -->
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);">
+          <p style="color: rgba(255,255,255,0.2); font-size: 0.75rem; line-height: 1.6;">
+            Purchased but still having issues? Contact <a href="mailto:rainers@theerainers.com" style="color: rgba(255,255,255,0.35);">rainers@theerainers.com</a> with your order email and we will sort it out.
+          </p>
+        </div>
+      </>
+    )}
+
+  </main>
+
+  <!-- SCRIPTURE -->
+  <footer style="border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 1.5rem; text-align: center;">
+    <p style="font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; color: rgba(255,255,255,0.06); font-size: clamp(0.875rem, 2.5vw, 1.25rem); line-height: 1; margin-bottom: 0.75rem;">
+      "I do not run aimlessly. I do not box as one beating the air."
+    </p>
+    <p style="color: #D4A373; font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase;">
+      1 Corinthians 9:26–27
+    </p>
+  </footer>
+
+</body>
+</html>
+
+<script>
+  const form    = document.getElementById('resend-form') as HTMLFormElement | null;
+  const btn     = document.getElementById('resend-btn') as HTMLButtonElement | null;
+  const success = document.getElementById('resend-success');
+  const error   = document.getElementById('resend-error');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+    if (error) error.style.display = 'none';
+
+    const email = (document.getElementById('resend-email') as HTMLInputElement)?.value.trim();
+
+    try {
+      const res = await fetch('/api/resend-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error();
+      if (form)    form.style.display    = 'none';
+      if (success) success.style.display = 'block';
+    } catch {
+      if (error) error.style.display = 'block';
+      if (btn) { btn.disabled = false; btn.textContent = 'Send My Link →'; }
+    }
+  });
+</script>

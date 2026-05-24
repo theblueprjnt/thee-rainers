@@ -1,22 +1,32 @@
 export const prerender = false;
 
-export const POST = async ({ request }) => {
-  const data = await request.json();
+import type { APIContext } from 'astro';
 
-  // NOTE FOR RAINERS: You must paste your Make.com Webhook 2 URL here!
-  const MAKE_WEBHOOK_2 = "https://hook.eu1.make.com/YOUR_NEW_WEBHOOK_URL_HERE";
+export async function POST({ request }: APIContext): Promise<Response> {
+  const webhookUrl = import.meta.env.MAKE_LEAD_WEBHOOK_URL ?? '';
+
+  let data: Record<string, unknown>;
+  try {
+    data = await request.json() as Record<string, unknown>;
+  } catch {
+    return new Response(JSON.stringify({ status: 'error', error: 'Invalid JSON' }), { status: 400 });
+  }
+
+  if (!/^https?:\/\//.test(webhookUrl)) {
+    console.warn('[coaching-capture] MAKE_LEAD_WEBHOOK_URL not set');
+    return new Response(JSON.stringify({ status: 'success' }), { status: 200 });
+  }
 
   try {
-    const response = await fetch(MAKE_WEBHOOK_2, {
+    const res = await fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, source: 'coaching-capture' }),
     });
-
-    if (!response.ok) throw new Error("Pipe failure");
-
-    return new Response(JSON.stringify({ status: "success" }), { status: 200 });
-  } catch (error) {
-    return new Response(JSON.stringify({ status: "error" }), { status: 500 });
+    if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
+    return new Response(JSON.stringify({ status: 'success' }), { status: 200 });
+  } catch (err) {
+    console.error('[coaching-capture] webhook error:', err);
+    return new Response(JSON.stringify({ status: 'error' }), { status: 500 });
   }
-};
+}
