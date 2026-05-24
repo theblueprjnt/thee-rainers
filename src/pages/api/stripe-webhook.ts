@@ -53,10 +53,11 @@ function generateToken(): string {
   return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-export async function POST({ request }: APIContext): Promise<Response> {
-  const webhookSecret = import.meta.env.STRIPE_WEBHOOK_SECRET ?? '';
-  const stripeKey     = import.meta.env.STRIPE_SECRET_KEY ?? '';
-  const deliveryUrl   = import.meta.env.MAKE_DELIVERY_WEBHOOK_URL ?? '';
+export async function POST({ request, locals }: APIContext): Promise<Response> {
+  const env = (locals as { runtime?: { env?: Record<string, string> } }).runtime?.env ?? {};
+  const webhookSecret = env['STRIPE_WEBHOOK_SECRET'] ?? '';
+  const stripeKey     = env['STRIPE_SECRET_KEY'] ?? '';
+  const deliveryUrl   = env['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
 
   if (!webhookSecret || !stripeKey || !deliveryUrl) {
     console.error('[stripe-webhook] Missing required env vars');
