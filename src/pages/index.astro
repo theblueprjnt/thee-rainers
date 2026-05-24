@@ -50,8 +50,28 @@ import Layout from '../layouts/Base.astro';
         <p class="text-[#0A0A0A]/40 text-sm mt-3">Step-by-step systems built for boxing.</p>
       </div>
 
-      <!-- 3-column blueprint cards -->
+      <!-- 3-column blueprint cards — Bundle leads as primary engine -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+
+        <div class="border-2 border-[#0057FF]/30 flex flex-col group hover:border-[#0057FF] transition-colors duration-200 relative">
+          <div class="absolute top-3 left-3 z-10 bg-[#0057FF] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Best Value</div>
+          <div class="bg-[#0A0A0A] overflow-hidden">
+            <img src="/images/bundle_cover.png" alt="Both Blueprints Bundle"
+              class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Bundle · 100+ Rounds</p>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-1">Both Blueprints</h3>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">Footwork + Shadowboxing. Complete system. Monthly Live Q&A included.</p>
+            <div class="mt-5 flex items-center justify-between">
+              <span class="font-black text-[#0A0A0A] text-2xl">$87</span>
+              <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank"
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200">
+                Buy →
+              </a>
+            </div>
+          </div>
+        </div>
 
         <div class="border border-[#0A0A0A]/10 flex flex-col group hover:border-[#0057FF]/40 transition-colors duration-200">
           <div class="bg-[#F6F6F6] overflow-hidden">
@@ -91,38 +111,6 @@ import Layout from '../layouts/Base.astro';
           </div>
         </div>
 
-        <div class="border border-[#0A0A0A]/10 flex flex-col group hover:border-[#0057FF]/40 transition-colors duration-200">
-          <div class="bg-[#0A0A0A] overflow-hidden">
-            <img src="/images/bundle_cover.png" alt="Both Blueprints Bundle"
-              class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
-          </div>
-          <div class="p-5 flex flex-col flex-1">
-            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Bundle · Best Value</p>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-1">Both Blueprints</h3>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">100+ rounds. Complete system. Monthly Live Q&A included.</p>
-            <div class="mt-5 flex items-center justify-between">
-              <span class="font-black text-[#0A0A0A] text-2xl">$87</span>
-              <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200">
-                Buy →
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Workshop strip -->
-      <div class="border border-[#D4A373]/20 bg-[#0A0A0A] p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-4">
-        <div>
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Live Workshop · June 27</p>
-          <p class="font-black text-white uppercase tracking-tight text-xl leading-tight">The Calibration — $197</p>
-          <p class="text-white/35 text-xs mt-2">90 min. Camera on. Real-time correction on your movement.</p>
-        </div>
-        <a href="/workshop"
-          class="shrink-0 blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
-          Reserve Seat →
-        </a>
       </div>
 
       <!-- PA strip -->
@@ -146,7 +134,7 @@ import Layout from '../layouts/Base.astro';
     <div class="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 items-center">
       <div>
         <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-4">Free · Start Here</p>
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-4">30-Day Footwork<br/>Foundation</h2>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-4">30-Day Stance<br/>Foundation</h2>
         <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-6">Before anything transfers, the platform has to hold. Stance. Weight distribution. Kinetic chain. Build what most fighters never had — free, no equipment, 30 days.</p>
         <a href="/foundation-guide"
           class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
