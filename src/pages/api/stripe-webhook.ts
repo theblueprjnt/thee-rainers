@@ -2,6 +2,7 @@ export const prerender = false;
 
 import type { APIContext } from 'astro';
 import Stripe from 'stripe';
+import { env as cfEnv } from 'cloudflare:workers';
 
 const PRODUCT_MAP: Record<string, string> = {
   'prod_UZreHroYQEDAFU': 'bundle',
@@ -15,11 +16,11 @@ function generateToken(): string {
   return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-export async function POST({ request, locals }: APIContext): Promise<Response> {
-  const env = (locals as { runtime?: { env?: Record<string, string> } }).runtime?.env ?? {};
-  const webhookSecret = env['STRIPE_WEBHOOK_SECRET'] ?? '';
-  const stripeKey     = env['STRIPE_SECRET_KEY'] ?? '';
-  const deliveryUrl   = env['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
+export async function POST({ request }: APIContext): Promise<Response> {
+  const e = cfEnv as unknown as Record<string, string>;
+  const webhookSecret = e['STRIPE_WEBHOOK_SECRET'] ?? '';
+  const stripeKey     = e['STRIPE_SECRET_KEY'] ?? '';
+  const deliveryUrl   = e['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
 
   if (!webhookSecret || !stripeKey || !deliveryUrl) {
     console.error('[stripe-webhook] Missing env vars — STRIPE_WEBHOOK_SECRET:', !!webhookSecret, 'STRIPE_SECRET_KEY:', !!stripeKey, 'MAKE_DELIVERY_WEBHOOK_URL:', !!deliveryUrl);

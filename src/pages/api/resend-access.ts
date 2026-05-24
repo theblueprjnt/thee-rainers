@@ -1,13 +1,15 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
+import { env as cfEnv } from 'cloudflare:workers';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST({ request }: APIContext): Promise<Response> {
-  const airtableKey = import.meta.env.AIRTABLE_API_KEY ?? '';
-  const airtableBase = import.meta.env.AIRTABLE_BASE_ID ?? '';
-  const deliveryUrl = import.meta.env.MAKE_DELIVERY_WEBHOOK_URL ?? '';
+  const e = cfEnv as unknown as Record<string, string>;
+  const airtableKey  = e['AIRTABLE_API_KEY']          ?? '';
+  const airtableBase = e['AIRTABLE_BASE_ID']           ?? '';
+  const deliveryUrl  = e['MAKE_DELIVERY_WEBHOOK_URL']  ?? '';
 
   let email = '';
   try {

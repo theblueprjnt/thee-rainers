@@ -1,9 +1,10 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
+import { env as cfEnv } from 'cloudflare:workers';
 
 export async function POST({ request }: APIContext): Promise<Response> {
-  const webhookUrl = import.meta.env.MAKE_LEAD_WEBHOOK_URL ?? '';
+  const webhookUrl = (cfEnv as unknown as Record<string, string>)['MAKE_LEAD_WEBHOOK_URL'] ?? '';
 
   let data: Record<string, unknown>;
   try {

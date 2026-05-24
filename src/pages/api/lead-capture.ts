@@ -11,6 +11,7 @@
 export const prerender = false;
 
 import type { APIContext } from 'astro';
+import { env as cfEnv } from 'cloudflare:workers';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -38,12 +39,12 @@ function redirectResponse(location: string): Response {
 }
 
 export async function OPTIONS(_ctx: APIContext): Promise<Response> {
-  const origin = import.meta.env.SITE_URL || 'https://theerainers.com';
+  const origin = (cfEnv as unknown as Record<string, string>)['SITE_URL'] || 'https://theerainers.com';
   return new Response(null, { status: 204, headers: corsHeaders(origin) });
 }
 
 export async function POST({ request }: APIContext): Promise<Response> {
-  const origin = import.meta.env.SITE_URL || 'https://theerainers.com';
+  const origin = (cfEnv as unknown as Record<string, string>)['SITE_URL'] || 'https://theerainers.com';
   const headers = corsHeaders(origin);
   const contentType = request.headers.get('content-type') ?? '';
   const isJson = contentType.includes('application/json');
@@ -83,7 +84,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
 
   // ── forward to Make.com webhook ───────────────────────────────────────
   // Skipped gracefully when MAKE_LEAD_WEBHOOK_URL is a placeholder or unset.
-  const webhookUrl = import.meta.env.MAKE_LEAD_WEBHOOK_URL ?? '';
+  const webhookUrl = (cfEnv as unknown as Record<string, string>)['MAKE_LEAD_WEBHOOK_URL'] ?? '';
   if (/^https?:\/\//.test(webhookUrl)) {
     try {
       const res = await fetch(webhookUrl, {

@@ -2,15 +2,17 @@
 export const prerender = false;
 
 import { presignR2GetUrl } from '../../lib/r2-presign';
+import { env as cfEnv } from 'cloudflare:workers';
 
 const { token } = Astro.params;
 
-const airtableKey  = import.meta.env.AIRTABLE_API_KEY  ?? '';
-const airtableBase = import.meta.env.AIRTABLE_BASE_ID  ?? '';
-const r2AccountId  = import.meta.env.R2_ACCOUNT_ID     ?? '';
-const r2AccessKey  = import.meta.env.R2_ACCESS_KEY_ID  ?? '';
-const r2Secret     = import.meta.env.R2_SECRET_ACCESS_KEY ?? '';
-const r2Bucket     = import.meta.env.R2_BUCKET         ?? '';
+const e            = cfEnv as unknown as Record<string, string>;
+const airtableKey  = e['AIRTABLE_API_KEY']           ?? '';
+const airtableBase = e['AIRTABLE_BASE_ID']            ?? '';
+const r2AccountId  = e['R2_ACCOUNT_ID']               ?? '';
+const r2AccessKey  = e['R2_ACCESS_KEY_ID']            ?? '';
+const r2Secret     = e['R2_SECRET_ACCESS_KEY']        ?? '';
+const r2Bucket     = e['R2_BUCKET']                   ?? '';
 
 // Product ID → R2 file key
 const PDF_MAP: Record<string, string> = {
