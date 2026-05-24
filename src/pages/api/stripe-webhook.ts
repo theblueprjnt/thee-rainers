@@ -22,9 +22,12 @@ export async function POST({ request }: APIContext): Promise<Response> {
   const stripeKey     = e['STRIPE_SECRET_KEY'] ?? '';
   const deliveryUrl   = e['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
 
-  if (!webhookSecret || !stripeKey || !deliveryUrl) {
-    console.error('[stripe-webhook] Missing env vars — STRIPE_WEBHOOK_SECRET:', !!webhookSecret, 'STRIPE_SECRET_KEY:', !!stripeKey, 'MAKE_DELIVERY_WEBHOOK_URL:', !!deliveryUrl);
+  if (!webhookSecret || !stripeKey) {
+    console.error('[stripe-webhook] Missing env vars — STRIPE_WEBHOOK_SECRET:', !!webhookSecret, 'STRIPE_SECRET_KEY:', !!stripeKey);
     return new Response('Misconfigured', { status: 500 });
+  }
+  if (!deliveryUrl) {
+    console.warn('[stripe-webhook] MAKE_DELIVERY_WEBHOOK_URL not set — purchases will be logged only');
   }
 
   // Must read raw body before any other parsing — required for signature verification

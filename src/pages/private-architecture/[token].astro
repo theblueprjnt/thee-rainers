@@ -14,11 +14,29 @@ const r2AccessKey  = e['R2_ACCESS_KEY_ID']            ?? '';
 const r2Secret     = e['R2_SECRET_ACCESS_KEY']        ?? '';
 const r2Bucket     = e['R2_BUCKET']                   ?? '';
 
-// Product ID → R2 file key
-const PDF_MAP: Record<string, string> = {
-  'prod_UZreHroYQEDAFU': '', // bundle: both PDFs — handled below
-  'prod_UZrejf6iuDorEA': 'theFOOTWORKBlueprint.pdf',
-  'prod_UZreDlek9325EY': 'the shadowboxing blueprint.pdf',
+// Product ID → R2 file keys (exact filenames in theerainers-vault bucket)
+const PDF_MAP: Record<string, string[]> = {
+  'prod_UZreHroYQEDAFU': [  // Bundle
+    'links_theFOOTWORKBlueprint.pdf',
+    'thefootworkblueprint.pdf',
+    'masterboxingbasein30days_playbook.pdf',
+    'the shadowboxing blueprint.pdf',
+  ],
+  'prod_UZrejf6iuDorEA': [  // Footwork Blueprint
+    'links_theFOOTWORKBlueprint.pdf',
+    'thefootworkblueprint.pdf',
+    'masterboxingbasein30days_playbook.pdf',
+  ],
+  'prod_UZreDlek9325EY': [  // Shadowboxing Blueprint
+    'the shadowboxing blueprint.pdf',
+  ],
+};
+
+const FILE_LABELS: Record<string, string> = {
+  'links_theFOOTWORKBlueprint.pdf':      'Download Footwork Resource Links →',
+  'thefootworkblueprint.pdf':            'Download Footwork Blueprint →',
+  'masterboxingbasein30days_playbook.pdf': 'Download 30-Day Boxing Base Playbook →',
+  'the shadowboxing blueprint.pdf':      'Download Shadowboxing Blueprint →',
 };
 
 interface PurchaseRecord {
@@ -75,15 +93,8 @@ const showExpired = (expired || inactive) && !fetchError;
 const pdfLinks: Array<{ label: string; url: string }> = [];
 
 if (isValid && r2AccountId && r2AccessKey && r2Secret && r2Bucket) {
-  const pid = record!.product_id ?? '';
-  const keys: string[] = [];
-
-  if (pid === 'prod_UZreHroYQEDAFU') {
-    // Bundle — both PDFs
-    keys.push('theFOOTWORKBlueprint.pdf', 'the shadowboxing blueprint.pdf');
-  } else if (PDF_MAP[pid]) {
-    keys.push(PDF_MAP[pid]);
-  }
+  const pid  = record!.product_id ?? '';
+  const keys = PDF_MAP[pid] ?? [];
 
   for (const key of keys) {
     try {
@@ -95,10 +106,7 @@ if (isValid && r2AccountId && r2AccessKey && r2Secret && r2Bucket) {
         key,
         expiresIn: 3600,
       });
-      const label = key.toLowerCase().includes('footwork')
-        ? 'Download Footwork Blueprint PDF →'
-        : 'Download Shadowboxing Blueprint PDF →';
-      pdfLinks.push({ label, url });
+      pdfLinks.push({ label: FILE_LABELS[key] ?? `Download ${key} →`, url });
     } catch (err) {
       console.error('[private-architecture] R2 presign error:', err);
     }
