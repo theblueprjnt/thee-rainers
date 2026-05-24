@@ -3,7 +3,7 @@ import Layout from '../layouts/Base.astro';
 ---
 <Layout title="About — Thee Rainers">
   <Fragment slot="head">
-    <meta name="description" content="The identity behind the system. Grounded in faith, disciplined by virtue, built for those who refuse to run aimlessly." />
+    <meta name="description" content="Thee Rainers is the operating system built from the floor up — from film, data, and the body itself. For athletes whose ambition has outpaced their gym." />
   </Fragment>
 
   <!-- Identity -->
@@ -21,33 +21,43 @@ import Layout from '../layouts/Base.astro';
             The mission is not to produce fighters. It is to produce people who think, move, and operate with systemic precision — and give the glory back to God when they do.
           </p>
         </div>
-        <div class="hidden md:flex items-center justify-center">
-          <div class="w-full max-w-[320px] aspect-[3/4] overflow-hidden border border-[#0A0A0A]/8">
+        <div class="hidden md:flex flex-col items-center gap-4">
+          <div class="w-full max-w-[280px] aspect-[3/4] overflow-hidden border border-[#0A0A0A]/8">
             <img
-              src="/images/rainers-hero.jpg"
-              alt="Thee Rainers"
-              class="w-full h-full object-cover object-top hero-matte"
+              src="/images/aikido-yellowbelt.png"
+              alt="The foundation started early."
+              class="w-full h-full object-cover object-top"
             />
           </div>
+          <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase text-center">The foundation started early.</p>
         </div>
       </div>
 
-      <!-- The Standard -->
+      <!-- The Ecosystem -->
       <div class="border-t border-[#0A0A0A]/8 pt-20 mb-20">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">The Standard — 7 Holy Virtues</p>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">What We Build Together</p>
         <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
           {[
-            { virtue: 'Humility',    line: 'Know your source. The strength is not yours.' },
-            { virtue: 'Charity',     line: 'Give the work freely. Keep the system sacred.' },
-            { virtue: 'Patience',    line: 'Absorb. Return. The SSC is patience made physical.' },
-            { virtue: 'Diligence',   line: '10 minutes of film. Every day. No exceptions.' },
-            { virtue: 'Temperance',  line: 'One range at a time. Adaptable in form, fixed in purpose.' },
-            { virtue: 'Kindness',    line: 'The community is the compound. Build it right.' },
-            { virtue: 'Chastity',    line: 'Whole-body discipline. Every punch from the floor.' },
-          ].map(v => (
-            <div class="grid grid-cols-[140px_1fr] py-6 gap-6 items-baseline tr-card">
-              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">{v.virtue}</p>
-              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">{v.line}</p>
+            {
+              label: 'Daily Content',
+              line: 'Performance. Boxing. Practical self-improvement. Every day across @theerainers — the work made visible.',
+            },
+            {
+              label: 'Weekly YouTube',
+              line: 'Deep-format breakdowns on mechanics, kinetic chain, and why most training fails to transfer.',
+            },
+            {
+              label: 'The Blueprints',
+              line: 'Step-by-step video modules. Footwork. Shadowboxing. The mechanical base built correctly from the floor up.',
+            },
+            {
+              label: 'Monthly Live Q&A',
+              line: 'Live with the community. Real questions. Real corrections. The room where the work compounds.',
+            },
+          ].map(item => (
+            <div class="grid grid-cols-[160px_1fr] py-6 gap-6 items-baseline">
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">{item.label}</p>
+              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">{item.line}</p>
             </div>
           ))}
         </div>
@@ -63,8 +73,11 @@ import Layout from '../layouts/Base.astro';
 
       <!-- CTA -->
       <div class="border-t border-[#0A0A0A]/8 pt-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-        <p class="text-[#0A0A0A]/30 text-sm max-w-[400px] leading-relaxed">If this is the standard you hold yourself to, the next step is the application.</p>
-        <a href="/command" class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">Apply →</a>
+        <p class="text-[#0A0A0A]/30 text-sm max-w-[400px] leading-relaxed">The system is built. The next step is yours.</p>
+        <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+          <a href="/vault" class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">Get the Blueprints →</a>
+          <a href="/footwork-foundation" class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/60 whitespace-nowrap">Start Free →</a>
+        </div>
       </div>
 
     </div>
