@@ -58,11 +58,26 @@ Universal bio link hub. Used on all platform bios. Order: Free Protocol → YouT
 
 ## Products — Stripe links
 - Workshop ($197): https://buy.stripe.com/7sY28r8lt1D06XU6446J20n
-- Workshop Replay ($47): https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p
-- Footwork Blueprint ($47): https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k
-- Shadowboxing Blueprint ($47): https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l
-- Bundle ($87): https://buy.stripe.com/14A4gz59hgxUaa65006J20m
+- Workshop Replay ($79): https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p  ← UPDATE STRIPE PRICE TO $79
+- Footwork Blueprint ($47 one-time): https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k
+- Shadowboxing Blueprint ($47 one-time): https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l
+- Bundle ($87 one-time): https://buy.stripe.com/14A4gz59hgxUaa65006J20m
 - Gumroad: no longer used — all purchases go through Stripe
+
+## Membership — Paid Brotherhood (continuity layer)
+- Footwork Blueprint Membership ($47/mo | $470/yr): prod_UZ9lTK2PhsS4xs
+- Shadowboxing Blueprint Membership ($47/mo | $470/yr): prod_UZ9vV79TAun9yB
+- Bundle Membership ($47/mo | $470/yr): prod_UZ9xqJt3glrCOO
+- ONE subscription per member — bundle is a single product, never stacked
+- Renewal fires invoice.payment_succeeded → fresh 7-day R2 presigned URLs regenerated
+- Add invoice.payment_succeeded to Stripe webhook events in dashboard
+
+## R2 Delivery — exact file paths (theerainers-vault bucket)
+- footwork: thefootworkblueprint/links_theFOOTWORKBlueprint.pdf
+- shadowboxing: the shadowboxing blueprint/the shadowboxing blueprint.pdf
+- bundle[0]: bundle/thefootworkblueprint/links_theFOOTWORKBlueprint.pdf
+- bundle[1]: bundle/the shadowboxing blueprint/the shadowboxing blueprint.pdf
+- workshop-replay: token-gated /watch/workshop-replay (unlisted YouTube, WATCH_TOKEN_SECRET)
 
 ## Featured YouTube video
 - ID: SrFywBFkmik

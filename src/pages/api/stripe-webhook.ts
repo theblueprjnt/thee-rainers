@@ -6,33 +6,30 @@ import { env as cfEnv } from 'cloudflare:workers';
 
 // ── product map ────────────────────────────────────────────────────────────
 // Maps Stripe product IDs → internal slug.
-// Add subscription product IDs here once created in Stripe Dashboard → Products.
 const PRODUCT_MAP: Record<string, string> = {
-  // One-time purchases (existing)
+  // One-time purchases
   'prod_UZreHroYQEDAFU': 'bundle',
   'prod_UZrejf6iuDorEA': 'footwork',
   'prod_UZreDlek9325EY': 'shadowboxing',
   'prod_UZOMBOeJ0mm15I': 'workshop-replay',
 
-  // Monthly subscriptions — create in Stripe Dashboard → Products → Add product → Recurring
-  // Bundle ($87/month) is ONE product here — never stack footwork + shadowboxing subscriptions
-  // 'prod_XXXXXXXXXXXX': 'bundle',        // Blueprint Bundle — Monthly ($87/mo)
-  // 'prod_XXXXXXXXXXXX': 'footwork',      // Footwork Blueprint — Monthly ($47/mo)
-  // 'prod_XXXXXXXXXXXX': 'shadowboxing',  // Shadowboxing Blueprint — Monthly ($47/mo)
+  // Membership — Paid Brotherhood ($47/mo or $470/yr)
+  // Bundle is ONE subscription — never stacks footwork + shadowboxing (no double charge)
+  'prod_UZ9lTK2PhsS4xs': 'footwork',      // Footwork Blueprint membership
+  'prod_UZ9vV79TAun9yB': 'shadowboxing',   // Shadowboxing Blueprint membership
+  'prod_UZ9xqJt3glrCOO': 'bundle',         // Bundle membership
 };
 
 // ── asset map ──────────────────────────────────────────────────────────────
-// Slug → R2 object key(s). Use string[] so bundle can deliver both files.
-// TO FIX: open each folder in R2 dashboard, copy the exact filename, update below.
-// Format: 'folder-name/exact-filename-as-uploaded.pdf'
+// Slug → R2 object key(s). string[] so bundle delivers both files in one event.
+// workshop-replay has no R2 asset — delivered via token-gated /watch/ page.
 const ASSET_MAP: Record<string, string[]> = {
-  'footwork':     ['thefootworkblueprint/thefootworkblueprint.pdf'],
+  'footwork':     ['thefootworkblueprint/links_theFOOTWORKBlueprint.pdf'],
   'shadowboxing': ['the shadowboxing blueprint/the shadowboxing blueprint.pdf'],
   'bundle':       [
-    'bundle/thefootworkblueprint/thefootworkblueprint.pdf',
+    'bundle/thefootworkblueprint/links_theFOOTWORKBlueprint.pdf',
     'bundle/the shadowboxing blueprint/the shadowboxing blueprint.pdf',
   ],
-  // 'workshop-replay' — no R2 asset; delivered via token-gated /watch/ page
 };
 
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
