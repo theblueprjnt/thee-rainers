@@ -15,10 +15,10 @@ import Layout from '../layouts/Base.astro';
           <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">The Identity</p>
           <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.82] mb-10">Not a brand.<br/>A standard.</h1>
           <p class="text-[#0A0A0A]/50 text-base leading-relaxed max-w-[480px] mb-8">
-              Thee Rainers is the operating system I built because the gym gave me fragments. No structure, no sequence, no source. I had to build it from the floor up — from the Word, from the film, from the data my own body gave me.
+            The Blueprints is the operating system I built because the gym gave me fragments. We athletes want to develop with structure — not more reps. I had to build it from the floor up, from what the data and my own body gave me.
           </p>
           <p class="text-[#0A0A0A]/30 text-sm leading-relaxed max-w-[480px]">
-            The mission is not to produce fighters. It is to produce people who think, move, and operate with systemic precision — and give the glory back to God when they do.
+            The mission is to produce people who think, move, and operate with systemic precision — because that is what this body was built for.
           </p>
         </div>
         <div class="hidden md:flex flex-col items-center gap-4">
@@ -31,29 +31,37 @@ import Layout from '../layouts/Base.astro';
             />
           </div>
           <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase text-center">The foundation started early.</p>
+          <div class="w-full max-w-[280px] aspect-[3/4] overflow-hidden border border-[#0A0A0A]/8 mt-2">
+            <img
+              src="/images/rainers-hero.jpg"
+              alt="Thee Rainers"
+              width="1894" height="2727"
+              class="w-full h-full object-cover object-top"
+            />
+          </div>
         </div>
       </div>
 
       <!-- The Ecosystem -->
       <div class="border-t border-[#0A0A0A]/8 pt-20 mb-20">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">What We Build Together</p>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">The Method</p>
         <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
           {[
             {
-              label: 'Daily Content',
-              line: 'Performance. Boxing. Practical self-improvement. Every day across @theerainers — the work made visible.',
+              label: 'Diagnosis First',
+              line: 'Every system starts with evidence — not opinion. Film. Data. The 7 levers. What is actually breaking your performance.',
             },
             {
-              label: 'Weekly YouTube',
-              line: 'Deep-format breakdowns on mechanics, kinetic chain, and why most training fails to transfer.',
+              label: 'Structured Protocol',
+              line: 'No fragments. Step-by-step modules built in sequence — stance, footwork, output. The mechanical base from the floor up.',
             },
             {
-              label: 'The Blueprints',
-              line: 'Step-by-step video modules. Footwork. Shadowboxing. The mechanical base built correctly from the floor up.',
+              label: 'Live Correction',
+              line: 'Monthly Q&A. Camera on. Real problems. Real-time corrections applied to your movement using the 7-lever framework.',
             },
             {
-              label: 'Monthly Live Q&A',
-              line: 'Live with the community. Real questions. Real corrections. The room where the work compounds.',
+              label: 'Private Architecture',
+              line: 'One fighter. One system. Built entirely around your body, your fight, and your timeline. Application only.',
             },
           ].map(item => (
             <div class="grid grid-cols-[160px_1fr] py-6 gap-6 items-baseline">
