@@ -1,0 +1,64 @@
+export const prerender = false;
+
+import Stripe from 'stripe';
+import { env as cfEnv } from 'cloudflare:workers';
+
+// Maps slug → existing Stripe subscription product IDs — no setup script needed.
+const PRODUCT_IDS: Record<string, { productId: string; interval: 'month' | 'year' }> = {
+  footwork_monthly:     { productId: 'prod_UZ9lTK2PhsS4xs', interval: 'month' },
+  footwork_annual:      { productId: 'prod_UZ9lTK2PhsS4xs', interval: 'year'  },
+  shadowboxing_monthly: { productId: 'prod_UZ9vV79TAun9yB', interval: 'month' },
+  shadowboxing_annual:  { productId: 'prod_UZ9vV79TAun9yB', interval: 'year'  },
+  bundle_monthly:       { productId: 'prod_UZ9xqJt3glrCOO', interval: 'month' },
+  bundle_annual:        { productId: 'prod_UZ9xqJt3glrCOO', interval: 'year'  },
+};
+
+export async function POST({ request }: { request: Request }): Promise<Response> {
+  const e = cfEnv as unknown as Record<string, string>;
+  const siteUrl = e['SITE_URL'] ?? 'https://theerainers.com';
+  const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': siteUrl };
+
+  try {
+    const { lookupKey } = await request.json() as { lookupKey: string };
+    if (!lookupKey || !PRODUCT_IDS[lookupKey]) {
+      return new Response(JSON.stringify({ error: 'unknown lookupKey' }), { status: 400, headers });
+    }
+
+    const stripe = new Stripe(e['STRIPE_SECRET_KEY'] ?? '', { httpClient: Stripe.createFetchHttpClient() });
+    const { productId, interval } = PRODUCT_IDS[lookupKey];
+
+    // Find the active recurring price for this product + interval
+    const prices = await stripe.prices.list({ product: productId, active: true, type: 'recurring', limit: 10 });
+    const price = prices.data.find(p => p.recurring?.interval === interval);
+    if (!price) {
+      return new Response(JSON.stringify({ error: 'no matching price found' }), { status: 404, headers });
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      mode: 'subscription',
+      line_items: [{ price: price.id, quantity: 1 }],
+      allow_promotion_codes: true,
+      billing_address_collection: 'auto',
+      success_url: `${siteUrl}/welcome?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteUrl}/vault`,
+      metadata: { lookup_key: lookupKey },
+      subscription_data: { metadata: { lookup_key: lookupKey } },
+    });
+
+    return new Response(JSON.stringify({ url: session.url }), { headers });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    return new Response(JSON.stringify({ error: msg }), { status: 500, headers });
+  }
+}
+
+export async function OPTIONS(): Promise<Response> {
+  const e = cfEnv as unknown as Record<string, string>;
+  return new Response(null, {
+    headers: {
+      'Access-Control-Allow-Origin': e['SITE_URL'] ?? 'https://theerainers.com',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
+}
