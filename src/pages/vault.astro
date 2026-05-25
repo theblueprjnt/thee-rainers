@@ -7,8 +7,8 @@ const products = [
     tag: 'Bundle · Best Value',
     title: 'Both Blueprints',
     sub: '100+ Rounds · Full System',
-    desc: 'Footwork + Shadowboxing. Complete operating system. Monthly Live Q&A included.',
-    price: '$87',
+    desc: 'Footwork + Shadowboxing. Complete operating system. Monthly Live Q&A included free.',
+    price: '$87', // NEEDS RAINERS: confirm bundle subscription price + swap url to subscription link
     url: 'https://buy.stripe.com/14A4gz59hgxUaa65006J20m',
     featured: true,
   },
@@ -18,7 +18,7 @@ const products = [
     title: 'Footwork Blueprint',
     sub: 'Win Fights with Footwork',
     desc: 'Full video breakdown. 56 drill rounds. 30-day progression. The base everything else runs on.',
-    price: '$47',
+    price: '$47/mo', // NEEDS RAINERS: swap url below to subscription payment link
     url: 'https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k',
     featured: false,
   },
@@ -28,7 +28,7 @@ const products = [
     title: 'Shadowboxing Blueprint',
     sub: 'Turn Shadowboxing Into Real Boxing',
     desc: 'Done-with-you session. Skill tests. Range control. The kinetic chain applied in motion.',
-    price: '$47',
+    price: '$47/mo', // NEEDS RAINERS: swap url below to subscription payment link
     url: 'https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l',
     featured: false,
   },
@@ -43,7 +43,7 @@ const productSchema = JSON.stringify(products.map(p => ({
   "brand": { "@type": "Brand", "name": "Thee Rainers" },
   "offers": {
     "@type": "Offer",
-    "price": p.price.replace('$', ''),
+    "price": parseFloat(p.price.replace(/[^0-9.]/g, '')),
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock",
     "url": p.url,
@@ -85,7 +85,7 @@ const productSchema = JSON.stringify(products.map(p => ({
                 <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
                 <a href={p.url} target="_blank"
                   class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
-                  Buy Now →
+                  {p.featured ? 'Get Bundle →' : 'Subscribe →'}
                 </a>
               </div>
             </div>
@@ -121,7 +121,7 @@ const productSchema = JSON.stringify(products.map(p => ({
             <div>
               <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">On Demand · Full Recording</p>
               <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-2xl leading-tight mb-3">Workshop Replay</h2>
-              <p class="text-[#0A0A0A]/60 text-xs leading-relaxed">The full 90-min session. Watch the corrections. Footwork, stance, punch mechanics. Apply the framework and rewatch as many times as you need.</p>
+              <p class="text-[#0A0A0A]/60 text-xs leading-relaxed">The full 90-min session. Watch the corrections. Footwork, stance, punch mechanics. Apply the framework. 7-day access window from purchase.</p>
             </div>
             <div class="flex items-center justify-between mt-8">
               <span class="font-black text-[#0A0A0A] text-2xl">$79</span>
@@ -146,6 +146,42 @@ const productSchema = JSON.stringify(products.map(p => ({
           class="shrink-0 inline-flex items-center justify-center font-bold border-2 border-[#6A0DAD] text-[#6A0DAD] bg-transparent px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#6A0DAD] hover:text-white transition-all duration-200 whitespace-nowrap">
           Apply →
         </a>
+      </div>
+
+      <!-- Monthly Q&A Community Call — free bonus block -->
+      <div class="mt-4 border border-[#D4A373]/25 bg-white overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-0">
+          <div class="p-8 md:p-10">
+            <div class="flex items-center gap-3 mb-5">
+              <span class="bg-[#D4A373]/15 border border-[#D4A373]/30 text-[#D4A373] text-[9px] font-black tracking-widest uppercase px-3 py-1.5">Included Free</span>
+              <span class="text-[#0A0A0A]/20 text-[9px] tracking-widest uppercase">With Every Blueprint</span>
+            </div>
+            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-3">Monthly Q&A<br/>Community Call</h2>
+            <p class="text-[#0A0A0A]/45 text-sm leading-relaxed max-w-[480px] mb-6">One Saturday per month. One hour. You bring the problem — we apply the 7-lever operating system to it live. Real-time diagnosis. No fluff. Included free with any Blueprint purchase.</p>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div class="flex items-center gap-6">
+                <div>
+                  <p class="text-[#D4A373] text-[9px] tracking-widest uppercase mb-0.5">Format</p>
+                  <p class="text-[#0A0A0A]/60 text-xs font-bold">Live · Zoom · Camera on</p>
+                </div>
+                <div class="w-px h-8 bg-[#0A0A0A]/8"></div>
+                <div>
+                  <p class="text-[#D4A373] text-[9px] tracking-widest uppercase mb-0.5">Cadence</p>
+                  <p class="text-[#0A0A0A]/60 text-xs font-bold">Every month · 1 hour</p>
+                </div>
+                <div class="w-px h-8 bg-[#0A0A0A]/8"></div>
+                <div>
+                  <p class="text-[#D4A373] text-[9px] tracking-widest uppercase mb-0.5">Cost</p>
+                  <p class="font-black text-[#D4A373] text-xs">Free</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hidden md:flex flex-col items-center justify-center bg-[#0A0A0A] px-12 py-10 self-stretch min-w-[200px]">
+            <p class="font-black text-white/15 uppercase tracking-tighter text-[3rem] leading-none mb-1">1×</p>
+            <p class="text-[#D4A373] text-[9px] tracking-widest uppercase text-center">Per Month<br/>Included</p>
+          </div>
+        </div>
       </div>
 
       <!-- Start free nudge -->
