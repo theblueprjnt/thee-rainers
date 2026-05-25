@@ -4,22 +4,35 @@ import type { APIContext } from 'astro';
 import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 
-// Stripe product ID → internal slug
+// ── product map ────────────────────────────────────────────────────────────
+// Maps Stripe product IDs → internal slug.
+// Add subscription product IDs here once created in Stripe Dashboard → Products.
 const PRODUCT_MAP: Record<string, string> = {
+  // One-time purchases (existing)
   'prod_UZreHroYQEDAFU': 'bundle',
   'prod_UZrejf6iuDorEA': 'footwork',
   'prod_UZreDlek9325EY': 'shadowboxing',
-  // Workshop Replay — paste the prod_ ID from Stripe Dashboard → Products
-  // 'prod_XXXXXXXXXXXX': 'workshop-replay',
+  'prod_UZOMBOeJ0mm15I': 'workshop-replay',
+
+  // Monthly subscriptions — create in Stripe Dashboard → Products → Add product → Recurring
+  // Bundle ($87/month) is ONE product here — never stack footwork + shadowboxing subscriptions
+  // 'prod_XXXXXXXXXXXX': 'bundle',        // Blueprint Bundle — Monthly ($87/mo)
+  // 'prod_XXXXXXXXXXXX': 'footwork',      // Footwork Blueprint — Monthly ($47/mo)
+  // 'prod_XXXXXXXXXXXX': 'shadowboxing',  // Shadowboxing Blueprint — Monthly ($47/mo)
 };
 
-// Slug → R2 object key for file-based products (workshop-replay uses signed watch URL instead)
-// NOTE: R2 bucket uses folder structure. Update these paths to match exact filenames in your bucket.
-// e.g. 'thefootworkblueprint/<filename>.pdf' — check R2 dashboard for exact names.
-const ASSET_MAP: Record<string, string> = {
-  'footwork':     'thefootworkblueprint/footwork-blueprint.pdf',
-  'shadowboxing': 'the shadowboxing blueprint/shadowboxing-blueprint.pdf',
-  'bundle':       'bundle/bundle.zip',
+// ── asset map ──────────────────────────────────────────────────────────────
+// Slug → R2 object key(s). Use string[] so bundle can deliver both files.
+// TO FIX: open each folder in R2 dashboard, copy the exact filename, update below.
+// Format: 'folder-name/exact-filename-as-uploaded.pdf'
+const ASSET_MAP: Record<string, string[]> = {
+  'footwork':     ['thefootworkblueprint/thefootworkblueprint.pdf'],
+  'shadowboxing': ['the shadowboxing blueprint/the shadowboxing blueprint.pdf'],
+  'bundle':       [
+    'bundle/thefootworkblueprint/thefootworkblueprint.pdf',
+    'bundle/the shadowboxing blueprint/the shadowboxing blueprint.pdf',
+  ],
+  // 'workshop-replay' — no R2 asset; delivered via token-gated /watch/ page
 };
 
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
@@ -99,34 +112,112 @@ async function generateR2PresignedUrl(
   return `https://${host}/${encodedKey}?${canonicalQS}&X-Amz-Signature=${signature}`;
 }
 
-// Generates a signed, time-limited URL for the on-site watch page.
-// No storage needed — expiry and authenticity are verified via HMAC on page load.
+// Stateless signed URL for the on-site /watch/ page — no KV needed.
 async function generateWatchUrl(secret: string, product: string): Promise<string> {
-  const exp = Math.floor(Date.now() / 1000) + SEVEN_DAYS_SECONDS;
+  const exp    = Math.floor(Date.now() / 1000) + SEVEN_DAYS_SECONDS;
   const sigBuf = await hmacBuf(new TextEncoder().encode(secret), `${product}:${exp}`);
-  const sig = Array.from(new Uint8Array(sigBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  const sig    = Array.from(new Uint8Array(sigBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
   return `${SITE_URL}/watch/${product}?sig=${sig}&exp=${exp}`;
+}
+
+// ── delivery ───────────────────────────────────────────────────────────────
+// Shared between checkout.session.completed and invoice.payment_succeeded (renewals).
+
+async function deliverProduct(
+  email: string,
+  productId: string,
+  e: Record<string, string>,
+): Promise<void> {
+  const deliveryUrl = e['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
+  if (!deliveryUrl) {
+    console.warn('[stripe-webhook] MAKE_DELIVERY_WEBHOOK_URL not set — delivery skipped');
+    return;
+  }
+
+  const token       = generateToken();
+  const productSlug = PRODUCT_MAP[productId] ?? 'unknown';
+
+  let expiringUrl: string | null  = null;
+  let expiringUrl2: string | null = null;
+
+  if (productSlug === 'workshop-replay') {
+    const watchSecret = e['WATCH_TOKEN_SECRET'] ?? '';
+    if (watchSecret) {
+      try {
+        expiringUrl = await generateWatchUrl(watchSecret, 'workshop-replay');
+      } catch (err) {
+        console.error('[stripe-webhook] Watch URL signing error:', String(err));
+      }
+    } else {
+      console.warn('[stripe-webhook] WATCH_TOKEN_SECRET not set');
+    }
+  } else {
+    const objectKeys = ASSET_MAP[productSlug] ?? [];
+    const r2AccountId = e['R2_ACCOUNT_ID'] ?? '';
+    const r2AccessKey = e['R2_ACCESS_KEY_ID'] ?? '';
+    const r2SecretKey = e['R2_SECRET_ACCESS_KEY'] ?? '';
+    const r2Bucket    = e['R2_BUCKET_NAME'] ?? '';
+    const r2Ready     = r2AccountId && r2AccessKey && r2SecretKey && r2Bucket;
+
+    if (r2Ready && objectKeys.length > 0) {
+      try {
+        expiringUrl = await generateR2PresignedUrl(
+          r2AccountId, r2AccessKey, r2SecretKey, r2Bucket, objectKeys[0],
+        );
+        // Bundle: second file (shadowboxing blueprint)
+        if (objectKeys[1]) {
+          expiringUrl2 = await generateR2PresignedUrl(
+            r2AccountId, r2AccessKey, r2SecretKey, r2Bucket, objectKeys[1],
+          );
+        }
+      } catch (err) {
+        console.error('[stripe-webhook] R2 presign error:', String(err));
+      }
+    } else {
+      console.warn('[stripe-webhook] R2 skipped — env vars missing or no asset for slug:', productSlug);
+    }
+  }
+
+  const payload: Record<string, string | null> = {
+    email,
+    product_id:    productId,
+    product_slug:  productSlug,
+    token,
+    expiring_url:  expiringUrl,
+    expiring_url_2: expiringUrl2, // only populated for bundle; null for all others
+  };
+
+  console.log('[stripe-webhook] Delivering:', JSON.stringify({
+    ...payload,
+    token: '[redacted]',
+    expiring_url:   expiringUrl   ? '[url-generated]' : null,
+    expiring_url_2: expiringUrl2  ? '[url-generated]' : null,
+  }));
+
+  try {
+    const res = await fetch(deliveryUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error(`Make.com responded ${res.status}: ${await res.text()}`);
+    console.log('[stripe-webhook] Delivery success for', productSlug);
+  } catch (err) {
+    console.error('[stripe-webhook] Delivery error:', String(err));
+    // Do not re-throw — Stripe must receive 200 regardless of downstream failures
+  }
 }
 
 // ── handler ────────────────────────────────────────────────────────────────
 
 export async function POST({ request }: APIContext): Promise<Response> {
   const e = cfEnv as unknown as Record<string, string>;
-  const webhookSecret  = e['STRIPE_WEBHOOK_SECRET'] ?? '';
-  const stripeKey      = e['STRIPE_SECRET_KEY'] ?? '';
-  const deliveryUrl    = e['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
-  const r2AccountId    = e['R2_ACCOUNT_ID'] ?? '';
-  const r2AccessKey    = e['R2_ACCESS_KEY_ID'] ?? '';
-  const r2SecretKey    = e['R2_SECRET_ACCESS_KEY'] ?? '';
-  const r2Bucket       = e['R2_BUCKET_NAME'] ?? '';
-  const watchSecret    = e['WATCH_TOKEN_SECRET'] ?? '';
+  const webhookSecret = e['STRIPE_WEBHOOK_SECRET'] ?? '';
+  const stripeKey     = e['STRIPE_SECRET_KEY'] ?? '';
 
   if (!webhookSecret || !stripeKey) {
     console.error('[stripe-webhook] Missing STRIPE_WEBHOOK_SECRET or STRIPE_SECRET_KEY');
     return new Response('Misconfigured', { status: 500 });
-  }
-  if (!deliveryUrl) {
-    console.warn('[stripe-webhook] MAKE_DELIVERY_WEBHOOK_URL not set — purchases logged only');
   }
 
   const rawBody   = await request.text();
@@ -145,10 +236,10 @@ export async function POST({ request }: APIContext): Promise<Response> {
     return new Response('Invalid signature', { status: 400 });
   }
 
+  // ── initial purchase (one-time or first subscription payment) ────────────
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
     const email   = session.customer_details?.email ?? session.customer_email ?? '';
-    const token   = generateToken();
 
     let productId = '';
     try {
@@ -163,65 +254,44 @@ export async function POST({ request }: APIContext): Promise<Response> {
       console.error('[stripe-webhook] listLineItems error:', String(err));
     }
 
-    const productSlug = PRODUCT_MAP[productId] ?? 'unknown';
-    let expiringUrl: string | null = null;
+    if (email && productId) {
+      await deliverProduct(email, productId, e);
+    }
+  }
 
-    if (productSlug === 'workshop-replay') {
-      // Deliver via on-site token-gated watch page — no R2 file needed
-      if (watchSecret) {
-        try {
-          expiringUrl = await generateWatchUrl(watchSecret, 'workshop-replay');
-        } catch (err) {
-          console.error('[stripe-webhook] Watch URL signing error:', String(err));
-        }
-      } else {
-        console.warn('[stripe-webhook] WATCH_TOKEN_SECRET not set — watch URL not generated');
-      }
-    } else {
-      // File-based products — R2 presigned URL
-      const objectKey = ASSET_MAP[productSlug];
-      const r2Ready   = r2AccountId && r2AccessKey && r2SecretKey && r2Bucket;
+  // ── subscription renewal — regenerate fresh access links each billing cycle ──
+  // billing_reason 'subscription_create' is skipped intentionally:
+  // checkout.session.completed already handled the initial delivery above.
+  if (event.type === 'invoice.payment_succeeded') {
+    const invoice = event.data.object as Stripe.Invoice;
 
-      if (objectKey && r2Ready) {
-        try {
-          expiringUrl = await generateR2PresignedUrl(
-            r2AccountId, r2AccessKey, r2SecretKey, r2Bucket, objectKey,
-          );
-        } catch (err) {
-          console.error('[stripe-webhook] R2 presign error:', String(err));
+    if (invoice.billing_reason !== 'subscription_cycle') {
+      return new Response(JSON.stringify({ received: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const email = invoice.customer_email ?? '';
+    let productId = '';
+
+    const subId = typeof invoice.subscription === 'string' ? invoice.subscription : null;
+    if (subId) {
+      try {
+        const subscription = await stripe.subscriptions.retrieve(subId, {
+          expand: ['items.data.price.product'],
+        });
+        const product = subscription.items.data[0]?.price?.product;
+        if (product && typeof product === 'object' && 'id' in product) {
+          productId = (product as Stripe.Product).id;
         }
-      } else {
-        console.warn('[stripe-webhook] R2 skipped — env vars missing or no asset for slug:', productSlug);
+      } catch (err) {
+        console.error('[stripe-webhook] subscription retrieve error:', String(err));
       }
     }
 
-    const payload = {
-      email,
-      product_id:   productId,
-      product_slug: productSlug,
-      token,
-      expiring_url: expiringUrl,
-    };
-
-    console.log('[stripe-webhook] Delivering:', JSON.stringify({
-      ...payload,
-      token: '[redacted]',
-      expiring_url: expiringUrl ? '[url-generated]' : null,
-    }));
-
-    if (deliveryUrl) {
-      try {
-        const res = await fetch(deliveryUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error(`Make.com responded ${res.status}: ${await res.text()}`);
-        console.log('[stripe-webhook] Delivery success');
-      } catch (err) {
-        console.error('[stripe-webhook] Delivery error:', String(err));
-        // Always return 200 to Stripe — never let downstream failures cause retries
-      }
+    if (email && productId) {
+      await deliverProduct(email, productId, e);
     }
   }
 
