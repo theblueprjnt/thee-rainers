@@ -3,93 +3,167 @@ import Layout from '../layouts/Base.astro';
 ---
 <Layout title="Monthly Q&A — Thee Rainers">
   <Fragment slot="head">
-    <meta name="description" content="Monthly live Q&A included with every paid product. One hour. Real-time diagnosis through the 7 levers." />
+    <meta name="description" content="One hour. One Saturday per month. You bring the problem — we apply the 7-lever system to it live. Included with every Blueprint." />
   </Fragment>
 
-  <!-- Hero -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24 items-start">
+  <!-- Hero: 60/40 — text left, coaching photo right -->
+  <section class="bg-white overflow-hidden border-b border-[#0A0A0A]/8">
 
-        <div>
-          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Monthly · Included with every paid product</p>
-          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.82] mb-10">Live Q&A.<br/>Real diagnosis.</h1>
-          <p class="text-[#0A0A0A]/50 text-base leading-relaxed mb-6 max-w-[480px]">
-            The protocol gives you the system. The library gives you the depth. This is where you bring what is not transferring — and we map it to the lever in real time.
-          </p>
-          <p class="text-[#0A0A0A]/35 text-sm leading-relaxed mb-10 max-w-[480px]">
-            One hour. One Saturday per month. No fluff, no performance, no upsell. You show up with a problem. We apply the operating system to it — live. Included with any paid product or Workshop.
-          </p>
+    <!-- Mobile photo strip -->
+    <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 60vw; max-height: 340px;">
+      <img
+        src="/images/coaching_amateurboxerinnetherlands.png"
+        alt="Live Q&A — real-time coaching session"
+        width="1200" height="1500"
+        loading="eager"
+        class="w-full h-full object-cover object-top"
+      />
+    </div>
 
-          <!-- Next session callout -->
-          <div class="border-l-2 border-[#D4A373] pl-6 mb-10">
-            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-1">Next Session</p>
-            <!-- TODO: POST-JUNE-27 DATE SWAP -->
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight">Saturday, June 13</p>
-            <p class="text-[#0A0A0A]/40 text-sm mt-1">1 hour · Live · Camera on · Real-time diagnosis</p>
-          </div>
+    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[88vh]">
 
-          <!-- Registration Form -->
-          <div class="border border-[#0A0A0A]/8 bg-[#F6F6F6] p-8 max-w-[480px]">
-            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-6">Reserve your place</p>
-            <form id="qa-form" class="flex flex-col gap-4">
-              <input
-                type="email"
-                id="qa-email"
-                required
-                placeholder="your@email.com"
-                class="border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20"
-              />
-              <button
-                type="submit"
-                id="qa-submit"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white"
-              >
-                Register →
-              </button>
-            </form>
-            <p id="qa-success" class="hidden text-[#D4A373] text-sm tracking-wide mt-4">Registered. Details sent before June 13.</p> <!-- TODO: POST-JUNE-27 DATE SWAP -->
-            <p id="qa-error" class="hidden text-[#0A0A0A]/40 text-sm mt-4">Something went wrong. Try again.</p>
-          </div>
+      <!-- Left 60% -->
+      <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Live · Monthly · One Hour</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.82] mb-8">
+          Live Q&A.<br/><span style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Real</span> Diagnosis.
+        </h1>
+        <p class="text-[#0A0A0A]/55 text-base leading-relaxed mb-5 max-w-[480px]">
+          You bring what is not transferring. We map it to the lever — live, on camera, in real time. One correction. No fluff. No upsell.
+        </p>
+        <p class="text-[#0A0A0A]/30 text-sm leading-relaxed mb-10 max-w-[480px]">
+          One Saturday per month. Camera on. You leave with a correction you can run in your next session. Included free with any Blueprint.
+        </p>
+
+        <!-- Next session -->
+        <div class="border-l-2 border-[#D4A373] pl-6 mb-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-1">Next Session</p>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight">Saturday, June 13</p>
+          <p class="text-[#0A0A0A]/40 text-sm mt-1">1 hour · Live · Camera on · Real-time diagnosis</p>
         </div>
 
-        <div class="flex flex-col gap-[2px]">
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-8">
-            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Perceptual</p>
-            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">You are not reading the cue early enough. Bring the sparring problem. We diagnose the perceptual leak and prescribe the drill.</p>
-          </div>
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-8">
-            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Mechanical</p>
-            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">The chain is breaking between the floor and the fist. Show the movement. We find the break. One correction — not five.</p>
-          </div>
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-8">
-            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Existential</p>
-            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">The mechanics are there in drilling. They dissolve under pressure. Layer 3 problem — identity, presence, internal standard. We address it directly.</p>
-          </div>
+        <!-- Registration form -->
+        <div class="border border-[#0A0A0A]/8 bg-[#F6F6F6] p-8 max-w-[480px]">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Reserve Your Place</p>
+          <p class="text-[#0A0A0A]/30 text-xs mb-5">Blueprint owner or new — register and we'll confirm your access before the call.</p>
+          <form id="qa-form" class="flex flex-col gap-4">
+            <input
+              type="email"
+              id="qa-email"
+              required
+              placeholder="your@email.com"
+              class="border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20"
+            />
+            <button
+              type="submit"
+              id="qa-submit"
+              class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white"
+            >
+              Register →
+            </button>
+          </form>
+          <p id="qa-success" class="hidden text-[#D4A373] text-sm tracking-wide mt-4">Registered. Details sent before June 13.</p>
+          <p id="qa-error" class="hidden text-[#0A0A0A]/40 text-sm mt-4">Something went wrong. Try again.</p>
+        </div>
+      </div>
+
+      <!-- Right 40%: coaching photo — desktop only -->
+      <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]">
+        <img
+          src="/images/coaching_amateurboxerinnetherlands.png"
+          alt="Live Q&A — real-time coaching session"
+          width="1200" height="1500"
+          loading="eager"
+          class="absolute inset-0 w-full h-full object-cover object-top"
+        />
+      </div>
+
+    </div>
+  </section>
+
+  <!-- What happens in a session — 3 layers -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20 border-b border-white/5">
+    <div class="max-w-[1280px] mx-auto w-full">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">What Gets Solved</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/5">
+
+        <div class="bg-[#0A0A0A] p-8 md:p-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Perceptual</p>
+          <p class="font-black text-white uppercase tracking-tight text-lg leading-tight mb-4">You're not reading the cue early enough.</p>
+          <p class="text-white/35 text-sm leading-relaxed">Bring the sparring problem. We diagnose the perceptual leak and prescribe the one drill that closes it.</p>
+        </div>
+
+        <div class="bg-[#0A0A0A] p-8 md:p-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Mechanical</p>
+          <p class="font-black text-white uppercase tracking-tight text-lg leading-tight mb-4">The chain breaks between floor and fist.</p>
+          <p class="text-white/35 text-sm leading-relaxed">Show the movement on camera. We find the break. One correction — not five. You run it in your next session.</p>
+        </div>
+
+        <div class="bg-[#0A0A0A] p-8 md:p-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Existential</p>
+          <p class="font-black text-white uppercase tracking-tight text-lg leading-tight mb-4">The mechanics work in drilling. Not under pressure.</p>
+          <p class="text-white/35 text-sm leading-relaxed">Layer 3 problem — identity, presence, internal standard. We address it directly. This is where the standard gets set.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Scripture + Upgrade -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-24 border-t border-[#0A0A0A]/8">
+  <!-- Access path — two lanes -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto w-full">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">How to Get In</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Already a customer -->
+        <div class="border border-[#0A0A0A]/10 p-10 flex flex-col justify-between gap-8">
+          <div>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Blueprint Owner</p>
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-2xl leading-tight mb-4">You're Already In.</p>
+            <p class="text-[#0A0A0A]/45 text-sm leading-relaxed">If you have any Blueprint, the Q&A is included. Register above and we'll confirm before the call. No extra charge, no waitlist.</p>
+          </div>
+          <a href="#qa-form"
+            class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A]/20 text-[#0A0A0A]/50 bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/40 hover:text-[#0A0A0A]/80 whitespace-nowrap self-start">
+            Register Above →
+          </a>
+        </div>
+
+        <!-- Not yet a customer -->
+        <div class="border-2 border-[#0057FF]/20 hover:border-[#0057FF] transition-colors duration-200 p-10 flex flex-col justify-between gap-8 group">
+          <div>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">New Here</p>
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-2xl leading-tight mb-4">Get a Blueprint. Unlock the Q&A.</p>
+            <p class="text-[#0A0A0A]/45 text-sm leading-relaxed">Any Blueprint ($47/mo) gives you access to the monthly Q&A plus the full video module. The Q&A is where the Blueprint gets applied to your specific problem.</p>
+          </div>
+          <a href="/vault"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap self-start">
+            Get a Blueprint →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripture + Private Architecture path -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-24">
     <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-16">
       <div class="max-w-[560px]">
         <p class="font-black text-[#0A0A0A]/55 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-6">"Iron sharpens iron, and one man sharpens another."</p>
         <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-10">Proverbs 27:17</p>
-        <p class="text-[#0A0A0A]/30 text-sm leading-relaxed">The free tier builds the foundation. The Q&A is where the system compounds — in community, under a standard, with direct access to the architect. Unlock it with any paid product.</p>
+        <p class="text-[#0A0A0A]/30 text-sm leading-relaxed">The Q&A is the room where the system compounds — in community, under a standard, with direct access to the architect. If your problem needs more than one hour per month, that path exists.</p>
       </div>
       <div class="flex flex-col gap-4 shrink-0">
-        <a href="/vault" class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
-          Enter the Vault →
+        <a href="/vault" class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
+          Get a Blueprint →
         </a>
-        <a href="/command" class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/50">
-          Apply for 1-on-1 →
+        <a href="/command" class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/50 whitespace-nowrap">
+          Apply for Private Architecture →
         </a>
       </div>
     </div>
   </section>
+
 </Layout>
 
 <script>
