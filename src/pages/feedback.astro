@@ -24,6 +24,12 @@ import Layout from '../layouts/Base.astro';
             </div>
 
             <div class="flex flex-col gap-2">
+              <label for="email" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Email</label>
+              <input type="email" id="email" required placeholder="—"
+                class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
+            </div>
+
+            <div class="flex flex-col gap-2">
               <label for="lever" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Which lever are you working on?</label>
               <select id="lever" required
                 class="border-b border-[#0A0A0A]/15 bg-white py-3 text-[#0A0A0A]/60 text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 appearance-none cursor-pointer">
@@ -85,12 +91,18 @@ import Layout from '../layouts/Base.astro';
       status.classList.remove('hidden');
       status.innerText = 'Submitting...';
 
+      const name       = (document.getElementById('name')       as HTMLInputElement).value.trim();
+      const email      = (document.getElementById('email')      as HTMLInputElement).value.trim();
+      const lever      = (document.getElementById('lever')      as HTMLSelectElement).value;
+      const gap        = (document.getElementById('gap')        as HTMLTextAreaElement).value.trim();
+      const suggestion = (document.getElementById('suggestion') as HTMLTextAreaElement).value.trim();
+
       const payload = {
-        name: (document.getElementById('name') as HTMLInputElement).value || 'Anonymous',
-        lever: (document.getElementById('lever') as HTMLSelectElement).value,
-        gap: (document.getElementById('gap') as HTMLTextAreaElement).value,
-        suggestion: (document.getElementById('suggestion') as HTMLTextAreaElement).value,
-        source: 'Feedback Loop',
+        full_name: name || 'Anonymous',
+        email,
+        phone: '0000000',
+        reason: lever || 'Feedback',
+        message: gap + (suggestion ? '\n\nWhat would make it more useful:\n' + suggestion : ''),
       };
 
       try {
@@ -99,7 +111,8 @@ import Layout from '../layouts/Base.astro';
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
-        if (res.ok) {
+        const body = await res.json() as { success: boolean };
+        if (body.success) {
           form.reset();
           status.innerText = 'Received. It is in the loop.';
         } else {

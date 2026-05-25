@@ -66,37 +66,15 @@ const {
       />
     </div>
 
-    <div>
-      <label
-        for={`${id}-phone`}
-        class="block font-medium text-navy mb-2"
-        style="font-size: var(--font-size-small);"
-      >
-        Phone (with country code)
-      </label>
-      <input
-        type="tel"
-        name="phone"
-        id={`${id}-phone`}
-        required
-        autocomplete="tel"
-        placeholder="+371 20 000 000"
-        class="block w-full px-4 py-3.5 border border-rule bg-white text-ink
-               placeholder:text-muted focus:outline-none focus:border-navy
-               transition-colors duration-200"
-        style="font-size: var(--font-size-body);"
-      />
-    </div>
-
     <button
       type="submit"
       data-lead-submit
       class="inline-flex items-center justify-center
-             bg-terracotta text-white
+             border-2 border-[#0057FF] text-[#0057FF] bg-transparent
              px-8 py-3.5
              font-semibold tracking-wide
-             hover:opacity-90 active:opacity-80
-             transition-opacity duration-200
+             hover:bg-[#0057FF] hover:text-white
+             transition-all duration-200
              cursor-pointer
              w-full sm:w-auto self-start"
       style="font-size: var(--font-size-small);"
@@ -139,14 +117,13 @@ const {
       const data = new FormData(form);
       const full_name = (data.get('full_name') as string ?? '').trim();
       const email = (data.get('email') as string ?? '').trim();
-      const phone = (data.get('phone') as string ?? '').trim();
       const source = (data.get('source') as string) || 'footwork-foundation';
 
       try {
         const res = await fetch('/api/lead-capture', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ full_name, email, phone, source }),
+          body: JSON.stringify({ full_name, email, source }),
         });
 
         const body = await res.json() as { success: boolean; error?: string };

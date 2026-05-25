@@ -7,11 +7,11 @@
     </a>
 
     <nav class="hidden md:flex items-center gap-8 mr-8">
-      <a href="/library" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Library</a>
-      <a href="/vault" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Blueprints</a>
-      <a href="/workshop" class="text-[#0057FF] text-[11px] tracking-widest uppercase hover:opacity-70 transition-opacity duration-200">Masterclass</a>
-      <a href="/about" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">About</a>
-      <a href="/command" class="text-[#6A0DAD]/70 text-[11px] tracking-widest uppercase hover:text-[#6A0DAD] transition-colors duration-200">Apply</a>
+      <a href="/library" data-nav-path="/library" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Library</a>
+      <a href="/vault" data-nav-path="/vault" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Blueprints</a>
+      <a href="/workshop" data-nav-path="/workshop" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Masterclass</a>
+      <a href="/about" data-nav-path="/about" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">About</a>
+      <a href="/command" data-nav-path="/command" class="text-[#6A0DAD]/70 text-[11px] tracking-widest uppercase hover:text-[#6A0DAD] transition-colors duration-200">Apply</a>
     </nav>
     <a href="/footwork-foundation" class="hidden md:inline-flex items-center justify-center font-bold text-xs tracking-widest uppercase px-6 py-2.5 border-2 border-[#0057FF] text-[#0057FF] bg-transparent hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">Start Free →</a>
 
@@ -22,11 +22,11 @@
     </button>
 
     <div id="mobile-menu" class="fixed inset-0 bg-white z-40 flex-col items-center justify-center gap-6 hidden">
-      <a href="/library" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Library</a>
-      <a href="/vault" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Blueprints</a>
-      <a href="/workshop" class="text-xl font-bold text-[#0057FF] tracking-widest uppercase hover:opacity-70 transition-opacity mobile-link">Masterclass</a>
-      <a href="/about" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">About</a>
-      <a href="/command" class="text-xl font-bold text-[#6A0DAD]/70 tracking-widest uppercase hover:text-[#6A0DAD] transition-colors mobile-link">Apply</a>
+      <a href="/library" data-nav-path="/library" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Library</a>
+      <a href="/vault" data-nav-path="/vault" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Blueprints</a>
+      <a href="/workshop" data-nav-path="/workshop" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Masterclass</a>
+      <a href="/about" data-nav-path="/about" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">About</a>
+      <a href="/command" data-nav-path="/command" class="text-xl font-bold text-[#6A0DAD]/70 tracking-widest uppercase hover:text-[#6A0DAD] transition-colors mobile-link">Apply</a>
       <a href="/footwork-foundation" class="text-xl font-bold border-2 border-[#0057FF] text-[#0057FF] px-10 py-4 tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all mobile-link">Start Free →</a>
     </div>
   </div>
@@ -52,4 +52,20 @@
 
   btn.addEventListener('click', toggleMenu);
   links.forEach(link => link.addEventListener('click', toggleMenu));
+
+  // Active state — highlight current page, aria-current for screen readers
+  const currentPath = window.location.pathname;
+  document.querySelectorAll<HTMLAnchorElement>('[data-nav-path]').forEach(link => {
+    const target = link.dataset.navPath ?? '';
+    const isActive = currentPath === target || (target.length > 1 && currentPath.startsWith(target + '/'));
+    if (!isActive) return;
+    link.setAttribute('aria-current', 'page');
+    if (target === '/command') {
+      link.classList.remove('text-[#6A0DAD]/70');
+      link.classList.add('text-[#6A0DAD]');
+    } else {
+      link.classList.remove('text-[#0A0A0A]/40', 'text-[#0A0A0A]/50');
+      link.classList.add('text-[#0057FF]');
+    }
+  });
 </script>
