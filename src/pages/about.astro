@@ -6,43 +6,62 @@ import Layout from '../layouts/Base.astro';
     <meta name="description" content="Thee Rainers is the operating system built from the floor up — from film, data, and the body itself. For athletes whose ambition has outpaced their gym." />
   </Fragment>
 
-  <!-- Identity -->
-  <section class="bg-white min-h-screen px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-24">
+  <!-- Identity: heading full-width, then balanced 2-col -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 md:pt-40 pb-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto w-full">
 
-      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24 mb-24">
-        <div>
-          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">The Identity</p>
-          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.82] mb-10">Not a brand.<br/>A standard.</h1>
-          <p class="text-[#0A0A0A]/50 text-base leading-relaxed max-w-[480px] mb-8">
+      <!-- Full-width heading — no competing with image -->
+      <div class="mb-16 md:mb-20">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The Identity</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.82]"
+          style="font-size: clamp(2.75rem, 7vw, 5.5rem);">
+          Not a brand.<br/>A standard.
+        </h1>
+      </div>
+
+      <!-- 2-col: text left, image right — heights naturally match -->
+      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24 items-start">
+        <div class="flex flex-col gap-7">
+          <p class="text-[#0A0A0A]/55 leading-relaxed" style="font-size: clamp(1rem, 1.25vw, 1.125rem); max-width: 520px;">
             The Blueprints is the operating system I built because the gym gave me fragments. We athletes want to develop with structure — not more reps. I had to build it from the floor up, from what the data and my own body gave me.
           </p>
-          <p class="text-[#0A0A0A]/30 text-sm leading-relaxed max-w-[480px]">
+          <p class="text-[#0A0A0A]/30 text-base leading-relaxed max-w-[520px]">
             The mission is to produce people who think, move, and operate with systemic precision — because that is what this body was built for.
           </p>
         </div>
-        <div class="hidden md:flex flex-col items-center gap-4">
-          <div class="w-full max-w-[280px] aspect-[3/4] overflow-hidden border border-[#0A0A0A]/8">
+        <div class="hidden md:block">
+          <div class="aspect-[4/5] overflow-hidden border border-[#0A0A0A]/8">
             <img
               src="/images/aikido-yellowbelt.png"
               alt="The foundation started early."
               width="1102" height="1470"
+              loading="lazy"
               class="w-full h-full object-cover object-top"
             />
           </div>
-          <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase text-center">The foundation started early.</p>
-          <div class="w-full max-w-[280px] aspect-[3/4] overflow-hidden border border-[#0A0A0A]/8 mt-2">
-            <img
-              src="/images/rainers-hero.jpg"
-              alt="Thee Rainers"
-              width="1894" height="2727"
-              class="w-full h-full object-cover object-top"
-            />
-          </div>
+          <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase mt-4">The foundation started early.</p>
         </div>
       </div>
 
-      <!-- The Ecosystem -->
+    </div>
+  </section>
+
+  <!-- Cinematic photo strip: rainers-hero — visual break between sections -->
+  <div class="w-full overflow-hidden bg-[#0A0A0A]" style="height: 50vw; max-height: 580px; min-height: 260px;">
+    <img
+      src="/images/rainers-hero.jpg"
+      alt="Thee Rainers"
+      width="1894" height="2727"
+      loading="lazy"
+      class="w-full h-full object-cover object-top"
+    />
+  </div>
+
+  <!-- The Method + Scripture + CTA -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 pt-20 pb-24">
+    <div class="max-w-[1280px] mx-auto w-full">
+
+      <!-- The Method -->
       <div class="border-t border-[#0A0A0A]/8 pt-20 mb-20">
         <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">The Method</p>
         <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
@@ -64,7 +83,7 @@ import Layout from '../layouts/Base.astro';
               line: 'One fighter. One system. Built entirely around your body, your fight, and your timeline. Application only.',
             },
           ].map(item => (
-            <div class="grid grid-cols-[160px_1fr] py-6 gap-6 items-baseline">
+            <div class="grid grid-cols-[180px_1fr] py-7 gap-8 items-baseline">
               <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">{item.label}</p>
               <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">{item.line}</p>
             </div>
@@ -74,7 +93,8 @@ import Layout from '../layouts/Base.astro';
 
       <!-- Scripture -->
       <div class="border-t border-[#0A0A0A]/8 pt-20 mb-20">
-        <p class="font-black text-[#0A0A0A]/55 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] max-w-[640px] mb-6">
+        <p class="font-black text-[#0A0A0A]/55 uppercase tracking-tighter leading-[0.88] max-w-[640px] mb-6"
+          style="font-size: clamp(1.5rem, 3vw, 2.5rem);">
           "Run in such a way as to get the prize. Every athlete exercises self-control in all things. So I do not run aimlessly; I do not box as one beating the air."
         </p>
         <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:24–26 · The Source Code</p>

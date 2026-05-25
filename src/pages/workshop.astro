@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Base.astro';
 import { Picture } from 'astro:assets';
-import defenseCover from '../assets/aikido-yellowbelt.png';
 import defenseCover1 from '../assets/defense_cover1.jpg';
 
 const faqItems = [
@@ -73,13 +72,10 @@ const faqSchema = JSON.stringify({
 
     <!-- Mobile image strip -->
     <div class="md:hidden w-full overflow-hidden bg-[#0D1F1F]" style="height: 65vw; max-height: 360px;">
-      <Picture
-        src={defenseCover}
-        formats={['avif', 'webp']}
-        widths={[480, 800]}
-        sizes="100vw"
-        alt="Defense Workshop — live 1-on-1 boxing coaching session"
-        quality={80}
+      <img
+        src="/images/sparring-netherlands.png"
+        alt="Defense Workshop — live boxing sparring session"
+        width="1920" height="1080"
         loading="eager"
         fetchpriority="high"
         class="w-full h-full object-cover object-top"
@@ -106,15 +102,12 @@ const faqSchema = JSON.stringify({
         </div>
       </div>
 
-      <!-- Right 40%: defense_cover — desktop only -->
+      <!-- Right 40%: sparring photo — desktop only -->
       <div class="hidden md:block relative overflow-hidden bg-[#0D1F1F]">
-        <Picture
-          src={defenseCover}
-          formats={['avif', 'webp']}
-          widths={[600, 900, 1166]}
-          sizes="40vw"
-          alt="Defense Workshop — live 1-on-1 boxing coaching session"
-          quality={80}
+        <img
+          src="/images/sparring-netherlands.png"
+          alt="Defense Workshop — live boxing sparring session"
+          width="1920" height="1080"
           loading="eager"
           fetchpriority="high"
           class="absolute inset-0 w-full h-full object-cover object-top"
