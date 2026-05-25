@@ -32,7 +32,7 @@ const eventSchema = JSON.stringify({
   "@type": "Event",
   "name": "Defense Workshop",
   "description": "90 minutes. Camera on. Real-time correction on your defensive structure, movement patterns, and mechanical foundation.",
-  "startDate": "2026-06-27",
+  "startDate": "2026-06-27", // TODO: POST-JUNE-27 DATE SWAP
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
   "location": { "@type": "VirtualLocation", "url": "https://theerainers.com/workshop" },
@@ -61,6 +61,7 @@ const faqSchema = JSON.stringify({
   <Fragment slot="head">
     <script type="application/ld+json" set:html={eventSchema} />
     <script type="application/ld+json" set:html={faqSchema} />
+    <!-- TODO: POST-JUNE-27 DATE SWAP — update both meta tags below -->
     <meta name="description" content="90 minutes. Camera on. Real-time correction on your defensive structure, movement, and mechanics. Saturday, June 27. $197." />
     <meta property="og:title" content="Defense Workshop — Thee Rainers" />
     <meta property="og:description" content="90 minutes. Camera on. Real-time correction on your defensive structure. Saturday, June 27. $197." />
@@ -89,6 +90,7 @@ const faqSchema = JSON.stringify({
 
       <!-- Left 60%: Content -->
       <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
+        <!-- TODO: POST-JUNE-27 DATE SWAP -->
         <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Live · June 27 · 90 Min · <span id="workshop-countdown" class="tabular-nums"></span></p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">The Defense<br/>Workshop.</h1>
         <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">Camera on. Real-time correction on your defensive structure, movement patterns, and mechanical foundation. You leave with a framework you run again and again.</p>
@@ -144,6 +146,7 @@ const faqSchema = JSON.stringify({
             </div>
           </div>
           <div class="mt-12">
+            <!-- TODO: POST-JUNE-27 DATE SWAP -->
             <p class="text-white/25 text-[10px] tracking-widest uppercase mb-5">Limited seats · Saturday, June 27</p>
             <div class="flex items-center justify-between">
               <span class="text-white font-black text-4xl">$197</span>
@@ -165,7 +168,7 @@ const faqSchema = JSON.stringify({
 
           <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex-1">
             <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">The Composure Guarantee</p>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Show up, do the work. If you don't walk away with a clear framework, email rainers@stepintoring.com within 24 hours. Full refund. No questions.</p>
+            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Show up, do the work. If you don't walk away with a clear framework, email rainers@theerainers.com within 24 hours. Full refund. No questions.</p>
           </div>
 
           <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex-1">
@@ -284,7 +287,7 @@ const faqSchema = JSON.stringify({
 <script>
   const el = document.getElementById('workshop-countdown');
   if (el) {
-    const target = new Date('2026-06-27T00:00:00').getTime();
+    const target = new Date('2026-06-27T00:00:00').getTime(); // TODO: POST-JUNE-27 DATE SWAP
     const update = () => {
       const days = Math.ceil((target - Date.now()) / 86400000);
       el.textContent = days > 0 ? days + ' days away' : 'Today';
