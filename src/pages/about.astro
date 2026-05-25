@@ -12,7 +12,7 @@ import Layout from '../layouts/Base.astro';
 
       <!-- Full-width heading — no competing with image -->
       <div class="mb-16 md:mb-20">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The Identity</p>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Thee Rainers · @theerainers</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.82]"
           style="font-size: clamp(2.75rem, 7vw, 5.5rem);">
           Not a brand.<br/>A standard.
@@ -61,33 +61,74 @@ import Layout from '../layouts/Base.astro';
   <section class="bg-white px-8 md:px-16 lg:px-24 pt-20 pb-24">
     <div class="max-w-[1280px] mx-auto w-full">
 
-      <!-- The Method -->
+      <!-- What We Do -->
       <div class="border-t border-[#0A0A0A]/8 pt-20 mb-20">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">The Method</p>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">What We Do</p>
         <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
-          {[
-            {
-              label: 'Diagnosis First',
-              line: 'Every system starts with evidence — not opinion. Film. Data. The 7 levers. What is actually breaking your performance.',
-            },
-            {
-              label: 'Structured Protocol',
-              line: 'No fragments. Step-by-step modules built in sequence — stance, footwork, output. The mechanical base from the floor up.',
-            },
-            {
-              label: 'Live Correction',
-              line: 'Monthly Q&A. Camera on. Real problems. Real-time corrections applied to your movement using the 7-lever framework.',
-            },
-            {
-              label: 'Private Architecture',
-              line: 'One fighter. One system. Built entirely around your body, your fight, and your timeline. Application only.',
-            },
-          ].map(item => (
-            <div class="grid grid-cols-[180px_1fr] py-7 gap-8 items-baseline">
-              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">{item.label}</p>
-              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">{item.line}</p>
+
+          <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
+            class="grid grid-cols-1 sm:grid-cols-[200px_1fr] py-7 gap-2 sm:gap-8 items-start group hover:opacity-75 transition-opacity duration-200">
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Instagram</p>
+              <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide mt-0.5">@theerainers · 331K →</p>
             </div>
-          ))}
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">Daily boxing technique, movement breakdowns, and behind-the-scenes training. The work made visible every day.</p>
+          </a>
+
+          <a href="https://www.tiktok.com/@theerainers" target="_blank" rel="noopener"
+            class="grid grid-cols-1 sm:grid-cols-[200px_1fr] py-7 gap-2 sm:gap-8 items-start group hover:opacity-75 transition-opacity duration-200">
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">TikTok</p>
+              <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide mt-0.5">@theerainers · 90K →</p>
+            </div>
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">Short-form breakdowns. The system in under 60 seconds — footwork, mechanics, and the things your gym skips.</p>
+          </a>
+
+          <a href="https://www.youtube.com/@Rainers" target="_blank" rel="noopener"
+            class="grid grid-cols-1 sm:grid-cols-[200px_1fr] py-7 gap-2 sm:gap-8 items-start group hover:opacity-75 transition-opacity duration-200">
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">YouTube</p>
+              <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide mt-0.5">@Rainers · 15K →</p>
+            </div>
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">Weekly deep-format sessions on kinetic chain, autonomic regulation, and why most boxing training fails to transfer. Every video is a module.</p>
+          </a>
+
+          <a href="https://www.facebook.com/theerainers" target="_blank" rel="noopener"
+            class="grid grid-cols-1 sm:grid-cols-[200px_1fr] py-7 gap-2 sm:gap-8 items-start group hover:opacity-75 transition-opacity duration-200">
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Facebook</p>
+              <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide mt-0.5">@theerainers · 110K →</p>
+            </div>
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">Longer-form posts and community reach. Where the older generation of fighters finds the system.</p>
+          </a>
+
+          <a href="https://www.threads.net/@theerainers" target="_blank" rel="noopener"
+            class="grid grid-cols-1 sm:grid-cols-[200px_1fr] py-7 gap-2 sm:gap-8 items-start group hover:opacity-75 transition-opacity duration-200">
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Threads</p>
+              <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide mt-0.5">@theerainers · 20K →</p>
+            </div>
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">Unfiltered thoughts on training, competition, and what it actually takes to build a fighter with structure.</p>
+          </a>
+
+          <a href="/vault"
+            class="grid grid-cols-1 sm:grid-cols-[200px_1fr] py-7 gap-2 sm:gap-8 items-start group hover:opacity-75 transition-opacity duration-200">
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">The Blueprints</p>
+              <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide mt-0.5">theerainers.com/vault →</p>
+            </div>
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">Step-by-step video systems. Footwork Blueprint, Shadowboxing Blueprint, monthly live Q&A included. The operating system in full.</p>
+          </a>
+
+          <a href="/qa"
+            class="grid grid-cols-1 sm:grid-cols-[200px_1fr] py-7 gap-2 sm:gap-8 items-start group hover:opacity-75 transition-opacity duration-200">
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Monthly Q&A</p>
+              <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide mt-0.5">Live · Every month →</p>
+            </div>
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">One Saturday per month. You bring what is not transferring. We apply the 7-lever system to it live. Camera on. Real corrections. Included with any Blueprint.</p>
+          </a>
+
         </div>
       </div>
 
