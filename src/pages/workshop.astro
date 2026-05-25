@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Base.astro';
 import { Picture } from 'astro:assets';
-import defenseCover from '../assets/defense_cover.png';
+import defenseCover from '../assets/aikido-yellowbelt.png';
 import defenseCover1 from '../assets/defense_cover1.jpg';
 
 const faqItems = [
@@ -72,17 +72,17 @@ const faqSchema = JSON.stringify({
   <section class="bg-white overflow-hidden border-b border-[#0A0A0A]/8">
 
     <!-- Mobile image strip -->
-    <div class="md:hidden w-full overflow-hidden bg-[#0D1F1F]" style="height: 55vw; max-height: 320px;">
+    <div class="md:hidden w-full overflow-hidden bg-[#0D1F1F]" style="height: 65vw; max-height: 360px;">
       <Picture
         src={defenseCover}
         formats={['avif', 'webp']}
         widths={[480, 800]}
         sizes="100vw"
-        alt="Defense Workshop — boxing defensive mechanics training"
+        alt="Defense Workshop — live 1-on-1 boxing coaching session"
         quality={80}
         loading="eager"
         fetchpriority="high"
-        class="w-full h-full object-cover object-center"
+        class="w-full h-full object-cover object-top"
       />
     </div>
 
@@ -113,11 +113,11 @@ const faqSchema = JSON.stringify({
           formats={['avif', 'webp']}
           widths={[600, 900, 1166]}
           sizes="40vw"
-          alt="Defense Workshop — boxing defensive mechanics training"
+          alt="Defense Workshop — live 1-on-1 boxing coaching session"
           quality={80}
           loading="eager"
           fetchpriority="high"
-          class="absolute inset-0 w-full h-full object-cover object-center"
+          class="absolute inset-0 w-full h-full object-cover object-top"
         />
       </div>
 
@@ -132,7 +132,7 @@ const faqSchema = JSON.stringify({
         <!-- Left 60%: Workshop — Flagship -->
         <div class="bg-[#0D1F1F] border border-[#D4A373]/20 hover:border-[#D4A373]/55 transition-colors duration-300 p-12 md:p-16 flex flex-col justify-between min-h-[540px] group">
           <div>
-            <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">One Session · Reusable Framework</span>
+            <span class="text-[#D4A373] text-[10px] tracking-wider md:tracking-widest uppercase">One Session · Reusable Framework</span>
             <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Defense<br/>Workshop</h2>
             <p class="text-white/55 text-sm leading-relaxed max-w-[380px] mb-10">Foot Space Work: single-leg balance, weight transfer, kinetic chain alignment, defensive structure. The mechanics your gym doesn't teach — live, corrected in real time. You run this framework again and again.</p>
             <div class="flex flex-col gap-3">
@@ -148,10 +148,10 @@ const faqSchema = JSON.stringify({
           <div class="mt-12">
             <!-- TODO: POST-JUNE-27 DATE SWAP -->
             <p class="text-white/25 text-[10px] tracking-widest uppercase mb-5">Limited seats · Saturday, June 27</p>
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <span class="text-white font-black text-4xl">$197</span>
               <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
                 Reserve Your Seat →
               </a>
             </div>
@@ -272,11 +272,11 @@ const faqSchema = JSON.stringify({
       </div>
       <div class="flex flex-col gap-4 shrink-0">
         <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
-          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
           Reserve Your Seat — $197 →
         </a>
         <a href="/vault"
-          class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/50">
+          class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/50 whitespace-nowrap">
           Browse the Vault →
         </a>
       </div>
