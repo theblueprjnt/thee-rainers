@@ -1,0 +1,149 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Base.astro';
+import { env as cfEnv } from 'cloudflare:workers';
+
+const secret   = (cfEnv as unknown as Record<string, string>)['WATCH_TOKEN_SECRET'] ?? '';
+const sig      = Astro.url.searchParams.get('sig') ?? '';
+const expParam = Astro.url.searchParams.get('exp') ?? '';
+
+let valid   = false;
+let expired = false;
+
+if (secret && sig && expParam) {
+  const expNum     = parseInt(expParam, 10);
+  const nowSeconds = Math.floor(Date.now() / 1000);
+
+  if (isNaN(expNum) || expNum < nowSeconds) {
+    expired = true;
+  } else {
+    const key = await crypto.subtle.importKey(
+      'raw',
+      new TextEncoder().encode(secret),
+      { name: 'HMAC', hash: 'SHA-256' },
+      false,
+      ['sign'],
+    );
+    const sigBuf = await crypto.subtle.sign(
+      'HMAC',
+      key,
+      new TextEncoder().encode(`workshop-replay:${expParam}`),
+    );
+    const expected = Array.from(new Uint8Array(sigBuf))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+    valid = sig === expected;
+  }
+}
+
+// Invalid token with no expiry state — send to sales page, not a 404
+if (!valid && !expired) {
+  return Astro.redirect('/workshop-replay');
+}
+---
+<Layout title="Workshop Replay — Thee Rainers">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
+    <div class="max-w-[900px] mx-auto w-full">
+
+      {expired ? (
+        <!-- Expired state — no video URL in source -->
+        <div>
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Link expired</p>
+          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-6">
+            Your access<br/>has expired.
+          </h1>
+          <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-10 max-w-[440px]">
+            This link was valid for 7 days from purchase. To watch the replay, get a fresh copy below.
+          </p>
+          <a href="/workshop-replay"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+            Get the Replay — $47 →
+          </a>
+        </div>
+      ) : (
+        <!-- Valid token — embed rendered server-side only for authenticated access -->
+        <div>
+          <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Access confirmed</p>
+          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-4">
+            Your replay<br/>is live.
+          </h1>
+          <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-12 max-w-[440px]">
+            90 minutes. Watch it through once, then use the timestamps to drill the specific section that matches your primary constraint.
+          </p>
+
+          <!-- VIDEO -->
+          <div class="border border-[#0A0A0A]/8 overflow-hidden mb-12">
+            <div class="relative w-full" style="padding-bottom: 56.25%;">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/AtZmUk7cZFQ"
+                title="Workshop Replay — Defense Workshop"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+                class="absolute inset-0 w-full h-full"
+              ></iframe>
+            </div>
+          </div>
+
+          <!-- TIMESTAMPS -->
+          <div class="border border-[#0A0A0A]/8 p-8 mb-12">
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-6">Jump to your section</p>
+            <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
+              <div class="flex gap-6 py-3">
+                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">0:00</span>
+                <span class="text-[#0A0A0A]/55 text-sm">Footwork & Balance — the base layer</span>
+              </div>
+              <div class="flex gap-6 py-3">
+                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~20m</span>
+                <span class="text-[#0A0A0A]/55 text-sm">Athletic Stance — your custom platform</span>
+              </div>
+              <div class="flex gap-6 py-3">
+                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~40m</span>
+                <span class="text-[#0A0A0A]/55 text-sm">Punch Mechanics — kinetic chain from floor to fist</span>
+              </div>
+              <div class="flex gap-6 py-3">
+                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~60m</span>
+                <span class="text-[#0A0A0A]/55 text-sm">Defensive Structure — offence and defence as one movement</span>
+              </div>
+              <div class="flex gap-6 py-3">
+                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~75m</span>
+                <span class="text-[#0A0A0A]/55 text-sm">Live Q&A — specific mechanical problems diagnosed</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEXT STEP -->
+          <div class="border-l-2 border-[#0057FF] pl-6 mb-12">
+            <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-2">Next step</p>
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">Know your primary constraint before June 27.</p>
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6 max-w-[400px]">The 7-lever audit identifies the specific lever holding your system back. Takes 3 minutes. Show up to the live workshop knowing exactly what to work on.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="/lever-audit-quiz"
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+                Take the 7-Lever Audit →
+              </a>
+              <a href="/workshop"
+                class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/70">
+                Reserve June 27 Live Seat →
+              </a>
+            </div>
+          </div>
+
+          <!-- SCRIPTURE -->
+          <div class="border-t border-[#0A0A0A]/8 pt-10">
+            <p class="font-black text-[#0A0A0A]/20 uppercase tracking-tighter text-2xl leading-tight mb-2">
+              "I do not box as one beating the air."
+            </p>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
+          </div>
+        </div>
+      )}
+
+    </div>
+  </section>
+</Layout>

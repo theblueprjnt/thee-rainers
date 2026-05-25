@@ -9,19 +9,21 @@ const PRODUCT_MAP: Record<string, string> = {
   'prod_UZreHroYQEDAFU': 'bundle',
   'prod_UZrejf6iuDorEA': 'footwork',
   'prod_UZreDlek9325EY': 'shadowboxing',
-  // Workshop Replay — add the prod_ ID from Stripe Dashboard → Products
+  // Workshop Replay — paste the prod_ ID from Stripe Dashboard → Products
   // 'prod_XXXXXXXXXXXX': 'workshop-replay',
 };
 
-// Slug → R2 object key (must match exact filenames uploaded to your bucket)
+// Slug → R2 object key for file-based products (workshop-replay uses signed watch URL instead)
+// NOTE: R2 bucket uses folder structure. Update these paths to match exact filenames in your bucket.
+// e.g. 'thefootworkblueprint/<filename>.pdf' — check R2 dashboard for exact names.
 const ASSET_MAP: Record<string, string> = {
-  'footwork':        'footwork-blueprint.pdf',
-  'shadowboxing':    'shadowboxing-blueprint.pdf',
-  'bundle':          'bundle.zip',
-  'workshop-replay': 'workshop-replay.mp4',
+  'footwork':     'thefootworkblueprint/footwork-blueprint.pdf',
+  'shadowboxing': 'the shadowboxing blueprint/shadowboxing-blueprint.pdf',
+  'bundle':       'bundle/bundle.zip',
 };
 
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
+const SITE_URL = 'https://theerainers.com';
 
 // ── token ──────────────────────────────────────────────────────────────────
 
@@ -52,7 +54,7 @@ async function hmacHex(key: ArrayBuffer, msg: string): Promise<string> {
 
 async function r2SigningKey(secret: string, dateOnly: string): Promise<ArrayBuffer> {
   const k1 = await hmacBuf(new TextEncoder().encode('AWS4' + secret), dateOnly);
-  const k2 = await hmacBuf(k1, 'auto');        // R2 region is always "auto"
+  const k2 = await hmacBuf(k1, 'auto');
   const k3 = await hmacBuf(k2, 's3');
   return hmacBuf(k3, 'aws4_request');
 }
@@ -97,17 +99,27 @@ async function generateR2PresignedUrl(
   return `https://${host}/${encodedKey}?${canonicalQS}&X-Amz-Signature=${signature}`;
 }
 
+// Generates a signed, time-limited URL for the on-site watch page.
+// No storage needed — expiry and authenticity are verified via HMAC on page load.
+async function generateWatchUrl(secret: string, product: string): Promise<string> {
+  const exp = Math.floor(Date.now() / 1000) + SEVEN_DAYS_SECONDS;
+  const sigBuf = await hmacBuf(new TextEncoder().encode(secret), `${product}:${exp}`);
+  const sig = Array.from(new Uint8Array(sigBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  return `${SITE_URL}/watch/${product}?sig=${sig}&exp=${exp}`;
+}
+
 // ── handler ────────────────────────────────────────────────────────────────
 
 export async function POST({ request }: APIContext): Promise<Response> {
   const e = cfEnv as unknown as Record<string, string>;
-  const webhookSecret = e['STRIPE_WEBHOOK_SECRET'] ?? '';
-  const stripeKey     = e['STRIPE_SECRET_KEY'] ?? '';
-  const deliveryUrl   = e['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
-  const r2AccountId   = e['R2_ACCOUNT_ID'] ?? '';
-  const r2AccessKey   = e['R2_ACCESS_KEY_ID'] ?? '';
-  const r2SecretKey   = e['R2_SECRET_ACCESS_KEY'] ?? '';
-  const r2Bucket      = e['R2_BUCKET_NAME'] ?? '';
+  const webhookSecret  = e['STRIPE_WEBHOOK_SECRET'] ?? '';
+  const stripeKey      = e['STRIPE_SECRET_KEY'] ?? '';
+  const deliveryUrl    = e['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
+  const r2AccountId    = e['R2_ACCOUNT_ID'] ?? '';
+  const r2AccessKey    = e['R2_ACCESS_KEY_ID'] ?? '';
+  const r2SecretKey    = e['R2_SECRET_ACCESS_KEY'] ?? '';
+  const r2Bucket       = e['R2_BUCKET_NAME'] ?? '';
+  const watchSecret    = e['WATCH_TOKEN_SECRET'] ?? '';
 
   if (!webhookSecret || !stripeKey) {
     console.error('[stripe-webhook] Missing STRIPE_WEBHOOK_SECRET or STRIPE_SECRET_KEY');
@@ -152,21 +164,35 @@ export async function POST({ request }: APIContext): Promise<Response> {
     }
 
     const productSlug = PRODUCT_MAP[productId] ?? 'unknown';
-    const objectKey   = ASSET_MAP[productSlug];
-
     let expiringUrl: string | null = null;
-    const r2Ready = r2AccountId && r2AccessKey && r2SecretKey && r2Bucket;
 
-    if (objectKey && r2Ready) {
-      try {
-        expiringUrl = await generateR2PresignedUrl(
-          r2AccountId, r2AccessKey, r2SecretKey, r2Bucket, objectKey,
-        );
-      } catch (err) {
-        console.error('[stripe-webhook] R2 presign error:', String(err));
+    if (productSlug === 'workshop-replay') {
+      // Deliver via on-site token-gated watch page — no R2 file needed
+      if (watchSecret) {
+        try {
+          expiringUrl = await generateWatchUrl(watchSecret, 'workshop-replay');
+        } catch (err) {
+          console.error('[stripe-webhook] Watch URL signing error:', String(err));
+        }
+      } else {
+        console.warn('[stripe-webhook] WATCH_TOKEN_SECRET not set — watch URL not generated');
       }
     } else {
-      console.warn('[stripe-webhook] R2 skipped — env vars missing or no asset for slug:', productSlug);
+      // File-based products — R2 presigned URL
+      const objectKey = ASSET_MAP[productSlug];
+      const r2Ready   = r2AccountId && r2AccessKey && r2SecretKey && r2Bucket;
+
+      if (objectKey && r2Ready) {
+        try {
+          expiringUrl = await generateR2PresignedUrl(
+            r2AccountId, r2AccessKey, r2SecretKey, r2Bucket, objectKey,
+          );
+        } catch (err) {
+          console.error('[stripe-webhook] R2 presign error:', String(err));
+        }
+      } else {
+        console.warn('[stripe-webhook] R2 skipped — env vars missing or no asset for slug:', productSlug);
+      }
     }
 
     const payload = {
@@ -180,7 +206,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
     console.log('[stripe-webhook] Delivering:', JSON.stringify({
       ...payload,
       token: '[redacted]',
-      expiring_url: expiringUrl ? '[presigned-url-generated]' : null,
+      expiring_url: expiringUrl ? '[url-generated]' : null,
     }));
 
     if (deliveryUrl) {
