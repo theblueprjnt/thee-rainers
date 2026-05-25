@@ -93,9 +93,22 @@ const videos = [
 
 const featured = videos.find(v => v.featured);
 const archive = videos.filter(v => !v.featured);
+
+const videoSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "What Boxing Does to Your Body That the Gym Can't",
+  "description": "83 out of 100 people who join a gym quit within 12 months. Boxing has held people for decades. This is the science behind why — and what your body actually builds when you train with integration instead of isolation.",
+  "thumbnailUrl": "https://img.youtube.com/vi/SrFywBFkmik/maxresdefault.jpg",
+  "embedUrl": "https://www.youtube.com/embed/SrFywBFkmik",
+  "contentUrl": "https://www.youtube.com/watch?v=SrFywBFkmik",
+  "uploadDate": "2025-01-01",
+  "publisher": { "@type": "Organization", "name": "Thee Rainers", "url": "https://theerainers.com" }
+});
 ---
 <Layout title="Library — Knowledge Archive | Thee Rainers">
   <Fragment slot="head">
+    <script type="application/ld+json" set:html={videoSchema} />
     <meta name="description" content="Deep-format sessions on autonomic regulation, systemic performance, and neural boxing. The knowledge archive of Thee Rainers." />
   </Fragment>
 

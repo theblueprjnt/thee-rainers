@@ -33,8 +33,27 @@ const products = [
     featured: false,
   },
 ];
+
+const productSchema = JSON.stringify(products.map(p => ({
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": p.title,
+  "description": p.desc,
+  "url": "https://theerainers.com/vault",
+  "brand": { "@type": "Brand", "name": "Thee Rainers" },
+  "offers": {
+    "@type": "Offer",
+    "price": p.price.replace('$', ''),
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": p.url,
+  },
+})));
 ---
 <Layout title="Blueprints — Thee Rainers" description="Step-by-step systems built for boxing. Better training for better results.">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={productSchema} />
+  </Fragment>
 
   <section class="bg-white px-6 md:px-12 lg:px-20 pt-28 md:pt-36 pb-20">
     <div class="max-w-[1100px] mx-auto">

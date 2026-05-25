@@ -4,9 +4,10 @@ import '../styles/global.css';
 
 interface Props {
   title?: string;
+  noindex?: boolean;
 }
 
-const { title = 'Thee Rainers — Links' } = Astro.props;
+const { title = 'Thee Rainers — Links', noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
 ---
 
@@ -24,7 +25,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
     <meta name="description" content="Thee Rainers — Engineered for the ring. Free protocol, live workshop, Private Architecture." />
     <meta property="og:title" content="Thee Rainers — Links" />
     <meta property="og:url" content={canonicalURL} />
-    <meta name="robots" content="noindex" />
+    {noindex && <meta name="robots" content="noindex" />}
     <title>{title}</title>
     <Analytics />
   </head>
