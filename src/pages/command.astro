@@ -14,7 +14,7 @@ import Layout from '../layouts/Base.astro';
         <div>
           <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">Application Protocol</p>
           <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-6xl leading-[0.85] mb-8">Structure beats<br/>dependence.</h1>
-          <p class="text-[#0A0A0A]/40 text-base leading-relaxed mb-10 max-w-[440px]">Private Architecture is not coaching. It is a system built around your specific fight, body, and mind. If accepted, you receive the blueprint. Apply below.</p>
+          <p class="text-[#0A0A0A]/60 text-base leading-relaxed mb-10 max-w-[440px]">Private Architecture is not coaching. It is a system built around your specific fight, body, and mind. If accepted, you receive the blueprint. Apply below.</p>
 
           <div class="border-l-2 border-[#D4A373]/40 pl-6 mb-14">
             <p class="text-[#0A0A0A]/25 text-sm leading-relaxed italic mb-3">"I do not run aimlessly. I do not fight like a boxer beating the air. I strike a blow to my body and make it my slave — so that after I have preached to others, I myself will not be disqualified."</p>
@@ -24,31 +24,31 @@ import Layout from '../layouts/Base.astro';
           <form id="command-form" class="flex flex-col gap-10">
             <div class="flex flex-col gap-2">
               <label for="name" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Full Name</label>
-              <input type="text" id="name" required placeholder="—"
+              <input type="text" id="name" name="full_name" required placeholder="—"
                 class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
             </div>
 
             <div class="flex flex-col gap-2">
               <label for="email" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Email</label>
-              <input type="email" id="email" required placeholder="—"
+              <input type="email" id="email" name="email" required placeholder="—"
                 class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
             </div>
 
             <div class="flex flex-col gap-2">
               <label for="record" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Current fight record and training structure</label>
-              <textarea id="record" rows="3" required placeholder="—"
+              <textarea id="record" name="record" rows="3" required placeholder="—"
                 class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
             </div>
 
             <div class="flex flex-col gap-2">
               <label for="flaw" class="text-[#D4A373] text-[10px] tracking-widest uppercase">Where do your mechanics break down under pressure?</label>
-              <textarea id="flaw" rows="3" required placeholder="—"
+              <textarea id="flaw" name="flaw" rows="3" required placeholder="—"
                 class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
             </div>
 
             <div class="flex flex-col gap-2">
               <label for="goal" class="text-[#D4A373] text-[10px] tracking-widest uppercase">What systemic change are you trying to make?</label>
-              <textarea id="goal" rows="3" required placeholder="—"
+              <textarea id="goal" name="goal" rows="3" required placeholder="—"
                 class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
             </div>
 

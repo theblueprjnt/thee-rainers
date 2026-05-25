@@ -7,6 +7,8 @@ interface Props {
   format?: string;
   price?: string;
   seats?: string;
+  cta_href?: string;
+  cta_text?: string;
 }
 
 const {
@@ -15,6 +17,8 @@ const {
   format = 'live online',
   price = '$197',
   seats = 'Limited to 30 seats per cohort to keep correction quality high.',
+  cta_href = 'https://buy.stripe.com/7sY28r8lt1D06XU6446J20n',
+  cta_text = 'Reserve your seat',
 } = Astro.props;
 ---
 
@@ -31,7 +35,7 @@ const {
   >
     {price}
   </p>
-  <Button href="#" variant="primary">Reserve your seat</Button>
+  <Button href={cta_href} variant="primary">{cta_text}</Button>
   <p
     class="text-muted mt-8 m-0"
     style="font-size: var(--font-size-small);"

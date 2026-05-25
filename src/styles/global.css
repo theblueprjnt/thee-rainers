@@ -16,6 +16,8 @@
   --color-blue: #0057FF;
   --color-copper: #D4A373;
   --color-purple: #6A0DAD;
+  --color-warm-white: #F7F5F2;
+  --color-charcoal: #141414;
 
   --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
   --font-serif: Georgia, ui-serif, serif;
@@ -110,4 +112,9 @@
     background-color: #0A0A0A;
     color: rgba(255, 255, 255, 0.10);
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-subject { animation: none; transform: none; }
+  .tr-card:hover { transform: none; }
 }

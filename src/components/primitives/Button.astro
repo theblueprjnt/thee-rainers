@@ -12,9 +12,9 @@ const { variant = 'primary', href, type = 'button', class: className, ...rest } 
 const base = 'inline-flex items-center justify-center font-semibold transition-all duration-200 cursor-pointer no-underline';
 
 const variants: Record<string, string> = {
-  primary: 'bg-terracotta text-white px-8 py-3.5 text-small tracking-wide hover:opacity-90 active:opacity-80',
+  primary: 'border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3.5 text-small tracking-wide hover:bg-[#0057FF] hover:text-white active:opacity-80',
   secondary: 'border border-navy text-navy px-8 py-3.5 text-small tracking-wide hover:bg-navy hover:text-white',
-  tertiary: 'text-ink underline underline-offset-4 text-small hover:text-terracotta p-0 bg-transparent border-0',
+  tertiary: 'text-ink underline underline-offset-4 text-small hover:text-[#0057FF] p-0 bg-transparent border-0',
 };
 
 const classes = [base, variants[variant], className].filter(Boolean).join(' ');
