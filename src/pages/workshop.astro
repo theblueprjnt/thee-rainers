@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Base.astro';
+import { Picture } from 'astro:assets';
+import defenseCover from '../assets/defense_cover.png';
+import defenseCover1 from '../assets/defense_cover1.jpg';
 
 const faqItems = [
   {
@@ -27,8 +30,8 @@ const faqItems = [
 const eventSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Event",
-  "name": "Live Mechanics Masterclass",
-  "description": "90 minutes. The mechanical structure to hit, exit, and reset. Live, with real-time correction on your actual movement.",
+  "name": "Defense Workshop",
+  "description": "90 minutes. Camera on. Real-time correction on your defensive structure, movement patterns, and mechanical foundation.",
   "startDate": "2026-06-27",
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
@@ -54,31 +57,82 @@ const faqSchema = JSON.stringify({
 });
 ---
 
-<Layout title="Live Mechanics Masterclass — Workshop | Thee Rainers">
+<Layout title="Defense Workshop — Thee Rainers">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={eventSchema} />
     <script type="application/ld+json" set:html={faqSchema} />
-    <meta name="description" content="90 minutes. The mechanical structure to hit, exit, and reset. Saturday, June 27. $197." />
+    <meta name="description" content="90 minutes. Camera on. Real-time correction on your defensive structure, movement, and mechanics. Saturday, June 27. $197." />
+    <meta property="og:title" content="Defense Workshop — Thee Rainers" />
+    <meta property="og:description" content="90 minutes. Camera on. Real-time correction on your defensive structure. Saturday, June 27. $197." />
+    <meta property="og:type" content="website" />
   </Fragment>
 
-  <section class="min-h-screen bg-white px-8 md:px-16 lg:px-24 py-32 md:py-40">
-    <div class="max-w-[1280px] mx-auto w-full">
+  <!-- HERO: 60/40 — defense_cover above the fold -->
+  <section class="bg-white overflow-hidden border-b border-[#0A0A0A]/8">
 
-      <div class="mb-16">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Live Workshop · Saturday, June 27</p>
-        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">Live Mechanics<br/>Masterclass.</h1>
-        <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed">90 minutes. The mechanical structure to hit, exit, and reset. Live, with real-time correction on your actual movement.</p>
+    <!-- Mobile image strip -->
+    <div class="md:hidden w-full overflow-hidden bg-[#0D1F1F]" style="height: 55vw; max-height: 320px;">
+      <Picture
+        src={defenseCover}
+        formats={['avif', 'webp']}
+        widths={[480, 800]}
+        sizes="100vw"
+        alt="Defense Workshop — boxing defensive mechanics training"
+        quality={80}
+        loading="eager"
+        fetchpriority="high"
+        class="w-full h-full object-cover object-center"
+      />
+    </div>
+
+    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[90vh]">
+
+      <!-- Left 60%: Content -->
+      <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Live · June 27 · 90 Min</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">The Defense<br/>Workshop.</h1>
+        <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">Camera on. Real-time correction on your defensive structure, movement patterns, and mechanical foundation. You leave with a framework you run again and again.</p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
+            Reserve Your Seat — $197 →
+          </a>
+          <a href="/workshop-replay"
+            class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/60 whitespace-nowrap">
+            Get the Replay — $47 →
+          </a>
+        </div>
       </div>
 
-      <!-- 60/40 Product Grid -->
+      <!-- Right 40%: defense_cover — desktop only -->
+      <div class="hidden md:block relative overflow-hidden bg-[#0D1F1F]">
+        <Picture
+          src={defenseCover}
+          formats={['avif', 'webp']}
+          widths={[600, 900, 1166]}
+          sizes="40vw"
+          alt="Defense Workshop — boxing defensive mechanics training"
+          quality={80}
+          loading="eager"
+          fetchpriority="high"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+        />
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRODUCT CARD -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto w-full">
       <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-[2px]">
 
-        <!-- Left 60%: The Workshop — Flagship -->
+        <!-- Left 60%: Workshop — Flagship -->
         <div class="bg-[#0D1F1F] border border-[#D4A373]/20 hover:border-[#D4A373]/55 transition-colors duration-300 p-12 md:p-16 flex flex-col justify-between min-h-[540px] group">
           <div>
             <span class="text-[#D4A373] text-[11px] tracking-widest uppercase">One Session · Reusable Framework</span>
-            <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Live Mechanics<br/>Masterclass</h2>
-            <p class="text-white/55 text-sm leading-relaxed max-w-[380px] mb-10">Foot Space Work: single-leg balance, weight transfer, kinetic chain alignment, stance. The mechanics your gym doesn't teach — live, corrected in real time. You run this framework again and again.</p>
+            <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Defense<br/>Workshop</h2>
+            <p class="text-white/55 text-sm leading-relaxed max-w-[380px] mb-10">Foot Space Work: single-leg balance, weight transfer, kinetic chain alignment, defensive structure. The mechanics your gym doesn't teach — live, corrected in real time. You run this framework again and again.</p>
             <div class="flex flex-col gap-3">
               <p class="text-white/30 text-[10px] tracking-widest uppercase mb-2">Session Structure</p>
               <ul class="flex flex-col gap-3 list-none p-0 m-0">
@@ -121,59 +175,76 @@ const faqSchema = JSON.stringify({
 
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- DEFENSE COVER 1: secondary image + testimonial text -->
+  <section class="bg-[#0A0A0A] overflow-hidden">
+    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1fr]">
+
+      <!-- Image: defense_cover1 -->
+      <div class="relative overflow-hidden" style="min-height: 480px;">
+        <Picture
+          src={defenseCover1}
+          formats={['avif', 'webp']}
+          widths={[600, 900, 1300]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          alt="Defense Workshop — live training session with Rainers"
+          quality={80}
+          loading="lazy"
+          class="absolute inset-0 w-full h-full object-cover object-top"
+        />
+      </div>
 
       <!-- Testimonial -->
-      <div class="mt-20 border-t border-[#0A0A0A]/8 pt-16">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">What fighters say</p>
-        <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-[2px]">
-
-          <!-- Video -->
-          <div class="aspect-video bg-[#0A0A0A]">
-            <iframe
-              src="https://www.youtube.com/embed/VCj0Dgfoako"
-              title="Giancarlo — Thee Rainers Workshop"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              class="w-full h-full"
-              loading="lazy"
-            ></iframe>
-          </div>
-
-          <!-- Quote -->
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex flex-col justify-between">
-            <div>
-              <p class="text-[#0A0A0A]/70 text-base leading-relaxed font-bold mb-6">
-                "The structure that was missing from my entire training."
-              </p>
-              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">
-                Real-time correction on live movement. Not theory — the actual mechanical gaps showing up in sparring, addressed in the session.
-              </p>
-            </div>
-            <div class="mt-8 pt-8 border-t border-[#0A0A0A]/8">
-              <p class="text-[#0A0A0A]/60 text-sm font-bold">Giancarlo</p>
-              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mt-1">Workshop Attendee</p>
-            </div>
-          </div>
-
+      <div class="px-8 md:px-16 py-16 md:py-24 flex flex-col justify-center">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">What fighters say</p>
+        <p class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-8">
+          "The structure that was missing from my entire training."
+        </p>
+        <p class="text-white/50 text-sm leading-relaxed mb-10 max-w-[400px]">
+          Real-time correction on live movement. Not theory — the actual mechanical gaps showing up in sparring, addressed in the session.
+        </p>
+        <div class="border-t border-white/10 pt-6">
+          <p class="text-white/70 text-sm font-bold">Giancarlo</p>
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mt-1">Workshop Attendee · Amateur Competitor</p>
         </div>
       </div>
 
-      <!-- FAQ -->
-      <div class="mt-20 border-t border-[#0A0A0A]/8 pt-16">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">Questions</p>
-        <div class="flex flex-col divide-y divide-[#0A0A0A]/8 max-w-[720px]">
-          {faqItems.map((item) => (
-            <details class="group py-8 cursor-pointer">
-              <summary class="font-bold text-[#0A0A0A]/60 text-sm tracking-wide list-none flex items-center justify-between gap-8 hover:text-[#0A0A0A] transition-colors duration-200">
-                {item.question}
-                <span class="text-[#D4A373] shrink-0 text-lg leading-none group-open:rotate-45 transition-transform duration-200">+</span>
-              </summary>
-              <p class="text-[#0A0A0A]/35 text-sm leading-relaxed mt-6">{item.answer}</p>
-            </details>
-          ))}
-        </div>
-      </div>
+    </div>
+  </section>
 
+  <!-- TESTIMONIAL VIDEO -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-20 border-t border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto w-full">
+      <div class="max-w-[480px] mx-auto aspect-video bg-[#0A0A0A]">
+        <iframe
+          src="https://www.youtube.com/embed/VCj0Dgfoako"
+          title="Giancarlo — Thee Rainers Workshop"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          class="w-full h-full"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-20 border-t border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto w-full">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-12">Questions</p>
+      <div class="flex flex-col divide-y divide-[#0A0A0A]/8 max-w-[720px]">
+        {faqItems.map((item) => (
+          <details class="group py-8 cursor-pointer">
+            <summary class="font-bold text-[#0A0A0A]/60 text-sm tracking-wide list-none flex items-center justify-between gap-8 hover:text-[#0A0A0A] transition-colors duration-200">
+              {item.question}
+              <span class="text-[#D4A373] shrink-0 text-lg leading-none group-open:rotate-45 transition-transform duration-200">+</span>
+            </summary>
+            <p class="text-[#0A0A0A]/35 text-sm leading-relaxed mt-6">{item.answer}</p>
+          </details>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -198,7 +269,7 @@ const faqSchema = JSON.stringify({
       </div>
       <div class="flex flex-col gap-4 shrink-0">
         <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
-          class="copper-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
           Reserve Your Seat — $197 →
         </a>
         <a href="/vault"
