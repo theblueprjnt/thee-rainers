@@ -7,7 +7,7 @@ import defenseCover1 from '../assets/defense_cover1.jpg';
 const faqItems = [
   {
     question: "I shadowbox a lot but it does not transfer in sparring. Will this help?",
-    answer: "Yes. The most common reason is that your stance breaks without you noticing. The Calibration trains the awareness and the mechanical foundation that makes shadowboxing build real skill.",
+    answer: "Yes. The most common reason is that your stance breaks without you noticing. The Defense Workshop builds the awareness and the mechanical foundation that makes shadowboxing transfer to real boxing.",
   },
   {
     question: "I have been training for years. Will this be too basic?",
@@ -23,7 +23,7 @@ const faqItems = [
   },
   {
     question: "Can I get a refund?",
-    answer: "Yes. Email rainers@stepintoring.com within 24 hours of the session ending and I return your money. No friction. No forms. No questions.",
+    answer: "Yes. Email rainers@theerainers.com within 24 hours of the session ending and I return your money. No friction. No forms. No questions.",
   },
 ];
 
@@ -89,7 +89,7 @@ const faqSchema = JSON.stringify({
 
       <!-- Left 60%: Content -->
       <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Live · June 27 · 90 Min</p>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Live · June 27 · 90 Min · <span id="workshop-countdown" class="tabular-nums"></span></p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">The Defense<br/>Workshop.</h1>
         <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">Camera on. Real-time correction on your defensive structure, movement patterns, and mechanical foundation. You leave with a framework you run again and again.</p>
         <div class="flex flex-col sm:flex-row gap-4">
@@ -99,7 +99,7 @@ const faqSchema = JSON.stringify({
           </a>
           <a href="/workshop-replay"
             class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/60 whitespace-nowrap">
-            Get the Replay — $47 →
+            Get the Replay — $79 →
           </a>
         </div>
       </div>
@@ -280,3 +280,15 @@ const faqSchema = JSON.stringify({
     </div>
   </section>
 </Layout>
+
+<script>
+  const el = document.getElementById('workshop-countdown');
+  if (el) {
+    const target = new Date('2026-06-27T00:00:00').getTime();
+    const update = () => {
+      const days = Math.ceil((target - Date.now()) / 86400000);
+      el.textContent = days > 0 ? days + ' days away' : 'Today';
+    };
+    update();
+  }
+</script>
