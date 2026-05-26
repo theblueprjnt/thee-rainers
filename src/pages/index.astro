@@ -219,16 +219,22 @@ import Layout from '../layouts/Base.astro';
       </div>
 
       <!-- Workshop Replay — Tier 3 upsell -->
-      <div class="border border-[#0A0A0A]/10 bg-[#F6F6F6] p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-        <div>
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">On Demand · Full Recording</p>
-          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight">Workshop Replay — $79</p>
-          <p class="text-[#0A0A0A]/60 text-xs mt-2">90 min. Watch the live corrections. Apply the framework. 7-day access from purchase.</p>
+      <div class="relative overflow-hidden bg-[#0A0A0A]">
+        <img src="/images/workshop_bacgkround.png" alt="Defense Workshop live session"
+          width="1920" height="1080"
+          class="absolute inset-0 w-full h-full object-cover object-center opacity-35"
+          loading="lazy" />
+        <div class="relative z-10 p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">On Demand · Full Recording</p>
+            <p class="font-black text-white uppercase tracking-tight text-xl leading-tight">Workshop Replay — $79</p>
+            <p class="text-white/50 text-xs mt-2">90 min. Watch the live corrections. Apply the framework. 7-day access from purchase.</p>
+          </div>
+          <a href="/workshop-replay"
+            class="shrink-0 blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+            Get Replay →
+          </a>
         </div>
-        <a href="/workshop-replay"
-          class="shrink-0 blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
-          Get Replay →
-        </a>
       </div>
 
     </div>
