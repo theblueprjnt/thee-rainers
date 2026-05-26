@@ -4,133 +4,154 @@ import Layout from '../layouts/Base.astro';
 <Layout title="Thee Rainers — Better training. Better results.">
 
   <!-- HERO -->
-  <section class="w-full md:min-h-screen overflow-hidden grid grid-cols-1 md:grid-cols-[60%_40%] bg-white border-b border-[#0A0A0A]/8">
+  <section class="relative overflow-hidden border-b border-[#0A0A0A]/8">
 
-    <div class="flex flex-col justify-center px-8 md:px-14 lg:px-20 pt-28 pb-12 md:py-0 relative z-10 overflow-hidden">
-      <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-5">Boxing Science · @theerainers</p>
-      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-6"
-        style="font-size: clamp(2.5rem, 5.5vw, 4.5rem); line-height: 0.85;">
-        <span style="background: linear-gradient(to right, #FF3366, #FF9933); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Engineered</span><br/>for the ring.
-      </h1>
-      <p class="text-[#0A0A0A]/55 mb-10 max-w-[380px] text-base leading-relaxed">
-        Your ambition is ahead of your gym. Systematic mechanics, not guesswork. This closes the gap.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a href="/foundation-guide"
-          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
-          Get Free 30-Day Foundation →
-        </a>
-        <a href="/vault"
-          class="inline-flex items-center justify-center font-bold bg-gradient-to-tr from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white px-10 py-4 text-sm uppercase tracking-widest shadow-[0_8px_32px_rgba(253,29,29,0.25)] hover:shadow-[0_12px_40px_rgba(253,29,29,0.4)] hover:scale-[1.02] transition-all duration-300 whitespace-nowrap border-none">
-          Shop Products →
-        </a>
+    <!-- Mobile: full-bleed image with dark gradient -->
+    <div class="md:hidden absolute inset-0 bg-[#0A0A0A]">
+      <img src="/images/coldfightpic2.jpg" alt="Thee Rainers"
+        width="2280" height="2203"
+        class="w-full h-full object-cover object-center opacity-70"
+        loading="eager" decoding="async" />
+      <div class="absolute inset-0"
+        style="background: linear-gradient(to top, #0A0A0A 28%, rgba(10,10,10,0.65) 55%, rgba(10,10,10,0.1) 100%)">
       </div>
     </div>
 
-    <div class="hidden md:flex items-stretch justify-center relative overflow-hidden bg-[#0A0A0A]">
-      <img src="/images/coldfightpic2.jpg" alt="Thee Rainers"
-        width="2280" height="2203"
-        class="hero-subject w-full h-full object-cover object-center"
-        loading="eager" decoding="async" />
-    </div>
+    <!-- Grid wrapper -->
+    <div class="relative z-10 md:grid md:grid-cols-[60%_40%] md:min-h-screen">
 
+      <!-- Left: text + CTAs -->
+      <div class="flex flex-col justify-end md:justify-center md:bg-white
+                  px-8 md:px-14 lg:px-20
+                  pt-36 pb-16 md:py-0
+                  min-h-[100svh] md:min-h-0">
+        <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-5">Boxing Science · @theerainers</p>
+        <h1 class="font-black uppercase tracking-tighter mb-6 text-white md:text-[#0A0A0A]"
+          style="font-size: clamp(2.75rem, 5.5vw, 4.5rem); line-height: 0.85;">
+          <span style="background: linear-gradient(to right, #FF3366, #FF9933); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Engineered</span><br/>for the ring.
+        </h1>
+        <p class="text-white/65 md:text-[#0A0A0A]/55 mb-10 max-w-[380px] text-base leading-relaxed">
+          Your ambition is ahead of your gym. Systematic mechanics, not guesswork. This closes the gap.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/foundation-guide"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+            Get Free 30-Day Foundation →
+          </a>
+          <a href="/vault"
+            class="inline-flex items-center justify-center font-bold bg-gradient-to-tr from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white px-10 py-4 text-sm uppercase tracking-widest shadow-[0_8px_32px_rgba(253,29,29,0.25)] hover:shadow-[0_12px_40px_rgba(253,29,29,0.4)] hover:scale-[1.02] transition-all duration-300 whitespace-nowrap border-none">
+            Shop Products →
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: desktop image panel -->
+      <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]">
+        <img src="/images/coldfightpic2.jpg" alt="Thee Rainers"
+          width="2280" height="2203"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager" decoding="async" />
+      </div>
+
+    </div>
   </section>
 
-  <!-- QUIZ — Lever diagnosis funnel -->
-  <section class="bg-[#F7F6F4] px-6 md:px-12 lg:px-20 py-10 md:py-12 border-b border-[#0A0A0A]/8">
-    <div id="quiz-container" class="bg-[#0A0A0A]/5 backdrop-blur-2xl border border-[#0A0A0A]/10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-3xl max-w-[800px] mx-auto p-8 md:p-12">
+  <!-- QUIZ — 3-step diagnosis -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[860px] mx-auto">
+
+      <!-- Header + progress -->
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+        <div>
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">3-Step Diagnosis · Free</p>
+          <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88]">Find your<br/>starting point.</h2>
+        </div>
+        <div class="flex gap-1.5">
+          <div id="qp-1" class="h-[3px] w-14 transition-all duration-300" style="background-color:#0057FF"></div>
+          <div id="qp-2" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
+          <div id="qp-3" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
+        </div>
+      </div>
 
       <!-- Step 1 -->
       <div id="quiz-step-1">
-        <p class="text-[#D4A373] text-xs uppercase tracking-widest mb-3">Quick diagnosis · 3 questions</p>
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-8">What is your primary<br/>focus right now?</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-6">What is your primary focus right now?</p>
+        <div class="grid grid-cols-2 gap-3">
           <button data-quiz-option data-step="1" data-value="speed"
-            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Speed</p>
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Speed</p>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Hand speed and combination flow</p>
           </button>
           <button data-quiz-option data-step="1" data-value="power"
-            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Power</p>
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Power</p>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Kinetic chain and punch mechanics</p>
           </button>
           <button data-quiz-option data-step="1" data-value="footwork"
-            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Footwork</p>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Movement, angles, and athletic control</p>
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Footwork</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Movement, angles, and control</p>
           </button>
           <button data-quiz-option data-step="1" data-value="ringiq"
-            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Ring IQ</p>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Tactics, reads, and tactical awareness</p>
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Ring IQ</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Reads, tactics, and decision-making</p>
           </button>
         </div>
       </div>
 
       <!-- Step 2 -->
       <div id="quiz-step-2" class="hidden">
-        <button id="quiz-back-2"
-          class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase mb-8 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 p-0">
+        <button id="quiz-back-2" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-6 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 p-0 font-bold">
           &larr; Back
         </button>
-        <p class="text-[#D4A373] text-xs uppercase tracking-widest mb-3">Step 2 of 3</p>
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-8">Where are you<br/>starting from?</h2>
+        <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-6">Where are you starting from?</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <button data-quiz-option data-step="2" data-value="beginner"
-            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Just starting</p>
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Just starting</p>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Under 1 year or no formal training</p>
           </button>
           <button data-quiz-option data-step="2" data-value="amateur"
-            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Amateur</p>
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Amateur</p>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Training consistently, have sparred</p>
           </button>
           <button data-quiz-option data-step="2" data-value="advanced"
-            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Advanced</p>
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Advanced</p>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Competitive or serious fight record</p>
           </button>
         </div>
       </div>
 
-      <!-- Step 3: Email capture -->
+      <!-- Step 3: Email -->
       <div id="quiz-step-3" class="hidden">
-        <button id="quiz-back-3"
-          class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase mb-8 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 p-0">
+        <button id="quiz-back-3" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-6 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 p-0 font-bold">
           &larr; Back
         </button>
-        <p class="text-[#D4A373] text-xs uppercase tracking-widest mb-3">Step 3 of 3</p>
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-3">Where should we send<br/>your custom blueprint?</h2>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-8 max-w-[420px]">Based on your focus, we will send the right starting protocol. Free. No spam.</p>
+        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Get your free protocol.</h3>
+        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-8 max-w-[420px]">Based on your answers — the right starting point, sent to your inbox. Free.</p>
         <form id="quiz-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
           <input type="email" id="quiz-email" placeholder="your@email.com" required
-            class="flex-1 border border-[#0A0A0A]/15 bg-white px-5 py-4 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/25 focus:outline-none focus:border-[#0057FF]/50 rounded-xl" />
+            class="flex-1 border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/25 focus:outline-none focus:border-[#0057FF] transition-colors duration-200" />
           <button type="submit" id="quiz-submit"
-            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap rounded-xl cursor-pointer disabled:opacity-40">
-            Send Blueprint →
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-40">
+            Send Protocol →
           </button>
         </form>
         <p id="quiz-error" class="text-[#0A0A0A]/40 text-xs mt-3 hidden">Please enter a valid email address.</p>
       </div>
 
-      <!-- Step 4: Confirmation -->
+      <!-- Step 4: Done -->
       <div id="quiz-step-4" class="hidden">
-        <p class="text-[#D4A373] text-xs uppercase tracking-widest mb-3">Sent</p>
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-3">Check your inbox.</h2>
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Sent</p>
+        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Check your inbox.</h3>
         <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[400px]">Your free protocol is on the way. Build the base. Everything else follows.</p>
       </div>
 
     </div>
   </section>
-
-  <!-- Mobile fighter strip -->
-  <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 80vw; max-height: 400px;">
-    <img src="/images/coldfightpic2.jpg" alt="Thee Rainers"
-      width="2280" height="2203"
-      class="w-full h-full object-cover object-center" loading="eager" />
-  </div>
 
   <!-- PRODUCTS -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-16 border-b border-[#0A0A0A]/8">
@@ -368,56 +389,62 @@ import Layout from '../layouts/Base.astro';
   });
 </script>
 
-<script>
-  {
-    const state = { focus: '', level: '' };
+<script is:inline>
+  (function() {
+    var STEPS = ['quiz-step-1','quiz-step-2','quiz-step-3','quiz-step-4'];
+    var BARS  = ['qp-1','qp-2','qp-3'];
+    var quizState = { focus: '', level: '' };
 
-    function quizShow(id: string): void {
-      ['quiz-step-1', 'quiz-step-2', 'quiz-step-3', 'quiz-step-4'].forEach(s => {
-        document.getElementById(s)?.classList.add('hidden');
+    function showStep(n) {
+      STEPS.forEach(function(id, i) {
+        var el = document.getElementById(id);
+        if (el) el.classList.toggle('hidden', i !== n - 1);
       });
-      document.getElementById(id)?.classList.remove('hidden');
+      BARS.forEach(function(id, i) {
+        var el = document.getElementById(id);
+        if (el) el.style.backgroundColor = i < n ? '#0057FF' : 'rgba(10,10,10,0.12)';
+      });
     }
 
-    document.querySelectorAll<HTMLButtonElement>('[data-quiz-option][data-step="1"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        state.focus = btn.dataset.value ?? '';
-        quizShow('quiz-step-2');
+    document.querySelectorAll('[data-quiz-option][data-step="1"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        quizState.focus = btn.dataset.value || '';
+        showStep(2);
       });
     });
 
-    document.querySelectorAll<HTMLButtonElement>('[data-quiz-option][data-step="2"]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        state.level = btn.dataset.value ?? '';
-        quizShow('quiz-step-3');
+    document.querySelectorAll('[data-quiz-option][data-step="2"]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        quizState.level = btn.dataset.value || '';
+        showStep(3);
       });
     });
 
-    document.getElementById('quiz-back-2')?.addEventListener('click', () => quizShow('quiz-step-1'));
-    document.getElementById('quiz-back-3')?.addEventListener('click', () => quizShow('quiz-step-2'));
+    var back2 = document.getElementById('quiz-back-2');
+    if (back2) back2.addEventListener('click', function() { showStep(1); });
 
-    const quizForm = document.getElementById('quiz-form') as HTMLFormElement | null;
-    quizForm?.addEventListener('submit', async (e: Event) => {
-      e.preventDefault();
-      const emailInput = document.getElementById('quiz-email') as HTMLInputElement | null;
-      const submitBtn  = document.getElementById('quiz-submit') as HTMLButtonElement | null;
-      const errorEl    = document.getElementById('quiz-error');
-      const email      = emailInput?.value.trim() ?? '';
+    var back3 = document.getElementById('quiz-back-3');
+    if (back3) back3.addEventListener('click', function() { showStep(2); });
 
-      if (!email) { errorEl?.classList.remove('hidden'); return; }
-      errorEl?.classList.add('hidden');
+    var quizForm = document.getElementById('quiz-form');
+    if (quizForm) {
+      quizForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var emailInput = document.getElementById('quiz-email');
+        var submitBtn  = document.getElementById('quiz-submit');
+        var errorEl    = document.getElementById('quiz-error');
+        var email      = emailInput ? emailInput.value.trim() : '';
 
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+        if (!email) { if (errorEl) errorEl.classList.remove('hidden'); return; }
+        if (errorEl) errorEl.classList.add('hidden');
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
 
-      try {
-        await fetch('/api/lead-capture', {
+        fetch('/api/lead-capture', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, full_name: '', source: 'lever-audit-quiz' }),
-        });
-      } catch { /* non-blocking */ }
-
-      quizShow('quiz-step-4');
-    });
-  }
+          body: JSON.stringify({ email: email, full_name: '', source: 'lever-audit-quiz' }),
+        }).catch(function() {}).finally(function() { showStep(4); });
+      });
+    }
+  })();
 </script>
