@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>30-Day Footwork Foundation — Thee Rainers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800;12..96,900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Bricolage Grotesque', 'Arial Black', Arial, sans-serif;
+      background: white;
+      color: #0A0A0A;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 16mm 18mm;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media print {
+      html, body { width: 210mm; background: white; }
+      .page { page-break-after: always; break-after: page; }
+      .page:last-child { page-break-after: avoid; }
+      .print-btn { display: none !important; }
+    }
+
+    @media screen {
+      body { background: #bbb; padding: 24px; }
+      .page { margin: 0 auto 32px; box-shadow: 0 4px 48px rgba(0,0,0,0.3); background: white; }
+    }
+
+    .print-btn {
+      position: fixed; top: 16px; right: 16px;
+      background: #0057FF; color: white; border: none;
+      padding: 12px 24px; font-family: inherit; font-weight: 800;
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      cursor: pointer; z-index: 999;
+    }
+
+    .label {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: #D4A373;
+    }
+    .label-faint { color: rgba(255,255,255,0.28); }
+    .label-dark  { color: rgba(10,10,10,0.22); }
+
+    /* ---- PAGE 1: COVER ---- */
+    .cover { background: #0A0A0A; }
+
+    /* ---- PAGE 2: STANCE LAWS ---- */
+    .law-block {
+      border-left: 3px solid #D4A373;
+      padding: 14px 0 14px 18px;
+      margin-bottom: 14px;
+    }
+    .law-num {
+      font-size: 9px; font-weight: 900;
+      color: #D4A373; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .law-title {
+      font-size: 20px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -0.02em;
+      color: #0A0A0A; line-height: 1; margin-bottom: 8px;
+    }
+    .law-body {
+      font-size: 11.5px; color: rgba(10,10,10,0.5);
+      line-height: 1.65;
+    }
+    .law-cue {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 9px; font-weight: 800;
+      color: #0057FF; letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ---- PAGE 3: DRILL ---- */
+    .step-row {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(10,10,10,0.07);
+      align-items: start;
+    }
+    .step-n {
+      font-size: 14px; font-weight: 900;
+      color: rgba(10,10,10,0.1); line-height: 1.1;
+    }
+    .step-title {
+      font-size: 12px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.02em;
+      color: #0A0A0A; margin-bottom: 3px;
+    }
+    .step-body {
+      font-size: 11px; color: rgba(10,10,10,0.45); line-height: 1.6;
+    }
+
+    /* ---- PAGE 4: SCHEDULE ---- */
+    .week-block {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 0;
+      border: 1px solid rgba(10,10,10,0.07);
+      margin-bottom: 8px;
+    }
+    .week-left {
+      background: #0A0A0A;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .week-num {
+      font-size: 9px; font-weight: 900;
+      color: #D4A373; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 4px;
+    }
+    .week-name {
+      font-size: 13px; font-weight: 900;
+      color: white; text-transform: uppercase;
+      letter-spacing: -0.01em; line-height: 1.1;
+    }
+    .week-right {
+      padding: 14px 16px;
+    }
+    .week-focus {
+      font-size: 10px; font-weight: 900;
+      color: #0A0A0A; text-transform: uppercase;
+      letter-spacing: 0.04em; margin-bottom: 5px;
+    }
+    .week-desc {
+      font-size: 10.5px; color: rgba(10,10,10,0.45); line-height: 1.6;
+    }
+    .week-drill {
+      margin-top: 5px;
+      font-size: 9px; font-weight: 800;
+      color: #0057FF; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+
+    /* ---- PAGE 5: NEXT STEP ---- */
+    .unlock-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(10,10,10,0.07);
+      margin-bottom: 14px;
+    }
+    .unlock-cell {
+      background: white;
+      padding: 14px 16px;
+    }
+    .unlock-label {
+      font-size: 8px; font-weight: 900;
+      color: rgba(10,10,10,0.2); text-transform: uppercase;
+      letter-spacing: 0.12em; margin-bottom: 4px;
+    }
+    .unlock-item {
+      font-size: 11px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: -0.01em;
+      color: #0A0A0A; line-height: 1.25;
+    }
+
+    .page-footer {
+      margin-top: auto; padding-top: 10px;
+      border-top: 1px solid rgba(10,10,10,0.05);
+      display: flex; justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Print → Save as PDF</button>
+
+
+<!-- ═════════════════════════════════════════════════
+     PAGE 1 — COVER
+═════════════════════════════════════════════════ -->
+<div class="page cover" style="justify-content: space-between;">
+
+  <p class="label label-faint">Thee Rainers · Free Protocol</p>
+
+  <div>
+    <p class="label label-faint" style="margin-bottom: 22px;">30 Days · 15–20 Min Per Session · No Equipment</p>
+
+    <h1 style="font-size: 72px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.045em; line-height: 0.82; color: white; margin-bottom: 26px;">
+      Footwork<br/>Foundation
+    </h1>
+
+    <p style="font-size: 14px; color: rgba(255,255,255,0.38); line-height: 1.7; max-width: 380px; margin-bottom: 32px;">
+      Most fighters train on a broken base and wonder why nothing transfers. This protocol fixes that. Stance, movement, angles — built in order, from the ground up.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; border: 1px solid rgba(255,255,255,0.07); margin-bottom: 28px;">
+      <div style="padding: 16px 14px; border-right: 1px solid rgba(255,255,255,0.07);">
+        <p class="label" style="margin-bottom: 6px;">Duration</p>
+        <p style="font-size: 28px; font-weight: 900; color: white; letter-spacing: -0.03em; line-height: 1;">30</p>
+        <p style="font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px;">Days</p>
+      </div>
+      <div style="padding: 16px 14px; border-right: 1px solid rgba(255,255,255,0.07);">
+        <p class="label" style="margin-bottom: 6px;">Per Session</p>
+        <p style="font-size: 28px; font-weight: 900; color: white; letter-spacing: -0.03em; line-height: 1;">15–20</p>
+        <p style="font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px;">Minutes</p>
+      </div>
+      <div style="padding: 16px 14px;">
+        <p class="label" style="margin-bottom: 6px;">Requirement</p>
+        <p style="font-size: 28px; font-weight: 900; color: white; letter-spacing: -0.03em; line-height: 1;">None</p>
+        <p style="font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px;">Equipment</p>
+      </div>
+    </div>
+
+    <div style="border-left: 2px solid rgba(212,163,115,0.4); padding: 10px 0 10px 16px;">
+      <p style="font-size: 11px; font-weight: 900; color: rgba(255,255,255,0.1); text-transform: uppercase; letter-spacing: -0.01em; line-height: 1.4; margin-bottom: 6px;">
+        "I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."
+      </p>
+      <p class="label">1 Corinthians 9:26–27</p>
+    </div>
+  </div>
+
+  <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+    <p class="label" style="color: rgba(255,255,255,0.15);">Full video system → theerainers.com/vault</p>
+    <p class="label" style="color: rgba(255,255,255,0.15);">theerainers.com</p>
+  </div>
+
+</div>
+
+
+<!-- ═════════════════════════════════════════════════
+     PAGE 2 — THE 3 LAWS (Stance)
+═════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid rgba(10,10,10,0.07);">
+    <p class="label">The 3 Stance Laws</p>
+    <p class="label label-dark">Establish these before you move</p>
+  </div>
+
+  <p style="font-size: 11.5px; color: rgba(10,10,10,0.38); line-height: 1.7; margin-bottom: 26px; max-width: 420px;">
+    Every problem in footwork traces back to one of three things. Fix these first. Everything else is downstream.
+  </p>
+
+  <div class="law-block">
+    <p class="law-num">Law 01</p>
+    <p class="law-title">Your base must be wide enough to push — not wide enough to stick.</p>
+    <p class="law-body">Feet shoulder-width or slightly wider. Weight on the balls of your feet, rear heel raised, knees bent. Flat-footed means flat-footed — dead to the floor, predictable, one step behind everything. The moment your heel touches down between movements, you've stopped being a fighter and started being a target.</p>
+    <span class="law-cue">Test: Jump once and land naturally. That width is correct.</span>
+  </div>
+
+  <div class="law-block">
+    <p class="law-num">Law 02</p>
+    <p class="law-title">Your feet must never cross. Your stance width must never collapse.</p>
+    <p class="law-body">When feet cross, the structure is gone. You cannot punch with power. You cannot defend. You cannot move. This is not technique — it is a physical law. The step-drag principle exists for one reason: so the foot closest to the direction you are moving always leads, and the other drags to restore width. Never the other way. Never a shortcut.</p>
+    <span class="law-cue">Common error: shuffling instead of step-dragging — feet close, stance narrows, structure collapses.</span>
+  </div>
+
+  <div class="law-block">
+    <p class="law-num">Law 03</p>
+    <p class="law-title">Your stance at the end of a round must look identical to the start.</p>
+    <p class="law-body">Fatigue reveals every shortcut. Chin comes up. Knees straighten. Weight shifts forward. Heels touch down. This is when you get hit — not because your opponent is better, but because your base abandoned you. The job of this protocol is to make the correct stance automatic under fatigue. Not comfortable. Automatic.</p>
+    <span class="law-cue">Day 1 drill: hold correct stance for 3 minutes without moving. Most fighters cannot do this.</span>
+  </div>
+
+  <div style="background: #F8F8F8; border: 1px solid rgba(10,10,10,0.07); padding: 14px 16px; margin-top: auto;">
+    <p class="label label-dark" style="margin-bottom: 8px;">The 5 Stance Points — Check Every Session</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px;">
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.5); line-height: 1.5;"><strong style="color: #0A0A0A;">Feet:</strong> shoulder-width, lead foot toward opponent, rear at 45°</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.5); line-height: 1.5;"><strong style="color: #0A0A0A;">Weight:</strong> 55% rear / 45% lead — even pressure side to side</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.5); line-height: 1.5;"><strong style="color: #0A0A0A;">Heels:</strong> rear heel raised, lead heel light — both ready to push</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.5); line-height: 1.5;"><strong style="color: #0A0A0A;">Knees:</strong> bent, loaded — not locked, not squatting</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.5); line-height: 1.5;"><strong style="color: #0A0A0A;">Head:</strong> behind lead shoulder, chin slightly down — smaller target</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <p class="label label-dark">Thee Rainers · 30-Day Footwork Foundation</p>
+    <p class="label label-dark">The 3 Stance Laws</p>
+  </div>
+
+</div>
+
+
+<!-- ═════════════════════════════════════════════════
+     PAGE 3 — THE STEP-DRAG + THE MIRROR DRILL
+═════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid rgba(10,10,10,0.07);">
+    <p class="label">The Movement Principle + Core Drill</p>
+    <p class="label label-dark">One law. One drill. Four weeks.</p>
+  </div>
+
+  <!-- STEP-DRAG -->
+  <div style="border: 1px solid rgba(10,10,10,0.08); background: #0A0A0A; padding: 16px 18px; margin-bottom: 22px;">
+    <p class="label" style="margin-bottom: 10px;">The Step-Drag Principle</p>
+    <p style="font-size: 13px; font-weight: 900; color: white; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 10px;">
+      The foot closest to where you are going moves first.<br/>The other foot drags to restore width. Feet never cross.
+    </p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; margin-top: 12px;">
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); padding: 10px;">
+        <p style="font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #0057FF; margin-bottom: 4px;">Forward</p>
+        <p style="font-size: 10px; color: rgba(255,255,255,0.38); line-height: 1.5;">Lead steps forward. Rear drags to restore width.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); padding: 10px;">
+        <p style="font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #0057FF; margin-bottom: 4px;">Backward</p>
+        <p style="font-size: 10px; color: rgba(255,255,255,0.38); line-height: 1.5;">Rear steps back. Lead drags to restore width.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); padding: 10px;">
+        <p style="font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #0057FF; margin-bottom: 4px;">Left</p>
+        <p style="font-size: 10px; color: rgba(255,255,255,0.38); line-height: 1.5;">Lead steps left. Rear drags to restore width.</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); padding: 10px;">
+        <p style="font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #0057FF; margin-bottom: 4px;">Right</p>
+        <p style="font-size: 10px; color: rgba(255,255,255,0.38); line-height: 1.5;">Rear steps right. Lead drags to restore width.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIRROR DRILL -->
+  <div style="margin-bottom: 18px;">
+    <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px;">
+      <p class="label">Drill 01 · Weeks 1–2</p>
+      <p style="font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; color: #0A0A0A; line-height: 1;">The Mirror Drill</p>
+    </div>
+    <p style="font-size: 9px; font-weight: 800; color: #0057FF; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">3 sets × 1 minute · 45 sec rest between sets</p>
+    <p style="font-size: 11.5px; color: rgba(10,10,10,0.5); line-height: 1.65; margin-bottom: 14px;">Face a mirror or a mark on the wall. Step-drag in all four directions — 3 steps forward, 3 back, 3 left, 3 right. Maintain stance width throughout. Do not hurry. Speed is not the goal. Clean mechanics at slow speed is the goal. Run this until it requires no thought. That is the standard.</p>
+  </div>
+
+  <div class="step-row" style="padding-top: 0;">
+    <div class="step-n">1</div>
+    <div>
+      <p class="step-title">Set your stance</p>
+      <p class="step-body">All 5 stance points before you move a single step. Do not skip this — starting in the wrong position means training the wrong pattern.</p>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-n">2</div>
+    <div>
+      <p class="step-title">Move. Count out loud.</p>
+      <p class="step-body">3 steps forward (lead first, drag). 3 steps backward (rear first, drag). 3 left (lead first, drag). 3 right (rear first, drag). Count each step aloud — this forces you to slow down and feel the mechanics.</p>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-n">3</div>
+    <div>
+      <p class="step-title">Check after every set</p>
+      <p class="step-body">Feet crossed at any point? Width collapsed? Guard dropped? Heels down? These are the four failure points. Fix one at a time before adding speed.</p>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-n">4</div>
+    <div>
+      <p class="step-title">Week 2: add guard, then pace variation</p>
+      <p class="step-body">Guard raised throughout. Then: slow for 20 seconds, medium for 20, fast for 20 — within the same set. If form breaks at speed, the speed is too high. Drop down until it holds.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 14px; border-left: 3px solid #0057FF; padding: 10px 0 10px 14px;">
+    <p style="font-size: 9px; font-weight: 900; color: #0057FF; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">Weeks 3–4 Drills (After Mirror Drill is Clean)</p>
+    <p style="font-size: 10.5px; color: rgba(10,10,10,0.45); line-height: 1.6;"><strong style="color: #0A0A0A;">Box Drill</strong> — move in a square: forward, right, backward, left. Direction changes without losing stance. <strong style="color: #0A0A0A;">Pivot Drill</strong> — plant lead foot, swing rear 45–90 degrees. New angle. New facing. <strong style="color: #0A0A0A;">L-Step</strong> — step forward-left at 45 degrees, plant, pivot to face forward. Now you are outside the centerline. Practice both sides.</p>
+  </div>
+
+  <div class="page-footer">
+    <p class="label label-dark">Thee Rainers · 30-Day Footwork Foundation</p>
+    <p class="label label-dark">Step-Drag + Mirror Drill</p>
+  </div>
+
+</div>
+
+
+<!-- ═════════════════════════════════════════════════
+     PAGE 4 — THE 30-DAY MAP
+═════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid rgba(10,10,10,0.07);">
+    <p class="label">The 30-Day Map</p>
+    <p class="label label-dark">6 days on · Day 7 active recovery · Do not skip weeks</p>
+  </div>
+
+  <p style="font-size: 11.5px; color: rgba(10,10,10,0.38); line-height: 1.65; margin-bottom: 20px;">
+    Each session: 3-min warm-up (leg swings, hip circles, ankle rotations) → 12-min drill block → 5-min shadow round. Record yourself on Day 1 and Day 30. The difference will be obvious.
+  </p>
+
+  <div class="week-block">
+    <div class="week-left">
+      <p class="week-num">Week 1</p>
+      <p class="week-name">Days<br/>1–7</p>
+    </div>
+    <div class="week-right">
+      <p class="week-focus">Stance Calibration</p>
+      <p class="week-desc">Static stance holds. Weight distribution (55/45). Step-drag forward and backward only. Day 5: Mirror Drill for endurance — stance must hold for a full 1.5-min round. Day 6: record yourself. Day 7: slow shadow only.</p>
+      <p class="week-drill">Checkpoint: stance holds for 2 full minutes without conscious correction.</p>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-left">
+      <p class="week-num">Week 2</p>
+      <p class="week-name">Days<br/>8–14</p>
+    </div>
+    <div class="week-right">
+      <p class="week-focus">Linear Control</p>
+      <p class="week-desc">Add lateral movement. Day 9: distance control drill — step to one arm's reach, step back, repeat. Day 10: pace variation within the Mirror Drill. Day 11: add guard. Day 12: introduce Box Drill at slow pace.</p>
+      <p class="week-drill">Checkpoint: step-drag all 4 directions clean, guard held, feet never crossing.</p>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-left">
+      <p class="week-num">Week 3</p>
+      <p class="week-name">Days<br/>15–21</p>
+    </div>
+    <div class="week-right">
+      <p class="week-focus">Angles + Pivots</p>
+      <p class="week-desc">Days 15–16: static pivot, then step + pivot in sequence. Days 17–18: L-step pattern. Day 19: retreat once, cut angle with L-step — exit the line. Day 20: first full shadow rounds, footwork only. Day 21: checkpoint.</p>
+      <p class="week-drill">Checkpoint: 3 different angles created from standing in under 10 seconds.</p>
+    </div>
+  </div>
+
+  <div class="week-block">
+    <div class="week-left" style="background: #0057FF;">
+      <p class="week-num" style="color: rgba(255,255,255,0.5);">Week 4</p>
+      <p class="week-name">Days<br/>22–30</p>
+    </div>
+    <div class="week-right">
+      <p class="week-focus">Integration</p>
+      <p class="week-desc">Full shadow rounds combining all 3 weeks. Day 24: the exit drill — enter range, throw, exit to 45 degrees. Never stand in the same spot twice. Day 28: add jab-cross combinations — feet move before hands. Day 30: full 3-min shadow on camera.</p>
+      <p class="week-drill">Final: exits happening automatically. Angles being created without thought.</p>
+    </div>
+  </div>
+
+  <div style="background: #F8F8F8; border: 1px solid rgba(10,10,10,0.07); padding: 14px 16px; margin-top: 14px;">
+    <p class="label label-dark" style="margin-bottom: 10px;">The 7 Cues — Post These Where You Train</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px 24px;">
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.55); line-height: 1.55;"><strong style="color: #0A0A0A;">Lead foot first.</strong> In every direction, the closer foot goes first. Every time.</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.55); line-height: 1.55;"><strong style="color: #0A0A0A;">Never cross.</strong> Crossed feet means no structure, no power, no defense.</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.55); line-height: 1.55;"><strong style="color: #0A0A0A;">Width holds.</strong> Stance width maintained through every step. Narrow = weak.</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.55); line-height: 1.55;"><strong style="color: #0A0A0A;">Ball of the foot.</strong> Heels down between moves = flat-footed = one step behind.</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.55); line-height: 1.55;"><strong style="color: #0A0A0A;">Bend the knees.</strong> Locked knees kill reactive speed and power transfer.</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.55); line-height: 1.55;"><strong style="color: #0A0A0A;">Plant, pivot, face.</strong> Every angle is deliberate. Full stance facing the new line.</p>
+      <p style="font-size: 10.5px; color: rgba(10,10,10,0.55); line-height: 1.55;"><strong style="color: #0A0A0A;">Exit after every engagement.</strong> Enter, throw, exit. Never stand still in the same spot twice.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <p class="label label-dark">Thee Rainers · 30-Day Footwork Foundation</p>
+    <p class="label label-dark">The 30-Day Map</p>
+  </div>
+
+</div>
+
+
+<!-- ═════════════════════════════════════════════════
+     PAGE 5 — WHAT COMES NEXT
+═════════════════════════════════════════════════ -->
+<div class="page" style="background: #0A0A0A;">
+
+  <p class="label label-faint" style="margin-bottom: 28px;">Thee Rainers · Boxing Performance</p>
+
+  <p style="font-size: 9px; font-weight: 900; color: rgba(255,255,255,0.22); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 12px;">What this protocol gave you</p>
+  <h2 style="font-size: 42px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.86; color: rgba(255,255,255,0.12); margin-bottom: 28px;">
+    The base.<br/>The law.<br/>The pattern.
+  </h2>
+
+  <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 22px; margin-bottom: 28px;">
+    <p style="font-size: 9px; font-weight: 900; color: #D4A373; text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 12px;">What it did not give you</p>
+    <p style="font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; color: white; line-height: 1.25; margin-bottom: 16px;">
+      The kinetic chain. Range as a weapon.<br/>The full 56-round video system.
+    </p>
+    <p style="font-size: 11.5px; color: rgba(255,255,255,0.32); line-height: 1.75; max-width: 420px;">
+      This protocol is the written framework. The Footwork Blueprint is the same system on video — every mechanic demonstrated, corrected, and drilled across 56 structured rounds. You see it in motion. You see what correct looks like versus what it feels like to get wrong. You see the moment when it transfers into sparring and the moment it breaks down.
+    </p>
+  </div>
+
+  <!-- UNLOCK GRID -->
+  <div class="unlock-row" style="background: rgba(255,255,255,0.06);">
+    <div class="unlock-cell" style="background: rgba(255,255,255,0.03);">
+      <p class="unlock-label">What is included</p>
+      <p class="unlock-item" style="color: rgba(255,255,255,0.6);">56 drill rounds<br/>on video</p>
+    </div>
+    <div class="unlock-cell" style="background: rgba(255,255,255,0.03);">
+      <p class="unlock-label">What is included</p>
+      <p class="unlock-item" style="color: rgba(255,255,255,0.6);">Full kinetic chain<br/>breakdown</p>
+    </div>
+    <div class="unlock-cell" style="background: rgba(255,255,255,0.03);">
+      <p class="unlock-label">What is included</p>
+      <p class="unlock-item" style="color: rgba(255,255,255,0.6);">Range control<br/>as a weapon</p>
+    </div>
+    <div class="unlock-cell" style="background: rgba(255,255,255,0.03);">
+      <p class="unlock-label">What is included — free</p>
+      <p class="unlock-item" style="color: #D4A373;">Monthly Q&A<br/>community call</p>
+    </div>
+  </div>
+
+  <!-- COMMUNITY FOMO -->
+  <div style="border-left: 2px solid rgba(212,163,115,0.3); padding: 14px 0 14px 18px; margin-bottom: 22px;">
+    <p class="label" style="margin-bottom: 8px;">The Monthly Q&A</p>
+    <p style="font-size: 11.5px; color: rgba(255,255,255,0.3); line-height: 1.7;">
+      One Saturday per month. Blueprint members bring the specific problem — what is not transferring, what breaks down under pressure, what the sparring footage shows. We diagnose it live. One correction, not five. Camera on. Real time. The recording burns after 30 days. You show up, or you miss it.
+    </p>
+  </div>
+
+  <!-- CTA -->
+  <div style="border: 1px solid rgba(0,87,255,0.25); padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+    <div>
+      <p style="font-size: 9px; font-weight: 900; color: #0057FF; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 4px;">Footwork Blueprint — Module 01</p>
+      <p style="font-size: 22px; font-weight: 900; color: white; letter-spacing: -0.03em; line-height: 1;">$47 / month</p>
+      <p style="font-size: 9px; color: rgba(255,255,255,0.22); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 3px;">Monthly Q&A included free · Cancel anytime</p>
+    </div>
+    <div style="text-align: right; flex-shrink: 0;">
+      <p style="font-size: 11px; font-weight: 900; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px;">theerainers.com/vault</p>
+      <p style="font-size: 9px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; text-transform: uppercase;">Both Blueprints — $87/mo</p>
+    </div>
+  </div>
+
+  <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center;">
+    <p class="label label-faint">theerainers.com/footwork-foundation</p>
+    <p class="label label-faint">© Thee Rainers</p>
+  </div>
+
+</div>
+
+</body>
+</html>
