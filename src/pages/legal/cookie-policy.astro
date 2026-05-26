@@ -1,0 +1,157 @@
+---
+import Layout from '../../layouts/Base.astro';
+---
+<Layout
+  title="Cookie Policy — Thee Rainers"
+  description="How Thee Rainers uses cookies. Short answer: we don't use tracking or advertising cookies."
+>
+  <section class="bg-[#F7F5F2] px-6 md:px-12 lg:px-20 pt-32 pb-24">
+    <div class="max-w-2xl mx-auto">
+
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Legal</p>
+      <h1 class="font-black text-[#141414] text-3xl md:text-4xl leading-tight tracking-tight mb-3">Cookie Policy</h1>
+      <p class="text-[#141414]/40 text-sm mb-12">Last updated: 26 May 2026</p>
+
+      <div class="prose-legal">
+
+        <h2>The short version</h2>
+        <p>
+          We do not use advertising cookies, tracking cookies, or profiling cookies. There is no cookie consent banner on this site because no non-essential cookies are set by us.
+        </p>
+
+        <h2>What is a cookie?</h2>
+        <p>
+          A cookie is a small text file stored in your browser by a website you visit. Cookies serve different purposes: some are strictly necessary to make a website function, others collect analytics data, and others track your behaviour across sites for advertising.
+        </p>
+
+        <h2>Cookies we set</h2>
+        <p>We do not set any first-party cookies. The following strictly necessary cookie may be set by our infrastructure provider:</p>
+
+        <table>
+          <thead>
+            <tr><th>Cookie</th><th>Set by</th><th>Purpose</th><th>Duration</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>__cf_bm</code></td>
+              <td>Cloudflare</td>
+              <td>Bot management and security. Identifies automated traffic to protect the site. Strictly necessary — cannot be disabled without breaking core security functions.</td>
+              <td>30 minutes</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Analytics</h2>
+        <p>
+          We use <strong>Cloudflare Web Analytics</strong>. This tool is privacy-first by design: it does not use cookies, does not store IP addresses, and does not track individual users across sessions or sites. It collects only aggregate, anonymous data (page views, referrer, country-level geographic data). No consent is required for cookieless analytics.
+        </p>
+        <p>We do not use Google Analytics, Google Tag Manager, Facebook Pixel, TikTok Pixel, or any other cookie-based analytics or advertising tool.</p>
+
+        <h2>Third-party cookies from embedded content</h2>
+        <p>
+          Some pages on this site embed third-party content that may set cookies in your browser:
+        </p>
+        <ul>
+          <li>
+            <strong>YouTube video embeds</strong> — The Library page (<a href="/library">/library</a>) embeds YouTube videos using the standard YouTube player. YouTube may set cookies when you interact with or view these videos. The token-gated Workshop Replay page uses <code>youtube-nocookie.com</code>, which YouTube states does not set cookies until you interact with the video.
+          </li>
+        </ul>
+        <p>
+          We do not control cookies set by third-party platforms. For YouTube's cookie practices, refer to Google's privacy policy at <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.
+        </p>
+
+        <h2>Payment processing</h2>
+        <p>
+          When you click a purchase button, you are redirected to Stripe's hosted checkout at <code>checkout.stripe.com</code>. Any cookies set during that process are set by Stripe on their own domain and are governed by <a href="https://stripe.com/privacy" target="_blank" rel="noopener">Stripe's Privacy Policy</a>. No Stripe tracking scripts are loaded on theerainers.com.
+        </p>
+
+        <h2>How to control cookies</h2>
+        <p>
+          You can manage and delete cookies through your browser settings. Instructions for common browsers:
+        </p>
+        <ul>
+          <li><strong>Chrome:</strong> Settings → Privacy and security → Cookies and other site data</li>
+          <li><strong>Firefox:</strong> Settings → Privacy &amp; Security → Cookies and Site Data</li>
+          <li><strong>Safari:</strong> Preferences → Privacy → Manage Website Data</li>
+          <li><strong>Edge:</strong> Settings → Cookies and site permissions</li>
+        </ul>
+        <p>
+          Blocking strictly necessary cookies (such as <code>__cf_bm</code>) may affect the security and functionality of the site.
+        </p>
+
+        <h2>Contact</h2>
+        <p>Questions about this policy: <a href="mailto:rainers@stepintoring.com">rainers@stepintoring.com</a>.</p>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .prose-legal {
+    color: #141414;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+  .prose-legal h2 {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: #141414;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .prose-legal p, .prose-legal li {
+    color: #141414;
+    margin-bottom: 0.9rem;
+  }
+  .prose-legal ul {
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .prose-legal li {
+    margin-bottom: 0.4rem;
+  }
+  .prose-legal a {
+    color: #c84d3a;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-legal a:hover {
+    opacity: 0.75;
+  }
+  .prose-legal strong {
+    font-weight: 700;
+    color: #141414;
+  }
+  .prose-legal code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.85em;
+    background: rgba(20,20,20,0.06);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+  .prose-legal table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+  }
+  .prose-legal th {
+    background: rgba(20,20,20,0.05);
+    font-weight: 700;
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid rgba(20,20,20,0.12);
+    color: #141414;
+  }
+  .prose-legal td {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid rgba(20,20,20,0.12);
+    vertical-align: top;
+  }
+  .prose-legal tr:nth-child(even) td {
+    background: rgba(20,20,20,0.025);
+  }
+</style>

@@ -94,6 +94,9 @@ const productSchema = JSON.stringify(products.map(p => ({
                   {p.featured ? 'Get Bundle →' : 'Subscribe →'}
                 </button>
               </div>
+              <p class="text-[9px] text-[#0A0A0A]/25 mt-2 text-right leading-relaxed">
+                By purchasing you agree to our <a href="/legal/terms" class="underline hover:text-[#0A0A0A]/50">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a>.
+              </p>
               {!p.featured && (
                 <p class="text-[10px] text-[#0A0A0A]/30 mt-3 text-center leading-relaxed">
                   Get both Blueprints + Monthly Q&A for&nbsp;
@@ -120,10 +123,15 @@ const productSchema = JSON.stringify(products.map(p => ({
           </div>
           <div class="flex items-center justify-between mt-8">
             <span class="font-black text-white text-2xl">$197</span>
-            <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
-              class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
-              Reserve Seat →
-            </a>
+            <div class="flex flex-col items-end gap-1">
+              <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+                Reserve Seat →
+              </a>
+              <p class="text-[9px] text-white/25 leading-relaxed">
+                <a href="/legal/terms" class="underline hover:text-white/50">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-white/50">Refund Policy</a>
+              </p>
+            </div>
           </div>
         </div>
 

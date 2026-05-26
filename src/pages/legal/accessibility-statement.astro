@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Base.astro';
+---
+<Layout
+  title="Accessibility Statement — Thee Rainers"
+  description="Thee Rainers accessibility statement — our commitment to WCAG 2.2 AA, what we've implemented, and known issues we are addressing."
+>
+  <section class="bg-[#F7F5F2] px-6 md:px-12 lg:px-20 pt-32 pb-24">
+    <div class="max-w-2xl mx-auto">
+
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Legal</p>
+      <h1 class="font-black text-[#141414] text-3xl md:text-4xl leading-tight tracking-tight mb-3">Accessibility Statement</h1>
+      <p class="text-[#141414]/40 text-sm mb-12">Last updated: 26 May 2026</p>
+
+      <div class="prose-legal">
+
+        <p>
+          Thee Rainers is committed to making theerainers.com accessible to all users, including people with disabilities. We aim to conform to <strong>WCAG 2.2 Level AA</strong> and are actively working to meet that standard.
+        </p>
+
+        <h2>What we have implemented</h2>
+        <ul>
+          <li>The site uses semantic HTML5 landmarks: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code> on every page.</li>
+          <li>Every <code>&lt;img&gt;</code> element has a meaningful <code>alt</code> attribute describing its content.</li>
+          <li>Decorative SVG icons use <code>aria-hidden="true"</code> to avoid screen reader clutter.</li>
+          <li>The navigation mobile menu button has an <code>aria-label</code> and the active navigation item receives <code>aria-current="page"</code>.</li>
+          <li>The application and contact forms use explicit <code>&lt;label&gt;</code> elements associated with each input via <code>for</code> / <code>id</code>.</li>
+          <li>Colour is not the sole means of conveying information.</li>
+          <li>The site is fully keyboard-navigable: all interactive elements are reachable by Tab and activatable by Enter or Space.</li>
+          <li>The <code>lang="en"</code> attribute is set on the root <code>&lt;html&gt;</code> element.</li>
+          <li>We use a variable font (Bricolage Grotesque) that renders well at all sizes and under browser text-zoom settings.</li>
+          <li>We do not use animations that could trigger vestibular disorders; hero animations respect the <code>prefers-reduced-motion</code> media query.</li>
+        </ul>
+
+        <h2>Known issues we are addressing</h2>
+        <ul>
+          <li><strong>Skip-to-content link:</strong> A skip navigation link (allowing keyboard users to bypass the site header and jump directly to main content) is not yet implemented. We are adding this.</li>
+          <li><strong>Email capture form labels:</strong> The email input fields on the free download forms (Footwork Foundation, 7-Lever Audit, Q&A registration) currently use placeholder text instead of a visible <code>&lt;label&gt;</code>. This has been identified as a WCAG 1.3.1 failure and will be corrected in an upcoming update.</li>
+          <li><strong>Colour contrast:</strong> Some secondary text elements use reduced-opacity colour values that may not meet the 4.5:1 contrast ratio for small body text at all zoom levels. We are reviewing and adjusting these.</li>
+        </ul>
+
+        <h2>Third-party content</h2>
+        <p>
+          Some pages embed YouTube video players. The accessibility of the YouTube player itself is outside our direct control. Where possible we use YouTube's nocookie variant. If you have difficulty with embedded video content, please contact us and we will provide an alternative.
+        </p>
+
+        <h2>Feedback and contact</h2>
+        <p>
+          If you experience any accessibility barrier on theerainers.com, we want to hear about it. Email us at <a href="mailto:rainers@stepintoring.com">rainers@stepintoring.com</a> with a description of the barrier and the page or feature affected. We aim to respond within 5 business days and to resolve confirmed issues as quickly as possible.
+        </p>
+        <p>
+          If you are not satisfied with our response, you may contact the relevant national equality or accessibility body in your country.
+        </p>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .prose-legal {
+    color: #141414;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+  .prose-legal h2 {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: #141414;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .prose-legal p, .prose-legal li {
+    color: #141414;
+    margin-bottom: 0.9rem;
+  }
+  .prose-legal ul {
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .prose-legal li {
+    margin-bottom: 0.4rem;
+  }
+  .prose-legal a {
+    color: #c84d3a;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-legal a:hover {
+    opacity: 0.75;
+  }
+  .prose-legal strong {
+    font-weight: 700;
+    color: #141414;
+  }
+  .prose-legal code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.85em;
+    background: rgba(20,20,20,0.06);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+</style>
