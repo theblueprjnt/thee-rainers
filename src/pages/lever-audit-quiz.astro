@@ -296,7 +296,9 @@ import LinkPage from '../layouts/LinkPage.astro';
     document.body.removeChild(a);
   }
 
-  // Boot
+  // Boot — show intro screen immediately
+  show('s-intro');
+
   document.getElementById('btn-start')?.addEventListener('click', () => {
     current = 0;
     renderLever(0);
