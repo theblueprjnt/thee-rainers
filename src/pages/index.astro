@@ -102,7 +102,7 @@ import Layout from '../layouts/Base.astro';
 
       <!-- Step 2 -->
       <div id="quiz-step-2" class="hidden">
-        <button id="quiz-back-2" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-6 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 p-0 font-bold">
+        <button id="quiz-back-2" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 py-3 px-1 font-bold min-h-[44px]">
           &larr; Back
         </button>
         <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-6">Where are you starting from?</p>
@@ -127,7 +127,7 @@ import Layout from '../layouts/Base.astro';
 
       <!-- Step 3: Email -->
       <div id="quiz-step-3" class="hidden">
-        <button id="quiz-back-3" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-6 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 p-0 font-bold">
+        <button id="quiz-back-3" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 py-3 px-1 font-bold min-h-[44px]">
           &larr; Back
         </button>
         <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Get your free protocol.</h3>
@@ -449,7 +449,7 @@ import Layout from '../layouts/Base.astro';
         fetch('/api/lead-capture', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, full_name: '', source: 'lever-audit-quiz' }),
+          body: JSON.stringify({ email: email, full_name: '', source: 'footwork-foundation' }),
         }).catch(function() {}).finally(function() { showStep(4); });
       });
     }
