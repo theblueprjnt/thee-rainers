@@ -7,13 +7,13 @@ import Layout from '../layouts/Base.astro';
   <section class="w-full md:min-h-screen overflow-hidden grid grid-cols-1 md:grid-cols-[60%_40%] bg-white border-b border-[#0A0A0A]/8">
 
     <div class="flex flex-col justify-center px-8 md:px-14 lg:px-20 pt-28 pb-12 md:py-0 relative z-10 overflow-hidden">
-      <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-5">Boxing Tech · @theerainers</p>
+      <p class="text-[#D4A373] text-xs tracking-wide uppercase mb-5">Elite Movement · @theerainers</p>
       <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter mb-6"
         style="font-size: clamp(2.5rem, 5.5vw, 4.5rem); line-height: 0.85;">
-        Engineered<br/>for the ring.
+        <span style="background: linear-gradient(to right, #FF3366, #FF9933); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Engineered</span><br/>for the ring.
       </h1>
       <p class="text-[#0A0A0A]/55 mb-10 max-w-[380px] text-base leading-relaxed">
-        Your ambition is ahead of your gym. This closes that gap.
+        Your ambition is ahead of your gym. Elite mechanics, not guesswork. This closes the gap.
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
         <a href="/foundation-guide"
@@ -21,7 +21,7 @@ import Layout from '../layouts/Base.astro';
           Get Free 30-Day Foundation →
         </a>
         <a href="/vault"
-          class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/20 text-[#0A0A0A]/50 bg-transparent px-10 py-4 text-sm tracking-widest uppercase hover:border-[#0A0A0A]/40 hover:text-[#0A0A0A]/80 transition-all duration-200 whitespace-nowrap">
+          class="inline-flex items-center justify-center font-bold bg-gradient-to-tr from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white px-10 py-4 text-sm uppercase tracking-widest shadow-[0_8px_32px_rgba(253,29,29,0.25)] hover:shadow-[0_12px_40px_rgba(253,29,29,0.4)] hover:scale-[1.02] transition-all duration-300 whitespace-nowrap border-none">
           Shop Products →
         </a>
       </div>
@@ -37,7 +37,7 @@ import Layout from '../layouts/Base.astro';
   </section>
 
   <!-- QUIZ — Lever diagnosis funnel -->
-  <section class="bg-white px-6 md:px-12 lg:px-20 py-10 md:py-12 border-b border-[#0A0A0A]/8">
+  <section class="bg-[#F7F6F4] px-6 md:px-12 lg:px-20 py-10 md:py-12 border-b border-[#0A0A0A]/8">
     <div id="quiz-container" class="bg-[#0A0A0A]/5 backdrop-blur-2xl border border-[#0A0A0A]/10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-3xl max-w-[800px] mx-auto p-8 md:p-12">
 
       <!-- Step 1 -->
@@ -58,12 +58,12 @@ import Layout from '../layouts/Base.astro';
           <button data-quiz-option data-step="1" data-value="footwork"
             class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
             <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Footwork</p>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Movement, angles, and ring control</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Movement, angles, and athletic control</p>
           </button>
           <button data-quiz-option data-step="1" data-value="ringiq"
             class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
             <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Ring IQ</p>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Tactics, reads, and fight strategy</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Tactics, reads, and tactical awareness</p>
           </button>
         </div>
       </div>
@@ -269,27 +269,27 @@ import Layout from '../layouts/Base.astro';
       <div class="grid grid-cols-2 md:grid-cols-5 gap-[1px] bg-[#0A0A0A]/8">
         <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1">331K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="331" data-suffix="K">331K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Instagram</p>
         </a>
         <a href="https://www.facebook.com/theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1">110K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="110" data-suffix="K">110K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Facebook</p>
         </a>
         <a href="https://www.tiktok.com/@theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1">90K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="90" data-suffix="K">90K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">TikTok</p>
         </a>
         <a href="https://www.threads.net/@theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1">20K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="20" data-suffix="K">20K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Threads</p>
         </a>
         <a href="https://www.youtube.com/@Rainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200 col-span-2 md:col-span-1">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1">15K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="15" data-suffix="K">15K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">YouTube</p>
         </a>
       </div>
@@ -308,6 +308,31 @@ import Layout from '../layouts/Base.astro';
   </section>
 
 </Layout>
+
+<script>
+  {
+    const els = document.querySelectorAll<HTMLElement>('[data-count]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        const target = parseInt(el.dataset.count ?? '0', 10);
+        const suffix = el.dataset.suffix ?? '';
+        const duration = 1000;
+        const start = performance.now();
+        observer.unobserve(el);
+        function step(now: number): void {
+          const p = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(ease * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.3 });
+    els.forEach(el => observer.observe(el));
+  }
+</script>
 
 <script>
   document.querySelectorAll<HTMLButtonElement>('[data-checkout]').forEach(btn => {

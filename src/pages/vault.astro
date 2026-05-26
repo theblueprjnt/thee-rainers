@@ -158,25 +158,6 @@ const productSchema = JSON.stringify(products.map(p => ({
 
       </div>
 
-      <!-- PA strip — Instagram gradient border signals exclusivity -->
-      <div class="mt-4 p-[2px]" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)">
-        <div class="bg-[#0A0A0A] p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <p class="text-[10px] tracking-widest uppercase mb-2"
-              style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-              Application Only · 1 of 1
-            </p>
-            <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-2">Private Architecture</h2>
-            <p class="text-white/35 text-xs max-w-[500px] leading-relaxed">No templates. No cohorts. A system engineered entirely around your fight, your body, your mind.</p>
-          </div>
-          <a href="/command"
-            class="shrink-0 inline-flex items-center justify-center font-bold text-white px-8 py-3 text-xs tracking-widest uppercase whitespace-nowrap transition-opacity duration-200 hover:opacity-80"
-            style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)">
-            Apply →
-          </a>
-        </div>
-      </div>
-
       <!-- Monthly Q&A Community Call — free bonus block -->
       <div class="mt-4 border border-[#D4A373]/25 bg-white overflow-hidden">
         <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-0">
@@ -210,6 +191,26 @@ const productSchema = JSON.stringify(products.map(p => ({
             <p class="font-black text-white/15 uppercase tracking-tighter text-[3rem] leading-none mb-1">1×</p>
             <p class="text-[#D4A373] text-[9px] tracking-widest uppercase text-center">Per Month<br/>Included</p>
           </div>
+        </div>
+      </div>
+
+      <!-- PA strip — Application only, strictly limited -->
+      <div class="mt-4 p-[2px]" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)">
+        <div class="bg-[#0A0A0A] p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <p class="text-[10px] tracking-widest uppercase mb-2"
+              style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+              Application Only · Strictly Limited
+            </p>
+            <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-2">Private Architecture</h2>
+            <p class="text-white/40 text-xs max-w-[500px] leading-relaxed mb-2">No templates. No cohorts. One athlete. One complete system — built around your fight, your mechanics, your mind.</p>
+            <p class="text-white/20 text-[10px] tracking-wide">Not every application is accepted. Not every slot is open.</p>
+          </div>
+          <a href="/command"
+            class="shrink-0 inline-flex items-center justify-center font-bold text-white px-8 py-3 text-xs tracking-widest uppercase whitespace-nowrap transition-opacity duration-200 hover:opacity-80"
+            style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)">
+            Apply →
+          </a>
         </div>
       </div>
 
