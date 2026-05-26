@@ -1,7 +1,6 @@
 ---
 import Nav from '../components/site/Nav.astro';
 import Footer from '../components/site/Footer.astro';
-import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -71,7 +70,6 @@ const siteSchema = JSON.stringify({
     <meta name="twitter:image" content="https://theerainers.com/images/coldfightpic3.jpg" />
     <title>{title}</title>
     <script type="application/ld+json" set:html={siteSchema} />
-    <ClientRouter />
     <slot name="head" />
   </head>
   <body class="bg-bg text-ink min-h-screen flex flex-col">
