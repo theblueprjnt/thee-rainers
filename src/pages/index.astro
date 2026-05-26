@@ -68,10 +68,10 @@ import Layout from '../layouts/Base.astro';
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">Footwork + Shadowboxing. Complete system. Monthly Live Q&A included free.</p>
             <div class="mt-5 flex items-center justify-between">
               <span class="font-black text-[#0A0A0A] text-2xl">$87<span class="text-sm font-bold text-[#0A0A0A]/40">/mo</span></span>
-              <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200">
+              <button data-checkout="bundle_monthly"
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 cursor-pointer disabled:opacity-40">
                 Buy →
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -92,10 +92,10 @@ import Layout from '../layouts/Base.astro';
             </div>
             <div class="mt-4 flex items-center justify-between">
               <span class="font-black text-[#0A0A0A] text-2xl">$47<span class="text-sm font-bold text-[#0A0A0A]/40">/mo</span></span>
-              <a href="https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k" target="_blank"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200">
+              <button data-checkout="footwork_monthly"
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 cursor-pointer disabled:opacity-40">
                 Subscribe →
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -116,10 +116,10 @@ import Layout from '../layouts/Base.astro';
             </div>
             <div class="mt-4 flex items-center justify-between">
               <span class="font-black text-[#0A0A0A] text-2xl">$47<span class="text-sm font-bold text-[#0A0A0A]/40">/mo</span></span>
-              <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l" target="_blank"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200">
+              <button data-checkout="shadowboxing_monthly"
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 cursor-pointer disabled:opacity-40">
                 Subscribe →
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -216,3 +216,31 @@ import Layout from '../layouts/Base.astro';
   </section>
 
 </Layout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-checkout]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const key = btn.dataset.checkout;
+      const original = btn.textContent ?? '';
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      try {
+        const res = await fetch('/api/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lookupKey: key }),
+        });
+        const data = await res.json() as { url?: string };
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          btn.disabled = false;
+          btn.textContent = original;
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  });
+</script>

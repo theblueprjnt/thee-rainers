@@ -9,7 +9,7 @@ const products = [
     sub: '100+ Rounds · Full System',
     desc: 'Footwork + Shadowboxing. Complete operating system. Monthly Live Q&A included free.',
     price: '$87/mo',
-    url: 'https://buy.stripe.com/14A4gz59hgxUaa65006J20m',
+    lookupKey: 'bundle_monthly',
     featured: true,
   },
   {
@@ -19,7 +19,7 @@ const products = [
     sub: 'Win Fights with Footwork',
     desc: 'Full video breakdown. 56 drill rounds. 30-day progression. The base everything else runs on.',
     price: '$47/mo',
-    url: 'https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k',
+    lookupKey: 'footwork_monthly',
     featured: false,
   },
   {
@@ -29,7 +29,7 @@ const products = [
     sub: 'Turn Shadowboxing Into Real Boxing',
     desc: 'Done-with-you session. Skill tests. Range control. The kinetic chain applied in motion.',
     price: '$47/mo',
-    url: 'https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l',
+    lookupKey: 'shadowboxing_monthly',
     featured: false,
   },
 ];
@@ -46,7 +46,7 @@ const productSchema = JSON.stringify(products.map(p => ({
     "price": parseFloat(p.price.replace(/[^0-9.]/g, '')),
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock",
-    "url": p.url,
+    "url": "https://theerainers.com/vault",
   },
 })));
 ---
@@ -89,18 +89,18 @@ const productSchema = JSON.stringify(products.map(p => ({
               )}
               <div class="mt-4 flex items-center justify-between">
                 <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
-                <a href={p.url} target="_blank"
-                  class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+                <button data-checkout={p.lookupKey}
+                  class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-40">
                   {p.featured ? 'Get Bundle →' : 'Subscribe →'}
-                </a>
+                </button>
               </div>
               {!p.featured && (
                 <p class="text-[10px] text-[#0A0A0A]/30 mt-3 text-center leading-relaxed">
                   Get both Blueprints + Monthly Q&A for&nbsp;
-                  <a href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m" target="_blank"
-                    class="text-[#0057FF] font-bold hover:opacity-60 transition-opacity">
+                  <button data-checkout="bundle_monthly"
+                    class="text-[#0057FF] font-bold hover:opacity-60 transition-opacity cursor-pointer disabled:opacity-40 bg-transparent border-0 p-0 text-[10px]">
                     $87/mo →
-                  </a>
+                  </button>
                 </p>
               )}
             </div>
@@ -225,3 +225,31 @@ const productSchema = JSON.stringify(products.map(p => ({
   </section>
 
 </Layout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-checkout]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const key = btn.dataset.checkout;
+      const original = btn.textContent ?? '';
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      try {
+        const res = await fetch('/api/create-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lookupKey: key }),
+        });
+        const data = await res.json() as { url?: string };
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          btn.disabled = false;
+          btn.textContent = original;
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  });
+</script>
