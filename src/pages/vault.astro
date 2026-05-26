@@ -6,8 +6,8 @@ const products = [
     image: '/images/bundle_cover.png',
     tag: 'Bundle · Best Value',
     title: 'Both Blueprints',
-    sub: '100+ Rounds · Full System',
-    desc: 'Footwork + Shadowboxing. Complete operating system. Monthly Live Q&A included free.',
+    sub: 'Module 01 + 02 · 60 Days · 96 Rounds',
+    desc: 'The complete system. Foundation first. Application second. Both modules running in sequence.',
     price: '$87/mo',
     lookupKey: 'bundle_monthly',
     featured: true,
@@ -16,8 +16,8 @@ const products = [
     image: '/images/footworkbp_cover.png',
     tag: 'Blueprint · Module 01',
     title: 'Footwork Blueprint',
-    sub: 'Win Fights with Footwork',
-    desc: 'Full video breakdown. 56 drill rounds. 30-day progression. The base everything else runs on.',
+    sub: 'Module 01 · 30 Days · 56 Rounds',
+    desc: 'Stance mechanics. Weight distribution. Kinetic chain from the floor up. The base layer.',
     price: '$47/mo',
     lookupKey: 'footwork_monthly',
     featured: false,
@@ -26,8 +26,8 @@ const products = [
     image: '/images/shadowboxingblueprint_covernew.png',
     tag: 'Blueprint · Module 02',
     title: 'Shadowboxing Blueprint',
-    sub: 'Turn Shadowboxing Into Real Boxing',
-    desc: 'Done-with-you session. Skill tests. Range control. The kinetic chain applied in motion.',
+    sub: 'Module 02 · 6 Weeks · 40 Rounds',
+    desc: 'Shadowboxing rebuilt as live simulation. Cue reading. Range fluency. Technique under pressure.',
     price: '$47/mo',
     lookupKey: 'shadowboxing_monthly',
     featured: false,
@@ -80,14 +80,11 @@ const productSchema = JSON.stringify(products.map(p => ({
             <div class="p-5 flex flex-col flex-1">
               <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">{p.tag}</p>
               <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-1">{p.title}</h2>
+              <p class="text-xs mb-2">
+                <span class="font-bold tracking-wide" style="background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">+ Includes Live Monthly Q&A Access</span>
+              </p>
               <p class="text-[#0A0A0A]/50 text-xs mb-3 font-bold">{p.sub}</p>
               <p class="text-[#0A0A0A]/60 text-xs leading-relaxed flex-1">{p.desc}</p>
-              {!p.featured && (
-                <div class="flex items-center gap-2 mt-4 pt-4 border-t border-[#D4A373]/20">
-                  <span class="text-[#D4A373] text-[9px] font-black tracking-widest uppercase">+ Monthly Live Q&A</span>
-                  <span class="text-[#0A0A0A]/25 text-[9px] tracking-widest uppercase">Included free</span>
-                </div>
-              )}
               <div class="mt-4 flex items-center justify-between">
                 <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
                 <button data-checkout={p.lookupKey}
@@ -194,26 +191,6 @@ const productSchema = JSON.stringify(products.map(p => ({
             <p class="font-black text-white/15 uppercase tracking-tighter text-[3rem] leading-none mb-1">1×</p>
             <p class="text-[#D4A373] text-[9px] tracking-widest uppercase text-center">Per Month<br/>Included</p>
           </div>
-        </div>
-      </div>
-
-      <!-- PA strip — Application only, strictly limited -->
-      <div class="mt-4 p-[2px]" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)">
-        <div class="bg-[#0A0A0A] p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <p class="text-[10px] tracking-widest uppercase mb-2"
-              style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-              Application Only · Strictly Limited
-            </p>
-            <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-2">Private Architecture</h2>
-            <p class="text-white/40 text-xs max-w-[500px] leading-relaxed mb-2">No templates. No cohorts. One athlete. One complete system — built around your fight, your mechanics, your mind.</p>
-            <p class="text-white/20 text-[10px] tracking-wide">Not every application is accepted. Not every slot is open.</p>
-          </div>
-          <a href="/command"
-            class="shrink-0 inline-flex items-center justify-center font-bold text-white px-8 py-3 text-xs tracking-widest uppercase whitespace-nowrap transition-opacity duration-200 hover:opacity-80"
-            style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)">
-            Apply →
-          </a>
         </div>
       </div>
 
