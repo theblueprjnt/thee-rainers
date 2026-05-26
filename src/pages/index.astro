@@ -165,12 +165,13 @@ import Layout from '../layouts/Base.astro';
       <!-- 3-column blueprint cards — Bundle leads as primary engine -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
 
-        <div class="border-2 border-[#0057FF]/30 flex flex-col group hover:border-[#0057FF] transition-colors duration-200 relative">
+        <div class="tr-card border-2 border-[#0057FF]/30 flex flex-col group hover:border-[#0057FF] transition-colors duration-200 relative">
           <div class="absolute top-3 left-3 z-10 bg-[#0057FF] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Best Value</div>
-          <div class="bg-[#0A0A0A] overflow-hidden">
+          <div class="bg-[#0A0A0A] overflow-hidden relative">
             <img src="/images/bundle_cover.png" alt="Both Blueprints Bundle"
               width="1414" height="2000"
               class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
           </div>
           <div class="p-5 flex flex-col flex-1">
             <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Bundle · 100+ Rounds</p>
@@ -179,7 +180,7 @@ import Layout from '../layouts/Base.astro';
             <div class="mt-5 flex items-center justify-between">
               <span class="font-black text-[#0A0A0A] text-2xl">$87<span class="text-sm font-bold text-[#0A0A0A]/40">/mo</span></span>
               <button data-checkout="bundle_monthly"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 cursor-pointer disabled:opacity-40">
+                class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-gradient-to-tr from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest rounded-xl shadow-[0_8px_32px_rgba(253,29,29,0.25)] hover:shadow-[0_12px_40px_rgba(253,29,29,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 border-none cursor-pointer">
                 Buy →
               </button>
             </div>
@@ -187,11 +188,12 @@ import Layout from '../layouts/Base.astro';
           </div>
         </div>
 
-        <div class="border border-[#0A0A0A]/10 flex flex-col group hover:border-[#0057FF]/40 transition-colors duration-200">
-          <div class="bg-[#F6F6F6] overflow-hidden">
+        <div class="tr-card border border-[#0A0A0A]/10 flex flex-col group hover:border-[#0057FF]/40 transition-colors duration-200">
+          <div class="bg-[#F6F6F6] overflow-hidden relative">
             <img src="/images/footworkbp_cover.png" alt="Footwork Blueprint"
               width="400" height="400"
               class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
           </div>
           <div class="p-5 flex flex-col flex-1">
             <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Blueprint · Module 01</p>
@@ -204,7 +206,7 @@ import Layout from '../layouts/Base.astro';
             <div class="mt-4 flex items-center justify-between">
               <span class="font-black text-[#0A0A0A] text-2xl">$47<span class="text-sm font-bold text-[#0A0A0A]/40">/mo</span></span>
               <button data-checkout="footwork_monthly"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 cursor-pointer disabled:opacity-40">
+                class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-gradient-to-tr from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest rounded-xl shadow-[0_8px_32px_rgba(253,29,29,0.25)] hover:shadow-[0_12px_40px_rgba(253,29,29,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 border-none cursor-pointer">
                 Subscribe →
               </button>
             </div>
@@ -212,11 +214,12 @@ import Layout from '../layouts/Base.astro';
           </div>
         </div>
 
-        <div class="border border-[#0A0A0A]/10 flex flex-col group hover:border-[#0057FF]/40 transition-colors duration-200">
-          <div class="bg-[#F6F6F6] overflow-hidden">
+        <div class="tr-card border border-[#0A0A0A]/10 flex flex-col group hover:border-[#0057FF]/40 transition-colors duration-200">
+          <div class="bg-[#F6F6F6] overflow-hidden relative">
             <img src="/images/shadowboxingblueprint_covernew.png" alt="Shadowboxing Blueprint"
               width="1500" height="1150"
               class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
           </div>
           <div class="p-5 flex flex-col flex-1">
             <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Blueprint · Module 02</p>
@@ -229,7 +232,7 @@ import Layout from '../layouts/Base.astro';
             <div class="mt-4 flex items-center justify-between">
               <span class="font-black text-[#0A0A0A] text-2xl">$47<span class="text-sm font-bold text-[#0A0A0A]/40">/mo</span></span>
               <button data-checkout="shadowboxing_monthly"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 cursor-pointer disabled:opacity-40">
+                class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-gradient-to-tr from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest rounded-xl shadow-[0_8px_32px_rgba(253,29,29,0.25)] hover:shadow-[0_12px_40px_rgba(253,29,29,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 border-none cursor-pointer">
                 Subscribe →
               </button>
             </div>
@@ -365,9 +368,10 @@ import Layout from '../layouts/Base.astro';
   document.querySelectorAll<HTMLButtonElement>('[data-checkout]').forEach(btn => {
     btn.addEventListener('click', async () => {
       const key = btn.dataset.checkout;
-      const original = btn.textContent ?? '';
+      const originalHTML = btn.innerHTML;
       btn.disabled = true;
-      btn.textContent = 'Loading...';
+      btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Processing...';
+      btn.classList.add('opacity-80', 'cursor-not-allowed');
       try {
         const res = await fetch('/api/create-checkout', {
           method: 'POST',
@@ -379,11 +383,13 @@ import Layout from '../layouts/Base.astro';
           window.location.href = data.url;
         } else {
           btn.disabled = false;
-          btn.textContent = original;
+          btn.innerHTML = originalHTML;
+          btn.classList.remove('opacity-80', 'cursor-not-allowed');
         }
       } catch {
         btn.disabled = false;
-        btn.textContent = original;
+        btn.innerHTML = originalHTML;
+        btn.classList.remove('opacity-80', 'cursor-not-allowed');
       }
     });
   });

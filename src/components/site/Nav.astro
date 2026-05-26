@@ -70,3 +70,17 @@
     link.classList.add('text-[#0057FF]');
   });
 </script>
+
+<script>
+  const siteNav = document.getElementById('site-nav');
+  function updateNavGlass() {
+    if (!siteNav) return;
+    if (window.scrollY > 10) {
+      siteNav.classList.add('is-scrolled');
+    } else {
+      siteNav.classList.remove('is-scrolled');
+    }
+  }
+  window.addEventListener('scroll', updateNavGlass, { passive: true });
+  updateNavGlass();
+</script>
