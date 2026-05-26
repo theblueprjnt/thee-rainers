@@ -36,6 +36,95 @@ import Layout from '../layouts/Base.astro';
 
   </section>
 
+  <!-- QUIZ — Lever diagnosis funnel -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-10 md:py-12 border-b border-[#0A0A0A]/8">
+    <div id="quiz-container" class="bg-[#0A0A0A]/5 backdrop-blur-2xl border border-[#0A0A0A]/10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-3xl max-w-[800px] mx-auto p-8 md:p-12">
+
+      <!-- Step 1 -->
+      <div id="quiz-step-1">
+        <p class="text-[#D4A373] text-xs uppercase tracking-widest mb-3">Quick diagnosis · 3 questions</p>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-8">What is your primary<br/>focus right now?</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <button data-quiz-option data-step="1" data-value="speed"
+            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Speed</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Hand speed and combination flow</p>
+          </button>
+          <button data-quiz-option data-step="1" data-value="power"
+            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Power</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Kinetic chain and punch mechanics</p>
+          </button>
+          <button data-quiz-option data-step="1" data-value="footwork"
+            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Footwork</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Movement, angles, and ring control</p>
+          </button>
+          <button data-quiz-option data-step="1" data-value="ringiq"
+            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Ring IQ</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Tactics, reads, and fight strategy</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div id="quiz-step-2" class="hidden">
+        <button id="quiz-back-2"
+          class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase mb-8 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 p-0">
+          &larr; Back
+        </button>
+        <p class="text-[#D4A373] text-xs uppercase tracking-widest mb-3">Step 2 of 3</p>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-8">Where are you<br/>starting from?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <button data-quiz-option data-step="2" data-value="beginner"
+            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Just starting</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Under 1 year or no formal training</p>
+          </button>
+          <button data-quiz-option data-step="2" data-value="amateur"
+            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Amateur</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Training consistently, have sparred</p>
+          </button>
+          <button data-quiz-option data-step="2" data-value="advanced"
+            class="bg-white border border-[#0A0A0A]/10 hover:border-[#0057FF]/50 active:scale-[0.98] transition-all duration-200 cursor-pointer rounded-xl p-6 text-left">
+            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1">Advanced</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Competitive or serious fight record</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Email capture -->
+      <div id="quiz-step-3" class="hidden">
+        <button id="quiz-back-3"
+          class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase mb-8 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 p-0">
+          &larr; Back
+        </button>
+        <p class="text-[#D4A373] text-xs uppercase tracking-widest mb-3">Step 3 of 3</p>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-3">Where should we send<br/>your custom blueprint?</h2>
+        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-8 max-w-[420px]">Based on your focus, we will send the right starting protocol. Free. No spam.</p>
+        <form id="quiz-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
+          <input type="email" id="quiz-email" placeholder="your@email.com" required
+            class="flex-1 border border-[#0A0A0A]/15 bg-white px-5 py-4 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/25 focus:outline-none focus:border-[#0057FF]/50 rounded-xl" />
+          <button type="submit" id="quiz-submit"
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap rounded-xl cursor-pointer disabled:opacity-40">
+            Send Blueprint →
+          </button>
+        </form>
+        <p id="quiz-error" class="text-[#0A0A0A]/40 text-xs mt-3 hidden">Please enter a valid email address.</p>
+      </div>
+
+      <!-- Step 4: Confirmation -->
+      <div id="quiz-step-4" class="hidden">
+        <p class="text-[#D4A373] text-xs uppercase tracking-widest mb-3">Sent</p>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-3">Check your inbox.</h2>
+        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[400px]">Your free protocol is on the way. Build the base. Everything else follows.</p>
+      </div>
+
+    </div>
+  </section>
+
   <!-- Mobile fighter strip -->
   <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 80vw; max-height: 400px;">
     <img src="/images/coldfightpic2.jpg" alt="Thee Rainers"
@@ -246,4 +335,58 @@ import Layout from '../layouts/Base.astro';
       }
     });
   });
+</script>
+
+<script>
+  {
+    const state = { focus: '', level: '' };
+
+    function quizShow(id: string): void {
+      ['quiz-step-1', 'quiz-step-2', 'quiz-step-3', 'quiz-step-4'].forEach(s => {
+        document.getElementById(s)?.classList.add('hidden');
+      });
+      document.getElementById(id)?.classList.remove('hidden');
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('[data-quiz-option][data-step="1"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.focus = btn.dataset.value ?? '';
+        quizShow('quiz-step-2');
+      });
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('[data-quiz-option][data-step="2"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.level = btn.dataset.value ?? '';
+        quizShow('quiz-step-3');
+      });
+    });
+
+    document.getElementById('quiz-back-2')?.addEventListener('click', () => quizShow('quiz-step-1'));
+    document.getElementById('quiz-back-3')?.addEventListener('click', () => quizShow('quiz-step-2'));
+
+    const quizForm = document.getElementById('quiz-form') as HTMLFormElement | null;
+    quizForm?.addEventListener('submit', async (e: Event) => {
+      e.preventDefault();
+      const emailInput = document.getElementById('quiz-email') as HTMLInputElement | null;
+      const submitBtn  = document.getElementById('quiz-submit') as HTMLButtonElement | null;
+      const errorEl    = document.getElementById('quiz-error');
+      const email      = emailInput?.value.trim() ?? '';
+
+      if (!email) { errorEl?.classList.remove('hidden'); return; }
+      errorEl?.classList.add('hidden');
+
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+
+      try {
+        await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, full_name: '', source: 'lever-audit-quiz' }),
+        });
+      } catch { /* non-blocking */ }
+
+      quizShow('quiz-step-4');
+    });
+  }
 </script>

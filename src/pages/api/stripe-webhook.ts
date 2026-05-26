@@ -29,11 +29,11 @@ const ASSET_MAP: Record<string, string[]> = {
 // TODO: Create tags in Kit (Grow > Tags) and paste the numeric IDs below.
 // Tag URL looks like: app.kit.com/tags/1234567 — the number is the ID.
 const KIT_PRODUCT_TAGS: Record<string, string> = {
-  'footwork':     'KIT_TAG_FOOTWORK',      // replace with numeric ID
-  'shadowboxing': 'KIT_TAG_SHADOWBOXING',  // replace with numeric ID
-  'bundle':       'KIT_TAG_BUNDLE',        // replace with numeric ID
+  'footwork':     '19807643',
+  'shadowboxing': '19807641',
+  'bundle':       '19807644',
 };
-const KIT_MEMBER_TAG = 'KIT_TAG_MEMBER_ACTIVE'; // replace with numeric ID — this gates the Q&A
+const KIT_MEMBER_TAG = '19807647';
 
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
 const SITE_URL = 'https://theerainers.com';
@@ -226,7 +226,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
   const webhookSecret = e['STRIPE_WEBHOOK_SECRET'] ?? '';
   const stripeKey     = e['STRIPE_SECRET_KEY'] ?? '';
   const kitKey        = e['KIT_API_KEY'] ?? '';
-  const airtableToken = e['AIRTABLE_TOKEN'] ?? '';
+  const airtableToken = e['AIRTABLE_API_KEY'] ?? '';
   const airtableBase  = e['AIRTABLE_BASE_ID'] ?? '';
   const airtableTable = e['AIRTABLE_TABLE'] ?? 'Members';
 
