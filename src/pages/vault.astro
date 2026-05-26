@@ -13,7 +13,7 @@ const products = [
     featured: true,
   },
   {
-    image: '/images/footworkbp_cover.png',
+    image: '/images/training_outsidepadwork.png',
     tag: 'Blueprint · Module 01',
     title: 'Footwork Blueprint',
     sub: 'Module 01 · 30 Days · 56 Rounds',
@@ -112,23 +112,31 @@ const productSchema = JSON.stringify(products.map(p => ({
       <!-- Workshop + Q&A row — live offers -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
 
-        <div class="border border-[#D4A373]/30 bg-[#0A0A0A] p-8 flex flex-col justify-between group hover:border-[#D4A373]/60 transition-colors duration-200">
-          <div>
-            <!-- TODO: POST-JUNE-27 DATE SWAP -->
-            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Live · June 27 · 90 min</p>
-            <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-3">Defense Workshop</h2>
-            <p class="text-white/40 text-xs leading-relaxed">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset.</p>
+        <div class="border border-[#D4A373]/30 bg-[#0A0A0A] flex flex-col group hover:border-[#D4A373]/60 transition-colors duration-200">
+          <!-- TODO: POST-JUNE-27 DATE SWAP -->
+          <div class="relative overflow-hidden" style="height: 200px;">
+            <img src="/images/defense_workshop.png" alt="Defense Workshop — live session"
+              width="1920" height="1080"
+              class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500" />
+            <div class="absolute inset-0 bg-[#0A0A0A]/45"></div>
           </div>
-          <div class="flex items-center justify-between mt-8">
-            <span class="font-black text-white text-2xl">$197</span>
-            <div class="flex flex-col items-end gap-1">
-              <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
-                Reserve Seat →
-              </a>
-              <p class="text-[9px] text-white/25 leading-relaxed">
-                <a href="/legal/terms" class="underline hover:text-white/50">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-white/50">Refund Policy</a>
-              </p>
+          <div class="p-8 flex flex-col flex-1 justify-between">
+            <div>
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Live · June 27 · 90 min</p>
+              <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-3">Defense Workshop</h2>
+              <p class="text-white/40 text-xs leading-relaxed">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset.</p>
+            </div>
+            <div class="flex items-center justify-between mt-8">
+              <span class="font-black text-white text-2xl">$197</span>
+              <div class="flex flex-col items-end gap-1">
+                <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
+                  class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+                  Reserve Seat →
+                </a>
+                <p class="text-[9px] text-white/25 leading-relaxed">
+                  <a href="/legal/terms" class="underline hover:text-white/50">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-white/50">Refund Policy</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
