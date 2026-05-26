@@ -19,7 +19,7 @@ export async function POST({ request }: { request: Request }): Promise<Response>
   const headers = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': siteUrl };
 
   try {
-    const { lookupKey } = await request.json() as { lookupKey: string };
+    const { lookupKey, customerEmail } = await request.json() as { lookupKey: string; customerEmail?: string };
     if (!lookupKey || !PRODUCT_IDS[lookupKey]) {
       return new Response(JSON.stringify({ error: 'unknown lookupKey' }), { status: 400, headers });
     }
@@ -37,8 +37,11 @@ export async function POST({ request }: { request: Request }): Promise<Response>
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       line_items: [{ price: price.id, quantity: 1 }],
+      automatic_payment_methods: { enabled: true },
+      phone_number_collection: { enabled: true },
       allow_promotion_codes: true,
       billing_address_collection: 'auto',
+      ...(customerEmail ? { customer_email: customerEmail } : {}),
       success_url: `${siteUrl}/welcome?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/vault`,
       metadata: { lookup_key: lookupKey },
