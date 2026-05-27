@@ -91,7 +91,7 @@ const productSchema = JSON.stringify(products.map(p => ({
                   <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
                   {p.price_note && <p class="text-[10px] text-[#0A0A0A]/30 mt-0.5">{p.price_note}</p>}
                 </div>
-                <a href={p.stripe_link} target="_blank"
+                <a href={p.stripe_link}
                   class="inline-flex items-center justify-center whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-xs uppercase tracking-widest hover:bg-[#0040CC] transition-colors duration-200">
                   {p.cta} →
                 </a>
@@ -146,7 +146,7 @@ const productSchema = JSON.stringify(products.map(p => ({
             <div class="flex items-center justify-between mt-8">
               <span class="font-black text-white text-2xl">$197</span>
               <div class="flex flex-col items-end gap-1">
-                <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
+                <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"
                   class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
                   Reserve Seat →
                 </a>
@@ -189,7 +189,7 @@ const productSchema = JSON.stringify(products.map(p => ({
           <div>
             <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
             <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight mb-3">Want live reps with Rainers?</h2>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Monthly Proving Ground sessions. Real-time movement correction. The room where the work gets pressure-tested. This is where the Blueprint becomes a fighter.</p>
+            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Weekly live Proving Ground sessions with Rainers. Real-time correction on your movement. Private community chat. Drill library. $39/mo.</p>
           </div>
           <a href="/community"
             class="shrink-0 inline-flex items-center justify-center whitespace-nowrap bg-[#6A0DAD] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200">

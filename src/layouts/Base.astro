@@ -79,5 +79,153 @@ const siteSchema = JSON.stringify({
       <slot />
     </main>
     <Footer />
+
+    <!-- 30-second email capture popup -->
+    <div id="tr-popup" role="dialog" aria-modal="true" aria-labelledby="tr-popup-heading"
+      class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4 hidden"
+      style="background: rgba(10,10,10,0.6); backdrop-filter: blur(2px);">
+      <div class="bg-white w-full max-w-[420px] relative"
+        style="box-shadow: 0 24px 80px rgba(0,0,0,0.35);">
+
+        <button id="tr-popup-close"
+          aria-label="Close"
+          class="absolute top-4 right-4 text-[#0A0A0A]/30 hover:text-[#0A0A0A] transition-colors text-xl leading-none font-bold cursor-pointer bg-transparent border-0 p-1">
+          &times;
+        </button>
+
+        <div class="p-8 pb-6">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Free · 30-Day Protocol</p>
+          <h2 id="tr-popup-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-3"
+            style="font-size: clamp(1.6rem, 4vw, 2rem);">
+            Build the base<br/>before anything else.
+          </h2>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-6">
+            30-day stance foundation. No gym. No equipment. The mechanical base most fighters never had. Free.
+          </p>
+
+          <form id="tr-popup-form" class="flex flex-col gap-3">
+            <label for="tr-popup-email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              id="tr-popup-email"
+              name="email"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-4 py-3 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[#0057FF] transition-colors duration-200"
+            />
+            <button type="submit" id="tr-popup-submit"
+              class="w-full inline-flex items-center justify-center font-bold bg-[#0057FF] text-white px-6 py-3 text-xs tracking-widest uppercase hover:bg-[#0040CC] transition-colors duration-200 disabled:opacity-40 cursor-pointer border-0">
+              Get the Free Protocol →
+            </button>
+          </form>
+
+          <div id="tr-popup-success" class="hidden text-center py-4">
+            <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight mb-1">It's on the way.</p>
+            <p class="text-[#0A0A0A]/45 text-sm">Check your inbox. Day 1 starts when you decide.</p>
+          </div>
+
+          <p class="text-[#0A0A0A]/20 text-[10px] mt-4 text-center">Your email. Nothing else.</p>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
+
+<script is:inline>
+(function() {
+  var STORAGE_KEY = 'tr_popup_v1';
+
+  function shouldShow() {
+    try {
+      return !localStorage.getItem(STORAGE_KEY);
+    } catch(e) { return true; }
+  }
+
+  function dismiss(permanent) {
+    try {
+      if (permanent) localStorage.setItem(STORAGE_KEY, '1');
+    } catch(e) {}
+    var popup = document.getElementById('tr-popup');
+    if (popup) {
+      popup.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function showPopup() {
+    if (!shouldShow()) return;
+    var popup = document.getElementById('tr-popup');
+    if (!popup) return;
+    popup.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+
+    var emailInput = popup.querySelector('#tr-popup-email');
+    if (emailInput) setTimeout(function() { emailInput.focus(); }, 50);
+  }
+
+  if (shouldShow()) {
+    setTimeout(showPopup, 30000);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var closeBtn = document.getElementById('tr-popup-close');
+    var overlay  = document.getElementById('tr-popup');
+    var form     = document.getElementById('tr-popup-form');
+    var submit   = document.getElementById('tr-popup-submit');
+    var success  = document.getElementById('tr-popup-success');
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() { dismiss(false); });
+    }
+
+    if (overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) dismiss(false);
+      });
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') dismiss(false);
+    });
+
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var emailInput = document.getElementById('tr-popup-email');
+        var email = emailInput ? emailInput.value.trim() : '';
+        if (!email) return;
+
+        submit.disabled = true;
+        submit.textContent = 'Sending...';
+
+        fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, full_name: '', source: 'popup-foundation' }),
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          dismiss(true);
+          if (form) form.classList.add('hidden');
+          if (success) success.classList.remove('hidden');
+          // Trigger PDF download
+          var a = document.createElement('a');
+          a.href = '/pdfs/footwork-foundation.pdf';
+          a.download = '30-Day-Footwork-Foundation-Thee-Rainers.pdf';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          // Auto-close after 3 seconds
+          setTimeout(function() { dismiss(true); }, 3000);
+        })
+        .catch(function() {
+          submit.disabled = false;
+          submit.textContent = 'Get the Free Protocol →';
+        });
+      });
+    }
+  });
+})();
+</script>
