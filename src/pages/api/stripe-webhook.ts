@@ -320,9 +320,10 @@ export async function POST({ request }: APIContext): Promise<Response> {
       if (email) {
         if (sub.status === 'active' || sub.status === 'trialing') {
           await tagKit(kitKey, email, KIT_MEMBER_TAG);
-        } else {
+        } else if (sub.status === 'canceled' || sub.status === 'unpaid') {
           await untagKit(kitKey, email, KIT_MEMBER_TAG);
         }
+        // past_due / incomplete / incomplete_expired: access preserved while Smart Retries runs
       }
     }
 
