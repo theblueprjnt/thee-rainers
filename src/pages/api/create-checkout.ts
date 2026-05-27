@@ -3,14 +3,11 @@ export const prerender = false;
 import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 
-// Maps slug → existing Stripe subscription product IDs — no setup script needed.
+// Maps slug → Greatness Community Stripe subscription product.
+// Replace REPLACE_WITH_GREATNESS_PRODUCT_ID after creating the product in Stripe Dashboard.
 const PRODUCT_IDS: Record<string, { productId: string; interval: 'month' | 'year' }> = {
-  footwork_monthly:     { productId: 'prod_UZ9lTK2PhsS4xs', interval: 'month' },
-  footwork_annual:      { productId: 'prod_UZ9lTK2PhsS4xs', interval: 'year'  },
-  shadowboxing_monthly: { productId: 'prod_UZ9vV79TAun9yB', interval: 'month' },
-  shadowboxing_annual:  { productId: 'prod_UZ9vV79TAun9yB', interval: 'year'  },
-  bundle_monthly:       { productId: 'prod_UZ9xqJt3glrCOO', interval: 'month' },
-  bundle_annual:        { productId: 'prod_UZ9xqJt3glrCOO', interval: 'year'  },
+  greatness_monthly: { productId: 'REPLACE_WITH_GREATNESS_PRODUCT_ID', interval: 'month' },
+  greatness_annual:  { productId: 'REPLACE_WITH_GREATNESS_PRODUCT_ID', interval: 'year'  },
 };
 
 export async function POST({ request }: { request: Request }): Promise<Response> {
@@ -43,7 +40,7 @@ export async function POST({ request }: { request: Request }): Promise<Response>
       billing_address_collection: 'auto',
       ...(customerEmail ? { customer_email: customerEmail } : {}),
       success_url: `${siteUrl}/welcome?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl}/vault`,
+      cancel_url: `${siteUrl}/community`,
       metadata: { lookup_key: lookupKey },
       subscription_data: { metadata: { lookup_key: lookupKey } },
     });

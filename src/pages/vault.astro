@@ -6,10 +6,12 @@ const products = [
     image: '/images/bundle_cover.png',
     tag: 'Bundle · Best Value',
     title: 'Both Blueprints',
-    sub: 'Module 01 + 02 · 60 Days · 96 Rounds',
+    sub: 'Footwork + Shadowboxing · 106 Rounds',
     desc: 'The complete system. Foundation first. Application second. Both modules running in sequence.',
-    price: '$87/mo',
-    lookupKey: 'bundle_monthly',
+    price: '$87',
+    price_note: 'Save $7 vs. buying separately.',
+    stripe_link: 'https://buy.stripe.com/14A4gz59hgxUaa65006J20m',
+    cta: 'Get Bundle',
     featured: true,
   },
   {
@@ -18,8 +20,10 @@ const products = [
     title: 'Footwork Blueprint',
     sub: 'Module 01 · 30 Days · 56 Rounds',
     desc: 'Stance mechanics. Weight distribution. Kinetic chain from the floor up. The base layer.',
-    price: '$47/mo',
-    lookupKey: 'footwork_monthly',
+    price: '$47',
+    price_note: null,
+    stripe_link: 'https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k',
+    cta: 'Buy Now',
     featured: false,
   },
   {
@@ -28,8 +32,10 @@ const products = [
     title: 'Shadowboxing Blueprint',
     sub: 'Module 02 · 6 Weeks · 40 Rounds',
     desc: 'Shadowboxing rebuilt as live simulation. Cue reading. Range fluency. Technique under pressure.',
-    price: '$47/mo',
-    lookupKey: 'shadowboxing_monthly',
+    price: '$47',
+    price_note: null,
+    stripe_link: 'https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l',
+    cta: 'Buy Now',
     featured: false,
   },
 ];
@@ -50,7 +56,7 @@ const productSchema = JSON.stringify(products.map(p => ({
   },
 })));
 ---
-<Layout title="Blueprints — Thee Rainers" description="Step-by-step systems built for boxing. Better training for better results.">
+<Layout title="Vault — Thee Rainers" description="Step-by-step systems built for boxing. One-time purchase. Download and own it.">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={productSchema} />
   </Fragment>
@@ -58,64 +64,75 @@ const productSchema = JSON.stringify(products.map(p => ({
   <section class="bg-white px-6 md:px-12 lg:px-20 pt-28 md:pt-36 pb-20">
     <div class="max-w-[1100px] mx-auto">
 
-      <!-- Header — tight, direct -->
       <div class="mb-10">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-3">Vault</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.88]">Better Training<br/>for Better Results.</h1>
-        <p class="text-[#0A0A0A]/45 text-sm mt-4">Step-by-step systems built for boxing.</p>
+        <p class="text-[#0A0A0A]/45 text-sm mt-4">One-time purchase. Download and own it.</p>
       </div>
 
-      <!-- 3-column product cards — bundle leads -->
+      <!-- Blueprint cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         {products.map(p => (
           <div class={`tr-card flex flex-col group transition-colors duration-200 relative ${p.featured ? 'border-2 border-[#0057FF]/30 hover:border-[#0057FF]' : 'border border-[#0A0A0A]/10 hover:border-[#0057FF]/40'}`}>
             {p.featured && <div class="absolute top-3 left-3 z-10 bg-[#0057FF] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Best Value</div>}
-            <!-- Cover image -->
             <div class={`overflow-hidden relative ${p.featured ? 'bg-[#0A0A0A]' : 'bg-[#F6F6F6]'}`}>
               <img src={p.image} alt={p.title}
                 loading="lazy"
                 class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
             </div>
-            <!-- Card body -->
             <div class="p-5 flex flex-col flex-1">
               <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">{p.tag}</p>
               <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-1">{p.title}</h2>
-              <p class="text-xs mb-2">
-                <span class="font-bold tracking-wide" style="background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">+ Includes Live Monthly Q&A Access</span>
-              </p>
               <p class="text-[#0A0A0A]/50 text-xs mb-3 font-bold">{p.sub}</p>
               <p class="text-[#0A0A0A]/60 text-xs leading-relaxed flex-1">{p.desc}</p>
               <div class="mt-4 flex items-center justify-between">
-                <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
-                <button data-checkout={p.lookupKey}
-                  class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-gradient-to-tr from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest rounded-xl shadow-[0_8px_32px_rgba(253,29,29,0.25)] hover:shadow-[0_12px_40px_rgba(253,29,29,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 border-none cursor-pointer">
-                  {p.featured ? 'Get Bundle →' : 'Subscribe →'}
-                </button>
+                <div>
+                  <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
+                  {p.price_note && <p class="text-[10px] text-[#0A0A0A]/30 mt-0.5">{p.price_note}</p>}
+                </div>
+                <a href={p.stripe_link} target="_blank"
+                  class="inline-flex items-center justify-center whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-xs uppercase tracking-widest hover:bg-[#0040CC] transition-colors duration-200">
+                  {p.cta} →
+                </a>
               </div>
               <p class="text-[9px] text-[#0A0A0A]/25 mt-2 text-right leading-relaxed">
                 By purchasing you agree to our <a href="/legal/terms" class="underline hover:text-[#0A0A0A]/50">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a>.
               </p>
-              {!p.featured && (
-                <p class="text-[10px] text-[#0A0A0A]/30 mt-3 text-center leading-relaxed">
-                  Get both Blueprints + Monthly Q&A for&nbsp;
-                  <button data-checkout="bundle_monthly"
-                    class="text-[#0057FF] font-bold hover:opacity-60 transition-opacity cursor-pointer disabled:opacity-40 bg-transparent border-0 p-0 text-[10px]">
-                    $87/mo →
-                  </button>
-                </p>
-              )}
             </div>
           </div>
         ))}
       </div>
 
-      <!-- Workshop + Q&A row — live offers -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      <!-- FAQ -->
+      <div class="mt-10 pt-10 border-t border-[#0A0A0A]/8">
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-6">Common Questions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 max-w-[900px]">
+          <div>
+            <p class="font-bold text-[#0A0A0A] text-sm mb-1">How do I get access after purchase?</p>
+            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">A download link is sent to the email you use at checkout. It arrives within a few minutes and is valid for 7 days. Save the PDF once downloaded.</p>
+          </div>
+          <div>
+            <p class="font-bold text-[#0A0A0A] text-sm mb-1">Is this a subscription?</p>
+            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">No. Both Blueprints are one-time purchases. Pay once, own it.</p>
+          </div>
+          <div>
+            <p class="font-bold text-[#0A0A0A] text-sm mb-1">Can I use this without a gym?</p>
+            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">Yes. The Footwork Blueprint requires no equipment. The Shadowboxing Blueprint works anywhere you have space to move.</p>
+          </div>
+          <div>
+            <p class="font-bold text-[#0A0A0A] text-sm mb-1">What if I want live coaching alongside it?</p>
+            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">The Greatness Community includes live Proving Ground sessions every month. <a href="/community" class="text-[#0057FF] font-bold hover:opacity-70 transition-opacity">Learn more.</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Workshop + Q&A row -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
 
         <div class="border border-[#D4A373]/30 bg-[#0A0A0A] flex flex-col group hover:border-[#D4A373]/60 transition-colors duration-200">
-          <!-- TODO: POST-JUNE-27 DATE SWAP -->
           <div class="relative overflow-hidden" style="height: 200px;">
-            <img src="/images/defense_workshop.png" alt="Defense Workshop — live session"
+            <img src="/images/defense_workshop.png" alt="Defense Workshop"
               width="1920" height="1080"
               class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500" />
             <div class="absolute inset-0 bg-[#0A0A0A]/45"></div>
@@ -130,7 +147,7 @@ const productSchema = JSON.stringify(products.map(p => ({
               <span class="font-black text-white text-2xl">$197</span>
               <div class="flex flex-col items-end gap-1">
                 <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n" target="_blank"
-                  class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+                  class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
                   Reserve Seat →
                 </a>
                 <p class="text-[9px] text-white/25 leading-relaxed">
@@ -143,7 +160,7 @@ const productSchema = JSON.stringify(products.map(p => ({
 
         <div class="border border-[#0A0A0A]/10 bg-[#F6F6F6] flex flex-col justify-between group hover:border-[#0057FF]/30 transition-colors duration-200">
           <div class="relative overflow-hidden" style="height: 200px;">
-            <img src="/images/workshop_bacgkround.png" alt="Defense Workshop — live session"
+            <img src="/images/workshop_bacgkround.png" alt="Workshop Replay"
               width="1920" height="1080"
               class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500" />
             <div class="absolute inset-0 bg-[#0A0A0A]/55"></div>
@@ -157,7 +174,7 @@ const productSchema = JSON.stringify(products.map(p => ({
             <div class="flex items-center justify-between mt-8">
               <span class="font-black text-[#0A0A0A] text-2xl">$79</span>
               <a href="/workshop-replay"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+                class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
                 Get Replay →
               </a>
             </div>
@@ -166,90 +183,37 @@ const productSchema = JSON.stringify(products.map(p => ({
 
       </div>
 
-      <!-- Monthly Q&A Community Call — free bonus block -->
-      <div class="mt-4 border border-[#D4A373]/25 bg-white overflow-hidden">
-        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-0">
-          <div class="p-8 md:p-10">
-            <div class="flex items-center gap-3 mb-5">
-              <span class="bg-[#D4A373]/15 border border-[#D4A373]/30 text-[#D4A373] text-[9px] font-black tracking-widest uppercase px-3 py-1.5">Included Free</span>
-              <span class="text-[#0A0A0A]/20 text-[9px] tracking-widest uppercase">With Every Blueprint</span>
-            </div>
-            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-3">Monthly Q&A<br/>Community Call</h2>
-            <p class="text-[#0A0A0A]/45 text-sm leading-relaxed max-w-[480px] mb-6">One Saturday per month. One hour. You bring the problem — we apply the 7-lever operating system to it live. Real-time diagnosis. No fluff. Included free with any Blueprint purchase.</p>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <div class="flex items-center gap-6">
-                <div>
-                  <p class="text-[#D4A373] text-[9px] tracking-widest uppercase mb-0.5">Format</p>
-                  <p class="text-[#0A0A0A]/60 text-xs font-bold">Live · Zoom · Camera on</p>
-                </div>
-                <div class="w-px h-8 bg-[#0A0A0A]/8"></div>
-                <div>
-                  <p class="text-[#D4A373] text-[9px] tracking-widest uppercase mb-0.5">Cadence</p>
-                  <p class="text-[#0A0A0A]/60 text-xs font-bold">Every month · 1 hour</p>
-                </div>
-                <div class="w-px h-8 bg-[#0A0A0A]/8"></div>
-                <div>
-                  <p class="text-[#D4A373] text-[9px] tracking-widest uppercase mb-0.5">Cost</p>
-                  <p class="font-black text-[#D4A373] text-xs">Free</p>
-                </div>
-              </div>
-            </div>
+      <!-- Community teaser -->
+      <div class="mt-4 border border-[#6A0DAD]/20 bg-[#6A0DAD]/04 overflow-hidden">
+        <div class="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
+            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight mb-3">Want live reps with Rainers?</h2>
+            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Monthly Proving Ground sessions. Real-time movement correction. The room where the work gets pressure-tested. This is where the Blueprint becomes a fighter.</p>
           </div>
-          <div class="hidden md:flex flex-col items-center justify-center bg-[#0A0A0A] px-12 py-10 self-stretch min-w-[200px]">
-            <p class="font-black text-white/15 uppercase tracking-tighter text-[3rem] leading-none mb-1">1×</p>
-            <p class="text-[#D4A373] text-[9px] tracking-widest uppercase text-center">Per Month<br/>Included</p>
-          </div>
+          <a href="/community"
+            class="shrink-0 inline-flex items-center justify-center whitespace-nowrap bg-[#6A0DAD] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200">
+            See the Community →
+          </a>
         </div>
       </div>
 
       <!-- Start free nudge -->
       <div class="mt-10 pt-10 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <p class="text-[#0A0A0A]/30 text-sm">Not ready to buy? The foundation protocol is free.</p>
-        <a href="/foundation-guide" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Protocol →</a>
+        <a href="/footwork-foundation" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Protocol →</a>
       </div>
 
     </div>
   </section>
 
-  <!-- Scripture -->
   <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20">
     <div class="max-w-[680px] mx-auto">
       <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
         "I do not run aimlessly. I do not box as one beating the air."
       </p>
-      <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:26–27</p>
+      <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
     </div>
   </section>
 
 </Layout>
-
-<script>
-  document.querySelectorAll<HTMLButtonElement>('[data-checkout]').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      const key = btn.dataset.checkout;
-      const originalHTML = btn.innerHTML;
-      btn.disabled = true;
-      btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Processing...';
-      btn.classList.add('opacity-80', 'cursor-not-allowed');
-      try {
-        const res = await fetch('/api/create-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ lookupKey: key }),
-        });
-        const data = await res.json() as { url?: string };
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          btn.disabled = false;
-          btn.innerHTML = originalHTML;
-          btn.classList.remove('opacity-80', 'cursor-not-allowed');
-        }
-      } catch {
-        btn.disabled = false;
-        btn.innerHTML = originalHTML;
-        btn.classList.remove('opacity-80', 'cursor-not-allowed');
-      }
-    });
-  });
-</script>

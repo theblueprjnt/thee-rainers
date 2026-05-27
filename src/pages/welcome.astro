@@ -2,46 +2,51 @@
 import Layout from '../layouts/Base.astro';
 export const prerender = true;
 ---
-<Layout title="Welcome — Thee Rainers">
+<Layout title="Welcome to the Greatness Community — Thee Rainers">
   <Fragment slot="head">
     <meta name="robots" content="noindex" />
   </Fragment>
 
-  <!-- Confirmation -->
   <section class="bg-white min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 py-32">
     <div class="max-w-[680px] mx-auto w-full">
 
-      <!-- Status indicator -->
       <div class="mb-10 flex items-center gap-3">
         <div class="w-2 h-2 rounded-full bg-[#22C55E]"></div>
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase">Purchase Confirmed</p>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase">You're In</p>
       </div>
 
-      <!-- Headline -->
       <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-8"
         style="font-size: clamp(2.5rem, 6vw, 4.5rem);">
-        Your access<br/>is on the way.
+        Welcome to<br/>Greatness Community.
       </h1>
 
-      <!-- Primary instruction -->
-      <div class="border-l-4 border-[#0057FF] pl-6 mb-12">
-        <p class="text-[#0A0A0A] text-lg font-bold leading-snug mb-2">Check your inbox now.</p>
+      <div class="border-l-4 border-[#6A0DAD] pl-6 mb-12">
+        <p class="text-[#0A0A0A] text-lg font-bold leading-snug mb-2">Check your inbox.</p>
         <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">
-          Your Blueprint link is being sent to the email address you used at checkout.
-          It arrives within a few minutes. If you don't see it, check your spam folder.
+          Your access link is on the way to the email you used at checkout.
+          Arrives within a few minutes. Check spam if you don't see it.
         </p>
       </div>
 
-      <!-- What's included — 3 clean rows -->
       <div class="flex flex-col divide-y divide-[#0A0A0A]/8 mb-12">
+
+        <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
+          <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5">
+            <div class="w-2 h-2 bg-[#6A0DAD]"></div>
+          </div>
+          <div>
+            <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">The Proving Ground</p>
+            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">Monthly live session. Camera on. Real-time correction. The session date, Zoom link, and prep instructions are in your welcome email.</p>
+          </div>
+        </div>
 
         <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
           <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5">
             <div class="w-2 h-2 bg-[#0057FF]"></div>
           </div>
           <div>
-            <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Your Blueprint</p>
-            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">A secure download link — valid for 7 days. Save the PDF. It does not expire once downloaded.</p>
+            <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Member Portal</p>
+            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">Access your drill library, session archive, and community resources. Your welcome email contains the direct link.</p>
           </div>
         </div>
 
@@ -50,31 +55,20 @@ export const prerender = true;
             <div class="w-2 h-2 bg-[#D4A373]"></div>
           </div>
           <div>
-            <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Monthly Live Q&A — Included</p>
-            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">One Saturday per month. Q&A details and the Zoom link come via email before each session.</p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
-          <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5">
-            <div class="w-2 h-2 bg-[#0A0A0A]/20"></div>
-          </div>
-          <div>
             <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Renewal</p>
-            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">Your subscription renews monthly. A fresh secure link is sent each cycle. Manage or cancel anytime via the link in your email.</p>
+            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">Your membership renews automatically each cycle. Cancel anytime via the link in your email or by contacting us directly.</p>
           </div>
         </div>
 
       </div>
 
-      <!-- Do this now -->
       <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-6 mb-10">
-        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">While you wait — start here</p>
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">Start here</p>
         <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight leading-tight mb-3">
-          The 30-Day Foundation Protocol is free.
+          The Free Foundation Protocol runs alongside everything.
         </p>
         <p class="text-[#0A0A0A]/45 text-xs leading-relaxed mb-5">
-          Your Blueprint builds on what this establishes. Run it in parallel from Day 1. No equipment. No gym required.
+          If you haven't run it yet, start today. It sets the structural base the Proving Ground builds on.
         </p>
         <a href="/footwork-foundation"
           class="inline-flex items-center font-bold text-[#0057FF] text-xs tracking-widest uppercase hover:opacity-60 transition-opacity">
@@ -82,15 +76,14 @@ export const prerender = true;
         </a>
       </div>
 
-      <!-- Support + navigation -->
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-[#0A0A0A]/8">
         <p class="text-[#0A0A0A]/30 text-xs leading-relaxed">
           Email not arrived after 10 minutes?<br/>
           <a href="mailto:rainers@theerainers.com" class="text-[#0057FF] hover:opacity-60 transition-opacity font-bold">rainers@theerainers.com</a>
         </p>
-        <a href="/vault"
-          class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase font-bold hover:text-[#0A0A0A]/60 transition-colors whitespace-nowrap">
-          Back to Blueprints →
+        <a href="/community/inside"
+          class="text-[#6A0DAD] text-xs tracking-widest uppercase font-bold hover:opacity-60 transition-opacity whitespace-nowrap">
+          Enter Member Area →
         </a>
       </div>
 

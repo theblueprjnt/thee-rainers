@@ -5,14 +5,13 @@ import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 
 // ── product map ────────────────────────────────────────────────────────────
+// Replace REPLACE_WITH_GREATNESS_PRODUCT_ID after creating the product in Stripe Dashboard.
 const PRODUCT_MAP: Record<string, string> = {
   'prod_UZreHroYQEDAFU': 'bundle',
   'prod_UZrejf6iuDorEA': 'footwork',
   'prod_UZreDlek9325EY': 'shadowboxing',
   'prod_UZOMBOeJ0mm15I': 'workshop-replay',
-  'prod_UZ9lTK2PhsS4xs': 'footwork',
-  'prod_UZ9vV79TAun9yB': 'shadowboxing',
-  'prod_UZ9xqJt3glrCOO': 'bundle',
+  'REPLACE_WITH_GREATNESS_PRODUCT_ID': 'greatness',
 };
 
 // ── asset map ──────────────────────────────────────────────────────────────
@@ -32,6 +31,7 @@ const KIT_PRODUCT_TAGS: Record<string, string> = {
   'footwork':     '19807643',
   'shadowboxing': '19807641',
   'bundle':       '19807644',
+  'greatness':    'KIT_TAG_GREATNESS', // replace with numeric tag ID after creating in Kit
 };
 const KIT_MEMBER_TAG = '19807647';
 
@@ -190,6 +190,9 @@ async function deliverProduct(email: string, productId: string, e: Record<string
       try { expiringUrl = await generateWatchUrl(watchSecret, 'workshop-replay'); }
       catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
     }
+  } else if (productSlug === 'greatness') {
+    // No file asset — link directly to the member portal
+    expiringUrl = `${SITE_URL}/community/inside`;
   } else {
     const objectKeys = ASSET_MAP[productSlug] ?? [];
     const r2AccountId = e['R2_ACCOUNT_ID'] ?? '';

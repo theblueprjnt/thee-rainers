@@ -1,0 +1,137 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Base.astro';
+---
+<Layout title="Member Area — Greatness Community" description="">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <section class="bg-white min-h-screen px-6 md:px-12 lg:px-20 pt-28 md:pt-36 pb-20">
+    <div class="max-w-[640px] mx-auto">
+
+      <!-- Gate — shown until verified -->
+      <div id="gate" class="">
+        <p class="text-[#6A0DAD] text-[11px] tracking-widest uppercase mb-6">Member Area</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6"
+          style="font-size: clamp(2rem, 4.5vw, 3rem);">
+          Enter your<br/>member email.
+        </h1>
+        <p class="text-[#0A0A0A]/45 text-sm leading-relaxed mb-10">
+          Use the email address you signed up with. We'll confirm your membership and let you in.
+        </p>
+
+        <form id="gate-form" class="flex flex-col gap-4 max-w-[400px]">
+          <input
+            id="gate-email"
+            type="email"
+            placeholder="your@email.com"
+            autocomplete="email"
+            required
+            class="w-full px-4 py-3 border border-[#0A0A0A]/20 bg-white text-[#0A0A0A] text-sm placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[#6A0DAD] transition-colors"
+          />
+          <button type="submit" id="gate-btn"
+            class="inline-flex items-center justify-center disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200 cursor-pointer border-0">
+            Verify Access →
+          </button>
+          <p id="gate-error" class="text-red-500 text-xs hidden">No active membership found for that email. <a href="/community" class="underline font-bold">Join the Community →</a></p>
+        </form>
+      </div>
+
+      <!-- Member content — hidden until verified -->
+      <div id="member-content" class="hidden">
+        <div class="mb-10 flex items-center gap-3">
+          <div class="w-2 h-2 rounded-full bg-[#22C55E]"></div>
+          <p class="text-[#6A0DAD] text-[11px] tracking-widest uppercase">Access Confirmed</p>
+        </div>
+
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-10"
+          style="font-size: clamp(2rem, 4.5vw, 3rem);">
+          Welcome back.
+        </h1>
+
+        <div class="flex flex-col divide-y divide-[#0A0A0A]/8 mb-12">
+
+          <div class="py-6">
+            <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-2">Monthly Session</p>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">The Proving Ground</h3>
+            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-4">Live session every month. Session date, Zoom link, and prep instructions are sent to your email before each session. Check your inbox for the next one.</p>
+            <a href="mailto:rainers@theerainers.com?subject=Next%20Proving%20Ground%20Date"
+              class="text-[#6A0DAD] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
+              Email for next session details →
+            </a>
+          </div>
+
+          <div class="py-6">
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Always On</p>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">Drill Library</h3>
+            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-4">The full structured drill archive. Every session filed by lever. Work what's weak.</p>
+            <a href="/library"
+              class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
+              Browse Library →
+            </a>
+          </div>
+
+          <div class="py-6">
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Free Protocols</p>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">Foundation Protocols</h3>
+            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-4">The 30-day footwork protocol and 7-lever audit are free. Run them alongside your Proving Ground work to track structural progress.</p>
+            <div class="flex gap-6">
+              <a href="/footwork-foundation" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Footwork Protocol →</a>
+              <a href="/lever-audit" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">7-Lever Audit →</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="pt-8 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <p class="text-[#0A0A0A]/30 text-xs leading-relaxed">
+            Questions? <a href="mailto:rainers@theerainers.com" class="text-[#0057FF] hover:opacity-60 transition-opacity font-bold">rainers@theerainers.com</a>
+          </p>
+          <a href="/vault" class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase font-bold hover:text-[#0A0A0A]/60 transition-colors whitespace-nowrap">Browse Vault →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  const form = document.getElementById('gate-form') as HTMLFormElement;
+  const btn = document.getElementById('gate-btn') as HTMLButtonElement;
+  const errorEl = document.getElementById('gate-error') as HTMLElement;
+  const gate = document.getElementById('gate') as HTMLElement;
+  const memberContent = document.getElementById('member-content') as HTMLElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (document.getElementById('gate-email') as HTMLInputElement).value.trim();
+    if (!email) return;
+
+    errorEl.classList.add('hidden');
+    btn.disabled = true;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Checking...';
+
+    try {
+      const res = await fetch('/api/community-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json() as { access: boolean };
+      if (data.access) {
+        gate.classList.add('hidden');
+        memberContent.classList.remove('hidden');
+      } else {
+        errorEl.classList.remove('hidden');
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    } catch {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    }
+  });
+</script>
