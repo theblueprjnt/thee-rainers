@@ -4,10 +4,10 @@ import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 
 // Maps slug → Greatness Community Stripe subscription product.
-// Replace REPLACE_WITH_GREATNESS_PRODUCT_ID after creating the product in Stripe Dashboard.
+// Replace prod_Uaz6EzELZP6j0V after creating the product in Stripe Dashboard.
 const PRODUCT_IDS: Record<string, { productId: string; interval: 'month' | 'year' }> = {
-  greatness_monthly: { productId: 'REPLACE_WITH_GREATNESS_PRODUCT_ID', interval: 'month' },
-  greatness_annual:  { productId: 'REPLACE_WITH_GREATNESS_PRODUCT_ID', interval: 'year'  },
+  greatness_monthly: { productId: 'prod_Uaz6EzELZP6j0V', interval: 'month' },
+  greatness_annual:  { productId: 'prod_Uaz6EzELZP6j0V', interval: 'year'  },
 };
 
 export async function POST({ request }: { request: Request }): Promise<Response> {
@@ -37,7 +37,7 @@ export async function POST({ request }: { request: Request }): Promise<Response>
       automatic_payment_methods: { enabled: true },
       phone_number_collection: { enabled: true },
       allow_promotion_codes: true,
-      billing_address_collection: 'auto',
+      billing_address_collection: 'required',
       ...(customerEmail ? { customer_email: customerEmail } : {}),
       success_url: `${siteUrl}/welcome?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/community`,

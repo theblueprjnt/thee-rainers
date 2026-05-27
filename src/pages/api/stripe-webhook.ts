@@ -5,13 +5,13 @@ import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 
 // ── product map ────────────────────────────────────────────────────────────
-// Replace REPLACE_WITH_GREATNESS_PRODUCT_ID after creating the product in Stripe Dashboard.
+// Replace prod_Uaz6EzELZP6j0V after creating the product in Stripe Dashboard.
 const PRODUCT_MAP: Record<string, string> = {
   'prod_UZreHroYQEDAFU': 'bundle',
   'prod_UZrejf6iuDorEA': 'footwork',
   'prod_UZreDlek9325EY': 'shadowboxing',
   'prod_UZOMBOeJ0mm15I': 'workshop-replay',
-  'REPLACE_WITH_GREATNESS_PRODUCT_ID': 'greatness',
+  'prod_Uaz6EzELZP6j0V': 'greatness',
 };
 
 // ── asset map ──────────────────────────────────────────────────────────────

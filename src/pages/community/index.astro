@@ -1,12 +1,76 @@
 ---
 import Layout from '../../layouts/Base.astro';
+
+const communitySchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Greatness Community",
+  "description": "Weekly live Q&A with Rainers. Private community. Growing drill library. Monthly membership for fighters who want to keep working.",
+  "url": "https://theerainers.com/community",
+  "brand": { "@type": "Brand", "name": "Thee Rainers" },
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": "39.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "39.00",
+        "priceCurrency": "USD",
+        "billingIncrement": 1,
+        "unitCode": "MON"
+      }
+    }
+  ]
+});
+
+const faqSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What happens at the weekly Proving Ground?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Live session every week. Camera on. Rainers watches your movement, stance, and angles and corrects them in real time. You bring a specific problem. You leave with a specific fix."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need the Blueprints first?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The Community works with whatever foundation you have right now. Members often use the Blueprints alongside their membership, but the Proving Ground is built to meet you where you are."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I cancel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, anytime. Cancel before your next renewal date and you keep full access until that date. No forms. No questions. Manage it yourself via the Customer Portal link in your welcome email."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the community chat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A private space for members. Ask questions between sessions, post training clips, and walk with other fighters who are doing the same work. The invite link is in your welcome email."
+      }
+    }
+  ]
+});
 ---
 <Layout
   title="Greatness Community — Thee Rainers"
-  description="Monthly live Proving Ground sessions with Rainers. Real-time movement correction. The room where the work gets pressure-tested."
+  description="Weekly live Q&A with Rainers. Private community. Growing drill library. Where the work continues."
 >
   <Fragment slot="head">
-    <meta name="robots" content="index, follow" />
+    <script type="application/ld+json" set:html={communitySchema} />
+    <script type="application/ld+json" set:html={faqSchema} />
   </Fragment>
 
   <!-- Hero -->
@@ -14,7 +78,7 @@ import Layout from '../../layouts/Base.astro';
     <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 60vw; max-height: 340px;">
       <img
         src="/images/sparring_withnetherlands.png"
-        alt="Proving Ground — live session with Rainers"
+        alt="Proving Ground — live weekly session with Rainers"
         width="1200" height="1500"
         loading="eager"
         class="w-full h-full object-cover object-top"
@@ -28,32 +92,37 @@ import Layout from '../../layouts/Base.astro';
           <p class="text-[#6A0DAD] text-[11px] tracking-widest uppercase mb-6">Greatness Community</p>
           <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6"
             style="font-size: clamp(2.8rem, 5.5vw, 4.5rem);">
-            The room where<br/>the work gets<br/>pressure-tested.
+            Where the work<br/>continues.
           </h1>
           <p class="text-[#0A0A0A]/55 text-base leading-relaxed mb-10 max-w-[480px]">
-            Monthly live Proving Ground sessions. Camera on. Real-time correction on your movement, stance, and angles. Blueprints give you the system. The Community is where you run it under pressure.
+            Brothers, weekly live Q&A, and the drills that compound. This is the ongoing work. You train alone but you don't build alone.
           </p>
 
-          <div class="flex flex-col sm:flex-row gap-3 mb-8">
+          <div class="flex flex-col sm:flex-row gap-3 mb-6">
             <button data-checkout="greatness_monthly"
-              class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-8 py-4 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200 cursor-pointer border-0">
+              class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-8 py-4 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200 cursor-pointer border-0"
+              aria-label="Join Greatness Community monthly for $39 per month">
               Join Monthly — $39/mo →
             </button>
             <button data-checkout="greatness_annual"
-              class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 border-2 border-[#6A0DAD] text-[#6A0DAD] bg-transparent font-bold px-8 py-4 text-xs uppercase tracking-widest hover:bg-[#6A0DAD] hover:text-white transition-all duration-200 cursor-pointer">
+              class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 border-2 border-[#6A0DAD] text-[#6A0DAD] bg-transparent font-bold px-8 py-4 text-xs uppercase tracking-widest hover:bg-[#6A0DAD] hover:text-white transition-all duration-200 cursor-pointer"
+              aria-label="Join Greatness Community annual for $390 per year">
               Join Annual — $390/yr
             </button>
           </div>
 
-          <p class="text-[10px] text-[#0A0A0A]/30 leading-relaxed">
-            Cancel anytime. By joining you agree to our <a href="/legal/terms" class="underline hover:text-[#0A0A0A]/60">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a>.
+          <p class="text-[10px] text-[#0A0A0A]/30 leading-relaxed mb-2">
+            By clicking Join, you authorize Thee Rainers to charge your card on a recurring basis until you cancel. Cancel anytime before your next renewal and it stops.
+          </p>
+          <p class="text-[10px] text-[#0A0A0A]/25 leading-relaxed">
+            Subject to our <a href="/legal/terms" class="underline hover:text-[#0A0A0A]/60">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a>.
           </p>
         </div>
 
-        <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]">
+        <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]" aria-hidden="true">
           <img
             src="/images/sparring_withnetherlands.png"
-            alt="Proving Ground — live session"
+            alt=""
             width="1200" height="1500"
             loading="eager"
             class="absolute inset-0 w-full h-full object-cover object-top opacity-80"
@@ -64,28 +133,34 @@ import Layout from '../../layouts/Base.astro';
     </div>
   </section>
 
-  <!-- What you get -->
+  <!-- What's inside -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1100px] mx-auto">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">What's Included</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#0A0A0A]/8">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">What's Inside</p>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-[#0A0A0A]/8">
 
         <div class="bg-white p-8">
-          <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-4">Monthly</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg leading-tight mb-3">The Proving Ground</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Live session every month. Camera on. Rainers reviews your movement in real time. One correction in a live room hits different than ten in a PDF.</p>
+          <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-4">Weekly</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Proving Ground</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Live every week. Camera on. Rainers watches and corrects your movement in real time. One live correction hits different than ten instructions on a page.</p>
         </div>
 
         <div class="bg-white p-8">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Always On</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg leading-tight mb-3">Drill Library Access</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Full access to the structured drill archive. Every session is categorized by lever — footwork, shadowboxing, defense, perception. Work what's weak.</p>
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Private</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Community Chat</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Ask between sessions. Post clips. Talk through problems with fighters who are doing the same work. The invite comes with your welcome email.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Growing</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg leading-tight mb-3">Session Archive</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every Proving Ground recorded and filed. Miss a session or want to rewatch a correction — it's there. The archive grows every month you're in.</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Drill Library</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every drill, categorized by lever. Added to every week. Work your weakest area. The library compounds the longer you stay.</p>
+        </div>
+
+        <div class="bg-white p-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Always</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Brotherhood</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Real men doing the work and walking together. Not a course with a comment section. A community with standards.</p>
         </div>
 
       </div>
@@ -93,9 +168,10 @@ import Layout from '../../layouts/Base.astro';
   </section>
 
   <!-- Pricing -->
-  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8" aria-labelledby="pricing-heading">
     <div class="max-w-[800px] mx-auto">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Membership</p>
+      <h2 id="pricing-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-8">One price. One membership. All of it included.</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
         <div class="bg-white border border-[#0A0A0A]/10 p-8 flex flex-col justify-between">
@@ -105,12 +181,18 @@ import Layout from '../../layouts/Base.astro';
               <span class="font-black text-[#0A0A0A] text-4xl">$39</span>
               <span class="text-[#0A0A0A]/40 text-sm">/mo</span>
             </div>
-            <p class="text-[#0A0A0A]/40 text-xs mb-8">Cancel anytime before your next renewal.</p>
+            <p class="text-[#0A0A0A]/40 text-xs mb-8">Charged monthly. Cancel before renewal to stop.</p>
           </div>
-          <button data-checkout="greatness_monthly"
-            class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-6 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200 cursor-pointer border-0 w-full">
-            Join Monthly →
-          </button>
+          <div class="flex flex-col gap-3">
+            <button data-checkout="greatness_monthly"
+              class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-6 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200 cursor-pointer border-0 w-full"
+              aria-label="Join monthly for $39 per month">
+              Join Monthly →
+            </button>
+            <p class="text-[10px] text-[#0A0A0A]/25 text-center leading-relaxed">
+              You authorize recurring monthly charges. Cancel anytime.
+            </p>
+          </div>
         </div>
 
         <div class="bg-white border-2 border-[#6A0DAD]/30 p-8 flex flex-col justify-between relative">
@@ -121,15 +203,52 @@ import Layout from '../../layouts/Base.astro';
               <span class="font-black text-[#0A0A0A] text-4xl">$390</span>
               <span class="text-[#0A0A0A]/40 text-sm">/yr</span>
             </div>
-            <p class="text-[#0A0A0A]/40 text-xs mb-8">Equivalent to $32.50/mo. Billed once annually.</p>
+            <p class="text-[#0A0A0A]/40 text-xs mb-8">That is $32.50 per month. Billed once per year.</p>
           </div>
-          <button data-checkout="greatness_annual"
-            class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-6 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200 cursor-pointer border-0 w-full">
-            Join Annual →
-          </button>
+          <div class="flex flex-col gap-3">
+            <button data-checkout="greatness_annual"
+              class="inline-flex items-center justify-center whitespace-nowrap disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-6 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200 cursor-pointer border-0 w-full"
+              aria-label="Join annual for $390 per year">
+              Join Annual →
+            </button>
+            <p class="text-[10px] text-[#0A0A0A]/25 text-center leading-relaxed">
+              You authorize one annual charge. Cancel before renewal to stop.
+            </p>
+          </div>
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8" aria-labelledby="faq-heading">
+    <div class="max-w-[800px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Questions</p>
+      <h2 id="faq-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-10">Common Questions</h2>
+      <dl class="flex flex-col divide-y divide-[#0A0A0A]/8">
+
+        <div class="py-6">
+          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">What happens at the weekly Proving Ground?</dt>
+          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Live session every week. Camera on. Rainers watches your movement, stance, and angles and corrects them in real time. You bring a specific problem. You leave with a specific fix.</dd>
+        </div>
+
+        <div class="py-6">
+          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">Do I need the Blueprints first?</dt>
+          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">No. The Community works with whatever foundation you have right now. Members often use the Blueprints alongside their membership, but the Proving Ground is built to meet you where you are.</dd>
+        </div>
+
+        <div class="py-6">
+          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">What is the community chat?</dt>
+          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">A private space for members only. Ask questions between sessions, post training clips, and walk with other fighters doing the same work. The invite link is in your welcome email.</dd>
+        </div>
+
+        <div class="py-6">
+          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">Can I cancel?</dt>
+          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Yes, anytime. Cancel before your next renewal date and you keep full access until that date. Manage it yourself via the Customer Portal link in your welcome email. No forms. No questions.</dd>
+        </div>
+
+      </dl>
     </div>
   </section>
 
@@ -162,7 +281,7 @@ import Layout from '../../layouts/Base.astro';
       const key = btn.dataset.checkout;
       const originalHTML = btn.innerHTML;
       btn.disabled = true;
-      btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Processing...';
+      btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Processing...';
       btn.classList.add('opacity-80', 'cursor-not-allowed');
       try {
         const res = await fetch('/api/create-checkout', {

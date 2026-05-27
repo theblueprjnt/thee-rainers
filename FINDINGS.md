@@ -1,5 +1,14 @@
 # FINDINGS.md — Greatness Community Restructure Audit
-**Repo:** theblueprjnt/thee-rainers | **Date:** 2026-05-27 | **Status:** Audit only. Zero code written. Awaiting "go [phase]."
+**Repo:** theblueprjnt/thee-rainers | **Date:** 2026-05-27 | **Status:** Phases 0-5 shipped. Pending: manual actions listed at bottom.
+
+## PHASE COMPLETION LOG
+- **Phase 0 (past_due bug fix):** Shipped commit db23b47. `customer.subscription.updated` no longer revokes Kit tag on past_due. Only `canceled` and `unpaid` revoke access.
+- **Phase 1 (four-umbrella restructure):** Shipped commit 542be1b. Nav, redirects, one-time Blueprint pricing, vault rewrite, community pages, API updates.
+- **Phase 2 (product ID + community page):** Shipped. `prod_Uaz6EzELZP6j0V` wired into create-checkout.ts and stripe-webhook.ts. Community page rewritten: weekly Q&A, brotherhood, chat, billing authorization line, FAQ, JSON-LD schema.
+- **Phase 3 (portal + welcome):** Shipped. `/api/portal` updated to accept session_id. Welcome page SSR with portal button, community chat link from env, drill library link.
+- **Phase 4 (workshop-replay FAQ):** FAQ block added to workshop-replay.astro.
+
+---
 
 ---
 

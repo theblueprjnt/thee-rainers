@@ -1,6 +1,13 @@
 ---
+export const prerender = false;
 import Layout from '../layouts/Base.astro';
-export const prerender = true;
+import { env as cfEnv } from 'cloudflare:workers';
+
+const e = cfEnv as unknown as Record<string, string>;
+const communityChat = e['COMMUNITY_CHAT_INVITE'] ?? '';
+
+// Session ID is in the URL from Stripe success redirect
+const sessionId = Astro.url.searchParams.get('session_id') ?? '';
 ---
 <Layout title="Welcome to the Greatness Community — Thee Rainers">
   <Fragment slot="head">
@@ -11,7 +18,7 @@ export const prerender = true;
     <div class="max-w-[680px] mx-auto w-full">
 
       <div class="mb-10 flex items-center gap-3">
-        <div class="w-2 h-2 rounded-full bg-[#22C55E]"></div>
+        <div class="w-2 h-2 rounded-full bg-[#22C55E]" aria-hidden="true"></div>
         <p class="text-[#D4A373] text-[11px] tracking-widest uppercase">You're In</p>
       </div>
 
@@ -23,40 +30,68 @@ export const prerender = true;
       <div class="border-l-4 border-[#6A0DAD] pl-6 mb-12">
         <p class="text-[#0A0A0A] text-lg font-bold leading-snug mb-2">Check your inbox.</p>
         <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">
-          Your access link is on the way to the email you used at checkout.
-          Arrives within a few minutes. Check spam if you don't see it.
+          Your welcome email is on the way to the address you used at checkout.
+          It has the community chat invite, the next Proving Ground date and Zoom link, and your Customer Portal link to manage billing. Check spam if you don't see it in a few minutes.
         </p>
       </div>
 
       <div class="flex flex-col divide-y divide-[#0A0A0A]/8 mb-12">
 
         <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
-          <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5">
+          <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
             <div class="w-2 h-2 bg-[#6A0DAD]"></div>
           </div>
           <div>
             <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">The Proving Ground</p>
-            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">Monthly live session. Camera on. Real-time correction. The session date, Zoom link, and prep instructions are in your welcome email.</p>
+            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">Weekly live session. Camera on. Rainers reviews your movement. The date, time, and Zoom link for the next session are in your welcome email.</p>
           </div>
         </div>
 
         <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
-          <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5">
+          <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
             <div class="w-2 h-2 bg-[#0057FF]"></div>
           </div>
           <div>
-            <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Member Portal</p>
-            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">Access your drill library, session archive, and community resources. Your welcome email contains the direct link.</p>
+            <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Community Chat</p>
+            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed mb-2">Private space for members. Ask questions between sessions, post clips, walk with brothers doing the same work.</p>
+            {communityChat ? (
+              <a href={communityChat} target="_blank" rel="noopener noreferrer"
+                class="text-[#6A0DAD] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
+                Join Community Chat →
+              </a>
+            ) : (
+              <p class="text-[#0A0A0A]/30 text-xs">Invite link in your welcome email.</p>
+            )}
           </div>
         </div>
 
         <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
-          <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5">
+          <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
             <div class="w-2 h-2 bg-[#D4A373]"></div>
           </div>
           <div>
-            <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Renewal</p>
-            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed">Your membership renews automatically each cycle. Cancel anytime via the link in your email or by contacting us directly.</p>
+            <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Drill Library</p>
+            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed mb-2">Full access to every drill, organized by lever. Start with whatever is weakest in your game.</p>
+            <a href="/library" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Browse Library →</a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
+          <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
+            <div class="w-2 h-2 bg-[#0A0A0A]/20"></div>
+          </div>
+          <div>
+            <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Manage Your Membership</p>
+            <p class="text-[#0A0A0A]/45 text-xs leading-relaxed mb-2">Update your card, switch plans, or cancel anytime. No forms. No questions. Self-serve through the Customer Portal.</p>
+            {sessionId ? (
+              <button id="portal-btn"
+                class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity cursor-pointer bg-transparent border-0 p-0 disabled:opacity-40"
+                aria-label="Open Customer Portal to manage your subscription">
+                Open Customer Portal →
+              </button>
+            ) : (
+              <p class="text-[#0A0A0A]/30 text-xs">Portal link in your welcome email.</p>
+            )}
           </div>
         </div>
 
@@ -91,3 +126,28 @@ export const prerender = true;
   </section>
 
 </Layout>
+
+{sessionId && (
+  <script define:vars={{ sessionId }}>
+    const btn = document.getElementById('portal-btn');
+    if (btn) {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        btn.textContent = 'Opening...';
+        try {
+          const res = await fetch('/api/portal', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ session_id: sessionId }),
+          });
+          const data = await res.json();
+          if (data.url) window.location.href = data.url;
+          else { btn.disabled = false; btn.textContent = 'Open Customer Portal →'; }
+        } catch {
+          btn.disabled = false;
+          btn.textContent = 'Open Customer Portal →';
+        }
+      });
+    }
+  </script>
+)}
