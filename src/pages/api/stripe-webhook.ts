@@ -31,7 +31,7 @@ const KIT_PRODUCT_TAGS: Record<string, string> = {
   'footwork':     '19807643',
   'shadowboxing': '19807641',
   'bundle':       '19807644',
-  'greatness':    'KIT_TAG_GREATNESS', // replace with numeric tag ID after creating in Kit
+  'greatness':    '19830354',
 };
 const KIT_MEMBER_TAG = '19807647';
 
