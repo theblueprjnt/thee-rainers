@@ -4,14 +4,16 @@
 Astro 4 on Cloudflare Pages/Workers. `@astrojs/cloudflare` adapter. Tailwind v4 (`@theme` CSS vars, no config file). All SSR API routes use `export const prerender = false` and `import { env as cfEnv } from 'cloudflare:workers'` for env vars. No wrangler.toml — managed via Cloudflare Pages dashboard.
 
 ## Brand rules — non-negotiable
-- Rainers Blue `#0057FF` — ALL primary CTAs (download, buy, apply, submit)
-- Copper `#D4A373` — metadata labels and separators ONLY. Never a CTA.
-- Royal Purple `#6A0DAD` — Private Architecture and Apply ONLY. Exclusivity signal.
-- Void `#0A0A0A` — primary text, scripture section backgrounds
+- Rainers Blue `#0057FF` — primary CTAs for one-time purchases (Blueprints, Workshop, Replay), lead capture (download, submit), and standard buttons
+- Copper `#D4A373` — metadata labels and separators ONLY. Never a CTA. Reserved for focus rings on purple buttons (accessibility).
+- Royal Purple `#6A0DAD` — Private Architecture, Apply, AND Greatness Community. Signals recurring membership / inner-circle commitment — separates ongoing membership from one-time Blueprint purchases.
+- Void `#0A0A0A` — primary text, scripture section backgrounds, instant hover state on purple buttons.
 - White `#FFFFFF` — primary background everywhere else
 - No emojis anywhere in the codebase or copy
 - No Telegram references — replaced by Monthly Q&A
 - Scripture sections stay dark (`bg-[#0A0A0A]`) for gravitas
+- Button shape: `rounded-none` everywhere (brutalist square edges, no pill/rounded buttons)
+- Footer/legal microcopy: minimum 12px (`text-xs`) at /55 opacity for WCAG AA contrast. Never `text-[10px]` at low opacity.
 
 ## Font
 Bricolage Grotesque Variable — loaded via Base.astro
