@@ -25,7 +25,6 @@ export async function POST({ request }: { request: Request }): Promise<Response>
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],
-      automatic_payment_methods: { enabled: true },
       phone_number_collection: { enabled: true },
       allow_promotion_codes: true,
       billing_address_collection: 'required',
