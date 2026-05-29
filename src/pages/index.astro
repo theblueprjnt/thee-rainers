@@ -433,7 +433,7 @@ import Layout from '../layouts/Base.astro';
         fetch('/api/lead-capture', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, full_name: '', source: 'footwork-foundation' }),
+          body: JSON.stringify({ email: email, full_name: '', source: 'quiz-home', quiz_focus: quizState.focus, quiz_level: quizState.level }),
         }).catch(function() {}).finally(function() { showStep(4); });
       });
     }

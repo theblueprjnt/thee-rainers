@@ -3,11 +3,9 @@ export const prerender = false;
 import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 
-// Maps slug → Greatness Community Stripe subscription product.
-// Replace prod_Uaz6EzELZP6j0V after creating the product in Stripe Dashboard.
-const PRODUCT_IDS: Record<string, { productId: string; interval: 'month' | 'year' }> = {
-  greatness_monthly: { productId: 'prod_Uaz6EzELZP6j0V', interval: 'month' },
-  greatness_annual:  { productId: 'prod_Uaz6EzELZP6j0V', interval: 'year'  },
+const PRICE_IDS: Record<string, string> = {
+  greatness_monthly: 'price_1Tbn8WHzlarU775HMfmbxaJy',
+  greatness_annual:  'price_1Tbn93HzlarU775HrkAJ73Yf',
 };
 
 export async function POST({ request }: { request: Request }): Promise<Response> {
@@ -17,23 +15,16 @@ export async function POST({ request }: { request: Request }): Promise<Response>
 
   try {
     const { lookupKey, customerEmail } = await request.json() as { lookupKey: string; customerEmail?: string };
-    if (!lookupKey || !PRODUCT_IDS[lookupKey]) {
+    const priceId = PRICE_IDS[lookupKey];
+    if (!priceId) {
       return new Response(JSON.stringify({ error: 'unknown lookupKey' }), { status: 400, headers });
     }
 
     const stripe = new Stripe(e['STRIPE_SECRET_KEY'] ?? '', { httpClient: Stripe.createFetchHttpClient() });
-    const { productId, interval } = PRODUCT_IDS[lookupKey];
-
-    // Find the active recurring price for this product + interval
-    const prices = await stripe.prices.list({ product: productId, active: true, type: 'recurring', limit: 10 });
-    const price = prices.data.find(p => p.recurring?.interval === interval);
-    if (!price) {
-      return new Response(JSON.stringify({ error: 'no matching price found' }), { status: 404, headers });
-    }
 
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
-      line_items: [{ price: price.id, quantity: 1 }],
+      line_items: [{ price: priceId, quantity: 1 }],
       automatic_payment_methods: { enabled: true },
       phone_number_collection: { enabled: true },
       allow_promotion_codes: true,

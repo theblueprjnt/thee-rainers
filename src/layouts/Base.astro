@@ -82,9 +82,9 @@ const siteSchema = JSON.stringify({
 
     <!-- 30-second email capture popup -->
     <div id="tr-popup" role="dialog" aria-modal="true" aria-labelledby="tr-popup-heading"
-      class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4 hidden"
+      class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4 hidden pointer-events-none"
       style="background: rgba(10,10,10,0.6); backdrop-filter: blur(2px);">
-      <div class="bg-white w-full max-w-[420px] relative"
+      <div class="bg-white w-full max-w-[420px] relative pointer-events-auto"
         style="box-shadow: 0 24px 80px rgba(0,0,0,0.35);">
 
         <button id="tr-popup-close"
@@ -159,7 +159,6 @@ const siteSchema = JSON.stringify({
     var popup = document.getElementById('tr-popup');
     if (!popup) return;
     popup.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
 
     var emailInput = popup.querySelector('#tr-popup-email');
     if (emailInput) setTimeout(function() { emailInput.focus(); }, 50);
