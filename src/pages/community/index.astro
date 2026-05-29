@@ -289,18 +289,20 @@ const faqSchema = JSON.stringify({
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ lookupKey: key }),
         });
-        const data = await res.json() as { url?: string };
+        const data = await res.json() as { url?: string; error?: string };
         if (data.url) {
           window.location.href = data.url;
         } else {
           btn.disabled = false;
           btn.innerHTML = originalHTML;
           btn.classList.remove('opacity-80', 'cursor-not-allowed');
+          alert('Error: ' + (data.error ?? 'no url returned'));
         }
-      } catch {
+      } catch (err) {
         btn.disabled = false;
         btn.innerHTML = originalHTML;
         btn.classList.remove('opacity-80', 'cursor-not-allowed');
+        alert('Error: ' + String(err));
       }
     });
   });
