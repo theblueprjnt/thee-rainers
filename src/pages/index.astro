@@ -243,9 +243,28 @@ import Layout from '../layouts/Base.astro';
 
       </div>
 
-      <!-- Workshop Replay -->
+      <!-- Defense Workshop · Live -->
       <div class="relative overflow-hidden bg-[#0A0A0A] mb-4">
         <img src="/images/workshop_bacgkround.png" alt="Defense Workshop live session"
+          width="1920" height="1080"
+          class="absolute inset-0 w-full h-full object-cover object-center opacity-45"
+          loading="lazy" />
+        <div class="relative z-10 p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div>
+            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Live · Saturday, June 27 · 90 Min</p>
+            <p class="font-black text-white uppercase tracking-tight text-xl leading-tight">Defense Workshop — $197</p>
+            <p class="text-white/55 text-xs mt-2 leading-relaxed">Camera on. Real-time correction on your defensive structure, movement, and mechanics. Limited seats.</p>
+          </div>
+          <a href="/workshop"
+            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+            Reserve Seat →
+          </a>
+        </div>
+      </div>
+
+      <!-- Workshop Replay -->
+      <div class="relative overflow-hidden bg-[#0A0A0A] mb-4">
+        <img src="/images/workshop_bacgkround.png" alt="Defense Workshop replay"
           width="1920" height="1080"
           class="absolute inset-0 w-full h-full object-cover object-center opacity-35"
           loading="lazy" />
@@ -253,10 +272,10 @@ import Layout from '../layouts/Base.astro';
           <div>
             <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">On Demand · Full Recording</p>
             <p class="font-black text-white uppercase tracking-tight text-xl leading-tight">Workshop Replay — $79</p>
-            <p class="text-white/50 text-xs mt-2">90 min. Watch the live corrections. Apply the framework. 7-day access from purchase.</p>
+            <p class="text-white/55 text-xs mt-2 leading-relaxed">90 min. Watch the live corrections. Apply the framework. 7-day access from purchase.</p>
           </div>
           <a href="/workshop-replay"
-            class="shrink-0 inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-3 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap border-2 border-[#0057FF] text-[#0057FF] bg-transparent font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0057FF] hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
             Get Replay →
           </a>
         </div>
@@ -271,7 +290,7 @@ import Layout from '../layouts/Base.astro';
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Weekly live Proving Ground sessions with Rainers. Real-time correction on your movement. Private community chat. Drill library. $39/mo.</p>
           </div>
           <a href="/community"
-            class="shrink-0 inline-flex items-center justify-center whitespace-nowrap bg-[#6A0DAD] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200">
+            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#6A0DAD] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
             See the Community →
           </a>
         </div>
