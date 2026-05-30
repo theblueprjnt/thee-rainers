@@ -23,7 +23,7 @@ Bricolage Grotesque Variable — loaded via Base.astro
 
 ## Funnel architecture (vertical integration)
 ```
-YouTube / Instagram / TikTok (331K / 90K / 15K)
+YouTube / Instagram / TikTok (18K / 332K / 95K)
     ↓
 /links — universal bio hub
     ↓
@@ -162,11 +162,12 @@ Stripe webhook events required: `checkout.session.completed` + `invoice.payment_
 - Chapters wired, end screen set, card at 8:31 → /footwork-foundation
 
 ## Social presence
-- Instagram: 331K @theerainers
-- Facebook: 110K @theerainers
-- TikTok: 90K @theerainers
-- Threads: 20K @theerainers
-- YouTube: 15K @Rainers
+Counts live in `src/data/social-stats.ts` (single source of truth). Update that file when numbers change; all pages rebuild on push.
+- Instagram: @theerainers
+- Facebook: @theerainers
+- TikTok: @theerainers
+- Threads: @theerainers
+- YouTube: @Rainers
 
 ## Pending — prioritized
 1. **[FIRE] Make.com delivery scenario** — MAKE_DELIVERY_WEBHOOK_URL receives payloads but no scenario sends the email. Every buyer gets nothing after payment.

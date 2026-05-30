@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Base.astro';
+import { SOCIAL_STATS } from '../data/social-stats';
 ---
 <Layout title="About — Thee Rainers">
   <Fragment slot="head">
@@ -122,27 +123,27 @@ import Layout from '../layouts/Base.astro';
             <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
               class="flex items-center gap-2 group hover:opacity-60 transition-opacity duration-200">
               <span class="text-[#0A0A0A]/50 text-[11px] tracking-widest uppercase font-bold">Instagram</span>
-              <span class="text-[#0A0A0A]/20 text-[10px]">331K →</span>
+              <span class="text-[#0A0A0A]/40 text-[11px]">{SOCIAL_STATS.instagram}K →</span>
             </a>
             <a href="https://www.tiktok.com/@theerainers" target="_blank" rel="noopener"
               class="flex items-center gap-2 group hover:opacity-60 transition-opacity duration-200">
               <span class="text-[#0A0A0A]/50 text-[11px] tracking-widest uppercase font-bold">TikTok</span>
-              <span class="text-[#0A0A0A]/20 text-[10px]">90K →</span>
+              <span class="text-[#0A0A0A]/40 text-[11px]">{SOCIAL_STATS.tiktok}K →</span>
             </a>
             <a href="https://www.youtube.com/@Rainers" target="_blank" rel="noopener"
               class="flex items-center gap-2 group hover:opacity-60 transition-opacity duration-200">
               <span class="text-[#0A0A0A]/50 text-[11px] tracking-widest uppercase font-bold">YouTube</span>
-              <span class="text-[#0A0A0A]/20 text-[10px]">15K →</span>
+              <span class="text-[#0A0A0A]/40 text-[11px]">{SOCIAL_STATS.youtube}K →</span>
             </a>
             <a href="https://www.facebook.com/theerainers" target="_blank" rel="noopener"
               class="flex items-center gap-2 group hover:opacity-60 transition-opacity duration-200">
               <span class="text-[#0A0A0A]/50 text-[11px] tracking-widest uppercase font-bold">Facebook</span>
-              <span class="text-[#0A0A0A]/20 text-[10px]">110K →</span>
+              <span class="text-[#0A0A0A]/40 text-[11px]">{SOCIAL_STATS.facebook}K →</span>
             </a>
             <a href="https://www.threads.net/@theerainers" target="_blank" rel="noopener"
               class="flex items-center gap-2 group hover:opacity-60 transition-opacity duration-200">
               <span class="text-[#0A0A0A]/50 text-[11px] tracking-widest uppercase font-bold">Threads</span>
-              <span class="text-[#0A0A0A]/20 text-[10px]">20K →</span>
+              <span class="text-[#0A0A0A]/40 text-[11px]">{SOCIAL_STATS.threads}K →</span>
             </a>
           </div>
         </div>

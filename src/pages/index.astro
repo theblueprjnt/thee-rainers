@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Base.astro';
+import { SOCIAL_STATS } from '../data/social-stats';
 ---
 <Layout title="Thee Rainers — Better training. Better results.">
 
@@ -334,27 +335,27 @@ import Layout from '../layouts/Base.astro';
       <div class="grid grid-cols-2 md:grid-cols-5 gap-[1px] bg-[#0A0A0A]/8">
         <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="331" data-suffix="K">331K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.instagram} data-suffix="K">{SOCIAL_STATS.instagram}K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Instagram</p>
         </a>
         <a href="https://www.facebook.com/theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="110" data-suffix="K">110K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.facebook} data-suffix="K">{SOCIAL_STATS.facebook}K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Facebook</p>
         </a>
         <a href="https://www.tiktok.com/@theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="90" data-suffix="K">90K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.tiktok} data-suffix="K">{SOCIAL_STATS.tiktok}K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">TikTok</p>
         </a>
         <a href="https://www.threads.net/@theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="20" data-suffix="K">20K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.threads} data-suffix="K">{SOCIAL_STATS.threads}K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">Threads</p>
         </a>
         <a href="https://www.youtube.com/@Rainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200 col-span-2 md:col-span-1">
-          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count="15" data-suffix="K">15K</p>
+          <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.youtube} data-suffix="K">{SOCIAL_STATS.youtube}K</p>
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">YouTube</p>
         </a>
       </div>
