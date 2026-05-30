@@ -123,48 +123,51 @@ const videoSchema = JSON.stringify({
       </div>
 
       {featured && (
-        <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-8 mb-4">
-          <div class="relative w-full aspect-video bg-[#F6F6F6] border border-[#0A0A0A]/8">
-            <iframe
-              src={featured.embedUrl}
-              title={featured.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-              class="absolute inset-0 w-full h-full"
-            ></iframe>
-          </div>
-
-          <!-- System Summary Sidebar -->
-          <div class="flex flex-col bg-[#F6F6F6] border border-[#0A0A0A]/8 p-8 gap-0">
-            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-6">System Summary · 3-Layer OS</p>
-
-            <div class="border-t border-[#0A0A0A]/8 pt-6 pb-6">
-              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 01 — Perceptual</p>
-              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Cue reading, pattern recognition, distance management. The fighter who sees first controls everything after. Diligence made physical.</p>
+        <>
+          <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-8 mb-8 md:items-start">
+            <div class="relative w-full aspect-video bg-[#F6F6F6] border border-[#0A0A0A]/8">
+              <iframe
+                src={featured.embedUrl}
+                title={featured.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="absolute inset-0 w-full h-full"
+              ></iframe>
             </div>
 
-            <div class="border-t border-[#0A0A0A]/8 pt-6 pb-6">
-              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 02 — Mechanical</p>
-              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Kinetic chain, reactive stiffness, range fluency. 76% of punch power originates at the floor. The body is the system — not the arm, not the gym.</p>
-            </div>
+            <!-- System Summary Sidebar -->
+            <div class="flex flex-col bg-[#F6F6F6] border border-[#0A0A0A]/8 p-8 gap-0">
+              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-6">System Summary · 3-Layer OS</p>
 
-            <div class="border-t border-[#0A0A0A]/8 pt-6 pb-6">
-              <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 03 — Existential</p>
-              <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Identity, presence, internal standard. Mechanics trained in drilling dissolve under pressure when Layer 3 is missing. This is where virtue meets performance.</p>
-            </div>
+              <div class="border-t border-[#0A0A0A]/8 pt-6 pb-6">
+                <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 01 — Perceptual</p>
+                <p class="text-[#0A0A0A]/55 text-xs leading-relaxed">Cue reading, pattern recognition, distance management. The fighter who sees first controls everything after.</p>
+              </div>
 
-            <div class="border-t border-[#0A0A0A]/8 pt-6 flex flex-col gap-3">
-              <a href="/footwork-foundation"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
-                Start the Foundation →
-              </a>
-              <a href="/vault"
-                class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/30 bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/50">
-                Get the System →
-              </a>
+              <div class="border-t border-[#0A0A0A]/8 pt-6 pb-6">
+                <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 02 — Mechanical</p>
+                <p class="text-[#0A0A0A]/55 text-xs leading-relaxed">Kinetic chain, reactive stiffness, range fluency. 76% of punch power originates at the floor.</p>
+              </div>
+
+              <div class="border-t border-[#0A0A0A]/8 pt-6">
+                <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Layer 03 — Existential</p>
+                <p class="text-[#0A0A0A]/55 text-xs leading-relaxed">Identity, presence, internal standard. Mechanics dissolve under pressure when Layer 3 is missing.</p>
+              </div>
             </div>
           </div>
-        </div>
+
+          <!-- CTAs (own row — no overflow risk into next section) -->
+          <div class="flex flex-col sm:flex-row gap-3 max-w-[640px] mx-auto md:ml-auto md:mr-0">
+            <a href="/footwork-foundation"
+              class="flex-1 inline-flex items-center justify-center rounded-none font-bold bg-[#0057FF] text-white px-6 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+              Start the Foundation →
+            </a>
+            <a href="/vault"
+              class="flex-1 inline-flex items-center justify-center rounded-none font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-4 text-sm tracking-wide uppercase hover:bg-[#0057FF] hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+              Get the System →
+            </a>
+          </div>
+        </>
       )}
 
     </div>
