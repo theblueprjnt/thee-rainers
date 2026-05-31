@@ -68,20 +68,26 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 - `/api/contact` — contact + feedback forms
 - `/api/stripe-webhook` — Stripe event handler (signature-verified, CF Workers compatible)
 
-## Environment variables (Cloudflare Pages — all set)
+## Environment variables (Cloudflare Pages)
 ```
-MAKE_LEAD_WEBHOOK_URL       — free form submissions (footwork, lever-audit, qa-registration)
-MAKE_DELIVERY_WEBHOOK_URL   — post-purchase delivery trigger
-STRIPE_SECRET_KEY           — Stripe API key
-STRIPE_WEBHOOK_SECRET       — Stripe webhook signature secret
-WATCH_TOKEN_SECRET          — HMAC signing key for /watch/ token-gated pages
-R2_ACCOUNT_ID               — Cloudflare account ID
-R2_ACCESS_KEY_ID            — R2 API token (access key)
-R2_SECRET_ACCESS_KEY        — R2 API token (secret)
-R2_BUCKET_NAME              — theerainers-vault
-AIRTABLE_API_KEY            — Airtable PAT
-AIRTABLE_BASE_ID            — Airtable base
+SITE_URL                    — production domain (e.g. https://theerainers.com). Used for CORS + Stripe redirect URLs. REQUIRED.
+MAKE_LEAD_WEBHOOK_URL       — free form submissions (footwork, lever-audit, qa, quiz-home). Also used by /api/coaching-capture.
+MAKE_CONTACT_WEBHOOK_URL    — contact + feedback form submissions. Separate webhook from lead. REQUIRED for contact form to deliver.
+MAKE_DELIVERY_WEBHOOK_URL   — post-purchase delivery trigger (PDFs, watch URLs).
+STRIPE_SECRET_KEY           — Stripe API key (sk_live_*). Powers /api/create-checkout + stripe-webhook.
+STRIPE_WEBHOOK_SECRET       — Stripe webhook signature secret.
+WATCH_TOKEN_SECRET          — HMAC signing key for /watch/ token-gated pages.
+R2_ACCOUNT_ID               — Cloudflare account ID.
+R2_ACCESS_KEY_ID            — R2 API token (access key).
+R2_SECRET_ACCESS_KEY        — R2 API token (secret).
+R2_BUCKET_NAME              — theerainers-vault.
+AIRTABLE_API_KEY            — Airtable PAT.
+AIRTABLE_BASE_ID            — Airtable base ID.
+AIRTABLE_TABLE              — Airtable table name for member records. Defaults to "Customers" in /api/community-access, "Members" in stripe-webhook. SET THIS to match your actual table or both code paths will silently skip writes/reads.
+KIT_API_KEY                 — Kit (ConvertKit) API key. Used by stripe-webhook to tag members on purchase. If unset, Kit tagging is skipped silently (Stripe events still process).
 ```
+
+**Silent-skip risk:** Form APIs return 200 even when their webhook URL is unset (graceful degradation). If `MAKE_CONTACT_WEBHOOK_URL` is not set in Cloudflare, the contact form looks like it worked but no email reaches you. Same pattern for `KIT_API_KEY` and `AIRTABLE_TABLE`. Verify each is set after any env rotation.
 
 ## Automation — Make.com
 
