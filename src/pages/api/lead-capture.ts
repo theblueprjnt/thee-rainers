@@ -83,22 +83,33 @@ export async function POST({ request }: APIContext): Promise<Response> {
   }
 
   // ── forward to Make.com webhook ───────────────────────────────────────
-  // Skipped gracefully when MAKE_LEAD_WEBHOOK_URL is a placeholder or unset.
+  // HARD-FAIL when MAKE_LEAD_WEBHOOK_URL is missing or invalid. This prevents
+  // the silent-drop bug that lost real leads pre-2026-05-31: if the config
+  // is wrong the user sees an error, not a fake success.
   const webhookUrl = (cfEnv as unknown as Record<string, string>)['MAKE_LEAD_WEBHOOK_URL'] ?? '';
-  if (/^https?:\/\//.test(webhookUrl)) {
-    try {
-      const res = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name, email, phone, source }),
-      });
-      if (!res.ok) throw new Error(`Webhook responded with ${res.status}`);
-    } catch (err) {
-      console.error('[lead-capture] webhook error:', err);
-      return isJson
-        ? jsonResponse({ success: false, error: 'Delivery failed. Please try again.' }, 500, headers)
-        : redirectResponse('/footwork-foundation?error=delivery_failed');
-    }
+  const emailLog = email.replace(/(.).*(@.*)/, '$1***$2');
+
+  if (!/^https?:\/\//.test(webhookUrl)) {
+    console.error('[lead-capture] FATAL: MAKE_LEAD_WEBHOOK_URL missing or invalid', { source, emailLog });
+    return isJson
+      ? jsonResponse({ success: false, error: 'Server config error. Email rainers@theerainers.com.' }, 500, headers)
+      : redirectResponse('/footwork-foundation?error=config_error');
+  }
+
+  console.log('[lead-capture] submission', { source, emailLog });
+
+  try {
+    const res = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ full_name, email, phone, source }),
+    });
+    if (!res.ok) throw new Error(`Webhook responded with ${res.status}`);
+  } catch (err) {
+    console.error('[lead-capture] webhook delivery failed:', err);
+    return isJson
+      ? jsonResponse({ success: false, error: 'Delivery failed. Please try again.' }, 500, headers)
+      : redirectResponse('/footwork-foundation?error=delivery_failed');
   }
 
   // ── success ───────────────────────────────────────────────────────────

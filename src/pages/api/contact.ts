@@ -100,22 +100,32 @@ export async function POST({ request }: APIContext): Promise<Response> {
   }
 
   // ── forward to Make.com webhook ───────────────────────────────────────
-  // Skipped gracefully when MAKE_CONTACT_WEBHOOK_URL is a placeholder or unset.
+  // HARD-FAIL when MAKE_CONTACT_WEBHOOK_URL is missing or invalid. No more
+  // silent drops — config error surfaces to user (500) and dev (console).
   const webhookUrl = (cfEnv as unknown as Record<string, string>)['MAKE_CONTACT_WEBHOOK_URL'] ?? '';
-  if (/^https?:\/\//.test(webhookUrl)) {
-    try {
-      const res = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name, email, phone, reason, message }),
-      });
-      if (!res.ok) throw new Error(`Webhook responded with ${res.status}`);
-    } catch (err) {
-      console.error('[contact] webhook error:', err);
-      return isJson
-        ? jsonResponse({ success: false, error: 'Delivery failed. Please try again.' }, 500, headers)
-        : redirectResponse('/contact?error=delivery_failed');
-    }
+  const emailLog = email.replace(/(.).*(@.*)/, '$1***$2');
+
+  if (!/^https?:\/\//.test(webhookUrl)) {
+    console.error('[contact] FATAL: MAKE_CONTACT_WEBHOOK_URL missing or invalid', { reason, emailLog });
+    return isJson
+      ? jsonResponse({ success: false, error: 'Server config error. Email rainers@theerainers.com.' }, 500, headers)
+      : redirectResponse('/contact?error=config_error');
+  }
+
+  console.log('[contact] submission', { reason, emailLog });
+
+  try {
+    const res = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ full_name, email, phone, reason, message }),
+    });
+    if (!res.ok) throw new Error(`Webhook responded with ${res.status}`);
+  } catch (err) {
+    console.error('[contact] webhook delivery failed:', err);
+    return isJson
+      ? jsonResponse({ success: false, error: 'Delivery failed. Please try again.' }, 500, headers)
+      : redirectResponse('/contact?error=delivery_failed');
   }
 
   // ── success ───────────────────────────────────────────────────────────

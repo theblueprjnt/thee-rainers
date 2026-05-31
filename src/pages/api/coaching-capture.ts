@@ -13,10 +13,14 @@ export async function POST({ request }: APIContext): Promise<Response> {
     return new Response(JSON.stringify({ status: 'error', error: 'Invalid JSON' }), { status: 400 });
   }
 
+  const emailLog = String(data.email ?? '').replace(/(.).*(@.*)/, '$1***$2');
+
   if (!/^https?:\/\//.test(webhookUrl)) {
-    console.warn('[coaching-capture] MAKE_LEAD_WEBHOOK_URL not set');
-    return new Response(JSON.stringify({ status: 'success' }), { status: 200 });
+    console.error('[coaching-capture] FATAL: MAKE_LEAD_WEBHOOK_URL missing or invalid', { emailLog });
+    return new Response(JSON.stringify({ status: 'error', error: 'Server config error. Email rainers@theerainers.com.' }), { status: 500 });
   }
+
+  console.log('[coaching-capture] submission', { emailLog });
 
   try {
     const res = await fetch(webhookUrl, {
@@ -27,7 +31,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
     if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
     return new Response(JSON.stringify({ status: 'success' }), { status: 200 });
   } catch (err) {
-    console.error('[coaching-capture] webhook error:', err);
+    console.error('[coaching-capture] webhook delivery failed:', err);
     return new Response(JSON.stringify({ status: 'error' }), { status: 500 });
   }
 }
