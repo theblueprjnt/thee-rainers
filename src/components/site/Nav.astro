@@ -19,15 +19,14 @@
       </svg>
     </button>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] flex flex-col items-center justify-center gap-6
-      opacity-0 pointer-events-none translate-y-[-8px]
-      transition-all duration-200 ease-out"
-      style="overscroll-behavior:contain; touch-action:none;">
-      <a href="/community" data-nav-path="/community" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Greatness Community</a>
-      <a href="/vault" data-nav-path="/vault" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Vault</a>
-      <a href="/library" data-nav-path="/library" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Library</a>
-      <a href="/about" data-nav-path="/about" class="text-xl font-bold text-[#0A0A0A]/50 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">About</a>
-      <a href="/command" class="text-xs tracking-widest uppercase mobile-link"
+    <div id="mobile-menu" class="fixed inset-0 z-[100] flex-col items-center justify-center gap-6"
+      style="display: none; background-color: #FFFFFF; overscroll-behavior: contain; touch-action: none;"
+      aria-hidden="true">
+      <a href="/community" data-nav-path="/community" class="text-xl font-bold text-[#0A0A0A]/70 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Greatness Community</a>
+      <a href="/vault" data-nav-path="/vault" class="text-xl font-bold text-[#0A0A0A]/70 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Vault</a>
+      <a href="/library" data-nav-path="/library" class="text-xl font-bold text-[#0A0A0A]/70 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Library</a>
+      <a href="/about" data-nav-path="/about" class="text-xl font-bold text-[#0A0A0A]/70 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">About</a>
+      <a href="/command" class="text-xs tracking-widest uppercase font-bold mobile-link"
         style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
         Private Architecture →
       </a>
@@ -41,23 +40,26 @@
   const icon = document.getElementById('menu-icon');
   const links = document.querySelectorAll('.mobile-link');
 
+  function openMenu() {
+    menu.style.display = 'flex';
+    menu.setAttribute('aria-hidden', 'false');
+    icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    menu.style.display = 'none';
+    menu.setAttribute('aria-hidden', 'true');
+    icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+    document.body.style.overflow = '';
+  }
   function toggleMenu() {
-    const isOpen = !menu.classList.contains('opacity-0');
-    if (isOpen) {
-      menu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-8px]');
-      menu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-      icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-      document.body.style.overflow = '';
-    } else {
-      menu.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-8px]');
-      menu.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-      icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-      document.body.style.overflow = 'hidden';
-    }
+    if (menu.style.display === 'flex') closeMenu();
+    else openMenu();
   }
 
   btn.addEventListener('click', toggleMenu);
-  links.forEach(link => link.addEventListener('click', toggleMenu));
+  links.forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
   // Active state
   const currentPath = window.location.pathname;
