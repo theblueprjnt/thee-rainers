@@ -31,7 +31,7 @@ import Layout from '../../layouts/Base.astro';
             class="w-full px-4 py-3 border border-[#0A0A0A]/20 bg-white text-[#0A0A0A] text-sm placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[#6A0DAD] transition-colors"
           />
           <button type="submit" id="gate-btn"
-            class="inline-flex items-center justify-center disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200 cursor-pointer border-0">
+            class="inline-flex items-center justify-center rounded-none disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
             Verify Access →
           </button>
           <p id="gate-error" class="text-red-500 text-xs hidden">No active membership found for that email. <a href="/community" class="underline font-bold">Join the Community →</a></p>

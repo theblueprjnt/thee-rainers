@@ -92,7 +92,7 @@ const productSchema = JSON.stringify(products.map(p => ({
                   {p.price_note && <p class="text-[10px] text-[#0A0A0A]/30 mt-0.5">{p.price_note}</p>}
                 </div>
                 <a href={p.stripe_link}
-                  class="inline-flex items-center justify-center whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-xs uppercase tracking-widest hover:bg-[#0040CC] transition-colors duration-200">
+                  class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
                   {p.cta} →
                 </a>
               </div>
@@ -192,7 +192,7 @@ const productSchema = JSON.stringify(products.map(p => ({
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Weekly live Proving Ground sessions with Rainers. Real-time correction on your movement. Private community chat. Drill library. $39/mo.</p>
           </div>
           <a href="/community"
-            class="shrink-0 inline-flex items-center justify-center whitespace-nowrap bg-[#6A0DAD] text-white font-bold px-8 py-3 text-xs uppercase tracking-widest hover:bg-[#5a0b92] transition-colors duration-200">
+            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#6A0DAD] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
             See the Community →
           </a>
         </div>

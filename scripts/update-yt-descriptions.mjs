@@ -27,7 +27,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const OAUTH_CLIENT_FILE = path.join(__dirname, 'oauth-client.json');
 const TOKEN_FILE        = path.join(__dirname, '.yt-token.json');  // gitignored
-const CHANNEL_ID        = 'UCRainersChannelId';  // REPLACE: your channel ID (starts with UC...)
+const CHANNEL_ID        = 'UC66qVS7EJyvCLJeaUzdoCfQ';
 
 // ── URL replacements ─────────────────────────────────────────────────────────
 // Order matters — more specific patterns first.
