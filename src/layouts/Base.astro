@@ -71,6 +71,8 @@ const siteSchema = JSON.stringify({
     <meta name="twitter:image" content="https://theerainers.com/images/og_social_share.jpg" />
     <title>{title}</title>
     <script type="application/ld+json" set:html={siteSchema} />
+    <!-- Cloudflare Web Analytics -->
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "6c995d4bc9a446c3b92eba609ef3ba69"}'></script>
     <slot name="head" />
   </head>
   <body class="bg-bg text-ink min-h-screen flex flex-col overflow-x-hidden">
