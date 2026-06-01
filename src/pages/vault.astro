@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Base.astro';
+import Testimonials from '../components/site/Testimonials.astro';
 
 const products = [
   {
@@ -90,6 +91,7 @@ const productSchema = JSON.stringify(products.map(p => ({
                 <div>
                   <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
                   {p.price_note && <p class="text-[10px] text-[#0A0A0A]/30 mt-0.5">{p.price_note}</p>}
+                  <p class="mt-1 text-xs font-medium tracking-wide text-[#0A0A0A]/55">120+ fighters training the system</p>
                 </div>
                 <a href={p.stripe_link}
                   class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
@@ -102,6 +104,15 @@ const productSchema = JSON.stringify(products.map(p => ({
             </div>
           </div>
         ))}
+      </div>
+
+      <!-- Proof — results from real students -->
+      <div class="mt-12 -mx-6 md:-mx-12 lg:-mx-20 border-t border-b border-[#0A0A0A]/8">
+        <Testimonials
+          ids={["giancarlo-private-architecture"]}
+          heading="What the system produces"
+          kicker="Results · In Their Words"
+        />
       </div>
 
       <!-- FAQ -->

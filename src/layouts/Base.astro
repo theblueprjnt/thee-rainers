@@ -80,6 +80,13 @@ const siteSchema = JSON.stringify({
     <script type="application/ld+json" set:html={siteSchema} />
     <!-- Cloudflare Web Analytics -->
     <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "6c995d4bc9a446c3b92eba609ef3ba69"}'></script>
+    <!-- Funnel event helper — single source of truth for dataLayer pushes -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      window.trackEvent = function(name, data) {
+        try { window.dataLayer.push(Object.assign({ event: name }, data || {})); } catch (e) {}
+      };
+    </script>
     <slot name="head" />
   </head>
   <body class="bg-bg text-ink min-h-screen flex flex-col overflow-x-hidden">

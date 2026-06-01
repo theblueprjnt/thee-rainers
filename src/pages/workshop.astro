@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Base.astro';
+import Testimonials from '../components/site/Testimonials.astro';
 import { Picture } from 'astro:assets';
 import defenseCover1 from '../assets/defense_cover1.jpg';
 
@@ -231,6 +232,13 @@ const faqSchema = JSON.stringify({
       </div>
     </div>
   </section>
+
+  <!-- Proof — results from real students -->
+  <Testimonials
+    ids={["giancarlo-private-architecture"]}
+    heading="What the system produces"
+    kicker="Results · In Their Words"
+  />
 
   <!-- FAQ -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-20 border-t border-[#0A0A0A]/8">

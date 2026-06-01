@@ -1,0 +1,250 @@
+---
+// src/components/site/Testimonials.astro
+//
+// Reusable proof section. One component, imported on every page that needs proof
+// (mirrors your single-source-of-truth pattern). Data lives in src/data/testimonials.ts.
+//
+// Design: brutalist system — rounded-none, copper metadata, void text, blue play.
+// Behavior: only renders REAL testimonials (placeholders are filtered out). If none
+// qualify, the whole section renders nothing — so a half-collected list never ships
+// an empty box. Video uses a click-to-load facade (youtube-nocookie) so the page
+// stays fast until someone actually wants to watch. Falls back to a text pull-quote
+// when no video ID is present yet.
+//
+// Usage:
+//   <Testimonials />                                  // all real testimonials
+//   <Testimonials ids={["giancarlo-private-architecture"]} />   // filter to specific ones
+//   <Testimonials heading="What students report" kicker="Results · Footwork" />
+//   <Testimonials background="void" />                // dark section (matches scripture blocks)
+
+import { testimonials, type Testimonial } from "../../data/testimonials";
+
+interface Props {
+  heading?: string;
+  kicker?: string;
+  ids?: string[];
+  background?: "white" | "void";
+}
+
+const {
+  heading = "Proof",
+  kicker = "Results · In Their Words",
+  ids,
+  background = "white",
+} = Astro.props;
+
+const isPlaceholder = (s?: string) =>
+  !s || s.startsWith("REPLACE_") || s.includes("REPLACE_WITH");
+
+// Renderable = real name + real quote. Video is an optional upgrade on top.
+const renderable = testimonials.filter(
+  (t) => t.name && t.quote && !isPlaceholder(t.quote) && !isPlaceholder(t.name),
+);
+
+const pool = ids?.length
+  ? renderable.filter((t) => ids.includes(t.id))
+  : renderable;
+
+const featured = pool.find((t) => t.featured) ?? pool[0];
+const rest = pool.filter((t) => t.id !== featured?.id);
+
+const hasVideo = (t?: Testimonial) => !!t?.youtubeId && !isPlaceholder(t.youtubeId);
+const featuredHasVideo = hasVideo(featured);
+const featuredIsPortrait = featured?.aspect === "portrait";
+
+// Thumbnail strategy: maxresdefault for portrait (no letterboxing on Shorts),
+// hqdefault for landscape (fast and reliable).
+const thumbUrl = featured?.youtubeId
+  ? featuredIsPortrait
+    ? `https://i.ytimg.com/vi/${featured.youtubeId}/maxresdefault.jpg`
+    : `https://i.ytimg.com/vi/${featured.youtubeId}/hqdefault.jpg`
+  : "";
+
+const dark = background === "void";
+const muted = dark ? "text-white/60" : "text-[#0A0A0A]/55";
+const hairline = dark ? "border-white/15" : "border-[#0A0A0A]/12";
+const ruleBar = "bg-[#D4A373]";
+---
+
+{
+  pool.length > 0 && (
+    <section
+      class={`w-full ${dark ? "bg-[#0A0A0A] text-white" : "bg-white text-[#0A0A0A]"}`}
+    >
+      <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+        {/* Header */}
+        <div class="mb-12 md:mb-16">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-[#D4A373]">
+            {kicker}
+          </p>
+          <h2 class="mt-3 text-4xl font-black uppercase leading-[0.9] tracking-tighter md:text-6xl">
+            {heading}
+          </h2>
+        </div>
+
+        {/* Spotlight */}
+        {featured && (
+          <div
+            class={
+              featuredHasVideo
+                ? featuredIsPortrait
+                  ? "grid grid-cols-1 gap-8 md:grid-cols-2 md:items-center md:gap-16"
+                  : "grid grid-cols-1 gap-8 md:grid-cols-5 md:items-center md:gap-12"
+                : "max-w-3xl"
+            }
+          >
+            {featuredHasVideo ? (
+              <>
+                <div
+                  class={
+                    featuredIsPortrait
+                      ? "mx-auto w-full max-w-[320px] md:mx-0"
+                      : "md:col-span-3"
+                  }
+                  data-yt-aspect={featuredIsPortrait ? "portrait" : "landscape"}
+                >
+                  <button
+                    type="button"
+                    class={`group relative block w-full overflow-hidden border ${hairline}`}
+                    data-yt-facade
+                    data-yt-id={featured.youtubeId}
+                    data-yt-aspect={featuredIsPortrait ? "portrait" : "landscape"}
+                    aria-label={`Play video testimonial from ${featured.name}`}
+                  >
+                    <span
+                      class={
+                        featuredIsPortrait
+                          ? "block aspect-[9/16] bg-[#0A0A0A]"
+                          : "block aspect-video bg-[#0A0A0A]"
+                      }
+                    >
+                      <img
+                        src={thumbUrl}
+                        alt=""
+                        width={featuredIsPortrait ? 360 : 480}
+                        height={featuredIsPortrait ? 640 : 360}
+                        loading="lazy"
+                        class="h-full w-full object-cover opacity-90 transition duration-150 group-hover:opacity-100"
+                      />
+                    </span>
+                    <span class="absolute inset-0 grid place-items-center">
+                      <span class="grid h-16 w-16 place-items-center bg-[#0057FF] text-white transition-colors duration-150 group-hover:bg-[#0A0A0A]">
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="22"
+                          height="22"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </span>
+                    </span>
+                    {featured.duration && (
+                      <span class="absolute bottom-3 right-3 bg-[#0A0A0A]/85 px-2 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
+                        {featured.duration}
+                      </span>
+                    )}
+                  </button>
+                </div>
+                <figure class={featuredIsPortrait ? "" : "md:col-span-2"}>
+                  <blockquote class="text-2xl font-bold leading-tight tracking-tight md:text-3xl">
+                    “{featured.quote}”
+                  </blockquote>
+                  <figcaption class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                    <span class={`h-px w-8 ${ruleBar}`} />
+                    <span class="font-bold uppercase tracking-wide">
+                      {featured.name}
+                    </span>
+                    <span class={muted}>{featured.context}</span>
+                  </figcaption>
+                </figure>
+              </>
+            ) : (
+              <figure>
+                <blockquote class="text-3xl font-bold leading-tight tracking-tight md:text-4xl">
+                  “{featured.quote}”
+                </blockquote>
+                <figcaption class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                  <span class={`h-px w-8 ${ruleBar}`} />
+                  <span class="font-bold uppercase tracking-wide">
+                    {featured.name}
+                  </span>
+                  <span class={muted}>{featured.context}</span>
+                </figcaption>
+              </figure>
+            )}
+          </div>
+        )}
+
+        {/* Grid of additional testimonials */}
+        {rest.length > 0 && (
+          <div class="mt-12 grid grid-cols-1 gap-px border md:mt-16 md:grid-cols-2 lg:grid-cols-3 {hairline}"
+               style={`border-color: ${dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)"}`}>
+            {rest.map((t) => (
+              <article
+                class={`flex flex-col ${dark ? "bg-[#0A0A0A]" : "bg-white"} p-6`}
+              >
+                <blockquote class="text-lg font-semibold leading-snug">
+                  “{t.quote}”
+                </blockquote>
+                <figcaption class="mt-auto flex items-center gap-3 pt-6">
+                  {t.photo && (
+                    <img
+                      src={t.photo}
+                      alt={t.name}
+                      width="40"
+                      height="40"
+                      loading="lazy"
+                      class="h-10 w-10 shrink-0 object-cover grayscale"
+                    />
+                  )}
+                  <span>
+                    <span class="block text-sm font-bold uppercase tracking-wide">
+                      {t.name}
+                    </span>
+                    <span class={`block text-xs ${muted}`}>{t.context}</span>
+                  </span>
+                </figcaption>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<script>
+  // Click-to-load YouTube facade. Event delegation handles any number of
+  // instances across any page that imports this component. Aspect ratio
+  // (landscape vs portrait Short) drives the iframe wrapper sizing so vertical
+  // videos don't get letterboxed in a 16:9 frame.
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const btn = target.closest<HTMLElement>("[data-yt-facade]");
+    if (!btn) return;
+    const id = btn.getAttribute("data-yt-id");
+    if (!id) return;
+    const isPortrait = btn.getAttribute("data-yt-aspect") === "portrait";
+
+    const wrap = document.createElement("div");
+    wrap.className = isPortrait
+      ? "relative aspect-[9/16] w-full"
+      : "relative aspect-video w-full";
+
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`;
+    iframe.title = "Video testimonial";
+    iframe.loading = "lazy";
+    iframe.setAttribute(
+      "allow",
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+    );
+    iframe.setAttribute("allowfullscreen", "");
+    iframe.className = "absolute inset-0 h-full w-full border-0";
+
+    wrap.appendChild(iframe);
+    btn.replaceWith(wrap);
+  });
+</script>
