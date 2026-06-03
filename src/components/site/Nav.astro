@@ -1,88 +1,138 @@
 ---
+// One source of truth for nav links. Desktop bar + mobile overlay both
+// iterate this array — they cannot drift from each other.
+const NAV_LINKS = [
+  { label: 'Greatness Community', href: '/community' },
+  { label: 'Vault',                href: '/vault' },
+  { label: 'Library',              href: '/library' },
+  { label: 'About',                href: '/about' },
+];
 ---
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-[#0A0A0A]/8">
   <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="/" class="z-50 flex items-center">
-      <img src="/images/logo-trb.png" alt="Thee Rainers Blueprint" class="h-10 md:h-12 w-auto" />
+    <a href="/" class="z-50 flex items-center" aria-label="Thee Rainers — home">
+      <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 md:h-12 w-auto" />
     </a>
 
-    <nav class="hidden md:flex items-center gap-8">
-      <a href="/community" data-nav-path="/community" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Greatness Community</a>
-      <a href="/vault" data-nav-path="/vault" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Vault</a>
-      <a href="/library" data-nav-path="/library" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">Library</a>
-      <a href="/about" data-nav-path="/about" class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">About</a>
+    <nav class="hidden md:flex items-center gap-8" aria-label="Primary">
+      {NAV_LINKS.map((l) => (
+        <a href={l.href} data-nav-path={l.href} class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">{l.label}</a>
+      ))}
     </nav>
 
-    <button id="mobile-menu-btn" class="md:hidden z-50 p-2 text-[#0A0A0A]/50 focus:outline-none" aria-label="Toggle Menu">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    <button id="menu-open" type="button" class="md:hidden z-50 p-2 text-[#0A0A0A]/60 focus:outline-none" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
 
-    <div id="mobile-menu" class="fixed inset-0 z-[100] flex-col items-center justify-center gap-6"
-      style="display: none; background-color: #FFFFFF; overscroll-behavior: contain; touch-action: none;"
-      aria-hidden="true">
-      <a href="/community" data-nav-path="/community" class="text-xl font-bold text-[#0A0A0A]/70 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Greatness Community</a>
-      <a href="/vault" data-nav-path="/vault" class="text-xl font-bold text-[#0A0A0A]/70 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Vault</a>
-      <a href="/library" data-nav-path="/library" class="text-xl font-bold text-[#0A0A0A]/70 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">Library</a>
-      <a href="/about" data-nav-path="/about" class="text-xl font-bold text-[#0A0A0A]/70 tracking-widest uppercase hover:text-[#0A0A0A] transition-colors mobile-link">About</a>
-      <a href="/command" class="text-xs tracking-widest uppercase font-bold mobile-link"
-        style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-        Private Architecture →
-      </a>
+    <div id="mobile-menu"
+      class="fixed inset-0 z-[100] hidden flex-col bg-white"
+      style="overscroll-behavior: contain;"
+      role="dialog" aria-modal="true" aria-label="Site navigation">
+
+      <!-- Backdrop tap area for close (covers entire panel; close button stops propagation) -->
+      <div id="menu-backdrop" class="absolute inset-0" aria-hidden="true"></div>
+
+      <!-- Top bar — same height as nav, with logo + close -->
+      <div class="relative flex items-center justify-between h-16 px-6 border-b border-[#0A0A0A]/8 bg-white">
+        <a href="/" class="flex items-center" aria-label="Thee Rainers — home">
+          <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 w-auto" />
+        </a>
+        <button id="menu-close" type="button" class="p-2 -mr-2 text-[#0A0A0A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2" aria-label="Close menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Scrollable nav body -->
+      <nav class="relative flex-1 overflow-y-auto px-6 pb-8 pt-2 bg-white" aria-label="Site navigation">
+        <ul class="flex flex-col">
+          {NAV_LINKS.map((l) => (
+            <li class="border-b border-[#D4A373]/30">
+              <a href={l.href} data-nav-path={l.href} class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0A0A0A] hover:opacity-70 transition-opacity">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <!-- CTA pair — purple (recurring) + blue outline (lead capture) -->
+        <a href="/community" class="mt-8 inline-flex w-full items-center justify-center rounded-none bg-[#6A0DAD] text-white font-bold px-6 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+          Join the Community
+        </a>
+        <a href="/foundation-guide" class="mt-3 inline-flex w-full items-center justify-center rounded-none border-2 border-[#0057FF] text-[#0057FF] font-bold px-6 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+          Get the free foundation
+        </a>
+
+        <p class="mt-8 text-[10px] tracking-widest uppercase text-[#0A0A0A]/35">Private Architecture · Application Only</p>
+        <a href="/command" class="block text-xs tracking-widest uppercase font-bold mt-2"
+          style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          Apply →
+        </a>
+      </nav>
     </div>
   </div>
 </header>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  const icon = document.getElementById('menu-icon');
-  const links = document.querySelectorAll('.mobile-link');
+  // ────────────────────────────────────────────────────────────────────────
+  // Bind on astro:page-load (not DOMContentLoaded). Astro's prefetch +
+  // client-side router replaces the document body on navigation, which kills
+  // any DOMContentLoaded-bound listeners. astro:page-load fires on every
+  // navigation event including the initial load, so this listener survives.
+  // ────────────────────────────────────────────────────────────────────────
 
-  function openMenu() {
-    menu.style.display = 'flex';
-    menu.setAttribute('aria-hidden', 'false');
-    icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-    document.body.style.overflow = 'hidden';
+  function initNav() {
+    const openBtn   = document.getElementById('menu-open') as HTMLButtonElement | null;
+    const closeBtn  = document.getElementById('menu-close') as HTMLButtonElement | null;
+    const backdrop  = document.getElementById('menu-backdrop');
+    const menu      = document.getElementById('mobile-menu') as HTMLElement | null;
+    if (!openBtn || !menu) return;
+
+    const setOpen = (open: boolean) => {
+      menu.classList.toggle('hidden', !open);
+      menu.classList.toggle('flex',   open);
+      document.body.style.overflow = open ? 'hidden' : '';
+      openBtn.setAttribute('aria-expanded', String(open));
+    };
+
+    openBtn.addEventListener('click',  () => setOpen(true));
+    closeBtn?.addEventListener('click', () => setOpen(false));
+
+    // Close on link tap (delegate inside menu) and on backdrop tap.
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    backdrop?.addEventListener('click', () => setOpen(false));
+
+    // Close on Escape.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && openBtn.getAttribute('aria-expanded') === 'true') setOpen(false);
+    });
+
+    // Active link styling for current page.
+    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-path]').forEach((link) => {
+      const target = link.dataset.navPath ?? '';
+      const isActive = currentPath === target || (target.length > 1 && currentPath.startsWith(target + '/'));
+      if (!isActive) return;
+      link.setAttribute('aria-current', 'page');
+      link.classList.remove('text-[#0A0A0A]/40');
+      link.classList.add('text-[#0057FF]');
+    });
   }
-  function closeMenu() {
-    menu.style.display = 'none';
-    menu.setAttribute('aria-hidden', 'true');
-    icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-    document.body.style.overflow = '';
-  }
-  function toggleMenu() {
-    if (menu.style.display === 'flex') closeMenu();
-    else openMenu();
-  }
 
-  btn.addEventListener('click', toggleMenu);
-  links.forEach(link => link.addEventListener('click', closeMenu));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-
-  // Active state
-  const currentPath = window.location.pathname;
-  document.querySelectorAll<HTMLAnchorElement>('[data-nav-path]').forEach(link => {
-    const target = link.dataset.navPath ?? '';
-    const isActive = currentPath === target || (target.length > 1 && currentPath.startsWith(target + '/'));
-    if (!isActive) return;
-    link.setAttribute('aria-current', 'page');
-    link.classList.remove('text-[#0A0A0A]/40', 'text-[#0A0A0A]/50');
-    link.classList.add('text-[#0057FF]');
-  });
-</script>
-
-<script>
-  const siteNav = document.getElementById('site-nav');
-  function updateNavGlass() {
+  function initNavGlass() {
+    const siteNav = document.getElementById('site-nav');
     if (!siteNav) return;
-    if (window.scrollY > 10) {
-      siteNav.classList.add('is-scrolled');
-    } else {
-      siteNav.classList.remove('is-scrolled');
-    }
+    const update = () => {
+      if (window.scrollY > 10) siteNav.classList.add('is-scrolled');
+      else                     siteNav.classList.remove('is-scrolled');
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
   }
-  window.addEventListener('scroll', updateNavGlass, { passive: true });
-  updateNavGlass();
+
+  // astro:page-load fires on initial load AND every client-side navigation.
+  document.addEventListener('astro:page-load', () => { initNav(); initNavGlass(); });
 </script>

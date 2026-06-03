@@ -4,7 +4,7 @@ import Testimonials from '../components/site/Testimonials.astro';
 
 const products = [
   {
-    image: '/images/bundle_cover.png',
+    image: '/images/3d_thebundle_cover.png',
     tag: 'Bundle · Best Value',
     title: 'Both Blueprints',
     sub: 'Footwork + Shadowboxing · 106 Rounds',
@@ -12,11 +12,11 @@ const products = [
     price: '$87',
     price_note: 'Save $7 vs. buying separately.',
     stripe_link: 'https://buy.stripe.com/14A4gz59hgxUaa65006J20m',
-    cta: 'Get Bundle',
+    cta: 'Get the Bundle',
     featured: true,
   },
   {
-    image: '/images/footworkbp_cover.png',
+    image: '/images/3d_thefootworkblueprint_cover.jpg',
     tag: 'Blueprint · Module 01',
     title: 'Footwork Blueprint',
     sub: 'Module 01 · 30 Days · 56 Rounds',
@@ -24,7 +24,7 @@ const products = [
     price: '$47',
     price_note: null,
     stripe_link: 'https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k',
-    cta: 'Buy Now',
+    cta: 'Get the Blueprint',
     featured: false,
   },
   {
@@ -36,7 +36,7 @@ const products = [
     price: '$47',
     price_note: null,
     stripe_link: 'https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l',
-    cta: 'Buy Now',
+    cta: 'Get the Blueprint',
     featured: false,
   },
 ];
@@ -90,21 +90,22 @@ const productSchema = JSON.stringify(products.map(p => ({
               <div class="mt-4 flex items-center justify-between">
                 <div>
                   <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
-                  {p.price_note && <p class="text-[10px] text-[#0A0A0A]/30 mt-0.5">{p.price_note}</p>}
-                  <p class="mt-1 text-xs font-medium tracking-wide text-[#0A0A0A]/55">120+ fighters training the system</p>
+                  {p.price_note && <p class="text-[10px] text-[#0A0A0A]/55 mt-0.5">{p.price_note}</p>}
                 </div>
                 <a href={p.stripe_link}
                   class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
                   {p.cta} →
                 </a>
               </div>
-              <p class="text-[11px] text-[#0A0A0A]/55 mt-2 text-right leading-relaxed">
-                By purchasing you agree to our <a href="/legal/terms" class="underline hover:text-[#0A0A0A]">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]">Refund Policy</a>.
-              </p>
             </div>
           </div>
         ))}
       </div>
+
+      <!-- One trust line for the whole product set, not per-card chrome. -->
+      <p class="mt-6 text-xs text-[#0A0A0A]/55 leading-relaxed">
+        One-time payment. Covered by our <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]">refund policy</a>. 120+ fighters training the system.
+      </p>
 
       <!-- Proof — remote students who trained from the blueprint -->
       <div class="mt-12 -mx-6 md:-mx-12 lg:-mx-20 border-t border-b border-[#0A0A0A]/8">

@@ -1,66 +1,103 @@
 // src/data/testimonials.ts
-// Single source of truth for social proof / testimonials.
-// (Mirrors the social-stats.ts pattern: one file, imported everywhere.)
+// Single source of truth for social proof. Mirrors social-stats.ts.
 //
-// HARD RULE: every entry must be REAL. Do not invent quotes, names, results,
-// or photos. An anonymous or invented testimonial is worse than none — 2026
-// buyers are highly sensitive to fakes, and a fake that gets noticed burns
-// trust on the whole page. Collect real ones, then add them here.
+// HARD RULE: every entry is REAL and CONSENTED. Do not invent. Do not include
+// anyone who has not explicitly agreed to public display. A withdrawn consent
+// is a hard remove — never "subtle". This file is reviewed before every push.
 //
-// What converts (verified 2026 CRO data): result-specific quotes (a concrete,
-// ideally measurable change) with a real name and a face (video > photo > text).
-// Praise-only quotes ("great product, loved it") barely move the needle.
+// ORDERING NOTE: The array order encodes ICP relevance — the visitor sees the
+// featured spotlight first, then the row in array order. Most-similar-to-ICP
+// first. The visitor's eye moves down the page; we put the strongest match
+// where the eye lands.
+//
+// WHY THESE FIELDS:
+// - `setting` (remote | in_person) maps a testimonial to the right product.
+//   Remote = "I trained alone from the blueprint" -> sells the Blueprints.
+//   In-person = "I trained live with Rainers" -> sells the Workshop / coaching.
+// - `persona` is the self-identification hook. A 50yo visitor converts when he
+//   sees a 50yo win; a woman converts when she sees a woman; a busy professional
+//   converts when he sees another busy professional. Match proof to viewer.
+// - `youtubeId` from unlisted Shorts. Vertical (9:16) — the component frames
+//   them vertically, no letterboxing. Leave empty for text-only testimonials.
 
 export interface Testimonial {
   id: string;
-  name: string;            // real first name (+ last initial if given)
-  context: string;         // role + duration, e.g. "Private Architecture · 5 Months"
-  quote: string;           // their words, short. Concrete change > praise.
-  youtubeId?: string;      // video testimonial (highest trust). Paste the real ID.
-  aspect?: 'landscape' | 'portrait';  // 'portrait' for YouTube Shorts (9:16). Default landscape.
-  photo?: string;          // /images/... real headshot for written testimonials
-  duration?: string;       // label on the video facade, e.g. "2 min"
-  featured?: boolean;      // ONE spotlight per section. Do not feature more than one.
+  name: string;
+  persona: string;          // self-ID hook: who this viewer recognizes themselves in
+  setting: "remote" | "in_person";
+  youtubeId?: string;       // unlisted Short ID (optional — empty = text-only card)
+  quote: string;            // their words — REPLACE placeholders with real lines
+  featured?: boolean;       // at most ONE featured per rendered section
 }
 
 export const testimonials: Testimonial[] = [
+  // ─── 1. GIANCARLO — entrepreneur, 6 months online coaching ──────────────
+  // Closest to ICP: paying online client who went the distance. Featured.
   {
-    id: "giancarlo-private-architecture",
+    id: "giancarlo-remote",
     name: "Giancarlo",
-    context: "Private Architecture · 5 Months",
+    persona: "Entrepreneur · 6 months online",
+    setting: "remote",
+    youtubeId: "VCj0Dgfoako",
+    // Pulled from his existing on-site testimonial. Real line, his words.
     quote:
       "My footwork makes sense. I could see openings instead of just swinging.",
-    youtubeId: "VCj0Dgfoako",
-    aspect: "portrait",  // it's a Shorts URL (9:16 vertical)
-    duration: "Short",
     featured: true,
   },
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // COLLECT THESE. The entries below are TEMPLATES showing the shape only.
-  // Replace each one fully with a REAL student before uncommenting. Aim for
-  // result-specific, named, with a photo or short clip. One Blueprint buyer,
-  // one Community member, one Workshop attendee covers your three buy pages.
-  // ─────────────────────────────────────────────────────────────────────────
-  // {
-  //   id: "firstname-footwork",
-  //   name: "Firstname",
-  //   context: "Footwork Blueprint · 30 Days",
-  //   quote: "Concrete change, their words. What holds now that broke before.",
-  //   photo: "/images/testimonials/firstname.jpg",
-  // },
-  // {
-  //   id: "firstname-community",
-  //   name: "Firstname",
-  //   context: "Greatness Community · 3 Months",
-  //   quote: "What the weekly correction fixed that a hundred reps did not.",
-  //   photo: "/images/testimonials/firstname-2.jpg",
-  // },
+  // ─── 2. KEVIN — civil engineer, trains at home ──────────────────────────
+  // Working professional, trained remote. Strong ICP signal: same demographic
+  // as your highest-intent buyers (busy professionals with structured minds).
+  {
+    id: "kevin-remote",
+    name: "Kevin",
+    persona: "Civil engineer · Trains at home",
+    setting: "remote",
+    youtubeId: "_W5iFlCIKow",
+    // No quote — video carries the proof. Card renders as video + name + persona.
+    quote: "",
+  },
+
+  // ─── 3. ELIZABETH — digital marketer, in person ─────────────────────────
+  // ICP-adjacent: woman, working professional, in-person. Persona is "moving
+  // away" per Rainers, but real, female, and a working professional — useful
+  // diversity in the lineup.
+  {
+    id: "elizabeth-inperson",
+    name: "Elizabeth",
+    persona: "Digital marketer · Trained in person",
+    setting: "in_person",
+    youtubeId: "KOWohmgNMNI",
+    // PLACEHOLDER — pull her real line. She's on pads, in person.
+    quote: "REPLACE: Elizabeth's strongest real sentence about what changed.",
+  },
+
+  // ─── 4. RICHARDS — startup founder, remote + sparring ────────────────────
+  // Per Rainers's correction: he is REMOTE + sparring, not pure in-person.
+  // The footage shows him sparring 3 months in.
+  {
+    id: "richards-remote",
+    name: "Richards",
+    persona: "Startup founder · Remote + sparring",
+    setting: "remote",
+    youtubeId: "LY8MNzbhg2o",
+    // PLACEHOLDER — pull his real line.
+    quote: "REPLACE: Richards's strongest real sentence about what changed.",
+  },
+
+  // ─── Removed entries ─────────────────────────────────────────────────────
+  // Jacob (CH6Iw2djxqE):   declined consent to public sharing. Hard remove.
+  // Kristaps (4TllJueBQKo): dropped per Rainers's updated ICP lineup.
+  // 50+ student (_W5iFlCIKow): dropped per Rainers's updated ICP lineup.
 ];
 
-// Verifiable usage proof. Keep these TRUE and update as they grow.
-// Usage/training counts are stronger and safer to stand behind than raw
-// "units sold". If you ever cite a sales number, it must be defensible.
+// Verifiable usage proof. Keep TRUE. Update as it grows.
 export const proofStats = {
   fightersTraining: "120+", // fighters training the system (per /footwork-foundation)
 };
+
+// Helpers the component uses to match proof to context.
+export const remoteTestimonials = () =>
+  testimonials.filter((t) => t.setting === "remote");
+export const inPersonTestimonials = () =>
+  testimonials.filter((t) => t.setting === "in_person");
