@@ -301,6 +301,7 @@ const stats = [
         });
         const body = await res.json() as { success: boolean };
         if (body.success) {
+          (window as any).trackEvent?.('generate_lead', { lead_source: 'footwork-foundation', currency: 'USD', value: 0 });
           form?.classList.add('hidden');
           success.classList.remove('hidden');
           triggerDownload('/pdfs/footwork-foundation.pdf', 'Footwork-Foundation-Thee-Rainers.pdf');

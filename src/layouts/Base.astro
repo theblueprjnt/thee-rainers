@@ -86,6 +86,41 @@ const siteSchema = JSON.stringify({
       window.trackEvent = function(name, data) {
         try { window.dataLayer.push(Object.assign({ event: name }, data || {})); } catch (e) {}
       };
+
+      // Product registry — Stripe Payment Link IDs and community lookup keys
+      // mapped to GA4-shaped ecommerce items. Keep in sync with vault.astro
+      // products array and create-checkout.ts PRICE_IDS.
+      var TR_PRODUCTS = {
+        '7sY28r8lt1D06XU6446J20n': { id: 'defense_workshop',        name: 'Defense Workshop',        price: 197 },
+        '6oUaEX7hp6Xk3LIdww6J20p': { id: 'workshop_replay',         name: 'Workshop Replay',         price:  79 },
+        'bJe14n8lt81ogyu3VW6J20k': { id: 'footwork_blueprint',      name: 'Footwork Blueprint',      price:  47 },
+        '5kQdR91X5dlIeqm8cc6J20l': { id: 'shadowboxing_blueprint',  name: 'Shadowboxing Blueprint',  price:  47 },
+        '14A4gz59hgxUaa65006J20m': { id: 'bundle_both_blueprints',  name: 'Bundle (Both Blueprints)', price:  87 },
+        'greatness_monthly':       { id: 'greatness_monthly',       name: 'Greatness Community — Monthly', price: 39 },
+        'greatness_annual':        { id: 'greatness_annual',        name: 'Greatness Community — Annual',  price: 390 }
+      };
+
+      // Delegated click — fires begin_checkout for ANY buy button site-wide.
+      // Covers <a href="buy.stripe.com/..."> AND <button data-checkout="...">.
+      document.addEventListener('click', function(e) {
+        var t = e.target && e.target.closest && e.target.closest('a[href*="buy.stripe.com"], button[data-checkout]');
+        if (!t) return;
+        var product = null;
+        if (t.tagName === 'A') {
+          var m = (t.getAttribute('href') || '').match(/buy\.stripe\.com\/(\w+)/);
+          if (m) product = TR_PRODUCTS[m[1]];
+        } else {
+          product = TR_PRODUCTS[t.getAttribute('data-checkout') || ''];
+        }
+        if (!product) return;
+        window.trackEvent('begin_checkout', {
+          ecommerce: {
+            currency: 'USD',
+            value: product.price,
+            items: [{ item_id: product.id, item_name: product.name, price: product.price, quantity: 1 }]
+          }
+        });
+      });
     </script>
     <slot name="head" />
   </head>
@@ -214,6 +249,7 @@ const siteSchema = JSON.stringify({
         })
         .then(function(r) { return r.json(); })
         .then(function() {
+          if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'popup-foundation', currency: 'USD', value: 0 });
           dismiss();
           if (form) form.classList.add('hidden');
           if (success) success.classList.remove('hidden');

@@ -317,6 +317,7 @@ import LinkPage from '../layouts/LinkPage.astro';
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, source: 'lever-audit-quiz', full_name: '' }),
       });
+      (window as any).trackEvent?.('generate_lead', { lead_source: 'lever-audit-quiz', currency: 'USD', value: 0 });
     } catch {
       // Non-blocking — show results regardless
     }

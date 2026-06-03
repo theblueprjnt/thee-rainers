@@ -106,13 +106,9 @@ const productSchema = JSON.stringify(products.map(p => ({
         ))}
       </div>
 
-      <!-- Proof — results from real students -->
+      <!-- Proof — remote students who trained from the blueprint -->
       <div class="mt-12 -mx-6 md:-mx-12 lg:-mx-20 border-t border-b border-[#0A0A0A]/8">
-        <Testimonials
-          ids={["giancarlo-private-architecture"]}
-          heading="What the system produces"
-          kicker="Results · In Their Words"
-        />
+        <Testimonials filter="remote" heading="Trained from the blueprint" kicker="Results · On Their Own" />
       </div>
 
       <!-- FAQ -->
@@ -226,5 +222,25 @@ const productSchema = JSON.stringify(products.map(p => ({
       <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
     </div>
   </section>
+
+  <!-- GA4 view_item_list — fires once on vault load to record buy-page traffic -->
+  <script is:inline>
+    if (typeof window !== 'undefined' && window.trackEvent) {
+      window.trackEvent('view_item_list', {
+        item_list_id: 'vault',
+        item_list_name: 'Vault — Blueprints + Workshops',
+        ecommerce: {
+          currency: 'USD',
+          items: [
+            { item_id: 'bundle_both_blueprints', item_name: 'Bundle (Both Blueprints)', price: 87, quantity: 1, item_category: 'one_time' },
+            { item_id: 'footwork_blueprint',     item_name: 'Footwork Blueprint',       price: 47, quantity: 1, item_category: 'one_time' },
+            { item_id: 'shadowboxing_blueprint', item_name: 'Shadowboxing Blueprint',   price: 47, quantity: 1, item_category: 'one_time' },
+            { item_id: 'defense_workshop',       item_name: 'Defense Workshop (Live)',  price: 197, quantity: 1, item_category: 'live_event' },
+            { item_id: 'workshop_replay',        item_name: 'Workshop Replay',          price: 79, quantity: 1, item_category: 'on_demand' }
+          ]
+        }
+      });
+    }
+  </script>
 
 </Layout>

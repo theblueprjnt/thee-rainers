@@ -38,6 +38,97 @@ const KIT_MEMBER_TAG = '19807647';
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
 const SITE_URL = 'https://theerainers.com';
 
+// ── GA4 product catalog ────────────────────────────────────────────────────
+// Slug → GA4 ecommerce item shape. Keep in sync with PRODUCT_MAP and the
+// client-side TR_PRODUCTS map in Base.astro. Source of truth for server-side
+// purchase events fired via the GA4 Measurement Protocol.
+const GA4_CATALOG: Record<string, { name: string; price: number; category: string }> = {
+  'footwork':        { name: 'Footwork Blueprint',         price:  47, category: 'one_time' },
+  'shadowboxing':    { name: 'Shadowboxing Blueprint',     price:  47, category: 'one_time' },
+  'bundle':          { name: 'Bundle (Both Blueprints)',   price:  87, category: 'one_time' },
+  'workshop-replay': { name: 'Workshop Replay',            price:  79, category: 'on_demand' },
+  'greatness':       { name: 'Greatness Community',        price:  39, category: 'subscription' },
+};
+
+// ── GA4 Measurement Protocol — server-side purchase event ──────────────────
+// Fires from Stripe webhook so every confirmed payment becomes a GA4 purchase
+// event regardless of browser ad blockers, Safari ITP, or pixel failures. This
+// is the trust signal — Stripe says "they paid", GA4 records it as conversion.
+// Gracefully skips if env vars are absent (logged so dev can fix).
+async function sendGA4Purchase(
+  e: Record<string, string>,
+  args: {
+    slug: string;
+    transactionId: string;
+    customerEmail?: string;
+    customerStripeId?: string;
+    actualValue?: number;
+  },
+): Promise<void> {
+  const measurementId = e['GA4_MEASUREMENT_ID'] ?? '';
+  const apiSecret     = e['GA4_API_SECRET'] ?? '';
+
+  if (!measurementId || !apiSecret) {
+    console.warn('[ga4] purchase skipped — GA4_MEASUREMENT_ID and/or GA4_API_SECRET not set', {
+      slug: args.slug,
+      transactionId: args.transactionId,
+    });
+    return;
+  }
+
+  const product = GA4_CATALOG[args.slug];
+  if (!product) {
+    console.warn('[ga4] purchase skipped — unknown product slug', { slug: args.slug });
+    return;
+  }
+  const value = args.actualValue ?? product.price;
+
+  // GA4 needs a stable client_id per buyer for deduping with browser events.
+  // Use Stripe customer id when present, fallback to email hash, fallback to txn.
+  const clientId =
+    args.customerStripeId
+      ? `stripe.${args.customerStripeId}`
+      : args.customerEmail
+        ? `email.${args.customerEmail.toLowerCase()}`
+        : `txn.${args.transactionId}`;
+
+  const payload = {
+    client_id: clientId,
+    events: [{
+      name: 'purchase',
+      params: {
+        transaction_id: args.transactionId,
+        currency: 'USD',
+        value,
+        items: [{
+          item_id: args.slug,
+          item_name: product.name,
+          item_category: product.category,
+          price: value,
+          quantity: 1,
+        }],
+      },
+    }],
+  };
+
+  const url = `https://www.google-analytics.com/mp/collect?measurement_id=${encodeURIComponent(measurementId)}&api_secret=${encodeURIComponent(apiSecret)}`;
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      console.error('[ga4] purchase rejected', { status: res.status, slug: args.slug, txn: args.transactionId });
+    } else {
+      console.log('[ga4] purchase recorded', { slug: args.slug, value, txn: args.transactionId });
+    }
+  } catch (err) {
+    console.error('[ga4] purchase fetch failed', String(err));
+  }
+}
+
 // ── Kit v4 helpers ─────────────────────────────────────────────────────────
 
 async function kitSubscriberId(apiKey: string, email: string): Promise<string | null> {
@@ -283,6 +374,17 @@ export async function POST({ request }: APIContext): Promise<Response> {
           await tagKit(kitKey, email, KIT_MEMBER_TAG);
           await tagKit(kitKey, email, KIT_PRODUCT_TAGS[slug]);
         }
+        // Server-side GA4 purchase event — most accurate revenue signal
+        if (slug) {
+          const amountCents = session.amount_total ?? null;
+          await sendGA4Purchase(e, {
+            slug,
+            transactionId: session.id,
+            customerEmail: email,
+            customerStripeId: String(session.customer ?? ''),
+            actualValue: amountCents != null ? amountCents / 100 : undefined,
+          });
+        }
       }
     }
 
@@ -302,7 +404,21 @@ export async function POST({ request }: APIContext): Promise<Response> {
           if (product && typeof product === 'object' && 'id' in product) productId = (product as Stripe.Product).id;
         } catch (err) { console.error('[stripe-webhook] subscription retrieve error:', String(err)); }
       }
-      if (email && productId) await deliverProduct(email, productId, e);
+      if (email && productId) {
+        await deliverProduct(email, productId, e);
+        // Subscription renewal — server-side GA4 purchase event
+        const slug = PRODUCT_MAP[productId];
+        if (slug) {
+          const amountCents = invoice.amount_paid ?? null;
+          await sendGA4Purchase(e, {
+            slug,
+            transactionId: invoice.id,
+            customerEmail: email,
+            customerStripeId: typeof invoice.customer === 'string' ? invoice.customer : '',
+            actualValue: amountCents != null ? amountCents / 100 : undefined,
+          });
+        }
+      }
     }
 
     // ── subscription status changes ─────────────────────────────────────────

@@ -45,6 +45,14 @@ import { SOCIAL_STATS } from '../data/social-stats';
             Get the Footwork System — $47 →
           </a>
         </div>
+
+        <!-- Proof bar + scroll cue — drives into the testimonials below -->
+        <a href="#students"
+          class="mt-10 inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase transition-colors duration-200 text-white/65 hover:text-white md:text-[#0A0A0A]/60 md:hover:text-[#0A0A0A] group">
+          <span class="h-px w-10 bg-[#D4A373] transition-[width] duration-200 group-hover:w-14"></span>
+          <span>120+ Fighters · Watch five of them</span>
+          <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-y-0.5">↓</span>
+        </a>
       </div>
 
       <!-- Right: desktop image panel -->
@@ -245,13 +253,9 @@ import { SOCIAL_STATS } from '../data/social-stats';
 
       </div>
 
-      <!-- Proof — results from real students -->
-      <div class="-mx-6 md:-mx-12 lg:-mx-20 mb-4 border-t border-[#0A0A0A]/8">
-        <Testimonials
-          ids={["giancarlo-private-architecture"]}
-          heading="What the system produces"
-          kicker="Results · In Their Words"
-        />
+      <!-- Proof — full wall: every fighter, remote and in-person -->
+      <div id="students" class="-mx-6 md:-mx-12 lg:-mx-20 mb-4 border-t border-[#0A0A0A]/8 scroll-mt-20">
+        <Testimonials heading="Watch them work." kicker="Field Report" />
       </div>
 
       <!-- Defense Workshop · Live -->
@@ -464,6 +468,8 @@ import { SOCIAL_STATS } from '../data/social-stats';
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: email, full_name: '', source: 'quiz-home', quiz_focus: quizState.focus, quiz_level: quizState.level }),
+        }).then(function() {
+          if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'quiz-home', quiz_focus: quizState.focus, quiz_level: quizState.level, currency: 'USD', value: 0 });
         }).catch(function() {}).finally(function() { showStep(4); });
       });
     }

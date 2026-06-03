@@ -92,6 +92,7 @@ import LinkPage from '../layouts/LinkPage.astro';
       });
       const body = await res.json() as { success: boolean };
       if (body.success) {
+        (window as any).trackEvent?.('generate_lead', { lead_source: 'foundation-guide', currency: 'USD', value: 0 });
         form.classList.add('hidden');
         success.classList.remove('hidden');
         triggerDownload('/pdfs/footwork-foundation.pdf', '30-Day-Footwork-Foundation-Thee-Rainers.pdf');

@@ -85,6 +85,8 @@ AIRTABLE_API_KEY            — Airtable PAT.
 AIRTABLE_BASE_ID            — Airtable base ID.
 AIRTABLE_TABLE              — Airtable table name for member records. Defaults to "Customers" in /api/community-access, "Members" in stripe-webhook. SET THIS to match your actual table or both code paths will silently skip writes/reads.
 KIT_API_KEY                 — Kit (ConvertKit) API key. Used by stripe-webhook to tag members on purchase. If unset, Kit tagging is skipped silently (Stripe events still process).
+GA4_MEASUREMENT_ID          — Public GA4 measurement ID for server-side purchase events (e.g. G-DX93RTR69T). Required for stripe-webhook → GA4 attribution.
+GA4_API_SECRET              — GA4 Measurement Protocol API secret. Generate in GA4 → Admin → Data Streams → web stream → Measurement Protocol API secrets → Create. Pair with GA4_MEASUREMENT_ID. If either is unset, server-side purchase events are skipped (logged as warning) and only client-side begin_checkout fires.
 ```
 
 **Silent-skip risk:** Form APIs return 200 even when their webhook URL is unset (graceful degradation). If `MAKE_CONTACT_WEBHOOK_URL` is not set in Cloudflare, the contact form looks like it worked but no email reaches you. Same pattern for `KIT_API_KEY` and `AIRTABLE_TABLE`. Verify each is set after any env rotation.
