@@ -78,10 +78,11 @@ const NAV_LINKS = [
 
 <script>
   // ────────────────────────────────────────────────────────────────────────
-  // Bind on astro:page-load (not DOMContentLoaded). Astro's prefetch +
-  // client-side router replaces the document body on navigation, which kills
-  // any DOMContentLoaded-bound listeners. astro:page-load fires on every
-  // navigation event including the initial load, so this listener survives.
+  // Astro <script> tags compile to ES modules with defer semantics, so by
+  // the time this runs the DOM is parsed and our nav elements exist.
+  // We run init() *synchronously* here (works without ViewTransitions),
+  // AND register astro:page-load as a hook in case ClientRouter is added
+  // later. A guard on the menu element prevents double-binding.
   // ────────────────────────────────────────────────────────────────────────
 
   function initNav() {
@@ -90,6 +91,9 @@ const NAV_LINKS = [
     const backdrop  = document.getElementById('menu-backdrop');
     const menu      = document.getElementById('mobile-menu') as HTMLElement | null;
     if (!openBtn || !menu) return;
+    // Idempotent — skip if already wired
+    if (menu.dataset.navWired === '1') return;
+    menu.dataset.navWired = '1';
 
     const setOpen = (open: boolean) => {
       menu.classList.toggle('hidden', !open);
@@ -125,6 +129,8 @@ const NAV_LINKS = [
   function initNavGlass() {
     const siteNav = document.getElementById('site-nav');
     if (!siteNav) return;
+    if (siteNav.dataset.glassWired === '1') return;
+    siteNav.dataset.glassWired = '1';
     const update = () => {
       if (window.scrollY > 10) siteNav.classList.add('is-scrolled');
       else                     siteNav.classList.remove('is-scrolled');
@@ -133,6 +139,9 @@ const NAV_LINKS = [
     update();
   }
 
-  // astro:page-load fires on initial load AND every client-side navigation.
+  // Run immediately — DOM is ready because Astro scripts defer.
+  initNav();
+  initNavGlass();
+  // Hook for ClientRouter view-transitions in case it gets enabled later.
   document.addEventListener('astro:page-load', () => { initNav(); initNavGlass(); });
 </script>
