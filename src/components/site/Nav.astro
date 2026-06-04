@@ -27,53 +27,56 @@ const NAV_LINKS = [
       </svg>
     </button>
   </div>
-
-  <!-- Mobile panel — rendered OUTSIDE the header container so its fixed positioning
-       can't be trapped by any ancestor's transform/opacity/etc. State is driven by
-       data-open attribute + explicit CSS, not Tailwind class toggling. -->
-  <div id="mobile-menu"
-    class="tr-mobile-menu"
-    data-open="false"
-    role="dialog" aria-modal="true" aria-label="Site navigation">
-
-    <!-- Backdrop tap area for close -->
-    <div id="menu-backdrop" class="tr-menu-backdrop" aria-hidden="true"></div>
-
-    <!-- Top bar — same height as nav with logo + close -->
-    <div class="tr-menu-topbar">
-      <a href="/" class="flex items-center" aria-label="Thee Rainers — home">
-        <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 w-auto" />
-      </a>
-      <button id="menu-close" type="button" class="tr-menu-close" aria-label="Close menu">
-        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Scrollable nav body -->
-    <nav class="tr-menu-body" aria-label="Site navigation">
-      <ul class="flex flex-col">
-        {NAV_LINKS.map((l) => (
-          <li class="border-b border-[#D4A373]/30">
-            <a href={l.href} data-nav-path={l.href} class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0A0A0A] hover:opacity-70 transition-opacity">
-              {l.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <a href="/community" class="tr-menu-cta tr-menu-cta-purple">Join the Community</a>
-      <a href="/foundation-guide" class="tr-menu-cta tr-menu-cta-outline">Get the free foundation</a>
-
-      <p class="mt-8 text-[10px] tracking-widest uppercase text-[#0A0A0A]/35">Private Architecture · Application Only</p>
-      <a href="/command" class="block text-xs tracking-widest uppercase font-bold mt-2"
-        style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-        Apply →
-      </a>
-    </nav>
-  </div>
 </header>
+
+<!-- Mobile menu rendered OUTSIDE the <header>.
+     CRITICAL: the header has `backdrop-blur-md` which creates a new containing
+     block for fixed-positioned descendants. Putting the menu inside the header
+     traps its `position: fixed; inset: 0` to the header's box, so it gets clipped
+     to ~64px tall. Rendering it as a sibling of <header> escapes that trap and
+     the menu correctly covers the full viewport. -->
+<div id="mobile-menu"
+  class="tr-mobile-menu"
+  data-open="false"
+  role="dialog" aria-modal="true" aria-label="Site navigation">
+
+  <!-- Backdrop tap area for close -->
+  <div id="menu-backdrop" class="tr-menu-backdrop" aria-hidden="true"></div>
+
+  <!-- Top bar — same height as nav with logo + close -->
+  <div class="tr-menu-topbar">
+    <a href="/" class="flex items-center" aria-label="Thee Rainers — home">
+      <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 w-auto" />
+    </a>
+    <button id="menu-close" type="button" class="tr-menu-close" aria-label="Close menu">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scrollable nav body -->
+  <nav class="tr-menu-body" aria-label="Site navigation">
+    <ul class="flex flex-col">
+      {NAV_LINKS.map((l) => (
+        <li class="border-b border-[#D4A373]/30">
+          <a href={l.href} data-nav-path={l.href} class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0A0A0A] hover:opacity-70 transition-opacity">
+            {l.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a href="/community" class="tr-menu-cta tr-menu-cta-purple">Join the Community</a>
+    <a href="/foundation-guide" class="tr-menu-cta tr-menu-cta-outline">Get the free foundation</a>
+
+    <p class="mt-8 text-[10px] tracking-widest uppercase text-[#0A0A0A]/35">Private Architecture · Application Only</p>
+    <a href="/command" class="block text-xs tracking-widest uppercase font-bold mt-2"
+      style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+      Apply →
+    </a>
+  </nav>
+</div>
 
 <style>
   /* Mobile menu — explicit CSS, not dependent on any Tailwind utility class
