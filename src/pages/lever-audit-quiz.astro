@@ -296,34 +296,41 @@ import LinkPage from '../layouts/LinkPage.astro';
     document.body.removeChild(a);
   }
 
-  // Boot — show intro screen immediately
-  show('s-intro');
+  // Idempotent init — sync + astro:page-load, guarded on form bound state
+  function initLeverAuditQuiz() {
+    const form = document.getElementById('email-form') as HTMLFormElement | null;
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
 
-  document.getElementById('btn-start')?.addEventListener('click', () => {
-    current = 0;
-    renderLever(0);
-  });
+    // Boot — show intro screen
+    show('s-intro');
 
-  document.getElementById('email-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('btn-results') as HTMLButtonElement;
-    if (btn) { btn.disabled = true; btn.textContent = 'Loading...'; }
+    document.getElementById('btn-start')?.addEventListener('click', () => {
+      current = 0;
+      renderLever(0);
+    });
 
-    const email = (document.getElementById('gate-email') as HTMLInputElement)?.value.trim();
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('btn-results') as HTMLButtonElement;
+      if (btn) { btn.disabled = true; btn.textContent = 'Loading...'; }
+      const email = (document.getElementById('gate-email') as HTMLInputElement)?.value.trim();
+      try {
+        await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, source: 'lever-audit-quiz', full_name: '' }),
+        });
+        (window as any).trackEvent?.('generate_lead', { lead_source: 'lever-audit-quiz', currency: 'USD', value: 0 });
+      } catch {
+        // Non-blocking — show results regardless
+      }
+      showResults();
+    });
+  }
 
-    try {
-      await fetch('/api/lead-capture', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'lever-audit-quiz', full_name: '' }),
-      });
-      (window as any).trackEvent?.('generate_lead', { lead_source: 'lever-audit-quiz', currency: 'USD', value: 0 });
-    } catch {
-      // Non-blocking — show results regardless
-    }
-
-    showResults();
-  });
+  initLeverAuditQuiz();
+  document.addEventListener('astro:page-load', initLeverAuditQuiz);
 </script>
 
 </LinkPage>

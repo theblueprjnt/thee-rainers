@@ -105,38 +105,43 @@ import Layout from '../layouts/Base.astro';
   </section>
 
   <script>
-    const form = document.getElementById('command-form') as HTMLFormElement;
-    const status = document.getElementById('form-status')!;
+    function initCommandForm() {
+      const form = document.getElementById('command-form') as HTMLFormElement | null;
+      if (!form || form.dataset.bound === 'true') return;
+      form.dataset.bound = 'true';
+      const status = document.getElementById('form-status')!;
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      status.classList.remove('hidden');
-      status.innerText = 'Transmitting...';
-
-      const payload = {
-        name: (document.getElementById('name') as HTMLInputElement).value,
-        email: (document.getElementById('email') as HTMLInputElement).value,
-        record: (document.getElementById('record') as HTMLTextAreaElement).value,
-        flaw: (document.getElementById('flaw') as HTMLTextAreaElement).value,
-        goal: (document.getElementById('goal') as HTMLTextAreaElement).value,
-        source: 'Private Architecture — Command',
-      };
-
-      try {
-        const res = await fetch('/api/coaching-capture', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        if (res.ok) {
-          form.reset();
-          status.innerText = 'Application received. I will review your structure.';
-        } else {
-          throw new Error();
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.classList.remove('hidden');
+        status.innerText = 'Transmitting...';
+        const payload = {
+          name: (document.getElementById('name') as HTMLInputElement).value,
+          email: (document.getElementById('email') as HTMLInputElement).value,
+          record: (document.getElementById('record') as HTMLTextAreaElement).value,
+          flaw: (document.getElementById('flaw') as HTMLTextAreaElement).value,
+          goal: (document.getElementById('goal') as HTMLTextAreaElement).value,
+          source: 'Private Architecture — Command',
+        };
+        try {
+          const res = await fetch('/api/coaching-capture', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if (res.ok) {
+            form.reset();
+            status.innerText = 'Application received. I will review your structure.';
+          } else {
+            throw new Error();
+          }
+        } catch {
+          status.innerText = 'Transmission failed. Contact directly on Instagram.';
         }
-      } catch {
-        status.innerText = 'Transmission failed. Contact directly on Instagram.';
-      }
-    });
+      });
+    }
+
+    initCommandForm();
+    document.addEventListener('astro:page-load', initCommandForm);
   </script>
 </Layout>

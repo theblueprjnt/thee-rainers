@@ -221,52 +221,54 @@ const siteSchema = JSON.stringify({
     setTimeout(showPopup, 8000);
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  // Idempotent init — runs sync on first load AND on every astro:page-load
+  // event (forward-compatible with ClientRouter). Guard prevents double-bind.
+  function initPopup() {
     var closeBtn = document.getElementById('tr-popup-close');
     var form     = document.getElementById('tr-popup-form');
     var submit   = document.getElementById('tr-popup-submit');
     var success  = document.getElementById('tr-popup-success');
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
 
     if (closeBtn) closeBtn.addEventListener('click', dismiss);
-
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') dismiss();
     });
 
-    if (form) {
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        var email = (document.getElementById('tr-popup-email').value || '').trim();
-        if (!email) return;
-
-        submit.disabled = true;
-        submit.textContent = 'Sending...';
-
-        fetch('/api/lead-capture', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, full_name: '', source: 'popup-foundation' }),
-        })
-        .then(function(r) { return r.json(); })
-        .then(function() {
-          if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'popup-foundation', currency: 'USD', value: 0 });
-          dismiss();
-          if (form) form.classList.add('hidden');
-          if (success) success.classList.remove('hidden');
-          var a = document.createElement('a');
-          a.href = '/pdfs/foundations_guide.pdf';
-          a.download = 'The-Boxing-Foundations-Thee-Rainers.pdf';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          setTimeout(dismiss, 3000);
-        })
-        .catch(function() {
-          submit.disabled = false;
-          submit.textContent = 'Get the Free Protocol →';
-        });
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = (document.getElementById('tr-popup-email').value || '').trim();
+      if (!email) return;
+      submit.disabled = true;
+      submit.textContent = 'Sending...';
+      fetch('/api/lead-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, full_name: '', source: 'popup-foundation' }),
+      })
+      .then(function(r) { return r.json(); })
+      .then(function() {
+        if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'popup-foundation', currency: 'USD', value: 0 });
+        dismiss();
+        if (form) form.classList.add('hidden');
+        if (success) success.classList.remove('hidden');
+        var a = document.createElement('a');
+        a.href = '/pdfs/foundations_guide.pdf';
+        a.download = 'The-Boxing-Foundations-Thee-Rainers.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(dismiss, 3000);
+      })
+      .catch(function() {
+        submit.disabled = false;
+        submit.textContent = 'Get the Free Protocol →';
       });
-    }
-  });
+    });
+  }
+
+  initPopup();
+  document.addEventListener('astro:page-load', initPopup);
 })();
 </script>

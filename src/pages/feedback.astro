@@ -83,44 +83,48 @@ import Layout from '../layouts/Base.astro';
   </section>
 
   <script>
-    const form = document.getElementById('feedback-form') as HTMLFormElement;
-    const status = document.getElementById('form-status')!;
+    function initFeedbackForm() {
+      const form = document.getElementById('feedback-form') as HTMLFormElement | null;
+      if (!form || form.dataset.bound === 'true') return;
+      form.dataset.bound = 'true';
+      const status = document.getElementById('form-status')!;
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      status.classList.remove('hidden');
-      status.innerText = 'Submitting...';
-
-      const name       = (document.getElementById('name')       as HTMLInputElement).value.trim();
-      const email      = (document.getElementById('email')      as HTMLInputElement).value.trim();
-      const lever      = (document.getElementById('lever')      as HTMLSelectElement).value;
-      const gap        = (document.getElementById('gap')        as HTMLTextAreaElement).value.trim();
-      const suggestion = (document.getElementById('suggestion') as HTMLTextAreaElement).value.trim();
-
-      const payload = {
-        full_name: name || 'Anonymous',
-        email,
-        phone: '0000000',
-        reason: lever || 'Feedback',
-        message: gap + (suggestion ? '\n\nWhat would make it more useful:\n' + suggestion : ''),
-      };
-
-      try {
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const body = await res.json() as { success: boolean };
-        if (body.success) {
-          form.reset();
-          status.innerText = 'Received. It is in the loop.';
-        } else {
-          throw new Error();
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        status.classList.remove('hidden');
+        status.innerText = 'Submitting...';
+        const name       = (document.getElementById('name')       as HTMLInputElement).value.trim();
+        const email      = (document.getElementById('email')      as HTMLInputElement).value.trim();
+        const lever      = (document.getElementById('lever')      as HTMLSelectElement).value;
+        const gap        = (document.getElementById('gap')        as HTMLTextAreaElement).value.trim();
+        const suggestion = (document.getElementById('suggestion') as HTMLTextAreaElement).value.trim();
+        const payload = {
+          full_name: name || 'Anonymous',
+          email,
+          phone: '0000000',
+          reason: lever || 'Feedback',
+          message: gap + (suggestion ? '\n\nWhat would make it more useful:\n' + suggestion : ''),
+        };
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const body = await res.json() as { success: boolean };
+          if (body.success) {
+            form.reset();
+            status.innerText = 'Received. It is in the loop.';
+          } else {
+            throw new Error();
+          }
+        } catch {
+          status.innerText = 'Something went wrong. Try again.';
         }
-      } catch {
-        status.innerText = 'Something went wrong. Try again.';
-      }
-    });
+      });
+    }
+
+    initFeedbackForm();
+    document.addEventListener('astro:page-load', initFeedbackForm);
   </script>
 </Layout>

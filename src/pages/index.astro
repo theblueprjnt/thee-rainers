@@ -140,14 +140,14 @@ import { SOCIAL_STATS } from '../data/social-stats';
         <button id="quiz-back-3" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 py-3 px-1 font-bold min-h-[44px]">
           &larr; Back
         </button>
-        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Get your free protocol.</h3>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-8 max-w-[420px]">Based on your answers — the right starting point, sent to your inbox. Free.</p>
+        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Start here.</h3>
+        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-8 max-w-[420px]">You answered 3 questions. Now I send you the one thing to fix first, based on what you told me. Check your inbox in a minute.</p>
         <form id="quiz-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
           <input type="email" id="quiz-email" placeholder="your@email.com" required
             class="flex-1 border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/25 focus:outline-none focus:border-[#0057FF] transition-colors duration-200" />
           <button type="submit" id="quiz-submit"
             class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-40">
-            Send Protocol →
+            Continue →
           </button>
         </form>
         <p id="quiz-error" class="text-[#0A0A0A]/40 text-xs mt-3 hidden">Please enter a valid email address.</p>
@@ -186,7 +186,7 @@ import { SOCIAL_STATS } from '../data/social-stats';
           <div class="p-5 flex flex-col flex-1">
             <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Bundle · 100+ Rounds</p>
             <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">Both Blueprints</h3>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">The complete system. Foundation first. Application second. Both modules running in sequence.</p>
+            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">Both blueprints, in order. Footwork first to build the base. Shadowboxing second to put it to work.</p>
             <div class="mt-5 flex items-center justify-between">
               <div>
                 <span class="font-black text-[#0A0A0A] text-2xl">$87</span>
@@ -430,39 +430,39 @@ import { SOCIAL_STATS } from '../data/social-stats';
       });
     }
 
-    document.querySelectorAll('[data-quiz-option][data-step="1"]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        quizState.focus = btn.dataset.value || '';
-        showStep(2);
+    // Idempotent init — sync first, then re-run on astro:page-load for ClientRouter
+    function initQuiz() {
+      var quizForm = document.getElementById('quiz-form');
+      if (!quizForm || quizForm.dataset.bound === 'true') return;
+      quizForm.dataset.bound = 'true';
+
+      document.querySelectorAll('[data-quiz-option][data-step="1"]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          quizState.focus = btn.dataset.value || '';
+          showStep(2);
+        });
       });
-    });
-
-    document.querySelectorAll('[data-quiz-option][data-step="2"]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        quizState.level = btn.dataset.value || '';
-        showStep(3);
+      document.querySelectorAll('[data-quiz-option][data-step="2"]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          quizState.level = btn.dataset.value || '';
+          showStep(3);
+        });
       });
-    });
 
-    var back2 = document.getElementById('quiz-back-2');
-    if (back2) back2.addEventListener('click', function() { showStep(1); });
+      var back2 = document.getElementById('quiz-back-2');
+      if (back2) back2.addEventListener('click', function() { showStep(1); });
+      var back3 = document.getElementById('quiz-back-3');
+      if (back3) back3.addEventListener('click', function() { showStep(2); });
 
-    var back3 = document.getElementById('quiz-back-3');
-    if (back3) back3.addEventListener('click', function() { showStep(2); });
-
-    var quizForm = document.getElementById('quiz-form');
-    if (quizForm) {
       quizForm.addEventListener('submit', function(e) {
         e.preventDefault();
         var emailInput = document.getElementById('quiz-email');
         var submitBtn  = document.getElementById('quiz-submit');
         var errorEl    = document.getElementById('quiz-error');
         var email      = emailInput ? emailInput.value.trim() : '';
-
         if (!email) { if (errorEl) errorEl.classList.remove('hidden'); return; }
         if (errorEl) errorEl.classList.add('hidden');
         if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
-
         fetch('/api/lead-capture', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -472,5 +472,8 @@ import { SOCIAL_STATS } from '../data/social-stats';
         }).catch(function() {}).finally(function() { showStep(4); });
       });
     }
+
+    initQuiz();
+    document.addEventListener('astro:page-load', initQuiz);
   })();
 </script>

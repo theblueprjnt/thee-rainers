@@ -172,60 +172,62 @@ const labelClass = 'block font-medium text-navy mb-2';
 </Base>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
-  const errorEl = document.getElementById('contact-error') as HTMLElement | null;
+  function initContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+    const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+    const errorEl = document.getElementById('contact-error') as HTMLElement | null;
 
-  // Show error from no-JS redirect path
-  const params = new URLSearchParams(window.location.search);
-  const errorCode = params.get('error');
-  if (errorCode && errorEl) {
-    const messages: Record<string, string> = {
-      invalid_email:   'Please enter a valid email address.',
-      invalid_phone:   'Please enter a valid phone number with at least 7 digits.',
-      missing_fields:  'All fields are required.',
-      delivery_failed: 'Delivery failed. Please try again.',
-      bad_request:     'Something went wrong. Please try again.',
-    };
-    errorEl.textContent = messages[errorCode] || 'Something went wrong. Please try again.';
-    errorEl.classList.remove('hidden');
-  }
+    const params = new URLSearchParams(window.location.search);
+    const errorCode = params.get('error');
+    if (errorCode && errorEl) {
+      const messages: Record<string, string> = {
+        invalid_email:   'Please enter a valid email address.',
+        invalid_phone:   'Please enter a valid phone number with at least 7 digits.',
+        missing_fields:  'All fields are required.',
+        delivery_failed: 'Delivery failed. Please try again.',
+        bad_request:     'Something went wrong. Please try again.',
+      };
+      errorEl.textContent = messages[errorCode] || 'Something went wrong. Please try again.';
+      errorEl.classList.remove('hidden');
+    }
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (submitBtn) submitBtn.disabled = true;
-    if (errorEl) errorEl.classList.add('hidden');
-
-    const data = new FormData(form);
-    const payload = {
-      full_name: (data.get('full_name') as string ?? '').trim(),
-      email:     (data.get('email')     as string ?? '').trim(),
-      phone:     (data.get('phone')     as string ?? '').trim(),
-      reason:    (data.get('reason')    as string ?? '').trim(),
-      message:   (data.get('message')   as string ?? '').trim(),
-    };
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const body = await res.json() as { success: boolean; error?: string };
-
-      if (body.success) {
-        window.location.href = '/thank-you/contact';
-      } else {
-        if (errorEl) {
-          errorEl.textContent = body.error || 'Something went wrong. Please try again.';
-          errorEl.classList.remove('hidden');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submitBtn) submitBtn.disabled = true;
+      if (errorEl) errorEl.classList.add('hidden');
+      const data = new FormData(form);
+      const payload = {
+        full_name: (data.get('full_name') as string ?? '').trim(),
+        email:     (data.get('email')     as string ?? '').trim(),
+        phone:     (data.get('phone')     as string ?? '').trim(),
+        reason:    (data.get('reason')    as string ?? '').trim(),
+        message:   (data.get('message')   as string ?? '').trim(),
+      };
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const body = await res.json() as { success: boolean; error?: string };
+        if (body.success) {
+          window.location.href = '/thank-you/contact';
+        } else {
+          if (errorEl) {
+            errorEl.textContent = body.error || 'Something went wrong. Please try again.';
+            errorEl.classList.remove('hidden');
+          }
+          if (submitBtn) submitBtn.disabled = false;
         }
+      } catch {
+        if (errorEl) errorEl.classList.remove('hidden');
         if (submitBtn) submitBtn.disabled = false;
       }
-    } catch {
-      if (errorEl) errorEl.classList.remove('hidden');
-      if (submitBtn) submitBtn.disabled = false;
-    }
-  });
+    });
+  }
+
+  initContactForm();
+  document.addEventListener('astro:page-load', initContactForm);
 </script>

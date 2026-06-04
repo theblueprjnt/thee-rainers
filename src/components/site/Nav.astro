@@ -1,6 +1,6 @@
 ---
-// One source of truth for nav links. Desktop bar + mobile overlay both
-// iterate this array — they cannot drift from each other.
+// Single source of truth for nav links. Desktop bar + mobile panel both
+// iterate this array so they cannot drift.
 const NAV_LINKS = [
   { label: 'Greatness Community', href: '/community' },
   { label: 'Vault',                href: '/vault' },
@@ -10,7 +10,7 @@ const NAV_LINKS = [
 ---
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-[#0A0A0A]/8">
   <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="/" class="z-50 flex items-center" aria-label="Thee Rainers — home">
+    <a href="/" class="z-[60] flex items-center" aria-label="Thee Rainers — home">
       <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 md:h-12 w-auto" />
     </a>
 
@@ -20,69 +20,161 @@ const NAV_LINKS = [
       ))}
     </nav>
 
-    <button id="menu-open" type="button" class="md:hidden z-50 p-2 text-[#0A0A0A]/60 focus:outline-none" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    <button id="menu-open" type="button" class="tr-menu-toggle md:hidden z-[60] p-2 -mr-2 text-[#0A0A0A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2"
+      aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
+  </div>
 
-    <div id="mobile-menu"
-      class="fixed inset-0 z-[100] hidden flex-col bg-white"
-      style="overscroll-behavior: contain;"
-      role="dialog" aria-modal="true" aria-label="Site navigation">
+  <!-- Mobile panel — rendered OUTSIDE the header container so its fixed positioning
+       can't be trapped by any ancestor's transform/opacity/etc. State is driven by
+       data-open attribute + explicit CSS, not Tailwind class toggling. -->
+  <div id="mobile-menu"
+    class="tr-mobile-menu"
+    data-open="false"
+    role="dialog" aria-modal="true" aria-label="Site navigation">
 
-      <!-- Backdrop tap area for close (covers entire panel; close button stops propagation) -->
-      <div id="menu-backdrop" class="absolute inset-0" aria-hidden="true"></div>
+    <!-- Backdrop tap area for close -->
+    <div id="menu-backdrop" class="tr-menu-backdrop" aria-hidden="true"></div>
 
-      <!-- Top bar — same height as nav, with logo + close -->
-      <div class="relative flex items-center justify-between h-16 px-6 border-b border-[#0A0A0A]/8 bg-white">
-        <a href="/" class="flex items-center" aria-label="Thee Rainers — home">
-          <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 w-auto" />
-        </a>
-        <button id="menu-close" type="button" class="p-2 -mr-2 text-[#0A0A0A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2" aria-label="Close menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Scrollable nav body -->
-      <nav class="relative flex-1 overflow-y-auto px-6 pb-8 pt-2 bg-white" aria-label="Site navigation">
-        <ul class="flex flex-col">
-          {NAV_LINKS.map((l) => (
-            <li class="border-b border-[#D4A373]/30">
-              <a href={l.href} data-nav-path={l.href} class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0A0A0A] hover:opacity-70 transition-opacity">
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <!-- CTA pair — purple (recurring) + blue outline (lead capture) -->
-        <a href="/community" class="mt-8 inline-flex w-full items-center justify-center rounded-none bg-[#6A0DAD] text-white font-bold px-6 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
-          Join the Community
-        </a>
-        <a href="/foundation-guide" class="mt-3 inline-flex w-full items-center justify-center rounded-none border-2 border-[#0057FF] text-[#0057FF] font-bold px-6 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
-          Get the free foundation
-        </a>
-
-        <p class="mt-8 text-[10px] tracking-widest uppercase text-[#0A0A0A]/35">Private Architecture · Application Only</p>
-        <a href="/command" class="block text-xs tracking-widest uppercase font-bold mt-2"
-          style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-          Apply →
-        </a>
-      </nav>
+    <!-- Top bar — same height as nav with logo + close -->
+    <div class="tr-menu-topbar">
+      <a href="/" class="flex items-center" aria-label="Thee Rainers — home">
+        <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 w-auto" />
+      </a>
+      <button id="menu-close" type="button" class="tr-menu-close" aria-label="Close menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
     </div>
+
+    <!-- Scrollable nav body -->
+    <nav class="tr-menu-body" aria-label="Site navigation">
+      <ul class="flex flex-col">
+        {NAV_LINKS.map((l) => (
+          <li class="border-b border-[#D4A373]/30">
+            <a href={l.href} data-nav-path={l.href} class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0A0A0A] hover:opacity-70 transition-opacity">
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a href="/community" class="tr-menu-cta tr-menu-cta-purple">Join the Community</a>
+      <a href="/foundation-guide" class="tr-menu-cta tr-menu-cta-outline">Get the free foundation</a>
+
+      <p class="mt-8 text-[10px] tracking-widest uppercase text-[#0A0A0A]/35">Private Architecture · Application Only</p>
+      <a href="/command" class="block text-xs tracking-widest uppercase font-bold mt-2"
+        style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        Apply →
+      </a>
+    </nav>
   </div>
 </header>
 
+<style>
+  /* Mobile menu — explicit CSS, not dependent on any Tailwind utility class
+     being generated. Driven entirely by the [data-open] attribute. */
+  .tr-mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background-color: #FFFFFF;
+    overscroll-behavior: contain;
+    flex-direction: column;
+    display: none;
+  }
+  .tr-mobile-menu[data-open="true"] {
+    display: flex;
+  }
+  .tr-menu-backdrop {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+  }
+  .tr-menu-topbar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 0 1.5rem;
+    border-bottom: 1px solid rgba(10,10,10,0.08);
+    background-color: #FFFFFF;
+  }
+  .tr-menu-close {
+    position: relative;
+    z-index: 2;
+    margin-right: -0.5rem;
+    padding: 0.5rem;
+    color: #0A0A0A;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  .tr-menu-close:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #D4A373;
+  }
+  .tr-menu-body {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem 1.5rem 2rem;
+    background-color: #FFFFFF;
+  }
+  .tr-menu-cta {
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    border-radius: 0;
+    transition: background-color 150ms, color 150ms;
+  }
+  .tr-menu-cta-purple {
+    margin-top: 2rem;
+    background-color: #6A0DAD;
+    color: #FFFFFF;
+  }
+  .tr-menu-cta-purple:hover { background-color: #0A0A0A; }
+  .tr-menu-cta-outline {
+    margin-top: 0.75rem;
+    border: 2px solid #0057FF;
+    color: #0057FF;
+    background-color: transparent;
+  }
+  .tr-menu-cta-outline:hover {
+    background-color: #0A0A0A;
+    color: #FFFFFF;
+    border-color: #0A0A0A;
+  }
+  /* Lock body scroll while menu is open — toggled by JS via [data-menu-open] */
+  html[data-menu-open="true"], body[data-menu-open="true"] {
+    overflow: hidden;
+  }
+</style>
+
 <script>
   // ────────────────────────────────────────────────────────────────────────
-  // Astro <script> tags compile to ES modules with defer semantics, so by
-  // the time this runs the DOM is parsed and our nav elements exist.
-  // We run init() *synchronously* here (works without ViewTransitions),
-  // AND register astro:page-load as a hook in case ClientRouter is added
-  // later. A guard on the menu element prevents double-binding.
+  // Mobile menu — bulletproof binding pattern:
+  // 1. Idempotent: dataset.bound guard prevents double-attaching listeners.
+  // 2. Synchronous: init() runs immediately when this script executes
+  //    (Astro <script> tags defer until DOM is parsed, so elements exist).
+  // 3. Forward-compatible: also re-runs on astro:page-load event in case
+  //    ClientRouter (ViewTransitions) gets enabled later in astro.config.
+  // 4. Declarative state: panel visibility driven by data-open attribute +
+  //    explicit CSS rules, NOT class toggling. No Tailwind dependency for
+  //    the open/close behavior.
   // ────────────────────────────────────────────────────────────────────────
 
   function initNav() {
@@ -91,27 +183,31 @@ const NAV_LINKS = [
     const backdrop  = document.getElementById('menu-backdrop');
     const menu      = document.getElementById('mobile-menu') as HTMLElement | null;
     if (!openBtn || !menu) return;
-    // Idempotent — skip if already wired
-    if (menu.dataset.navWired === '1') return;
-    menu.dataset.navWired = '1';
+    if (openBtn.dataset.bound === 'true') return;
+    openBtn.dataset.bound = 'true';
 
     const setOpen = (open: boolean) => {
-      menu.classList.toggle('hidden', !open);
-      menu.classList.toggle('flex',   open);
-      document.body.style.overflow = open ? 'hidden' : '';
+      menu.setAttribute('data-open', String(open));
       openBtn.setAttribute('aria-expanded', String(open));
+      // Lock scroll on BOTH html and body for iOS Safari compatibility
+      document.documentElement.setAttribute('data-menu-open', String(open));
+      document.body.setAttribute('data-menu-open', String(open));
     };
 
-    openBtn.addEventListener('click',  () => setOpen(true));
-    closeBtn?.addEventListener('click', () => setOpen(false));
+    openBtn.addEventListener('click', () => {
+      const isOpen = menu.getAttribute('data-open') === 'true';
+      setOpen(!isOpen);
+    });
 
-    // Close on link tap (delegate inside menu) and on backdrop tap.
-    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    closeBtn?.addEventListener('click', () => setOpen(false));
     backdrop?.addEventListener('click', () => setOpen(false));
+
+    // Close on link tap (delegated inside menu).
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
 
     // Close on Escape.
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && openBtn.getAttribute('aria-expanded') === 'true') setOpen(false);
+      if (e.key === 'Escape' && menu.getAttribute('data-open') === 'true') setOpen(false);
     });
 
     // Active link styling for current page.
@@ -129,8 +225,8 @@ const NAV_LINKS = [
   function initNavGlass() {
     const siteNav = document.getElementById('site-nav');
     if (!siteNav) return;
-    if (siteNav.dataset.glassWired === '1') return;
-    siteNav.dataset.glassWired = '1';
+    if (siteNav.dataset.glassBound === 'true') return;
+    siteNav.dataset.glassBound = 'true';
     const update = () => {
       if (window.scrollY > 10) siteNav.classList.add('is-scrolled');
       else                     siteNav.classList.remove('is-scrolled');
@@ -139,9 +235,9 @@ const NAV_LINKS = [
     update();
   }
 
-  // Run immediately — DOM is ready because Astro scripts defer.
+  // Run synchronously now (works for every page load, with or without ClientRouter).
   initNav();
   initNavGlass();
-  // Hook for ClientRouter view-transitions in case it gets enabled later.
+  // Hook for ClientRouter view-transitions in case it's enabled later.
   document.addEventListener('astro:page-load', () => { initNav(); initNavGlass(); });
 </script>

@@ -156,40 +156,43 @@ const levers = [
     document.body.removeChild(a);
   }
 
-  const form = document.getElementById('audit-form') as HTMLFormElement;
-  const success = document.getElementById('audit-success')!;
-  const error = document.getElementById('audit-error')!;
-  const submit = document.getElementById('audit-submit') as HTMLButtonElement;
+  function initLeverAuditForm() {
+    const form = document.getElementById('audit-form') as HTMLFormElement | null;
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+    const success = document.getElementById('audit-success')!;
+    const error = document.getElementById('audit-error')!;
+    const submit = document.getElementById('audit-submit') as HTMLButtonElement;
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    submit.disabled = true;
-    submit.textContent = 'Preparing...';
-    error.classList.add('hidden');
-
-    const email = (document.getElementById('audit-email') as HTMLInputElement).value.trim();
-
-    try {
-      const res = await fetch('/api/lead-capture', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'lever-audit', full_name: '', phone: '' }),
-      });
-
-      const body = await res.json() as { success: boolean };
-
-      if (body.success) {
-        (window as any).trackEvent?.('generate_lead', { lead_source: 'lever-audit', currency: 'USD', value: 0 });
-        form.classList.add('hidden');
-        success.classList.remove('hidden');
-        triggerDownload('/pdfs/lever-audit.pdf', '7-Lever-Audit-Thee-Rainers.pdf');
-      } else {
-        throw new Error();
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submit.disabled = true;
+      submit.textContent = 'Preparing...';
+      error.classList.add('hidden');
+      const email = (document.getElementById('audit-email') as HTMLInputElement).value.trim();
+      try {
+        const res = await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, source: 'lever-audit', full_name: '', phone: '' }),
+        });
+        const body = await res.json() as { success: boolean };
+        if (body.success) {
+          (window as any).trackEvent?.('generate_lead', { lead_source: 'lever-audit', currency: 'USD', value: 0 });
+          form.classList.add('hidden');
+          success.classList.remove('hidden');
+          triggerDownload('/pdfs/lever-audit.pdf', '7-Lever-Audit-Thee-Rainers.pdf');
+        } else {
+          throw new Error();
+        }
+      } catch {
+        error.classList.remove('hidden');
+        submit.disabled = false;
+        submit.textContent = 'Download Free →';
       }
-    } catch {
-      error.classList.remove('hidden');
-      submit.disabled = false;
-      submit.textContent = 'Download Free →';
-    }
-  });
+    });
+  }
+
+  initLeverAuditForm();
+  document.addEventListener('astro:page-load', initLeverAuditForm);
 </script>

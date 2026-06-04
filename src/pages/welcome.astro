@@ -129,8 +129,10 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
 
 {sessionId && (
   <script define:vars={{ sessionId }}>
-    const btn = document.getElementById('portal-btn');
-    if (btn) {
+    function initPortalButton() {
+      const btn = document.getElementById('portal-btn');
+      if (!btn || btn.dataset.bound === 'true') return;
+      btn.dataset.bound = 'true';
       btn.addEventListener('click', async () => {
         btn.disabled = true;
         btn.textContent = 'Opening...';
@@ -149,5 +151,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
         }
       });
     }
+    initPortalButton();
+    document.addEventListener('astro:page-load', initPortalButton);
   </script>
 )}

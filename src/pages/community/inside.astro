@@ -98,40 +98,45 @@ import Layout from '../../layouts/Base.astro';
 </Layout>
 
 <script>
-  const form = document.getElementById('gate-form') as HTMLFormElement;
-  const btn = document.getElementById('gate-btn') as HTMLButtonElement;
-  const errorEl = document.getElementById('gate-error') as HTMLElement;
-  const gate = document.getElementById('gate') as HTMLElement;
-  const memberContent = document.getElementById('member-content') as HTMLElement;
+  function initCommunityGate() {
+    const form = document.getElementById('gate-form') as HTMLFormElement | null;
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+    const btn = document.getElementById('gate-btn') as HTMLButtonElement;
+    const errorEl = document.getElementById('gate-error') as HTMLElement;
+    const gate = document.getElementById('gate') as HTMLElement;
+    const memberContent = document.getElementById('member-content') as HTMLElement;
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = (document.getElementById('gate-email') as HTMLInputElement).value.trim();
-    if (!email) return;
-
-    errorEl.classList.add('hidden');
-    btn.disabled = true;
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Checking...';
-
-    try {
-      const res = await fetch('/api/community-access', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json() as { access: boolean };
-      if (data.access) {
-        gate.classList.add('hidden');
-        memberContent.classList.remove('hidden');
-      } else {
-        errorEl.classList.remove('hidden');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = (document.getElementById('gate-email') as HTMLInputElement).value.trim();
+      if (!email) return;
+      errorEl.classList.add('hidden');
+      btn.disabled = true;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Checking...';
+      try {
+        const res = await fetch('/api/community-access', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json() as { access: boolean };
+        if (data.access) {
+          gate.classList.add('hidden');
+          memberContent.classList.remove('hidden');
+        } else {
+          errorEl.classList.remove('hidden');
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }
+      } catch {
         btn.disabled = false;
         btn.innerHTML = originalText;
       }
-    } catch {
-      btn.disabled = false;
-      btn.innerHTML = originalText;
-    }
-  });
+    });
+  }
+
+  initCommunityGate();
+  document.addEventListener('astro:page-load', initCommunityGate);
 </script>

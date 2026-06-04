@@ -223,20 +223,31 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
 }
 
 <script>
-  // Thumbnail fallback chain: maxres -> hq -> mq. Shorts often lack maxres.
-  const order = ["maxresdefault", "hqdefault", "mqdefault"];
-  document.querySelectorAll<HTMLImageElement>("img[data-fallback]").forEach((img) => {
-    img.addEventListener("error", () => {
-      const id = img.getAttribute("data-fallback");
-      let step = Number(img.getAttribute("data-step") || "0") + 1;
-      if (!id || step >= order.length) return;
-      img.setAttribute("data-step", String(step));
-      img.src = `https://i.ytimg.com/vi/${id}/${order[step]}.jpg`;
+  // Idempotent init — sync first, then re-run on astro:page-load for ClientRouter.
+  // Delegated click handler is attached to document, so we guard on document itself.
+  function initTestimonials() {
+    const order = ["maxresdefault", "hqdefault", "mqdefault"];
+    document.querySelectorAll<HTMLImageElement>("img[data-fallback]").forEach((img) => {
+      if (img.dataset.bound === 'true') return;
+      img.dataset.bound = 'true';
+      img.addEventListener("error", () => {
+        const id = img.getAttribute("data-fallback");
+        let step = Number(img.getAttribute("data-step") || "0") + 1;
+        if (!id || step >= order.length) return;
+        img.setAttribute("data-step", String(step));
+        img.src = `https://i.ytimg.com/vi/${id}/${order[step]}.jpg`;
+      });
     });
-  });
+
+    // Document-level facade click delegation — bind once globally.
+    if (document.documentElement.dataset.trYtFacadeBound !== 'true') {
+      document.documentElement.dataset.trYtFacadeBound = 'true';
+      document.addEventListener("click", onFacadeClick);
+    }
+  }
 
   // Facade: inject the real player only on click. Delegation = works for any count.
-  document.addEventListener("click", (e) => {
+  function onFacadeClick(e: Event) {
     const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-yt-facade]");
     if (!btn) return;
     const id = btn.getAttribute("data-yt-id");
@@ -256,5 +267,8 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
     iframe.className = "absolute inset-0 h-full w-full border-0";
     frame.appendChild(iframe);
     btn.replaceWith(frame);
-  });
+  }
+
+  initTestimonials();
+  document.addEventListener('astro:page-load', initTestimonials);
 </script>

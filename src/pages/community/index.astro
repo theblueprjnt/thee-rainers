@@ -295,8 +295,11 @@ const faqSchema = JSON.stringify({
     return null;
   }
 
-  document.querySelectorAll<HTMLButtonElement>('[data-checkout]').forEach(btn => {
-    btn.addEventListener('click', async () => {
+  function initCheckoutButtons() {
+    document.querySelectorAll<HTMLButtonElement>('[data-checkout]').forEach(btn => {
+      if (btn.dataset.bound === 'true') return;
+      btn.dataset.bound = 'true';
+      btn.addEventListener('click', async () => {
       const key = btn.dataset.checkout;
       const originalHTML = btn.innerHTML;
       const errorEl = findErrorEl(btn);
@@ -328,6 +331,10 @@ const faqSchema = JSON.stringify({
         if (errorEl) errorEl.classList.remove('hidden');
         restore();
       }
+      });
     });
-  });
+  }
+
+  initCheckoutButtons();
+  document.addEventListener('astro:page-load', initCheckoutButtons);
 </script>
