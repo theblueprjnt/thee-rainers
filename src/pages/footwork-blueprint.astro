@@ -32,7 +32,7 @@ const productSchema = JSON.stringify({
 
       <!-- Left: copy -->
       <div>
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Blueprint · Module 01</p>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Blueprint</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
           style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
           The Footwork<br/>Blueprint.
@@ -57,9 +57,33 @@ const productSchema = JSON.stringify({
             class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-8 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
             Get the Footwork Blueprint →
           </a>
-          <p class="text-[11px] text-[#0A0A0A]/55 leading-relaxed">
-            Lifetime access. Instant digital download.
-          </p>
+        </div>
+
+        <!-- Specs (Gumroad-style fact sheet) -->
+        <div class="max-w-[420px] border-t border-[#0A0A0A]/10">
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">Pages</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">21</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">Delivery</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">Instant digital download</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">Access perks</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">Private community chat</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">Language</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">English &amp; Spanish</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">
+              Video breakdown
+              <span class="text-[#0057FF] text-[9px] ml-1">NEW</span>
+            </span>
+            <span class="text-[#0A0A0A] text-sm font-bold">11 min</span>
+          </div>
         </div>
       </div>
 
@@ -75,72 +99,60 @@ const productSchema = JSON.stringify({
     </div>
   </section>
 
-  <!-- WHAT'S IN IT -->
+  <!-- WHAT'S IN IT — Gumroad-style flat bullet list -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[920px] mx-auto">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">What's in it</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-12">
-        Five modules. One system.
+    <div class="max-w-[720px] mx-auto">
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-8">
+        What's in it?
       </h2>
 
-      <div class="flex flex-col divide-y divide-[#0A0A0A]/10">
+      <ul class="flex flex-col gap-7 text-[#0A0A0A]/80 text-base leading-relaxed">
 
-        <!-- Module 1 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">
-            <span class="block">Module 01</span>
-            <span class="block text-[#0A0A0A]/30 mt-1">New</span>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]">
+            <span class="text-[#D4A373] shrink-0">◆</span>
+            <span>Foundations Footwork Video <span class="text-[#0057FF] text-xs tracking-widest uppercase ml-1">New</span></span>
           </p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Foundations Footwork (Video)</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed mb-4">
-              A clear explanation of footwork. The logic behind every drill, so you know why you're doing them.
-            </p>
-            <ul class="flex flex-col gap-2 text-sm text-[#0A0A0A]/70">
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>How to step and punch without breaking your stance.</span></li>
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>How weight transfer affects power and recovery.</span></li>
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>How elite fighters stay balanced while moving, striking, and resetting.</span></li>
-            </ul>
-          </div>
-        </div>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">A clear explanation of footwork:</p>
+          <ul class="ml-7 mt-2 flex flex-col gap-1.5 text-[#0A0A0A]/75 text-sm">
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>How to step and punch without breaking your stance</li>
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>How weight transfer affects power and recovery</li>
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>How elite fighters stay balanced while moving, striking, and resetting</li>
+          </ul>
+          <p class="ml-7 mt-3 text-[#0A0A0A]/65 text-sm italic">This video explains the <strong>logic</strong> behind the drills so you know why you're doing them.</p>
+        </li>
 
-        <!-- Module 2 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 02</p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">56 Rounds of Drills</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
-              Built to install elite movement. Orthodox and southpaw. Used by boxers, kickboxers, MMA strikers, and coaches. The full Blueprint laid out in a clean, easy-to-follow breakdown.
-            </p>
-          </div>
-        </div>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]"><span class="text-[#D4A373] shrink-0">◆</span><span>56 Rounds of Drills to build elite movement (Orthodox &amp; Southpaw)</span></p>
+        </li>
 
-        <!-- Module 3 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">
-            <span class="block">Module 03</span>
-            <span class="block text-[#0A0A0A]/30 mt-1">New</span>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]"><span class="text-[#D4A373] shrink-0">◆</span><span>Used by boxers, kickboxers, MMA strikers &amp; coaches</span></p>
+        </li>
+
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]"><span class="text-[#D4A373] shrink-0">◆</span><span>The full Blueprint in clean, easy-to-follow breakdown</span></p>
+        </li>
+
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]">
+            <span class="text-[#D4A373] shrink-0">◆</span>
+            <span>30-Day Base Training Structure <span class="text-[#0057FF] text-xs tracking-widest uppercase ml-1">New</span></span>
           </p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">30-Day Base Training Structure</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
-              A simple 30-day way to apply the drills correctly instead of guessing. This structure shows you how to run the Blueprint inside your training, so the work actually compounds.
-            </p>
-          </div>
-        </div>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">A simple 30-Day way to apply the drills correctly instead of guessing. This structure shows you how to run the Blueprint inside your training.</p>
+        </li>
 
-        <!-- Module 4 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 04</p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Private Community Chat</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
-              Early access to the private community chat. Connect with other fighters. Get exclusive tips.
-            </p>
-          </div>
-        </div>
+        <li>
+          <p class="flex gap-3 items-baseline font-bold text-[#0A0A0A]">
+            <svg class="text-[#0057FF] shrink-0 w-4 h-4 self-center" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h11c.55 0 1-.45 1-1z"/>
+            </svg>
+            <span>Early access to private community chat</span>
+          </p>
+          <p class="ml-7 mt-1 text-[#0A0A0A]/70 text-sm">Connect with other fighters and get exclusive tips.</p>
+        </li>
 
-      </div>
+      </ul>
     </div>
   </section>
 

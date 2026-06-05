@@ -31,7 +31,7 @@ const productSchema = JSON.stringify({
     <div class="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-[58%_42%] gap-10 md:gap-16 items-center">
 
       <div>
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Blueprint · Module 02</p>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Blueprint</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
           style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
           The Shadowboxing<br/>Blueprint.
@@ -49,9 +49,30 @@ const productSchema = JSON.stringify({
             class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-8 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
             Get the Shadowboxing Blueprint →
           </a>
-          <p class="text-[11px] text-[#0A0A0A]/55 leading-relaxed">
-            Lifetime access. Run it without replaying the video. Take it to the gym. Revisit it years from now.
-          </p>
+        </div>
+
+        <!-- Specs (Gumroad-style fact sheet) -->
+        <div class="max-w-[420px] border-t border-[#0A0A0A]/10">
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">Delivery</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">Instant digital download</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">Access perks</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">Private training group</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">Language</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">English</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">Foundations video</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">Included</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3">
+            <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold">Round structure PDF</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">Printable</span>
+          </div>
         </div>
       </div>
 
@@ -66,110 +87,71 @@ const productSchema = JSON.stringify({
     </div>
   </section>
 
-  <!-- WHAT'S IN IT -->
+  <!-- WHAT'S IN IT — Gumroad-style flat bullet list -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[920px] mx-auto">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">What's in it</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-12">
-        Six modules. One system.
+    <div class="max-w-[720px] mx-auto">
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-8">
+        What's in it?
       </h2>
 
-      <div class="flex flex-col divide-y divide-[#0A0A0A]/10">
+      <ul class="flex flex-col gap-7 text-[#0A0A0A]/80 text-base leading-relaxed">
 
-        <!-- Module 1 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">
-            <span class="block">Module 01</span>
-            <span class="block text-[#0A0A0A]/30 mt-1">Video</span>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]">
+            <span class="text-[#D4A373] shrink-0">◆</span>
+            <span>Foundations: The 6 Punches <span class="text-[#0057FF] text-xs tracking-widest uppercase ml-1">Video</span></span>
           </p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Foundations: The 6 Punches</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
-              You learn the six punches. How they should feel in attack and defense. The rules that make them work in shadowboxing.
-            </p>
-          </div>
-        </div>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">You'll understand the 6 punches, how they should feel in both attacks and defense, plus the rules that make them work in shadowboxing.</p>
+        </li>
 
-        <!-- Module 2 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 02</p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">3 Shadowboxing Mistakes That Kill Skill</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed mb-4">
-              The patterns that look like training but do not transfer. Learn how to:
-            </p>
-            <ul class="flex flex-col gap-2 text-sm text-[#0A0A0A]/70">
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Set up attacks.</span></li>
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Exit instead of freezing or getting hit.</span></li>
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Move with purpose instead of bouncing or cool combinations.</span></li>
-            </ul>
-          </div>
-        </div>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]"><span class="text-[#D4A373] shrink-0">◆</span><span>3 Shadowboxing Mistakes That Kill Skill</span></p>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">Learn how to:</p>
+          <ul class="ml-7 mt-2 flex flex-col gap-1.5 text-[#0A0A0A]/75 text-sm">
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>Set up attacks</li>
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>Exit (instead of freezing/getting hit)</li>
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>Move with purpose instead of bouncing or cool combinations</li>
+          </ul>
+        </li>
 
-        <!-- Module 3 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">
-            <span class="block">Module 03</span>
-            <span class="block text-[#0A0A0A]/30 mt-1">New</span>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]">
+            <span class="text-[#D4A373] shrink-0">◆</span>
+            <span>Full Structured Shadowboxing Sessions <span class="text-[#0057FF] text-xs tracking-widest uppercase ml-1">New</span></span>
           </p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Full Structured Sessions</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed mb-4">
-              Full sessions where you train alongside me. Every round has a focus, a constraint, and an intention. You learn to:
-            </p>
-            <ul class="flex flex-col gap-2 text-sm text-[#0A0A0A]/70">
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Build rhythm.</span></li>
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Control range.</span></li>
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Reset and exit.</span></li>
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Defend and counter.</span></li>
-              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Stay fresh under fatigue.</span></li>
-            </ul>
-            <p class="text-[#0A0A0A]/55 text-xs leading-relaxed mt-4 italic">
-              Mental and physical. A repeatable training system.
-            </p>
-          </div>
-        </div>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">These are full, structured sessions. You train alongside me. Every round has a focus, a constraint, and an intention.</p>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">Learn to:</p>
+          <ul class="ml-7 mt-2 flex flex-col gap-1.5 text-[#0A0A0A]/75 text-sm">
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>Build rhythm</li>
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>Control range</li>
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>Reset &amp; exit</li>
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>Defend &amp; counter</li>
+            <li class="flex gap-2"><span class="text-[#0A0A0A]/40 shrink-0">•</span>Stay fresh under fatigue</li>
+          </ul>
+          <p class="ml-7 mt-3 text-[#0A0A0A]/65 text-sm italic">Both mental and physical training. A repeatable training system.</p>
+        </li>
 
-        <!-- Module 4 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 04</p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">The Shadowboxing Test (3-Minute)</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
-              At the end of the system, you test yourself. A 3-minute round designed to expose what is real and what is theory.
-            </p>
-          </div>
-        </div>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]"><span class="text-[#D4A373] shrink-0">◆</span><span>The Shadowboxing Test (3-Minute)</span></p>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">At the end, you test yourself.</p>
+        </li>
 
-        <!-- Module 5 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 05</p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Private Training Group Access</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
-              Train. Ask. Improve.
-            </p>
-          </div>
-        </div>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]"><span class="text-[#D4A373] shrink-0">◆</span><span>Private Training Group Access</span></p>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">Train. Ask. Improve.</p>
+        </li>
 
-        <!-- Module 6 -->
-        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
-          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 06</p>
-          <div>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">30-Day Training Structure</h3>
-            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
-              A 30-day way to run the Blueprint so the sessions compound instead of stacking randomly.
-            </p>
-          </div>
-        </div>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]"><span class="text-[#D4A373] shrink-0">◆</span><span>30-Day Training Structure</span></p>
+        </li>
 
-      </div>
+      </ul>
 
-      <!-- Bonus call-out -->
-      <div class="mt-8 p-6 md:p-8 bg-[#F6F6F6] border border-[#0A0A0A]/10">
-        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Bonus</p>
-        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">Round Structure PDF (Printable)</h3>
-        <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+      <!-- Bonus callout — Round Structure PDF -->
+      <div class="mt-10 p-6 md:p-8 bg-[#F6F6F6] border border-[#0A0A0A]/10">
+        <p class="text-[#0057FF] text-[10px] tracking-widest uppercase mb-2 font-bold">Bonus</p>
+        <p class="font-bold text-[#0A0A0A] text-base mb-2">Round Structure PDF (Printable)</p>
+        <p class="text-[#0A0A0A]/65 text-sm leading-relaxed">
           All rounds laid out in a PDF. Run it without replaying the video. Take it to the gym. Revisit it years from now.
         </p>
       </div>
