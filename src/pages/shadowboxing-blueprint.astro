@@ -1,0 +1,340 @@
+---
+import Layout from '../layouts/Base.astro';
+import Testimonials from '../components/site/Testimonials.astro';
+
+const productSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "The Shadowboxing Blueprint",
+  "description": "A practical playbook to build boxing skill with or without a partner. Foundations video on the 6 punches, the 3 mistakes that kill skill, full structured sessions, and a printable round structure PDF.",
+  "url": "https://theerainers.com/shadowboxing-blueprint",
+  "image": "https://theerainers.com/images/shadowboxingblueprint_covernew.png",
+  "brand": { "@type": "Brand", "name": "Thee Rainers" },
+  "offers": {
+    "@type": "Offer",
+    "price": "47.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l",
+  },
+});
+---
+<Layout
+  title="The Shadowboxing Blueprint: Common Mistakes + Done-With-Me Session + Skill Test"
+  description="Build boxing skill with or without a partner. The 6 punches, the 3 mistakes that kill skill, structured sessions, a 3-minute skill test, printable round PDF. $47.">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={productSchema} />
+  </Fragment>
+
+  <!-- HERO -->
+  <section class="bg-white border-b border-[#0A0A0A]/8 pt-28 md:pt-36 pb-16 md:pb-20">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-[58%_42%] gap-10 md:gap-16 items-center">
+
+      <div>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Blueprint · Module 02</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
+          style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
+          The Shadowboxing<br/>Blueprint.
+        </h1>
+        <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-8 max-w-[520px]">
+          A practical playbook to build boxing skill. With or without a partner. Every round has a focus, a constraint, and an intention.
+        </p>
+
+        <div class="flex flex-col gap-3 mb-6 max-w-[420px]">
+          <div class="flex items-baseline gap-3">
+            <span class="font-black text-[#0A0A0A] text-4xl">$47</span>
+            <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">One time</span>
+          </div>
+          <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"
+            class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-8 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+            Get the Shadowboxing Blueprint →
+          </a>
+          <p class="text-[11px] text-[#0A0A0A]/55 leading-relaxed">
+            Lifetime access. Run it without replaying the video. Take it to the gym. Revisit it years from now.
+          </p>
+        </div>
+      </div>
+
+      <div class="order-first md:order-last">
+        <div class="relative bg-[#F6F6F6] border border-[#0A0A0A]/10 mx-auto max-w-[420px]">
+          <img src="/images/shadowboxingblueprint_covernew.png" alt="The Shadowboxing Blueprint"
+            width="1500" height="1150"
+            class="w-full h-auto object-contain" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHAT'S IN IT -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">What's in it</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-12">
+        Six modules. One system.
+      </h2>
+
+      <div class="flex flex-col divide-y divide-[#0A0A0A]/10">
+
+        <!-- Module 1 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">
+            <span class="block">Module 01</span>
+            <span class="block text-[#0A0A0A]/30 mt-1">Video</span>
+          </p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Foundations: The 6 Punches</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+              You learn the six punches. How they should feel in attack and defense. The rules that make them work in shadowboxing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 02</p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">3 Shadowboxing Mistakes That Kill Skill</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed mb-4">
+              The patterns that look like training but do not transfer. Learn how to:
+            </p>
+            <ul class="flex flex-col gap-2 text-sm text-[#0A0A0A]/70">
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Set up attacks.</span></li>
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Exit instead of freezing or getting hit.</span></li>
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Move with purpose instead of bouncing or cool combinations.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">
+            <span class="block">Module 03</span>
+            <span class="block text-[#0A0A0A]/30 mt-1">New</span>
+          </p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Full Structured Sessions</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed mb-4">
+              Full sessions where you train alongside me. Every round has a focus, a constraint, and an intention. You learn to:
+            </p>
+            <ul class="flex flex-col gap-2 text-sm text-[#0A0A0A]/70">
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Build rhythm.</span></li>
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Control range.</span></li>
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Reset and exit.</span></li>
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Defend and counter.</span></li>
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>Stay fresh under fatigue.</span></li>
+            </ul>
+            <p class="text-[#0A0A0A]/55 text-xs leading-relaxed mt-4 italic">
+              Mental and physical. A repeatable training system.
+            </p>
+          </div>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 04</p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">The Shadowboxing Test (3-Minute)</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+              At the end of the system, you test yourself. A 3-minute round designed to expose what is real and what is theory.
+            </p>
+          </div>
+        </div>
+
+        <!-- Module 5 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 05</p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Private Training Group Access</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+              Train. Ask. Improve.
+            </p>
+          </div>
+        </div>
+
+        <!-- Module 6 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 06</p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">30-Day Training Structure</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+              A 30-day way to run the Blueprint so the sessions compound instead of stacking randomly.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bonus call-out -->
+      <div class="mt-8 p-6 md:p-8 bg-[#F6F6F6] border border-[#0A0A0A]/10">
+        <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-2">Bonus</p>
+        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">Round Structure PDF (Printable)</h3>
+        <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+          All rounds laid out in a PDF. Run it without replaying the video. Take it to the gym. Revisit it years from now.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Who this is for</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
+        Four kinds of athletes.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#0A0A0A]/8">
+        <div class="bg-white p-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">01</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">Fighters whose shadowboxing feels random.</p>
+        </div>
+        <div class="bg-white p-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">02</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">Beginners who want structure.</p>
+        </div>
+        <div class="bg-white p-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">03</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">Athletes who want skill. Not just feeling exhausted.</p>
+        </div>
+        <div class="bg-white p-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">04</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">Coaches who want a reusable system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT CHANGES YOU -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">How it changes you</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-12">
+        Five gains that compound.
+      </h2>
+      <ul class="flex flex-col divide-y divide-[#0A0A0A]/8">
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">01</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You start throwing combinations with purpose.</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">02</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You start thinking in setups and exits.</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">03</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You understand range.</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">04</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You build control. Then you add speed.</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">05</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You train decision-making without absorbing damage.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHY THIS WORKS -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20">
+    <div class="max-w-[720px] mx-auto text-center">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Why this works</p>
+      <h2 class="font-black text-white uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] mb-8">
+        Buy once.<br/>Train forever.
+      </h2>
+      <p class="text-white/60 text-base leading-relaxed mb-4 max-w-[520px] mx-auto">
+        Shadowboxing removes impact. No absorbing punches. No damaging joints. When you go back to the bag or sparring, your mechanics add up.
+      </p>
+      <p class="text-white/40 text-sm leading-relaxed max-w-[520px] mx-auto">
+        Open the Blueprint five years from now, pick a session, and run it. You save time by learning the way top fighters train.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <Testimonials filter="remote" heading="Trained from the blueprint" kicker="Results · On Their Own" />
+
+  <!-- HESITATION -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-t border-[#0A0A0A]/8">
+    <div class="max-w-[720px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">If you are hesitating</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+        "I do not have space for shadowboxing drills in my plan."
+      </h2>
+      <p class="text-[#0A0A0A]/65 text-base leading-relaxed mb-3">
+        Reduce other workouts by 20%. Do shadowboxing in that 20%.
+      </p>
+      <p class="text-[#0A0A0A]/55 text-base leading-relaxed">
+        Inside a week, you feel the difference in your movement, your attacks, and your defense.
+      </p>
+    </div>
+  </section>
+
+  <!-- BONUSES -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Bonuses</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
+        What ships with it.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">Printable Round Structure PDF.</p>
+        </div>
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">Training-ready structure.</p>
+        </div>
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">Orthodox and southpaw application.</p>
+        </div>
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">Reusable for years.</p>
+        </div>
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">Lifetime access plus future minor updates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[680px] mx-auto text-center">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Access the Blueprint</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] mb-8">
+        Shadowbox with intent.
+      </h2>
+      <div class="flex items-baseline justify-center gap-3 mb-6">
+        <span class="font-black text-[#0A0A0A] text-4xl">$47</span>
+        <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">One time</span>
+      </div>
+      <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"
+        class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-10 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+        Get the Shadowboxing Blueprint →
+      </a>
+      <p class="text-[11px] text-[#0A0A0A]/55 mt-4">120+ fighters training the system.</p>
+
+      <div class="mt-12 pt-10 border-t border-[#0A0A0A]/10 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs">
+        <span class="text-[#0A0A0A]/40 uppercase tracking-widest">Or</span>
+        <a href="/bundle" class="text-[#0057FF] font-bold tracking-widest uppercase hover:text-[#0A0A0A] transition-colors">Get both with Footwork — $87 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPTURE -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20">
+    <div class="max-w-[680px] mx-auto">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
+        "I do not run aimlessly. I do not box as one beating the air."
+      </p>
+      <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
+    </div>
+  </section>
+
+</Layout>

@@ -1,0 +1,299 @@
+---
+import Layout from '../layouts/Base.astro';
+import Testimonials from '../components/site/Testimonials.astro';
+
+const productSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "The Footwork Blueprint",
+  "description": "Win Fights with Footwork. A practical playbook to move with balance, control, and intent. 56 rounds of drills, Foundations Footwork video, 30-Day Base Training Structure.",
+  "url": "https://theerainers.com/footwork-blueprint",
+  "image": "https://theerainers.com/images/3d_thefootworkblueprint_cover.jpg",
+  "brand": { "@type": "Brand", "name": "Thee Rainers" },
+  "offers": {
+    "@type": "Offer",
+    "price": "47.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k",
+  },
+});
+---
+<Layout
+  title="The Footwork Blueprint: Full Bases Video Breakdown + 56 Rounds of Drills + 30-Day Structure"
+  description="Win fights with footwork. 56 rounds of drills, Foundations Footwork video, 30-Day base training structure. Orthodox and southpaw. $47.">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={productSchema} />
+  </Fragment>
+
+  <!-- HERO -->
+  <section class="bg-white border-b border-[#0A0A0A]/8 pt-28 md:pt-36 pb-16 md:pb-20">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-[58%_42%] gap-10 md:gap-16 items-center">
+
+      <!-- Left: copy -->
+      <div>
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Blueprint · Module 01</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
+          style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
+          The Footwork<br/>Blueprint.
+        </h1>
+        <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-8 max-w-[520px]">
+          Win fights with footwork. A practical playbook to help you move with balance, control, and intent. Not random bouncing. Not wasted steps.
+        </p>
+
+        <!-- Price + primary CTA -->
+        <div class="flex flex-col gap-3 mb-6 max-w-[420px]">
+          <div class="flex items-baseline gap-3">
+            <span class="font-black text-[#0A0A0A] text-4xl">$47</span>
+            <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">One time</span>
+          </div>
+          <a href="https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k"
+            class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-8 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+            Get the Footwork Blueprint →
+          </a>
+          <p class="text-[11px] text-[#0A0A0A]/55 leading-relaxed">
+            Lifetime access. Open it 5 years from now and the drills still run.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: 3D cover -->
+      <div class="order-first md:order-last">
+        <div class="relative bg-[#F6F6F6] border border-[#0A0A0A]/10 mx-auto max-w-[420px]">
+          <img src="/images/3d_thefootworkblueprint_cover.jpg" alt="The Footwork Blueprint"
+            width="1600" height="2000"
+            class="w-full h-auto object-contain" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHAT'S IN IT -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">What's in it</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-12">
+        Five modules. One system.
+      </h2>
+
+      <div class="flex flex-col divide-y divide-[#0A0A0A]/10">
+
+        <!-- Module 1 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">
+            <span class="block">Module 01</span>
+            <span class="block text-[#0A0A0A]/30 mt-1">New</span>
+          </p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Foundations Footwork (Video)</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed mb-4">
+              A clear explanation of footwork. The logic behind every drill, so you know why you're doing them.
+            </p>
+            <ul class="flex flex-col gap-2 text-sm text-[#0A0A0A]/70">
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>How to step and punch without breaking your stance.</span></li>
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>How weight transfer affects power and recovery.</span></li>
+              <li class="flex gap-3"><span class="text-[#D4A373] font-bold">·</span><span>How elite fighters stay balanced while moving, striking, and resetting.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 02</p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">56 Rounds of Drills</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+              Built to install elite movement. Orthodox and southpaw. Used by boxers, kickboxers, MMA strikers, and coaches. The full Blueprint laid out in a clean, easy-to-follow breakdown.
+            </p>
+          </div>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">
+            <span class="block">Module 03</span>
+            <span class="block text-[#0A0A0A]/30 mt-1">New</span>
+          </p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">30-Day Base Training Structure</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+              A simple 30-day way to apply the drills correctly instead of guessing. This structure shows you how to run the Blueprint inside your training, so the work actually compounds.
+            </p>
+          </div>
+        </div>
+
+        <!-- Module 4 -->
+        <div class="py-8 md:py-10 grid grid-cols-1 md:grid-cols-[120px_1fr] gap-4 md:gap-10">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase pt-1">Module 04</p>
+          <div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-3">Private Community Chat</h3>
+            <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+              Early access to the private community chat. Connect with other fighters. Get exclusive tips.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Who this is for</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
+        Three kinds of athletes.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#0A0A0A]/8">
+        <div class="bg-white p-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">01</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">Boxers and combat athletes who want better balance, angles, and movement.</p>
+        </div>
+        <div class="bg-white p-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">02</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">Fighters who feel stiff, flat-footed, or inconsistent when moving.</p>
+        </div>
+        <div class="bg-white p-8">
+          <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-3">03</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">Coaches who want a simple footwork structure they can reuse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT CHANGES YOU -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">How it changes you</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-12">
+        Five gains that compound.
+      </h2>
+      <ul class="flex flex-col divide-y divide-[#0A0A0A]/8">
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">01</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You learn to keep balance while moving and throwing punches. Detailed stance plus mechanics foundation.</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">02</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You learn to transfer force from the feet.</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">03</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You learn to control the center of the ring.</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">04</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You learn to apply pressure and escape it.</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[#D4A373] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">Bonus</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">You learn the formula for choosing the best drills for progress without wasting time.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- VALUE — Buy once, train forever -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20">
+    <div class="max-w-[720px] mx-auto text-center">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">The value</p>
+      <h2 class="font-black text-white uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] mb-8">
+        Buy once.<br/>Train forever.
+      </h2>
+      <p class="text-white/60 text-base leading-relaxed mb-4 max-w-[520px] mx-auto">
+        Open the Blueprint five years from now, pick a drill, and run it. You save time by learning the way top fighters train.
+      </p>
+      <p class="text-white/40 text-sm leading-relaxed max-w-[520px] mx-auto">
+        It is not about me. I gathered the knowledge of top fighters and coaches into one place. The drills are tested. The drills are proven. They work.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROOF (remote students who trained from the blueprint) -->
+  <Testimonials filter="remote" heading="Trained from the blueprint" kicker="Results · On Their Own" />
+
+  <!-- HESITATION -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-t border-[#0A0A0A]/8">
+    <div class="max-w-[720px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">If you are hesitating</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+        "I do not have space for footwork drills in my plan."
+      </h2>
+      <p class="text-[#0A0A0A]/65 text-base leading-relaxed mb-3">
+        Reduce other workouts by 20%. Do footwork in that 20%.
+      </p>
+      <p class="text-[#0A0A0A]/55 text-base leading-relaxed">
+        Inside a week, you feel the difference in your movement, your attacks, and your defense.
+      </p>
+    </div>
+  </section>
+
+  <!-- BONUSES -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Bonuses</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
+        What ships with it.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">ENG + ESP versions.</p>
+        </div>
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">Loom Video Breakdown: 4 Bases Explained.</p>
+        </div>
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">Early-buyer discount.</p>
+        </div>
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">Solo training, gym warmups, and skill-gap work.</p>
+        </div>
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[#0057FF] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">Lifetime access plus future minor updates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[680px] mx-auto text-center">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Access the Blueprint</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] mb-8">
+        Start with the base.
+      </h2>
+      <div class="flex items-baseline justify-center gap-3 mb-6">
+        <span class="font-black text-[#0A0A0A] text-4xl">$47</span>
+        <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">One time</span>
+      </div>
+      <a href="https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k"
+        class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-10 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+        Get the Footwork Blueprint →
+      </a>
+      <p class="text-[11px] text-[#0A0A0A]/55 mt-4">120+ fighters training the system.</p>
+
+      <!-- Cross-sell -->
+      <div class="mt-12 pt-10 border-t border-[#0A0A0A]/10 flex flex-col sm:flex-row items-center justify-center gap-4 text-xs">
+        <span class="text-[#0A0A0A]/40 uppercase tracking-widest">Or</span>
+        <a href="/bundle" class="text-[#0057FF] font-bold tracking-widest uppercase hover:text-[#0A0A0A] transition-colors">Get both with Shadowboxing — $87 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPTURE -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20">
+    <div class="max-w-[680px] mx-auto">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
+        "I do not run aimlessly. I do not box as one beating the air."
+      </p>
+      <p class="text-[#D4A373] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
+    </div>
+  </section>
+
+</Layout>
