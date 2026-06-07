@@ -34,6 +34,12 @@ const KIT_PRODUCT_TAGS: Record<string, string> = {
   'greatness':    '19830354',
 };
 const KIT_MEMBER_TAG = '19807647';
+// 14-day Community trial tag — applied to Blueprint buyers so Kit can fire the
+// Day 0 / Day 7 / Day 12 / Day 14 trial-conversion sequence.
+// TODO: Rainers — create the tag in Kit (Grow > Tags → "community_trial_14d"),
+// copy the numeric ID from the URL (app.kit.com/tags/XXXXX), paste below.
+const KIT_TRIAL_TAG_ID = '';
+const BLUEPRINT_TRIAL_SLUGS = new Set(['footwork', 'shadowboxing', 'bundle']);
 
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
 const SITE_URL = 'https://theerainers.com';
@@ -373,6 +379,14 @@ export async function POST({ request }: APIContext): Promise<Response> {
         if (slug && KIT_PRODUCT_TAGS[slug]) {
           await tagKit(kitKey, email, KIT_MEMBER_TAG);
           await tagKit(kitKey, email, KIT_PRODUCT_TAGS[slug]);
+        }
+        // Start the 14-day Community trial for Blueprint buyers.
+        if (slug && BLUEPRINT_TRIAL_SLUGS.has(slug)) {
+          if (KIT_TRIAL_TAG_ID) {
+            await tagKit(kitKey, email, KIT_TRIAL_TAG_ID);
+          } else {
+            console.error('[stripe-webhook] FATAL: ' + slug + ' purchased by ' + email + ' but KIT_TRIAL_TAG_ID is empty. Day-0/7/12/14 trial-conversion sequence will NOT fire. Create the tag in Kit (Grow > Tags), copy the numeric ID from app.kit.com/tags/XXXXX, paste into stripe-webhook.ts.');
+          }
         }
         // Server-side GA4 purchase event — most accurate revenue signal
         if (slug) {
