@@ -42,7 +42,7 @@
 
   <!-- Paid products — catalog -->
   <url>
-    <loc>https://theerainers.com/vault</loc>
+    <loc>https://theerainers.com/shop</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
