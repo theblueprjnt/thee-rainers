@@ -12,17 +12,17 @@ import { SOCIAL_STATS } from '../data/social-stats';
     <div class="max-w-[1280px] mx-auto w-full">
 
       <!-- Full-width heading — no competing with image -->
-      <div class="mb-16 md:mb-20">
+      <div class="mb-10 md:mb-14">
         <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Thee Rainers · @theerainers</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.82]"
-          style="font-size: clamp(2.75rem, 7vw, 5.5rem);">
+          style="font-size: clamp(2.5rem, 6vw, 4.75rem);">
           Built from<br/>the floor up.
         </h1>
       </div>
 
-      <!-- 2-col: text left, image right — heights naturally match -->
-      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24 items-start">
-        <div class="flex flex-col gap-7">
+      <!-- 2-col: text left, image right — center-aligned so short text + tall image balance -->
+      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-12 md:gap-20 items-center">
+        <div class="flex flex-col gap-6">
           <p class="text-[#0A0A0A]/55 leading-relaxed" style="font-size: clamp(1rem, 1.25vw, 1.125rem); max-width: 520px;">
             The Blueprints is the operating system I built because the gym gave me fragments. Athletes want to develop with structure — not more reps. I had to build it from the floor up, from what the data and my own body gave me.
           </p>
@@ -30,14 +30,14 @@ import { SOCIAL_STATS } from '../data/social-stats';
             The mission is to produce people who think, move, and operate with systemic precision — because that is what this body was built for.
           </p>
         </div>
-        <div class="hidden md:block">
-          <div class="aspect-[4/5] overflow-hidden border border-[#0A0A0A]/8">
+        <div class="hidden md:block max-w-[420px] mx-auto md:ml-auto md:mr-0">
+          <div class="aspect-[5/6] overflow-hidden border border-[#0A0A0A]/8">
             <img
               src="/images/coaching_amateurboxerinnetherlands.png"
               alt="Coaching — Netherlands."
-              width="1200" height="1500"
+              width="1200" height="1440"
               loading="lazy"
-              class="w-full h-full object-cover object-top"
+              class="w-full h-full object-cover object-center"
             />
           </div>
           <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase mt-4">In the work.</p>
