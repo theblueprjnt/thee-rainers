@@ -38,7 +38,7 @@ const KIT_MEMBER_TAG = '19807647';
 // Day 0 / Day 7 / Day 12 / Day 14 trial-conversion sequence.
 // TODO: Rainers — create the tag in Kit (Grow > Tags → "community_trial_14d"),
 // copy the numeric ID from the URL (app.kit.com/tags/XXXXX), paste below.
-const KIT_TRIAL_TAG_ID = '';
+const KIT_TRIAL_TAG_ID = '20130499';
 const BLUEPRINT_TRIAL_SLUGS = new Set(['footwork', 'shadowboxing', 'bundle']);
 
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;

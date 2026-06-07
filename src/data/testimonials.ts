@@ -41,7 +41,7 @@ export const testimonials: Testimonial[] = [
     youtubeId: "VCj0Dgfoako",
     // Pulled from his existing on-site testimonial. Real line, his words.
     quote:
-      "My footwork makes sense. I could see openings instead of just swinging.",
+      "My footwork makes sense. I can see openings instead of just swinging.",
     featured: true,
   },
 

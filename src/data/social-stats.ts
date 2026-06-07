@@ -8,11 +8,11 @@
 //   25.9K on Threads → 26
 
 export const SOCIAL_STATS = {
-  instagram: 332,
-  facebook: 135,
-  tiktok: 95,
+  instagram: 333,
+  facebook: 141,
+  tiktok: 100,
   threads: 26,
-  youtube: 18,
+  youtube: 23,
 } as const;
 
-export const LAST_UPDATED = '2026-05-30';
+export const LAST_UPDATED = '2026-06-07';
