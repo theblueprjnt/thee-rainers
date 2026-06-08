@@ -87,15 +87,17 @@ const siteSchema = JSON.stringify({
         try { window.dataLayer.push(Object.assign({ event: name }, data || {})); } catch (e) {}
       };
 
-      // Product registry — Stripe Payment Link IDs and community lookup keys
-      // mapped to GA4-shaped ecommerce items. Keep in sync with vault.astro
-      // products array and create-checkout.ts PRICE_IDS.
+      // Product registry — Stripe Payment Link IDs (live defense workshop only)
+      // and Checkout Session lookup keys mapped to GA4-shaped ecommerce items.
+      // Keep in sync with shop.astro products array and create-checkout.ts.
       var TR_PRODUCTS = {
+        // Defense Workshop (live) still uses a Stripe Payment Link.
         '7sY28r8lt1D06XU6446J20n': { id: 'defense_workshop',        name: 'Defense Workshop',        price: 197 },
-        '6oUaEX7hp6Xk3LIdww6J20p': { id: 'workshop_replay',         name: 'Workshop Replay',         price:  79 },
-        'bJe14n8lt81ogyu3VW6J20k': { id: 'footwork_blueprint',      name: 'Footwork Blueprint',      price:  47 },
-        '5kQdR91X5dlIeqm8cc6J20l': { id: 'shadowboxing_blueprint',  name: 'Shadowboxing Blueprint',  price:  47 },
-        '14A4gz59hgxUaa65006J20m': { id: 'bundle_both_blueprints',  name: 'Bundle (Both Blueprints)', price:  87 },
+        // Lookup keys for data-checkout buttons (Checkout Session migration).
+        'footwork':                { id: 'footwork_blueprint',      name: 'Footwork Blueprint',      price:  47 },
+        'shadowboxing':            { id: 'shadowboxing_blueprint',  name: 'Shadowboxing Blueprint',  price:  47 },
+        'bundle':                  { id: 'bundle_both_blueprints',  name: 'Bundle (Both Blueprints)', price:  87 },
+        'workshop_replay':         { id: 'workshop_replay',         name: 'Workshop Replay',         price:  79 },
         'greatness_monthly':       { id: 'greatness_monthly',       name: 'Greatness Community — Monthly', price: 39 },
         'greatness_annual':        { id: 'greatness_annual',        name: 'Greatness Community — Annual',  price: 390 }
       };
@@ -121,6 +123,57 @@ const siteSchema = JSON.stringify({
           }
         });
       });
+
+      // ── Site-wide Checkout Session handler ────────────────────────────────
+      // Any <button data-checkout="LOOKUP_KEY"> on any page calls
+      // /api/create-checkout and redirects to the Stripe Checkout URL.
+      // Idempotent — safe on view transitions / re-init.
+      function initCheckoutButtons() {
+        document.querySelectorAll('button[data-checkout]').forEach(function (btn) {
+          if (btn.dataset.checkoutBound === 'true') return;
+          btn.dataset.checkoutBound = 'true';
+          btn.addEventListener('click', async function () {
+            var key = btn.dataset.checkout;
+            if (!key) return;
+            var originalHTML = btn.innerHTML;
+            // Find a sibling [data-checkout-error] for inline error display.
+            var scope = btn.parentElement;
+            var errorEl = null;
+            while (scope && !errorEl) {
+              errorEl = scope.querySelector('[data-checkout-error]');
+              scope = scope.parentElement;
+            }
+            if (errorEl) errorEl.classList.add('hidden');
+            btn.disabled = true;
+            btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Processing...';
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            var restore = function () {
+              btn.disabled = false;
+              btn.innerHTML = originalHTML;
+              btn.classList.remove('opacity-80', 'cursor-not-allowed');
+            };
+            try {
+              var res = await fetch('/api/create-checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ lookupKey: key }),
+              });
+              var data = await res.json();
+              if (data && data.url) {
+                window.location.href = data.url;
+                return;
+              }
+              if (errorEl) errorEl.classList.remove('hidden');
+              restore();
+            } catch (err) {
+              if (errorEl) errorEl.classList.remove('hidden');
+              restore();
+            }
+          });
+        });
+      }
+      initCheckoutButtons();
+      document.addEventListener('astro:page-load', initCheckoutButtons);
     </script>
     <slot name="head" />
   </head>

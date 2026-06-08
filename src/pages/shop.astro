@@ -11,7 +11,7 @@ const products = [
     desc: 'Both blueprints, in order. Footwork first to build the base. Shadowboxing second to put it to work.',
     price: '$87',
     price_note: 'Save $7 vs. buying separately.',
-    stripe_link: 'https://buy.stripe.com/14A4gz59hgxUaa65006J20m',
+    lookupKey: 'bundle',
     page: '/bundle',
     cta: 'Get the Bundle',
     featured: true,
@@ -24,7 +24,7 @@ const products = [
     desc: 'Stance mechanics. Weight distribution. Kinetic chain from the floor up. The base layer.',
     price: '$47',
     price_note: null,
-    stripe_link: 'https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k',
+    lookupKey: 'footwork',
     page: '/footwork-blueprint',
     cta: 'Get the Blueprint',
     featured: false,
@@ -37,7 +37,7 @@ const products = [
     desc: 'Shadowboxing rebuilt as live simulation. Cue reading. Range fluency. Technique under pressure.',
     price: '$47',
     price_note: null,
-    stripe_link: 'https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l',
+    lookupKey: 'shadowboxing',
     page: '/shadowboxing-blueprint',
     cta: 'Get the Blueprint',
     featured: false,
@@ -98,10 +98,10 @@ const productSchema = JSON.stringify(products.map(p => ({
                   <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
                   {p.price_note && <p class="text-[10px] text-[#0A0A0A]/55 mt-0.5">{p.price_note}</p>}
                 </div>
-                <a href={p.stripe_link}
-                  class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+                <button data-checkout={p.lookupKey}
+                  class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2 cursor-pointer border-0">
                   {p.cta} →
-                </a>
+                </button>
               </div>
               <p class="mt-3 text-[11px]">
                 <a href={p.page} class="text-[#0057FF] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity">Learn more →</a>
@@ -192,7 +192,7 @@ const productSchema = JSON.stringify(products.map(p => ({
               <span class="font-black text-[#0A0A0A] text-2xl">$79</span>
               <a href="/workshop-replay"
                 class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
-                Get Replay →
+                See Replay →
               </a>
             </div>
           </div>
