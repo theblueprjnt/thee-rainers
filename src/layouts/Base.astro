@@ -172,7 +172,11 @@ const siteSchema = JSON.stringify({
           });
         });
       }
-      initCheckoutButtons();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCheckoutButtons);
+      } else {
+        initCheckoutButtons();
+      }
       document.addEventListener('astro:page-load', initCheckoutButtons);
     </script>
     <slot name="head" />
