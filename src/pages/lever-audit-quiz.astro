@@ -11,21 +11,21 @@ import LinkPage from '../layouts/LinkPage.astro';
   </div>
 
   <!-- ── INTRO ── -->
-  <div id="s-intro" class="screen active fixed inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-16">
-    <div class="w-full max-w-[440px]">
-      <p class="text-[#D4A373] text-[10px] tracking-[0.2em] uppercase mb-10">Thee Rainers · For Competitors</p>
-      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.82] mb-8"
-          style="font-size: clamp(3.5rem, 10vw, 5.5rem);">
+  <div id="s-intro" class="screen active fixed inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-10">
+    <div class="w-full max-w-[420px]">
+      <p class="text-[#D4A373] text-[10px] tracking-[0.2em] uppercase mb-5">Thee Rainers · For Competitors</p>
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.82] mb-5"
+          style="font-size: clamp(2.8rem, 8vw, 4.5rem);">
         7-Lever<br/>Audit
       </h1>
-      <p class="text-[#0A0A0A]/50 text-base leading-relaxed mb-4 max-w-[340px]">
-        Seven questions. Find the lever that is capping your system before your next fight.
+      <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-2 max-w-[340px]">
+        Seven questions. Find the lever capping your system before your next fight.
       </p>
-      <p class="text-[#0A0A0A]/30 text-sm leading-relaxed mb-12 max-w-[340px]">
+      <p class="text-[#0A0A0A]/30 text-sm leading-relaxed mb-8 max-w-[340px]">
         Rate yourself as the sparring version — not the drilling version.
       </p>
       <button id="btn-start"
-        class="group inline-flex items-center justify-center w-full font-bold bg-[#0A0A0A] text-white px-10 py-5 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0057FF] active:bg-[#0057FF]/90 cursor-pointer border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+        class="group inline-flex items-center justify-center w-full font-bold bg-[#0A0A0A] text-white px-10 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0057FF] active:bg-[#0057FF]/90 cursor-pointer border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
         Begin Audit
         <span class="ml-3 transition-transform duration-150 group-hover:translate-x-1">→</span>
       </button>
@@ -33,22 +33,22 @@ import LinkPage from '../layouts/LinkPage.astro';
   </div>
 
   <!-- ── QUESTION ── -->
-  <div id="s-levers" class="screen fixed inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-20">
+  <div id="s-levers" class="screen fixed inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-10">
     <div class="w-full max-w-[480px]">
 
-      <div class="flex items-center justify-between mb-10">
+      <div class="flex items-center justify-between mb-6">
         <p id="lev-num" class="text-[#D4A373] text-[10px] tracking-[0.2em] uppercase">01</p>
         <p id="lev-progress" class="text-[#0A0A0A]/25 text-[10px] tracking-[0.15em] uppercase">1 of 7</p>
       </div>
 
-      <p id="lev-name" class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase mb-4">Cue Reading</p>
+      <p id="lev-name" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-3">Cue Reading</p>
       <h2 id="lev-question"
-        class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-12"
-        style="font-size: clamp(1.75rem, 4.5vw, 2.5rem);">
+        class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.9] mb-8"
+        style="font-size: clamp(1.25rem, 3.5vw, 1.6rem);">
         Question text
       </h2>
 
-      <div id="lev-ratings" class="flex gap-2 mb-4"></div>
+      <div id="lev-ratings" class="flex gap-2 mb-3"></div>
 
       <div class="flex justify-between">
         <span id="lev-anchor-low"  class="text-[9px] text-[#0A0A0A]/25 tracking-wide uppercase">1 — Not there</span>
@@ -59,59 +59,59 @@ import LinkPage from '../layouts/LinkPage.astro';
   </div>
 
   <!-- ── EMAIL GATE ── -->
-  <div id="s-email" class="screen fixed inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-16">
+  <div id="s-email" class="screen fixed inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-10">
     <div class="w-full max-w-[400px]">
-      <div class="w-8 h-[2px] bg-[#0057FF] mb-10"></div>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-4"
-          style="font-size: clamp(2rem, 6vw, 3rem);">
+      <div class="w-8 h-[2px] bg-[#0057FF] mb-6"></div>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-3"
+          style="font-size: clamp(1.8rem, 5vw, 2.5rem);">
         Results<br/>are ready.
       </h2>
-      <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-10 max-w-[300px]">
+      <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6 max-w-[300px]">
         Enter your email to unlock your score and download the full PDF audit.
       </p>
       <form id="email-form" class="flex flex-col gap-3">
         <input type="email" id="gate-email" required placeholder="your@email.com"
-          class="w-full border border-[#0A0A0A]/15 bg-transparent px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0A0A0A] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
+          class="w-full border border-[#0A0A0A]/15 bg-transparent px-5 py-3 text-[#0A0A0A] text-sm focus:border-[#0A0A0A] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
         <button type="submit" id="btn-results"
           class="inline-flex items-center justify-center font-bold bg-[#0057FF] text-white px-8 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 cursor-pointer border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
           See My Results →
         </button>
       </form>
-      <p class="text-[#0A0A0A]/20 text-[10px] tracking-wide mt-5 uppercase">PDF downloads automatically</p>
+      <p class="text-[#0A0A0A]/20 text-[10px] tracking-wide mt-4 uppercase">PDF downloads automatically</p>
     </div>
   </div>
 
   <!-- ── RESULTS ── -->
   <div id="s-results" class="screen fixed inset-0 overflow-y-auto">
-    <div class="flex flex-col items-center px-6 py-20">
+    <div class="flex flex-col items-center px-6 pt-12 pb-16">
       <div class="w-full max-w-[440px]">
 
         <!-- Score -->
-        <p class="text-[#D4A373] text-[10px] tracking-[0.2em] uppercase mb-6">Your Results</p>
-        <div class="flex items-baseline gap-2 mb-2">
+        <p class="text-[#D4A373] text-[10px] tracking-[0.2em] uppercase mb-3">Your Results</p>
+        <div class="flex items-baseline gap-2 mb-1">
           <span id="res-total" class="font-black text-[#0A0A0A] leading-none tracking-tighter"
-            style="font-size: clamp(4rem, 16vw, 7rem);">—</span>
-          <span class="text-[#0A0A0A]/20 font-black text-3xl">/35</span>
+            style="font-size: clamp(3.5rem, 14vw, 6rem);">—</span>
+          <span class="text-[#0A0A0A]/20 font-black text-2xl">/35</span>
         </div>
-        <p id="res-verdict" class="text-[#0A0A0A]/45 text-sm leading-relaxed mb-12 max-w-[340px]">—</p>
+        <p id="res-verdict" class="text-[#0A0A0A]/45 text-sm leading-relaxed mb-8 max-w-[340px]">—</p>
 
         <!-- Primary constraint -->
-        <div class="border-l-[3px] border-[#D4A373] pl-5 mb-12">
+        <div class="border-l-[3px] border-[#D4A373] pl-5 mb-8">
           <p class="text-[#D4A373] text-[10px] tracking-[0.18em] uppercase mb-2">Primary Constraint</p>
-          <p id="res-constraint" class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">—</p>
-          <p id="res-impact" class="text-[#0A0A0A]/45 text-sm leading-relaxed max-w-[360px]">—</p>
+          <p id="res-constraint" class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg leading-tight mb-2">—</p>
+          <p id="res-impact" class="text-[#0A0A0A]/45 text-sm leading-relaxed">—</p>
         </div>
 
         <!-- Lever bars -->
-        <div id="res-bars" class="flex flex-col gap-3 mb-12"></div>
+        <div id="res-bars" class="flex flex-col gap-[10px] mb-8"></div>
 
         <!-- Separator -->
-        <div class="border-t border-[#0A0A0A]/8 mb-10"></div>
+        <div class="border-t border-[#0A0A0A]/8 mb-7"></div>
 
         <!-- CTA -->
-        <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-5">Recommended next step</p>
+        <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4">Recommended next step</p>
         <a id="res-cta" href="/"
-          class="w-full inline-flex items-center justify-center font-bold bg-[#0057FF] text-white px-8 py-5 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 mb-4">
+          class="w-full inline-flex items-center justify-center font-bold bg-[#0057FF] text-white px-8 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 mb-4">
           —
         </a>
         <a href="/pdfs/lever-audit.pdf" download="7-Lever-Audit-Thee-Rainers.pdf"
@@ -166,7 +166,7 @@ import LinkPage from '../layouts/LinkPage.astro';
   /* Rating buttons */
   .rating-btn {
     flex: 1;
-    min-height: 60px;
+    min-height: 52px;
     border: 1.5px solid rgba(10,10,10,0.12);
     background: transparent;
     font-family: inherit;
