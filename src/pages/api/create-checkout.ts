@@ -16,7 +16,6 @@ interface ProductConfig {
   mode: 'payment' | 'subscription';
   successPath: string;
   cancelPath: string;
-  optionalItems?: string[];
 }
 
 const PRODUCTS: Record<string, ProductConfig> = {
@@ -25,21 +24,18 @@ const PRODUCTS: Record<string, ProductConfig> = {
     mode: 'payment',
     successPath: '/thank-you/footwork',
     cancelPath: '/footwork-blueprint',
-    optionalItems: ['price_1TfksbHzlarU775HzesQ4tfS'], // Shadowboxing add-on $40
   },
   shadowboxing: {
     priceId: 'price_1Tb1DHHzlarU775HIzI4fY8r',
     mode: 'payment',
     successPath: '/thank-you/shadowboxing',
     cancelPath: '/shadowboxing-blueprint',
-    optionalItems: ['price_1TfkrhHzlarU775HpW8Frpi9'], // Footwork add-on $40
   },
   bundle: {
     priceId: 'price_1Tb1E3HzlarU775HOWBmRYIZ',
     mode: 'payment',
     successPath: '/thank-you/bundle',
     cancelPath: '/bundle',
-    optionalItems: ['price_1TfkuAHzlarU775HneEki2a2'], // Community 30-day trial $19
   },
   workshop_replay: {
     priceId: 'price_1Tb1ILHzlarU775H0NVAhRgb',
@@ -93,13 +89,6 @@ export async function POST({ request }: { request: Request }): Promise<Response>
       sessionParams.subscription_data = { metadata: { lookup_key: lookupKey } };
     } else {
       sessionParams.payment_intent_data = { metadata: { lookup_key: lookupKey } };
-    }
-
-    if (product.optionalItems && product.optionalItems.length > 0) {
-      // Stripe Checkout cross-sells via optional_items. Buyer sees "Add to
-      // your order" with toggle on the hosted Checkout page.
-      (sessionParams as unknown as { optional_items: { price: string; quantity: number }[] }).optional_items =
-        product.optionalItems.map(priceId => ({ price: priceId, quantity: 1 }));
     }
 
     const session = await stripe.checkout.sessions.create(sessionParams);

@@ -163,11 +163,22 @@ const siteSchema = JSON.stringify({
                 window.location.href = data.url;
                 return;
               }
-              if (errorEl) errorEl.classList.remove('hidden');
+              var errMsg = (data && data.error) ? data.error : 'Checkout unavailable';
+              console.error('[checkout] API error:', errMsg);
               restore();
+              if (errorEl) {
+                errorEl.classList.remove('hidden');
+              } else {
+                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[#C84D3A] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable — email rainers@theerainers.com</p>');
+              }
             } catch (err) {
-              if (errorEl) errorEl.classList.remove('hidden');
+              console.error('[checkout] fetch error:', err);
               restore();
+              if (errorEl) {
+                errorEl.classList.remove('hidden');
+              } else {
+                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[#C84D3A] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable — email rainers@theerainers.com</p>');
+              }
             }
           });
         });
@@ -181,7 +192,7 @@ const siteSchema = JSON.stringify({
     </script>
     <slot name="head" />
   </head>
-  <body class="bg-bg text-ink min-h-screen flex flex-col overflow-x-hidden">
+  <body class="bg-white text-[#0A0A0A] min-h-screen flex flex-col overflow-x-hidden">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LQ7HPXG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
