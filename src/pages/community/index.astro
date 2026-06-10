@@ -315,3 +315,58 @@ const faqSchema = JSON.stringify({
   </section>
 
 </Layout>
+
+<script>
+  // Subscription checkout — self-contained, runs after DOM ready (Astro module script).
+  function bindCommunityCheckout() {
+    document.querySelectorAll('button[data-checkout]').forEach(function(btn) {
+      if ((btn as HTMLButtonElement).dataset.communityBound === 'true') return;
+      (btn as HTMLButtonElement).dataset.communityBound = 'true';
+
+      btn.addEventListener('click', async function() {
+        const key = (btn as HTMLButtonElement).dataset.checkout;
+        if (!key) return;
+        const originalHTML = btn.innerHTML;
+
+        // Find nearest [data-checkout-error] element
+        let errorEl: Element | null = null;
+        let scope: Element | null = btn.parentElement;
+        while (scope && !errorEl) {
+          errorEl = scope.querySelector('[data-checkout-error]');
+          scope = scope.parentElement;
+        }
+        if (errorEl) errorEl.classList.add('hidden');
+
+        (btn as HTMLButtonElement).disabled = true;
+        btn.textContent = 'Processing...';
+        btn.classList.add('opacity-80', 'cursor-not-allowed');
+
+        const restore = () => {
+          (btn as HTMLButtonElement).disabled = false;
+          btn.innerHTML = originalHTML;
+          btn.classList.remove('opacity-80', 'cursor-not-allowed');
+        };
+
+        try {
+          const res = await fetch('/api/create-checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ lookupKey: key }),
+          });
+          const data = await res.json();
+          if (data && data.url) {
+            window.location.href = data.url;
+            return;
+          }
+          restore();
+          if (errorEl) errorEl.classList.remove('hidden');
+        } catch {
+          restore();
+          if (errorEl) errorEl.classList.remove('hidden');
+        }
+      });
+    });
+  }
+
+  bindCommunityCheckout();
+</script>
