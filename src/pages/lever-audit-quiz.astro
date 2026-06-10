@@ -51,8 +51,8 @@ import LinkPage from '../layouts/LinkPage.astro';
       <div id="lev-ratings" class="flex gap-2 mb-4"></div>
 
       <div class="flex justify-between">
-        <span class="text-[9px] text-[#0A0A0A]/25 tracking-wide uppercase">Breaks every time</span>
-        <span class="text-[9px] text-[#0A0A0A]/25 tracking-wide uppercase">Completely automatic</span>
+        <span id="lev-anchor-low"  class="text-[9px] text-[#0A0A0A]/25 tracking-wide uppercase">1 — Not there</span>
+        <span id="lev-anchor-high" class="text-[9px] text-[#0A0A0A]/25 tracking-wide uppercase">5 — Automatic</span>
       </div>
 
     </div>
@@ -98,8 +98,8 @@ import LinkPage from '../layouts/LinkPage.astro';
         <!-- Primary constraint -->
         <div class="border-l-[3px] border-[#D4A373] pl-5 mb-12">
           <p class="text-[#D4A373] text-[10px] tracking-[0.18em] uppercase mb-2">Primary Constraint</p>
-          <p id="res-constraint" class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight">—</p>
-          <p class="text-[#0A0A0A]/35 text-xs leading-relaxed mt-2 max-w-[300px]">Fix this first. Every improvement compounds on it.</p>
+          <p id="res-constraint" class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">—</p>
+          <p id="res-impact" class="text-[#0A0A0A]/45 text-sm leading-relaxed max-w-[360px]">—</p>
         </div>
 
         <!-- Lever bars -->
@@ -241,19 +241,54 @@ import LinkPage from '../layouts/LinkPage.astro';
 
 <script>
   const LEVERS = [
-    { num: '01', name: 'Cue Reading',             q: 'In sparring — do you see punches arriving, or feel them landing?' },
-    { num: '02', name: 'Kinetic Chain',            q: 'Do your punches come from your legs and hip — or your shoulder and arm?' },
-    { num: '03', name: 'Reactive Stiffness',       q: 'Does your footwork feel springy by round 4 — or flat and heavy?' },
-    { num: '04', name: 'Range Fluency',            q: 'Can you generate offence at all three ranges — or do you have one home?' },
-    { num: '05', name: 'Defensive Responsibility', q: 'When you throw combinations — does your guard hold, or does your chin get exposed?' },
-    { num: '06', name: 'Transfer to Live',         q: 'Is your sparring the same standard as your pad work — or does pressure strip the technique?' },
-    { num: '07', name: 'Identity & Presence',      q: 'When hurt and behind — do you fight your system, or contract and wait for the round to end?' },
+    {
+      num: '01', name: 'Cue Reading',
+      q: 'Last time you got hit clean in sparring — did you see it coming?',
+      low: 'Blind to it', high: 'Read it early',
+      impact: 'You are defending after contact. Every slip, roll, and block you practise is reactive — which has a ceiling. Until this is fixed, your defensive ceiling is lower than your opponent\'s offensive floor.',
+    },
+    {
+      num: '02', name: 'Kinetic Chain',
+      q: 'Where does your power start? Be honest about the last jab you threw with intent.',
+      low: 'Arm and shoulder', high: 'Hip and ground',
+      impact: 'Arm-punching caps your output at roughly half your potential force. Footwork improvements, angle work, and combination flow all hit a ceiling here — you can position well and still not hurt anyone.',
+    },
+    {
+      num: '03', name: 'Reactive Stiffness',
+      q: 'Round 4, pressured — how much of your footwork is still loaded and springy versus survival stepping?',
+      low: 'Flat and heavy', high: 'Still loaded',
+      impact: 'When the legs go, the whole system collapses — your output drops, your guard gets lazy, and you start absorbing instead of moving. If this is your constraint, conditioning alone will not fix it. The loading mechanism needs work.',
+    },
+    {
+      num: '04', name: 'Range Fluency',
+      q: 'How often do you choose your range in sparring versus ending up wherever your opponent puts you?',
+      low: 'Wherever they put me', high: 'I dictate it',
+      impact: 'If your opponent controls distance, they control the whole fight. You train at one range and fight at whatever they give you. Your offensive game only works at the range you have access to — which may not be the one you practised.',
+    },
+    {
+      num: '05', name: 'Defensive Responsibility',
+      q: 'After a combination, where is your guard? Check your sparring footage honestly before you answer.',
+      low: 'Dropped and wide', high: 'Back and tight',
+      impact: 'Every combination you throw is a trade offer your opponent did not have to accept. You are leaving the door open during the moment you commit most. This is where most stoppages begin.',
+    },
+    {
+      num: '06', name: 'Transfer to Live',
+      q: 'Pick one technical thing you have been drilling for at least two weeks. Is it showing up under pressure?',
+      low: 'Disappears in sparring', high: 'Transfers cleanly',
+      impact: 'You have the technique. You do not have it under pressure yet. The drill has not become a reflex. More repetitions alone will not close this gap — the training environment has to change.',
+    },
+    {
+      num: '07', name: 'Identity & Presence',
+      q: 'Hurt, behind on the round, opponent smelling blood — what does your system do?',
+      low: 'Shuts down', high: 'Stays structured',
+      impact: 'When it matters most, the system is not there. This is not a mental toughness problem in the motivational sense — it is a structural one. Fighters who fragment under adversity have not been trained to maintain their system while hurt. That is a specific skill.',
+    },
   ];
 
   const ROUTES: Record<string, { verdict: string; url: string; cta: string }> = {
-    foundation: { verdict: 'The base layer needs work before the system can compound.',        url: '/footwork-foundation', cta: 'Start the 30-Day Foundation Protocol →' },
-    workshop:   { verdict: 'The mechanics are there. One session locks them into structure.',  url: '/workshop',            cta: 'Reserve Your Workshop Seat →' },
-    command:    { verdict: 'Your system is close. One lever is capping everything above it.', url: '/command',             cta: 'Apply for Private Architecture →' },
+    foundation: { verdict: 'Multiple levers are underdeveloped. Stacking specific work on top of this will not compound — the base needs to come first.',        url: '/footwork-foundation', cta: 'Start the 30-Day Foundation Protocol →' },
+    workshop:   { verdict: 'Your base is there. One session focused on mechanical structure will lock in what the sparring environment keeps stripping.',        url: '/workshop',            cta: 'Reserve Your Workshop Seat →' },
+    command:    { verdict: 'Your system is advanced. One lever is capping every improvement above it. This is the level where targeted, personalised work pays most.', url: '/command', cta: 'Apply for Private Architecture →' },
   };
 
   const answers: number[] = new Array(7).fill(0);
@@ -299,6 +334,11 @@ import LinkPage from '../layouts/LinkPage.astro';
     if (nameEl)  nameEl.textContent  = l.name;
     if (qEl)     qEl.textContent     = l.q;
     if (progEl)  progEl.textContent  = `${i + 1} of 7`;
+
+    const anchorLow  = document.getElementById('lev-anchor-low');
+    const anchorHigh = document.getElementById('lev-anchor-high');
+    if (anchorLow)  anchorLow.textContent  = `1 — ${l.low}`;
+    if (anchorHigh) anchorHigh.textContent = `5 — ${l.high}`;
 
     if (ratingsEl) {
       ratingsEl.innerHTML = [1, 2, 3, 4, 5].map(v => `
@@ -351,6 +391,9 @@ import LinkPage from '../layouts/LinkPage.astro';
     if (verdictEl)    verdictEl.textContent    = route.verdict;
     if (constraintEl) constraintEl.textContent = LEVERS[minIdx].name;
     if (ctaEl)        { ctaEl.textContent = route.cta; ctaEl.href = route.url; }
+
+    const impactEl = document.getElementById('res-impact');
+    if (impactEl) impactEl.textContent = LEVERS[minIdx].impact;
 
     if (barsEl) {
       barsEl.innerHTML = LEVERS.map((l, i) => `
