@@ -128,10 +128,11 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
                 </blockquote>
                 <figcaption class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
                   <span class="h-px w-8 bg-[#D4A373]" />
-                  {featured.name && (
-                    <span class="font-bold uppercase tracking-wide">{featured.name}</span>
-                  )}
-                  <span class={muted}>{featured.persona}</span>
+                  <span>
+                    {featured.name && <span class="font-bold uppercase tracking-wide">{featured.name}</span>}
+                    {featured.name && featured.persona && <span class={muted}> · {featured.persona}</span>}
+                    {!featured.name && featured.persona && <span class={muted}>{featured.persona}</span>}
+                  </span>
                 </figcaption>
               </figure>
             </div>
@@ -166,10 +167,11 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
               </button>
               <figcaption class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
                 <span class="h-px w-8 bg-[#D4A373]" />
-                {featured.name && (
-                  <span class="font-bold uppercase tracking-wide">{featured.name}</span>
-                )}
-                <span class={muted}>{featured.persona}</span>
+                <span>
+                  {featured.name && <span class="font-bold uppercase tracking-wide">{featured.name}</span>}
+                  {featured.name && featured.persona && <span class={muted}> · {featured.persona}</span>}
+                  {!featured.name && featured.persona && <span class={muted}>{featured.persona}</span>}
+                </span>
               </figcaption>
             </figure>
           )
@@ -208,10 +210,11 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
                   </span>
                 </button>
                 <figcaption class="flex flex-wrap items-center gap-x-2 gap-y-0.5 pt-3 text-xs">
-                  {t.name && (
-                    <span class="font-bold uppercase tracking-wide">{t.name}</span>
-                  )}
-                  <span class={muted}>{t.persona}</span>
+                  <span>
+                    {t.name && <span class="font-bold uppercase tracking-wide">{t.name}</span>}
+                    {t.name && t.persona && <span class={muted}> · {t.persona}</span>}
+                    {!t.name && t.persona && <span class={muted}>{t.persona}</span>}
+                  </span>
                 </figcaption>
               </figure>
             ))}

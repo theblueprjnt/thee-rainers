@@ -36,7 +36,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "giancarlo-remote",
     name: "Giancarlo",
-    persona: "Entrepreneur · 6 months online",
+    persona: "Entrepreneur · 6 months in the system",
     setting: "remote",
     youtubeId: "VCj0Dgfoako",
     // Pulled from his existing on-site testimonial. Real line, his words.
@@ -77,7 +77,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "richards-remote",
     name: "Richards",
-    persona: "Startup founder · Remote + sparring",
+    persona: "Startup founder · 3 months in the system",
     setting: "remote",
     youtubeId: "LY8MNzbhg2o",
     quote: "I'm going back to it for a second time. There's so much more I didn't get the first.",
