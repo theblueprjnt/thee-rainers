@@ -94,9 +94,7 @@ const siteSchema = JSON.stringify({
         // Defense Workshop (live) still uses a Stripe Payment Link.
         '7sY28r8lt1D06XU6446J20n': { id: 'defense_workshop',        name: 'Defense Workshop',        price: 197 },
         // Lookup keys for data-checkout buttons (Checkout Session migration).
-        'footwork':                { id: 'footwork_blueprint',      name: 'Footwork Blueprint',      price:  47 },
         'shadowboxing':            { id: 'shadowboxing_blueprint',  name: 'Shadowboxing Blueprint',  price:  47 },
-        'bundle':                  { id: 'bundle_both_blueprints',  name: 'Bundle (Both Blueprints)', price:  87 },
         'workshop_replay':         { id: 'workshop_replay',         name: 'Workshop Replay',         price:  79 },
         'greatness_monthly':       { id: 'greatness_monthly',       name: 'Greatness Community — Monthly', price: 39 },
         'greatness_annual':        { id: 'greatness_annual',        name: 'Greatness Community — Annual',  price: 390 }
@@ -238,7 +236,7 @@ const siteSchema = JSON.stringify({
             />
             <button type="submit" id="tr-popup-submit"
               class="w-full inline-flex items-center justify-center rounded-none font-bold bg-[#0057FF] text-white px-6 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 disabled:opacity-40 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
-              Get the Free Protocol →
+              Get the Footwork Blueprint →
             </button>
           </form>
 
@@ -260,7 +258,8 @@ const siteSchema = JSON.stringify({
   var STORAGE_KEY = 'tr_popup_v2';
 
   // Only fire on organic entry pages — never interrupt purchase flow
-  var ENTRY_PAGES = ['/', '/links', '/footwork-foundation', '/lever-audit'];
+  // /footwork-blueprint is itself a capture page — don't double-prompt.
+  var ENTRY_PAGES = ['/', '/links', '/lever-audit-quiz'];
   var path = window.location.pathname.replace(/\/$/, '') || '/';
   var isEntryPage = ENTRY_PAGES.indexOf(path) !== -1;
 
@@ -331,7 +330,7 @@ const siteSchema = JSON.stringify({
       })
       .catch(function() {
         submit.disabled = false;
-        submit.textContent = 'Get the Free Protocol →';
+        submit.textContent = 'Get the Footwork Blueprint →';
       });
     });
   }

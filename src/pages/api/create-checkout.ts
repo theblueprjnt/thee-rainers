@@ -19,23 +19,11 @@ interface ProductConfig {
 }
 
 const PRODUCTS: Record<string, ProductConfig> = {
-  footwork: {
-    priceId: 'price_1Ta1RaHzlarU775HzUj9mz2O',
-    mode: 'payment',
-    successPath: '/thank-you/footwork',
-    cancelPath: '/footwork-blueprint',
-  },
   shadowboxing: {
     priceId: 'price_1Tb1DHHzlarU775HIzI4fY8r',
     mode: 'payment',
     successPath: '/thank-you/shadowboxing',
     cancelPath: '/shadowboxing-blueprint',
-  },
-  bundle: {
-    priceId: 'price_1Tb1E3HzlarU775HOWBmRYIZ',
-    mode: 'payment',
-    successPath: '/thank-you/bundle',
-    cancelPath: '/bundle',
   },
   workshop_replay: {
     priceId: 'price_1Tb1ILHzlarU775H0NVAhRgb',

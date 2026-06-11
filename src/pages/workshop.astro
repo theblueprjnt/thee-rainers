@@ -3,6 +3,7 @@ import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
 import { Picture } from 'astro:assets';
 import defenseCover1 from '../assets/defense_cover1.jpg';
+import { WORKSHOP_DATE_ISO, WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
 const faqItems = [
   {
@@ -32,7 +33,7 @@ const eventSchema = JSON.stringify({
   "@type": "Event",
   "name": "Defense Workshop",
   "description": "90 minutes. Camera on. Real-time correction on your defensive structure, movement patterns, and mechanical foundation.",
-  "startDate": "2026-06-27", // TODO: POST-JUNE-27 DATE SWAP
+  "startDate": WORKSHOP_DATE_ISO,
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
   "location": { "@type": "VirtualLocation", "url": "https://theerainers.com/workshop" },
@@ -61,10 +62,9 @@ const faqSchema = JSON.stringify({
   <Fragment slot="head">
     <script type="application/ld+json" set:html={eventSchema} />
     <script type="application/ld+json" set:html={faqSchema} />
-    <!-- TODO: POST-JUNE-27 DATE SWAP — update both meta tags below -->
-    <meta name="description" content="90 minutes. Camera on. Real-time correction on your defensive structure, movement, and mechanics. Saturday, June 27. $197." />
+    <meta name="description" content={`90 minutes. Camera on. Real-time correction on your defensive structure, movement, and mechanics. ${WORKSHOP_DATE_LONG}. $197.`} />
     <meta property="og:title" content="Defense Workshop — Thee Rainers" />
-    <meta property="og:description" content="90 minutes. Camera on. Real-time correction on your defensive structure. Saturday, June 27. $197." />
+    <meta property="og:description" content={`90 minutes. Camera on. Real-time correction on your defensive structure. ${WORKSHOP_DATE_LONG}. $197.`} />
     <meta property="og:type" content="website" />
   </Fragment>
 
@@ -87,8 +87,7 @@ const faqSchema = JSON.stringify({
 
       <!-- Left 60%: Content -->
       <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
-        <!-- TODO: POST-JUNE-27 DATE SWAP -->
-        <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-6">Live · June 27 · 90 Min · <span id="workshop-countdown" class="tabular-nums"></span></p>
+        <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-6">Live · {WORKSHOP_DATE_SHORT} · 90 Min · <span id="workshop-countdown" class="tabular-nums" data-workshop-target={WORKSHOP_DATE_ISO}></span></p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">The <span style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Defense</span><br/>Workshop.</h1>
         <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">Camera on. Real-time correction on your defensive structure, movement patterns, and mechanical foundation. You leave with a framework you run again and again.</p>
         <div class="flex flex-col sm:flex-row gap-4">
@@ -141,8 +140,7 @@ const faqSchema = JSON.stringify({
             </div>
           </div>
           <div class="mt-12">
-            <!-- TODO: POST-JUNE-27 DATE SWAP -->
-            <p class="text-white/25 text-[10px] tracking-widest uppercase mb-5">Limited seats · Saturday, June 27</p>
+            <p class="text-white/25 text-[10px] tracking-widest uppercase mb-5">Limited seats · {WORKSHOP_DATE_LONG}</p>
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <span class="text-white font-black text-4xl">$197</span>
               <div class="flex flex-col items-end gap-1">
@@ -259,7 +257,7 @@ const faqSchema = JSON.stringify({
     <div class="max-w-[1280px] mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6">
       <p class="text-[#0A0A0A]/30 text-sm">Not ready for live? Start with the free 30-day protocol first.</p>
       <div class="flex gap-4 shrink-0">
-        <a href="/footwork-foundation" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Get Free Protocol →</a>
+        <a href="/footwork-blueprint" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Get Free Protocol →</a>
         <a href="/shop" class="text-[#0A0A0A]/30 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors">See All Products →</a>
       </div>
     </div>
@@ -291,7 +289,8 @@ const faqSchema = JSON.stringify({
 <script>
   const el = document.getElementById('workshop-countdown');
   if (el) {
-    const target = new Date('2026-06-27T00:00:00').getTime(); // TODO: POST-JUNE-27 DATE SWAP
+    const iso = el.getAttribute('data-workshop-target') || '';
+    const target = new Date(iso + 'T00:00:00').getTime();
     const update = () => {
       const days = Math.ceil((target - Date.now()) / 86400000);
       el.textContent = days > 0 ? days + ' days away' : 'Today';

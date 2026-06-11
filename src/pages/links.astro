@@ -1,6 +1,7 @@
 ---
 import LinkPage from '../layouts/LinkPage.astro';
 import { SOCIAL_STATS } from '../data/social-stats';
+import { WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 ---
 <LinkPage title="Thee Rainers — Links">
 
@@ -18,10 +19,10 @@ import { SOCIAL_STATS } from '../data/social-stats';
     <!-- Links stack -->
     <div class="w-full flex flex-col gap-3">
 
-      <!-- 1. Free Protocol — top of funnel, highest volume -->
-      <a href="/footwork-foundation"
+      <!-- 1. Free Blueprint — top of funnel, highest volume -->
+      <a href="/footwork-blueprint"
         class="w-full flex items-center justify-between border-2 border-[#0057FF] text-[#0057FF] px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white group">
-        <span>The Footwork Starter</span>
+        <span>The Footwork Blueprint</span>
         <span class="text-xs opacity-60 group-hover:opacity-100">Free →</span>
       </a>
 
@@ -44,8 +45,7 @@ import { SOCIAL_STATS } from '../data/social-stats';
       <a href="/workshop"
         class="w-full flex items-center justify-between border border-[#0A0A0A]/12 text-[#0A0A0A]/70 px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:border-[#0057FF] hover:text-[#0057FF] group">
         <span>The Defense Workshop</span>
-        <!-- TODO: POST-JUNE-27 DATE SWAP -->
-        <span class="text-[#926624] text-xs tracking-widest">$197 · June 27 →</span>
+        <span class="text-[#926624] text-xs tracking-widest">$197 · {WORKSHOP_DATE_SHORT} →</span>
       </a>
 
       <!-- 3b. Workshop Replay -->
@@ -111,7 +111,7 @@ import { SOCIAL_STATS } from '../data/social-stats';
 
     <!-- Scripture anchor -->
     <p class="text-[#0A0A0A]/15 text-[10px] tracking-widest uppercase text-center mt-4">
-      1 Corinthians 9:26–27
+      1 Corinthians 9:26-27
     </p>
 
   </div>

@@ -1,0 +1,16 @@
+# Redirects — Cloudflare Pages format.
+# Format: source  destination  status
+
+# IA pivot 2026-06-12: Footwork Blueprint becomes the single free lead magnet.
+# The two old free pages collapse into /footwork-blueprint.
+/footwork-foundation         /footwork-blueprint  301
+/foundation-guide            /footwork-blueprint  301
+/lever-audit                 /footwork-blueprint  301
+/thank-you/footwork-foundation  /footwork-blueprint?downloaded=1  301
+
+# Bundle killed 2026-06-12. Surviving traffic goes to the shop.
+/bundle                      /shop  301
+/thank-you/bundle            /shop  301
+
+# Legacy
+/vault                       /shop  301

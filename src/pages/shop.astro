@@ -1,33 +1,21 @@
 ---
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
+import { WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
 const products = [
   {
-    image: '/images/3d_thebundle_cover.png',
-    tag: 'Bundle · Best Value',
-    title: 'Both Blueprints',
-    sub: 'Footwork + Shadowboxing · 100+ Rounds',
-    desc: 'Both blueprints, in order. Footwork first to build the base. Shadowboxing second to put it to work.',
-    price: '$87',
-    price_note: 'Save $7 vs. buying separately.',
-    stripeUrl: 'https://buy.stripe.com/14A4gz59hgxUaa65006J20m',
-    page: '/bundle',
-    cta: 'Get the Bundle',
-    featured: true,
-  },
-  {
     image: '/images/3d_thefootworkblueprint_cover.jpg',
-    tag: 'Blueprint',
+    tag: 'Free · Start Here',
     title: 'Footwork Blueprint',
     sub: '56 Rounds · Orthodox + Southpaw',
-    desc: 'Stance mechanics. Weight distribution. Kinetic chain from the floor up. The base layer.',
-    price: '$47',
+    desc: 'Stance mechanics. Weight distribution. Kinetic chain from the floor up. The base layer. Full PDF. No payment.',
+    price: 'FREE',
     price_note: null,
-    stripeUrl: 'https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k',
+    stripeUrl: '/footwork-blueprint',
     page: '/footwork-blueprint',
-    cta: 'Get the Blueprint',
-    featured: false,
+    cta: 'Get the PDF',
+    featured: true,
   },
   {
     image: '/images/shadowboxingblueprint_covernew.png',
@@ -75,10 +63,10 @@ const productSchema = JSON.stringify(products.map(p => ({
       </div>
 
       <!-- Blueprint cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {products.map(p => (
           <div class={`tr-card flex flex-col group transition-colors duration-200 relative ${p.featured ? 'border-2 border-[#0057FF]/30 hover:border-[#0057FF]' : 'border border-[#0A0A0A]/10 hover:border-[#0057FF]/40'}`}>
-            {p.featured && <div class="absolute top-3 left-3 z-10 bg-[#0057FF] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Best Value</div>}
+            {p.featured && <div class="absolute top-3 left-3 z-10 bg-[#0057FF] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Free · Start Here</div>}
             <!-- Image + title now link to product page. Buy button stays direct to Stripe. -->
             <a href={p.page} aria-label={`Learn more about ${p.title}`} class={`overflow-hidden relative block ${p.featured ? 'bg-[#0A0A0A]' : 'bg-[#F6F6F6]'}`}>
               <img src={p.image} alt={p.title}
@@ -151,7 +139,7 @@ const productSchema = JSON.stringify(products.map(p => ({
           </div>
           <div class="p-8 flex flex-col flex-1 justify-between">
             <div>
-              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">Live · June 27 · 90 min</p>
+              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">Live · {WORKSHOP_DATE_SHORT} · 90 min</p>
               <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-3">Defense Workshop</h2>
               <p class="text-white/40 text-xs leading-relaxed">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset.</p>
             </div>
@@ -200,7 +188,7 @@ const productSchema = JSON.stringify(products.map(p => ({
         <div class="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
-            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight mb-3">Want live reps with Rainers?</h2>
+            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight mb-3">Live Reps With Rainers.</h2>
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Weekly live Proving Ground sessions with Rainers. Real-time correction on your movement. Private community chat. Drill library. $39/mo.</p>
           </div>
           <a href="/community"
@@ -212,8 +200,8 @@ const productSchema = JSON.stringify(products.map(p => ({
 
       <!-- Start free nudge -->
       <div class="mt-10 pt-10 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <p class="text-[#0A0A0A]/30 text-sm">Not ready to buy? The foundation protocol is free.</p>
-        <a href="/footwork-foundation" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Protocol →</a>
+        <p class="text-[#0A0A0A]/30 text-sm">Start free with the Footwork Blueprint. Build the base first.</p>
+        <a href="/footwork-blueprint" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Blueprint →</a>
       </div>
 
     </div>
@@ -237,8 +225,7 @@ const productSchema = JSON.stringify(products.map(p => ({
         ecommerce: {
           currency: 'USD',
           items: [
-            { item_id: 'bundle_both_blueprints', item_name: 'Bundle (Both Blueprints)', price: 87, quantity: 1, item_category: 'one_time' },
-            { item_id: 'footwork_blueprint',     item_name: 'Footwork Blueprint',       price: 47, quantity: 1, item_category: 'one_time' },
+            { item_id: 'footwork_blueprint',     item_name: 'Footwork Blueprint (Free)', price: 0,  quantity: 1, item_category: 'lead_magnet' },
             { item_id: 'shadowboxing_blueprint', item_name: 'Shadowboxing Blueprint',   price: 47, quantity: 1, item_category: 'one_time' },
             { item_id: 'defense_workshop',       item_name: 'Defense Workshop (Live)',  price: 197, quantity: 1, item_category: 'live_event' },
             { item_id: 'workshop_replay',        item_name: 'Workshop Replay',          price: 79, quantity: 1, item_category: 'on_demand' }

@@ -101,6 +101,19 @@
     transform: translateZ(0);
   }
 
+  /* Workshop gradient CTA — Instagram gradient, reserved for the live Workshop. */
+  .tr-gradient-cta {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    will-change: background-position, transform;
+    transition: background-position 0.6s ease, transform 0.15s ease;
+    box-shadow: 0 6px 18px -8px rgba(220, 39, 67, 0.55);
+  }
+  .tr-gradient-cta:hover {
+    background-position: 100% 50%;
+  }
+
   /* Purple CTA — Private Architecture only */
   .purple-btn {
     will-change: background-color, color;

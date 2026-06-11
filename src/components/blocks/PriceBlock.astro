@@ -1,5 +1,6 @@
 ---
 import Button from '../primitives/Button.astro';
+import { WORKSHOP_DATE_LONG } from '../../data/workshop.ts';
 
 interface Props {
   date?: string;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 const {
-  date = 'Saturday, June 27', // TODO: POST-JUNE-27 DATE SWAP
+  date = WORKSHOP_DATE_LONG,
   duration = '90 minutes',
   format = 'live online',
   price = '$197',

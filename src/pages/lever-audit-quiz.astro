@@ -114,9 +114,9 @@ import LinkPage from '../layouts/LinkPage.astro';
           class="w-full inline-flex items-center justify-center font-bold bg-[#0057FF] text-white px-8 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 mb-4">
           ...
         </a>
-        <a href="/pdfs/lever-audit.pdf" download="7-Lever-Audit-Thee-Rainers.pdf"
+        <a href="/pdfs/footwork-blueprint.pdf" download="The-Footwork-Blueprint-Thee-Rainers.pdf"
           class="block text-center text-[10px] text-[#0A0A0A]/25 tracking-widest uppercase hover:text-[#0A0A0A]/50 transition-colors duration-200 py-2">
-          Download PDF again →
+          Download the Blueprint PDF →
         </a>
 
         <!-- Private Architecture -->
@@ -127,7 +127,7 @@ import LinkPage from '../layouts/LinkPage.astro';
         </div>
 
         <!-- Scripture -->
-        <p class="text-[#0A0A0A]/10 text-[10px] tracking-widest uppercase text-center mt-12">1 Corinthians 9:26–27</p>
+        <p class="text-[#0A0A0A]/10 text-[10px] tracking-widest uppercase text-center mt-12">1 Corinthians 9:26-27</p>
 
       </div>
     </div>
@@ -286,7 +286,7 @@ import LinkPage from '../layouts/LinkPage.astro';
   ];
 
   const ROUTES: Record<string, { verdict: string; url: string; cta: string }> = {
-    foundation: { verdict: 'Multiple levers are underdeveloped. Stacking specific work on top of this will not compound. The base needs to come first.',        url: '/foundation-guide', cta: 'Get the Footwork Starter →' },
+    foundation: { verdict: 'Multiple levers are underdeveloped. Stacking specific work on top of this will not compound. The base needs to come first.',        url: '/footwork-blueprint', cta: 'Get the Footwork Blueprint · Free →' },
     workshop:   { verdict: 'Your base is there. One session focused on mechanical structure will lock in what the sparring environment keeps stripping.',        url: '/workshop',            cta: 'Reserve Your Workshop Seat →' },
     command:    { verdict: 'Your system is advanced. One lever is capping every improvement above it. This is the level where targeted, personalised work pays most.', url: '/command', cta: 'Apply for Private Architecture →' },
   };
@@ -418,10 +418,10 @@ import LinkPage from '../layouts/LinkPage.astro';
 
     show('s-results');
 
-    // PDF download
+    // PDF download — Footwork Blueprint is the canonical lead magnet
     const a = document.createElement('a');
-    a.href = '/pdfs/lever-audit.pdf';
-    a.download = '7-Lever-Audit-Thee-Rainers.pdf';
+    a.href = '/pdfs/footwork-blueprint.pdf';
+    a.download = 'The-Footwork-Blueprint-Thee-Rainers.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

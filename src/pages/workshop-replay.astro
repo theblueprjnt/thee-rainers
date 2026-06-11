@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Base.astro';
+import { WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 ---
 <Layout title="Workshop Replay — Footwork & Foundation | Thee Rainers">
   <Fragment slot="head">
@@ -130,12 +131,11 @@ import Layout from '../layouts/Base.astro';
         <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.85] mb-4">
           Want real-time<br/>correction?
         </h2>
-        <!-- TODO: POST-JUNE-27 DATE SWAP -->
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">The replay gives you the framework. The Defense Workshop on June 27 gives you live diagnosis. Camera on, your movement, real corrections in real time.</p>
+        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">The replay gives you the framework. The Defense Workshop on {WORKSHOP_DATE_SHORT} gives you live diagnosis. Camera on, your movement, real corrections in real time.</p>
       </div>
       <a href="/workshop"
         class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white shrink-0">
-        Reserve June 27 Seat · $197 →
+        Reserve {WORKSHOP_DATE_SHORT} Seat · $197 →
       </a>
     </div>
   </section>
