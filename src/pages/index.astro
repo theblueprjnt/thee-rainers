@@ -131,29 +131,35 @@ import { SOCIAL_STATS } from '../data/social-stats';
         </div>
       </div>
 
-      <!-- Step 3: Email -->
+      <!-- Step 3: Email (dynamic insight per path) -->
       <div id="quiz-step-3" class="hidden">
         <button id="quiz-back-3" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 py-3 px-1 font-bold min-h-[44px]">
           &larr; Back
         </button>
-        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Start here.</h3>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-8 max-w-[420px]">You answered 3 questions. Now I send you the one thing to fix first, based on what you told me. Check your inbox in a minute.</p>
+        <div id="quiz-insight" class="border-l-2 border-[#D4A373] pl-4 mb-8 max-w-[480px]">
+          <!-- Populated by JS -->
+        </div>
+        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-[0.88] mb-2">Your starting point.</h3>
+        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6 max-w-[420px]">Enter your email and I will send you the specific next step based on what you told me.</p>
         <form id="quiz-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
           <input type="email" id="quiz-email" placeholder="your@email.com" required
             class="flex-1 border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/25 focus:outline-none focus:border-[#0057FF] transition-colors duration-200" />
           <button type="submit" id="quiz-submit"
             class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-40">
-            Continue →
+            Send it →
           </button>
         </form>
         <p id="quiz-error" class="text-[#0A0A0A]/40 text-xs mt-3 hidden">Please enter a valid email address.</p>
       </div>
 
-      <!-- Step 4: Done -->
+      <!-- Step 4: Done (dynamic product CTA per path) -->
       <div id="quiz-step-4" class="hidden">
         <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Sent</p>
         <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Check your inbox.</h3>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[400px]">Your free protocol is on the way. Build the base. Everything else follows.</p>
+        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[400px] mb-8">Your plan is on the way. If you want to start now:</p>
+        <div id="quiz-result-cta">
+          <!-- Populated by JS -->
+        </div>
       </div>
 
     </div>
@@ -427,6 +433,33 @@ import { SOCIAL_STATS } from '../data/social-stats';
     var BARS  = ['qp-1','qp-2','qp-3'];
     var quizState = { focus: '', level: '' };
 
+    var PATHS = {
+      speed: {
+        insight: 'Speed comes from efficiency, not effort. Most fighters trying to move faster are fighting their own stance. When the base is unstable, every step burns more than it should.',
+        cta: 'Get the Shadowboxing Blueprint · $47 →',
+        url: '/shadowboxing-blueprint',
+      },
+      power: {
+        insight: 'Power comes from the kinetic chain, not the shoulder. If punches feel like they need more muscle, the break is in how force transfers from your base. Fix the foundation and the power follows.',
+        cta: 'Get the Footwork Blueprint · $47 →',
+        url: '/footwork-blueprint',
+      },
+      footwork: {
+        insight: 'Most footwork problems are stance problems in disguise. Where your weight sits determines every angle you can take or give. That is what the Blueprint addresses from the ground up.',
+        cta: 'Get the Footwork Blueprint · $47 →',
+        url: '/footwork-blueprint',
+      },
+      ringiq: {
+        insight: 'Ring IQ builds through reps with real feedback. What you are describing requires live correction, not more content. The Greatness Community gives you weekly live sessions with Rainers.',
+        cta: 'See the Greatness Community →',
+        url: '/community',
+      },
+    };
+
+    function getPath() {
+      return PATHS[quizState.focus] || PATHS['footwork'];
+    }
+
     function showStep(n) {
       STEPS.forEach(function(id, i) {
         var el = document.getElementById(id);
@@ -436,9 +469,17 @@ import { SOCIAL_STATS } from '../data/social-stats';
         var el = document.getElementById(id);
         if (el) el.style.backgroundColor = i < n ? '#0057FF' : 'rgba(10,10,10,0.12)';
       });
+      if (n === 3) {
+        var insight = document.getElementById('quiz-insight');
+        if (insight) insight.innerHTML = '<p class="text-[#0A0A0A]/70 text-sm leading-relaxed">' + getPath().insight + '</p>';
+      }
+      if (n === 4) {
+        var path = getPath();
+        var resultCta = document.getElementById('quiz-result-cta');
+        if (resultCta) resultCta.innerHTML = '<a href="' + path.url + '" style="display:inline-flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #0057FF;color:#0057FF;background:transparent;padding:12px 28px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" onmouseover="this.style.background=\'#0057FF\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'#0057FF\'">' + path.cta + '</a>';
+      }
     }
 
-    // Idempotent init — sync first, then re-run on astro:page-load for ClientRouter
     function initQuiz() {
       var quizForm = document.getElementById('quiz-form');
       if (!quizForm || quizForm.dataset.bound === 'true') return;
@@ -471,12 +512,13 @@ import { SOCIAL_STATS } from '../data/social-stats';
         if (!email) { if (errorEl) errorEl.classList.remove('hidden'); return; }
         if (errorEl) errorEl.classList.add('hidden');
         if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+        var source = 'quiz-' + (quizState.focus || 'home');
         fetch('/api/lead-capture', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email, full_name: '', source: 'quiz-home', quiz_focus: quizState.focus, quiz_level: quizState.level }),
+          body: JSON.stringify({ email: email, full_name: '', source: source, quiz_focus: quizState.focus, quiz_level: quizState.level }),
         }).then(function() {
-          if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'quiz-home', quiz_focus: quizState.focus, quiz_level: quizState.level, currency: 'USD', value: 0 });
+          if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: source, quiz_focus: quizState.focus, quiz_level: quizState.level, currency: 'USD', value: 0 });
         }).catch(function() {}).finally(function() { showStep(4); });
       });
     }
