@@ -22,7 +22,7 @@ import LinkPage from '../layouts/LinkPage.astro';
         Seven questions. Find the lever capping your system before your next fight.
       </p>
       <p class="text-[#0A0A0A]/30 text-sm leading-relaxed mb-8 max-w-[340px]">
-        Rate yourself as the sparring version — not the drilling version.
+        Rate yourself as the sparring version, not the drilling version.
       </p>
       <button id="btn-start"
         class="group inline-flex items-center justify-center w-full font-bold bg-[#0A0A0A] text-white px-10 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0057FF] active:bg-[#0057FF]/90 cursor-pointer border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
@@ -51,8 +51,8 @@ import LinkPage from '../layouts/LinkPage.astro';
       <div id="lev-ratings" class="flex gap-2 mb-3"></div>
 
       <div class="flex justify-between">
-        <span id="lev-anchor-low"  class="text-[9px] text-[#0A0A0A]/25 tracking-wide uppercase">1 — Not there</span>
-        <span id="lev-anchor-high" class="text-[9px] text-[#0A0A0A]/25 tracking-wide uppercase">5 — Automatic</span>
+        <span id="lev-anchor-low"  class="text-[9px] text-[#0A0A0A]/25 tracking-wide uppercase">1 · Not there</span>
+        <span id="lev-anchor-high" class="text-[9px] text-[#0A0A0A]/25 tracking-wide uppercase">5 · Automatic</span>
       </div>
 
     </div>
@@ -112,7 +112,7 @@ import LinkPage from '../layouts/LinkPage.astro';
         <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4">Recommended next step</p>
         <a id="res-cta" href="/"
           class="w-full inline-flex items-center justify-center font-bold bg-[#0057FF] text-white px-8 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 mb-4">
-          —
+          ...
         </a>
         <a href="/pdfs/lever-audit.pdf" download="7-Lever-Audit-Thee-Rainers.pdf"
           class="block text-center text-[10px] text-[#0A0A0A]/25 tracking-widest uppercase hover:text-[#0A0A0A]/50 transition-colors duration-200 py-2">
@@ -243,27 +243,27 @@ import LinkPage from '../layouts/LinkPage.astro';
   const LEVERS = [
     {
       num: '01', name: 'Cue Reading',
-      q: 'Last time you got hit clean in sparring — did you see it coming?',
+      q: 'Last time you got hit clean in sparring, did you see it coming?',
       low: 'Blind to it', high: 'Read it early',
-      impact: 'You are defending after contact. Every slip, roll, and block you practise is reactive — which has a ceiling. Until this is fixed, your defensive ceiling is lower than your opponent\'s offensive floor.',
+      impact: 'You are defending after contact. Every slip, roll, and block you practise is reactive. That has a ceiling. Until this is fixed, your defensive ceiling is lower than your opponent\'s offensive floor.',
     },
     {
       num: '02', name: 'Kinetic Chain',
       q: 'Where does your power start? Be honest about the last jab you threw with intent.',
       low: 'Arm and shoulder', high: 'Hip and ground',
-      impact: 'Arm-punching caps your output at roughly half your potential force. Footwork improvements, angle work, and combination flow all hit a ceiling here — you can position well and still not hurt anyone.',
+      impact: 'Arm-punching caps your output at roughly half your potential force. Footwork improvements, angle work, and combination flow all hit a ceiling here. You can position well and still not hurt anyone.',
     },
     {
       num: '03', name: 'Reactive Stiffness',
-      q: 'Round 4, pressured — how much of your footwork is still loaded and springy versus survival stepping?',
+      q: 'Round 4, under pressure. How much of your footwork is still loaded and springy versus survival stepping?',
       low: 'Flat and heavy', high: 'Still loaded',
-      impact: 'When the legs go, the whole system collapses — your output drops, your guard gets lazy, and you start absorbing instead of moving. If this is your constraint, conditioning alone will not fix it. The loading mechanism needs work.',
+      impact: 'When the legs go, the whole system collapses. Your output drops, your guard gets lazy, and you start absorbing instead of moving. If this is your constraint, conditioning alone will not fix it. The loading mechanism needs work.',
     },
     {
       num: '04', name: 'Range Fluency',
       q: 'How often do you choose your range in sparring versus ending up wherever your opponent puts you?',
       low: 'Wherever they put me', high: 'I dictate it',
-      impact: 'If your opponent controls distance, they control the whole fight. You train at one range and fight at whatever they give you. Your offensive game only works at the range you have access to — which may not be the one you practised.',
+      impact: 'If your opponent controls distance, they control the whole fight. You train at one range and fight at whatever they give you. Your offensive game only works at the range you have access to. It may not be the range you practised.',
     },
     {
       num: '05', name: 'Defensive Responsibility',
@@ -275,13 +275,13 @@ import LinkPage from '../layouts/LinkPage.astro';
       num: '06', name: 'Transfer to Live',
       q: 'Pick one technical thing you have been drilling for at least two weeks. Is it showing up under pressure?',
       low: 'Disappears in sparring', high: 'Transfers cleanly',
-      impact: 'You have the technique. You do not have it under pressure yet. The drill has not become a reflex. More repetitions alone will not close this gap — the training environment has to change.',
+      impact: 'You have the technique. You do not have it under pressure yet. The drill has not become a reflex. More repetitions alone will not close this gap. The training environment has to change.',
     },
     {
       num: '07', name: 'Identity & Presence',
-      q: 'Hurt, behind on the round, opponent smelling blood — what does your system do?',
+      q: 'Hurt, behind on the round, opponent smelling blood. What does your system do?',
       low: 'Shuts down', high: 'Stays structured',
-      impact: 'When it matters most, the system is not there. This is not a mental toughness problem in the motivational sense — it is a structural one. Fighters who fragment under adversity have not been trained to maintain their system while hurt. That is a specific skill.',
+      impact: 'When it matters most, the system is not there. This is not a mental toughness problem in the motivational sense. It is a structural one. Fighters who fragment under adversity have not been trained to maintain their system while hurt. That is a specific skill.',
     },
   ];
 
@@ -337,8 +337,8 @@ import LinkPage from '../layouts/LinkPage.astro';
 
     const anchorLow  = document.getElementById('lev-anchor-low');
     const anchorHigh = document.getElementById('lev-anchor-high');
-    if (anchorLow)  anchorLow.textContent  = `1 — ${l.low}`;
-    if (anchorHigh) anchorHigh.textContent = `5 — ${l.high}`;
+    if (anchorLow)  anchorLow.textContent  = `1 · ${l.low}`;
+    if (anchorHigh) anchorHigh.textContent = `5 · ${l.high}`;
 
     if (ratingsEl) {
       ratingsEl.innerHTML = [1, 2, 3, 4, 5].map(v => `
