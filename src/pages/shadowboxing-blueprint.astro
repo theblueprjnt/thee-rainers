@@ -27,7 +27,7 @@ const productSchema = JSON.stringify({
   </Fragment>
 
   <!-- HERO -->
-  <section class="bg-white border-b border-[#0A0A0A]/8 pt-28 md:pt-36 pb-16 md:pb-20">
+  <section id="buy-bar-sentinel" class="bg-white border-b border-[#0A0A0A]/8 pt-28 md:pt-36 pb-16 md:pb-20">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-[58%_42%] gap-10 md:gap-16 items-center">
 
       <div>
@@ -296,7 +296,7 @@ const productSchema = JSON.stringify({
   </section>
 
   <!-- FINAL CTA -->
-  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+  <section id="final-cta-section" class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[680px] mx-auto text-center">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Access the Blueprint</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] mb-8">
@@ -330,4 +330,37 @@ const productSchema = JSON.stringify({
     </div>
   </section>
 
+  <!-- STICKY BUY BAR (mobile only) -->
+  <div id="sticky-bar"
+    class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-[#0A0A0A]/12 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-200 ease-out"
+    aria-hidden="true">
+    <div class="flex items-baseline gap-2">
+      <span class="font-black text-[#0A0A0A] text-xl">$47</span>
+      <span class="text-[#0A0A0A]/40 text-[10px] uppercase tracking-widest">One time</span>
+    </div>
+    <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"
+      class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase">
+      Get the Blueprint →
+    </a>
+  </div>
+
 </Layout>
+
+<script>
+  {
+    const bar = document.getElementById('sticky-bar') as HTMLElement | null;
+    const sentinel = document.getElementById('buy-bar-sentinel');
+    const finalCta = document.getElementById('final-cta-section');
+    if (bar && sentinel && finalCta) {
+      let heroGone = false;
+      let finalVisible = false;
+      function sync() {
+        const show = heroGone && !finalVisible;
+        bar.classList.toggle('translate-y-full', !show);
+        bar.setAttribute('aria-hidden', String(!show));
+      }
+      new IntersectionObserver(([e]) => { heroGone = !e.isIntersecting; sync(); }).observe(sentinel);
+      new IntersectionObserver(([e]) => { finalVisible = e.isIntersecting; sync(); }).observe(finalCta);
+    }
+  }
+</script>
