@@ -68,8 +68,7 @@ export const testimonials: Testimonial[] = [
     persona: "Digital marketer · Trained in person",
     setting: "in_person",
     youtubeId: "KOWohmgNMNI",
-    // PLACEHOLDER — pull her real line. She's on pads, in person.
-    quote: "REPLACE: Elizabeth's strongest real sentence about what changed.",
+    quote: "I know what to do and where to focus, instead of doing junk volume.",
   },
 
   // ─── 4. RICHARDS — startup founder, remote + sparring ────────────────────
@@ -81,8 +80,7 @@ export const testimonials: Testimonial[] = [
     persona: "Startup founder · Remote + sparring",
     setting: "remote",
     youtubeId: "LY8MNzbhg2o",
-    // PLACEHOLDER — pull his real line.
-    quote: "REPLACE: Richards's strongest real sentence about what changed.",
+    quote: "I'm going back to it for a second time. There's so much more I didn't get the first.",
   },
 
   // ─── Removed entries ─────────────────────────────────────────────────────
