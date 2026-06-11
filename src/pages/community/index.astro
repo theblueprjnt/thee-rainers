@@ -1,85 +1,17 @@
 ---
 import Layout from '../../layouts/Base.astro';
-import { NEXT_PROVING_GROUND, COMMUNITY_MEMBER_COUNT } from '../../data/proving-ground';
-
-const communitySchema = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Greatness Community",
-  "description": "Weekly live Q&A with Rainers. Private community. Growing drill library. Monthly membership for fighters who want to keep working.",
-  "url": "https://theerainers.com/community",
-  "brand": { "@type": "Brand", "name": "Thee Rainers" },
-  "offers": [
-    {
-      "@type": "Offer",
-      "price": "39.00",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "priceSpecification": {
-        "@type": "UnitPriceSpecification",
-        "price": "39.00",
-        "priceCurrency": "USD",
-        "billingIncrement": 1,
-        "unitCode": "MON"
-      }
-    }
-  ]
-});
-
-const faqSchema = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What happens at the weekly Proving Ground?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Live session every week. Camera on. Rainers watches your movement, stance, and angles and corrects them in real time. You bring a specific problem. You leave with a specific fix."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I need the Blueprints first?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. The Community works with whatever foundation you have right now. Members often use the Blueprints alongside their membership, but the Proving Ground is built to meet you where you are."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I cancel?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, anytime. Cancel before your next renewal date and you keep full access until that date. No forms. No questions. Manage it yourself via the Customer Portal link in your welcome email."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the community chat?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A private space for members. Ask questions between sessions, post training clips, and walk with other fighters who are doing the same work. The invite link is in your welcome email."
-      }
-    }
-  ]
-});
 ---
 <Layout
   title="Greatness Community — Thee Rainers"
-  description="Weekly live Q&A with Rainers. Private community. Growing drill library. Where the work continues."
+  description="Weekly live sessions with Rainers. Private community. Drill library. Building now. Get notified first."
 >
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={communitySchema} />
-    <script type="application/ld+json" set:html={faqSchema} />
-  </Fragment>
 
   <!-- Hero -->
   <section class="bg-white overflow-hidden border-b border-[#0A0A0A]/8">
     <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 60vw; max-height: 340px;">
       <img
         src="/images/sparring_withnetherlands.png"
-        alt="Proving Ground — live weekly session with Rainers"
+        alt="Rainers coaching"
         width="1200" height="1500"
         loading="eager"
         class="w-full h-full object-cover object-center grayscale contrast-[1.2] brightness-[0.85] blur-[1.5px]"
@@ -93,45 +25,35 @@ const faqSchema = JSON.stringify({
           <p class="text-[#6A0DAD] text-[11px] tracking-widest uppercase mb-6">Greatness Community</p>
           <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6"
             style="font-size: clamp(2.8rem, 5.5vw, 4.5rem);">
-            Where the work<br/>continues.
+            Building now.<br/>Be first in.
           </h1>
-          <p class="text-[#0A0A0A]/55 text-base leading-relaxed mb-6 max-w-[480px]">
-            Brothers and sisters, weekly live Q&A, and the drills that compound. This is the ongoing work. You might train alone — you build together.
+          <p class="text-[#0A0A0A]/55 text-base leading-relaxed mb-8 max-w-[460px]">
+            Weekly live sessions with Rainers. Private community. A drill library that compounds the longer you train. This is where the ongoing work lives. Leave your email and you hear first when doors open.
           </p>
 
-          <!-- Proof + next session -->
-          <div class="flex flex-wrap items-center gap-x-5 gap-y-2 mb-8">
-            <div class="inline-flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-[#6A0DAD] animate-pulse"></span>
-              <p class="text-[11px] tracking-widest uppercase font-bold text-[#6A0DAD]">{COMMUNITY_MEMBER_COUNT}+ on the path</p>
-            </div>
-            <p class="text-[11px] tracking-widest uppercase text-[#0A0A0A]/45">
-              Next Proving Ground · {NEXT_PROVING_GROUND.date} · {NEXT_PROVING_GROUND.time}
-            </p>
+          <form id="community-waitlist-form" class="flex flex-col gap-3 max-w-[420px]">
+            <label for="community-email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              id="community-email"
+              name="email"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-4 py-3.5 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[#6A0DAD] transition-colors duration-200"
+            />
+            <button type="submit" id="community-submit"
+              class="inline-flex items-center justify-center whitespace-nowrap rounded-none bg-[#6A0DAD] text-white font-bold px-8 py-4 text-sm uppercase tracking-wide hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+              Notify Me When It Opens →
+            </button>
+          </form>
+
+          <div id="community-success" class="hidden max-w-[420px]">
+            <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight mb-1">You're on the list.</p>
+            <p class="text-[#0A0A0A]/45 text-sm">We will reach out before doors open.</p>
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-3 mb-3">
-            <button data-checkout="greatness_monthly"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-none disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-8 py-4 text-sm uppercase tracking-wide hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2"
-              aria-label="Join Greatness Community monthly for $39 per month">
-              Join Monthly — $39/mo →
-            </button>
-            <button data-checkout="greatness_annual"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-none disabled:opacity-40 border-2 border-[#6A0DAD] text-[#6A0DAD] bg-transparent font-bold px-8 py-4 text-sm uppercase tracking-wide hover:bg-[#0A0A0A] hover:text-white hover:border-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2"
-              aria-label="Join Greatness Community annual for $390 per year">
-              Join Annual — $390/yr
-            </button>
-          </div>
-          <p data-checkout-error="hero" class="hidden text-[#C84D3A] text-xs font-bold tracking-wide mb-4" role="alert">
-            Checkout temporarily unavailable. Refresh and try again, or email <a href="mailto:rainers@theerainers.com" class="underline">rainers@theerainers.com</a>.
-          </p>
-
-          <p class="text-[10px] text-[#0A0A0A]/30 leading-relaxed mb-2">
-            By clicking Join, you authorize Thee Rainers to charge your card on a recurring basis until you cancel. Cancel anytime before your next renewal and it stops.
-          </p>
-          <p class="text-[10px] text-[#0A0A0A]/25 leading-relaxed">
-            Subject to our <a href="/legal/terms" class="underline hover:text-[#0A0A0A]/60">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a>.
-          </p>
+          <p class="text-[#0A0A0A]/20 text-xs mt-4">Your email. Nothing else.</p>
         </div>
 
         <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]" aria-hidden="true">
@@ -148,7 +70,7 @@ const faqSchema = JSON.stringify({
     </div>
   </section>
 
-  <!-- What's inside -->
+  <!-- What's being built -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1100px] mx-auto">
       <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">What's Inside</p>
@@ -157,24 +79,24 @@ const faqSchema = JSON.stringify({
         <div class="bg-white p-8">
           <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-4">Weekly</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Proving Ground</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Live every week. Camera on. Rainers watches and corrects your movement in real time. One live correction hits different than ten instructions on a page.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Live every week. Camera on. Rainers watches and corrects your movement in real time. One live correction is worth ten pages of instruction.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Private</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Community Chat</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Ask between sessions. Post clips. Talk through problems with fighters who are doing the same work. The invite comes with your welcome email.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Ask between sessions. Post clips. Work through problems with fighters doing the same work.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Growing</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Drill Library</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every drill, categorized by lever. Added to every week. Work your weakest area. The library compounds the longer you stay.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every drill, categorized by lever. Added every week. Work your weakest area. The library compounds the longer you stay.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Always</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Community</h3>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Brotherhood</h3>
           <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">People doing the work and walking the path toward greatness together. A community with standards.</p>
         </div>
 
@@ -182,125 +104,35 @@ const faqSchema = JSON.stringify({
     </div>
   </section>
 
-  <!-- Member voice (placeholder — replace quote + name when ready) -->
-  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[820px] mx-auto">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-8">From the inside</p>
-      <p class="font-black text-white uppercase tracking-tighter leading-[0.95] text-2xl md:text-3xl mb-6">
-        "[Replace with a real member quote — one sentence on what changed for them after joining]"
-      </p>
-      <p class="text-white/40 text-[11px] tracking-widest uppercase">
-        Member · [Name · City]
-      </p>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8" aria-labelledby="pricing-heading">
-    <div class="max-w-[800px] mx-auto">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Membership</p>
-      <h2 id="pricing-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-8">One price. One membership. All of it included.</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-        <div class="bg-white border border-[#0A0A0A]/10 p-8 flex flex-col justify-between">
-          <div>
-            <p class="text-[#D4A373] text-[10px] tracking-widest uppercase mb-4">Monthly</p>
-            <div class="flex items-baseline gap-2 mb-2">
-              <span class="font-black text-[#0A0A0A] text-4xl">$39</span>
-              <span class="text-[#0A0A0A]/40 text-sm">/mo</span>
-            </div>
-            <p class="text-[#0A0A0A]/40 text-xs mb-8">Charged monthly. Cancel before renewal to stop.</p>
-          </div>
-          <div class="flex flex-col gap-3">
-            <button data-checkout="greatness_monthly"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-none disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-6 py-3 text-sm uppercase tracking-wide hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer border-0 w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2"
-              aria-label="Join monthly for $39 per month">
-              Join Monthly →
-            </button>
-            <p data-checkout-error="monthly" class="hidden text-[#C84D3A] text-[11px] font-bold tracking-wide text-center" role="alert">
-              Checkout temporarily unavailable. Try again.
-            </p>
-            <p class="text-[10px] text-[#0A0A0A]/25 text-center leading-relaxed">
-              You authorize recurring monthly charges. Cancel anytime.
-            </p>
-          </div>
-        </div>
-
-        <div class="bg-white border-2 border-[#6A0DAD]/30 p-8 flex flex-col justify-between relative">
-          <div class="absolute top-3 right-3 bg-[#6A0DAD] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Save $78</div>
-          <div>
-            <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-4">Annual</p>
-            <div class="flex items-baseline gap-2 mb-1">
-              <span class="font-black text-[#0A0A0A] text-4xl">$390</span>
-              <span class="text-[#0A0A0A]/40 text-sm">/yr</span>
-            </div>
-            <p class="text-[#0A0A0A]/40 text-xs mb-8">That is $32.50 per month. Billed once per year.</p>
-          </div>
-          <div class="flex flex-col gap-3">
-            <button data-checkout="greatness_annual"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-none disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-6 py-3 text-sm uppercase tracking-wide hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer border-0 w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2"
-              aria-label="Join annual for $390 per year">
-              Join Annual →
-            </button>
-            <p data-checkout-error="annual" class="hidden text-[#C84D3A] text-[11px] font-bold tracking-wide text-center" role="alert">
-              Checkout temporarily unavailable. Try again.
-            </p>
-            <p class="text-[10px] text-[#0A0A0A]/25 text-center leading-relaxed">
-              You authorize one annual charge. Cancel before renewal to stop.
-            </p>
-          </div>
-        </div>
-
+  <!-- Bottom capture -->
+  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[600px] mx-auto text-center">
+      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Get notified</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-6">Be first when doors open.</h2>
+      <form id="community-waitlist-form-2" class="flex flex-col sm:flex-row gap-3 max-w-[480px] mx-auto">
+        <label for="community-email-2" class="sr-only">Email address</label>
+        <input
+          type="email"
+          id="community-email-2"
+          name="email"
+          placeholder="your@email.com"
+          autocomplete="email"
+          required
+          class="flex-1 border border-[#0A0A0A]/15 bg-white px-4 py-3.5 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[#6A0DAD] transition-colors duration-200"
+        />
+        <button type="submit"
+          class="whitespace-nowrap inline-flex items-center justify-center rounded-none bg-[#6A0DAD] text-white font-bold px-6 py-3.5 text-sm uppercase tracking-wide hover:bg-[#0A0A0A] transition-colors duration-150 cursor-pointer border-0 focus:outline-none">
+          Notify Me →
+        </button>
+      </form>
+      <div id="community-success-2" class="hidden mt-4">
+        <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight">You're on the list.</p>
       </div>
-
-      <!-- Price anchor: subtle path up the ladder -->
-      <div class="mt-10 pt-8 border-t border-[#0A0A0A]/10 text-center">
+      <div class="mt-10 pt-8 border-t border-[#0A0A0A]/10">
         <p class="text-[#0A0A0A]/40 text-xs tracking-widest uppercase">
-          When you need 1:1 — <a href="/command" class="text-[#6A0DAD] font-bold hover:text-[#0A0A0A] transition-colors">Private Architecture →</a>
+          Need 1:1 now? <a href="/command" class="text-[#6A0DAD] font-bold hover:text-[#0A0A0A] transition-colors">Private Architecture →</a>
         </p>
       </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8" aria-labelledby="faq-heading">
-    <div class="max-w-[800px] mx-auto">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-6">Questions</p>
-      <h2 id="faq-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-10">Common Questions</h2>
-      <dl class="flex flex-col divide-y divide-[#0A0A0A]/8">
-
-        <div class="py-6">
-          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">What happens at the weekly Proving Ground?</dt>
-          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Live session every week. Camera on. Rainers watches your movement, stance, and angles and corrects them in real time. You bring a specific problem. You leave with a specific fix.</dd>
-        </div>
-
-        <div class="py-6">
-          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">Do I need the Blueprints first?</dt>
-          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">No. The Community works with whatever foundation you have right now. Members often use the Blueprints alongside their membership, but the Proving Ground is built to meet you where you are.</dd>
-        </div>
-
-        <div class="py-6">
-          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">What is the community chat?</dt>
-          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">A private space for members only. Ask questions between sessions, post training clips, and walk with other fighters doing the same work. The invite link is in your welcome email.</dd>
-        </div>
-
-        <div class="py-6">
-          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">Can I cancel?</dt>
-          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Yes, anytime. Cancel before your next renewal date and you keep full access until that date. Manage it yourself via the Customer Portal link in your welcome email. No forms. No questions.</dd>
-        </div>
-
-      </dl>
-    </div>
-  </section>
-
-  <!-- Already a member -->
-  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[600px] mx-auto text-center">
-      <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-3">Already a Member?</p>
-      <a href="/community/inside"
-        class="inline-flex items-center justify-center font-bold text-[#6A0DAD] text-xs tracking-widest uppercase border-2 border-[#6A0DAD] px-8 py-3 hover:bg-[#6A0DAD] hover:text-white transition-all duration-200">
-        Enter Member Area →
-      </a>
     </div>
   </section>
 
@@ -317,56 +149,38 @@ const faqSchema = JSON.stringify({
 </Layout>
 
 <script>
-  // Subscription checkout — self-contained, runs after DOM ready (Astro module script).
-  function bindCommunityCheckout() {
-    document.querySelectorAll('button[data-checkout]').forEach(function(btn) {
-      if ((btn as HTMLButtonElement).dataset.communityBound === 'true') return;
-      (btn as HTMLButtonElement).dataset.communityBound = 'true';
+  function bindWaitlist(formId: string, emailId: string, successId: string) {
+    const form = document.getElementById(formId) as HTMLFormElement | null;
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
 
-      btn.addEventListener('click', async function() {
-        const key = (btn as HTMLButtonElement).dataset.checkout;
-        if (!key) return;
-        const originalHTML = btn.innerHTML;
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const emailEl = document.getElementById(emailId) as HTMLInputElement | null;
+      const email = emailEl?.value?.trim();
+      if (!email) return;
 
-        // Find nearest [data-checkout-error] element
-        let errorEl: Element | null = null;
-        let scope: Element | null = btn.parentElement;
-        while (scope && !errorEl) {
-          errorEl = scope.querySelector('[data-checkout-error]');
-          scope = scope.parentElement;
-        }
-        if (errorEl) errorEl.classList.add('hidden');
+      const submit = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = submit.textContent || '';
+      submit.disabled = true;
+      submit.textContent = 'Sending...';
 
-        (btn as HTMLButtonElement).disabled = true;
-        btn.textContent = 'Processing...';
-        btn.classList.add('opacity-80', 'cursor-not-allowed');
+      try {
+        await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, full_name: '', source: 'community-waitlist' }),
+        });
+      } catch { /* silent — user still sees success */ }
 
-        const restore = () => {
-          (btn as HTMLButtonElement).disabled = false;
-          btn.innerHTML = originalHTML;
-          btn.classList.remove('opacity-80', 'cursor-not-allowed');
-        };
+      if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'community-waitlist' });
 
-        try {
-          const res = await fetch('/api/create-checkout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ lookupKey: key }),
-          });
-          const data = await res.json();
-          if (data && data.url) {
-            window.location.href = data.url;
-            return;
-          }
-          restore();
-          if (errorEl) errorEl.classList.remove('hidden');
-        } catch {
-          restore();
-          if (errorEl) errorEl.classList.remove('hidden');
-        }
-      });
+      form.classList.add('hidden');
+      const successEl = document.getElementById(successId);
+      if (successEl) successEl.classList.remove('hidden');
     });
   }
 
-  bindCommunityCheckout();
+  bindWaitlist('community-waitlist-form', 'community-email', 'community-success');
+  bindWaitlist('community-waitlist-form-2', 'community-email-2', 'community-success-2');
 </script>

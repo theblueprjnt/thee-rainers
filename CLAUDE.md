@@ -1,5 +1,17 @@
 # Thee Rainers — Project Context
 
+## Skills (load these before copy or visual work)
+- Voice rules: `.claude/skills/trb-voice/SKILL.md` — banned words, punctuation, system names, proof copy rules.
+- Design rules: `.claude/skills/trb-design/SKILL.md` — color tokens, spacing scale, button shapes, contrast, verification loop.
+
+## Build and deploy commands
+```
+npm run dev        # local dev server at localhost:4321
+npm run build      # production build (requires Cloudflare bindings)
+git push           # deploys to Cloudflare Pages automatically (main branch)
+```
+Visual verification: Chrome DevTools MCP screenshot at 390x844 after every change. Do not mark a task done from code alone.
+
 ## Stack
 Astro 4 on Cloudflare Pages/Workers. `@astrojs/cloudflare` adapter. Tailwind v4 (`@theme` CSS vars, no config file). All SSR API routes use `export const prerender = false` and `import { env as cfEnv } from 'cloudflare:workers'` for env vars. No wrangler.toml — managed via Cloudflare Pages dashboard.
 
