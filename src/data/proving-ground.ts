@@ -1,6 +1,6 @@
 // Update this weekly. Rebuild + push deploys the new date everywhere it shows.
 export const NEXT_PROVING_GROUND = {
-  date: 'Saturday, June 13',
+  date: 'Saturday, July 4',
   time: '10am ET',
 };
 
