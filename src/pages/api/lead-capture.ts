@@ -15,10 +15,6 @@ import { env as cfEnv } from 'cloudflare:workers';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function phoneDigits(phone: string): number {
-  return (phone.match(/\d/g) ?? []).length;
-}
-
 function corsHeaders(origin: string): Record<string, string> {
   return {
     'Access-Control-Allow-Origin': origin,
@@ -83,37 +79,48 @@ export async function POST({ request }: APIContext): Promise<Response> {
   }
 
   // ── forward to Make.com webhook ───────────────────────────────────────
-  // HARD-FAIL when MAKE_LEAD_WEBHOOK_URL is missing or invalid. This prevents
-  // the silent-drop bug that lost real leads pre-2026-05-31: if the config
-  // is wrong the user sees an error, not a fake success.
-  const webhookUrl = (cfEnv as unknown as Record<string, string>)['MAKE_LEAD_WEBHOOK_URL'] ?? '';
+  // RESILIENT-BY-DEFAULT. The PDF download fires client-side regardless of
+  // this webhook's success. Webhook failure therefore means a CRM/email-list
+  // gap, never a broken user experience. We log structured warnings so the
+  // gap is observable in CF Pages logs and surface delivery state in the
+  // response (success flag + X-Lead-Webhook-Status header), but we never
+  // surface a 500 for a webhook problem.
+  const rawWebhook = (cfEnv as unknown as Record<string, string>)['MAKE_LEAD_WEBHOOK_URL'] ?? '';
+  // Defensive: strip wrapping whitespace + quote characters (a frequent
+  // dashboard paste artifact that silently breaks the env var).
+  const webhookUrl = rawWebhook.trim().replace(/^["']|["']$/g, '');
   const emailLog = email.replace(/(.).*(@.*)/, '$1***$2');
 
+  let webhookStatus = 'unattempted';
+
   if (!/^https?:\/\//.test(webhookUrl)) {
-    console.error('[lead-capture] FATAL: MAKE_LEAD_WEBHOOK_URL missing or invalid', { source, emailLog });
-    return isJson
-      ? jsonResponse({ success: false, error: 'Server config error. Email rainers@theerainers.com.' }, 500, headers)
-      : redirectResponse('/foundation?error=config_error');
+    webhookStatus = 'config_missing';
+    console.warn('[LEAD_DEFERRED] MAKE_LEAD_WEBHOOK_URL missing or invalid', { source, emailLog });
+  } else {
+    console.log('[lead-capture] submission', { source, emailLog });
+    try {
+      const res = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ full_name, email, phone, source }),
+        signal: AbortSignal.timeout(8000),
+      });
+      if (res.ok) {
+        webhookStatus = 'delivered';
+      } else {
+        webhookStatus = `non_2xx_${res.status}`;
+        console.warn('[LEAD_DEFERRED] webhook non-2xx', { source, emailLog, status: res.status });
+      }
+    } catch (err) {
+      webhookStatus = 'fetch_failed';
+      console.warn('[LEAD_DEFERRED] webhook fetch failed', { source, emailLog, err: String(err) });
+    }
   }
 
-  console.log('[lead-capture] submission', { source, emailLog });
-
-  try {
-    const res = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ full_name, email, phone, source }),
-    });
-    if (!res.ok) throw new Error(`Webhook responded with ${res.status}`);
-  } catch (err) {
-    console.error('[lead-capture] webhook delivery failed:', err);
-    return isJson
-      ? jsonResponse({ success: false, error: 'Delivery failed. Please try again.' }, 500, headers)
-      : redirectResponse('/foundation?error=delivery_failed');
-  }
-
-  // ── success ───────────────────────────────────────────────────────────
+  // Always return success — the PDF download already fired client-side and the
+  // user's job is done. Webhook diagnostics are exposed in a header for ops.
+  const successHeaders = { ...headers, 'X-Lead-Webhook-Status': webhookStatus };
   return isJson
-    ? jsonResponse({ success: true }, 200, headers)
+    ? jsonResponse({ success: true, webhookStatus }, 200, successHeaders)
     : redirectResponse('/thank-you/foundation');
 }
