@@ -93,13 +93,6 @@ export async function POST({ request }: APIContext): Promise<Response> {
 
   let webhookStatus = 'unattempted';
 
-  // TEMP DIAG (remove after Make.com env var verified): expose a privacy-safe
-  // fingerprint of the webhook URL so we can tell from a browser network tab
-  // whether CF Pages is hitting the URL we expect.
-  const urlFingerprint = webhookUrl
-    ? `${webhookUrl.slice(0, 30)}...${webhookUrl.slice(-6)}_len${webhookUrl.length}`
-    : 'empty';
-
   if (!/^https?:\/\//.test(webhookUrl)) {
     webhookStatus = 'config_missing';
     console.warn('[LEAD_DEFERRED] MAKE_LEAD_WEBHOOK_URL missing or invalid', { source, emailLog });
@@ -126,11 +119,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
 
   // Always return success — the PDF download already fired client-side and the
   // user's job is done. Webhook diagnostics are exposed in a header for ops.
-  const successHeaders = {
-    ...headers,
-    'X-Lead-Webhook-Status': webhookStatus,
-    'X-Lead-Webhook-Fingerprint': urlFingerprint,
-  };
+  const successHeaders = { ...headers, 'X-Lead-Webhook-Status': webhookStatus };
   return isJson
     ? jsonResponse({ success: true, webhookStatus }, 200, successHeaders)
     : redirectResponse('/thank-you/foundation');
