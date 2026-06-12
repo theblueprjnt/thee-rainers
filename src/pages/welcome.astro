@@ -9,7 +9,7 @@ const communityChat = e['COMMUNITY_CHAT_INVITE'] ?? '';
 // Session ID is in the URL from Stripe success redirect
 const sessionId = Astro.url.searchParams.get('session_id') ?? '';
 ---
-<Layout title="Welcome to the Greatness Community — Thee Rainers">
+<Layout title="Welcome to the Greatness Community · Thee Rainers">
   <Fragment slot="head">
     <meta name="robots" content="noindex" />
   </Fragment>
@@ -105,7 +105,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
         <p class="text-[#0A0A0A]/45 text-xs leading-relaxed mb-5">
           If you haven't run it yet, start today. It sets the structural base the Proving Ground builds on.
         </p>
-        <a href="/footwork-blueprint"
+        <a href="/foundation"
           class="inline-flex items-center font-bold text-[#0057FF] text-xs tracking-widest uppercase hover:opacity-60 transition-opacity">
           Start the Free Protocol →
         </a>

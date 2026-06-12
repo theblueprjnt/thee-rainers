@@ -12,8 +12,8 @@ const products = [
     desc: 'Stance mechanics. Weight distribution. Kinetic chain from the floor up. The base layer. Full PDF. No payment.',
     price: 'FREE',
     price_note: null,
-    stripeUrl: '/footwork-blueprint',
-    page: '/footwork-blueprint',
+    stripeUrl: '/foundation',
+    page: '/foundation',
     cta: 'Get the PDF',
     featured: true,
   },
@@ -48,7 +48,7 @@ const productSchema = JSON.stringify(products.map(p => ({
   },
 })));
 ---
-<Layout title="Shop — Thee Rainers" description="Step-by-step systems built for boxing. One-time purchase. Download and own it.">
+<Layout title="Shop · Thee Rainers" description="Step-by-step systems built for boxing. One-time purchase. Download and own it.">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={productSchema} />
   </Fragment>
@@ -201,7 +201,7 @@ const productSchema = JSON.stringify(products.map(p => ({
       <!-- Start free nudge -->
       <div class="mt-10 pt-10 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <p class="text-[#0A0A0A]/30 text-sm">Start free with the Footwork Blueprint. Build the base first.</p>
-        <a href="/footwork-blueprint" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Blueprint →</a>
+        <a href="/foundation" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Blueprint →</a>
       </div>
 
     </div>

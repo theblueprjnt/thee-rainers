@@ -200,30 +200,40 @@ const siteSchema = JSON.stringify({
     </main>
     <Footer />
 
-    <!-- Email capture tollbooth — entry pages only -->
+    <!-- Email capture — entry pages only. Centered, Apple-restraint, single product. -->
     <div id="tr-popup" role="dialog" aria-modal="true" aria-labelledby="tr-popup-heading"
-      class="fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-4 hidden pointer-events-none"
-      style="background: rgba(10,10,10,0.65); backdrop-filter: blur(3px);">
-      <div class="bg-white w-full max-w-[440px] relative pointer-events-auto"
-        style="box-shadow: 0 24px 80px rgba(0,0,0,0.4);">
+      class="fixed inset-0 z-[200] flex items-center justify-center p-5 hidden pointer-events-none tr-popup-overlay"
+      style="background: rgba(10,10,10,0.62); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);">
+      <div class="bg-white w-full max-w-[420px] relative pointer-events-auto tr-popup-card"
+        style="box-shadow: 0 30px 80px rgba(0,0,0,0.35);">
 
         <button id="tr-popup-close"
           aria-label="Close"
-          class="absolute top-4 right-4 text-[#0A0A0A]/25 hover:text-[#0A0A0A] transition-colors text-xl leading-none font-bold cursor-pointer bg-transparent border-0 p-1">
+          class="absolute top-3 right-3 text-[#0A0A0A]/30 hover:text-[#0A0A0A] transition-colors text-2xl leading-none cursor-pointer bg-transparent border-0 p-2">
           &times;
         </button>
 
-        <div class="p-8 pb-6">
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-4">Free · 30-Day Protocol</p>
-          <h2 id="tr-popup-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-3"
-            style="font-size: clamp(1.6rem, 4vw, 2rem);">
-            Build the base<br/>before anything else.
+        <div class="p-7 pb-6">
+          <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">Free · The Foundation</p>
+          <h2 id="tr-popup-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-3"
+            style="font-size: clamp(1.5rem, 4vw, 1.9rem);">
+            Start with the base.
           </h2>
           <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-6">
-            30-day stance foundation. No gym. No equipment. The structural base most athletes never build. Free.
+            The Footwork Blueprint. 21 pages, 56 drills, full video breakdown. The technical foundation most gyms skip. Free.
           </p>
 
           <form id="tr-popup-form" class="flex flex-col gap-3">
+            <label for="tr-popup-name" class="sr-only">Your name</label>
+            <input
+              type="text"
+              id="tr-popup-name"
+              name="name"
+              placeholder="Your name"
+              autocomplete="name"
+              required
+              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-4 py-3.5 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[#0057FF] focus:bg-white transition-colors duration-200"
+            />
             <label for="tr-popup-email" class="sr-only">Email address</label>
             <input
               type="email"
@@ -232,20 +242,20 @@ const siteSchema = JSON.stringify({
               placeholder="your@email.com"
               autocomplete="email"
               required
-              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-4 py-3.5 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[#0057FF] transition-colors duration-200"
+              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-4 py-3.5 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[#0057FF] focus:bg-white transition-colors duration-200"
             />
             <button type="submit" id="tr-popup-submit"
-              class="w-full inline-flex items-center justify-center rounded-none font-bold bg-[#0057FF] text-white px-6 py-4 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 disabled:opacity-40 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
-              Get the Footwork Blueprint →
+              class="tr-gradient-cta w-full inline-flex items-center justify-center rounded-none font-bold text-white px-6 py-4 text-sm tracking-widest uppercase transition-transform duration-150 hover:-translate-y-0.5 disabled:opacity-50 disabled:translate-y-0 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+              Get the Blueprint · Free →
             </button>
           </form>
 
           <div id="tr-popup-success" class="hidden text-center py-4">
-            <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight mb-1">It's on the way.</p>
-            <p class="text-[#0A0A0A]/45 text-sm">Check your inbox. Day 1 starts when you decide.</p>
+            <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight mb-1">It's downloading.</p>
+            <p class="text-[#0A0A0A]/50 text-sm">Save the PDF when prompted. Day 1 starts when you decide.</p>
           </div>
 
-          <p class="text-[#0A0A0A]/20 text-[10px] mt-4 text-center">Your email. Nothing else.</p>
+          <p class="text-[#0A0A0A]/30 text-[10px] mt-4 text-center tracking-wide">No payment. No spam. Unsubscribe any time.</p>
         </div>
       </div>
     </div>
@@ -258,7 +268,7 @@ const siteSchema = JSON.stringify({
   var STORAGE_KEY = 'tr_popup_v2';
 
   // Only fire on organic entry pages — never interrupt purchase flow
-  // /footwork-blueprint is itself a capture page — don't double-prompt.
+  // /foundation is itself a capture page — don't double-prompt.
   var ENTRY_PAGES = ['/', '/links', '/lever-audit-quiz'];
   var path = window.location.pathname.replace(/\/$/, '') || '/';
   var isEntryPage = ENTRY_PAGES.indexOf(path) !== -1;
@@ -283,9 +293,22 @@ const siteSchema = JSON.stringify({
     if (emailInput) setTimeout(function() { emailInput.focus(); }, 50);
   }
 
-  // Fire at 8s on entry pages only
+  // Fire on entry pages only — whichever happens first: 15s OR user scrolls past 40% of page.
+  // Apple-restraint: don't interrupt people who just landed.
   if (isEntryPage && !isDismissed()) {
-    setTimeout(showPopup, 8000);
+    var fired = false;
+    var fire = function() {
+      if (fired) return;
+      fired = true;
+      window.removeEventListener('scroll', onScroll);
+      showPopup();
+    };
+    var onScroll = function() {
+      var max = (document.documentElement.scrollHeight - window.innerHeight) || 1;
+      if ((window.scrollY / max) > 0.4) fire();
+    };
+    setTimeout(fire, 15000);
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
   // Idempotent init — runs sync on first load AND on every astro:page-load
@@ -303,35 +326,37 @@ const siteSchema = JSON.stringify({
       if (e.key === 'Escape') dismiss();
     });
 
+    // PDF-first wiring. The user always gets the file even if the lead-capture
+    // backend fails. Trigger download → show success → fire webhook in background.
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+      var name  = (document.getElementById('tr-popup-name').value  || '').trim();
       var email = (document.getElementById('tr-popup-email').value || '').trim();
-      if (!email) return;
+      if (!email || !name) return;
       submit.disabled = true;
-      submit.textContent = 'Sending...';
+      submit.textContent = 'Preparing...';
+
+      // 1. PDF download first — contract with the user.
+      var a = document.createElement('a');
+      a.href = '/pdfs/foundation.pdf';
+      a.download = 'The-Footwork-Blueprint-Thee-Rainers.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // 2. Show success state immediately.
+      if (form) form.classList.add('hidden');
+      if (success) success.classList.remove('hidden');
+      if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'popup-footwork-blueprint', currency: 'USD', value: 0 });
+
+      // 3. Fire Make.com in background (non-blocking).
       fetch('/api/lead-capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, full_name: '', source: 'popup-foundation' }),
-      })
-      .then(function(r) { return r.json(); })
-      .then(function() {
-        if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'popup-foundation', currency: 'USD', value: 0 });
-        dismiss();
-        if (form) form.classList.add('hidden');
-        if (success) success.classList.remove('hidden');
-        var a = document.createElement('a');
-        a.href = '/pdfs/foundations_guide.pdf';
-        a.download = 'The-Boxing-Foundations-Thee-Rainers.pdf';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setTimeout(dismiss, 3000);
-      })
-      .catch(function() {
-        submit.disabled = false;
-        submit.textContent = 'Get the Footwork Blueprint →';
-      });
+        body: JSON.stringify({ email: email, full_name: name, source: 'popup-footwork-blueprint' }),
+      }).catch(function(err) { console.warn('[popup] background webhook failed:', err); });
+
+      setTimeout(dismiss, 3200);
     });
   }
 

@@ -72,14 +72,14 @@ export async function POST({ request }: APIContext): Promise<Response> {
   } catch {
     return isJson
       ? jsonResponse({ success: false, error: 'Malformed request body.' }, 400, headers)
-      : redirectResponse('/footwork-blueprint?error=bad_request');
+      : redirectResponse('/foundation?error=bad_request');
   }
 
   // ── validate ─────────────────────────────────────────────────────────
   if (!email || !EMAIL_RE.test(email)) {
     return isJson
       ? jsonResponse({ success: false, error: 'A valid email address is required.' }, 400, headers)
-      : redirectResponse('/footwork-blueprint?error=invalid_email');
+      : redirectResponse('/foundation?error=invalid_email');
   }
 
   // ── forward to Make.com webhook ───────────────────────────────────────
@@ -93,7 +93,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
     console.error('[lead-capture] FATAL: MAKE_LEAD_WEBHOOK_URL missing or invalid', { source, emailLog });
     return isJson
       ? jsonResponse({ success: false, error: 'Server config error. Email rainers@theerainers.com.' }, 500, headers)
-      : redirectResponse('/footwork-blueprint?error=config_error');
+      : redirectResponse('/foundation?error=config_error');
   }
 
   console.log('[lead-capture] submission', { source, emailLog });
@@ -109,11 +109,11 @@ export async function POST({ request }: APIContext): Promise<Response> {
     console.error('[lead-capture] webhook delivery failed:', err);
     return isJson
       ? jsonResponse({ success: false, error: 'Delivery failed. Please try again.' }, 500, headers)
-      : redirectResponse('/footwork-blueprint?error=delivery_failed');
+      : redirectResponse('/foundation?error=delivery_failed');
   }
 
   // ── success ───────────────────────────────────────────────────────────
   return isJson
     ? jsonResponse({ success: true }, 200, headers)
-    : redirectResponse('/thank-you/footwork-blueprint');
+    : redirectResponse('/thank-you/foundation');
 }
