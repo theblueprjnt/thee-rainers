@@ -6,65 +6,93 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 ---
 <Layout title="Thee Rainers · Better training. Better results.">
 
-  <!-- HERO -->
-  <section class="relative overflow-hidden border-b border-[#0A0A0A]/8">
+  <!-- HERO — mobile: clean photo on top, dark stage below. Desktop: 60/40. -->
+  <section class="relative overflow-hidden border-b border-[#0A0A0A]/8 bg-[#0A0A0A] md:bg-white">
 
-    <!-- Mobile: full-bleed image with dark gradient -->
-    <div class="md:hidden absolute inset-0 bg-[#0A0A0A]">
-      <img src="/images/coldfightpic2.jpg" alt="Thee Rainers"
-        width="2280" height="2203"
-        class="w-full h-full object-cover object-center opacity-70"
-        loading="eager" decoding="async" />
-      <div class="absolute inset-0"
-        style="background: linear-gradient(to top, #0A0A0A 28%, rgba(10,10,10,0.65) 55%, rgba(10,10,10,0.1) 100%)">
+    <!-- ── MOBILE LAYOUT ──────────────────────────────────────────────── -->
+    <div class="md:hidden flex flex-col">
+      <!-- Photo strip — clean, no text overlay, anchored to boxer's face -->
+      <div class="relative w-full bg-[#0A0A0A] mt-16" style="height: 56svh; min-height: 360px;">
+        <img src="/images/coldfightpic2.jpg" alt="Thee Rainers · Boxer"
+          width="2280" height="2203"
+          class="absolute inset-0 w-full h-full object-cover"
+          style="object-position: 60% 30%;"
+          loading="eager" decoding="async" fetchpriority="high" />
+        <!-- Subtle vignette so the gradient CTA below has visual continuity -->
+        <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-24"
+          style="background: linear-gradient(to top, #0A0A0A, transparent);"></div>
+      </div>
+
+      <!-- Content stage — solid black, generous padding, no overlap -->
+      <div class="bg-[#0A0A0A] px-7 pt-8 pb-12">
+        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Boxing Tech · @theerainers</p>
+        <h1 class="font-black uppercase tracking-tighter mb-5 text-white"
+          style="font-size: clamp(2.5rem, 11vw, 3.5rem); line-height: 0.86;">
+          Engineered<br/>for the ring.
+        </h1>
+        <p class="text-white/55 mb-8 max-w-[340px] text-sm leading-relaxed">
+          The technical foundation most gyms skip. Step by step.
+        </p>
+        <div class="flex flex-col gap-3">
+          <a href="/workshop"
+            class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-6 py-4 text-[13px] tracking-wide uppercase transition-transform duration-150 active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+            Reserve Workshop · {WORKSHOP_DATE_SHORT} · $197 →
+          </a>
+          <a href="/foundation"
+            class="inline-flex items-center justify-center font-bold border border-white/30 text-white bg-transparent px-6 py-4 text-[13px] tracking-wide uppercase hover:border-white active:translate-y-px transition-all duration-150">
+            Get the Footwork Blueprint · Free →
+          </a>
+        </div>
+
+        <a href="#students"
+          class="mt-7 inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-white/55 hover:text-white transition-colors duration-200">
+          <span class="h-px w-8 bg-[#D4A373]"></span>
+          <span>Watch fighters run the system</span>
+          <span aria-hidden="true">↓</span>
+        </a>
       </div>
     </div>
 
-    <!-- Grid wrapper -->
-    <div class="relative z-10 md:grid md:grid-cols-[60%_40%] md:min-h-screen">
-
+    <!-- ── DESKTOP LAYOUT ─────────────────────────────────────────────── -->
+    <div class="hidden md:grid md:grid-cols-[60%_40%] md:min-h-screen">
       <!-- Left: text + CTAs -->
-      <div class="flex flex-col justify-end md:justify-center md:bg-white
-                  px-8 md:px-14 lg:px-20
-                  pt-36 pb-16 md:py-0
-                  min-h-[100svh] md:min-h-0">
+      <div class="flex flex-col justify-center bg-white px-14 lg:px-20">
         <p class="text-[#926624] text-xs tracking-wide uppercase mb-5">Boxing Tech · @theerainers</p>
-        <h1 class="font-black uppercase tracking-tighter mb-6 text-white md:text-[#0A0A0A]"
+        <h1 class="font-black uppercase tracking-tighter mb-6 text-[#0A0A0A]"
           style="font-size: clamp(2.75rem, 5.5vw, 4.5rem); line-height: 0.85;">
           Engineered<br/>for the ring.
         </h1>
-        <p class="text-white/65 md:text-[#0A0A0A]/55 mb-10 max-w-[380px] text-base leading-relaxed">
+        <p class="text-[#0A0A0A]/55 mb-10 max-w-[380px] text-base leading-relaxed">
           The technical foundation most gyms skip. Step by step.
         </p>
-        <div class="flex flex-col gap-3 max-w-[460px]">
+        <div class="flex flex-col gap-3 max-w-[480px]">
           <a href="/workshop"
             class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-4 text-sm tracking-wide uppercase transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
             Reserve Workshop Seat · {WORKSHOP_DATE_SHORT} · $197 →
           </a>
           <a href="/foundation"
-            class="inline-flex items-center justify-center font-bold border-2 border-white/80 md:border-[#0A0A0A]/15 text-white md:text-[#0A0A0A] bg-transparent px-8 py-4 text-sm tracking-wide uppercase hover:border-white md:hover:border-[#0057FF] md:hover:text-[#0057FF] transition-all duration-200 whitespace-nowrap">
+            class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A]/15 text-[#0A0A0A] bg-transparent px-8 py-4 text-sm tracking-wide uppercase hover:border-[#0057FF] hover:text-[#0057FF] transition-all duration-200 whitespace-nowrap">
             Get the Footwork Blueprint · Free →
           </a>
         </div>
 
-        <!-- Proof bar + scroll cue — drives into the testimonials below -->
         <a href="#students"
-          class="mt-10 inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase transition-colors duration-200 text-white/65 hover:text-white md:text-[#0A0A0A]/60 md:hover:text-[#0A0A0A] group">
+          class="mt-10 inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase transition-colors duration-200 text-[#0A0A0A]/60 hover:text-[#0A0A0A] group">
           <span class="h-px w-10 bg-[#D4A373] transition-[width] duration-200 group-hover:w-14"></span>
           <span>Watch fighters run the system</span>
           <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-y-0.5">↓</span>
         </a>
       </div>
 
-      <!-- Right: desktop image panel -->
-      <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]">
+      <!-- Right: image panel -->
+      <div class="relative overflow-hidden bg-[#0A0A0A]">
         <img src="/images/coldfightpic2.jpg" alt="Thee Rainers"
           width="2280" height="2203"
           class="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager" decoding="async" />
+          loading="eager" decoding="async" fetchpriority="high" />
       </div>
-
     </div>
+
   </section>
 
   <!-- QUIZ — 3-step diagnosis -->
