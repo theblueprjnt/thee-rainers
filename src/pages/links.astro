@@ -5,106 +5,106 @@ import { WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 ---
 <LinkPage title="Thee Rainers · Links">
 
-  <div class="max-w-[440px] mx-auto px-6 py-14 flex flex-col items-center gap-10">
+  <div class="max-w-[440px] mx-auto px-6 py-12 flex flex-col items-center gap-8">
 
     <!-- Identity -->
     <div class="flex flex-col items-center gap-3 text-center">
       <a href="/">
         <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 w-auto" />
       </a>
-      <p class="text-[#926624] text-[10px] tracking-widest uppercase">Systemic Boxing Performance</p>
-      <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[300px]">Engineered for the ring. Seven levers. One operating system. Built for fighters who think in structures.</p>
+      <p class="text-[#926624] text-[10px] tracking-widest uppercase">Boxing Performance</p>
+      <p class="text-[#0A0A0A]/45 text-sm leading-relaxed max-w-[280px]">Built for people who think in structures.</p>
     </div>
 
     <!-- Links stack -->
     <div class="w-full flex flex-col gap-3">
 
-      <!-- 1. Free Blueprint — top of funnel, highest volume -->
+      <!-- 1. Free Footwork Blueprint — top of funnel, every visitor sees this -->
       <a href="/foundation"
-        class="w-full flex items-center justify-between border-2 border-[#0057FF] text-[#0057FF] px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white group">
-        <span>The Footwork Blueprint</span>
-        <span class="text-xs opacity-60 group-hover:opacity-100">Free →</span>
+        class="tr-link tr-link-primary group">
+        <span class="tr-link-label">Footwork Blueprint</span>
+        <span class="tr-link-meta">Free →</span>
       </a>
 
-      <!-- 2. YouTube subscribe — channel growth priority -->
-      <a href="https://www.youtube.com/@Rainers?sub_confirmation=1"
-        target="_blank" rel="noopener"
-        class="w-full flex items-center justify-between border-2 border-[#0057FF] text-[#0057FF] px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white group">
-        <span>Subscribe on YouTube</span>
-        <span class="text-xs opacity-60 group-hover:opacity-100">@Rainers →</span>
-      </a>
-
-      <!-- 2b. Blueprints — Tier 2 continuity -->
-      <a href="/shop"
-        class="w-full flex items-center justify-between border border-[#0A0A0A]/12 text-[#0A0A0A]/70 px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:border-[#0057FF] hover:text-[#0057FF] group">
-        <span>The Blueprints</span>
-        <span class="text-[#926624] text-xs tracking-widest">from $47 →</span>
-      </a>
-
-      <!-- 3. Workshop — urgency, revenue -->
+      <!-- 2. Live Workshop — gradient, 2026 hero offer -->
       <a href="/workshop"
-        class="w-full flex items-center justify-between border border-[#0A0A0A]/12 text-[#0A0A0A]/70 px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:border-[#0057FF] hover:text-[#0057FF] group">
-        <span>The Defense Workshop</span>
-        <span class="text-[#926624] text-xs tracking-widest">$197 · {WORKSHOP_DATE_SHORT} →</span>
+        class="tr-link tr-link-gradient group">
+        <span class="tr-link-label text-white">Defense Workshop</span>
+        <span class="tr-link-meta text-white/85">$197 · {WORKSHOP_DATE_SHORT} →</span>
       </a>
 
-      <!-- 3b. Workshop Replay -->
-      <a href="/workshop-replay"
-        class="w-full flex items-center justify-between border border-[#0A0A0A]/12 text-[#0A0A0A]/70 px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:border-[#0057FF] hover:text-[#0057FF] group">
-        <span>Workshop Replay</span>
-        <span class="text-[#926624] text-xs tracking-widest">$79 · On Demand →</span>
-      </a>
-
-      <!-- 4. Latest video — drives watch time + subscribers -->
-      <a href="https://youtu.be/SrFywBFkmik"
+      <!-- 3. Latest video — pairs topically with the Workshop offer above -->
+      <a href="https://youtu.be/vdUDuFRUqGo"
         target="_blank" rel="noopener"
-        class="w-full flex items-center justify-between border border-[#0A0A0A]/12 text-[#0A0A0A]/70 px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A] group">
-        <span>Latest Video</span>
-        <span class="text-xs opacity-40 group-hover:opacity-70">What Boxing Does to Your Body →</span>
+        class="tr-link tr-link-quiet group">
+        <span class="tr-link-label">Why You Can't Defend Yourself</span>
+        <span class="tr-link-meta">New · YouTube →</span>
       </a>
 
-      <!-- 5. 7-Lever Audit — competitor qualifier -->
+      <!-- 4. YouTube subscribe -->
+      <a href="https://www.youtube.com/@theerainers"
+        target="_blank" rel="noopener"
+        class="tr-link tr-link-quiet group">
+        <span class="tr-link-label">Subscribe on YouTube</span>
+        <span class="tr-link-meta">@theerainers →</span>
+      </a>
+
+      <!-- 5. Shop — Blueprints -->
+      <a href="/shop"
+        class="tr-link tr-link-quiet group">
+        <span class="tr-link-label">Shop</span>
+        <span class="tr-link-meta">Blueprints · from $47 →</span>
+      </a>
+
+      <!-- 6. Workshop Replay — attraction offer -->
+      <a href="/workshop-replay"
+        class="tr-link tr-link-quiet group">
+        <span class="tr-link-label">Workshop Replay</span>
+        <span class="tr-link-meta">$79 · On Demand →</span>
+      </a>
+
+      <!-- 7. 7-Lever Audit -->
       <a href="/lever-audit-quiz"
-        class="w-full flex items-center justify-between border border-[#0A0A0A]/12 text-[#0A0A0A]/70 px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A] group">
-        <span>Free 7-Lever Audit</span>
-        <span class="text-xs opacity-40 group-hover:opacity-70">Find the leak →</span>
+        class="tr-link tr-link-quiet group">
+        <span class="tr-link-label">7-Lever Audit</span>
+        <span class="tr-link-meta">Free · Diagnose →</span>
       </a>
 
       <!-- Divider -->
       <div class="border-t border-[#0A0A0A]/8 my-1"></div>
 
-      <!-- 6. Social platforms — follow loop -->
+      <!-- 8. Social platforms — follow loop -->
       <div class="grid grid-cols-2 gap-3">
         <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
-          class="flex items-center justify-between border border-[#0A0A0A]/10 px-4 py-3 text-[10px] text-[#0A0A0A]/40 tracking-widest uppercase hover:text-[#0A0A0A] hover:border-[#0A0A0A]/25 transition-all duration-200">
+          class="flex items-center justify-between gap-2 border border-[#0A0A0A]/10 px-4 py-3 text-[10px] text-[#0A0A0A]/45 tracking-widest uppercase hover:text-[#0A0A0A] hover:border-[#0A0A0A]/25 transition-all duration-200">
           <span>Instagram</span>
-          <span class="opacity-60">{SOCIAL_STATS.instagram}K →</span>
+          <span class="opacity-60 whitespace-nowrap">{SOCIAL_STATS.instagram}K →</span>
         </a>
         <a href="https://www.tiktok.com/@theerainers" target="_blank" rel="noopener"
-          class="flex items-center justify-between border border-[#0A0A0A]/10 px-4 py-3 text-[10px] text-[#0A0A0A]/40 tracking-widest uppercase hover:text-[#0A0A0A] hover:border-[#0A0A0A]/25 transition-all duration-200">
+          class="flex items-center justify-between gap-2 border border-[#0A0A0A]/10 px-4 py-3 text-[10px] text-[#0A0A0A]/45 tracking-widest uppercase hover:text-[#0A0A0A] hover:border-[#0A0A0A]/25 transition-all duration-200">
           <span>TikTok</span>
-          <span class="opacity-60">{SOCIAL_STATS.tiktok}K →</span>
+          <span class="opacity-60 whitespace-nowrap">{SOCIAL_STATS.tiktok}K →</span>
         </a>
         <a href="https://www.facebook.com/theerainers" target="_blank" rel="noopener"
-          class="flex items-center justify-between border border-[#0A0A0A]/10 px-4 py-3 text-[10px] text-[#0A0A0A]/40 tracking-widest uppercase hover:text-[#0A0A0A] hover:border-[#0A0A0A]/25 transition-all duration-200">
+          class="flex items-center justify-between gap-2 border border-[#0A0A0A]/10 px-4 py-3 text-[10px] text-[#0A0A0A]/45 tracking-widest uppercase hover:text-[#0A0A0A] hover:border-[#0A0A0A]/25 transition-all duration-200">
           <span>Facebook</span>
-          <span class="opacity-60">{SOCIAL_STATS.facebook}K →</span>
+          <span class="opacity-60 whitespace-nowrap">{SOCIAL_STATS.facebook}K →</span>
         </a>
         <a href="https://www.threads.net/@theerainers" target="_blank" rel="noopener"
-          class="flex items-center justify-between border border-[#0A0A0A]/10 px-4 py-3 text-[10px] text-[#0A0A0A]/40 tracking-widest uppercase hover:text-[#0A0A0A] hover:border-[#0A0A0A]/25 transition-all duration-200">
+          class="flex items-center justify-between gap-2 border border-[#0A0A0A]/10 px-4 py-3 text-[10px] text-[#0A0A0A]/45 tracking-widest uppercase hover:text-[#0A0A0A] hover:border-[#0A0A0A]/25 transition-all duration-200">
           <span>Threads</span>
-          <span class="opacity-60">{SOCIAL_STATS.threads}K →</span>
+          <span class="opacity-60 whitespace-nowrap">{SOCIAL_STATS.threads}K →</span>
         </a>
       </div>
 
       <!-- Divider -->
       <div class="border-t border-[#0A0A0A]/8 my-1"></div>
 
-      <!-- 7. Private Architecture — bottom, highest intent -->
+      <!-- 9. Private Architecture — bottom, highest intent -->
       <a href="/command"
-        class="w-full flex items-center justify-between px-6 py-4 text-sm font-bold tracking-widest uppercase transition-opacity duration-200 hover:opacity-75 text-white bg-[#6A0DAD]">
+        class="w-full flex items-center justify-between gap-3 px-6 py-4 text-sm font-bold tracking-widest uppercase transition-opacity duration-200 hover:opacity-80 text-white bg-[#6A0DAD]">
         <span>Private Architecture</span>
-        <span class="text-xs opacity-80">Application Only →</span>
+        <span class="text-xs opacity-80 whitespace-nowrap">Application Only →</span>
       </a>
 
     </div>

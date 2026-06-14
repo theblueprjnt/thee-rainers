@@ -178,8 +178,8 @@ Stripe webhook events required: `checkout.session.completed` + `invoice.payment_
 - TO GENERATE: Open `/lever-audit-print.html` in Chrome → Print → Save as PDF → `/public/pdfs/lever-audit.pdf` → commit + push
 
 ## Featured YouTube video
-- ID: `SrFywBFkmik` — "What Boxing Does to Your Body That the Gym Can't"
-- Chapters wired, end screen set, card at 8:31 → /footwork-foundation
+- ID: `vdUDuFRUqGo` — "Why You Can't Defend Yourself" (added 2026-06-14, pairs with Defense Workshop)
+- Previous featured: `SrFywBFkmik` — "What Boxing Does to Your Body That the Gym Can't" (now in archive)
 
 ## Social presence
 Counts live in `src/data/social-stats.ts` (single source of truth). Update that file when numbers change; all pages rebuild on push.

@@ -3,22 +3,22 @@ import Layout from '../layouts/Base.astro';
 ---
 <Layout title="Apply · Private Architecture | Thee Rainers">
   <Fragment slot="head">
-    <meta name="description" content="Private Architecture. 1 of 1 systemic performance coaching. Application only. No templates. No cohorts." />
+    <meta name="description" content="Private Architecture. 1-of-1 work built around your fight, body, and schedule. Application only." />
   </Fragment>
 
-  <section class="min-h-screen bg-white flex flex-col justify-center px-8 md:px-16 lg:px-24 py-32">
+  <section class="bg-white flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-28 pb-16 md:py-32 md:min-h-screen">
     <div class="max-w-[1280px] mx-auto w-full">
       <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24">
 
         <!-- Left: Form (60%) -->
         <div>
-          <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-8">Application Protocol</p>
-          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-6xl leading-[0.85] mb-8">Structure beats<br/>dependence.</h1>
-          <p class="text-[#0A0A0A]/60 text-base leading-relaxed mb-10 max-w-[440px]">Private Architecture is not coaching. It is a system built around your specific fight, body, and mind. If accepted, you receive the blueprint. Apply below.</p>
+          <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-6">Application</p>
+          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.9] mb-7">Private<br/>Architecture.</h1>
+          <p class="text-[#0A0A0A]/60 text-base leading-relaxed mb-10 max-w-[460px]">Built around your fight, your body, your schedule. I review every application myself. If we're a fit, we begin.</p>
 
           <div class="border-l-2 border-[#D4A373]/40 pl-6 mb-14">
-            <p class="text-[#0A0A0A]/25 text-sm leading-relaxed italic mb-3">"I do not run aimlessly. I do not fight like a boxer beating the air. I strike a blow to my body and make it my slave — so that after I have preached to others, I myself will not be disqualified."</p>
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase">1 Corinthians 9:26–27 · The Source Code</p>
+            <p class="text-[#0A0A0A]/25 text-sm leading-relaxed italic mb-3">"I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."</p>
+            <p class="text-[#926624] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
           </div>
 
           <form id="command-form" class="flex flex-col gap-10">
@@ -47,7 +47,7 @@ import Layout from '../layouts/Base.astro';
             </div>
 
             <div class="flex flex-col gap-2">
-              <label for="goal" class="text-[#926624] text-[10px] tracking-widest uppercase">What systemic change are you trying to make?</label>
+              <label for="goal" class="text-[#926624] text-[10px] tracking-widest uppercase">What do you want to change?</label>
               <textarea id="goal" name="goal" rows="3" required placeholder="—"
                 class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
             </div>
@@ -78,23 +78,23 @@ import Layout from '../layouts/Base.astro';
             </div>
             <div class="px-6 py-4 bg-[#F6F6F6] border-t border-[#0A0A0A]/8">
               <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-1">Private Architecture · 5 Months</p>
-              <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">Giancarlo — amateur competitor. The system was built around his fight schedule, mechanics, and objectives.</p>
+              <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">Giancarlo · entrepreneur. We built the work around his fight schedule and the way his body actually moves.</p>
             </div>
           </div>
 
           <div class="border-l border-[#0A0A0A]/10 pl-10 flex flex-col gap-8">
-            <p class="text-[#0A0A0A]/20 text-[11px] tracking-widest uppercase">What this is</p>
+            <p class="text-[#0A0A0A]/20 text-[11px] tracking-widest uppercase">How it works</p>
             <div>
               <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">01</p>
-              <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">One system. No templates. No cohorts. Engineered entirely around your mechanics, schedule, and objective.</p>
+              <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Single-track. Your training, your fight, your timeline. No cohort.</p>
             </div>
             <div>
               <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">02</p>
-              <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Application-only. Not because of scarcity — because architecture requires the right input to produce the right output.</p>
+              <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Application first so I can see what we're working with before we begin.</p>
             </div>
             <div>
               <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">03</p>
-              <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Systemic performance is the output. Not motivation. Not conditioning. A repeatable, pressure-tested operating system.</p>
+              <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">You leave with the playbook. The work has to compound after I'm gone.</p>
             </div>
           </div>
 
@@ -131,12 +131,12 @@ import Layout from '../layouts/Base.astro';
           });
           if (res.ok) {
             form.reset();
-            status.innerText = 'Application received. I will review your structure.';
+            status.innerText = 'Application received. I will be in touch.';
           } else {
             throw new Error();
           }
         } catch {
-          status.innerText = 'Transmission failed. Contact directly on Instagram.';
+          status.innerText = 'Something went wrong. Find me on Instagram.';
         }
       });
     }

@@ -220,7 +220,7 @@ const siteSchema = JSON.stringify({
             Start with the base.
           </h2>
           <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-6">
-            The Footwork Blueprint. 21 pages, 56 drills, full video breakdown. The technical foundation most gyms skip. Free.
+            21 pages. 56 drills. Full video breakdown. Free.
           </p>
 
           <form id="tr-popup-form" class="flex flex-col gap-3">
@@ -269,7 +269,7 @@ const siteSchema = JSON.stringify({
 
   // Only fire on organic entry pages — never interrupt purchase flow
   // /foundation is itself a capture page — don't double-prompt.
-  var ENTRY_PAGES = ['/', '/links', '/lever-audit-quiz'];
+  var ENTRY_PAGES = ['/', '/lever-audit-quiz'];
   var path = window.location.pathname.replace(/\/$/, '') || '/';
   var isEntryPage = ENTRY_PAGES.indexOf(path) !== -1;
 
@@ -305,7 +305,7 @@ const siteSchema = JSON.stringify({
     };
     var onScroll = function() {
       var max = (document.documentElement.scrollHeight - window.innerHeight) || 1;
-      if ((window.scrollY / max) > 0.4) fire();
+      if ((window.scrollY / max) > 0.65) fire();
     };
     setTimeout(fire, 15000);
     window.addEventListener('scroll', onScroll, { passive: true });
