@@ -7,7 +7,7 @@ interface Props {
 
 const {
   id = 'lead-form',
-  source = 'footwork-foundation',
+  source = 'footwork-free',
   submitText = 'Send me the guide',
 } = Astro.props;
 ---
@@ -117,7 +117,7 @@ const {
       const data = new FormData(form);
       const full_name = (data.get('full_name') as string ?? '').trim();
       const email = (data.get('email') as string ?? '').trim();
-      const source = (data.get('source') as string) || 'footwork-foundation';
+      const source = (data.get('source') as string) || 'footwork-free';
 
       try {
         const res = await fetch('/api/lead-capture', {

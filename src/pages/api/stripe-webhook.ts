@@ -283,7 +283,9 @@ async function deliverProduct(email: string, productId: string, e: Record<string
 
   if (productSlug === 'workshop-replay') {
     const watchSecret = e['WATCH_TOKEN_SECRET'] ?? '';
-    if (watchSecret) {
+    if (!watchSecret) {
+      console.error('[stripe-webhook] WATCH_TOKEN_SECRET not set — workshop-replay buyer will receive no watch link');
+    } else {
       try { expiringUrl = await generateWatchUrl(watchSecret, 'workshop-replay'); }
       catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
     }
@@ -364,7 +366,9 @@ export async function POST({ request }: APIContext): Promise<Response> {
         }
       } catch (err) { console.error('[stripe-webhook] listLineItems error:', String(err)); }
 
-      if (email && productId) {
+      if (!email || !productId) {
+        console.error('[stripe-webhook] checkout.session.completed missing email or productId', { sessionId: session.id, email: !!email, productId: !!productId });
+      } else {
         const slug = PRODUCT_MAP[productId];
         await deliverProduct(email, productId, e);
         // Sync member into Airtable + tag in Kit

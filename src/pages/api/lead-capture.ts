@@ -103,7 +103,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
   let full_name = '';
   let email = '';
   let phone = '';
-  let source = 'footwork-foundation';
+  let source = 'footwork-free';
 
   try {
     if (isJson) {
