@@ -10,12 +10,12 @@ import Layout from '../../layouts/Base.astro';
   <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
     <div class="max-w-[720px] mx-auto w-full">
 
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Purchase confirmed</p>
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Confirmed</p>
       <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-6">
-        Check your<br/>email.
+        You're in.<br/>The replay is<br/>on its way.
       </h1>
       <p class="text-[#0A0A0A]/50 text-base leading-relaxed mb-12 max-w-[440px]">
-        Your access link is on its way. It arrives within a few minutes — click it to watch the full 90-minute session.
+        Your access link arrives within a few minutes. Click it to watch the full 90-minute session. 7-day window from purchase.
       </p>
 
       <div class="border border-[#0A0A0A]/8 p-8 mb-12">
@@ -40,6 +40,22 @@ import Layout from '../../layouts/Base.astro';
         </div>
       </div>
 
+      <!-- WELCOME VIDEO SLOT -->
+      <div class="mb-12">
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Watch while you wait</p>
+        <div class="aspect-video w-full overflow-hidden bg-[#0A0A0A]">
+          <iframe
+            src="https://www.youtube.com/embed/vdUDuFRUqGo"
+            title="Why You Can't Defend Yourself"
+            class="w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide mt-3">Why You Can't Defend Yourself — the foundation the replay builds on.</p>
+      </div>
+
       <!-- Use the wait productively -->
       <div class="border-l-2 border-[var(--blue)] pl-6 mb-12">
         <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-2">While you wait</p>
@@ -57,7 +73,7 @@ import Layout from '../../layouts/Base.astro';
   <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20">
     <div class="max-w-[680px] mx-auto">
       <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
-        "I do not box as one beating the air."
+        "I do not run aimlessly; I do not box as one beating the air."
       </p>
       <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
     </div>
