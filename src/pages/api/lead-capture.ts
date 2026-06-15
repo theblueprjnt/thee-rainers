@@ -1,12 +1,15 @@
 // POST /api/lead-capture
 //
 // Environment variables required:
-//   MAKE_LEAD_WEBHOOK_URL  — your Make.com webhook URL
-//   SITE_URL               — your production domain, e.g. https://theerainers.com
-//
-// Set these in:
-//   Local dev:         .env  (already gitignored)
-//   Cloudflare Pages:  Settings → Environment variables → Add variable
+//   MAKE_LEAD_WEBHOOK_URL  — Make.com webhook (resilient path for email delivery)
+//   KIT_API_KEY            — Kit (ConvertKit) v4 API key
+//   KIT_LEAD_TAG_ID        — Tag ID to apply to all free opt-in leads in Kit
+//                            Create in Kit: Grow > Tags > "footwork_lead", copy numeric ID
+//   AIRTABLE_API_KEY       — Airtable PAT
+//   AIRTABLE_BASE_ID       — Airtable base ID
+//   AIRTABLE_LEADS_TABLE   — Airtable table for leads (default: "Leads")
+//                            NOTE: "source" field must be Single line text, not Single Select
+//   SITE_URL               — production domain, e.g. https://theerainers.com
 
 export const prerender = false;
 
@@ -34,18 +37,69 @@ function redirectResponse(location: string): Response {
   return new Response(null, { status: 302, headers: { Location: location } });
 }
 
+// ── Kit v4 helpers ─────────────────────────────────────────────────────────
+
+async function kitFindOrCreate(apiKey: string, email: string, firstName: string): Promise<string | null> {
+  let res = await fetch('https://api.kit.com/v4/subscribers', {
+    method: 'POST',
+    headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email_address: email, first_name: firstName || undefined }),
+  });
+  let data: Record<string, unknown> = await res.json().catch(() => ({}));
+  const sub = data?.subscriber as Record<string, unknown> | undefined;
+  if (sub?.id) return String(sub.id);
+
+  res = await fetch(`https://api.kit.com/v4/subscribers?email_address=${encodeURIComponent(email)}`, {
+    headers: { 'X-Kit-Api-Key': apiKey },
+  });
+  data = await res.json().catch(() => ({}));
+  const subs = data?.subscribers as Array<Record<string, unknown>> | undefined;
+  return subs?.[0]?.id ? String(subs[0].id) : null;
+}
+
+async function kitApplyTag(apiKey: string, email: string, firstName: string, tagId: string): Promise<void> {
+  if (!apiKey || !tagId) return;
+  const id = await kitFindOrCreate(apiKey, email, firstName);
+  if (!id) return;
+  await fetch(`https://api.kit.com/v4/tags/${tagId}/subscribers/${id}`, {
+    method: 'POST',
+    headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
+    body: '{}',
+  });
+}
+
+// ── Airtable helper ────────────────────────────────────────────────────────
+
+async function upsertAirtableLead(
+  token: string,
+  baseId: string,
+  table: string,
+  fields: Record<string, string>,
+): Promise<void> {
+  if (!token || !baseId || !fields.Email) return;
+  await fetch(`https://api.airtable.com/v0/${baseId}/${encodeURIComponent(table)}`, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      performUpsert: { fieldsToMergeOn: ['Email'] },
+      records: [{ fields }],
+    }),
+  });
+}
+
 export async function OPTIONS(_ctx: APIContext): Promise<Response> {
   const origin = (cfEnv as unknown as Record<string, string>)['SITE_URL'] || 'https://theerainers.com';
   return new Response(null, { status: 204, headers: corsHeaders(origin) });
 }
 
 export async function POST({ request }: APIContext): Promise<Response> {
-  const origin = (cfEnv as unknown as Record<string, string>)['SITE_URL'] || 'https://theerainers.com';
+  const e = cfEnv as unknown as Record<string, string>;
+  const origin = e['SITE_URL'] || 'https://theerainers.com';
   const headers = corsHeaders(origin);
   const contentType = request.headers.get('content-type') ?? '';
   const isJson = contentType.includes('application/json');
 
-  // ── parse ────────────────────────────────────────────────────────────
+  // ── parse ─────────────────────────────────────────────────────────────
   let full_name = '';
   let email = '';
   let phone = '';
@@ -71,54 +125,64 @@ export async function POST({ request }: APIContext): Promise<Response> {
       : redirectResponse('/foundation?error=bad_request');
   }
 
-  // ── validate ─────────────────────────────────────────────────────────
+  // ── validate ──────────────────────────────────────────────────────────
   if (!email || !EMAIL_RE.test(email)) {
     return isJson
       ? jsonResponse({ success: false, error: 'A valid email address is required.' }, 400, headers)
       : redirectResponse('/foundation?error=invalid_email');
   }
 
-  // ── forward to Make.com webhook ───────────────────────────────────────
-  // RESILIENT-BY-DEFAULT. The PDF download fires client-side regardless of
-  // this webhook's success. Webhook failure therefore means a CRM/email-list
-  // gap, never a broken user experience. We log structured warnings so the
-  // gap is observable in CF Pages logs and surface delivery state in the
-  // response (success flag + X-Lead-Webhook-Status header), but we never
-  // surface a 500 for a webhook problem.
-  const rawWebhook = (cfEnv as unknown as Record<string, string>)['MAKE_LEAD_WEBHOOK_URL'] ?? '';
-  // Defensive: strip wrapping whitespace + quote characters (a frequent
-  // dashboard paste artifact that silently breaks the env var).
-  const webhookUrl = rawWebhook.trim().replace(/^["']|["']$/g, '');
   const emailLog = email.replace(/(.).*(@.*)/, '$1***$2');
+  console.log('[lead-capture] submission', { source, emailLog });
 
+  // ── Make.com webhook (resilient — never blocks response) ──────────────
+  const rawWebhook = (e['MAKE_LEAD_WEBHOOK_URL'] ?? '').trim().replace(/^["']|["']$/g, '');
   let webhookStatus = 'unattempted';
 
-  if (!/^https?:\/\//.test(webhookUrl)) {
+  if (!/^https?:\/\//.test(rawWebhook)) {
     webhookStatus = 'config_missing';
     console.warn('[LEAD_DEFERRED] MAKE_LEAD_WEBHOOK_URL missing or invalid', { source, emailLog });
   } else {
-    console.log('[lead-capture] submission', { source, emailLog });
     try {
-      const res = await fetch(webhookUrl, {
+      const res = await fetch(rawWebhook, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ full_name, email, phone, source }),
         signal: AbortSignal.timeout(8000),
       });
-      if (res.ok) {
-        webhookStatus = 'delivered';
-      } else {
-        webhookStatus = `non_2xx_${res.status}`;
-        console.warn('[LEAD_DEFERRED] webhook non-2xx', { source, emailLog, status: res.status });
-      }
+      webhookStatus = res.ok ? 'delivered' : `non_2xx_${res.status}`;
+      if (!res.ok) console.warn('[LEAD_DEFERRED] webhook non-2xx', { source, emailLog, status: res.status });
     } catch (err) {
       webhookStatus = 'fetch_failed';
       console.warn('[LEAD_DEFERRED] webhook fetch failed', { source, emailLog, err: String(err) });
     }
   }
 
-  // Always return success — the PDF download already fired client-side and the
-  // user's job is done. Webhook diagnostics are exposed in a header for ops.
+  // ── Kit — subscribe + tag (fire-and-forget, never blocks response) ────
+  const kitKey   = e['KIT_API_KEY'] ?? '';
+  const kitTagId = e['KIT_LEAD_TAG_ID'] ?? '';
+  if (kitKey) {
+    kitApplyTag(kitKey, email, full_name, kitTagId).catch((err) =>
+      console.warn('[lead-capture] Kit tag failed', { emailLog, err: String(err) }),
+    );
+  }
+
+  // ── Airtable — upsert lead record (fire-and-forget) ──────────────────
+  const airtableToken = e['AIRTABLE_API_KEY'] ?? '';
+  const airtableBase  = e['AIRTABLE_BASE_ID'] ?? '';
+  const airtableTable = e['AIRTABLE_LEADS_TABLE'] ?? 'Leads';
+  if (airtableToken && airtableBase) {
+    upsertAirtableLead(airtableToken, airtableBase, airtableTable, {
+      Email:     email,
+      Name:      full_name,
+      Source:    source,
+      Phone:     phone,
+      CreatedAt: new Date().toISOString(),
+    }).catch((err) =>
+      console.warn('[lead-capture] Airtable upsert failed', { emailLog, err: String(err) }),
+    );
+  }
+
   const successHeaders = { ...headers, 'X-Lead-Webhook-Status': webhookStatus };
   return isJson
     ? jsonResponse({ success: true, webhookStatus }, 200, successHeaders)
