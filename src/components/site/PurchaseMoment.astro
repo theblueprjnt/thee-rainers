@@ -1,0 +1,165 @@
+---
+interface Props {
+  productName: string;
+  firstActionCopy: string;
+  primaryLabel: string;
+  primaryHref: string;
+}
+const { productName, firstActionCopy, primaryLabel, primaryHref } = Astro.props;
+---
+
+<div class="pm-root">
+  <div class="pm-check-wrap">
+    <svg class="pm-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle class="pm-circle" cx="32" cy="32" r="28" stroke-width="2.5" />
+      <path class="pm-tick" d="M20 33 L28 42 L44 22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </div>
+  <p class="pm-eyebrow">Confirmed</p>
+  <h1 class="pm-headline">You're in.</h1>
+  <p class="pm-product">{productName}</p>
+  <p class="pm-action">{firstActionCopy}</p>
+  <a href={primaryHref} class="pm-cta">{primaryLabel}</a>
+  <p class="pm-reassurance">Your confirmation is in your email.</p>
+</div>
+
+<style>
+  .pm-root {
+    margin-bottom: 3rem;
+  }
+  .pm-check-wrap {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.5rem;
+  }
+  .pm-svg {
+    display: block;
+    width: 64px;
+    height: 64px;
+  }
+  .pm-circle {
+    stroke: var(--red);
+    fill: none;
+    stroke-dasharray: 176;
+    stroke-dashoffset: 0;
+  }
+  .pm-tick {
+    stroke: var(--red);
+    fill: none;
+    stroke-dasharray: 40;
+    stroke-dashoffset: 0;
+  }
+  .pm-eyebrow {
+    color: var(--ink-soft);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .pm-headline {
+    font-weight: 900;
+    color: #0A0A0A;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    font-size: clamp(2.25rem, 8vw, 3rem);
+    line-height: 0.88;
+    margin-bottom: 0.5rem;
+  }
+  .pm-product {
+    font-weight: 900;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .pm-action {
+    color: rgba(10, 10, 10, 0.5);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+  }
+  .pm-cta {
+    display: block;
+    max-width: 360px;
+    text-align: center;
+    background: var(--red);
+    color: #ffffff;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0;
+    transition: background 150ms ease;
+    margin-bottom: 1rem;
+  }
+  .pm-cta:hover {
+    background: #0A0A0A;
+  }
+  .pm-cta:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
+  }
+  .pm-reassurance {
+    color: rgba(10, 10, 10, 0.3);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Full animation ──────────────────────────────────────────── */
+  @media (prefers-reduced-motion: no-preference) {
+    .pm-check-wrap {
+      animation: pm-spring 400ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    .pm-circle {
+      stroke-dashoffset: 176;
+      animation: pm-draw 320ms ease-out forwards;
+    }
+    .pm-tick {
+      stroke-dashoffset: 40;
+      animation: pm-draw 220ms ease-out 240ms both;
+    }
+    .pm-eyebrow     { animation: pm-rise 240ms ease-out 480ms both; }
+    .pm-headline    { animation: pm-rise 260ms ease-out 540ms both; }
+    .pm-product     { animation: pm-rise 240ms ease-out 600ms both; }
+    .pm-action      { animation: pm-rise 240ms ease-out 660ms both; }
+    .pm-cta         { animation: pm-rise 240ms ease-out 740ms both; }
+    .pm-reassurance { animation: pm-rise 200ms ease-out 820ms both; }
+  }
+
+  /* ── Reduced motion: cross-fade only, no transforms ─────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .pm-check-wrap { animation: pm-fade 300ms ease both; }
+    .pm-eyebrow,
+    .pm-headline,
+    .pm-product,
+    .pm-action,
+    .pm-cta,
+    .pm-reassurance { animation: pm-fade 300ms ease 80ms both; }
+  }
+
+  @keyframes pm-draw {
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes pm-spring {
+    from { transform: scale(0.88); }
+    to   { transform: scale(1); }
+  }
+  @keyframes pm-rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pm-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+</style>
+
+<script is:inline>
+  if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+    try { setTimeout(function () { navigator.vibrate(10); }, 480); } catch (_) {}
+  }
+</script>

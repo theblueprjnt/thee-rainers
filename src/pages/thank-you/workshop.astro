@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Base.astro';
+import PurchaseMoment from '../../components/site/PurchaseMoment.astro';
 import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
 ---
 <Layout title={`Seat Reserved — ${WORKSHOP_DATE_SHORT} | Thee Rainers`}>
@@ -10,13 +11,12 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts'
   <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
     <div class="max-w-[720px] mx-auto w-full">
 
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Confirmed</p>
-      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-6">
-        You're in.<br/>{WORKSHOP_DATE_SHORT}.
-      </h1>
-      <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-12 max-w-[440px]">
-        The Zoom link comes to your email 24 hours before the session. Camera on. Come ready to move.
-      </p>
+      <PurchaseMoment
+        productName="Defense Workshop"
+        firstActionCopy="Know your primary constraint before you arrive. The audit takes 3 minutes."
+        primaryLabel="Take the 7-Lever Audit →"
+        primaryHref="/lever-audit-quiz"
+      />
 
       <div class="border border-[#0A0A0A]/8 p-8 mb-12">
         <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-6">Session details</p>
@@ -59,7 +59,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts'
 
       <!-- WATCH THE PREVIOUS SESSION -->
       <div class="border border-[#0A0A0A]/8 p-8 mb-4">
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Optional — watch before {WORKSHOP_DATE_SHORT}</p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Optional. Watch before {WORKSHOP_DATE_SHORT}</p>
         <p class="text-[#0A0A0A]/60 text-sm font-bold mb-2">The previous workshop replay</p>
         <p class="text-[#0A0A0A]/35 text-xs leading-relaxed mb-5">Same mechanical foundations covered in this session. Watching it first means {WORKSHOP_DATE_SHORT} becomes refinement, not introduction.</p>
         <a href="/workshop-replay"
