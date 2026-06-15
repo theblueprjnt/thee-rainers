@@ -101,9 +101,9 @@
     transform: translateZ(0);
   }
 
-  /* Primary CTA — flat red, one per screen */
+  /* Primary CTA — Instagram gradient, one per screen */
   .tr-gradient-cta {
-    background: var(--red);
+    background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
     will-change: opacity, transform;
     transition: opacity 0.15s ease, transform 0.15s ease;
   }
