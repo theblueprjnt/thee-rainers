@@ -167,7 +167,7 @@ const siteSchema = JSON.stringify({
               if (errorEl) {
                 errorEl.classList.remove('hidden');
               } else {
-                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[#C84D3A] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable — email rainers@theerainers.com</p>');
+                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable — email rainers@theerainers.com</p>');
               }
             } catch (err) {
               console.error('[checkout] fetch error:', err);
@@ -175,7 +175,7 @@ const siteSchema = JSON.stringify({
               if (errorEl) {
                 errorEl.classList.remove('hidden');
               } else {
-                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[#C84D3A] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable — email rainers@theerainers.com</p>');
+                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable — email rainers@theerainers.com</p>');
               }
             }
           });
