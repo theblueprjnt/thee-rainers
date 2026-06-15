@@ -24,7 +24,7 @@ const productSchema = JSON.stringify({
 ---
 <Layout
   title="The Footwork Blueprint · Free Download | Thee Rainers"
-  description="The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw. Free download. English and Spanish.">
+  description="The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw. Free download.">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={productSchema} />
   </Fragment>
@@ -37,13 +37,13 @@ const productSchema = JSON.stringify({
 
       <!-- Left: copy + capture -->
       <div class="order-2 md:order-1">
-        <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-4">Free · The Footwork Blueprint</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Free · The Footwork Blueprint</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
           style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
           The Footwork<br/>Blueprint.
         </h1>
         <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-8 max-w-[520px]">
-          Win fights with footwork. A practical playbook to move with balance, control, and intent. Every step has a job. Free. English and Spanish. Instant download.
+          Win fights with footwork. A practical playbook to move with balance, control, and intent. Every step has a job. Free. Instant download.
         </p>
 
         <!-- Capture form -->
@@ -55,7 +55,7 @@ const productSchema = JSON.stringify({
               required
               placeholder="Your name"
               autocomplete="name"
-              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/30"
+              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-[#0A0A0A] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/30"
             />
             <input
               type="email"
@@ -63,17 +63,17 @@ const productSchema = JSON.stringify({
               required
               placeholder="your@email.com"
               autocomplete="email"
-              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-[#0A0A0A] text-sm focus:border-[#0057FF] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/30"
+              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-[#0A0A0A] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/30"
             />
             <button
               type="submit"
               id="capture-submit"
-              class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2"
+              class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2"
             >
               Get the Blueprint · Free →
             </button>
           </form>
-          <p id="capture-success" class="hidden text-[#0057FF] text-sm tracking-wide mt-4">Your blueprint is downloading. Save the PDF when prompted.</p>
+          <p id="capture-success" class="hidden text-[var(--blue)] text-sm tracking-wide mt-4">Your blueprint is downloading. Save the PDF when prompted.</p>
           <p id="capture-error" class="hidden text-[#C84D3A] text-sm mt-3">Something went wrong. Try again.</p>
           <p class="text-[11px] text-[#0A0A0A]/35 mt-4">No payment. No spam. Unsubscribe any time.</p>
         </div>
@@ -81,23 +81,19 @@ const productSchema = JSON.stringify({
         <!-- Specs -->
         <div class="max-w-[520px] border-t border-[#0A0A0A]/10">
           <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
-            <span class="text-[#926624] text-[10px] tracking-widest uppercase font-bold">Drills</span>
+            <span class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase font-bold">Drills</span>
             <span class="text-[#0A0A0A] text-sm font-bold">56 rounds · Orthodox and Southpaw</span>
           </div>
           <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
-            <span class="text-[#926624] text-[10px] tracking-widest uppercase font-bold">Video Breakdown</span>
+            <span class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase font-bold">Video Breakdown</span>
             <span class="text-[#0A0A0A] text-sm font-bold">11 min</span>
           </div>
           <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
-            <span class="text-[#926624] text-[10px] tracking-widest uppercase font-bold">Format</span>
+            <span class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase font-bold">Format</span>
             <span class="text-[#0A0A0A] text-sm font-bold">21-page playbook, zero filler</span>
           </div>
-          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
-            <span class="text-[#926624] text-[10px] tracking-widest uppercase font-bold">Language</span>
-            <span class="text-[#0A0A0A] text-sm font-bold">English &amp; Spanish</span>
-          </div>
           <div class="flex justify-between items-baseline py-3">
-            <span class="text-[#926624] text-[10px] tracking-widest uppercase font-bold">Delivery</span>
+            <span class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase font-bold">Delivery</span>
             <span class="text-[#0A0A0A] text-sm font-bold">Instant digital download</span>
           </div>
         </div>
@@ -132,21 +128,21 @@ const productSchema = JSON.stringify({
   <!-- WHY IT MATTERS — 3 pillars -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-14 md:py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1100px] mx-auto">
-      <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-3">Why The Base</p>
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-3">Why The Base</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
         The base carries everything.
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="border-l-2 border-[#D4A373] pl-5 py-1">
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">Power From The Floor</p>
+        <div class="border-l-2 border-[#0A0A0A]/15 pl-5 py-1">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Power From The Floor</p>
           <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Most of your punch power comes from the ground up. A broken base costs you before you throw a single punch.</p>
         </div>
-        <div class="border-l-2 border-[#D4A373] pl-5 py-1">
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">Holds Under Pressure</p>
+        <div class="border-l-2 border-[#0A0A0A]/15 pl-5 py-1">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Holds Under Pressure</p>
           <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Drill the right movements now and they become automatic when it gets hard. That is what this builds.</p>
         </div>
-        <div class="border-l-2 border-[#D4A373] pl-5 py-1">
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">No Gym Required</p>
+        <div class="border-l-2 border-[#0A0A0A]/15 pl-5 py-1">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">No Gym Required</p>
           <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">21 pages. 56 rounds. Just you and the work. Your body is enough.</p>
         </div>
       </div>
@@ -156,21 +152,21 @@ const productSchema = JSON.stringify({
   <!-- HOW TO USE IT — three steps -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-14 md:py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[720px] mx-auto">
-      <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-3">After You Download</p>
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-3">After You Download</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
         Three steps.
       </h2>
       <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
         <div class="py-7">
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">01 · Read it</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">01 · Read it</p>
           <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Twenty minutes. The blueprint explains what your base is doing right now and what it should be doing instead.</p>
         </div>
         <div class="py-7">
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">02 · Start today</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">02 · Start today</p>
           <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Five minutes of stance work, on your floor. No gear, no gym, no partner. You feel the difference inside a week.</p>
         </div>
         <div class="py-7">
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">03 · When the base holds</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">03 · When the base holds</p>
           <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Add the Shadowboxing Blueprint. Add the live Workshop. Everything transfers because the foundation is finally ready for it.</p>
         </div>
       </div>
@@ -186,14 +182,14 @@ const productSchema = JSON.stringify({
   <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-14 md:py-20 border-t border-white/5">
     <div class="max-w-[1100px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
       <div class="max-w-[640px]">
-        <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">When the base holds · Next step</p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">When the base holds · Next step</p>
         <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-4">
           The Defense Workshop.
         </h2>
         <p class="text-white/55 text-sm leading-relaxed">{WORKSHOP_DATE_SHORT}. 90 minutes. Camera on. Real-time correction on your defensive structure, movement, and mechanics. The blueprint gives you the framework. The Workshop gives you live diagnosis.</p>
       </div>
       <a href="/workshop"
-        class="tr-gradient-cta shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+        class="tr-gradient-cta shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
         Reserve Seat · $197 →
       </a>
     </div>
@@ -205,7 +201,7 @@ const productSchema = JSON.stringify({
       <p class="text-[#0A0A0A]/30 text-base md:text-lg italic leading-relaxed mb-4">
         "I do not run aimlessly. I do not box as one beating the air."
       </p>
-      <p class="text-[#926624] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
+      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
     </div>
   </section>
 

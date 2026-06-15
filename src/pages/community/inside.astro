@@ -12,7 +12,7 @@ import Layout from '../../layouts/Base.astro';
 
       <!-- Gate — shown until verified -->
       <div id="gate" class="">
-        <p class="text-[#6A0DAD] text-[11px] tracking-widest uppercase mb-6">Member Area</p>
+        <p class="text-[var(--purple)] text-[11px] tracking-widest uppercase mb-6">Member Area</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6"
           style="font-size: clamp(2rem, 4.5vw, 3rem);">
           Enter your<br/>member email.
@@ -28,10 +28,10 @@ import Layout from '../../layouts/Base.astro';
             placeholder="your@email.com"
             autocomplete="email"
             required
-            class="w-full px-4 py-3 border border-[#0A0A0A]/20 bg-white text-[#0A0A0A] text-sm placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[#6A0DAD] transition-colors"
+            class="w-full px-4 py-3 border border-[#0A0A0A]/20 bg-white text-[#0A0A0A] text-sm placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[var(--purple)] transition-colors"
           />
           <button type="submit" id="gate-btn"
-            class="inline-flex items-center justify-center rounded-none disabled:opacity-40 bg-[#6A0DAD] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+            class="inline-flex items-center justify-center rounded-none disabled:opacity-40 bg-[var(--purple)] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
             Verify Access →
           </button>
           <p id="gate-error" class="text-red-500 text-xs hidden">No active membership found for that email. <a href="/community" class="underline font-bold">Join the Community →</a></p>
@@ -42,7 +42,7 @@ import Layout from '../../layouts/Base.astro';
       <div id="member-content" class="hidden">
         <div class="mb-10 flex items-center gap-3">
           <div class="w-2 h-2 rounded-full bg-[#22C55E]"></div>
-          <p class="text-[#6A0DAD] text-[11px] tracking-widest uppercase">Access Confirmed</p>
+          <p class="text-[var(--purple)] text-[11px] tracking-widest uppercase">Access Confirmed</p>
         </div>
 
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-10"
@@ -53,32 +53,32 @@ import Layout from '../../layouts/Base.astro';
         <div class="flex flex-col divide-y divide-[#0A0A0A]/8 mb-12">
 
           <div class="py-6">
-            <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-2">Weekly Session</p>
+            <p class="text-[var(--purple)] text-[10px] tracking-widest uppercase mb-2">Weekly Session</p>
             <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">The Proving Ground</h3>
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-4">Live every week. Session date, Zoom link, and prep instructions are sent to your email before each session. Check your inbox for the next one.</p>
             <a href="mailto:rainers@theerainers.com?subject=Next%20Proving%20Ground%20Date"
-              class="text-[#6A0DAD] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
+              class="text-[var(--purple)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
               Email for next session details →
             </a>
           </div>
 
           <div class="py-6">
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">Always On</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Always On</p>
             <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">Drill Library</h3>
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-4">The full structured drill archive. Every session filed by lever. Work what's weak.</p>
             <a href="/library"
-              class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
+              class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
               Browse Library →
             </a>
           </div>
 
           <div class="py-6">
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">Free</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Free</p>
             <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">The Footwork Blueprint</h3>
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-4">The Footwork Blueprint and the 7-lever audit are free. Run them alongside your Proving Ground work to track structural progress.</p>
             <div class="flex gap-6">
-              <a href="/foundation" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Get the Blueprint →</a>
-              <a href="/lever-audit-quiz" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">7-Lever Audit →</a>
+              <a href="/foundation" class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Get the Blueprint →</a>
+              <a href="/lever-audit-quiz" class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">7-Lever Audit →</a>
             </div>
           </div>
 
@@ -86,7 +86,7 @@ import Layout from '../../layouts/Base.astro';
 
         <div class="pt-8 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p class="text-[#0A0A0A]/30 text-xs leading-relaxed">
-            Questions? <a href="mailto:rainers@theerainers.com" class="text-[#0057FF] hover:opacity-60 transition-opacity font-bold">rainers@theerainers.com</a>
+            Questions? <a href="mailto:rainers@theerainers.com" class="text-[var(--blue)] hover:opacity-60 transition-opacity font-bold">rainers@theerainers.com</a>
           </p>
           <a href="/shop" class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase font-bold hover:text-[#0A0A0A]/60 transition-colors whitespace-nowrap">Browse Shop →</a>
         </div>

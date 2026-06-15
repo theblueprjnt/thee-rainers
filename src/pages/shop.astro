@@ -57,7 +57,7 @@ const productSchema = JSON.stringify(products.map(p => ({
     <div class="max-w-[1100px] mx-auto">
 
       <div class="mb-10">
-        <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-3">Shop</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-3">Shop</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.88]">Better Training<br/>for Better Results.</h1>
         <p class="text-[#0A0A0A]/45 text-sm mt-4">One-time purchase. Download and own it.</p>
       </div>
@@ -65,8 +65,8 @@ const productSchema = JSON.stringify(products.map(p => ({
       <!-- Blueprint cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {products.map(p => (
-          <div class={`tr-card flex flex-col group transition-colors duration-200 relative ${p.featured ? 'border-2 border-[#0057FF]/30 hover:border-[#0057FF]' : 'border border-[#0A0A0A]/10 hover:border-[#0057FF]/40'}`}>
-            {p.featured && <div class="absolute top-3 left-3 z-10 bg-[#0057FF] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Free · Start Here</div>}
+          <div class={`tr-card flex flex-col group transition-colors duration-200 relative ${p.featured ? 'border-2 border-[var(--blue)]/30 hover:border-[var(--blue)]' : 'border border-[#0A0A0A]/10 hover:border-[var(--blue)]/40'}`}>
+            {p.featured && <div class="absolute top-3 left-3 z-10 bg-[var(--blue)] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Free · Start Here</div>}
             <!-- Image + title now link to product page. Buy button stays direct to Stripe. -->
             <a href={p.page} aria-label={`Learn more about ${p.title}`} class={`overflow-hidden relative block ${p.featured ? 'bg-[#0A0A0A]' : 'bg-[#F6F6F6]'}`}>
               <img src={p.image} alt={p.title}
@@ -75,9 +75,9 @@ const productSchema = JSON.stringify(products.map(p => ({
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
             </a>
             <div class="p-5 flex flex-col flex-1">
-              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">{p.tag}</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">{p.tag}</p>
               <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-1">
-                <a href={p.page} class="hover:text-[#0057FF] transition-colors">{p.title}</a>
+                <a href={p.page} class="hover:text-[var(--blue)] transition-colors">{p.title}</a>
               </h2>
               <p class="text-[#0A0A0A]/50 text-xs mb-3 font-bold">{p.sub}</p>
               <p class="text-[#0A0A0A]/60 text-xs leading-relaxed flex-1">{p.desc}</p>
@@ -87,12 +87,12 @@ const productSchema = JSON.stringify(products.map(p => ({
                   {p.price_note && <p class="text-[10px] text-[#0A0A0A]/55 mt-0.5">{p.price_note}</p>}
                 </div>
                 <a href={p.stripeUrl}
-                  class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+                  class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--blue)] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
                   {p.cta} →
                 </a>
               </div>
               <p class="mt-3 text-[11px]">
-                <a href={p.page} class="text-[#0057FF] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity">Learn more →</a>
+                <a href={p.page} class="text-[var(--blue)] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity">Learn more →</a>
               </p>
             </div>
           </div>
@@ -122,7 +122,7 @@ const productSchema = JSON.stringify(products.map(p => ({
           </div>
           <div>
             <p class="font-bold text-[#0A0A0A] text-sm mb-1">What if I want live coaching alongside it?</p>
-            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">The Greatness Community includes live Proving Ground sessions every week. <a href="/community" class="text-[#0057FF] font-bold hover:opacity-70 transition-opacity">Learn more.</a></p>
+            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">The Greatness Community includes live Proving Ground sessions every week. <a href="/community" class="text-[var(--blue)] font-bold hover:opacity-70 transition-opacity">Learn more.</a></p>
           </div>
         </div>
       </div>
@@ -130,7 +130,7 @@ const productSchema = JSON.stringify(products.map(p => ({
       <!-- Workshop + Q&A row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
 
-        <div class="border border-[#D4A373]/30 bg-[#0A0A0A] flex flex-col group hover:border-[#D4A373]/60 transition-colors duration-200">
+        <div class="border border-white/10 bg-[#0A0A0A] flex flex-col group hover:border-white/20 transition-colors duration-200">
           <div class="relative overflow-hidden" style="height: 200px;">
             <img src="/images/defense_workshop.png" alt="Defense Workshop"
               width="1920" height="1080"
@@ -139,7 +139,7 @@ const productSchema = JSON.stringify(products.map(p => ({
           </div>
           <div class="p-8 flex flex-col flex-1 justify-between">
             <div>
-              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">Live · {WORKSHOP_DATE_SHORT} · 90 min</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Live · {WORKSHOP_DATE_SHORT} · 90 min</p>
               <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-3">Defense Workshop</h2>
               <p class="text-white/40 text-xs leading-relaxed">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset.</p>
             </div>
@@ -147,7 +147,7 @@ const productSchema = JSON.stringify(products.map(p => ({
               <span class="font-black text-white text-2xl">$197</span>
               <div class="flex flex-col items-end gap-1">
                 <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"
-                  class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+                  class="inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[var(--blue)] hover:text-white transition-all duration-200 whitespace-nowrap">
                   Reserve Seat →
                 </a>
                 <p class="text-[11px] text-white/55 leading-relaxed">
@@ -158,7 +158,7 @@ const productSchema = JSON.stringify(products.map(p => ({
           </div>
         </div>
 
-        <div class="border border-[#0A0A0A]/10 bg-[#F6F6F6] flex flex-col justify-between group hover:border-[#0057FF]/30 transition-colors duration-200">
+        <div class="border border-[#0A0A0A]/10 bg-[#F6F6F6] flex flex-col justify-between group hover:border-[var(--blue)]/30 transition-colors duration-200">
           <div class="relative overflow-hidden" style="height: 200px;">
             <img src="/images/workshop_bacgkround.png" alt="Workshop Replay"
               width="1920" height="1080"
@@ -167,14 +167,14 @@ const productSchema = JSON.stringify(products.map(p => ({
           </div>
           <div class="p-8 flex flex-col flex-1 justify-between">
             <div>
-              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">On Demand · Full Recording</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">On Demand · Full Recording</p>
               <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-2xl leading-tight mb-3">Workshop Replay</h2>
               <p class="text-[#0A0A0A]/60 text-xs leading-relaxed">The full 90-min session. Watch the corrections. Footwork, stance, punch mechanics. Apply the framework. 7-day access window from purchase.</p>
             </div>
             <div class="flex items-center justify-between mt-8">
               <span class="font-black text-[#0A0A0A] text-2xl">$79</span>
               <a href="/workshop-replay"
-                class="inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap">
+                class="inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[var(--blue)] hover:text-white transition-all duration-200 whitespace-nowrap">
                 See Replay →
               </a>
             </div>
@@ -184,15 +184,15 @@ const productSchema = JSON.stringify(products.map(p => ({
       </div>
 
       <!-- Community teaser -->
-      <div class="mt-4 border border-[#6A0DAD]/20 bg-[#6A0DAD]/04 overflow-hidden">
+      <div class="mt-4 border border-[var(--purple)]/20 bg-[var(--purple)]/04 overflow-hidden">
         <div class="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
+            <p class="text-[var(--purple)] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
             <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight mb-3">Live Reps With Rainers.</h2>
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Weekly live Proving Ground sessions with Rainers. Real-time correction on your movement. Private community chat. Drill library. $39/mo.</p>
           </div>
           <a href="/community"
-            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#6A0DAD] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--purple)] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
             See the Community →
           </a>
         </div>
@@ -201,7 +201,7 @@ const productSchema = JSON.stringify(products.map(p => ({
       <!-- Start free nudge -->
       <div class="mt-10 pt-10 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <p class="text-[#0A0A0A]/30 text-sm">Start free with the Footwork Blueprint. Build the base first.</p>
-        <a href="/foundation" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Blueprint →</a>
+        <a href="/foundation" class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Blueprint →</a>
       </div>
 
     </div>
@@ -212,7 +212,7 @@ const productSchema = JSON.stringify(products.map(p => ({
       <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
         "I do not run aimlessly. I do not box as one beating the air."
       </p>
-      <p class="text-[#926624] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
+      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
     </div>
   </section>
 

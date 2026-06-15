@@ -126,7 +126,7 @@ const videoSchema = JSON.stringify({
     <div class="max-w-[1100px] mx-auto w-full">
 
       <div class="mb-10 md:mb-12">
-        <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-6">The Library</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">The Library</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-6">Knowledge<br/>archive.</h1>
         <p class="text-[#0A0A0A]/45 text-base max-w-[460px] leading-relaxed">Long-form breakdowns of how the system works. Watch in any order.</p>
       </div>
@@ -146,13 +146,13 @@ const videoSchema = JSON.stringify({
 
           <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-2">
             <div class="max-w-[640px]">
-              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">{featured.label}</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">{featured.label}</p>
               <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-2xl md:text-3xl leading-[0.95] mb-3">{featured.title}</h2>
               <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">{featured.description}</p>
             </div>
             <div class="flex flex-col sm:flex-row gap-3 shrink-0">
               <a href="/foundation"
-                class="inline-flex items-center justify-center rounded-none font-bold bg-[#0057FF] text-white px-6 py-3.5 text-xs tracking-widest uppercase hover:bg-[#0A0A0A] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2 whitespace-nowrap">
+                class="inline-flex items-center justify-center rounded-none font-bold bg-[var(--blue)] text-white px-6 py-3.5 text-xs tracking-widest uppercase hover:bg-[#0A0A0A] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2 whitespace-nowrap">
                 Start Free →
               </a>
               <a href="/workshop"
@@ -173,13 +173,13 @@ const videoSchema = JSON.stringify({
       <div class="max-w-[1280px] mx-auto w-full">
 
         <div class="mb-12">
-          <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-4">Archive</p>
+          <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Archive</p>
           <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.85]">All sessions.</h2>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[2px]">
           {archive.map(video => (
-            <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#D4A373]/20 transition-colors duration-300 group">
+            <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 hover:border-[#0A0A0A]/15 transition-colors duration-300 group">
               <div class="relative aspect-video overflow-hidden">
                 <img
                   src={video.thumbnailUrl}
@@ -189,11 +189,11 @@ const videoSchema = JSON.stringify({
                 />
               </div>
               <div class="p-8">
-                <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">{video.label}</p>
+                <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">{video.label}</p>
                 <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg leading-tight mb-3">{video.title}</h3>
                 <p class="text-[#0A0A0A]/40 text-xs leading-relaxed mb-6">{video.description}</p>
                 <a href={video.embedUrl.replace('/embed/', '/watch?v=')} target="_blank"
-                  class="text-[#926624] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity duration-200">
+                  class="text-[var(--ink-soft)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity duration-200">
                   Watch →
                 </a>
               </div>
@@ -214,7 +214,7 @@ const videoSchema = JSON.stringify({
       </div>
       <div class="flex flex-col sm:flex-row gap-4 shrink-0">
         <a href="/foundation"
-          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
+          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white whitespace-nowrap">
           Start Free →
         </a>
         <a href="/shop"

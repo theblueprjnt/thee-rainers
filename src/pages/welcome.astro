@@ -19,7 +19,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
 
       <div class="mb-10 flex items-center gap-3">
         <div class="w-2 h-2 rounded-full bg-[#22C55E]" aria-hidden="true"></div>
-        <p class="text-[#926624] text-[11px] tracking-widest uppercase">You're In</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase">You're In</p>
       </div>
 
       <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-8"
@@ -27,7 +27,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
         Welcome to<br/>Greatness Community.
       </h1>
 
-      <div class="border-l-4 border-[#6A0DAD] pl-6 mb-12">
+      <div class="border-l-4 border-[var(--purple)] pl-6 mb-12">
         <p class="text-[#0A0A0A] text-lg font-bold leading-snug mb-2">Check your inbox.</p>
         <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">
           Your welcome email is on the way to the address you used at checkout.
@@ -39,7 +39,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
 
         <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
           <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
-            <div class="w-2 h-2 bg-[#6A0DAD]"></div>
+            <div class="w-2 h-2 bg-[var(--purple)]"></div>
           </div>
           <div>
             <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">The Proving Ground</p>
@@ -49,14 +49,14 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
 
         <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
           <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
-            <div class="w-2 h-2 bg-[#0057FF]"></div>
+            <div class="w-2 h-2 bg-[var(--blue)]"></div>
           </div>
           <div>
             <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Community Chat</p>
             <p class="text-[#0A0A0A]/45 text-xs leading-relaxed mb-2">Private space for members. Ask questions between sessions, post clips, walk with brothers doing the same work.</p>
             {communityChat ? (
               <a href={communityChat} target="_blank" rel="noopener noreferrer"
-                class="text-[#6A0DAD] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
+                class="text-[var(--purple)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
                 Join Community Chat →
               </a>
             ) : (
@@ -67,12 +67,12 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
 
         <div class="grid grid-cols-[24px_1fr] gap-4 py-5 items-start">
           <div class="w-6 h-6 border border-[#0A0A0A]/15 flex items-center justify-center shrink-0 mt-0.5" aria-hidden="true">
-            <div class="w-2 h-2 bg-[#D4A373]"></div>
+            <div class="w-2 h-2 bg-[var(--ink-soft)]"></div>
           </div>
           <div>
             <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight mb-0.5">Drill Library</p>
             <p class="text-[#0A0A0A]/45 text-xs leading-relaxed mb-2">Full access to every drill, organized by lever. Start with whatever is weakest in your game.</p>
-            <a href="/library" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Browse Library →</a>
+            <a href="/library" class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Browse Library →</a>
           </div>
         </div>
 
@@ -85,7 +85,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
             <p class="text-[#0A0A0A]/45 text-xs leading-relaxed mb-2">Update your card, switch plans, or cancel anytime. No forms. No questions. Self-serve through the Customer Portal.</p>
             {sessionId ? (
               <button id="portal-btn"
-                class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity cursor-pointer bg-transparent border-0 p-0 disabled:opacity-40"
+                class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity cursor-pointer bg-transparent border-0 p-0 disabled:opacity-40"
                 aria-label="Open Customer Portal to manage your subscription">
                 Open Customer Portal →
               </button>
@@ -98,7 +98,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
       </div>
 
       <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-6 mb-10">
-        <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">Start here</p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Start here</p>
         <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight leading-tight mb-3">
           The Footwork Blueprint runs alongside everything.
         </p>
@@ -106,7 +106,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
           If you haven't downloaded it yet, grab it today. It sets the structural base the Proving Ground builds on.
         </p>
         <a href="/foundation"
-          class="inline-flex items-center font-bold text-[#0057FF] text-xs tracking-widest uppercase hover:opacity-60 transition-opacity">
+          class="inline-flex items-center font-bold text-[var(--blue)] text-xs tracking-widest uppercase hover:opacity-60 transition-opacity">
           Get the Footwork Blueprint · Free →
         </a>
       </div>
@@ -114,10 +114,10 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-8 border-t border-[#0A0A0A]/8">
         <p class="text-[#0A0A0A]/30 text-xs leading-relaxed">
           Email not arrived after 10 minutes?<br/>
-          <a href="mailto:rainers@theerainers.com" class="text-[#0057FF] hover:opacity-60 transition-opacity font-bold">rainers@theerainers.com</a>
+          <a href="mailto:rainers@theerainers.com" class="text-[var(--blue)] hover:opacity-60 transition-opacity font-bold">rainers@theerainers.com</a>
         </p>
         <a href="/community/inside"
-          class="text-[#6A0DAD] text-xs tracking-widest uppercase font-bold hover:opacity-60 transition-opacity whitespace-nowrap">
+          class="text-[var(--purple)] text-xs tracking-widest uppercase font-bold hover:opacity-60 transition-opacity whitespace-nowrap">
           Enter Member Area →
         </a>
       </div>

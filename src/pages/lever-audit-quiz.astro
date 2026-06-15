@@ -7,13 +7,13 @@ import LinkPage from '../layouts/LinkPage.astro';
 
   <!-- Progress bar -->
   <div id="progress-rail" class="hidden fixed top-0 left-0 right-0 h-[2px] bg-[#0A0A0A]/8 z-50">
-    <div id="progress-fill" class="h-full bg-[#0057FF] transition-[width] duration-500 ease-out" style="width:0%"></div>
+    <div id="progress-fill" class="h-full bg-[var(--blue)] transition-[width] duration-500 ease-out" style="width:0%"></div>
   </div>
 
   <!-- ── INTRO ── -->
   <div id="s-intro" class="screen active fixed inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-10">
     <div class="w-full max-w-[420px]">
-      <p class="text-[#926624] text-[10px] tracking-[0.2em] uppercase mb-5">Thee Rainers · For Competitors</p>
+      <p class="text-[var(--ink-soft)] text-[10px] tracking-[0.2em] uppercase mb-5">Thee Rainers · For Competitors</p>
       <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.82] mb-5"
           style="font-size: clamp(2.8rem, 8vw, 4.5rem);">
         7-Lever<br/>Audit
@@ -25,7 +25,7 @@ import LinkPage from '../layouts/LinkPage.astro';
         Rate yourself as the sparring version, not the drilling version.
       </p>
       <button id="btn-start"
-        class="group inline-flex items-center justify-center w-full font-bold bg-[#0A0A0A] text-white px-10 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0057FF] active:bg-[#0057FF]/90 cursor-pointer border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+        class="group inline-flex items-center justify-center w-full font-bold bg-[#0A0A0A] text-white px-10 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[var(--blue)] active:bg-[var(--blue)]/90 cursor-pointer border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
         Begin Audit
         <span class="ml-3 transition-transform duration-150 group-hover:translate-x-1">→</span>
       </button>
@@ -37,7 +37,7 @@ import LinkPage from '../layouts/LinkPage.astro';
     <div class="w-full max-w-[480px]">
 
       <div class="flex items-center justify-between mb-6">
-        <p id="lev-num" class="text-[#926624] text-[10px] tracking-[0.2em] uppercase">01</p>
+        <p id="lev-num" class="text-[var(--ink-soft)] text-[10px] tracking-[0.2em] uppercase">01</p>
         <p id="lev-progress" class="text-[#0A0A0A]/25 text-[10px] tracking-[0.15em] uppercase">1 of 7</p>
       </div>
 
@@ -61,7 +61,7 @@ import LinkPage from '../layouts/LinkPage.astro';
   <!-- ── EMAIL GATE ── -->
   <div id="s-email" class="screen fixed inset-0 overflow-y-auto flex flex-col items-center justify-center px-6 py-10">
     <div class="w-full max-w-[400px]">
-      <div class="w-8 h-[2px] bg-[#0057FF] mb-6"></div>
+      <div class="w-8 h-[2px] bg-[var(--blue)] mb-6"></div>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-3"
           style="font-size: clamp(1.8rem, 5vw, 2.5rem);">
         Results<br/>are ready.
@@ -73,7 +73,7 @@ import LinkPage from '../layouts/LinkPage.astro';
         <input type="email" id="gate-email" required placeholder="your@email.com"
           class="w-full border border-[#0A0A0A]/15 bg-transparent px-5 py-3 text-[#0A0A0A] text-sm focus:border-[#0A0A0A] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
         <button type="submit" id="btn-results"
-          class="inline-flex items-center justify-center font-bold bg-[#0057FF] text-white px-8 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 cursor-pointer border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+          class="inline-flex items-center justify-center font-bold bg-[var(--blue)] text-white px-8 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 cursor-pointer border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
           See My Results →
         </button>
       </form>
@@ -87,7 +87,7 @@ import LinkPage from '../layouts/LinkPage.astro';
       <div class="w-full max-w-[440px]">
 
         <!-- Score -->
-        <p class="text-[#926624] text-[10px] tracking-[0.2em] uppercase mb-3">Your Results</p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-[0.2em] uppercase mb-3">Your Results</p>
         <div class="flex items-baseline gap-2 mb-1">
           <span id="res-total" class="font-black text-[#0A0A0A] leading-none tracking-tighter"
             style="font-size: clamp(3.5rem, 14vw, 6rem);">—</span>
@@ -96,8 +96,8 @@ import LinkPage from '../layouts/LinkPage.astro';
         <p id="res-verdict" class="text-[#0A0A0A]/45 text-sm leading-relaxed mb-8 max-w-[340px]">—</p>
 
         <!-- Primary constraint -->
-        <div class="border-l-[3px] border-[#D4A373] pl-5 mb-8">
-          <p class="text-[#926624] text-[10px] tracking-[0.18em] uppercase mb-2">Primary Constraint</p>
+        <div class="border-l-[3px] border-[var(--blue)] pl-5 mb-8">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-[0.18em] uppercase mb-2">Primary Constraint</p>
           <p id="res-constraint" class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg leading-tight mb-2">—</p>
           <p id="res-impact" class="text-[#0A0A0A]/45 text-sm leading-relaxed">—</p>
         </div>
@@ -111,7 +111,7 @@ import LinkPage from '../layouts/LinkPage.astro';
         <!-- CTA -->
         <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4">Recommended next step</p>
         <a id="res-cta" href="/"
-          class="w-full inline-flex items-center justify-center font-bold bg-[#0057FF] text-white px-8 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 mb-4">
+          class="w-full inline-flex items-center justify-center font-bold bg-[var(--blue)] text-white px-8 py-4 text-sm tracking-widest uppercase transition-colors duration-150 hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 mb-4">
           ...
         </a>
         <a href="/pdfs/foundation.pdf" download="The-Footwork-Blueprint-Thee-Rainers.pdf"
@@ -120,10 +120,10 @@ import LinkPage from '../layouts/LinkPage.astro';
         </a>
 
         <!-- Private Architecture -->
-        <div class="border border-[#6A0DAD]/15 p-6 mt-8">
-          <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-2">Application Only</p>
+        <div class="border border-[var(--purple)]/15 p-6 mt-8">
+          <p class="text-[var(--purple)] text-[10px] tracking-widest uppercase mb-2">Application Only</p>
           <p class="text-[#0A0A0A]/50 text-xs leading-relaxed mb-4">Private Architecture deploys all seven levers as one system. Built around your specific structure and fight schedule.</p>
-          <a href="/command" class="text-[#6A0DAD]/70 text-[10px] tracking-widest uppercase hover:text-[#6A0DAD] transition-colors duration-200">See Private Architecture →</a>
+          <a href="/command" class="text-[var(--purple)]/70 text-[10px] tracking-widest uppercase hover:text-[var(--purple)] transition-colors duration-200">See Private Architecture →</a>
         </div>
 
         <!-- Scripture -->
@@ -214,8 +214,8 @@ import LinkPage from '../layouts/LinkPage.astro';
     font-weight: 600;
   }
 
-  .lever-bar.is-primary .lbr-label { color: #D4A373; font-weight: 800; }
-  .lever-bar.is-primary .lbr-fill  { background: #D4A373; }
+  .lever-bar.is-primary .lbr-label { color: var(--blue); font-weight: 800; }
+  .lever-bar.is-primary .lbr-fill  { background: var(--blue); }
 
   .lbr-track {
     height: 2px;
@@ -236,7 +236,7 @@ import LinkPage from '../layouts/LinkPage.astro';
     text-align: right;
   }
 
-  .lever-bar.is-primary .lbr-score { color: #D4A373; }
+  .lever-bar.is-primary .lbr-score { color: var(--blue); }
 </style>
 
 <script>

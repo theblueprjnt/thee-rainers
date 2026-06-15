@@ -12,52 +12,52 @@ import Layout from '../layouts/Base.astro';
 
         <!-- Left: Form (60%) -->
         <div>
-          <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-6">Application</p>
+          <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Application</p>
           <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.9] mb-7">Private<br/>Architecture.</h1>
           <p class="text-[#0A0A0A]/60 text-base leading-relaxed mb-10 max-w-[460px]">Built around your fight, your body, your schedule. I review every application myself. If we're a fit, we begin.</p>
 
-          <div class="border-l-2 border-[#D4A373]/40 pl-6 mb-14">
+          <div class="border-l-2 border-[#0A0A0A]/10 pl-6 mb-14">
             <p class="text-[#0A0A0A]/25 text-sm leading-relaxed italic mb-3">"I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."</p>
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
           </div>
 
           <form id="command-form" class="flex flex-col gap-10">
             <div class="flex flex-col gap-2">
-              <label for="name" class="text-[#926624] text-[10px] tracking-widest uppercase">Full Name</label>
+              <label for="name" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Full Name</label>
               <input type="text" id="name" name="full_name" required placeholder="—"
-                class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
+                class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
             </div>
 
             <div class="flex flex-col gap-2">
-              <label for="email" class="text-[#926624] text-[10px] tracking-widest uppercase">Email</label>
+              <label for="email" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Email</label>
               <input type="email" id="email" name="email" required placeholder="—"
-                class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
+                class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
             </div>
 
             <div class="flex flex-col gap-2">
-              <label for="record" class="text-[#926624] text-[10px] tracking-widest uppercase">Current fight record and training structure</label>
+              <label for="record" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Current fight record and training structure</label>
               <textarea id="record" name="record" rows="3" required placeholder="—"
-                class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
+                class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
             </div>
 
             <div class="flex flex-col gap-2">
-              <label for="flaw" class="text-[#926624] text-[10px] tracking-widest uppercase">Where do your mechanics break down under pressure?</label>
+              <label for="flaw" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Where do your mechanics break down under pressure?</label>
               <textarea id="flaw" name="flaw" rows="3" required placeholder="—"
-                class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
+                class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
             </div>
 
             <div class="flex flex-col gap-2">
-              <label for="goal" class="text-[#926624] text-[10px] tracking-widest uppercase">What do you want to change?</label>
+              <label for="goal" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">What do you want to change?</label>
               <textarea id="goal" name="goal" rows="3" required placeholder="—"
-                class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[#D4A373] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
+                class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
             </div>
 
             <div>
               <button type="submit"
-                class="purple-btn inline-flex items-center justify-center font-bold border-2 border-[#6A0DAD] text-[#6A0DAD] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#6A0DAD] hover:text-white">
+                class="purple-btn inline-flex items-center justify-center font-bold border-2 border-[var(--purple)] text-[var(--purple)] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--purple)] hover:text-white">
                 Submit Application
               </button>
-              <p id="form-status" class="hidden text-[#926624] text-sm tracking-wide mt-6"></p>
+              <p id="form-status" class="hidden text-[var(--ink-soft)] text-sm tracking-wide mt-6"></p>
             </div>
           </form>
         </div>
@@ -77,7 +77,7 @@ import Layout from '../layouts/Base.astro';
               ></iframe>
             </div>
             <div class="px-6 py-4 bg-[#F6F6F6] border-t border-[#0A0A0A]/8">
-              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-1">Private Architecture · 5 Months</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-1">Private Architecture · 5 Months</p>
               <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">Giancarlo · entrepreneur. We built the work around his fight schedule and the way his body actually moves.</p>
             </div>
           </div>
@@ -85,15 +85,15 @@ import Layout from '../layouts/Base.astro';
           <div class="border-l border-[#0A0A0A]/10 pl-10 flex flex-col gap-8">
             <p class="text-[#0A0A0A]/20 text-[11px] tracking-widest uppercase">How it works</p>
             <div>
-              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">01</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">01</p>
               <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Single-track. Your training, your fight, your timeline. No cohort.</p>
             </div>
             <div>
-              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">02</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">02</p>
               <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Application first so I can see what we're working with before we begin.</p>
             </div>
             <div>
-              <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">03</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">03</p>
               <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">You leave with the playbook. The work has to compound after I'm gone.</p>
             </div>
           </div>

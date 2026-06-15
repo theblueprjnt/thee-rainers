@@ -25,7 +25,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
       <!-- Content stage — solid black, generous padding, no overlap -->
       <div class="bg-[#0A0A0A] px-7 pt-8 pb-12">
-        <p class="text-[#D4A373] text-[11px] tracking-widest uppercase mb-4">Boxing Tech · @theerainers</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Boxing Tech · @theerainers</p>
         <h1 class="font-black uppercase tracking-tighter mb-5 text-white"
           style="font-size: clamp(2.5rem, 11vw, 3.5rem); line-height: 0.86;">
           Engineered<br/>for the ring.
@@ -35,7 +35,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         </p>
         <div class="flex flex-col gap-3">
           <a href="/workshop"
-            class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-6 py-4 text-[13px] tracking-wide uppercase transition-transform duration-150 active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+            class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-6 py-4 text-[13px] tracking-wide uppercase transition-transform duration-150 active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
             Reserve Workshop · {WORKSHOP_DATE_SHORT} · $197 →
           </a>
           <a href="/foundation"
@@ -46,7 +46,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
         <a href="#students"
           class="mt-7 inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-white/55 hover:text-white transition-colors duration-200">
-          <span class="h-px w-8 bg-[#D4A373]"></span>
+          <span class="h-px w-8 bg-[var(--ink-soft)]"></span>
           <span>Watch fighters run the system</span>
           <span aria-hidden="true">↓</span>
         </a>
@@ -57,7 +57,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
     <div class="hidden md:grid md:grid-cols-[60%_40%] md:min-h-screen">
       <!-- Left: text + CTAs -->
       <div class="flex flex-col justify-center bg-white px-14 lg:px-20">
-        <p class="text-[#926624] text-xs tracking-wide uppercase mb-5">Boxing Tech · @theerainers</p>
+        <p class="text-[var(--ink-soft)] text-xs tracking-wide uppercase mb-5">Boxing Tech · @theerainers</p>
         <h1 class="font-black uppercase tracking-tighter mb-6 text-[#0A0A0A]"
           style="font-size: clamp(2.75rem, 5.5vw, 4.5rem); line-height: 0.85;">
           Engineered<br/>for the ring.
@@ -67,18 +67,18 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         </p>
         <div class="flex flex-col gap-3 max-w-[480px]">
           <a href="/workshop"
-            class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-4 text-sm tracking-wide uppercase transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+            class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-4 text-sm tracking-wide uppercase transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
             Reserve Workshop Seat · {WORKSHOP_DATE_SHORT} · $197 →
           </a>
           <a href="/foundation"
-            class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A]/15 text-[#0A0A0A] bg-transparent px-8 py-4 text-sm tracking-wide uppercase hover:border-[#0057FF] hover:text-[#0057FF] transition-all duration-200 whitespace-nowrap">
+            class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A]/15 text-[#0A0A0A] bg-transparent px-8 py-4 text-sm tracking-wide uppercase hover:border-[var(--blue)] hover:text-[var(--blue)] transition-all duration-200 whitespace-nowrap">
             Get the Footwork Blueprint · Free →
           </a>
         </div>
 
         <a href="#students"
           class="mt-10 inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase transition-colors duration-200 text-[#0A0A0A]/60 hover:text-[#0A0A0A] group">
-          <span class="h-px w-10 bg-[#D4A373] transition-[width] duration-200 group-hover:w-14"></span>
+          <span class="h-px w-10 bg-[var(--ink-soft)] transition-[width] duration-200 group-hover:w-14"></span>
           <span>Watch fighters run the system</span>
           <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-y-0.5">↓</span>
         </a>
@@ -102,11 +102,11 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
       <!-- Header + progress -->
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
         <div>
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">Quiz</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Quiz</p>
           <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88]">Find your<br/>starting point.</h2>
         </div>
         <div class="flex gap-1.5">
-          <div id="qp-1" class="h-[3px] w-14 transition-all duration-300" style="background-color:#0057FF"></div>
+          <div id="qp-1" class="h-[3px] w-14 transition-all duration-300" style="background-color:var(--blue)"></div>
           <div id="qp-2" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
           <div id="qp-3" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
         </div>
@@ -117,19 +117,19 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-6">What is your primary focus right now?</p>
         <div class="grid grid-cols-2 gap-3">
           <button data-quiz-option data-step="1" data-value="speed"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
             <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Speed</p>
           </button>
           <button data-quiz-option data-step="1" data-value="power"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
             <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Power</p>
           </button>
           <button data-quiz-option data-step="1" data-value="footwork"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
             <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Footwork</p>
           </button>
           <button data-quiz-option data-step="1" data-value="ringiq"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
             <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Ring IQ</p>
           </button>
         </div>
@@ -143,17 +143,17 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-6">Where are you starting from?</p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
           <button data-quiz-option data-step="2" data-value="beginner"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
             <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Just starting</p>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Under 1 year or no formal training</p>
           </button>
           <button data-quiz-option data-step="2" data-value="amateur"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
             <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Amateur</p>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Training consistently, have sparred</p>
           </button>
           <button data-quiz-option data-step="2" data-value="advanced"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0057FF] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
             <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Advanced</p>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Competitive or serious fight record</p>
           </button>
@@ -165,16 +165,16 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         <button id="quiz-back-3" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 py-3 px-1 font-bold min-h-[44px]">
           &larr; Back
         </button>
-        <div id="quiz-insight" class="border-l-2 border-[#D4A373] pl-4 mb-8 max-w-[480px]">
+        <div id="quiz-insight" class="border-l-2 border-[#0A0A0A]/15 pl-4 mb-8 max-w-[480px]">
           <!-- Populated by JS -->
         </div>
         <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-[0.88] mb-2">Your starting point.</h3>
         <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6 max-w-[420px]">Enter your email and I will send you the specific next step based on what you told me.</p>
         <form id="quiz-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
           <input type="email" id="quiz-email" placeholder="your@email.com" required
-            class="flex-1 border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/25 focus:outline-none focus:border-[#0057FF] transition-colors duration-200" />
+            class="flex-1 border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/25 focus:outline-none focus:border-[var(--blue)] transition-colors duration-200" />
           <button type="submit" id="quiz-submit"
-            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-xs tracking-widest uppercase hover:bg-[#0057FF] hover:text-white transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-40">
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-8 py-4 text-xs tracking-widest uppercase hover:bg-[var(--blue)] hover:text-white transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-40">
             Send it →
           </button>
         </form>
@@ -183,7 +183,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
       <!-- Step 4: Done (dynamic product CTA per path) -->
       <div id="quiz-step-4" class="hidden">
-        <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-4">Sent</p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Sent</p>
         <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Check your inbox.</h3>
         <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[400px] mb-8">Your plan is on the way. If you want to start now:</p>
         <div id="quiz-result-cta">
@@ -228,7 +228,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
               <p class="text-white/65 text-xs md:text-sm mt-3 leading-relaxed">Camera on. Real-time correction on your defensive structure, movement, and mechanics. Limited seats. Full recording delivered within 24h.</p>
             </div>
             <a href="/workshop"
-              class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-white text-[#0A0A0A] font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0057FF] hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+              class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-white text-[#0A0A0A] font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[var(--blue)] hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
               Reserve Seat →
             </a>
           </div>
@@ -238,8 +238,8 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
       <!-- 2-column blueprint cards — Footwork (free) + Shadowboxing ($47) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
 
-        <div class="tr-card border-2 border-[#0057FF]/30 flex flex-col group hover:border-[#0057FF] transition-colors duration-200 relative">
-          <div class="absolute top-3 left-3 z-10 bg-[#0057FF] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Free · Start Here</div>
+        <div class="tr-card border-2 border-[var(--blue)]/30 flex flex-col group hover:border-[var(--blue)] transition-colors duration-200 relative">
+          <div class="absolute top-3 left-3 z-10 bg-[var(--blue)] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Free · Start Here</div>
           <a href="/foundation" aria-label="Get the free Footwork Blueprint" class="bg-[#F6F6F6] overflow-hidden relative block">
             <img src="/images/3d_thefootworkblueprint_cover.jpg" alt="Footwork Blueprint"
               width="400" height="400"
@@ -247,22 +247,22 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
           </a>
           <div class="p-5 flex flex-col flex-1">
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">Blueprint · 21 Pages · 56 Drills</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Blueprint · 21 Pages · 56 Drills</p>
             <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">
-              <a href="/foundation" class="hover:text-[#0057FF] transition-colors">Footwork Blueprint</a>
+              <a href="/foundation" class="hover:text-[var(--blue)] transition-colors">Footwork Blueprint</a>
             </h3>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">Stance mechanics. Weight distribution. Kinetic chain from the floor up. The base layer. Full PDF. No payment.</p>
             <div class="mt-5 flex items-center justify-between gap-3">
-              <span class="font-black text-[#0057FF] text-2xl">FREE</span>
+              <span class="font-black text-[var(--blue)] text-2xl">FREE</span>
               <a href="/foundation"
-                class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+                class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--blue)] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
                 Get the PDF →
               </a>
             </div>
           </div>
         </div>
 
-        <div class="tr-card border border-[#0A0A0A]/10 flex flex-col group hover:border-[#0057FF]/40 transition-colors duration-200">
+        <div class="tr-card border border-[#0A0A0A]/10 flex flex-col group hover:border-[var(--blue)]/40 transition-colors duration-200">
           <a href="/shadowboxing-blueprint" aria-label="Learn more about the Shadowboxing Blueprint" class="bg-[#F6F6F6] overflow-hidden relative block">
             <img src="/images/shadowboxingblueprint_covernew.png" alt="Shadowboxing Blueprint"
               width="1500" height="1150"
@@ -270,15 +270,15 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
           </a>
           <div class="p-5 flex flex-col flex-1">
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">Blueprint · The Next Layer</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Blueprint · The Next Layer</p>
             <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">
-              <a href="/shadowboxing-blueprint" class="hover:text-[#0057FF] transition-colors">Shadowboxing Blueprint</a>
+              <a href="/shadowboxing-blueprint" class="hover:text-[var(--blue)] transition-colors">Shadowboxing Blueprint</a>
             </h3>
             <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">Shadowboxing rebuilt as live simulation. Cue reading. Range fluency. Technique under pressure. After the footwork foundation.</p>
             <div class="mt-5 flex items-center justify-between gap-3">
               <span class="font-black text-[#0A0A0A] text-2xl">$47</span>
               <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"
-                class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0057FF] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+                class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--blue)] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
                 Get the Blueprint →
               </a>
             </div>
@@ -300,27 +300,27 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
           loading="lazy" />
         <div class="relative z-10 p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-2">On Demand · Full Recording</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">On Demand · Full Recording</p>
             <p class="font-black text-white uppercase tracking-tight text-xl leading-tight">Workshop Replay · $79</p>
             <p class="text-white/55 text-xs mt-2 leading-relaxed">90 min. Watch the live corrections. Apply the framework. 7-day access from purchase.</p>
           </div>
           <a href="/workshop-replay"
-            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap border-2 border-[#0057FF] text-[#0057FF] bg-transparent font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0057FF] hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[var(--blue)] hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
             Get Replay →
           </a>
         </div>
       </div>
 
       <!-- Greatness Community -->
-      <div class="border border-[#6A0DAD]/20 overflow-hidden">
+      <div class="border border-[var(--purple)]/20 overflow-hidden">
         <div class="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <p class="text-[#6A0DAD] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
+            <p class="text-[var(--purple)] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
             <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight mb-3">Live Reps With Rainers.</h3>
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Weekly live Proving Ground sessions with Rainers. Real-time correction on your movement. Private community chat. Drill library. $39/mo.</p>
           </div>
           <a href="/community"
-            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#6A0DAD] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--purple)] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
             See the Community →
           </a>
         </div>
@@ -336,27 +336,27 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
           <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.instagram} data-suffix="K">{SOCIAL_STATS.instagram}K</p>
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase">Instagram</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Instagram</p>
         </a>
         <a href="https://www.facebook.com/theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
           <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.facebook} data-suffix="K">{SOCIAL_STATS.facebook}K</p>
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase">Facebook</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Facebook</p>
         </a>
         <a href="https://www.tiktok.com/@theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
           <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.tiktok} data-suffix="K">{SOCIAL_STATS.tiktok}K</p>
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase">TikTok</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">TikTok</p>
         </a>
         <a href="https://www.threads.net/@theerainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200">
           <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.threads} data-suffix="K">{SOCIAL_STATS.threads}K</p>
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase">Threads</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Threads</p>
         </a>
         <a href="https://www.youtube.com/@Rainers" target="_blank" rel="noopener"
           class="bg-white flex flex-col items-center justify-center py-8 px-4 hover:bg-[#F6F6F6] transition-colors duration-200 col-span-2 md:col-span-1">
           <p class="font-black text-[#0A0A0A] text-2xl md:text-3xl leading-none mb-1" data-count={SOCIAL_STATS.youtube} data-suffix="K">{SOCIAL_STATS.youtube}K</p>
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase">YouTube</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">YouTube</p>
         </a>
       </div>
     </div>
@@ -369,7 +369,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         style="font-size: clamp(1.75rem, 4vw, 2.5rem);">
         "I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."
       </p>
-      <p class="text-[#926624] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
+      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
     </div>
   </section>
 
@@ -440,7 +440,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
       });
       BARS.forEach(function(id, i) {
         var el = document.getElementById(id);
-        if (el) el.style.backgroundColor = i < n ? '#0057FF' : 'rgba(10,10,10,0.12)';
+        if (el) el.style.backgroundColor = i < n ? 'var(--blue)' : 'rgba(10,10,10,0.12)';
       });
       if (n === 3) {
         var insight = document.getElementById('quiz-insight');
@@ -449,7 +449,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
       if (n === 4) {
         var path = getPath();
         var resultCta = document.getElementById('quiz-result-cta');
-        if (resultCta) resultCta.innerHTML = '<a href="' + path.url + '" style="display:inline-flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #0057FF;color:#0057FF;background:transparent;padding:12px 28px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" onmouseover="this.style.background=\'#0057FF\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'#0057FF\'">' + path.cta + '</a>';
+        if (resultCta) resultCta.innerHTML = '<a href="' + path.url + '" style="display:inline-flex;align-items:center;justify-content:center;font-weight:700;border:2px solid var(--blue);color:var(--blue);background:transparent;padding:12px 28px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;" onmouseover="this.style.background=\'var(--blue)\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'var(--blue)\'">' + path.cta + '</a>';
       }
     }
 

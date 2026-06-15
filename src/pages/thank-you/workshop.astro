@@ -10,7 +10,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts'
   <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
     <div class="max-w-[720px] mx-auto w-full">
 
-      <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-4">Confirmed</p>
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Confirmed</p>
       <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-6">
         You're in.<br/>{WORKSHOP_DATE_SHORT}.
       </h1>
@@ -19,7 +19,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts'
       </p>
 
       <div class="border border-[#0A0A0A]/8 p-8 mb-12">
-        <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-6">Session details</p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-6">Session details</p>
         <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
           <div class="flex justify-between py-3">
             <span class="text-[#0A0A0A]/35 text-sm">Date</span>
@@ -45,21 +45,21 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts'
       </div>
 
       <!-- NEXT STEP -->
-      <div class="border-l-2 border-[#0057FF] pl-6 mb-12">
+      <div class="border-l-2 border-[var(--blue)] pl-6 mb-12">
         <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-2">Do this now</p>
         <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">Know your primary constraint before you arrive.</p>
         <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6 max-w-[400px]">
           The 7-lever audit identifies the specific lever holding your system back. 3 minutes. The people who arrive with this already scored get the most out of the live Q&A.
         </p>
         <a href="/lever-audit-quiz"
-          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white">
+          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white">
           Take the 7-Lever Audit →
         </a>
       </div>
 
       <!-- WATCH THE PREVIOUS SESSION -->
       <div class="border border-[#0A0A0A]/8 p-8">
-        <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-3">Optional — watch before {WORKSHOP_DATE_SHORT}</p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Optional — watch before {WORKSHOP_DATE_SHORT}</p>
         <p class="text-[#0A0A0A]/60 text-sm font-bold mb-2">The previous workshop replay</p>
         <p class="text-[#0A0A0A]/35 text-xs leading-relaxed mb-5">Same mechanical foundations covered in this session. Watching it first means {WORKSHOP_DATE_SHORT} becomes refinement, not introduction.</p>
         <a href="/workshop-replay"

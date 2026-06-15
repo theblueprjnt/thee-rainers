@@ -1,23 +1,23 @@
 @import "tailwindcss";
 @import "@fontsource-variable/bricolage-grotesque/index.css";
 
-@theme {
-  --color-bg: #FFFFFF;
-  --color-navy: #0A0A0A;
-  --color-terracotta: #c84d3a;
-  --color-ink: #0A0A0A;
-  --color-cream: #F6F6F6;
-  --color-muted: #888888;
-  --color-rule: #E0E0E0;
+:root {
+  --paper:    #FFFFFF;
+  --ink:      #0A0A0A;
+  --ink-soft: #6B7280;
+  --red:      #E11D2A;
+  --blue:     #2348C6;
+  --purple:   #7C3AED;
+}
 
-  --color-brand-dark: #0A0A0A;
-  --color-brand-teal: #EEF4FF;
-  --color-brand-light: #F6F6F6;
-  --color-blue: #0057FF;
-  --color-copper: #D4A373;
-  --color-copper-text: #926624;
-  --color-purple: #6A0DAD;
-  --color-warm-white: #F7F5F2;
+@theme {
+  --color-paper:    #FFFFFF;
+  --color-ink:      #0A0A0A;
+  --color-ink-soft: #6B7280;
+  --color-red:      #E11D2A;
+  --color-blue:     #2348C6;
+  --color-purple:   #7C3AED;
+  --color-cream:    #F6F6F6;
   --color-charcoal: #141414;
 
   --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
@@ -101,17 +101,14 @@
     transform: translateZ(0);
   }
 
-  /* Workshop gradient CTA — Instagram gradient, reserved for the live Workshop. */
+  /* Primary CTA — flat red, one per screen */
   .tr-gradient-cta {
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    background-size: 200% 200%;
-    background-position: 0% 50%;
-    will-change: background-position, transform;
-    transition: background-position 0.6s ease, transform 0.15s ease;
-    box-shadow: 0 6px 18px -8px rgba(220, 39, 67, 0.55);
+    background: var(--red);
+    will-change: opacity, transform;
+    transition: opacity 0.15s ease, transform 0.15s ease;
   }
   .tr-gradient-cta:hover {
-    background-position: 100% 50%;
+    opacity: 0.88;
   }
 
   /* /links — shared link row. Two-column layout, never overflows. */
@@ -140,34 +137,31 @@
     flex: 0 0 auto;
   }
   .tr-link-primary {
-    border: 2px solid #0057FF;
-    color: #0057FF;
+    border: 2px solid var(--blue);
+    color: var(--blue);
   }
   .tr-link-primary .tr-link-meta { opacity: 0.7; }
-  .tr-link-primary:hover { background: #0057FF; color: #FFFFFF; }
+  .tr-link-primary:hover { background: var(--blue); color: #FFFFFF; }
   .tr-link-primary:hover .tr-link-meta { opacity: 1; }
 
   .tr-link-gradient {
     border: 1px solid transparent;
     color: #FFFFFF;
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    background-size: 200% 200%;
-    background-position: 0% 50%;
-    box-shadow: 0 6px 18px -8px rgba(220, 39, 67, 0.55);
-    transition: background-position 0.6s ease, transform 0.15s ease;
+    background: var(--red);
+    transition: opacity 0.15s ease;
   }
-  .tr-link-gradient:hover { background-position: 100% 50%; }
+  .tr-link-gradient:hover { opacity: 0.88; }
 
   .tr-link-quiet {
     border: 1px solid rgba(10,10,10,0.12);
     color: rgba(10,10,10,0.78);
   }
-  .tr-link-quiet .tr-link-meta { color: #926624; }
+  .tr-link-quiet .tr-link-meta { color: var(--ink-soft); }
   .tr-link-quiet:hover {
-    border-color: #0057FF;
-    color: #0057FF;
+    border-color: var(--ink);
+    color: var(--ink);
   }
-  .tr-link-quiet:hover .tr-link-meta { color: #0057FF; }
+  .tr-link-quiet:hover .tr-link-meta { color: var(--ink); }
 
   /* Popup — subtle fade+rise on appearance, matching iOS sheet feel */
   @keyframes tr-popup-fade   { from { opacity: 0; } to { opacity: 1; } }

@@ -78,7 +78,7 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
     <section class={dark ? "w-full bg-[#0A0A0A] text-white" : "w-full bg-white text-[#0A0A0A]"}>
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div class="mb-12 md:mb-16">
-          <p class="text-[10px] font-bold uppercase tracking-widest text-[#926624]">
+          <p class="text-[10px] font-bold uppercase tracking-widest text-[var(--ink-soft)]">
             {kicker}
           </p>
           <h2 class="mt-3 text-4xl font-black uppercase leading-[0.9] tracking-tighter md:text-6xl">
@@ -112,7 +112,7 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
                       class="h-full w-full object-cover opacity-90 transition duration-150 group-hover:opacity-100"
                     />
                     <span class="absolute inset-0 grid place-items-center">
-                      <span class="grid h-16 w-16 place-items-center bg-[#0057FF] text-white transition-colors duration-150 group-hover:bg-white group-hover:text-[#0A0A0A]">
+                      <span class="grid h-16 w-16 place-items-center bg-[var(--blue)] text-white transition-colors duration-150 group-hover:bg-white group-hover:text-[#0A0A0A]">
                         <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
                           <path d="M8 5v14l11-7z" />
                         </svg>
@@ -127,7 +127,7 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
                   “{featured.quote}”
                 </blockquote>
                 <figcaption class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-                  <span class="h-px w-8 bg-[#D4A373]" />
+                  <span class="h-px w-8 bg-[var(--ink-soft)]" />
                   <span>
                     {featured.name && <span class="font-bold uppercase tracking-wide">{featured.name}</span>}
                     {featured.name && featured.persona && <span class={muted}> · {featured.persona}</span>}
@@ -157,7 +157,7 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
                     class="h-full w-full object-cover opacity-90 transition duration-150 group-hover:opacity-100"
                   />
                   <span class="absolute inset-0 grid place-items-center">
-                    <span class="grid h-16 w-16 place-items-center bg-[#0057FF] text-white transition-colors duration-150 group-hover:bg-white group-hover:text-[#0A0A0A]">
+                    <span class="grid h-16 w-16 place-items-center bg-[var(--blue)] text-white transition-colors duration-150 group-hover:bg-white group-hover:text-[#0A0A0A]">
                       <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
                         <path d="M8 5v14l11-7z" />
                       </svg>
@@ -166,7 +166,7 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
                 </span>
               </button>
               <figcaption class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-                <span class="h-px w-8 bg-[#D4A373]" />
+                <span class="h-px w-8 bg-[var(--ink-soft)]" />
                 <span>
                   {featured.name && <span class="font-bold uppercase tracking-wide">{featured.name}</span>}
                   {featured.name && featured.persona && <span class={muted}> · {featured.persona}</span>}
@@ -201,7 +201,7 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
                       class="h-full w-full object-cover opacity-90 transition duration-150 group-hover:opacity-100"
                     />
                     <span class="absolute inset-0 grid place-items-center">
-                      <span class="grid h-12 w-12 place-items-center bg-[#0057FF] text-white transition-colors duration-150 group-hover:bg-white group-hover:text-[#0A0A0A]">
+                      <span class="grid h-12 w-12 place-items-center bg-[var(--blue)] text-white transition-colors duration-150 group-hover:bg-white group-hover:text-[#0A0A0A]">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
                           <path d="M8 5v14l11-7z" />
                         </svg>

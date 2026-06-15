@@ -87,17 +87,13 @@ const faqSchema = JSON.stringify({
 
       <!-- Left 60%: Content -->
       <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
-        <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-6">Live · {WORKSHOP_DATE_SHORT} · 90 Min · <span id="workshop-countdown" class="tabular-nums" data-workshop-target={WORKSHOP_DATE_ISO}></span></p>
-        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">The <span style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Defense</span><br/>Workshop.</h1>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Live · {WORKSHOP_DATE_SHORT} · 90 Min · <span id="workshop-countdown" class="tabular-nums" data-workshop-target={WORKSHOP_DATE_ISO}></span></p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">The <span style="color: var(--red);">Defense</span><br/>Workshop.</h1>
         <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">Camera on. Real-time correction on your defensive structure, movement patterns, and mechanical foundation. You leave with a framework you run again and again.</p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"
-            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
+            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white whitespace-nowrap">
             Reserve Your Seat · $197 →
-          </a>
-          <a href="/workshop-replay"
-            class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/60 whitespace-nowrap">
-            Get the Replay · $79 →
           </a>
         </div>
         <p class="text-[11px] text-[#0A0A0A]/30 mt-3">Secure checkout via Stripe · Instant delivery · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a></p>
@@ -124,9 +120,9 @@ const faqSchema = JSON.stringify({
       <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-[2px]">
 
         <!-- Left 60%: Workshop — Flagship -->
-        <div class="bg-[#0D1F1F] border border-[#D4A373]/20 hover:border-[#D4A373]/55 transition-colors duration-300 p-12 md:p-16 flex flex-col justify-between min-h-[540px] group">
+        <div class="bg-[#0D1F1F] border border-white/10 hover:border-white/25 transition-colors duration-300 p-12 md:p-16 flex flex-col justify-between min-h-[540px] group">
           <div>
-            <span class="text-[#926624] text-[10px] tracking-wider md:tracking-widest uppercase">One Session · Reusable Framework</span>
+            <span class="text-[var(--ink-soft)] text-[10px] tracking-wider md:tracking-widest uppercase">One Session · Reusable Framework</span>
             <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Defense<br/>Workshop</h2>
             <p class="text-white/55 text-sm leading-relaxed max-w-[380px] mb-10">Foot Space Work. Balance, weight transfer, defensive positioning. The mechanics your gym doesn't teach. Live. Corrected in real time. You run this framework again and again.</p>
             <div class="flex flex-col gap-3">
@@ -135,7 +131,7 @@ const faqSchema = JSON.stringify({
                 <li class="text-white/50 text-sm">Foundation (30 min): stance, balance, and the four footwork bases</li>
                 <li class="text-white/50 text-sm">Application (45 min): live drilling, camera on, real-time correction</li>
                 <li class="text-white/50 text-sm">Integration (15 min): your 30-day written progression</li>
-                <li class="text-[#926624] text-sm">Full recording delivered within 24 hours</li>
+                <li class="text-[var(--red)] text-sm">Full recording delivered within 24 hours</li>
               </ul>
             </div>
           </div>
@@ -145,7 +141,7 @@ const faqSchema = JSON.stringify({
               <span class="text-white font-black text-4xl">$197</span>
               <div class="flex flex-col items-end gap-1">
                 <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"
-                  class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
+                  class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white whitespace-nowrap">
                   Reserve Your Seat →
                 </a>
                 <p class="text-[9px] text-white/25">
@@ -160,18 +156,18 @@ const faqSchema = JSON.stringify({
         <div class="flex flex-col gap-[2px]">
 
           <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex-1">
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-4">Who this is for</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Who this is for</p>
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Fighters whose ambition is ahead of their gym. Competitive amateurs, coaches, and serious athletes who want structural understanding, not more conditioning.</p>
           </div>
 
           <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex-1">
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase mb-4">The Composure Guarantee</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">The Composure Guarantee</p>
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Show up, do the work. If you don't walk away with a clear framework, email rainers@theerainers.com within 24 hours. Full refund. No questions.</p>
           </div>
 
           <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex-1">
             <p class="text-[#0A0A0A]/20 text-xs leading-relaxed italic mb-4">"I discipline my body and keep it under control."</p>
-            <p class="text-[#926624] text-[10px] tracking-widest uppercase">1 Corinthians 9:27</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:27</p>
           </div>
 
         </div>
@@ -199,7 +195,7 @@ const faqSchema = JSON.stringify({
 
       <!-- Testimonial -->
       <div class="px-8 md:px-16 py-16 md:py-24 flex flex-col justify-center">
-        <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-8">What fighters say</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-8">What fighters say</p>
         <p class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-8">
           "The structure that was missing from my entire training."
         </p>
@@ -208,7 +204,7 @@ const faqSchema = JSON.stringify({
         </p>
         <div class="border-t border-white/10 pt-6">
           <p class="text-white/70 text-sm font-bold">Giancarlo</p>
-          <p class="text-[#926624] text-[10px] tracking-widest uppercase mt-1">Entrepreneur · 6 Months In The System</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-1">Entrepreneur · 6 Months In The System</p>
         </div>
       </div>
 
@@ -237,13 +233,13 @@ const faqSchema = JSON.stringify({
   <!-- FAQ -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-20 border-t border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto w-full">
-      <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-12">Questions</p>
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-12">Questions</p>
       <div class="flex flex-col divide-y divide-[#0A0A0A]/8 max-w-[720px]">
         {faqItems.map((item) => (
           <details class="group py-8 cursor-pointer">
             <summary class="font-bold text-[#0A0A0A]/60 text-sm tracking-wide list-none flex items-center justify-between gap-8 hover:text-[#0A0A0A] transition-colors duration-200">
               {item.question}
-              <span class="text-[#926624] shrink-0 text-lg leading-none group-open:rotate-45 transition-transform duration-200">+</span>
+              <span class="text-[var(--ink-soft)] shrink-0 text-lg leading-none group-open:rotate-45 transition-transform duration-200">+</span>
             </summary>
             <p class="text-[#0A0A0A]/35 text-sm leading-relaxed mt-6">{item.answer}</p>
           </details>
@@ -257,7 +253,7 @@ const faqSchema = JSON.stringify({
     <div class="max-w-[1280px] mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6">
       <p class="text-[#0A0A0A]/30 text-sm">Not ready for live? Start with the free Footwork Blueprint first.</p>
       <div class="flex gap-4 shrink-0">
-        <a href="/foundation" class="text-[#0057FF] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Get the Blueprint · Free →</a>
+        <a href="/foundation" class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Get the Blueprint · Free →</a>
         <a href="/shop" class="text-[#0A0A0A]/30 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors">See All Products →</a>
       </div>
     </div>
@@ -267,13 +263,13 @@ const faqSchema = JSON.stringify({
   <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-24 border-t border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
       <div>
-        <p class="text-[#926624] text-[11px] tracking-widest uppercase mb-4">One session. The mechanics start here.</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">One session. The mechanics start here.</p>
         <h2 class="font-black text-[#0A0A0A]/55 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] max-w-[560px]">"I do not run aimlessly. I do not box as one beating the air."</h2>
-        <p class="text-[#926624] text-[10px] tracking-widest uppercase mt-4">1 Corinthians 9:26</p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-4">1 Corinthians 9:26</p>
       </div>
       <div class="flex flex-col gap-4 shrink-0">
         <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"
-          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[#0057FF] text-[#0057FF] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[#0057FF] hover:text-white whitespace-nowrap">
+          class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white whitespace-nowrap">
           Reserve Your Seat · $197 →
         </a>
         <a href="/shop"

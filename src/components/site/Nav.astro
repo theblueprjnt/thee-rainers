@@ -19,8 +19,8 @@ const NAV_LINKS = [
     <a href="/workshop" data-nav-path="/workshop"
       class="tr-nav-workshop tr-gradient-cta inline-flex items-center gap-1.5 text-white font-bold tracking-widest uppercase
              text-[9px] md:text-[10px] px-2.5 md:px-3 py-1.5 md:py-2 leading-none whitespace-nowrap
-             transition-transform duration-150 hover:-translate-y-0.5
-             focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2">
+             transition-opacity duration-150
+             focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
       <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse" aria-hidden="true"></span>
       <span>Workshop · {WORKSHOP_DATE_SHORT}</span>
     </a>
@@ -31,7 +31,7 @@ const NAV_LINKS = [
       ))}
     </nav>
 
-    <button id="menu-open" type="button" class="tr-menu-toggle md:hidden z-[60] ml-auto p-2 -mr-2 text-[#0A0A0A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A373] focus-visible:ring-offset-2"
+    <button id="menu-open" type="button" class="tr-menu-toggle md:hidden z-[60] ml-auto p-2 -mr-2 text-[#0A0A0A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2"
       aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -75,7 +75,7 @@ const NAV_LINKS = [
 
     <ul class="flex flex-col mt-4">
       {NAV_LINKS.map((l) => (
-        <li class="border-b border-[#D4A373]/30">
+        <li class="border-b border-[#0A0A0A]/10">
           <a href={l.href} data-nav-path={l.href} class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0A0A0A] hover:opacity-70 transition-opacity">
             {l.label}
           </a>
@@ -83,11 +83,11 @@ const NAV_LINKS = [
       ))}
     </ul>
 
-    <a href="/community" class="tr-menu-cta tr-menu-cta-purple">Join the Community</a>
+    <a href="/community" class="tr-menu-cta tr-menu-cta-red">Join the Community</a>
     <a href="/foundation" class="tr-menu-cta tr-menu-cta-outline">Get the Footwork Blueprint · Free</a>
 
     <p class="mt-8 text-[10px] tracking-widest uppercase text-[#0A0A0A]/35">Private Architecture · Application Only</p>
-    <a href="/command" class="block text-xs tracking-widest uppercase font-bold mt-2 text-[#6A0DAD] hover:opacity-70 transition-opacity duration-200">
+    <a href="/command" class="block text-xs tracking-widest uppercase font-bold mt-2 text-[var(--purple)] hover:opacity-70 transition-opacity duration-200">
       Apply →
     </a>
   </nav>
@@ -136,7 +136,7 @@ const NAV_LINKS = [
   }
   .tr-menu-close:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #D4A373;
+    box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--blue);
   }
   .tr-menu-body {
     position: relative;
@@ -159,16 +159,16 @@ const NAV_LINKS = [
     border-radius: 0;
     transition: background-color 150ms, color 150ms;
   }
-  .tr-menu-cta-purple {
+  .tr-menu-cta-red {
     margin-top: 2rem;
-    background-color: #6A0DAD;
+    background-color: var(--red);
     color: #FFFFFF;
   }
-  .tr-menu-cta-purple:hover { background-color: #0A0A0A; }
+  .tr-menu-cta-red:hover { opacity: 0.88; }
   .tr-menu-cta-outline {
     margin-top: 0.75rem;
-    border: 2px solid #0057FF;
-    color: #0057FF;
+    border: 2px solid var(--blue);
+    color: var(--blue);
     background-color: transparent;
   }
   .tr-menu-cta-outline:hover {
@@ -236,7 +236,7 @@ const NAV_LINKS = [
       if (!isActive) return;
       link.setAttribute('aria-current', 'page');
       link.classList.remove('text-[#0A0A0A]/40');
-      link.classList.add('text-[#0057FF]');
+      link.classList.add('text-[#0A0A0A]');
     });
   }
 
