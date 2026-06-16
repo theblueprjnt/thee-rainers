@@ -4,7 +4,7 @@ import Testimonials from '../components/site/Testimonials.astro';
 import { SOCIAL_STATS } from '../data/social-stats';
 import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 ---
-<Layout title="Thee Rainers · Better training. Better results.">
+<Layout title="Thee Rainers · Engineered for the ring.">
 
   <!-- HERO — mobile: clean photo on top, dark stage below. Desktop: 60/40. -->
   <section class="relative overflow-hidden border-b border-[#0A0A0A]/8 bg-[#0A0A0A] md:bg-white">
@@ -25,7 +25,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
       <!-- Content stage — solid black, generous padding, no overlap -->
       <div class="bg-[#0A0A0A] px-7 pt-8 pb-12">
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Boxing Tech · @theerainers</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">@theerainers</p>
         <h1 class="font-black uppercase tracking-tighter mb-5 text-white"
           style="font-size: clamp(2.5rem, 11vw, 3.5rem); line-height: 0.86;">
           Engineered<br/>for the ring.
@@ -57,7 +57,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
     <div class="hidden md:grid md:grid-cols-[60%_40%] md:min-h-screen">
       <!-- Left: text + CTAs -->
       <div class="flex flex-col justify-center bg-white px-14 lg:px-20">
-        <p class="text-[var(--ink-soft)] text-xs tracking-wide uppercase mb-5">Boxing Tech · @theerainers</p>
+        <p class="text-[var(--ink-soft)] text-xs tracking-wide uppercase mb-5">@theerainers</p>
         <h1 class="font-black uppercase tracking-tighter mb-6 text-[#0A0A0A]"
           style="font-size: clamp(2.75rem, 5.5vw, 4.5rem); line-height: 0.85;">
           Engineered<br/>for the ring.
@@ -312,7 +312,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
       </div>
 
       <!-- Greatness Community -->
-      <div class="border border-[var(--blue)]/20 overflow-hidden">
+      <div class="border overflow-hidden" style="border-color: rgba(106,13,173,0.2);">
         <div class="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
@@ -320,7 +320,8 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
             <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Weekly live Proving Ground sessions with Rainers. Real-time correction on your movement. Private community chat. Drill library. $39/mo.</p>
           </div>
           <a href="/community"
-            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--blue)] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
+            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-3 text-sm tracking-wide uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none"
+            style="background: #6A0DAD;">
             See the Community →
           </a>
         </div>
