@@ -2,41 +2,18 @@
 import Base from '../layouts/Base.astro';
 ---
 <Base title="Page Not Found | Thee Rainers">
-  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
-    <div class="max-w-[720px] mx-auto w-full">
-
-      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">404</p>
-      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-6">
+  <section class="bg-white px-8 md:px-16 lg:px-24 flex items-center" style="min-height: calc(100vh - 120px);">
+    <div class="max-w-[480px]">
+      <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase mb-6">404</p>
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-4">
         Wrong corner.
       </h1>
-      <p class="text-[#0A0A0A]/50 text-base leading-relaxed mb-12 max-w-[440px]">
-        This page doesn't exist. Start from the system.
+      <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-10">
+        This page doesn't exist.
       </p>
-
-      <div class="flex flex-col gap-3 max-w-[400px]">
-        <a href="/"
-          class="tr-gradient-cta inline-flex items-center justify-center rounded-none font-bold text-white px-8 py-4 text-sm tracking-wide uppercase transition-transform duration-150 hover:-translate-y-0.5">
-          Back to Home →
-        </a>
-        <a href="/foundation"
-          class="inline-flex items-center justify-center rounded-none font-bold border-2 border-[var(--blue)]/30 text-[var(--blue)] bg-transparent px-8 py-4 text-sm tracking-wide uppercase hover:border-[var(--blue)] transition-colors duration-200">
-          Get the Free Blueprint →
-        </a>
-        <a href="/workshop"
-          class="inline-flex items-center justify-center rounded-none font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/50 bg-transparent px-8 py-4 text-sm tracking-wide uppercase hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/70 transition-colors duration-200">
-          See the Workshop →
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20">
-    <div class="max-w-[680px] mx-auto">
-      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
-        "I do not run aimlessly; I do not box as one beating the air."
-      </p>
-      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
+      <a href="/" class="text-[var(--blue)] text-sm font-bold tracking-wide hover:opacity-70 transition-opacity">
+        ← Back to home
+      </a>
     </div>
   </section>
 </Base>
