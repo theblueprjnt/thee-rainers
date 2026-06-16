@@ -2,8 +2,8 @@
 interface Props {
   productName: string;
   firstActionCopy: string;
-  primaryLabel: string;
-  primaryHref: string;
+  primaryLabel?: string;
+  primaryHref?: string;
 }
 const { productName, firstActionCopy, primaryLabel, primaryHref } = Astro.props;
 ---
@@ -19,7 +19,9 @@ const { productName, firstActionCopy, primaryLabel, primaryHref } = Astro.props;
   <h1 class="pm-headline">You're in.</h1>
   <p class="pm-product">{productName}</p>
   <p class="pm-action">{firstActionCopy}</p>
-  <a href={primaryHref} class="pm-cta">{primaryLabel}</a>
+  {primaryLabel && primaryHref && (
+    <a href={primaryHref} class="pm-cta">{primaryLabel}</a>
+  )}
   <p class="pm-reassurance">Your confirmation is in your email.</p>
 </div>
 
