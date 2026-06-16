@@ -133,6 +133,8 @@ const siteSchema = JSON.stringify({
           btn.addEventListener('click', async function () {
             var key = btn.dataset.checkout;
             if (!key) return;
+            // Yield before any synchronous DOM work — keeps INP low
+            await new Promise(function(r) { setTimeout(r, 0); });
             var originalHTML = btn.innerHTML;
             // Find a sibling [data-checkout-error] for inline error display.
             var scope = btn.parentElement;
@@ -181,12 +183,20 @@ const siteSchema = JSON.stringify({
           });
         });
       }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initCheckoutButtons);
-      } else {
-        initCheckoutButtons();
+      // Defer binding to idle time — prevents checkout init from blocking INP
+      function scheduleCheckoutInit() {
+        if (typeof requestIdleCallback !== 'undefined') {
+          requestIdleCallback(initCheckoutButtons, { timeout: 2000 });
+        } else {
+          setTimeout(initCheckoutButtons, 0);
+        }
       }
-      document.addEventListener('astro:page-load', initCheckoutButtons);
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', scheduleCheckoutInit);
+      } else {
+        scheduleCheckoutInit();
+      }
+      document.addEventListener('astro:page-load', scheduleCheckoutInit);
     </script>
     <slot name="head" />
   </head>
