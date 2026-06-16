@@ -9,68 +9,69 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts'
   </Fragment>
 
   <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
-    <div class="max-w-[720px] mx-auto w-full">
+    <div class="max-w-[1100px] mx-auto w-full">
 
-      <PurchaseMoment
-        productName="Defense Workshop"
-        firstActionCopy="Know your primary constraint before you arrive. The audit takes 3 minutes."
-        primaryLabel="Take the 7-Lever Audit →"
-        primaryHref="/lever-audit-quiz"
-      />
+      <div class="grid grid-cols-1 md:grid-cols-[55%_45%] gap-12 md:gap-16 lg:gap-24">
 
-      <div class="border border-[#0A0A0A]/8 p-8 mb-12">
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-6">Session details</p>
-        <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
-          <div class="py-3">
-            <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Date</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold">{WORKSHOP_DATE_LONG}</p>
+        <!-- LEFT: Confirmation + session details -->
+        <div>
+          <PurchaseMoment
+            productName="Defense Workshop"
+            firstActionCopy="Know your primary constraint before you arrive. The audit takes 3 minutes."
+            primaryLabel="Take the 7-Lever Audit →"
+            primaryHref="/lever-audit-quiz"
+          />
+
+          <div class="border border-[#0A0A0A]/8 p-8 mb-8">
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-6">Session details</p>
+            <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
+              <div class="py-3">
+                <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Date</p>
+                <p class="text-[#0A0A0A]/70 text-sm font-bold">{WORKSHOP_DATE_LONG}</p>
+              </div>
+              <div class="py-3">
+                <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Format</p>
+                <p class="text-[#0A0A0A]/70 text-sm font-bold">Live on Zoom · Camera on</p>
+              </div>
+              <div class="py-3">
+                <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Length</p>
+                <p class="text-[#0A0A0A]/70 text-sm font-bold">90 minutes</p>
+              </div>
+              <div class="py-3">
+                <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Zoom link</p>
+                <p class="text-[#0A0A0A]/70 text-sm font-bold">Sent to your email 24h before</p>
+              </div>
+              <div class="py-3">
+                <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Recording</p>
+                <p class="text-[#0A0A0A]/70 text-sm font-bold">Delivered within 24h after</p>
+              </div>
+            </div>
           </div>
-          <div class="py-3">
-            <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Format</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold">Live on Zoom · Camera on</p>
-          </div>
-          <div class="py-3">
-            <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Length</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold">90 minutes</p>
-          </div>
-          <div class="py-3">
-            <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Zoom link</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold">Sent to your email 24h before</p>
-          </div>
-          <div class="py-3">
-            <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-0.5">Recording</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold">Delivered within 24h after</p>
+
+          <div class="border-t border-[#0A0A0A]/6 pt-8">
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Optional. Watch before {WORKSHOP_DATE_SHORT}</p>
+            <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-4">The previous workshop replay. Same mechanical foundations. Watching it first means {WORKSHOP_DATE_SHORT} becomes refinement, not introduction.</p>
+            <a href="/workshop-replay" class="text-[var(--blue)] text-sm font-bold tracking-wide hover:opacity-70 transition-opacity">Get the Replay · $79 →</a>
           </div>
         </div>
-      </div>
 
-      <!-- WATCH THE PREVIOUS SESSION -->
-      <div class="border border-[#0A0A0A]/8 p-8 mb-4">
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Optional. Watch before {WORKSHOP_DATE_SHORT}</p>
-        <p class="text-[#0A0A0A]/60 text-sm font-bold mb-2">The previous workshop replay</p>
-        <p class="text-[#0A0A0A]/35 text-xs leading-relaxed mb-5">Same mechanical foundations covered in this session. Watching it first means {WORKSHOP_DATE_SHORT} becomes refinement, not introduction.</p>
-        <a href="/workshop-replay"
-          class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/35 bg-transparent px-6 py-3 text-xs tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/60">
-          Get the Replay · $79 →
-        </a>
-      </div>
-
-      <!-- WELCOME VIDEO SLOT -->
-      <div class="mb-12">
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Watch this first</p>
-        <div class="aspect-video w-full overflow-hidden bg-[#0A0A0A]">
-          <iframe
-            src="https://www.youtube.com/embed/vdUDuFRUqGo"
-            title="Why You Can't Defend Yourself"
-            class="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-          ></iframe>
+        <!-- RIGHT: Video -->
+        <div class="md:pt-8">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Watch this first</p>
+          <div class="aspect-video w-full overflow-hidden bg-[#0A0A0A]">
+            <iframe
+              src="https://www.youtube.com/embed/vdUDuFRUqGo"
+              title="Why You Can't Defend Yourself"
+              class="w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+          <p class="text-[#0A0A0A]/25 text-[10px] tracking-wide mt-3">The structural problem the workshop is designed to solve.</p>
         </div>
-        <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide mt-3">The structural problem the workshop is designed to solve.</p>
-      </div>
 
+      </div>
     </div>
   </section>
 
