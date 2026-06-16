@@ -1,80 +1,86 @@
 ---
 import Layout from '../../layouts/Base.astro';
+import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
 ---
 <Layout
   title="Greatness Community · Thee Rainers"
-  description="Weekly live sessions with Rainers. Private community. Drill library. Building now. Get notified first."
+  description="Weekly live Proving Ground with Rainers. Drill library built on the 7-Lever Framework. Fighters doing the work from every corner of the world. $39/month."
 >
 
-  <!-- Hero -->
+  <!-- HERO -->
   <section class="bg-white overflow-hidden border-b border-[#0A0A0A]/8">
+
     <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 60vw; max-height: 340px;">
       <img
         src="/images/sparring_withnetherlands.png"
-        alt="Rainers coaching"
+        alt="Training session"
         width="1200" height="1500"
         loading="eager"
-        class="w-full h-full object-cover object-center grayscale contrast-[1.2] brightness-[0.85] blur-[1.5px]"
+        class="w-full h-full object-cover object-center opacity-90 grayscale contrast-[1.2] brightness-[0.85]"
       />
     </div>
 
-    <div class="max-w-[1140px] mx-auto px-6 md:px-12 lg:px-20">
-      <div class="grid grid-cols-1 md:grid-cols-[60fr_40fr] min-h-[600px]">
+    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[88vh]">
 
-        <div class="flex flex-col justify-center py-20 md:py-32 md:pr-16">
-          <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Greatness Community</p>
-          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6"
-            style="font-size: clamp(2.8rem, 5.5vw, 4.5rem);">
-            Building now.<br/>Be first in.
-          </h1>
-          <p class="text-[#0A0A0A]/55 text-base leading-relaxed mb-8 max-w-[460px]">
-            Weekly live sessions with Rainers. Private community. A drill library that compounds the longer you train. This is where the ongoing work lives. Leave your email and you hear first when doors open.
-          </p>
+      <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Greatness Community</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-8"
+          style="font-size: clamp(2.8rem, 6vw, 4.5rem);">
+          The room where<br/>the work continues.
+        </h1>{/* // NEEDS RAINERS */}
+        <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">
+          Weekly live correction with Rainers. A drill library built on the 7-Lever Framework. Fighters doing the same work from every corner of the world.
+        </p>{/* // NEEDS RAINERS */}
 
-          <form id="community-waitlist-form" class="flex flex-col gap-3 max-w-[420px]">
-            <label for="community-email" class="sr-only">Email address</label>
-            <input
-              type="email"
-              id="community-email"
-              name="email"
-              placeholder="your@email.com"
-              autocomplete="email"
-              required
-              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-4 py-3.5 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[var(--blue)] transition-colors duration-200"
-            />
-            <button type="submit" id="community-submit"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-none bg-[var(--blue)] text-white font-bold px-8 py-4 text-sm uppercase tracking-wide hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-              Notify Me When It Opens →
-            </button>
-          </form>
-
-          <div id="community-success" class="hidden max-w-[420px]">
-            <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight mb-1">You're on the list.</p>
-            <p class="text-[#0A0A0A]/45 text-sm">We will reach out before doors open.</p>
-          </div>
-
-          <p class="text-[#0A0A0A]/20 text-xs mt-4">Your email. Nothing else.</p>
+        <div class="flex flex-col gap-3 max-w-[380px]">
+          <button
+            data-checkout="greatness_monthly"
+            class="inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase whitespace-nowrap cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
+            style="background: #6A0DAD;">
+            Join the Community · $39/mo →
+          </button>
+          <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide">Checkout unavailable — email rainers@theerainers.com</p>
+          <a href="#pricing" class="text-center text-[#0A0A0A]/35 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors">
+            Annual plan available · $390/yr
+          </a>
         </div>
 
-        <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]" aria-hidden="true">
-          <img
-            src="/images/sparring_withnetherlands.png"
-            alt=""
-            width="1200" height="1500"
-            loading="eager"
-            class="absolute inset-0 w-full h-full object-cover object-center opacity-90 grayscale contrast-[1.2] brightness-[0.85] blur-[1.5px]"
-          />
-        </div>
-
+        <p class="text-[11px] text-[#0A0A0A]/25 mt-4">Cancel anytime · Secure checkout via Stripe</p>
       </div>
+
+      <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]" aria-hidden="true">
+        <img
+          src="/images/sparring_withnetherlands.png"
+          alt=""
+          width="1200" height="1500"
+          loading="eager"
+          class="absolute inset-0 w-full h-full object-cover object-center opacity-90 grayscale contrast-[1.2] brightness-[0.85]"
+        />
+      </div>
+
     </div>
   </section>
 
-  <!-- What's being built -->
-  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[1100px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">What's Inside</p>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-[#0A0A0A]/8">
+  <!-- NEXT PROVING GROUND -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-6 border-b border-white/5">
+    <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <span class="inline-block w-2 h-2 rounded-full bg-[#6A0DAD] shrink-0"></span>
+        <p class="text-white/60 text-sm">Next Proving Ground · <span class="text-white font-bold">{NEXT_PROVING_GROUND.date} · {NEXT_PROVING_GROUND.time}</span></p>
+      </div>
+      <button
+        data-checkout="greatness_monthly"
+        class="text-[#6A0DAD] text-xs font-bold tracking-widest uppercase hover:opacity-70 transition-opacity cursor-pointer bg-transparent border-0 shrink-0">
+        Join before then →
+      </button>
+    </div>
+  </section>
+
+  <!-- WHAT'S INSIDE -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-10">What's Inside</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-[#0A0A0A]/8">
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Weekly</p>
@@ -83,61 +89,132 @@ import Layout from '../../layouts/Base.astro';
         </div>
 
         <div class="bg-white p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Private</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Community Chat</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Ask between sessions. Post clips. Work through problems with fighters doing the same work.</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Growing</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Drill Library</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every drill categorized by lever. Added every week. Work your weakest area. The library compounds the longer you stay.</p>
         </div>
 
         <div class="bg-white p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Growing</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Drill Library</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every drill, categorized by lever. Added every week. Work your weakest area. The library compounds the longer you stay.</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Private</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Community</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Ask between sessions. Post clips. Work through problems with fighters doing the same work across every time zone.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Always</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Brotherhood</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">People doing the work and walking the path toward greatness together. A community with standards.</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Session Recordings</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every Proving Ground recorded. Watch on your schedule. The work is the same across every time zone.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Bottom capture -->
-  <section class="bg-[#F6F6F6] px-6 md:px-12 lg:px-20 py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[600px] mx-auto text-center">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Get notified</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-6">Be first when doors open.</h2>
-      <form id="community-waitlist-form-2" class="flex flex-col sm:flex-row gap-3 max-w-[480px] mx-auto">
-        <label for="community-email-2" class="sr-only">Email address</label>
-        <input
-          type="email"
-          id="community-email-2"
-          name="email"
-          placeholder="your@email.com"
-          autocomplete="email"
-          required
-          class="flex-1 border border-[#0A0A0A]/15 bg-white px-4 py-3.5 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[var(--blue)] transition-colors duration-200"
-        />
-        <button type="submit"
-          class="whitespace-nowrap inline-flex items-center justify-center rounded-none bg-[var(--blue)] text-white font-bold px-6 py-3.5 text-sm uppercase tracking-wide hover:bg-[#0A0A0A] transition-colors duration-150 cursor-pointer border-0 focus:outline-none">
-          Notify Me →
-        </button>
-      </form>
-      <div id="community-success-2" class="hidden mt-4">
-        <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight">You're on the list.</p>
+  <!-- PRICING -->
+  <section id="pricing" class="bg-[#F6F6F6] px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-10">Membership</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-[2px] max-w-[720px]">
+
+        <!-- Monthly -->
+        <div class="bg-white border border-[#0A0A0A]/8 p-10 flex flex-col gap-8">
+          <div>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Monthly</p>
+            <div class="flex items-baseline gap-1 mb-1">
+              <span class="font-black text-[#0A0A0A] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$39</span>
+              <span class="text-[#0A0A0A]/40 text-sm">/month</span>
+            </div>
+            <p class="text-[#0A0A0A]/30 text-xs">Cancel anytime</p>
+          </div>
+
+          <ul class="flex flex-col gap-3">
+            <li class="text-[#0A0A0A]/60 text-sm">Weekly Proving Ground (live)</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Full drill library access</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Private community</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Session recordings</li>
+          </ul>
+
+          <div>
+            <button
+              data-checkout="greatness_monthly"
+              class="w-full inline-flex items-center justify-center font-bold text-white px-8 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
+              style="background: #6A0DAD;">
+              Join Monthly →
+            </button>
+            <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout unavailable — email rainers@theerainers.com</p>
+          </div>
+        </div>
+
+        <!-- Annual -->
+        <div class="bg-white border-2 p-10 flex flex-col gap-8 relative" style="border-color: #6A0DAD;">
+          <div class="absolute -top-px right-6">
+            <span class="inline-block text-white text-[9px] font-bold tracking-widest uppercase px-3 py-1.5" style="background: #6A0DAD;">Saves 2 Months</span>
+          </div>
+          <div>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Annual</p>
+            <div class="flex items-baseline gap-1 mb-1">
+              <span class="font-black text-[#0A0A0A] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$390</span>
+              <span class="text-[#0A0A0A]/40 text-sm">/year</span>
+            </div>
+            <p class="text-[#0A0A0A]/30 text-xs">$32.50/month · billed once</p>
+          </div>
+
+          <ul class="flex flex-col gap-3">
+            <li class="text-[#0A0A0A]/60 text-sm">Everything in Monthly</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Two months free</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Full year of Proving Grounds</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Full year of library growth</li>
+          </ul>
+
+          <div>
+            <button
+              data-checkout="greatness_annual"
+              class="w-full inline-flex items-center justify-center font-bold text-white px-8 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
+              style="background: #6A0DAD;">
+              Join Annual →
+            </button>
+            <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout unavailable — email rainers@theerainers.com</p>
+          </div>
+        </div>
+
       </div>
-      <div class="mt-10 pt-8 border-t border-[#0A0A0A]/10">
-        <p class="text-[#0A0A0A]/40 text-xs tracking-widest uppercase">
-          Need 1:1 now? <a href="/command" class="text-[var(--ink-soft)] font-bold hover:text-[#0A0A0A] transition-colors">Private Architecture →</a>
-        </p>
-      </div>
+
+      <p class="text-[#0A0A0A]/25 text-xs mt-6 max-w-[480px]">Membership renews automatically. Cancel before your next billing date and you will not be charged again. <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a></p>
     </div>
   </section>
 
-  <!-- Scripture -->
-  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20">
+  <!-- WHO IT'S FOR -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[720px]">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Who this is for</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-8"
+        style="font-size: clamp(2rem, 4vw, 3rem);">
+        Fighters who take the craft seriously.
+      </h2>{/* // NEEDS RAINERS */}
+      <p class="text-[#0A0A0A]/55 text-base leading-relaxed max-w-[560px] mb-10">
+        Trains anywhere. Every income. The one thread that connects everyone in the room: they study their own movement and want to fix what is actually broken. The work is the entry requirement.
+      </p>{/* // NEEDS RAINERS */}
+      <button
+        data-checkout="greatness_monthly"
+        class="inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
+        style="background: #6A0DAD;">
+        Join the Community · $39/mo →
+      </button>
+      <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout unavailable — email rainers@theerainers.com</p>
+    </div>
+  </section>
+
+  <!-- PRIVATE ARCHITECTURE FOOTNOTE -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-10 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-[#0A0A0A]/30 text-sm">Need the full framework built around your specific structure?</p>
+      <a href="/command" class="text-[#0A0A0A]/35 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors shrink-0">Private Architecture — Application Only →</a>
+    </div>
+  </section>
+
+  <!-- SCRIPTURE -->
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20">
     <div class="max-w-[680px] mx-auto">
       <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
         "As iron sharpens iron, so one person sharpens another."
@@ -147,40 +224,3 @@ import Layout from '../../layouts/Base.astro';
   </section>
 
 </Layout>
-
-<script>
-  function bindWaitlist(formId: string, emailId: string, successId: string) {
-    const form = document.getElementById(formId) as HTMLFormElement | null;
-    if (!form || form.dataset.bound === 'true') return;
-    form.dataset.bound = 'true';
-
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const emailEl = document.getElementById(emailId) as HTMLInputElement | null;
-      const email = emailEl?.value?.trim();
-      if (!email) return;
-
-      const submit = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const originalText = submit.textContent || '';
-      submit.disabled = true;
-      submit.textContent = 'Sending...';
-
-      try {
-        await fetch('/api/lead-capture', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, full_name: '', source: 'community-waitlist' }),
-        });
-      } catch { /* silent — user still sees success */ }
-
-      if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'community-waitlist' });
-
-      form.classList.add('hidden');
-      const successEl = document.getElementById(successId);
-      if (successEl) successEl.classList.remove('hidden');
-    });
-  }
-
-  bindWaitlist('community-waitlist-form', 'community-email', 'community-success');
-  bindWaitlist('community-waitlist-form-2', 'community-email-2', 'community-success-2');
-</script>
