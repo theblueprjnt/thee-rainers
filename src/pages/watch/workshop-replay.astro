@@ -119,32 +119,26 @@ if (!valid && !expired) {
           </div>
 
           <!-- NEXT STEP -->
-          <div class="border-l-2 border-[var(--blue)] pl-6 mb-12">
-            <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-2">Next step</p>
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">Know your primary constraint before {WORKSHOP_DATE_SHORT}.</p>
-            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6 max-w-[400px]">The 7-lever audit identifies the specific lever holding your system back. Takes 3 minutes. Show up to the live workshop knowing exactly what to work on.</p>
+          <div class="border-t border-[#0A0A0A]/6 pt-10 mb-12">
+            <p class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-3">Before the live session</p>
+            <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-4">Know which lever is your primary constraint. The 7-lever audit takes 3 minutes. Show up to the {WORKSHOP_DATE_SHORT} session knowing exactly what to work on.</p>
             <div class="flex flex-col sm:flex-row gap-4">
-              <a href="/lever-audit-quiz"
-                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white">
-                Take the 7-Lever Audit →
-              </a>
-              <a href="/workshop"
-                class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/40 bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/70">
-                Reserve {WORKSHOP_DATE_SHORT} Live Seat →
-              </a>
+              <a href="/lever-audit-quiz" class="text-[var(--blue)] text-sm font-bold tracking-wide hover:opacity-70 transition-opacity">Take the 7-Lever Audit →</a>
+              <a href="/workshop" class="text-[#0A0A0A]/35 text-sm font-bold tracking-wide hover:text-[#0A0A0A]/60 transition-colors">Reserve {WORKSHOP_DATE_SHORT} Live Seat →</a>
             </div>
-          </div>
-
-          <!-- SCRIPTURE -->
-          <div class="border-t border-[#0A0A0A]/8 pt-10">
-            <p class="font-black text-[#0A0A0A]/20 uppercase tracking-tighter text-2xl leading-tight mb-2">
-              "I do not box as one beating the air."
-            </p>
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
           </div>
         </div>
       )}
 
+    </div>
+  </section>
+
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20">
+    <div class="max-w-[680px] mx-auto">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
+        "I do not run aimlessly; I do not box as one beating the air."
+      </p>
+      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
     </div>
   </section>
 </Layout>
