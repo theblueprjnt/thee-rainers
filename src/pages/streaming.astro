@@ -1,0 +1,180 @@
+---
+import Layout from '../layouts/Base.astro';
+// RAINERS: paste your YouTube channel ID below (found at youtube.com/account_advanced)
+const CHANNEL_ID = 'UCvzBjbWiMoUMSX45REjgcmQ';
+---
+<Layout
+  title="Live · Thee Rainers"
+  description="Watch Thee Rainers live. Boxing mechanics, technique breakdowns, and real-time coaching."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <div class="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center px-6 py-24">
+
+    <!-- OFFLINE STATE (default — rendered server-side, no flash) -->
+    <div id="offline-state" class="w-full max-w-[560px] mx-auto text-center">
+      <div class="flex items-center justify-center gap-2 mb-6">
+        <span class="inline-block w-2 h-2 rounded-full bg-white/20"></span>
+        <p class="text-white/25 text-[10px] tracking-widest uppercase">Offline</p>
+      </div>
+      <h1 class="font-black text-white uppercase tracking-tighter leading-[0.85] mb-4"
+        style="font-size: clamp(2.2rem, 7vw, 4rem);">
+        Not live<br/>right now.
+      </h1>
+      <p class="text-white/40 text-sm leading-relaxed mb-12 max-w-[340px] mx-auto">
+        Follow me so you catch the next session.
+      </p>
+
+      <div class="flex flex-col gap-3 max-w-[360px] mx-auto">
+        <a href="https://youtube.com/@theerainers" target="_blank" rel="noopener noreferrer"
+          class="follow-btn">
+          <span class="follow-label">YouTube</span>
+          <span class="follow-arrow">Subscribe →</span>
+        </a>
+        <a href="https://twitch.tv/theerainers" target="_blank" rel="noopener noreferrer"
+          class="follow-btn">
+          <span class="follow-label">Twitch</span>
+          <span class="follow-arrow">Follow →</span>
+        </a>
+        <a href="https://kick.com/theerainers" target="_blank" rel="noopener noreferrer"
+          class="follow-btn">
+          <span class="follow-label">Kick</span>
+          <span class="follow-arrow">Follow →</span>
+        </a>
+        <a href="https://facebook.com/theerainers" target="_blank" rel="noopener noreferrer"
+          class="follow-btn">
+          <span class="follow-label">Facebook</span>
+          <span class="follow-arrow">Follow →</span>
+        </a>
+        <a href="https://tiktok.com/@theerainers" target="_blank" rel="noopener noreferrer"
+          class="follow-btn">
+          <span class="follow-label">TikTok</span>
+          <span class="follow-arrow">Follow →</span>
+        </a>
+        <a href="https://instagram.com/theerainers" target="_blank" rel="noopener noreferrer"
+          class="follow-btn">
+          <span class="follow-label">Instagram</span>
+          <span class="follow-arrow">Follow →</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- LIVE STATE (hidden by default, JS reveals when live) -->
+    <div id="live-state" class="hidden w-full max-w-[860px] mx-auto">
+
+      <div class="text-center mb-8">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span class="live-dot inline-block w-2.5 h-2.5 rounded-full bg-[var(--red)]"></span>
+          <p class="text-white/50 text-[10px] tracking-widest uppercase">Live now</p>
+        </div>
+        <h1 class="font-black text-white uppercase tracking-tighter leading-[0.85] mb-3"
+          style="font-size: clamp(2.5rem, 8vw, 5rem);">
+          I'm live.
+        </h1>
+        <p id="live-title" class="text-white/50 text-base leading-relaxed max-w-[480px] mx-auto"></p>
+      </div>
+
+      <!-- 16:9 player -->
+      <div class="relative w-full overflow-hidden rounded-lg" style="padding-bottom: 56.25%;">
+        <iframe
+          id="live-player"
+          src=""
+          title="Thee Rainers — Live"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen"
+          allowfullscreen
+          loading="lazy"
+          class="absolute inset-0 w-full h-full rounded-lg border-0"
+        ></iframe>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4">
+        <p class="text-white/30 text-xs tracking-wide">Live now. Tap the player to unmute.</p>
+        <a href="https://youtube.com/@theerainers/live"
+          target="_blank" rel="noopener noreferrer"
+          class="inline-flex items-center justify-center font-bold text-white bg-[var(--red)] px-6 py-3 text-xs tracking-widest uppercase transition-opacity duration-150 hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] whitespace-nowrap">
+          Join the chat on YouTube →
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</Layout>
+
+<style>
+  .follow-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .follow-btn:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .follow-btn:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+  .follow-label { font-weight: 800; }
+  .follow-arrow { opacity: 0.5; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .live-dot {
+      animation: live-pulse 1.8s ease-in-out infinite;
+    }
+  }
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.85); }
+  }
+</style>
+
+<script define:vars={{ CHANNEL_ID }}>
+  var liveState   = document.getElementById('live-state');
+  var offlineState = document.getElementById('offline-state');
+  var playerEl    = document.getElementById('live-player');
+  var titleEl     = document.getElementById('live-title');
+
+  function applyStatus(status) {
+    if (status.isLive) {
+      var src = status.videoId
+        ? 'https://www.youtube.com/embed/' + status.videoId + '?autoplay=1&mute=1&rel=0&playsinline=1'
+        : 'https://www.youtube.com/embed/live_stream?channel=' + CHANNEL_ID + '&autoplay=1&mute=1&rel=0&playsinline=1';
+      if (playerEl && playerEl.src !== src) playerEl.src = src;
+      if (titleEl) titleEl.textContent = status.title || '';
+      liveState && liveState.classList.remove('hidden');
+      offlineState && offlineState.classList.add('hidden');
+    } else {
+      if (playerEl) playerEl.src = '';
+      liveState && liveState.classList.add('hidden');
+      offlineState && offlineState.classList.remove('hidden');
+    }
+  }
+
+  async function checkStatus() {
+    try {
+      var res = await fetch('/live-status.json?_=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) return;
+      var data = await res.json();
+      applyStatus(data);
+    } catch (e) {
+      // fail silently — offline state remains
+    }
+  }
+
+  checkStatus();
+  setInterval(checkStatus, 60000);
+</script>
