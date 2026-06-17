@@ -23,14 +23,17 @@ import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
     <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[88vh]">
 
       <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Greatness Community</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Greatness Community · Founding Members</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-8"
           style="font-size: clamp(2.8rem, 6vw, 4.5rem);">
-          The room where<br/>the work continues.
+          Live with me.<br/>Every week.
         </h1>{/* // NEEDS RAINERS */}
-        <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">
-          Weekly live correction with Rainers. A drill library, updated daily. Fighters who take the craft seriously, from every corner of the world.
-        </p>{/* // NEEDS RAINERS — "from every corner of the world" line: Rainers had "brothers and sisters" — confirm final phrase */}
+        <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-6">
+          Live correction every week. A drill library, added to daily. People who take the craft seriously, from anywhere.
+        </p>{/* // NEEDS RAINERS */}
+        <p class="text-[#0A0A0A]/35 text-sm max-w-[480px] leading-relaxed mb-10">
+          Founding cohort. First workshop July 4. The library grows with us, starting now.
+        </p>{/* // NEEDS RAINERS */}
 
         <div class="flex flex-col gap-3 max-w-[380px]">
           <button
@@ -41,7 +44,7 @@ import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
           </button>
           <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide">Checkout unavailable — email rainers@theerainers.com</p>
           <a href="#pricing" class="text-center text-[#0A0A0A]/35 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors">
-            Annual plan available · $390/yr
+            Pay yearly · save $78
           </a>
         </div>
 
@@ -61,12 +64,12 @@ import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
     </div>
   </section>
 
-  <!-- NEXT PROVING GROUND -->
+  <!-- NEXT WORKSHOP -->
   <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-6 border-b border-white/5">
     <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div class="flex items-center gap-4">
         <span class="inline-block w-2 h-2 rounded-full bg-[#6A0DAD] shrink-0"></span>
-        <p class="text-white/60 text-sm">Next Proving Ground · <span class="text-white font-bold">{NEXT_PROVING_GROUND.date} · {NEXT_PROVING_GROUND.time}</span></p>
+        <p class="text-white/60 text-sm">Next workshop · <span class="text-white font-bold">{NEXT_PROVING_GROUND.date} · {NEXT_PROVING_GROUND.time}</span></p>
       </div>
       <button
         data-checkout="greatness_monthly"
@@ -84,26 +87,26 @@ import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Weekly</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Proving Ground</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Live every week. Camera on. Rainers watches and corrects your movement in real time. One live correction is worth ten pages of instruction.</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Workshop</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Live every week. Camera on. I watch your movement and call out what to fix.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Growing</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Drill Library</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every drill categorized by lever. Added every week. Work your weakest area. The library compounds the longer you stay.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Drills filed by lever. New ones added every week. Work what is weakest first.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Private</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Community</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Ask between sessions. Post clips. Work through problems with fighters doing the same work across every time zone.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Ask between sessions. Post your clips. Work through what is breaking down.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Always</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Session Recordings</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every Proving Ground recorded. Watch on your schedule. The work is the same across every time zone.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every workshop recorded. Watch when you can. Different time zones, same work.</p>
         </div>
 
       </div>
@@ -190,10 +193,10 @@ import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
       <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Who this is for</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-8"
         style="font-size: clamp(2rem, 4vw, 3rem);">
-        Fighters who take the craft seriously.
+        People who take<br/>the craft seriously.
       </h2>{/* // NEEDS RAINERS */}
       <p class="text-[#0A0A0A]/55 text-base leading-relaxed max-w-[560px] mb-10">
-        Trains anywhere. Every income. The one thread that connects everyone in the room: they study their own movement and want to fix what is actually broken. The work is the entry requirement.
+        Trains anywhere. Every income. We watch our own movement. We want to fix what is actually broken. The work is the only entry requirement.
       </p>{/* // NEEDS RAINERS */}
       <button
         data-checkout="greatness_monthly"
