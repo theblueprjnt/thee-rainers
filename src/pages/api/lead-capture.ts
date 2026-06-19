@@ -10,11 +10,14 @@
 //   AIRTABLE_LEADS_TABLE   — Airtable table for leads (default: "Leads")
 //                            NOTE: "source" field must be Single line text, not Single Select
 //   SITE_URL               — production domain, e.g. https://theerainers.com
+//   TELEGRAM_BOT_TOKEN     — Telegram bot token from @BotFather
+//   TELEGRAM_CHAT_ID       — Your personal Telegram chat ID (get via @userinfobot)
 
 export const prerender = false;
 
 import type { APIContext } from 'astro';
 import { env as cfEnv } from 'cloudflare:workers';
+import { sendTelegramAlert } from '../../lib/telegram';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -157,6 +160,14 @@ export async function POST({ request }: APIContext): Promise<Response> {
       console.warn('[LEAD_DEFERRED] webhook fetch failed', { source, emailLog, err: String(err) });
     }
   }
+
+  // ── Telegram alert (fire-and-forget) ─────────────────────────────────
+  const masked = email.replace(/(.).*(@.*)/, '$1***$2');
+  sendTelegramAlert(
+    e['TELEGRAM_BOT_TOKEN'] ?? '',
+    e['TELEGRAM_CHAT_ID'] ?? '',
+    `NEW LEAD\nSource: ${source}\nEmail: ${masked}${full_name ? `\nName: ${full_name}` : ''}`,
+  ).catch(() => {});
 
   // ── Kit — subscribe + tag (fire-and-forget, never blocks response) ────
   const kitKey   = e['KIT_API_KEY'] ?? '';

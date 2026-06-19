@@ -3,6 +3,7 @@ export const prerender = false;
 import type { APIContext } from 'astro';
 import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
+import { sendTelegramAlert } from '../../lib/telegram';
 
 // ── product map ────────────────────────────────────────────────────────────
 // Replace prod_Uaz6EzELZP6j0V after creating the product in Stripe Dashboard.
@@ -371,6 +372,12 @@ export async function POST({ request }: APIContext): Promise<Response> {
       } else {
         const slug = PRODUCT_MAP[productId];
         await deliverProduct(email, productId, e);
+        // Telegram sale alert
+        sendTelegramAlert(
+          e['TELEGRAM_BOT_TOKEN'] ?? '',
+          e['TELEGRAM_CHAT_ID'] ?? '',
+          `NEW SALE\nProduct: ${slug ?? productId}\nEmail: ${email.replace(/(.).*(@.*)/, '$1***$2')}`,
+        ).catch(() => {});
         // Sync member into Airtable + tag in Kit
         await upsertAirtable(airtableToken, airtableBase, airtableTable, {
           Email: email,
