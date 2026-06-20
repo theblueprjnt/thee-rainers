@@ -118,14 +118,28 @@ ${FUNNEL_MAP}`,
 
 // ── Sequence emails — add here as Rainers writes them ─────────────────────
 // delayDays: how many days after opt-in this email sends
-const SEQUENCE: Array<{ delayDays: number; subject: string; body: string }> = [
+const SEQUENCE: Array<{ delayDays: number; subject: string; preview: string; body: string }> = [
   {
     delayDays: 2,
     subject: 'why I started training this way',
+    preview: '',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">I won my last 3 fights without a coach in my corner. Prior to that I trained with a group coach and competition was always confusing for me. I thought intensity = key, until I left group training for boxing growth and less damage inflicted on the body and brain.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">When I prepped for my first fight I had so many things on my mind as you gather different opinions and information along your boxing journey. All I knew was footwork mattered. So I found a coach and trained that way. I won the fight in a simple fashion simply outboxing my opponent and knocking him down twice.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">Whether you train for health, skill or performance — essentially you're looking for control, not intensity or "hitting harder". Over the next couple of weeks I'll break down the fundamentals and bring you clarity and control both inside and outside the ring.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 8px;">I always read replies — tell me: <strong>what made you start boxing?</strong></p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+${FUNNEL_MAP}`,
+  },
+  {
+    delayDays: 5,
+    subject: 'The Footwork Blueprint (Control Inside Ring)',
+    preview: 'This is where the control starts',
+    body: `<p style="font-size:14px;font-weight:700;color:#0A0A0A;margin:0 0 20px;">The Footwork Blueprint.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Control in the ring starts from the ground up. I wrote a Blueprint with 4 main footwork bases and over 56 rounds of footwork drills. I used this to prepare for my first fight without a coach — I ended up winning using simple positioning and a jab, scoring 2 knockdowns.</p>
+<p style="margin:0 0 28px;"><a href="https://theerainers.com/vault" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">GET THE FOOTWORK BLUEPRINT · $47 →</a></p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">If you're past fundamentals and want to take your sparring or technique to the next level — the next workshop is July 25. Sparring Control. Live at 12PM ET, replay included. 8 spots total.</p>
+<p style="margin:0 0 28px;"><a href="https://theerainers.com/workshop" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">RESERVE A SPOT →</a></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
 ${FUNNEL_MAP}`,
@@ -159,7 +173,7 @@ async function sendResendWelcome(resendKey: string, email: string, source: strin
     fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: seq.subject, html: wrapEmail(seq.body), scheduled_at: scheduledAt }),
+      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: seq.subject, html: wrapEmail((seq.preview ? `<div style="display:none;max-height:0;overflow:hidden;">${seq.preview}</div>` : '') + seq.body), scheduled_at: scheduledAt }),
     }).then(async r => {
       if (!r.ok) console.error('[lead-capture] Resend schedule failed day', seq.delayDays, r.status, await r.text());
       else console.log('[lead-capture] Resend scheduled day', seq.delayDays, 'for', email);
