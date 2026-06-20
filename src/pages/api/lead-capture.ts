@@ -139,8 +139,6 @@ ${FUNNEL_MAP}`,
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Control in the ring starts from the ground up. I built this around 4 main footwork bases and over 56 rounds of drills. I used this to prepare for my first fight without a coach — I ended up winning using simple positioning and a jab, scoring 2 knockdowns.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">Here's a breakdown of the 4 bases.</p>
 <p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">WATCH THE BREAKDOWN →</a></p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">If you're past fundamentals and want to take your sparring or technique to the next level — the next workshop is July 25. Sparring Control. Live at 12PM ET, replay included. 8 spots total.</p>
-<p style="margin:0 0 28px;"><a href="https://theerainers.com/workshop" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">RESERVE A SPOT →</a></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
 ${FUNNEL_MAP}`,
