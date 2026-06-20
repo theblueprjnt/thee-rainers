@@ -1,0 +1,263 @@
+{
+  "name": "TRB — Product Delivery",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {
+        "hook": 1,
+        "maxResults": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": { "x": 0, "y": 0 },
+        "restore": {
+          "parameters": {
+            "hook": {
+              "label": "TRB Delivery Webhook",
+              "connection": null
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "parameters": {},
+      "mapper": {},
+      "metadata": { "designer": { "x": 300, "y": 0 } },
+      "routes": [
+        {
+          "flow": [
+            {
+              "id": 3,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "Your Footwork Blueprint",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 16px;\">Your Footwork Blueprint is ready.</p>\n<p style=\"margin:0 0 24px;\">\n<a href=\"{{1.expiring_url}}\" style=\"display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;\">Download Blueprint</a>\n</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;\">This link expires in 7 days. Save the file before then.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Questions: <a href=\"mailto:rainers@theerainers.com\" style=\"color:#0057FF;\">rainers@theerainers.com</a></p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": -400 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": {
+            "name": "Footwork Blueprint",
+            "conditions": [
+              [
+                {
+                  "a": "{{1.product_slug}}",
+                  "b": "footwork",
+                  "o": "text:equal"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "flow": [
+            {
+              "id": 4,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "Your Shadowboxing Blueprint",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 16px;\">Your Shadowboxing Blueprint is ready.</p>\n<p style=\"margin:0 0 24px;\">\n<a href=\"{{1.expiring_url}}\" style=\"display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;\">Download Blueprint</a>\n</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;\">This link expires in 7 days. Save the file before then.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Questions: <a href=\"mailto:rainers@theerainers.com\" style=\"color:#0057FF;\">rainers@theerainers.com</a></p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": -200 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": {
+            "name": "Shadowboxing Blueprint",
+            "conditions": [
+              [
+                {
+                  "a": "{{1.product_slug}}",
+                  "b": "shadowboxing",
+                  "o": "text:equal"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "flow": [
+            {
+              "id": 5,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "Your Blueprints",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 24px;\">Both blueprints are ready.</p>\n<p style=\"font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;\">Footwork Blueprint</p>\n<p style=\"margin:0 0 24px;\">\n<a href=\"{{1.expiring_url}}\" style=\"display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;\">Download Footwork Blueprint</a>\n</p>\n<p style=\"font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;\">Shadowboxing Blueprint</p>\n<p style=\"margin:0 0 24px;\">\n<a href=\"{{1.expiring_url_2}}\" style=\"display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;\">Download Shadowboxing Blueprint</a>\n</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;\">Both links expire in 7 days. Save both files before then.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Questions: <a href=\"mailto:rainers@theerainers.com\" style=\"color:#0057FF;\">rainers@theerainers.com</a></p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": 0 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": {
+            "name": "Bundle",
+            "conditions": [
+              [
+                {
+                  "a": "{{1.product_slug}}",
+                  "b": "bundle",
+                  "o": "text:equal"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "flow": [
+            {
+              "id": 6,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "Your Defense Workshop Replay",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 16px;\">Your Defense Workshop replay is ready.</p>\n<p style=\"margin:0 0 24px;\">\n<a href=\"{{1.expiring_url}}\" style=\"display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;\">Watch the Replay</a>\n</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;\">90 minutes. Footwork, stance, punch mechanics, defensive structure, live Q&amp;A.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;\">This link expires in 7 days. Watch it before then.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Questions: <a href=\"mailto:rainers@theerainers.com\" style=\"color:#0057FF;\">rainers@theerainers.com</a></p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": 200 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": {
+            "name": "Workshop Replay",
+            "conditions": [
+              [
+                {
+                  "a": "{{1.product_slug}}",
+                  "b": "workshop-replay",
+                  "o": "text:equal"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "flow": [
+            {
+              "id": 7,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "Your purchase from Thee Rainers",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 16px;\">Purchase confirmed.</p>\n<p style=\"font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;\">If you were expecting a download or watch link, email rainers@theerainers.com with your order details and we will get it to you within the hour.</p>\n<p style=\"margin:0 0 24px;\">\n<a href=\"{{1.expiring_url}}\" style=\"display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;\">Access Your Purchase</a>\n</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Questions: <a href=\"mailto:rainers@theerainers.com\" style=\"color:#0057FF;\">rainers@theerainers.com</a></p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": 400 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": null
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "confidential": false,
+      "dlt": false,
+      "dlq": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "eu1.make.com"
+  }
+}

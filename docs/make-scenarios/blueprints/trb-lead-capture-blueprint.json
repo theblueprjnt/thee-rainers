@@ -1,0 +1,263 @@
+{
+  "name": "TRB — Lead Capture + Welcome Email",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {
+        "hook": 1,
+        "maxResults": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": { "x": 0, "y": 0 },
+        "restore": {
+          "parameters": {
+            "hook": {
+              "label": "TRB Lead Capture Webhook",
+              "connection": null
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "builtin:BasicRouter",
+      "version": 1,
+      "parameters": {},
+      "mapper": {},
+      "metadata": { "designer": { "x": 300, "y": 0 } },
+      "routes": [
+        {
+          "flow": [
+            {
+              "id": 3,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "Your Footwork Foundation Protocol",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 8px;\">Your 30-day Footwork Foundation protocol is ready.</p>\n<p style=\"font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;\">30 days. One mechanic at a time. Start session one today.</p>\n<p style=\"margin:0 0 24px;\">\n<a href=\"https://theerainers.com/pdfs/footwork-foundation.pdf\" style=\"display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;\">Download Protocol</a>\n</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;\">The protocol covers ground contact, balance mechanics, pivot systems, and how footwork connects to your punch output. Do the work and the mechanics compound.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Rainers</p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": -400 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": {
+            "name": "Footwork Foundation",
+            "conditions": [
+              [
+                {
+                  "a": "{{1.source}}",
+                  "b": "footwork-foundation",
+                  "o": "text:equal"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "flow": [
+            {
+              "id": 4,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "Your 7-Lever Audit",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 8px;\">Your 7-Lever Self-Assessment is ready.</p>\n<p style=\"font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;\">Seven levers. One broken lever kills performance across all the others. Find yours.</p>\n<p style=\"margin:0 0 24px;\">\n<a href=\"https://theerainers.com/pdfs/lever-audit.pdf\" style=\"display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;\">Download Audit</a>\n</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;\">Work through each lever honestly. The audit only works if you score what you actually see in sparring, not what you wish was true.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Rainers</p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": -200 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": {
+            "name": "Lever Audit",
+            "conditions": [
+              [
+                {
+                  "a": "{{1.source}}",
+                  "b": "lever-audit",
+                  "o": "text:equal"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "flow": [
+            {
+              "id": 5,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "Your lever audit results",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 8px;\">You completed the 7-Lever Audit.</p>\n<p style=\"font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;\">Now you know which lever is limiting everything else. That gap is where the work starts.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;\">The Defense Workshop breaks down the mechanics directly. 90 minutes. Footwork, stance, punch mechanics, defensive structure.</p>\n<p style=\"margin:0 0 24px;\">\n<a href=\"https://theerainers.com/workshop\" style=\"display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;\">See the Defense Workshop</a>\n</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Rainers</p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": 0 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": {
+            "name": "Lever Quiz",
+            "conditions": [
+              [
+                {
+                  "a": "{{1.source}}",
+                  "b": "lever-audit-quiz",
+                  "o": "text:equal"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "flow": [
+            {
+              "id": 6,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "Monthly Q&A — you're in",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 8px;\">You are registered for the Monthly Q&amp;A.</p>\n<p style=\"font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;\">Bring a specific question. Vague questions get vague answers. The more specific you are about your mechanical problem, the more precise the diagnosis.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;\">The link and time will come closer to the session date. Check your inbox.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Rainers</p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": 200 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": {
+            "name": "Q&A Registration",
+            "conditions": [
+              [
+                {
+                  "a": "{{1.source}}",
+                  "b": "qa-registration",
+                  "o": "text:equal"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "flow": [
+            {
+              "id": 7,
+              "module": "gmail:ActionSendEmail",
+              "version": 1,
+              "parameters": { "account": 1 },
+              "mapper": {
+                "to": "{{1.email}}",
+                "subject": "You are on the list",
+                "contentType": "html",
+                "content": "<div style=\"font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;\">\n<p style=\"font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;\">Thee Rainers</p>\n<p style=\"font-size:15px;line-height:1.6;margin:0 0 8px;\">Got it.</p>\n<p style=\"font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;\">You are on the list. More coming soon.</p>\n<p style=\"font-size:12px;color:#888;line-height:1.6;margin:0;\">Rainers</p>\n</div>",
+                "sendAs": null,
+                "cc": null,
+                "bcc": null,
+                "replyTo": "rainers@theerainers.com",
+                "attachments": null
+              },
+              "metadata": {
+                "designer": { "x": 600, "y": 400 },
+                "restore": {
+                  "parameters": {
+                    "account": {
+                      "label": "rainers@theerainers.com",
+                      "connection": "google"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "filter": null
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "scenario": {
+      "roundtrips": 1,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "autoCommitTriggerLast": true,
+      "sequential": false,
+      "confidential": false,
+      "dlt": false,
+      "dlq": false
+    },
+    "designer": {
+      "orphans": []
+    },
+    "zone": "eu1.make.com"
+  }
+}
