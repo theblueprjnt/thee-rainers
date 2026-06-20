@@ -116,24 +116,56 @@ ${FUNNEL_MAP}`,
   },
 };
 
+// ── Sequence emails — add here as Rainers writes them ─────────────────────
+// delayDays: how many days after opt-in this email sends
+const SEQUENCE: Array<{ delayDays: number; subject: string; body: string }> = [
+  {
+    delayDays: 2,
+    subject: 'why I started training this way',
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">I won my last 3 fights without a coach in my corner. Prior to that I trained with a group coach and competition was always confusing for me. I thought intensity = key, until I left group training for boxing growth and less damage inflicted on the body and brain.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">When I prepped for my first fight I had so many things on my mind as you gather different opinions and information along your boxing journey. All I knew was footwork mattered. So I found a coach and trained that way. I won the fight in a simple fashion simply outboxing my opponent and knocking him down twice.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">Whether you train for health, skill or performance — essentially you're looking for control, not intensity or "hitting harder". Over the next couple of weeks I'll break down the fundamentals and bring you clarity and control both inside and outside the ring.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 8px;">I always read replies — tell me: <strong>what made you start boxing?</strong></p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+${FUNNEL_MAP}`,
+  },
+];
+
+function wrapEmail(body: string): string {
+  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">${body}</div>`;
+}
+
 async function sendResendWelcome(resendKey: string, email: string, source: string): Promise<void> {
   const cfg = WELCOME_CONFIG[source];
   if (!resendKey || !cfg) return;
-  const html =
-    `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">` +
-    cfg.body +
-    `</div>`;
+
+  // Immediate welcome email
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: cfg.subject, html }),
+      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: cfg.subject, html: wrapEmail(cfg.body) }),
     });
     if (!res.ok) console.error('[lead-capture] Resend welcome failed', res.status, await res.text());
     else console.log('[lead-capture] Resend welcome sent', { source });
   } catch (err) {
-    console.error('[lead-capture] Resend fetch error:', String(err));
+    console.error('[lead-capture] Resend welcome fetch error:', String(err));
   }
+
+  // Schedule sequence emails — fires at opt-in, Resend delivers on schedule
+  for (const seq of SEQUENCE) {
+    const scheduledAt = new Date(Date.now() + seq.delayDays * 24 * 60 * 60 * 1000).toISOString();
+    fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: seq.subject, html: wrapEmail(seq.body), scheduled_at: scheduledAt }),
+    }).then(async r => {
+      if (!r.ok) console.error('[lead-capture] Resend schedule failed day', seq.delayDays, r.status, await r.text());
+      else console.log('[lead-capture] Resend scheduled day', seq.delayDays, 'for', email);
+    }).catch(err => console.error('[lead-capture] Resend schedule error:', String(err)));
+  }
+
 }
 
 // ── Kit v4 helpers ─────────────────────────────────────────────────────────
