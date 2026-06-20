@@ -40,33 +40,79 @@ function redirectResponse(location: string): Response {
 
 // ── Resend welcome email ───────────────────────────────────────────────────
 
+// Funnel map appended to every welcome email — shows what exists, lets them self-select.
+const FUNNEL_MAP = `
+<div style="border-top:1px solid #eee;margin:32px 0 0;padding:32px 0 0;">
+  <p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#aaa;margin:0 0 20px;">What else is available</p>
+  <table style="width:100%;border-collapse:collapse;">
+    <tr>
+      <td style="padding:12px 0;border-bottom:1px solid #f0f0f0;vertical-align:top;width:60%;">
+        <p style="font-size:13px;font-weight:700;color:#0A0A0A;margin:0 0 2px;">Workshop Replay</p>
+        <p style="font-size:12px;color:#888;margin:0;">90 minutes on demand. Defense mechanics from the ground up.</p>
+      </td>
+      <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
+        <a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0057FF;text-decoration:none;">$79 →</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:12px 0;border-bottom:1px solid #f0f0f0;vertical-align:top;">
+        <p style="font-size:13px;font-weight:700;color:#0A0A0A;margin:0 0 2px;">Blueprint Bundle</p>
+        <p style="font-size:12px;color:#888;margin:0;">Footwork and shadowboxing. Both systems together.</p>
+      </td>
+      <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
+        <a href="https://theerainers.com/vault" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0057FF;text-decoration:none;">$87 →</a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:12px 0;vertical-align:top;">
+        <p style="font-size:13px;font-weight:700;color:#0A0A0A;margin:0 0 2px;">1-on-1 Coaching</p>
+        <p style="font-size:12px;color:#888;margin:0;">Built around your training. Your fight, your body, your timeline.</p>
+      </td>
+      <td style="padding:12px 0 12px 16px;vertical-align:middle;text-align:right;">
+        <a href="https://theerainers.com/command" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A0DAD;text-decoration:none;">Apply →</a>
+      </td>
+    </tr>
+  </table>
+</div>`;
+
 const WELCOME_CONFIG: Record<string, { subject: string; body: string }> = {
   'footwork-foundation': {
-    subject: 'Your Footwork Foundation Protocol',
-    body: `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Your 30-day Footwork Foundation protocol is ready.</p>
-<p style="font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;">30 days. One mechanic at a time. Start session one today.</p>
-<p style="margin:0 0 24px;"><a href="https://theerainers.com/pdfs/footwork-foundation.pdf" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Protocol</a></p>
-<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Ground contact, balance mechanics, pivot systems, and how footwork connects to your punch output. Do the work and the mechanics compound.</p>`,
+    subject: 'the signal you\'re ignoring',
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">A lot of the damage you take in training is damage you do not have to take. The simpler way starts before the cause has happened. The same applies to boxing.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You do not have to block a punch you are not in front of. Defense starts with distance. A small step, a couple inches, and the world's hardest punch can't hit you. It takes less effort than defending and dealing with potential damage.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">This is a fundamental principle we train to develop control in boxing. Your hands are the last line of defense.</p>
+<p style="margin:0 0 28px;"><a href="https://theerainers.com/pdfs/footwork-foundation.pdf" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Your Protocol →</a></p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 8px;">Reply to this email and tell me: <strong>what would change in your training if you never had to worry about getting hit?</strong></p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">I read these.</p>
+<p style="font-size:13px;color:#888;margin:0;">Train well,<br/>Rainers</p>
+${FUNNEL_MAP}`,
   },
   'lever-audit': {
     subject: 'Your 7-Lever Audit',
-    body: `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Your 7-Lever Self-Assessment is ready.</p>
-<p style="font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;">Seven levers. One broken lever limits performance across all the others. Find yours.</p>
-<p style="margin:0 0 24px;"><a href="https://theerainers.com/pdfs/lever-audit.pdf" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Audit</a></p>
-<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Work through each lever honestly. Score what you actually see in sparring, not what you wish was true.</p>`,
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Your 7-Lever Self-Assessment is ready.</p>
+<p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Seven levers. One broken lever limits performance across all the others. Find yours.</p>
+<p style="margin:0 0 24px;"><a href="https://theerainers.com/pdfs/lever-audit.pdf" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Audit →</a></p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Work through each lever honestly. Score what you actually see in sparring, not what you wish was true.</p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+${FUNNEL_MAP}`,
   },
   'lever-audit-quiz': {
     subject: 'Your lever audit results',
-    body: `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">You completed the 7-Lever Audit.</p>
-<p style="font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;">Now you know which lever is limiting everything else. That gap is where the work starts.</p>
-<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">The Defense Workshop breaks down the mechanics directly. 90 minutes. Footwork, stance, punch mechanics, defensive structure.</p>
-<p style="margin:0 0 24px;"><a href="https://theerainers.com/workshop" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">See the Defense Workshop</a></p>`,
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You completed the 7-Lever Audit.</p>
+<p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Now you know which lever is limiting everything else. That gap is where the work starts.</p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+${FUNNEL_MAP}`,
   },
   'qa-registration': {
     subject: 'Monthly Q&A — you are in',
-    body: `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">You are registered for the Monthly Q&amp;A.</p>
-<p style="font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;">Bring a specific question. The more specific you are about your mechanical problem, the more precise the diagnosis.</p>
-<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">The link and time will come closer to the session date.</p>`,
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You are registered for the Monthly Q&amp;A.</p>
+<p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Bring a specific question. The more specific you are about your mechanical problem, the more precise the diagnosis.</p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">The link and time will come closer to the session date.</p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+${FUNNEL_MAP}`,
   },
 };
 
