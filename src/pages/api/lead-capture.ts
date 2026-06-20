@@ -40,6 +40,59 @@ function redirectResponse(location: string): Response {
   return new Response(null, { status: 302, headers: { Location: location } });
 }
 
+// ── Resend welcome email ───────────────────────────────────────────────────
+
+const WELCOME_CONFIG: Record<string, { subject: string; body: string }> = {
+  'footwork-foundation': {
+    subject: 'Your Footwork Foundation Protocol',
+    body: `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Your 30-day Footwork Foundation protocol is ready.</p>
+<p style="font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;">30 days. One mechanic at a time. Start session one today.</p>
+<p style="margin:0 0 24px;"><a href="https://theerainers.com/pdfs/footwork-foundation.pdf" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Protocol</a></p>
+<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Ground contact, balance mechanics, pivot systems, and how footwork connects to your punch output. Do the work and the mechanics compound.</p>`,
+  },
+  'lever-audit': {
+    subject: 'Your 7-Lever Audit',
+    body: `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Your 7-Lever Self-Assessment is ready.</p>
+<p style="font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;">Seven levers. One broken lever limits performance across all the others. Find yours.</p>
+<p style="margin:0 0 24px;"><a href="https://theerainers.com/pdfs/lever-audit.pdf" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Audit</a></p>
+<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Work through each lever honestly. Score what you actually see in sparring, not what you wish was true.</p>`,
+  },
+  'lever-audit-quiz': {
+    subject: 'Your lever audit results',
+    body: `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">You completed the 7-Lever Audit.</p>
+<p style="font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;">Now you know which lever is limiting everything else. That gap is where the work starts.</p>
+<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">The Defense Workshop breaks down the mechanics directly. 90 minutes. Footwork, stance, punch mechanics, defensive structure.</p>
+<p style="margin:0 0 24px;"><a href="https://theerainers.com/workshop" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">See the Defense Workshop</a></p>`,
+  },
+  'qa-registration': {
+    subject: 'Monthly Q&A — you are in',
+    body: `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">You are registered for the Monthly Q&amp;A.</p>
+<p style="font-size:14px;color:#555;line-height:1.6;margin:0 0 24px;">Bring a specific question. The more specific you are about your mechanical problem, the more precise the diagnosis.</p>
+<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">The link and time will come closer to the session date.</p>`,
+  },
+};
+
+async function sendResendWelcome(resendKey: string, email: string, source: string): Promise<void> {
+  const cfg = WELCOME_CONFIG[source];
+  if (!resendKey || !cfg) return;
+  const html =
+    `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
+    `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
+    cfg.body +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0;">Rainers</p></div>`;
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: 'Thee Rainers <rainers@theerainers.com>', to: [email], subject: cfg.subject, html }),
+    });
+    if (!res.ok) console.error('[lead-capture] Resend welcome failed', res.status, await res.text());
+    else console.log('[lead-capture] Resend welcome sent', { source });
+  } catch (err) {
+    console.error('[lead-capture] Resend fetch error:', String(err));
+  }
+}
+
 // ── Kit v4 helpers ─────────────────────────────────────────────────────────
 
 async function kitFindOrCreate(apiKey: string, email: string, firstName: string): Promise<string | null> {
@@ -160,6 +213,10 @@ export async function POST({ request }: APIContext): Promise<Response> {
       console.warn('[LEAD_DEFERRED] webhook fetch failed', { source, emailLog, err: String(err) });
     }
   }
+
+  // ── Resend welcome email (fire-and-forget) ───────────────────────────
+  const resendKey = e['RESEND_API_KEY'] ?? '';
+  sendResendWelcome(resendKey, email, source).catch(() => {});
 
   // ── Telegram alert (fire-and-forget) ─────────────────────────────────
   const masked = email.replace(/(.).*(@.*)/, '$1***$2');

@@ -14,6 +14,7 @@ export const prerender = false;
 
 import type { APIContext } from 'astro';
 import { env as cfEnv } from 'cloudflare:workers';
+import { sendTelegramAlert } from '../../lib/telegram';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -99,33 +100,65 @@ export async function POST({ request }: APIContext): Promise<Response> {
       : redirectResponse('/contact?error=invalid_phone');
   }
 
-  // ── forward to Make.com webhook ───────────────────────────────────────
-  // HARD-FAIL when MAKE_CONTACT_WEBHOOK_URL is missing or invalid. No more
-  // silent drops — config error surfaces to user (500) and dev (console).
-  const webhookUrl = (cfEnv as unknown as Record<string, string>)['MAKE_CONTACT_WEBHOOK_URL'] ?? '';
   const emailLog = email.replace(/(.).*(@.*)/, '$1***$2');
-
-  if (!/^https?:\/\//.test(webhookUrl)) {
-    console.error('[contact] FATAL: MAKE_CONTACT_WEBHOOK_URL missing or invalid', { reason, emailLog });
-    return isJson
-      ? jsonResponse({ success: false, error: 'Server config error. Email rainers@theerainers.com.' }, 500, headers)
-      : redirectResponse('/contact?error=config_error');
-  }
-
   console.log('[contact] submission', { reason, emailLog });
 
-  try {
-    const res = await fetch(webhookUrl, {
+  // ── Telegram alert (fire-and-forget) ─────────────────────────────────
+  const e = cfEnv as unknown as Record<string, string>;
+  sendTelegramAlert(
+    e['TELEGRAM_BOT_TOKEN'] ?? '',
+    e['TELEGRAM_CHAT_ID'] ?? '',
+    `CONTACT FORM\nReason: ${reason}\nName: ${full_name}\nEmail: ${emailLog}\n\n${message.slice(0, 200)}${message.length > 200 ? '…' : ''}`,
+  ).catch(() => {});
+
+  // ── Resend notification to Rainers (primary) ──────────────────────────
+  const resendKey = e['RESEND_API_KEY'] ?? '';
+  let delivered = false;
+  if (resendKey) {
+    try {
+      const html =
+        `<div style="font-family:monospace;max-width:600px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
+        `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Contact Form</p>` +
+        `<p style="font-size:18px;font-weight:700;margin:0 0 24px;">${reason}</p>` +
+        `<table style="width:100%;border-collapse:collapse;margin:0 0 24px;">` +
+        `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;width:25%;">Name</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;">${full_name}</td></tr>` +
+        `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;">Email</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;"><a href="mailto:${email}" style="color:#0057FF;">${email}</a></td></tr>` +
+        `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;">Phone</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;">${phone}</td></tr>` +
+        `<tr><td style="padding:10px 0;font-size:11px;text-transform:uppercase;color:#888;vertical-align:top;">Message</td><td style="padding:10px 0;font-size:14px;line-height:1.6;">${message.replace(/\n/g, '<br/>')}</td></tr>` +
+        `</table>` +
+        `<p style="margin:0;"><a href="mailto:${email}" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Reply</a></p>` +
+        `</div>`;
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from: 'Thee Rainers <rainers@theerainers.com>',
+          to: ['rainers@theerainers.com'],
+          reply_to: email,
+          subject: `${reason} — ${full_name}`,
+          html,
+        }),
+      });
+      if (res.ok) { delivered = true; }
+      else { console.error('[contact] Resend failed', res.status, await res.text()); }
+    } catch (err) {
+      console.error('[contact] Resend fetch error:', String(err));
+    }
+  }
+
+  // ── Make.com webhook (secondary) ─────────────────────────────────────
+  const webhookUrl = (e['MAKE_CONTACT_WEBHOOK_URL'] ?? '').trim();
+  if (/^https?:\/\//.test(webhookUrl)) {
+    fetch(webhookUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ full_name, email, phone, reason, message }),
-    });
-    if (!res.ok) throw new Error(`Webhook responded with ${res.status}`);
-  } catch (err) {
-    console.error('[contact] webhook delivery failed:', err);
+    }).catch((err) => console.warn('[contact] Make.com failed:', String(err)));
+  } else if (!delivered) {
+    console.error('[contact] FATAL: No delivery method configured. RESEND_API_KEY missing and MAKE_CONTACT_WEBHOOK_URL invalid. Message from', emailLog, 'lost.');
     return isJson
-      ? jsonResponse({ success: false, error: 'Delivery failed. Please try again.' }, 500, headers)
-      : redirectResponse('/contact?error=delivery_failed');
+      ? jsonResponse({ success: false, error: 'Server config error. Email rainers@theerainers.com directly.' }, 500, headers)
+      : redirectResponse('/contact?error=config_error');
   }
 
   // ── success ───────────────────────────────────────────────────────────
