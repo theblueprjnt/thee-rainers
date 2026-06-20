@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Base.astro';
 ---
-<Layout title="Apply · Private Architecture | Thee Rainers">
+<Layout title="Apply · 1-on-1 Coaching | Thee Rainers">
   <Fragment slot="head">
-    <meta name="description" content="Private Architecture. 1-of-1 work built around your fight, body, and schedule. Application only." />
+    <meta name="description" content="1-on-1 coaching built around your fight, your body, your schedule. Application only." />
   </Fragment>
 
   <section class="bg-white flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-28 pb-16 md:py-32 md:min-h-screen">
@@ -13,7 +13,7 @@ import Layout from '../layouts/Base.astro';
         <!-- Left: Form (60%) -->
         <div>
           <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Application</p>
-          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.9] mb-7">Private<br/>Architecture.</h1>
+          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.9] mb-7">1-on-1<br/>Coaching.</h1>
           <p class="text-[#0A0A0A]/60 text-base leading-relaxed mb-10 max-w-[460px]">Built around your fight, your body, your schedule. I review every application myself. If we're a fit, we begin.</p>
 
           <div class="border-l-2 border-[#0A0A0A]/10 pl-6 mb-14">
@@ -70,15 +70,15 @@ import Layout from '../layouts/Base.astro';
             <div class="relative w-full" style="padding-bottom: 177.78%;">
               <iframe
                 src="https://www.youtube.com/embed/VCj0Dgfoako"
-                title="Giancarlo · 5-Month Private Architecture Result"
+                title="Giancarlo · 5-Month 1-on-1 Coaching Result"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
                 class="absolute inset-0 w-full h-full"
               ></iframe>
             </div>
             <div class="px-6 py-4 bg-[#F6F6F6] border-t border-[#0A0A0A]/8">
-              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-1">Private Architecture · 5 Months</p>
-              <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">Giancarlo · entrepreneur. We built the work around his fight schedule and the way his body actually moves.</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-1">1-on-1 Coaching · 5 Months</p>
+              <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">Giancarlo · entrepreneur. We built the work around his sparring and the way his body actually moves.</p>
             </div>
           </div>
 
@@ -121,7 +121,7 @@ import Layout from '../layouts/Base.astro';
           record: (document.getElementById('record') as HTMLTextAreaElement).value,
           flaw: (document.getElementById('flaw') as HTMLTextAreaElement).value,
           goal: (document.getElementById('goal') as HTMLTextAreaElement).value,
-          source: 'Private Architecture — Command',
+          source: '1-on-1 Coaching — Command',
         };
         try {
           const res = await fetch('/api/coaching-capture', {
