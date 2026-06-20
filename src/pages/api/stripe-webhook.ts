@@ -271,12 +271,94 @@ async function generateWatchUrl(secret: string, product: string): Promise<string
   return `${SITE_URL}/watch/${product}?sig=${sig}&exp=${exp}`;
 }
 
+// ── delivery email via Resend ──────────────────────────────────────────────
+
+const DELIVERY_SUBJECTS: Record<string, string> = {
+  'footwork':        'Your Footwork Blueprint',
+  'shadowboxing':    'Your Shadowboxing Blueprint',
+  'bundle':          'Your Blueprints',
+  'workshop-replay': 'Your Defense Workshop Replay',
+  'greatness':       'You are in.',
+};
+
+function buildDeliveryHtml(slug: string, url: string, url2: string | null): string {
+  const wrap = (inner: string) =>
+    `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
+    `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
+    inner +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#0057FF;">rainers@theerainers.com</a></p>` +
+    `</div>`;
+
+  const btn = (href: string, label: string) =>
+    `<p style="margin:0 0 24px;"><a href="${href}" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">${label}</a></p>`;
+
+  if (slug === 'bundle' && url2) {
+    return wrap(
+      `<p style="font-size:15px;line-height:1.6;margin:0 0 24px;">Both blueprints are ready.</p>` +
+      `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Footwork Blueprint</p>` +
+      btn(url, 'Download Footwork Blueprint') +
+      `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Shadowboxing Blueprint</p>` +
+      btn(url2, 'Download Shadowboxing Blueprint') +
+      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">Both links expire in 7 days. Save both files before then.</p>`,
+    );
+  }
+  if (slug === 'workshop-replay') {
+    return wrap(
+      `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Your Defense Workshop replay is ready.</p>` +
+      btn(url, 'Watch the Replay') +
+      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">90 minutes. Footwork, stance, punch mechanics, defensive structure, live Q&amp;A.</p>` +
+      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">This link expires in 7 days. Watch it before then.</p>`,
+    );
+  }
+  if (slug === 'greatness') {
+    return wrap(
+      `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">You are in.</p>` +
+      btn(url, 'Enter the Community') +
+      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">Your membership is active. The community is live.</p>`,
+    );
+  }
+  // footwork or shadowboxing
+  const label = slug === 'footwork' ? 'Download Footwork Blueprint' : 'Download Shadowboxing Blueprint';
+  return wrap(
+    `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">${DELIVERY_SUBJECTS[slug] ?? 'Your purchase'} is ready.</p>` +
+    btn(url, label) +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">This link expires in 7 days. Save the file before then.</p>`,
+  );
+}
+
+async function sendResendDelivery(
+  resendKey: string,
+  email: string,
+  slug: string,
+  url: string | null,
+  url2: string | null,
+): Promise<void> {
+  if (!resendKey || !url) return;
+  const subject = DELIVERY_SUBJECTS[slug] ?? 'Your purchase from Thee Rainers';
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'Thee Rainers <rainers@theerainers.com>',
+        to: [email],
+        subject,
+        html: buildDeliveryHtml(slug, url, url2),
+      }),
+    });
+    if (!res.ok) {
+      console.error('[stripe-webhook] Resend delivery failed', res.status, await res.text());
+    } else {
+      console.log('[stripe-webhook] Resend delivery sent for', slug);
+    }
+  } catch (err) {
+    console.error('[stripe-webhook] Resend fetch error:', String(err));
+  }
+}
+
 // ── delivery ───────────────────────────────────────────────────────────────
 
 async function deliverProduct(email: string, productId: string, e: Record<string, string>): Promise<void> {
-  const deliveryUrl = e['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
-  if (!deliveryUrl) { console.warn('[stripe-webhook] MAKE_DELIVERY_WEBHOOK_URL not set'); return; }
-
   const token       = generateToken();
   const productSlug = PRODUCT_MAP[productId] ?? 'unknown';
   let expiringUrl: string | null  = null;
@@ -291,7 +373,6 @@ async function deliverProduct(email: string, productId: string, e: Record<string
       catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
     }
   } else if (productSlug === 'greatness') {
-    // No file asset — link directly to the member portal
     expiringUrl = `${SITE_URL}/community/inside`;
   } else {
     const objectKeys = ASSET_MAP[productSlug] ?? [];
@@ -309,16 +390,30 @@ async function deliverProduct(email: string, productId: string, e: Record<string
     }
   }
 
-  try {
-    const res = await fetch(deliveryUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, product_id: productId, product_slug: productSlug, token, expiring_url: expiringUrl, expiring_url_2: expiringUrl2 }),
-    });
-    if (!res.ok) throw new Error(`Make.com responded ${res.status}`);
-    console.log('[stripe-webhook] Delivery success for', productSlug);
-  } catch (err) {
-    console.error('[stripe-webhook] Delivery error:', String(err));
+  // Primary: Resend (direct, no middleman)
+  const resendKey = e['RESEND_API_KEY'] ?? '';
+  if (resendKey) {
+    await sendResendDelivery(resendKey, email, productSlug, expiringUrl, expiringUrl2);
+  }
+
+  // Secondary: Make.com webhook (optional — fires if URL is set, for extra automations)
+  const deliveryUrl = e['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
+  if (deliveryUrl) {
+    try {
+      const res = await fetch(deliveryUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, product_id: productId, product_slug: productSlug, token, expiring_url: expiringUrl, expiring_url_2: expiringUrl2 }),
+      });
+      if (!res.ok) console.warn('[stripe-webhook] Make.com delivery responded', res.status);
+      else console.log('[stripe-webhook] Make.com delivery success for', productSlug);
+    } catch (err) {
+      console.error('[stripe-webhook] Make.com delivery error:', String(err));
+    }
+  }
+
+  if (!resendKey && !deliveryUrl) {
+    console.error('[stripe-webhook] FATAL: No delivery method configured. Set RESEND_API_KEY (preferred) or MAKE_DELIVERY_WEBHOOK_URL. Buyer', email, 'purchased', productSlug, 'and received nothing.');
   }
 }
 

@@ -62,7 +62,7 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 - `/workshop-replay` — replay sales page · $79
 - `/watch/workshop-replay` — token-gated watch page (server-validates HMAC before rendering embed)
 - `/vault` — all products
-- `/command` — Private Architecture application
+- `/command` — 1-on-1 Coaching application
 - `/qa` — Monthly Q&A · next session June 13
 - `/library` — YouTube knowledge library
 - `/arena` — training resources
@@ -76,7 +76,7 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 
 ## API routes
 - `/api/lead-capture` — all free forms (email required, source tag varies)
-- `/api/coaching-capture` — Private Architecture application
+- `/api/coaching-capture` — 1-on-1 Coaching application
 - `/api/contact` — contact + feedback forms
 - `/api/stripe-webhook` — Stripe event handler (signature-verified, CF Workers compatible)
 
@@ -85,7 +85,8 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 SITE_URL                    — production domain (e.g. https://theerainers.com). Used for CORS + Stripe redirect URLs. REQUIRED.
 MAKE_LEAD_WEBHOOK_URL       — free form submissions (footwork, lever-audit, qa, quiz-home). Also used by /api/coaching-capture.
 MAKE_CONTACT_WEBHOOK_URL    — contact + feedback form submissions. Separate webhook from lead. REQUIRED for contact form to deliver.
-MAKE_DELIVERY_WEBHOOK_URL   — post-purchase delivery trigger (PDFs, watch URLs).
+RESEND_API_KEY              — Resend transactional email API key. PRIMARY delivery method — set this and buyers get product emails instantly from CF Worker with no Make.com dependency. Free at resend.com. Requires domain verified in Resend dashboard (theerainers.com). Get key at resend.com/api-keys.
+MAKE_DELIVERY_WEBHOOK_URL   — post-purchase delivery trigger (PDFs, watch URLs). SECONDARY — only fires if set. Resend is preferred.
 STRIPE_SECRET_KEY           — Stripe API key (sk_live_*). Powers /api/create-checkout + stripe-webhook.
 STRIPE_WEBHOOK_SECRET       — Stripe webhook signature secret.
 WATCH_TOKEN_SECRET          — HMAC signing key for /watch/ token-gated pages.
