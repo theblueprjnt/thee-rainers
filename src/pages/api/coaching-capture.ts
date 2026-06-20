@@ -2,8 +2,6 @@ export const prerender = false;
 
 import type { APIContext } from 'astro';
 import { env as cfEnv } from 'cloudflare:workers';
-import { sendTelegramAlert } from '../../lib/telegram';
-
 export async function POST({ request }: APIContext): Promise<Response> {
   const e = cfEnv as unknown as Record<string, string>;
 
@@ -26,13 +24,6 @@ export async function POST({ request }: APIContext): Promise<Response> {
 
   const emailLog = email.replace(/(.).*(@.*)/, '$1***$2');
   console.log('[coaching-capture] submission', { emailLog });
-
-  // ── Telegram alert (fire-and-forget) ─────────────────────────────────
-  sendTelegramAlert(
-    e['TELEGRAM_BOT_TOKEN'] ?? '',
-    e['TELEGRAM_CHAT_ID'] ?? '',
-    `NEW APPLICATION — 1-on-1 Coaching\nName: ${name || 'not given'}\nEmail: ${emailLog}`,
-  ).catch(() => {});
 
   // ── Resend notification to Rainers (full application) ─────────────────
   const resendKey = e['RESEND_API_KEY'] ?? '';

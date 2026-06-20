@@ -17,8 +17,6 @@ export const prerender = false;
 
 import type { APIContext } from 'astro';
 import { env as cfEnv } from 'cloudflare:workers';
-import { sendTelegramAlert } from '../../lib/telegram';
-
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function corsHeaders(origin: string): Record<string, string> {
@@ -217,14 +215,6 @@ export async function POST({ request }: APIContext): Promise<Response> {
   // ── Resend welcome email (fire-and-forget) ───────────────────────────
   const resendKey = e['RESEND_API_KEY'] ?? '';
   sendResendWelcome(resendKey, email, source).catch(() => {});
-
-  // ── Telegram alert (fire-and-forget) ─────────────────────────────────
-  const masked = email.replace(/(.).*(@.*)/, '$1***$2');
-  sendTelegramAlert(
-    e['TELEGRAM_BOT_TOKEN'] ?? '',
-    e['TELEGRAM_CHAT_ID'] ?? '',
-    `NEW LEAD\nSource: ${source}\nEmail: ${masked}${full_name ? `\nName: ${full_name}` : ''}`,
-  ).catch(() => {});
 
   // ── Kit — subscribe + tag (fire-and-forget, never blocks response) ────
   const kitKey   = e['KIT_API_KEY'] ?? '';

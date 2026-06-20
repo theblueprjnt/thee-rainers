@@ -1,0 +1,23 @@
+name: Monthly KPI Report
+
+on:
+  schedule:
+    # 8:00 AM UTC on the 1st of every month
+    - cron: '0 8 1 * *'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub Actions tab (useful for testing)
+
+jobs:
+  send-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger monthly report
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X GET https://theerainers.com/api/monthly-report \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}")
+          echo "Response status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "Monthly report failed with status $STATUS"
+            exit 1
+          fi
