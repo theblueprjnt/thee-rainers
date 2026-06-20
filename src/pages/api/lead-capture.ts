@@ -120,15 +120,14 @@ async function sendResendWelcome(resendKey: string, email: string, source: strin
   const cfg = WELCOME_CONFIG[source];
   if (!resendKey || !cfg) return;
   const html =
-    `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
-    `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
+    `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">` +
     cfg.body +
-    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0;">Rainers</p></div>`;
+    `</div>`;
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Thee Rainers <rainers@theerainers.com>', to: [email], subject: cfg.subject, html }),
+      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: cfg.subject, html }),
     });
     if (!res.ok) console.error('[lead-capture] Resend welcome failed', res.status, await res.text());
     else console.log('[lead-capture] Resend welcome sent', { source });
