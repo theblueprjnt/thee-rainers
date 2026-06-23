@@ -3,9 +3,9 @@
 // (in production builds) if the date here is in the past, preventing
 // silent date rot on the live site.
 
-export const WORKSHOP_DATE_ISO = '2026-06-27';
-export const WORKSHOP_DATE_LONG = 'Saturday, June 27';
-export const WORKSHOP_DATE_SHORT = 'June 27';
+export const WORKSHOP_DATE_ISO = '2026-07-25';
+export const WORKSHOP_DATE_LONG = 'Saturday, July 25';
+export const WORKSHOP_DATE_SHORT = 'July 25';
 export const WORKSHOP_PRICE = 197;
 export const WORKSHOP_DURATION = '90 Min';
 

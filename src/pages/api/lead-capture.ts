@@ -143,6 +143,18 @@ ${FUNNEL_MAP}`,
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
 ${FUNNEL_MAP}`,
   },
+  {
+    delayDays: 8,
+    subject: 'how to defend yourself',
+    preview: '',
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The first question I get asked after people learn footwork is: how do I defend myself? I'm not letting my hands go in sparring, because I'm afraid I'll get countered or hit.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">I'm running a live workshop on July 25 teaching defense and the 5 layers of defense in boxing. Learn to defend yourself on all 5 levels, how to use each to position yourself with the opponent to hit and not get hit.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">If you're still flinching or getting hit more than 3 times per round when sparring — reserve your spot below.</p>
+<p style="margin:0 0 16px;"><a href="https://theerainers.com/workshop" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">RESERVE MY SPOT →</a></p>
+<p style="font-size:12px;color:#aaa;margin:0 0 28px;">8 spots · Live · July 25 · 12PM ET</p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
+  },
 ];
 
 function wrapEmail(body: string): string {
