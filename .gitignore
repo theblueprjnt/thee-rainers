@@ -40,3 +40,8 @@ TRB_CONTEXT.md
 *.PNG
 *.JPG
 screenshots/
+# Production images in public/ must be committed — un-ignore them
+!public/**/*.jpg
+!public/**/*.jpeg
+!public/**/*.png
+!public/**/*.PNG
