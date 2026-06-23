@@ -6,10 +6,6 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://theerainers.com',
   adapter: cloudflare(),
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'hover',
-  },
   vite: {
     plugins: [tailwindcss()],
   },

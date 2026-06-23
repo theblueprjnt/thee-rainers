@@ -185,14 +185,12 @@ const NAV_LINKS = [
 <script>
   // ────────────────────────────────────────────────────────────────────────
   // Mobile menu — bulletproof binding pattern:
-  // 1. Idempotent: dataset.bound guard prevents double-attaching listeners.
-  // 2. Synchronous: init() runs immediately when this script executes
-  //    (Astro <script> tags defer until DOM is parsed, so elements exist).
-  // 3. Forward-compatible: also re-runs on astro:page-load event in case
-  //    ClientRouter (ViewTransitions) gets enabled later in astro.config.
-  // 4. Declarative state: panel visibility driven by data-open attribute +
-  //    explicit CSS rules, NOT class toggling. No Tailwind dependency for
-  //    the open/close behavior.
+  // Idempotent: dataset.bound guard prevents double-attaching listeners.
+  // Synchronous: init() runs immediately when this script executes
+  //   (Astro <script> tags defer until DOM is parsed, so elements exist).
+  // Declarative state: panel visibility driven by data-open attribute +
+  //   explicit CSS rules, NOT class toggling. No Tailwind dependency for
+  //   the open/close behavior.
   // ────────────────────────────────────────────────────────────────────────
 
   function initNav() {
@@ -253,9 +251,6 @@ const NAV_LINKS = [
     update();
   }
 
-  // Run synchronously now (works for every page load, with or without ClientRouter).
   initNav();
   initNavGlass();
-  // Hook for ClientRouter view-transitions in case it's enabled later.
-  document.addEventListener('astro:page-load', () => { initNav(); initNavGlass(); });
 </script>

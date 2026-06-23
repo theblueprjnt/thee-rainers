@@ -226,8 +226,6 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
 }
 
 <script>
-  // Idempotent init — sync first, then re-run on astro:page-load for ClientRouter.
-  // Delegated click handler is attached to document, so we guard on document itself.
   function initTestimonials() {
     const order = ["maxresdefault", "hqdefault", "mqdefault"];
     document.querySelectorAll<HTMLImageElement>("img[data-fallback]").forEach((img) => {
@@ -273,5 +271,4 @@ const hairColor = dark ? "rgba(255,255,255,.15)" : "rgba(10,10,10,.12)";
   }
 
   initTestimonials();
-  document.addEventListener('astro:page-load', initTestimonials);
 </script>

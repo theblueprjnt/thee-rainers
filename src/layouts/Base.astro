@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = 'Thee Rainers',
-  description = 'Systemic boxing performance. Seven levers. Autonomic regulation. Built for fighters who think in structures, not sessions.',
+  description = 'Boxing built on purpose. Free footwork blueprint, live defense workshops, and 1-on-1 coaching from Rainers. Control in the ring starts here.',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
@@ -69,13 +69,17 @@ const siteSchema = JSON.stringify({
     <meta property="og:site_name" content="Thee Rainers" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://theerainers.com/images/rainers-training.jpg" />
+    <meta property="og:image" content="https://theerainers.com/images/og-card.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@theerainers" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:image" content="https://theerainers.com/images/rainers-training.jpg" />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://theerainers.com/images/og-card.jpg" />
+    <meta name="twitter:image:alt" content="Rainers competing in the ring" />
     <title>{title}</title>
     <script type="application/ld+json" set:html={siteSchema} />
     <!-- Cloudflare Web Analytics -->
@@ -196,7 +200,6 @@ const siteSchema = JSON.stringify({
       } else {
         scheduleCheckoutInit();
       }
-      document.addEventListener('astro:page-load', scheduleCheckoutInit);
     </script>
     <slot name="head" />
   </head>
@@ -322,8 +325,7 @@ const siteSchema = JSON.stringify({
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // Idempotent init — runs sync on first load AND on every astro:page-load
-  // event (forward-compatible with ClientRouter). Guard prevents double-bind.
+  // Idempotent init — guard on form.dataset.bound prevents double-bind.
   function initPopup() {
     var closeBtn = document.getElementById('tr-popup-close');
     var form     = document.getElementById('tr-popup-form');
@@ -372,6 +374,5 @@ const siteSchema = JSON.stringify({
   }
 
   initPopup();
-  document.addEventListener('astro:page-load', initPopup);
 })();
 </script>
