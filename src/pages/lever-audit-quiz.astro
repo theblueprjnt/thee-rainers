@@ -1,7 +1,10 @@
 ---
-import LinkPage from '../layouts/LinkPage.astro';
+export const prerender = false;
+import type { APIContext } from 'astro';
+export function GET(_ctx: APIContext): Response {
+  return new Response(null, { status: 301, headers: { Location: '/foundation' } });
+}
 ---
-<LinkPage title="7-Lever Audit · Thee Rainers">
 
 <div id="quiz">
 

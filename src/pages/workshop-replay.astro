@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Base.astro';
-import { WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 ---
 <Layout title="Defense Workshop Replay · On Demand | Thee Rainers">
   <Fragment slot="head">
@@ -51,33 +50,9 @@ import { WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
           </div>
         </div>
 
-        <!-- Right: curriculum -->
-        <div class="flex flex-col gap-[2px]">
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-6">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">01</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold mb-1">Footwork & Balance</p>
-            <p class="text-[#0A0A0A]/35 text-xs leading-relaxed">The errors draining your stamina and making you stiff. Ground contact, weight distribution, pivot mechanics.</p>
-          </div>
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-6">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">02</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold mb-1">Athletic Stance</p>
-            <p class="text-[#0A0A0A]/35 text-xs leading-relaxed">Build your custom stance. The platform where you attack and defend simultaneously.</p>
-          </div>
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-6">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">03</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold mb-1">Punch Mechanics</p>
-            <p class="text-[#0A0A0A]/35 text-xs leading-relaxed">Stop pushing and start snapping. Power from the kinetic chain, not the shoulder.</p>
-          </div>
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-6">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">04</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold mb-1">Defensive Structure</p>
-            <p class="text-[#0A0A0A]/35 text-xs leading-relaxed">Boxing with purpose. Defence built into offence. Not added on after.</p>
-          </div>
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-6">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">05</p>
-            <p class="text-[#0A0A0A]/70 text-sm font-bold mb-1">Live Q&A Recording</p>
-            <p class="text-[#0A0A0A]/35 text-xs leading-relaxed">Real questions, real answers. Specific mechanical problems diagnosed in real time.</p>
-          </div>
+        <!-- Right: why -->
+        <div class="flex flex-col justify-center">
+          <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[320px]">One session recorded. The framework for controlling space in the ring — on your schedule, as many times as you need it.</p>
         </div>
 
       </div>
@@ -123,22 +98,6 @@ import { WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
     </div>
   </section>
 
-  <!-- UPSELL: Live workshop -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
-      <div class="max-w-[540px]">
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">After the replay</p>
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.85] mb-4">
-          Real-time<br/>correction.
-        </h2>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">The replay gives you the framework. The Defense Workshop on {WORKSHOP_DATE_SHORT} gives you live diagnosis. Camera on, your movement, real corrections in real time.</p>
-      </div>
-      <a href="/workshop"
-        class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white shrink-0">
-        Reserve {WORKSHOP_DATE_SHORT} Seat · $197 →
-      </a>
-    </div>
-  </section>
 
   <!-- FAQ -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8" aria-labelledby="replay-faq-heading">

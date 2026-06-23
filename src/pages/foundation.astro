@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
-import { WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
 const productSchema = JSON.stringify({
   "@context": "https://schema.org",
@@ -42,9 +41,10 @@ const productSchema = JSON.stringify({
           style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
           The Footwork<br/>Blueprint.
         </h1>
-        <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-8 max-w-[520px]">
+        <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-2 max-w-[520px]">
           Win fights with footwork. A practical playbook to move with balance, control, and intent. Every step has a job. Free. Instant download.
         </p>
+        <p class="text-[#0A0A0A]/35 text-sm mb-8 max-w-[520px]">For fighters who train seriously and want to move with purpose. From Rainers — pro boxer, coach.</p>
 
         <!-- Capture form -->
         <div id="capture-wrap" class="max-w-[520px] mb-8">
@@ -149,48 +149,25 @@ const productSchema = JSON.stringify({
     </div>
   </section>
 
-  <!-- HOW TO USE IT — three steps -->
-  <section class="bg-white px-6 md:px-12 lg:px-20 py-14 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[720px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-3">After You Download</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
-        Three steps.
-      </h2>
-      <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
-        <div class="py-7">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">01 · Read it</p>
-          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Twenty minutes. The blueprint explains what your base is doing right now and what it should be doing instead.</p>
-        </div>
-        <div class="py-7">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">02 · Start today</p>
-          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Five minutes of stance work, on your floor. No gear, no gym, no partner. You feel the difference inside a week.</p>
-        </div>
-        <div class="py-7">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">03 · When the base holds</p>
-          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Add the Shadowboxing Blueprint. Add the live Workshop. Everything transfers because the foundation is finally ready for it.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- TESTIMONIALS -->
   <div class="border-t border-[#0A0A0A]/8">
     <Testimonials heading="What fighters say." kicker="Field Report" />
   </div>
 
-  <!-- UPSELL: Workshop -->
+  <!-- UPSELL: Workshop Replay -->
   <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-14 md:py-20 border-t border-white/5">
     <div class="max-w-[1100px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
       <div class="max-w-[640px]">
         <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">When the base holds · Next step</p>
         <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-4">
-          The Defense Workshop.
+          The Workshop Replay.
         </h2>
-        <p class="text-white/55 text-sm leading-relaxed">{WORKSHOP_DATE_SHORT}. 90 minutes. Camera on. Real-time correction on your defensive structure, movement, and mechanics. The blueprint gives you the framework. The Workshop gives you live diagnosis.</p>
+        <p class="text-white/55 text-sm leading-relaxed">90 minutes on demand. Defense mechanics from the ground up. The blueprint gives you the base. The replay shows it applied.</p>
       </div>
-      <a href="/workshop"
-        class="tr-gradient-cta shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-        Reserve Seat · $197 →
+      <a href="/workshop-replay"
+        class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--blue)] text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
+        Watch the Replay · $79 →
       </a>
     </div>
   </section>
