@@ -35,3 +35,8 @@ screenshots/
 
 # Stale context brief — superseded by TRB_ICP_v2.md
 TRB_CONTEXT.md
+
+# Source assets (live in ~/TheRainers/assets/)
+*.PNG
+*.JPG
+screenshots/
