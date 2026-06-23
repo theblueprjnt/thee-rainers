@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
-import { WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
 const products = [
   {
@@ -9,7 +8,7 @@ const products = [
     tag: 'Free · Start Here',
     title: 'Footwork Blueprint',
     sub: '56 Rounds · Orthodox + Southpaw',
-    desc: 'Stance mechanics. Weight distribution. Kinetic chain from the floor up. The base layer. Full PDF. No payment.',
+    desc: 'The base layer. Full PDF. No payment.',
     price: 'FREE',
     price_note: null,
     stripeUrl: '/foundation',
@@ -22,7 +21,7 @@ const products = [
     tag: 'Blueprint',
     title: 'Shadowboxing Blueprint',
     sub: '50+ Rounds · Orthodox + Southpaw',
-    desc: 'Shadowboxing rebuilt as live simulation. Cue reading. Range fluency. Technique under pressure.',
+    desc: 'The next layer after footwork. Full PDF.',
     price: '$47',
     price_note: null,
     stripeUrl: 'https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l',
@@ -142,7 +141,7 @@ const productSchema = JSON.stringify(products.map(p => ({
           </div>
           <div class="p-8 flex flex-col flex-1 justify-between">
             <div>
-              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Live · {WORKSHOP_DATE_SHORT} · 90 min</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Live · 90 min</p>
               <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-3">Defense Workshop</h2>
               <p class="text-white/40 text-xs leading-relaxed">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset.</p>
             </div>
@@ -172,7 +171,7 @@ const productSchema = JSON.stringify(products.map(p => ({
             <div>
               <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">On Demand · Full Recording</p>
               <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-2xl leading-tight mb-3">Workshop Replay</h2>
-              <p class="text-[#0A0A0A]/60 text-xs leading-relaxed">The full 90-min session. Watch the corrections. Footwork, stance, punch mechanics. Apply the framework. 7-day access window from purchase.</p>
+              <p class="text-[#0A0A0A]/60 text-xs leading-relaxed">The full 90-min session on demand. The framework applied. 7-day access from purchase.</p>
             </div>
             <div class="flex items-center justify-between mt-8">
               <span class="font-black text-[#0A0A0A] text-2xl">$79</span>
