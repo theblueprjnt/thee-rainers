@@ -11,9 +11,14 @@ import Base from '../layouts/Base.astro';
       <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-10">
         This page doesn't exist.
       </p>
-      <a href="/" class="text-[var(--blue)] text-sm font-bold tracking-wide hover:opacity-70 transition-opacity">
-        ← Back to home
-      </a>
+      <div class="flex flex-col gap-4">
+        <a href="/" class="text-[var(--blue)] text-sm font-bold tracking-wide hover:opacity-70 transition-opacity">
+          ← Back to home
+        </a>
+        <a href="/foundation" class="text-[#0A0A0A]/30 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors">
+          Free Blueprint →
+        </a>
+      </div>
     </div>
   </section>
 </Base>

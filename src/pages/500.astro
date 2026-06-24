@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Something went wrong · Thee Rainers">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <section class="bg-white px-8 md:px-16 lg:px-24 flex items-center" style="min-height: calc(100vh - 120px);">
+    <div class="max-w-[480px]">
+      <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase mb-6">500</p>
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-4">
+        Something broke.
+      </h1>
+      <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-10">
+        An error occurred on our end. Go back home. Let us know if it keeps happening.
+      </p>
+      <div class="flex flex-col gap-4">
+        <a href="/" class="text-[var(--blue)] text-sm font-bold tracking-wide hover:opacity-70 transition-opacity">
+          ← Back to home
+        </a>
+        <button id="report-btn" type="button"
+          class="text-left text-[#0A0A0A]/30 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors bg-transparent border-0 p-0 cursor-pointer">
+          Report this →
+        </button>
+        <p id="report-confirm" class="hidden text-[#0A0A0A]/30 text-xs tracking-wide">Reported. We are on it.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const btn = document.getElementById('report-btn') as HTMLButtonElement | null;
+  const confirm = document.getElementById('report-confirm');
+  btn?.addEventListener('click', async () => {
+    if (!btn) return;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    try {
+      await fetch('/api/error-report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'error-report',
+          url: window.location.href,
+          referrer: document.referrer,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+    } catch { /* fire-and-forget */ }
+    btn.classList.add('hidden');
+    confirm?.classList.remove('hidden');
+  });
+</script>

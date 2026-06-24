@@ -44,7 +44,7 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 /lever-audit-quiz — 7 questions, routes to right next step
     ↓
 /workshop-replay — $79 on-demand (attraction offer, leverages workshop archive)
-/workshop — $197 live · June 27 · Defense Workshop
+/workshop — $197 live · July 25 · Defense Workshop
     ↓
 /vault — Blueprints one-time ($47 each, $87 bundle)
        + Membership continuity ($47/mo — naming TBD, user decides copy)
@@ -55,10 +55,10 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 ## Pages inventory
 - `/` — home
 - `/about` — founder
-- `/footwork-foundation` — free protocol + email capture
+- `/foundation` — free Footwork Blueprint + email capture
 - `/lever-audit` — competitor qualifier + email capture
 - `/lever-audit-quiz` — interactive quiz + email gate
-- `/workshop` — Defense Workshop · June 27 · $197
+- `/workshop` — Defense Workshop · July 25 · $197
 - `/workshop-replay` — replay sales page · $79
 - `/watch/workshop-replay` — token-gated watch page (server-validates HMAC before rendering embed)
 - `/vault` — all products
@@ -70,7 +70,7 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 - `/foundation-guide` — redirect/noindex
 - `/feedback`, `/contact` — contact forms
 - `/thank-you/footwork-foundation` — post-download
-- `/thank-you/workshop` — post-workshop-purchase (June 27 live)
+- `/thank-you/workshop` — post-workshop-purchase (July 25 live)
 - `/thank-you/workshop-replay` — post-replay-purchase (check email, link incoming)
 - `/thank-you/contact` — post-contact
 
@@ -204,3 +204,26 @@ Counts live in `src/data/social-stats.ts` (single source of truth). Update that 
 
 ## Contact
 rainers@theerainers.com
+
+## Operational rules — non-negotiable
+
+### Recon-first protocol
+Read and report before changing anything. State what exists, what the problem is, and what the proposed fix is. Wait for approval. "Fix it while you're there" is not approval.
+
+### Brand voice (enforced — no exceptions in visible copy)
+- No em dashes (—) or en dashes (–). Use a period or comma.
+- No exclamation marks anywhere.
+- No hype voice, no rhetorical headers.
+- Short, direct sentences. State the thing. Move on.
+- Show WHY, never HOW. Pages diagnose and invite — they do not teach the curriculum before someone pays.
+- Never state numeric buyer counts. Replace with proof density or remove.
+- Full voice rules: `.claude/skills/trb-voice/SKILL.md`
+
+### gitignore — macOS case-insensitive trap
+`*.JPG` in .gitignore matches `*.jpg` files on macOS HFS+ (case-insensitive filesystem). Production images in `public/` must always be committed — they are served as static assets, not source files. The .gitignore includes `!public/**/*.jpg` negation rules to force-include them. If you add a new image extension to the ignore list, add a matching negation for `public/**`.
+
+### Internal links
+Before linking to any internal URL, confirm the page exists in the pages inventory above. `/footwork-foundation` redirects to `/foundation` but the source should always be `/foundation`. `/journal` does not exist — do not link to it.
+
+### 500 page reporting
+`/api/error-report` (POST) — forwards `{ source, url, referrer, timestamp }` to `MAKE_LEAD_WEBHOOK_URL`. Make filters on `source === "error-report"` to route to Rainers' inbox + Airtable log. Fire-and-forget; client shows "Reported." on success or failure.
