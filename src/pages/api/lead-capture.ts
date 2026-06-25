@@ -51,7 +51,7 @@ const FUNNEL_MAP = `
         <p style="font-size:12px;color:#888;margin:0;">90 minutes on demand. Defense mechanics from the ground up.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
-        <a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0057FF;text-decoration:none;">$79 →</a>
+        <a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0057FF;text-decoration:none;">$47 →</a>
       </td>
     </tr>
     <tr>

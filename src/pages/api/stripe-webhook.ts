@@ -53,7 +53,7 @@ const GA4_CATALOG: Record<string, { name: string; price: number; category: strin
   'footwork':        { name: 'Footwork Blueprint',         price:  47, category: 'one_time' },
   'shadowboxing':    { name: 'Shadowboxing Blueprint',     price:  47, category: 'one_time' },
   'bundle':          { name: 'Bundle (Both Blueprints)',   price:  87, category: 'one_time' },
-  'workshop-replay': { name: 'Workshop Replay',            price:  79, category: 'on_demand' },
+  'workshop-replay': { name: 'Workshop Replay',            price:  47, category: 'on_demand' },
   'greatness':       { name: 'Greatness Community',        price:  39, category: 'subscription' },
 };
 

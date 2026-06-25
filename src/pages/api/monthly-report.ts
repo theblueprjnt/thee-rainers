@@ -10,7 +10,7 @@ import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 
 const PRODUCT_NAMES: Record<string, string> = {
-  'prod_UZOMBOeJ0mm15I': 'Workshop Replay ($79)',
+  'prod_UZOMBOeJ0mm15I': 'Workshop Replay ($47)',
   'prod_UZrejf6iuDorEA': 'Footwork Blueprint ($47)',
   'prod_UZreDlek9325EY': 'Shadowboxing Blueprint ($47)',
   'prod_UZreHroYQEDAFU': 'Bundle ($87)',

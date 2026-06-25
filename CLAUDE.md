@@ -43,7 +43,7 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 /lever-audit — free 7-lever self-assessment (email capture → PDF)
 /lever-audit-quiz — 7 questions, routes to right next step
     ↓
-/workshop-replay — $79 on-demand (attraction offer, leverages workshop archive)
+/workshop-replay — $47 on-demand (attraction offer, leverages workshop archive)
 /workshop — $197 live · July 25 · Defense Workshop
     ↓
 /vault — Blueprints one-time ($47 each, $87 bundle)
@@ -59,7 +59,7 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 - `/lever-audit` — competitor qualifier + email capture
 - `/lever-audit-quiz` — interactive quiz + email gate
 - `/workshop` — Defense Workshop · July 25 · $197
-- `/workshop-replay` — replay sales page · $79
+- `/workshop-replay` — replay sales page · $47
 - `/watch/workshop-replay` — token-gated watch page (server-validates HMAC before rendering embed)
 - `/vault` — all products
 - `/command` — 1-on-1 Coaching application
@@ -159,7 +159,7 @@ Expired token → repurchase CTA (no video in source). Invalid token → redirec
 | Product | Price | Stripe link | Product ID |
 |---|---|---|---|
 | Defense Workshop (live) | $197 | https://buy.stripe.com/7sY28r8lt1D06XU6446J20n | — |
-| Workshop Replay | $79 | https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p | prod_UZOMBOeJ0mm15I |
+| Workshop Replay | $47 | https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p | prod_UZOMBOeJ0mm15I |
 | Footwork Blueprint | $47 | https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k | prod_UZrejf6iuDorEA |
 | Shadowboxing Blueprint | $47 | https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l | prod_UZreDlek9325EY |
 | Bundle (both blueprints) | $87 | https://buy.stripe.com/14A4gz59hgxUaa65006J20m | prod_UZreHroYQEDAFU |
