@@ -3,68 +3,51 @@ import Layout from '../layouts/Base.astro';
 ---
 <Layout title="Defense Workshop Replay · On Demand | Thee Rainers">
   <Fragment slot="head">
-    <meta name="description" content="90 minutes. Defense mechanics. Watch on demand. $47." />
+    <meta name="description" content="90 minutes on demand. Defensive structure from the base up. Footwork, stance, live Q&A. Watch when you're ready. $47." />
   </Fragment>
 
-  <!-- HERO -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 pt-20 md:pt-40 pb-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24 items-start">
+  <!-- HERO — dark, full-bleed, CTA above the fold on mobile -->
+  <section class="relative overflow-hidden bg-[#0A0A0A]">
+    <img src="/images/workshop_bacgkround.png" alt="" aria-hidden="true"
+      width="1920" height="1080"
+      class="absolute inset-0 w-full h-full object-cover object-center opacity-15 pointer-events-none select-none"
+      loading="eager" fetchpriority="high" />
 
-        <div>
-          <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-8">On Demand · Full Recording</p>
-          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-6xl leading-[0.85] mb-8">
-            The Workshop<br/>Replay
-          </h1>
-          <p class="text-[#0A0A0A]/50 text-base leading-relaxed mb-10 max-w-[440px]">
-            90 minutes. Footwork, stance, punch mechanics, defensive structure, and a live Q&A session at the end. The same session that went live in May. Watch it now, on your schedule.
-          </p>
+    <div class="relative z-10 px-6 md:px-16 lg:px-24 pt-28 md:pt-44 pb-14 md:pb-20">
+      <div class="max-w-[680px]">
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">On Demand · Full Recording</p>
+        <h1 class="font-black text-white uppercase tracking-tighter leading-[0.85] mb-6"
+          style="font-size: clamp(2.8rem, 8vw, 4.75rem);">
+          The Defense<br/>Workshop.<br/>Recorded.
+        </h1>
+        <p class="text-white/55 text-base leading-relaxed mb-10 max-w-[460px]">
+          The framework for not getting hit. Footwork, stance, defensive structure, live Q&A. 90 minutes on your schedule.
+        </p>
 
-          <div class="border border-[#0A0A0A]/8 p-8 mb-10 max-w-[440px]">
-            <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
-              <div class="flex justify-between py-3">
-                <span class="text-[#0A0A0A]/40 text-sm">Format</span>
-                <span class="text-[#0A0A0A]/70 text-sm font-bold">Full recording · watch anytime</span>
-              </div>
-              <div class="flex justify-between py-3">
-                <span class="text-[#0A0A0A]/40 text-sm">Length</span>
-                <span class="text-[#0A0A0A]/70 text-sm font-bold">90 minutes</span>
-              </div>
-              <div class="flex justify-between py-3">
-                <span class="text-[#0A0A0A]/40 text-sm">Access</span>
-                <span class="text-[#0A0A0A]/70 text-sm font-bold">Instant · 7-day access link</span>
-              </div>
-              <div class="flex justify-between py-3">
-                <span class="text-[#0A0A0A]/40 text-sm">Price</span>
-                <span class="font-black text-[#0A0A0A] text-xl">$47</span>
-              </div>
-            </div>
-          </div>
+        <a href="https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p"
+          class="inline-flex w-full sm:w-auto items-center justify-center rounded-none bg-[var(--blue)] text-white font-bold px-10 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+          Get the Replay · $47 →
+        </a>
 
-          <div class="flex flex-col gap-4 max-w-[360px]">
-            <a href="https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p"
-              class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white">
-              Get the Replay · $47 →
-            </a>
-            <p class="text-[11px] text-[#0A0A0A]/30 text-center">Secure checkout via Stripe · Instant delivery · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a></p>
-          </div>
+        <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-white/25 text-[10px] tracking-widest uppercase">
+          <span>90 Min</span>
+          <span aria-hidden="true">·</span>
+          <span>Instant Access</span>
+          <span aria-hidden="true">·</span>
+          <span>7-Day Link</span>
+          <span aria-hidden="true">·</span>
+          <span class="text-white/45 font-bold">$47</span>
         </div>
-
-        <!-- Right: why -->
-        <div class="flex flex-col justify-center">
-          <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[320px]">One session recorded. The framework for controlling space in the ring — on your schedule, as many times as you need it.</p>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- TESTIMONIAL -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto w-full grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-16 items-center">
+  <!-- PROOF — Giancarlo -->
+  <section class="bg-white px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-12 md:gap-20 items-center">
 
       <div class="flex flex-col items-center md:items-start">
-        <div class="border border-[#0A0A0A]/8 overflow-hidden w-full max-w-[280px]">
+        <div class="w-full max-w-[260px] mx-auto md:mx-0 overflow-hidden border border-[#0A0A0A]/8">
           <div class="relative w-full" style="padding-bottom: 177.78%;">
             <iframe
               src="https://www.youtube.com/embed/VCj0Dgfoako"
@@ -75,32 +58,53 @@ import Layout from '../layouts/Base.astro';
             ></iframe>
           </div>
         </div>
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-4">Giancarlo · 5 Months</p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-4 text-center md:text-left">Giancarlo · 5 Months</p>
       </div>
 
       <div>
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">The result of this work</p>
-        <p class="font-black text-[#0A0A0A]/55 uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Field Report</p>
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
           "My footwork makes sense. I can see openings instead of just swinging."
         </p>
         <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-8 max-w-[400px]">
-          Giancarlo started sparring. Five months of work. What you see in this short is the same mechanics this workshop teaches.
+          Giancarlo started sparring. Five months. What you see in this clip is built on the same mechanics this workshop teaches.
         </p>
-        <div class="flex flex-col items-start gap-1">
-          <a href="https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p"
-            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white">
-            Get the Replay · $47 →
-          </a>
-          <p class="text-[9px] text-[#0A0A0A]/25"><a href="/legal/terms" class="underline hover:text-[#0A0A0A]/50">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a></p>
-        </div>
+        <a href="https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p"
+          class="inline-flex items-center justify-center rounded-none bg-[var(--blue)] text-white font-bold px-10 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
+          Get the Replay · $47 →
+        </a>
+        <p class="text-[9px] text-[#0A0A0A]/25 mt-2"><a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a></p>
       </div>
 
     </div>
   </section>
 
+  <!-- WHAT'S INSIDE — 3 pillars, problem-framed -->
+  <section class="bg-white px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1100px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-3">What's inside.</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
+        Three things this session fixes.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="border-t-2 border-[#0A0A0A] pt-5">
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Why you keep getting hit.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">The break is almost always in your stance or positioning. The session maps where your defense fails before pressure even comes.</p>
+        </div>
+        <div class="border-t-2 border-[#0A0A0A] pt-5">
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Why your movement fails under pressure.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Footwork that works in drills breaks in sparring. The workshop finds where the chain disconnects and builds the fix from the base up.</p>
+        </div>
+        <div class="border-t-2 border-[#0A0A0A] pt-5">
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Live Q&A. Real problems. Real answers.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Fighters in the live session asked the questions you probably have. Every answer is in the recording.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- FAQ -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8" aria-labelledby="replay-faq-heading">
+  <section class="bg-white px-6 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8" aria-labelledby="replay-faq-heading">
     <div class="max-w-[800px] mx-auto">
       <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Questions</p>
       <h2 id="replay-faq-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-10">Common Questions</h2>
@@ -130,13 +134,19 @@ import Layout from '../layouts/Base.astro';
     </div>
   </section>
 
-  <!-- SCRIPTURE -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-12 md:py-20">
-    <div class="max-w-[720px] mx-auto">
-      <p class="font-black uppercase tracking-tighter leading-[0.88] mb-4 text-white/50 text-2xl md:text-3xl">
-        "I do not run aimlessly. I do not fight like a boxer beating the air."
-      </p>
-      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
+  <!-- SCRIPTURE + final CTA -->
+  <section class="bg-[#0A0A0A] px-6 md:px-16 lg:px-24 py-14 md:py-20">
+    <div class="max-w-[780px] mx-auto flex flex-col md:flex-row md:items-end justify-between gap-10">
+      <div>
+        <p class="font-black uppercase tracking-tighter leading-[0.88] mb-4 text-white/50 text-2xl md:text-3xl max-w-[520px]">
+          "I do not run aimlessly. I do not fight like a boxer beating the air."
+        </p>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
+      </div>
+      <a href="https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p"
+        class="shrink-0 inline-flex items-center justify-center rounded-none bg-[var(--blue)] text-white font-bold px-10 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none whitespace-nowrap">
+        Get the Replay · $47 →
+      </a>
     </div>
   </section>
 
