@@ -124,15 +124,15 @@ const faqSchema = JSON.stringify({
         <!-- Left 60%: Workshop — Flagship -->
         <div class="bg-[#0D1F1F] border border-white/10 hover:border-white/25 transition-colors duration-300 p-12 md:p-16 flex flex-col justify-between min-h-[540px] group">
           <div>
-            <span class="text-[var(--ink-soft)] text-[10px] tracking-wider md:tracking-widest uppercase">One Session · Reusable Framework</span>
+            <span class="text-[var(--ink-soft)] text-[10px] tracking-wider md:tracking-widest uppercase">Live · {WORKSHOP_DATE_SHORT}</span>
             <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Defense<br/>Workshop</h2>
-            <p class="text-white/55 text-sm leading-relaxed max-w-[380px] mb-10">5 layers of defense. How to defend yourself at each one. How to use positioning to hit and not get hit. Live correction on your movement. The mechanics your gym doesn't teach explicitly.</p>
+            <p class="text-white/55 text-sm leading-relaxed max-w-[380px] mb-10">5 layers of defense. How to defend yourself at each one. How to use positioning to hit and not get hit. Live correction on your movement. The mechanics your gym doesn't teach.</p>
             <div class="flex flex-col gap-3">
               <p class="text-white/30 text-[10px] tracking-widest uppercase mb-2">Session Structure</p>
               <ul class="flex flex-col gap-3 list-none p-0 m-0">
                 <li class="text-white/50 text-sm">Foundation (30 min): the 5 layers broken down, one by one</li>
                 <li class="text-white/50 text-sm">Application (45 min): live drilling, camera on, real-time correction</li>
-                <li class="text-white/50 text-sm">Integration (15 min): how to layer these into your sparring immediately</li>
+                <li class="text-white/50 text-sm">Sparring (15 min): how to put this into your next round</li>
                 <li class="text-[var(--red)] text-sm">Full recording delivered within 24 hours</li>
               </ul>
             </div>
@@ -213,24 +213,8 @@ const faqSchema = JSON.stringify({
     </div>
   </section>
 
-  <!-- TESTIMONIAL VIDEO -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-20 border-t border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <div class="max-w-[480px] mx-auto aspect-video bg-[#0A0A0A]">
-        <iframe
-          src="https://www.youtube.com/embed/VCj0Dgfoako"
-          title="Giancarlo · Thee Rainers Workshop"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          class="w-full h-full"
-          loading="lazy"
-        ></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- Proof — in-person students who trained live with Rainers -->
-  <Testimonials filter="in_person" heading="Trained live" kicker="Results · In The Room" background="void" />
+  <!-- Proof — fighters on film -->
+  <Testimonials ids={["giancarlo-remote", "elizabeth-inperson"]} heading="What fighters say" kicker="Results · On Film" background="void" />
 
   <!-- FAQ -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-20 border-t border-[#0A0A0A]/8">
