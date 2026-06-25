@@ -130,8 +130,7 @@ Receives purchase events (initial + monthly renewals). Payload:
 **For workshop-replay:** `expiring_url` = `https://theerainers.com/watch/workshop-replay?sig=xxx&exp=xxx` (7-day signed URL).
 
 ### Airtable
-KNOWN BUG: `source` field is Single Select type — API sends strings not in options → 422 → all leads silently dropped.
-**FIX: In Airtable → change `source` field type from Single Select → Single line text.**
+`source` field is Single line text (verified 2026-06-25). Upsert uses `fieldsToMergeOn: ['Email']`.
 
 ## Delivery system architecture
 
@@ -192,15 +191,59 @@ Counts live in `src/data/social-stats.ts` (single source of truth). Update that 
 
 ## Pending — prioritized
 1. **[FIRE] Make.com delivery scenario** — MAKE_DELIVERY_WEBHOOK_URL receives payloads but no scenario sends the email. Every buyer gets nothing after payment.
-2. **[FIRE] Airtable source field** — change Single Select → Single line text. All leads being dropped.
-3. **[URGENT] Stripe Workshop Replay success URL** — update in Stripe Dashboard to `/thank-you/workshop-replay`
-4. **[WEEK] Membership section on site** — subscription products exist in Stripe + webhook, but no page offers them. Naming/copy TBD by Rainers.
-5. **[WEEK] Post-purchase email sequence in Make.com** — Day 0 delivery, Day 3 check-in, Day 7 upsell, Day 14 workshop invite
-6. **[WEEK] Lever-audit.pdf** — generate from print template (Chrome → Print → Save as PDF)
-7. **[ONGOING] Platform bios** — update to theerainers.com/links once all is confirmed live
+2. **[URGENT] Stripe Workshop Replay success URL** — update in Stripe Dashboard to `/thank-you/workshop-replay`
+3. **[WEEK] Membership section on site** — subscription products exist in Stripe + webhook, but no page offers them. Naming/copy TBD by Rainers.
+4. **[WEEK] Post-purchase email sequence in Make.com** — Day 0 delivery, Day 3 check-in, Day 7 upsell, Day 14 workshop invite
+5. **[WEEK] Lever-audit.pdf** — generate from print template (Chrome → Print → Save as PDF)
+6. **[ONGOING] Platform bios** — update to theerainers.com/links once all is confirmed live
 
 ## Deployment
 `git push` → Cloudflare Pages auto-deploys `main`. No manual steps.
+
+## Rituals
+
+### pre-push (run before every git push)
+```
+# 1. Em dash grep — zero output = pass
+grep -r "—\|–" src/ --include="*.astro" --include="*.ts" --include="*.tsx" --include="*.md" -l
+
+# 2. Brand words grep — should return zero matches
+grep -r "masterclass\|calibration\|real results\|real coaching" src/ --include="*.astro" -l
+
+# 3. Placeholder grep — should return zero matches  
+grep -r "NEEDS RAINERS\|REPLACE_WITH\|TODO:" src/pages/ -l
+```
+If any grep returns output, fix before pushing.
+
+### weekly-audit (run every Monday)
+```
+# Page health — each should return 200
+for path in / /workshop /workshop-replay /foundation /vault /command /links /about /community; do
+  code=$(curl -s -o /dev/null -w "%{http_code}" "https://theerainers.com$path")
+  echo "$code $path"
+done
+
+# GTM presence — should contain GTM-5LQ7HPXG
+curl -s https://theerainers.com | grep -o "GTM-[A-Z0-9]*"
+
+# Stripe buy links live — should each return 200 (not 404)
+curl -s -o /dev/null -w "%{http_code}" https://buy.stripe.com/7sY28r8lt1D06XU6446J20n
+curl -s -o /dev/null -w "%{http_code}" https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p
+```
+
+### copy-pass (run before any page goes live)
+1. Load `.claude/skills/trb-voice/SKILL.md`
+2. Grep for banned patterns: em dash, "masterclass", "real X", "not X it's Y", rhetorical headers
+3. Read every h1/h2/CTA label out loud — does it earn attention before asking for anything?
+4. Check numeric counts — never state buyer counts, replace with proof density
+5. Confirm all system names use exact locked names (Workshop, Blueprint, Private Architecture, etc.)
+
+### measure (run after any funnel change)
+GA4 funnel state — open GA4 → Reports → Engagement → Events, confirm:
+- `begin_checkout` fires on Stripe CTA clicks for all 4 products
+- `purchase` events arrive after real test transactions
+- Source breakdown (organic / social / direct) shows traffic attribution
+If `purchase` events are missing: GA4_MEASUREMENT_ID + GA4_API_SECRET set in Cloudflare Pages env.
 
 ## Contact
 rainers@theerainers.com
