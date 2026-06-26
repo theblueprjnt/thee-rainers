@@ -190,7 +190,7 @@ Counts live in `src/data/social-stats.ts` (single source of truth). Update that 
 - YouTube: @Rainers
 
 ## Pending — prioritized
-1. **[FIRE] Make.com delivery scenario** — MAKE_DELIVERY_WEBHOOK_URL receives payloads but no scenario sends the email. Every buyer gets nothing after payment.
+1. **[VERIFY] Make.com delivery scenario** — Resend is the primary delivery path and IS wired (stripe-webhook.ts:394). Buyers get the email if RESEND_API_KEY is set in Cloudflare Pages. Make.com is secondary/optional. Confirm RESEND_API_KEY is set in dashboard; if yes, this is resolved.
 2. **[URGENT] Stripe Workshop Replay success URL** — update in Stripe Dashboard to `/thank-you/workshop-replay`
 3. **[WEEK] Membership section on site** — subscription products exist in Stripe + webhook, but no page offers them. Naming/copy TBD by Rainers.
 4. **[WEEK] Post-purchase email sequence in Make.com** — Day 0 delivery, Day 3 check-in, Day 7 upsell, Day 14 workshop invite
