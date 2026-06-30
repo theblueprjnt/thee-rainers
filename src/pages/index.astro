@@ -4,333 +4,324 @@ import Testimonials from '../components/site/Testimonials.astro';
 import { SOCIAL_STATS } from '../data/social-stats';
 import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 ---
-<Layout title="Thee Rainers · Engineered for the ring.">
+<Layout
+  title="Thee Rainers · Structured boxing for the serious student."
+  description="Boxing built on structure. Full offense, full defense, a clear path. The foundation most gyms skip. Free Footwork Blueprint, live workshops, and coaching.">
 
-  <!-- HERO — mobile: clean photo on top, dark stage below. Desktop: 60/40. -->
-  <section class="relative overflow-hidden border-b border-[#0A0A0A]/8 bg-[#0A0A0A] md:bg-white">
+  <!-- ── HERO ──────────────────────────────────────────────────────────── -->
+  <section class="relative bg-[#0A0A0A] overflow-hidden" style="min-height: 100svh;">
 
-    <!-- ── MOBILE LAYOUT ──────────────────────────────────────────────── -->
-    <div class="md:hidden flex flex-col">
-      <!-- Photo strip — clean, no text overlay, anchored to boxer's face -->
-      <div class="relative w-full bg-[#0A0A0A] mt-16" style="height: 56svh; min-height: 360px;">
-        <img src="/images/coldfightpic2.jpg" alt="Thee Rainers · Boxer"
-          width="2280" height="2203"
-          class="absolute inset-0 w-full h-full object-cover"
-          style="object-position: 60% 30%;"
-          loading="eager" decoding="async" fetchpriority="high" />
-        <!-- Subtle vignette so the gradient CTA below has visual continuity -->
-        <div aria-hidden="true" class="absolute inset-x-0 bottom-0 h-24"
-          style="background: linear-gradient(to top, #0A0A0A, transparent);"></div>
-      </div>
+    <!-- Rainers cutout — anchored bottom-right, desktop only -->
+    <div class="absolute right-0 bottom-0 h-full hidden md:block pointer-events-none select-none" aria-hidden="true">
+      <img src="/images/herocropped.png" alt=""
+        class="h-full w-auto object-contain object-bottom"
+        style="max-height: 100svh;"
+        loading="eager" decoding="async" fetchpriority="high" />
+      <div class="absolute inset-y-0 left-0 w-64" style="background: linear-gradient(to right, #0A0A0A 0%, transparent 100%);"></div>
+    </div>
 
-      <!-- Content stage — solid black, generous padding, no overlap -->
-      <div class="bg-[#0A0A0A] px-7 pt-8 pb-12">
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">@theerainers</p>
-        <h1 class="font-black uppercase tracking-tighter mb-5 text-white"
-          style="font-size: clamp(2.5rem, 11vw, 3.5rem); line-height: 0.86;">
-          Engineered<br/>for the ring.
+    <!-- Mobile: fight photo as full bg at low opacity -->
+    <div class="absolute inset-0 md:hidden" aria-hidden="true">
+      <img src="/images/coldfightpic2.jpg" alt=""
+        class="w-full h-full object-cover object-center opacity-20"
+        loading="eager" decoding="async" fetchpriority="high" />
+      <div class="absolute inset-0" style="background: linear-gradient(to top, #0A0A0A 30%, transparent 100%);"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 flex flex-col justify-end md:justify-center px-6 md:px-12 lg:px-20 pb-16 pt-28 md:py-0" style="min-height: 100svh; max-width: 56%;" >
+      <div class="md:max-w-[560px]">
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Thee Rainers · Structured Boxing</p>
+        <h1 class="font-black uppercase tracking-tighter text-white mb-6" style="font-size: clamp(3.25rem, 6.5vw, 5.5rem); line-height: 0.84;">
+          Boxing<br/>built on<br/>structure.
         </h1>
-        <p class="text-white/55 mb-8 max-w-[340px] text-sm leading-relaxed">
-          The foundation most gyms skip. Step by step.
+        <p class="text-white/50 text-base leading-relaxed mb-10 max-w-[420px]">
+          Full offense. Full defense. A clear path. The part of boxing most gyms skip.
         </p>
-        <div class="flex flex-col gap-3">
-          <a href="/workshop"
-            class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-6 py-4 text-[13px] tracking-wide uppercase transition-transform duration-150 active:translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
-            Reserve Workshop · {WORKSHOP_DATE_SHORT} · $197 →
-          </a>
+        <div class="flex flex-col sm:flex-row gap-3">
           <a href="/foundation"
-            class="inline-flex items-center justify-center font-bold border border-white/30 text-white bg-transparent px-6 py-4 text-[13px] tracking-wide uppercase hover:border-white active:translate-y-px transition-all duration-150">
-            Get the Footwork Blueprint · Free →
+            class="inline-flex items-center justify-center bg-[var(--blue)] text-white font-bold px-7 py-4 text-sm tracking-wide uppercase hover:bg-white hover:text-[#0A0A0A] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+            Start Free · Footwork Blueprint →
+          </a>
+          <a href="#the-method"
+            class="inline-flex items-center justify-center border border-white/20 text-white font-bold px-7 py-4 text-sm tracking-wide uppercase hover:border-white/50 transition-colors duration-200">
+            See the Method ↓
           </a>
         </div>
-
-        <a href="#students"
-          class="mt-7 inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-white/55 hover:text-white transition-colors duration-200">
-          <span class="h-px w-8 bg-[var(--ink-soft)]"></span>
-          <span>Watch fighters run the system</span>
-          <span aria-hidden="true">↓</span>
+        <a href="#proof"
+          class="mt-10 inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-white/35 hover:text-white/60 transition-colors duration-200">
+          <span class="h-px w-8 bg-white/20"></span>
+          Watch fighters run the system ↓
         </a>
       </div>
     </div>
-
-    <!-- ── DESKTOP LAYOUT ─────────────────────────────────────────────── -->
-    <div class="hidden md:grid md:grid-cols-[60%_40%] md:min-h-screen">
-      <!-- Left: text + CTAs -->
-      <div class="flex flex-col justify-center bg-white px-14 lg:px-20">
-        <p class="text-[var(--ink-soft)] text-xs tracking-wide uppercase mb-5">@theerainers</p>
-        <h1 class="font-black uppercase tracking-tighter mb-6 text-[#0A0A0A]"
-          style="font-size: clamp(2.75rem, 5.5vw, 4.5rem); line-height: 0.85;">
-          Engineered<br/>for the ring.
-        </h1>
-        <p class="text-[#0A0A0A]/55 mb-10 max-w-[380px] text-base leading-relaxed">
-          The foundation most gyms skip. Step by step.
-        </p>
-        <div class="flex flex-col gap-3 max-w-[480px]">
-          <a href="/workshop"
-            class="tr-gradient-cta inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-4 text-sm tracking-wide uppercase transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-            Reserve Workshop Seat · {WORKSHOP_DATE_SHORT} · $197 →
-          </a>
-          <a href="/foundation"
-            class="inline-flex items-center justify-center font-bold border-2 border-[#0A0A0A]/15 text-[#0A0A0A] bg-transparent px-8 py-4 text-sm tracking-wide uppercase hover:border-[var(--blue)] hover:text-[var(--blue)] transition-all duration-200 whitespace-nowrap">
-            Get the Footwork Blueprint · Free →
-          </a>
-        </div>
-
-        <a href="#students"
-          class="mt-10 inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase transition-colors duration-200 text-[#0A0A0A]/60 hover:text-[#0A0A0A] group">
-          <span class="h-px w-10 bg-[var(--ink-soft)] transition-[width] duration-200 group-hover:w-14"></span>
-          <span>Watch fighters run the system</span>
-          <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-y-0.5">↓</span>
-        </a>
-      </div>
-
-      <!-- Right: image panel -->
-      <div class="relative overflow-hidden bg-[#0A0A0A]">
-        <img src="/images/coldfightpic2.jpg" alt="Thee Rainers"
-          width="2280" height="2203"
-          class="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager" decoding="async" fetchpriority="high" />
-      </div>
-    </div>
-
   </section>
 
-  <!-- QUIZ — 3-step diagnosis -->
-  <section class="bg-white px-6 md:px-12 lg:px-20 py-10 md:py-16 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[860px] mx-auto">
-
-      <!-- Header + progress -->
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-        <div>
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Quiz</p>
-          <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88]">Find your<br/>starting point.</h2>
-        </div>
-        <div class="flex gap-1.5">
-          <div id="qp-1" class="h-[3px] w-14 transition-all duration-300" style="background-color:var(--blue)"></div>
-          <div id="qp-2" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
-          <div id="qp-3" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
-        </div>
-      </div>
-
-      <!-- Step 1 -->
-      <div id="quiz-step-1">
-        <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-6">What is your primary focus right now?</p>
-        <div class="grid grid-cols-2 gap-3">
-          <button data-quiz-option data-step="1" data-value="speed"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Speed</p>
-          </button>
-          <button data-quiz-option data-step="1" data-value="power"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Power</p>
-          </button>
-          <button data-quiz-option data-step="1" data-value="footwork"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Footwork</p>
-          </button>
-          <button data-quiz-option data-step="1" data-value="ring-iq"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Ring IQ</p>
-          </button>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div id="quiz-step-2" class="hidden">
-        <button id="quiz-back-2" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 py-3 px-1 font-bold min-h-[44px]">
-          &larr; Back
-        </button>
-        <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-6">Where are you starting from?</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <button data-quiz-option data-step="2" data-value="beginner"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Just starting</p>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Under 1 year or no formal training</p>
-          </button>
-          <button data-quiz-option data-step="2" data-value="amateur"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Amateur</p>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Training consistently, have sparred</p>
-          </button>
-          <button data-quiz-option data-step="2" data-value="advanced"
-            class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
-            <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Advanced</p>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Competitive or serious fight record</p>
-          </button>
-        </div>
-      </div>
-
-      <!-- Step 3: Email (dynamic insight per path) -->
-      <div id="quiz-step-3" class="hidden">
-        <button id="quiz-back-3" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 py-3 px-1 font-bold min-h-[44px]">
-          &larr; Back
-        </button>
-        <div id="quiz-insight" class="border-l-2 border-[#0A0A0A]/15 pl-4 mb-8 max-w-[480px]">
-          <!-- Populated by JS -->
-        </div>
-        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-[0.88] mb-2">Your starting point.</h3>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6 max-w-[420px]">Enter your email and I will send you the specific next step based on what you told me.</p>
-        <form id="quiz-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
-          <input type="email" id="quiz-email" placeholder="your@email.com" required
-            class="flex-1 border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/25 focus:outline-none focus:border-[var(--blue)] transition-colors duration-200" />
-          <button type="submit" id="quiz-submit"
-            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-8 py-4 text-xs tracking-widest uppercase hover:bg-[var(--blue)] hover:text-white transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-40">
-            Send it →
-          </button>
-        </form>
-        <p id="quiz-error" class="text-[#0A0A0A]/40 text-xs mt-3 hidden">Please enter a valid email address.</p>
-      </div>
-
-      <!-- Step 4: Done (dynamic product CTA per path) -->
-      <div id="quiz-step-4" class="hidden">
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Sent</p>
-        <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Check your inbox.</h3>
-        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[400px] mb-8">Your plan is on the way. If you want to start now:</p>
-        <div id="quiz-result-cta">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- WORKSHOP BAND — primary urgency, gradient edge -->
+  <!-- ── WORKSHOP BAND ─────────────────────────────────────────────────── -->
   <a href="/workshop" class="block bg-[#0A0A0A] hover:bg-[#141414] transition-colors duration-150 border-y border-white/5">
     <div class="max-w-[1100px] mx-auto px-6 md:px-12 lg:px-20 py-3 flex items-center justify-between gap-4">
       <p class="text-white text-[11px] font-bold tracking-widest uppercase">
-        <span class="inline-block w-2 h-2 mr-2 rounded-full" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);"></span>
+        <span class="inline-block w-2 h-2 mr-2 rounded-full align-middle" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);"></span>
         Live Workshop · Don't Get Hit · {WORKSHOP_DATE_SHORT} · $197
       </p>
       <span class="text-white text-[11px] font-bold tracking-widest uppercase shrink-0">Reserve Seat →</span>
     </div>
   </a>
 
-  <!-- PRODUCTS -->
-  <section class="bg-white px-6 md:px-12 lg:px-20 py-10 md:py-16 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[1100px] mx-auto">
-
-      <div class="mb-8">
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88]">The System.</h2>
-        <p class="text-[#0A0A0A]/40 text-sm mt-3">One live workshop. Two blueprints.</p>
-      </div>
-
-      <!-- FLAGSHIP: Defense Workshop · Live (gradient frame) -->
-      <div class="relative overflow-hidden mb-4 p-[2px] tr-gradient-cta">
-        <div class="relative bg-[#0A0A0A] overflow-hidden">
-          <img src="/images/workshop_bacgkround.png" alt="Defense Workshop live session"
-            width="1920" height="1080"
-            class="absolute inset-0 w-full h-full object-cover object-center opacity-15"
-            loading="lazy" />
-          <div class="relative z-10 p-6 md:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-            <div class="max-w-[640px]">
-              <p class="text-white/70 text-[10px] tracking-widest uppercase mb-2">Flagship · Live · {WORKSHOP_DATE_LONG} · 90 Min</p>
-              <p class="font-black text-white uppercase tracking-tight text-2xl md:text-3xl leading-[0.9]">Defense Workshop · $197</p>
-              <p class="text-white/80 text-xs md:text-sm mt-3 leading-relaxed">Camera on. Real-time correction on your defensive structure. Limited seats. Full recording delivered within 24 hours.</p>
-            </div>
-            <a href="/workshop"
-              class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap bg-white text-[#0A0A0A] font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[var(--blue)] hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-              Reserve Seat →
-            </a>
-          </div>
+  <!-- ── THE PROBLEM ───────────────────────────────────────────────────── -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[900px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Why this is different</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-14"
+        style="font-size: clamp(2rem, 4.5vw, 3.25rem);">
+        Most gyms teach you to throw.<br/>Almost none teach you to not get hit.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-[#0A0A0A]/8 pt-10">
+        <div>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">No structure</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Training hard without a clear path. Group classes move fast and skip the mechanics that actually build a boxer. The foundation never gets set.</p>
+        </div>
+        <div>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">No defense</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Offense gets all the attention. Movement logic, guard discipline, and composure under pressure are treated as extras. They are not extras. They are the sport.</p>
+        </div>
+        <div>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">No feedback</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Patterns you can't see in yourself get trained harder. Individualized correction changes the entire trajectory. Most people never get it.</p>
         </div>
       </div>
-
-      <!-- 2-column blueprint cards — Footwork (free) + Shadowboxing ($47) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-
-        <div class="tr-card border-2 border-[var(--blue)]/30 flex flex-col group hover:border-[var(--blue)] transition-colors duration-200 relative">
-          <div class="absolute top-3 left-3 z-10 bg-[var(--blue)] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Free · Start Here</div>
-          <a href="/foundation" aria-label="Get the free Footwork Blueprint" class="bg-[#F6F6F6] overflow-hidden relative block">
-            <img src="/images/3d_thefootworkblueprint_cover.jpg" alt="Footwork Blueprint"
-              width="400" height="400"
-              class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
-          </a>
-          <div class="p-5 flex flex-col flex-1">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Blueprint · 21 Pages · 56 Drills</p>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">
-              <a href="/foundation" class="hover:text-[var(--blue)] transition-colors">Footwork Blueprint</a>
-            </h3>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">The base layer. Full PDF. No payment.</p>
-            <div class="mt-5 flex items-center justify-between gap-3">
-              <span class="font-black text-[var(--blue)] text-2xl">FREE</span>
-              <a href="/foundation"
-                class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--blue)] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-                Get the PDF →
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="tr-card border border-[#0A0A0A]/10 flex flex-col group hover:border-[var(--blue)]/40 transition-colors duration-200">
-          <a href="/shadowboxing-blueprint" aria-label="Learn more about the Shadowboxing Blueprint" class="bg-[#F6F6F6] overflow-hidden relative block">
-            <img src="/images/shadowboxingblueprint_covernew.png" alt="Shadowboxing Blueprint"
-              width="1500" height="1150"
-              class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
-          </a>
-          <div class="p-5 flex flex-col flex-1">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Blueprint · The Next Layer</p>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-3">
-              <a href="/shadowboxing-blueprint" class="hover:text-[var(--blue)] transition-colors">Shadowboxing Blueprint</a>
-            </h3>
-            <p class="text-[#0A0A0A]/40 text-xs leading-relaxed flex-1">The next layer. Builds on the footwork base.</p>
-            <div class="mt-5 flex items-center justify-between gap-3">
-              <span class="font-black text-[#0A0A0A] text-2xl">$47</span>
-              <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"
-                class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--blue)] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-                Get the Blueprint →
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Proof — full wall: every fighter, remote and in-person -->
-      <div id="students" class="-mx-6 md:-mx-12 lg:-mx-20 mb-4 border-t border-[#0A0A0A]/8 scroll-mt-20">
-        <Testimonials heading="Watch them work." kicker="Field Report" />
-      </div>
-
-      <!-- Workshop Replay — secondary attraction offer -->
-      <div class="relative overflow-hidden bg-[#0A0A0A] mb-4">
-        <img src="/images/workshop_bacgkround.png" alt="Defense Workshop replay"
-          width="1920" height="1080"
-          class="absolute inset-0 w-full h-full object-cover object-center opacity-15"
-          loading="lazy" />
-        <div class="relative z-10 p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div>
-            <p class="text-white/60 text-[10px] tracking-widest uppercase mb-2">On Demand · Full Recording</p>
-            <p class="font-black text-white uppercase tracking-tight text-xl leading-tight">Workshop Replay · $47</p>
-            <p class="text-white/75 text-xs mt-2 leading-relaxed">90 min. Live corrections on demand. 7-day access from purchase.</p>
-          </div>
-          <a href="/workshop-replay"
-            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[var(--blue)] hover:text-white transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-            Get Replay →
-          </a>
-        </div>
-      </div>
-
-      <!-- Greatness Community -->
-      <div class="border overflow-hidden" style="border-color: rgba(106,13,173,0.2);">
-        <div class="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight mb-3">Live Reps With Rainers.</h3>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">Weekly live Proving Ground sessions with Rainers. Real-time correction on your movement. Private community. Drill library. $39/mo.</p>
-          </div>
-          <a href="/community"
-            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-3 text-sm tracking-wide uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none"
-            style="background: #6A0DAD;">
-            See the Community →
-          </a>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- SOCIAL PROOF -->
+  <!-- ── THE METHOD ────────────────────────────────────────────────────── -->
+  <section id="the-method" class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-white/5 scroll-mt-16">
+    <div class="max-w-[1000px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">The Rainers Method</p>
+      <h2 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-12"
+        style="font-size: clamp(2rem, 4.5vw, 3.25rem);">
+        Structure first.<br/>Defense always.<br/>Progress you can measure.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/8">
+        <div class="bg-[#0A0A0A] p-8">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">01</p>
+          <p class="font-black text-white uppercase tracking-tight text-lg mb-4">Structure</p>
+          <p class="text-white/40 text-sm leading-relaxed">Every clean punch starts at the floor. Balance, weight transfer, kinetic chain. Build the base and everything above it works. Skip it and nothing does.</p>
+        </div>
+        <div class="bg-[#0A0A0A] p-8">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">02</p>
+          <p class="font-black text-white uppercase tracking-tight text-lg mb-4">Defense</p>
+          <p class="text-white/40 text-sm leading-relaxed">Boxing is a two-way sport. Movement logic, guard discipline, composure under pressure. Full offense and full defense. Minimum unnecessary damage.</p>
+        </div>
+        <div class="bg-[#0A0A0A] p-8">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">03</p>
+          <p class="font-black text-white uppercase tracking-tight text-lg mb-4">Progress</p>
+          <p class="text-white/40 text-sm leading-relaxed">Structure tells you what to do. Feedback tells you how you're doing. Clear steps, honest assessment, and real correction turn training into actual improvement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CHOOSE YOUR PATH ──────────────────────────────────────────────── -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1000px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Where to start</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-12"
+        style="font-size: clamp(2rem, 4.5vw, 3.25rem);">
+        Find your<br/>starting point.
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <!-- Path 1: Free Foundation -->
+        <a href="/foundation" class="group flex flex-col p-8 border-2 border-[var(--blue)]/20 hover:border-[var(--blue)] transition-colors duration-200">
+          <p class="text-[var(--blue)] text-[10px] tracking-widest uppercase font-bold mb-5">Free · Start Here</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-4">Build the base.</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">New to structure, or resetting from the ground up. 56 drills. Free. The foundation everything else runs on.</p>
+          <p class="mt-6 text-[var(--blue)] text-[11px] font-bold tracking-widest uppercase group-hover:opacity-60 transition-opacity">Get the Free Blueprint →</p>
+        </a>
+
+        <!-- Path 2: Community -->
+        <a href="/community" class="group flex flex-col p-8 border border-[#0A0A0A]/10 hover:border-[#6A0DAD]/50 transition-colors duration-200">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase font-bold mb-5">$39/mo · Greatness Community</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-4">Train with live correction.</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">Training consistently but lacking feedback. Weekly live Proving Ground sessions. Camera on. Real-time correction on movement.</p>
+          <p class="mt-6 text-[#6A0DAD] text-[11px] font-bold tracking-widest uppercase group-hover:opacity-60 transition-opacity">See the Community →</p>
+        </a>
+
+        <!-- Path 3: 1-on-1 -->
+        <a href="/command" class="group flex flex-col p-8 border border-[#0A0A0A]/10 hover:border-[#0A0A0A]/30 transition-colors duration-200">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase font-bold mb-5">Application · 1-on-1 Coaching</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-4">Built around you.</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">A specific fight, flaw, or goal. Custom coaching built around one fighter. No templates. No cohorts. Application only.</p>
+          <p class="mt-6 text-[#0A0A0A] text-[11px] font-bold tracking-widest uppercase group-hover:opacity-60 transition-opacity">Apply for Coaching →</p>
+        </a>
+
+      </div>
+
+      <!-- Quiz nudge -->
+      <div class="mt-8 pt-8 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <p class="text-[#0A0A0A]/35 text-sm">Not sure where you fit?</p>
+        <button id="quiz-toggle"
+          class="text-[var(--blue)] text-[11px] font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap cursor-pointer bg-transparent border-0 p-0">
+          Find my starting point →
+        </button>
+      </div>
+
+      <!-- Quiz panel — collapsed by default -->
+      <div id="quiz-panel" class="hidden mt-10 border-t border-[#0A0A0A]/8 pt-10">
+        <div class="max-w-[860px]">
+
+          <div class="flex items-center justify-between gap-4 mb-8">
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-[0.88]">3-step finder.</h3>
+            <div class="flex gap-1.5">
+              <div id="qp-1" class="h-[3px] w-14 transition-all duration-300" style="background-color:var(--blue)"></div>
+              <div id="qp-2" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
+              <div id="qp-3" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
+            </div>
+          </div>
+
+          <!-- Step 1 -->
+          <div id="quiz-step-1">
+            <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-5">What is your primary focus right now?</p>
+            <div class="grid grid-cols-2 gap-3">
+              <button data-quiz-option data-step="1" data-value="speed"
+                class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+                <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Speed</p>
+              </button>
+              <button data-quiz-option data-step="1" data-value="power"
+                class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+                <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Power</p>
+              </button>
+              <button data-quiz-option data-step="1" data-value="footwork"
+                class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+                <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Footwork</p>
+              </button>
+              <button data-quiz-option data-step="1" data-value="ring-iq"
+                class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+                <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm">Ring IQ</p>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div id="quiz-step-2" class="hidden">
+            <button id="quiz-back-2" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 py-3 px-1 font-bold min-h-[44px]">
+              &larr; Back
+            </button>
+            <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-5">Where are you starting from?</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <button data-quiz-option data-step="2" data-value="beginner"
+                class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+                <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Just starting</p>
+                <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Under 1 year or no formal training</p>
+              </button>
+              <button data-quiz-option data-step="2" data-value="amateur"
+                class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+                <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Amateur</p>
+                <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Training consistently, have sparred</p>
+              </button>
+              <button data-quiz-option data-step="2" data-value="advanced"
+                class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+                <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">Advanced</p>
+                <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Competitive or serious fight record</p>
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div id="quiz-step-3" class="hidden">
+            <button id="quiz-back-3" class="text-[#0A0A0A]/30 text-[10px] tracking-widest uppercase mb-4 flex items-center gap-2 hover:text-[#0A0A0A]/60 transition-colors cursor-pointer bg-transparent border-0 py-3 px-1 font-bold min-h-[44px]">
+              &larr; Back
+            </button>
+            <div id="quiz-insight" class="border-l-2 border-[#0A0A0A]/15 pl-4 mb-8 max-w-[480px]"></div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-[0.88] mb-2">Your starting point.</h3>
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-6 max-w-[420px]">Enter an email and I will send the specific next step based on what you told me.</p>
+            <form id="quiz-form" class="flex flex-col sm:flex-row gap-3 max-w-[520px]">
+              <input type="email" id="quiz-email" placeholder="your@email.com" required
+                class="flex-1 border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/25 focus:outline-none focus:border-[var(--blue)] transition-colors duration-200" />
+              <button type="submit" id="quiz-submit"
+                class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-8 py-4 text-xs tracking-widest uppercase hover:bg-[var(--blue)] hover:text-white transition-all duration-200 whitespace-nowrap cursor-pointer disabled:opacity-40">
+                Send it →
+              </button>
+            </form>
+            <p id="quiz-error" class="text-[#0A0A0A]/40 text-xs mt-3 hidden">Please enter a valid email address.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div id="quiz-step-4" class="hidden">
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Sent</p>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-3">Check your inbox.</h3>
+            <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[400px] mb-8">Your plan is on the way. Start now:</p>
+            <div id="quiz-result-cta"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROOF ─────────────────────────────────────────────────────────── -->
+  <div id="proof" class="border-b border-[#0A0A0A]/8 scroll-mt-20">
+    <Testimonials heading="Watch them work." kicker="Field Report" />
+  </div>
+
+  <!-- ── COACHING CREDENTIALS ──────────────────────────────────────────── -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+
+        <!-- Photo grid — the collage -->
+        <div class="grid grid-cols-2 gap-2 order-2 md:order-1">
+          <img src="/images/rainers-coaching.jpg" alt="Rainers coaching — padwork in the ring"
+            class="col-span-1 w-full object-cover object-top"
+            style="aspect-ratio: 3/4;"
+            loading="lazy" />
+          <div class="flex flex-col gap-2">
+            <img src="/images/corner-coach-ring.jpg" alt="Rainers cornering a fighter between rounds"
+              class="w-full object-cover object-top"
+              style="aspect-ratio: 4/3;"
+              loading="lazy" />
+            <img src="/images/padwork-outdoor.jpg" alt="Rainers holding pads — outdoor training"
+              class="w-full object-cover object-center"
+              style="aspect-ratio: 4/3;"
+              loading="lazy" />
+          </div>
+        </div>
+
+        <!-- Copy -->
+        <div class="order-1 md:order-2">
+          <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Rainers</p>
+          <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-6"
+            style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
+            6 years coaching.<br/>Over a decade<br/>in the martial arts.
+          </h2>
+          <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-4">
+            Competitive amateur boxer. Coach since 2020. Martial arts from childhood, boxing seriously since 16. The method comes from real reps on both sides of the pads.
+          </p>
+          <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-8">
+            The work here started from a clear-eyed read of what most training leaves out. Not hype. Not shortcuts. Structure, defense, and honest progress.
+          </p>
+          <div class="flex flex-wrap gap-8 border-t border-[#0A0A0A]/8 pt-8">
+            <div>
+              <p class="font-black text-[#0A0A0A] text-3xl leading-none">6+</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-2">Years coaching</p>
+            </div>
+            <div>
+              <p class="font-black text-[#0A0A0A] text-3xl leading-none">15+</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-2">Years in the martial arts</p>
+            </div>
+            <div>
+              <p class="font-black text-[#0A0A0A] text-3xl leading-none">6+</p>
+              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-2">Amateur wins</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SOCIAL REACH ───────────────────────────────────────────────────── -->
   <section class="bg-white py-12 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1100px] mx-auto px-6 md:px-12 lg:px-20">
       <div class="flex items-baseline justify-between gap-4 mb-6">
@@ -367,7 +358,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
     </div>
   </section>
 
-  <!-- SCRIPTURE -->
+  <!-- ── SCRIPTURE ──────────────────────────────────────────────────────── -->
   <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-12 md:py-24">
     <div class="max-w-[680px] mx-auto">
       <p class="font-black uppercase tracking-tighter leading-[0.88] mb-5 text-white/50"
@@ -382,6 +373,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
 <script>
   {
+    // Social stats counter
     const els = document.querySelectorAll<HTMLElement>('[data-count]');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -407,6 +399,18 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
 
 <script is:inline>
   (function() {
+    // Quiz toggle
+    var toggle = document.getElementById('quiz-toggle');
+    var panel  = document.getElementById('quiz-panel');
+    if (toggle && panel) {
+      toggle.addEventListener('click', function() {
+        var hidden = panel.classList.toggle('hidden');
+        toggle.textContent = hidden ? 'Find my starting point →' : 'Close ↑';
+        if (!hidden) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    // Quiz logic
     var STEPS = ['quiz-step-1','quiz-step-2','quiz-step-3','quiz-step-4'];
     var BARS  = ['qp-1','qp-2','qp-3'];
     var quizState = { focus: '', level: '' };

@@ -13,7 +13,7 @@ git push           # deploys to Cloudflare Pages automatically (main branch)
 Visual verification: Chrome DevTools MCP screenshot at 390x844 after every change. Do not mark a task done from code alone.
 
 ## Stack
-Astro 4 on Cloudflare Pages/Workers. `@astrojs/cloudflare` adapter. Tailwind v4 (`@theme` CSS vars, no config file). All SSR API routes use `export const prerender = false` and `import { env as cfEnv } from 'cloudflare:workers'` for env vars. No wrangler.toml — managed via Cloudflare Pages dashboard.
+Astro 6 on Cloudflare Pages/Workers. `@astrojs/cloudflare` adapter. Tailwind v4 (`@theme` CSS vars, no config file). All SSR API routes use `export const prerender = false` and `import { env as cfEnv } from 'cloudflare:workers'` for env vars. No wrangler.toml — managed via Cloudflare Pages dashboard.
 
 ## Brand rules — non-negotiable
 - Rainers Blue `#0057FF` — primary CTAs for one-time purchases (Blueprints, Workshop, Replay), lead capture (download, submit), and standard buttons

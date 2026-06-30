@@ -42,6 +42,14 @@ const KIT_MEMBER_TAG = '19807647';
 const KIT_TRIAL_TAG_ID = '20130499';
 const BLUEPRINT_TRIAL_SLUGS = new Set(['footwork', 'shadowboxing', 'bundle']);
 
+// Post-purchase Kit sequences — create in Kit (Grow > Sequences), paste numeric IDs below.
+// Replay:    D+2 tip email, D+7 community CTA
+// Community: D+3 prep / what to expect email
+// Blueprints already covered by the trial-conversion tag sequence above.
+// Leave as empty string '' to skip silently until the sequence exists in Kit.
+const KIT_REPLAY_SEQ_ID     = '';
+const KIT_COMMUNITY_SEQ_ID  = '';
+
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
 const SITE_URL = 'https://theerainers.com';
 
@@ -179,6 +187,20 @@ async function untagKit(apiKey: string, email: string, tagId: string): Promise<v
   });
 }
 
+// Add subscriber to a Kit sequence — no-op if sequenceId is empty/placeholder.
+// Create sequences in Kit (Grow > Sequences), copy the numeric ID from the URL.
+async function addToKitSequence(apiKey: string, email: string, sequenceId: string): Promise<void> {
+  if (!apiKey || !sequenceId || sequenceId.startsWith('KIT_SEQ_')) return;
+  const id = await kitSubscriberId(apiKey, email);
+  if (!id) return;
+  const res = await fetch(`https://api.kit.com/v4/sequences/${sequenceId}/subscribers`, {
+    method: 'POST',
+    headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  });
+  if (!res.ok) console.warn('[stripe-webhook] Kit sequence subscribe failed', sequenceId, res.status);
+}
+
 // ── Airtable helpers ───────────────────────────────────────────────────────
 
 async function upsertAirtable(
@@ -281,7 +303,7 @@ const DELIVERY_SUBJECTS: Record<string, string> = {
   'greatness':       'You are in.',
 };
 
-function buildDeliveryHtml(slug: string, url: string, url2: string | null): string {
+function buildDeliveryHtml(slug: string, url: string, url2: string | null, env?: Record<string, string>): string {
   const wrap = (inner: string) =>
     `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
     `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
@@ -311,10 +333,21 @@ function buildDeliveryHtml(slug: string, url: string, url2: string | null): stri
     );
   }
   if (slug === 'greatness') {
+    const chatInvite = env?.['COMMUNITY_CHAT_INVITE'] ?? '';
+    const chatLine = chatInvite
+      ? `<p style="margin:0 0 24px;"><a href="${chatInvite}" style="display:inline-block;background:#6A0DAD;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Join Community Chat →</a></p>`
+      : `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 24px;">Community chat invite and Zoom link for the next session will follow in a separate email.</p>`;
     return wrap(
-      `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">You are in.</p>` +
-      btn(url, 'Enter the Community') +
-      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">Your membership is active. The community is live.</p>`,
+      `<p style="font-size:15px;line-height:1.6;margin:0 0 8px;">You are in.</p>` +
+      `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">Your Greatness Community membership is active.</p>` +
+      btn(url, 'Enter the Member Area') +
+      `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">What happens next</p>` +
+      `<table style="width:100%;border-collapse:collapse;margin:0 0 24px;">` +
+      `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;width:60%;">The Proving Ground</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;">Weekly live — date and Zoom in next email</td></tr>` +
+      `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;">Drill Library</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;"><a href="https://theerainers.com/library" style="color:#0057FF;">theerainers.com/library</a></td></tr>` +
+      `<tr><td style="padding:10px 0;font-size:13px;color:#0A0A0A;">Manage / cancel</td><td style="padding:10px 0;font-size:12px;color:#888;text-align:right;">Via Customer Portal — link in member area</td></tr>` +
+      `</table>` +
+      chatLine,
     );
   }
   // footwork or shadowboxing
@@ -332,6 +365,7 @@ async function sendResendDelivery(
   slug: string,
   url: string | null,
   url2: string | null,
+  env?: Record<string, string>,
 ): Promise<void> {
   if (!resendKey || !url) return;
   const subject = DELIVERY_SUBJECTS[slug] ?? 'Your purchase from Thee Rainers';
@@ -343,7 +377,7 @@ async function sendResendDelivery(
         from: 'Thee Rainers <rainers@theerainers.com>',
         to: [email],
         subject,
-        html: buildDeliveryHtml(slug, url, url2),
+        html: buildDeliveryHtml(slug, url, url2, env),
       }),
     });
     if (!res.ok) {
@@ -393,7 +427,7 @@ async function deliverProduct(email: string, productId: string, e: Record<string
   // Primary: Resend (direct, no middleman)
   const resendKey = e['RESEND_API_KEY'] ?? '';
   if (resendKey) {
-    await sendResendDelivery(resendKey, email, productSlug, expiringUrl, expiringUrl2);
+    await sendResendDelivery(resendKey, email, productSlug, expiringUrl, expiringUrl2, e);
   }
 
   // Secondary: Make.com webhook (optional — fires if URL is set, for extra automations)
@@ -485,6 +519,13 @@ export async function POST({ request }: APIContext): Promise<Response> {
         if (slug && KIT_PRODUCT_TAGS[slug]) {
           await tagKit(kitKey, email, KIT_MEMBER_TAG);
           await tagKit(kitKey, email, KIT_PRODUCT_TAGS[slug]);
+        }
+        // Post-purchase Kit sequences
+        if (slug === 'workshop-replay' && KIT_REPLAY_SEQ_ID) {
+          await addToKitSequence(kitKey, email, KIT_REPLAY_SEQ_ID);
+        }
+        if (slug === 'greatness' && KIT_COMMUNITY_SEQ_ID) {
+          await addToKitSequence(kitKey, email, KIT_COMMUNITY_SEQ_ID);
         }
         // Start the 14-day Community trial for Blueprint buyers.
         if (slug && BLUEPRINT_TRIAL_SLUGS.has(slug)) {

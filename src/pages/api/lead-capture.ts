@@ -1,3 +1,5 @@
+import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
+
 // POST /api/lead-capture
 //
 // Environment variables required:
@@ -160,11 +162,11 @@ ${FUNNEL_MAP}`,
     subject: 'how to defend yourself',
     preview: '',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The first question I get asked after people learn footwork is: how do I defend myself? I'm not letting my hands go in sparring, because I'm afraid I'll get countered or hit.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">I'm running a live workshop on July 25 teaching defense and the 5 layers of defense in boxing. Learn to defend yourself on all 5 levels, how to use each to position yourself with the opponent to hit and not get hit.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">I'm running a live workshop on ${WORKSHOP_DATE_LONG} teaching defense and the 5 layers of defense in boxing. Learn to defend yourself on all 5 levels, how to use each to position yourself with the opponent to hit and not get hit.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">If you're still flinching or getting hit more than 3 times per round when sparring — reserve your spot below.</p>
 <p style="margin:0 0 16px;"><a href="https://theerainers.com/workshop" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">RESERVE MY SPOT · $197 →</a></p>
-<p style="font-size:12px;color:#aaa;margin:0 0 24px;">8 spots · Live · July 25 · 12PM ET</p>
-<p style="font-size:14px;color:#0A0A0A;margin:0 0 8px;">Can't make July 25? The full session is already recorded.</p>
+<p style="font-size:12px;color:#aaa;margin:0 0 24px;">Live · ${WORKSHOP_DATE_SHORT} · 12PM ET</p>
+<p style="font-size:14px;color:#0A0A0A;margin:0 0 8px;">Can't make ${WORKSHOP_DATE_SHORT}? The full session is already recorded.</p>
 <p style="margin:0 0 28px;"><a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0057FF;text-decoration:none;">GET THE REPLAY · $47 →</a></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,

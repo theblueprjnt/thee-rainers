@@ -66,5 +66,49 @@ export async function POST({ request }: APIContext): Promise<Response> {
     }).catch((err) => console.warn('[coaching-capture] Make.com failed:', String(err)));
   }
 
+  // ── Kit tagging — mark applicant for coaching follow-up sequence ───────
+  // Create tag in Kit (Grow > Tags → "coaching_applicant"), paste numeric ID
+  // from the URL (app.kit.com/tags/XXXXX) into KIT_COACHING_TAG_ID env var.
+  const kitKey       = e['KIT_API_KEY'] ?? '';
+  const coachingTag  = e['KIT_COACHING_TAG_ID'] ?? '';
+  if (kitKey && coachingTag) {
+    (async () => {
+      try {
+        // find-or-create subscriber
+        let res = await fetch('https://api.kit.com/v4/subscribers', {
+          method: 'POST',
+          headers: { 'X-Kit-Api-Key': kitKey, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email_address: email, first_name: name || undefined }),
+        });
+        let d = await res.json().catch(() => ({})) as Record<string, unknown>;
+        let subId: string | null = (d?.subscriber as Record<string, unknown> | undefined)?.id
+          ? String((d.subscriber as Record<string, unknown>).id)
+          : null;
+        if (!subId) {
+          res = await fetch(`https://api.kit.com/v4/subscribers?email_address=${encodeURIComponent(email)}`, {
+            headers: { 'X-Kit-Api-Key': kitKey },
+          });
+          d = await res.json().catch(() => ({})) as Record<string, unknown>;
+          const subs = d?.subscribers as Array<Record<string, unknown>> | undefined;
+          subId = subs?.[0]?.id ? String(subs[0].id) : null;
+        }
+        if (subId) {
+          await fetch(`https://api.kit.com/v4/tags/${coachingTag}/subscribers/${subId}`, {
+            method: 'POST',
+            headers: { 'X-Kit-Api-Key': kitKey, 'Content-Type': 'application/json' },
+            body: '{}',
+          });
+          console.log('[coaching-capture] Kit tagged applicant', emailLog);
+        }
+      } catch (err) {
+        console.warn('[coaching-capture] Kit tagging failed:', String(err));
+      }
+    })();
+  } else if (!kitKey) {
+    console.warn('[coaching-capture] KIT_API_KEY not set — applicant not tagged in Kit');
+  } else if (!coachingTag) {
+    console.warn('[coaching-capture] KIT_COACHING_TAG_ID not set — applicant not tagged in Kit');
+  }
+
   return new Response(JSON.stringify({ status: 'success' }), { status: 200 });
 }
