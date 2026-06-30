@@ -1,0 +1,120 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const LOOM_URL = 'https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4';
+const PDF_URL  = '/pdfs/foundation.pdf';
+---
+<Base title="The Footwork Blueprint · Access | Thee Rainers">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <!-- DELIVERY HERO -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 pt-32 pb-16 md:pb-24 border-b border-white/5">
+    <div class="max-w-[680px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Thee Rainers · Free Blueprint</p>
+      <h1 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-6"
+        style="font-size: clamp(2.25rem, 5vw, 3.75rem);">
+        The Blueprint<br/>is yours.
+      </h1>
+      <p class="text-white/45 text-base leading-relaxed mb-12 max-w-[480px]">
+        21 pages. 56 drills. One breakdown video. Save both before closing this page.
+      </p>
+
+      <!-- Two delivery buttons -->
+      <div class="flex flex-col sm:flex-row gap-4">
+
+        <a id="pdf-download"
+          href={PDF_URL}
+          download="The-Footwork-Blueprint-Thee-Rainers.pdf"
+          class="inline-flex items-center justify-center gap-3 bg-[var(--blue)] text-white font-bold px-8 py-4 text-sm tracking-wide uppercase hover:bg-white hover:text-[#0A0A0A] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 1v9M4 7l4 4 4-4M2 14h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Download the Blueprint
+        </a>
+
+        <a href={LOOM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-3 border border-white/25 text-white font-bold px-8 py-4 text-sm tracking-wide uppercase hover:border-white/60 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="6,4 13,8 6,12" fill="currentColor"/>
+          </svg>
+          Watch the Breakdown
+        </a>
+
+      </div>
+
+      <p class="mt-6 text-white/25 text-xs">
+        PDF opens in browser or downloads directly. Video opens in a new tab.
+      </p>
+    </div>
+  </section>
+
+  <!-- WHAT EACH IS -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-14 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[680px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <div>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">The Blueprint · PDF</p>
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-3">21 pages. 56 drills.</p>
+        <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Orthodox and Southpaw. A 30-day progression structure. Every drill has a purpose — balance, weight transfer, and the kinetic chain. Start at page one.</p>
+      </div>
+
+      <div>
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">The Breakdown · Video</p>
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-3">The four bases explained.</p>
+        <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">A short Loom walkthrough on the mechanical foundation the blueprint runs on. Watch this before your first session so the drills make sense from the first rep.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NEXT STEP NUDGE -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-14 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[680px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-5">After the blueprint</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <a href="/community" class="group flex flex-col p-6 border border-[#0A0A0A]/10 hover:border-[#6A0DAD]/50 transition-colors duration-200">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">$39/mo · Greatness Community</p>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Live correction, every week.</p>
+          <p class="text-[#0A0A0A]/45 text-xs leading-relaxed flex-1">Run the blueprint with Rainers watching. Weekly Proving Ground sessions. Camera on.</p>
+          <p class="mt-4 text-[#6A0DAD] text-[11px] font-bold tracking-widest uppercase group-hover:opacity-60 transition-opacity">See the Community →</p>
+        </a>
+
+        <a href="/workshop" class="group flex flex-col p-6 border border-[#0A0A0A]/10 hover:border-[var(--blue)]/40 transition-colors duration-200">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">$197 · Defense Workshop</p>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Live. Camera on. Real-time correction.</p>
+          <p class="text-[#0A0A0A]/45 text-xs leading-relaxed flex-1">90 minutes. The full defensive structure applied to your movement in real time.</p>
+          <p class="mt-4 text-[var(--blue)] text-[11px] font-bold tracking-widest uppercase group-hover:opacity-60 transition-opacity">Reserve a Seat →</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPTURE -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-20">
+    <div class="max-w-[600px] mx-auto">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] mb-5 text-white/40"
+        style="font-size: clamp(1.5rem, 3.5vw, 2.25rem);">
+        "I do not run aimlessly. I do not box as one beating the air."
+      </p>
+      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
+    </div>
+  </section>
+
+</Base>
+
+<script>
+  // Auto-trigger PDF download 800ms after page load so it starts immediately
+  // while the user reads the page — they don't have to click anything.
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const link = document.getElementById('pdf-download') as HTMLAnchorElement | null;
+      if (link) link.click();
+    }, 800);
+  });
+</script>

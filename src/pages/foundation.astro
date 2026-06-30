@@ -42,7 +42,7 @@ const productSchema = JSON.stringify({
           The Footwork<br/>Blueprint.
         </h1>
         <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-2 max-w-[520px]">
-          Win fights with footwork. A practical playbook to move with balance, control, and intent. Every step has a job. Free. Instant download.
+          Win fights with footwork, and take fewer hits doing it. A practical playbook to move with balance, control, and intent. Every step has a job. Free.
         </p>
         <p class="text-[#0A0A0A]/35 text-sm mb-8 max-w-[520px]">For fighters who train seriously and want to move with purpose. From Rainers, pro boxer and coach.</p>
 
@@ -73,8 +73,6 @@ const productSchema = JSON.stringify({
               Get the Blueprint · Free →
             </button>
           </form>
-          <p id="capture-success" class="hidden text-[var(--blue)] text-sm tracking-wide mt-4">Your blueprint is downloading. Save the PDF when prompted.</p>
-          <p id="capture-error" class="hidden text-[var(--red)] text-sm mt-3">Something went wrong. Try again.</p>
           <p class="text-[11px] text-[#0A0A0A]/35 mt-4">No payment. No spam. Unsubscribe any time.</p>
         </div>
 
@@ -200,16 +198,6 @@ const productSchema = JSON.stringify({
 </style>
 
 <script>
-  function triggerDownload(url: string, filename: string): void {
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.rel = 'noopener';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-
   function wireCapture(): void {
     const form = document.getElementById('capture-form') as HTMLFormElement | null;
     if (!form || form.dataset.bound === 'true') return;
@@ -218,34 +206,21 @@ const productSchema = JSON.stringify({
     const nameEl = document.getElementById('capture-name') as HTMLInputElement | null;
     const emailEl = document.getElementById('capture-email') as HTMLInputElement | null;
     const submit = document.getElementById('capture-submit') as HTMLButtonElement | null;
-    const success = document.getElementById('capture-success')!;
-    const error = document.getElementById('capture-error')!;
 
-    // PDF-first wiring. The user ALWAYS gets the file even if the lead-capture
-    // backend fails (Make.com outage, env-var rotation, etc). We trigger the
-    // download immediately, fire the webhook in the background, and only fall
-    // back to the inline error if the PDF itself somehow can't be served.
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       const email = emailEl?.value.trim() ?? '';
       const full_name = nameEl?.value.trim() ?? '';
       if (!email || !full_name) return;
 
-      if (submit) { submit.disabled = true; submit.textContent = 'Preparing...'; }
-      error.classList.add('hidden');
+      if (submit) { submit.disabled = true; submit.textContent = 'One moment...'; }
 
-      // 1. Trigger the PDF download FIRST. This is the contract with the user.
-      try {
-        triggerDownload('/pdfs/foundation.pdf', 'The-Footwork-Blueprint-Thee-Rainers.pdf');
-      } catch {
-        error.classList.remove('hidden');
-        if (submit) { submit.disabled = false; submit.textContent = 'Get the Blueprint · Free →'; }
-        return;
-      }
-
-      // 2. Show success state immediately.
-      form.classList.add('hidden');
-      success.classList.remove('hidden');
+      // Fire lead-capture webhook in the background — delivery is on the next page.
+      fetch('/api/lead-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, full_name, source: 'footwork-blueprint' }),
+      }).catch(err => console.warn('[capture] webhook failed:', err));
 
       (window as Window & { trackEvent?: (n: string, d: Record<string, unknown>) => void }).trackEvent?.('generate_lead', {
         lead_source: 'footwork-blueprint',
@@ -253,13 +228,8 @@ const productSchema = JSON.stringify({
         value: 0,
       });
 
-      // 3. Fire the Make.com webhook in the background (fire-and-forget).
-      // Backend failure does not block delivery. Errors are logged for diagnostics.
-      fetch('/api/lead-capture', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, full_name, source: 'footwork-blueprint' }),
-      }).catch(err => console.warn('[capture] background webhook failed:', err));
+      // Redirect to delivery page — PDF auto-downloads there.
+      setTimeout(() => { window.location.href = '/thank-you/footwork-blueprint'; }, 400);
     });
   }
 
