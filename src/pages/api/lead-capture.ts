@@ -116,6 +116,25 @@ ${FUNNEL_MAP}`,
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
 ${FUNNEL_MAP}`,
   },
+  'footwork-blueprint': {
+    subject: 'Your Blueprint. Start on page 9.',
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The PDF arrived with your download confirmation. If you missed it, it is also here: <a href="https://theerainers.com/pdfs/foundation.pdf" style="color:#0057FF;">The Footwork Blueprint</a></p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">There are 56 rounds in the blueprint. Most people start on page 1. Page 9 is where the base work begins.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Work through the stance and balance drills before anything else. Not because the opening pages are wrong. Because everything in the drills compounds only when the base they build on is stable.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">One thing to notice as you go through it: most of what the blueprint corrects is not complex. The issues are structural - stance breaks, being off-balance and movement without intention. They are pattern problems. Humans can change patterns with the right repetitions.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The full sequence is 30 days. Run it from the base forward.</p>
+<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Watch the 11-min Breakdown →</a></p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+${FUNNEL_MAP}`,
+  },
+  'safe-boxing': {
+    subject: 'You are on the list.',
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The resources for parents, coaches, and gym owners are in development. You will be first to know when they open.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">What is coming: parent guides, session structures, coach scripts, and contact-progression frameworks. Built on the same principle — structure before contact, defense from day one.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">If there is a specific question or situation you are navigating right now, reply to this email. I read these.</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
+  },
 };
 
 // ── Sequence emails — add here as Rainers writes them ─────────────────────
@@ -277,6 +296,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
   let phone = '';
   let source = 'footwork-free';
 
+  let honeypot = '';
   try {
     if (isJson) {
       const body = (await request.json()) as Record<string, string>;
@@ -284,12 +304,14 @@ export async function POST({ request }: APIContext): Promise<Response> {
       email     = (body.email    ?? '').trim();
       phone     = (body.phone    ?? '').trim();
       source    = (body.source   ?? source).trim();
+      honeypot  = (body.website  ?? '').trim();
     } else {
       const data = await request.formData();
       full_name = ((data.get('full_name') as string) ?? '').trim();
       email     = ((data.get('email')     as string) ?? '').trim();
       phone     = ((data.get('phone')     as string) ?? '').trim();
       source    = ((data.get('source')    as string) ?? source).trim();
+      honeypot  = ((data.get('website')   as string) ?? '').trim();
     }
   } catch {
     return isJson
@@ -298,6 +320,8 @@ export async function POST({ request }: APIContext): Promise<Response> {
   }
 
   // ── validate ──────────────────────────────────────────────────────────
+  // Honeypot — bots fill hidden fields, humans don't. Silent 200 to avoid fingerprinting.
+  if (honeypot) return jsonResponse({ success: true }, 200, headers);
   if (!email || !EMAIL_RE.test(email)) {
     return isJson
       ? jsonResponse({ success: false, error: 'A valid email address is required.' }, 400, headers)

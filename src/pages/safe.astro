@@ -25,23 +25,54 @@ import Layout from '../layouts/Base.astro';
   <!-- THE PROBLEM FOR THIS AUDIENCE -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-[#0A0A0A]/8">
     <div class="max-w-[900px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">The gap most gyms leave</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-14"
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">The gap</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-6"
         style="font-size: clamp(1.75rem, 4vw, 3rem);">
-        Boxing teaches so much.<br/>Most environments teach it unsafely.
+        The methods exist.<br/>Most gyms don't use them.
       </h2>
+      <p class="text-[#0A0A0A]/50 text-base leading-relaxed mb-14 max-w-[640px]">
+        Touch sparring. Structured contact progression. Defense-first session design. These practices already exist in the sport. Organizations like the Rocksteady Foundation have built programs around them. The issue is not what boxing can be. It is what most gyms actually do.
+      </p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-[#0A0A0A]/8 pt-10">
         <div class="border-l-2 border-[#0A0A0A]/12 pl-5 py-1">
           <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Chaotic sparring</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Free sparring before the mechanics are built. Kids and beginners absorbing contact they are not equipped to reduce. The damage accumulates before the skill does.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Free rounds before the mechanics are built. Beginners absorbing contact they are not equipped to reduce. The damage accumulates before the skill does.</p>
         </div>
         <div class="border-l-2 border-[#0A0A0A]/12 pl-5 py-1">
-          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">No structure to point to</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Coaches know something is off but lack a framework they can hand to parents or defend to a board. Intuition is not enough when the conversation is about brain health.</p>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">No framework to stand behind</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Coaches know something is off. They lack a clear methodology to hand to parents or defend to a board. Instinct is not enough when the conversation is about brain health.</p>
         </div>
         <div class="border-l-2 border-[#0A0A0A]/12 pl-5 py-1">
           <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Defense treated as optional</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Offense gets the attention. Movement logic, guard discipline, and composure under pressure are supposed to come later. They are not optional. They are what limits damage.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Offense gets the attention. Guard discipline, movement logic, and composure under pressure come later — if at all. They are not optional. They are what limits damage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WITNESS SECTION -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-14 md:py-20 border-b border-white/5">
+    <div class="max-w-[860px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-8">What it looks like in practice</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+        <div>
+          <p class="font-black text-white uppercase tracking-tight text-base mb-4 leading-tight">
+            This is not a theoretical concern.
+          </p>
+          <p class="text-white/45 text-sm leading-relaxed mb-5">
+            Gyms in Italy, Lithuania, Latvia. Hundreds of sparring sessions across different countries and cultures. The pre-fight clearance in some facilities is five seconds of checking your eyes. If a fighter is knocked out, someone provides assistance. No protocol follows. No guidance. No regulatory response. Fighters get back in without a timeline or a conversation.
+          </p>
+          <p class="text-white/45 text-sm leading-relaxed">
+            The research describes one version of the sport. What happens inside most gyms is another. This framework exists because those two things need to close.
+          </p>
+        </div>
+        <div class="border border-white/10 p-7">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-5">The precedent already exists</p>
+          <ul class="flex flex-col gap-4 text-white/50 text-sm leading-relaxed">
+            <li><span class="text-white font-bold block text-xs tracking-widest uppercase mb-1">Touch sparring</span>Contact-limited rounds where the goal is shoulder taps and positioning, not landing punches. Used in structured programs to build mechanics before full contact.</li>
+            <li><span class="text-white font-bold block text-xs tracking-widest uppercase mb-1">Structured progression</span>Contact increases only when the mechanics are in place. Not by schedule. By readiness.</li>
+            <li><span class="text-white font-bold block text-xs tracking-widest uppercase mb-1">Defense-first session design</span>Guard, distance, and footwork before offense. The full sport from the first session, not the half that gets the attention.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -51,10 +82,11 @@ import Layout from '../layouts/Base.astro';
   <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-white/5">
     <div class="max-w-[900px] mx-auto">
       <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">The framework</p>
-      <h2 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-12"
+      <h2 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-6"
         style="font-size: clamp(1.75rem, 4vw, 3rem);">
         Structure before contact.<br/>Defense from day one.<br/>Clear limits at every stage.
       </h2>
+      <p class="text-white/35 text-sm leading-relaxed mb-12 max-w-[560px]">This is not new. It is what the sport's better programs have always done. What we do is make it practical, communicable, and available outside of elite-level institutions.</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/8">
         <div class="bg-[#0A0A0A] p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">01</p>
@@ -93,6 +125,15 @@ import Layout from '../layouts/Base.astro';
           <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">You want to offer youth programs without the liability of chaotic sparring. A structured, defensible framework that protects your athletes and your program.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- GYM OWNER SEED -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-10 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[860px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[520px]">Building a structured youth program at your gym? We are developing implementation tools for coaches and gym owners. If this work is relevant to what you are doing, get in touch.</p>
+      <a href="mailto:rainers@theerainers.com?subject=Gym%20Program"
+        class="shrink-0 text-[#0A0A0A]/40 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/70 transition-colors whitespace-nowrap">Email Us →</a>
     </div>
   </section>
 
@@ -197,6 +238,12 @@ import Layout from '../layouts/Base.astro';
       } catch {
         // non-blocking — show success regardless
       }
+
+      (window as Window & { trackEvent?: (n: string, d: Record<string, unknown>) => void }).trackEvent?.('generate_lead', {
+        lead_source: 'safe-boxing',
+        currency: 'USD',
+        value: 0,
+      });
 
       form.classList.add('hidden');
       success.classList.remove('hidden');
