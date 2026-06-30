@@ -180,16 +180,33 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         <div class="max-w-[860px]">
 
           <div class="flex items-center justify-between gap-4 mb-8">
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-[0.88]">3-step finder.</h3>
-            <div class="flex gap-1.5">
-              <div id="qp-1" class="h-[3px] w-14 transition-all duration-300" style="background-color:var(--blue)"></div>
+            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-[0.88]">Quick finder.</h3>
+            <div class="flex gap-1.5" id="quiz-bars">
+              <div id="qp-1" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
               <div id="qp-2" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
               <div id="qp-3" class="h-[3px] w-14 transition-all duration-300" style="background-color:rgba(10,10,10,0.12)"></div>
             </div>
           </div>
 
+          <!-- Step 0 — Audience split -->
+          <div id="quiz-step-0">
+            <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-5">Who are you here for?</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button id="quiz-self"
+                class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[var(--blue)] hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+                <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">My own training</p>
+                <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">I train boxing and want to improve my skill, movement, or defense.</p>
+              </button>
+              <button id="quiz-youth"
+                class="border border-[#0A0A0A]/10 bg-[#F7F6F4] hover:border-[#0A0A0A]/30 hover:bg-white transition-colors duration-150 cursor-pointer p-6 text-left w-full">
+                <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-1.5">A child or gym program</p>
+                <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">I am a parent, coach, or gym owner looking for safer training frameworks.</p>
+              </button>
+            </div>
+          </div>
+
           <!-- Step 1 -->
-          <div id="quiz-step-1">
+          <div id="quiz-step-1" class="hidden">
             <p class="text-[#0A0A0A]/35 text-[10px] tracking-widest uppercase mb-5">What is your primary focus right now?</p>
             <div class="grid grid-cols-2 gap-3">
               <button data-quiz-option data-step="1" data-value="speed"
@@ -417,6 +434,18 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         if (!hidden) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
+
+    // Step 0 — audience split
+    var selfBtn = document.getElementById('quiz-self');
+    if (selfBtn) selfBtn.addEventListener('click', function() {
+      var s0 = document.getElementById('quiz-step-0');
+      if (s0) s0.classList.add('hidden');
+      showStep(1);
+    });
+    var youthBtn = document.getElementById('quiz-youth');
+    if (youthBtn) youthBtn.addEventListener('click', function() {
+      window.location.href = '/safe';
+    });
 
     // Quiz logic
     var STEPS = ['quiz-step-1','quiz-step-2','quiz-step-3','quiz-step-4'];
