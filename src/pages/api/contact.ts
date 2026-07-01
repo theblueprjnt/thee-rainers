@@ -127,7 +127,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
           from: 'Thee Rainers <rainers@theerainers.com>',
           to: ['rainers@theerainers.com'],
           reply_to: email,
-          subject: `${reason} — ${full_name}`,
+          subject: `${reason}: ${full_name}`,
           html,
         }),
       });

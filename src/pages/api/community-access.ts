@@ -28,7 +28,7 @@ export async function POST({ request }: { request: Request }): Promise<Response>
   const e = cfEnv as unknown as Record<string, string>;
   const airtableToken = e['AIRTABLE_API_KEY'] ?? '';
   const airtableBase  = e['AIRTABLE_BASE_ID'] ?? '';
-  const airtableTable = e['AIRTABLE_TABLE'] ?? 'Customers';
+  const airtableTable = e['AIRTABLE_TABLE'] ?? 'Members';
 
   if (!airtableToken || !airtableBase) {
     console.error('[community-access] AIRTABLE_API_KEY or AIRTABLE_BASE_ID not set');
