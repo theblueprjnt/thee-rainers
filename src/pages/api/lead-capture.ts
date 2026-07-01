@@ -361,7 +361,14 @@ export async function POST({ request }: APIContext): Promise<Response> {
   // ── Kit — subscribe + tag (fire-and-forget, never blocks response) ────
   const kitKey   = e['KIT_API_KEY'] ?? '';
   const kitTagId = e['KIT_LEAD_TAG_ID'] ?? '';
-  if (kitKey) {
+  if (!kitKey) {
+    console.warn('[lead-capture] KIT_API_KEY not set — subscriber will NOT be added to Kit', { source, emailLog });
+  } else if (!kitTagId) {
+    console.warn('[lead-capture] KIT_LEAD_TAG_ID not set — subscriber will be created in Kit but not tagged', { source, emailLog });
+    kitFindOrCreate(kitKey, email, full_name).catch((err) =>
+      console.warn('[lead-capture] Kit create failed', { emailLog, err: String(err) }),
+    );
+  } else {
     kitApplyTag(kitKey, email, full_name, kitTagId).catch((err) =>
       console.warn('[lead-capture] Kit tag failed', { emailLog, err: String(err) }),
     );
@@ -371,13 +378,17 @@ export async function POST({ request }: APIContext): Promise<Response> {
   const airtableToken = e['AIRTABLE_API_KEY'] ?? '';
   const airtableBase  = e['AIRTABLE_BASE_ID'] ?? '';
   const airtableTable = e['AIRTABLE_LEADS_TABLE'] ?? 'Leads';
-  if (airtableToken && airtableBase) {
+  if (!airtableToken) {
+    console.warn('[lead-capture] AIRTABLE_API_KEY not set — lead will NOT be saved to Airtable', { source, emailLog });
+  } else if (!airtableBase) {
+    console.warn('[lead-capture] AIRTABLE_BASE_ID not set — lead will NOT be saved to Airtable', { source, emailLog });
+  } else {
     upsertAirtableLead(airtableToken, airtableBase, airtableTable, {
-      Email:     email,
-      Name:      full_name,
-      Source:    source,
-      Phone:     phone,
-      CreatedAt: new Date().toISOString(),
+      Email:            email,
+      Name:             full_name,
+      Source:           source,
+      Phone:            phone,
+      'Date Submitted': new Date().toISOString(),
     }).catch((err) =>
       console.warn('[lead-capture] Airtable upsert failed', { emailLog, err: String(err) }),
     );
