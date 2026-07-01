@@ -62,8 +62,8 @@ const faqSchema = JSON.stringify({
   <Fragment slot="head">
     <script type="application/ld+json" set:html={eventSchema} />
     <script type="application/ld+json" set:html={faqSchema} />
-    <meta name="description" content={`90 minutes. Live. The 5 layers of defense in boxing — how to position yourself to hit and not get hit. ${WORKSHOP_DATE_LONG}. $197.`} />
-    <meta property="og:title" content="Defense Workshop — Thee Rainers" />
+    <meta name="description" content={`90 minutes. Live. The 5 layers of defense in boxing. How to position yourself to hit and not get hit. ${WORKSHOP_DATE_LONG}. $197.`} />
+    <meta property="og:title" content="Defense Workshop · Thee Rainers" />
     <meta property="og:description" content={`90 minutes. Live. The 5 layers of defense in boxing. ${WORKSHOP_DATE_LONG}. $197.`} />
     <meta property="og:type" content="website" />
   </Fragment>
@@ -127,15 +127,7 @@ const faqSchema = JSON.stringify({
             <span class="text-[var(--ink-soft)] text-[10px] tracking-wider md:tracking-widest uppercase">Live · {WORKSHOP_DATE_SHORT}</span>
             <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Defense<br/>Workshop</h2>
             <p class="text-white/55 text-sm leading-relaxed max-w-[380px] mb-10">5 layers of defense. How to position to hit and not get hit. The mechanics your gym doesn't teach.</p>
-            <div class="flex flex-col gap-3">
-              <p class="text-white/30 text-[10px] tracking-widest uppercase mb-2">Session Structure</p>
-              <ul class="flex flex-col gap-3 list-none p-0 m-0">
-                <li class="text-white/50 text-sm">Foundation (30 min): 5 layers of defense</li>
-                <li class="text-white/50 text-sm">Application (45 min): live drilling with camera</li>
-                <li class="text-white/50 text-sm">Sparring (15 min): put it in your next round</li>
-                <li class="text-[var(--red)] text-sm">Full recording delivered within 24 hours</li>
-              </ul>
-            </div>
+            <p class="text-white/50 text-sm leading-relaxed">Foundation, live drilling, and a sparring application block. Full recording delivered within 24 hours.</p>
           </div>
           <div class="mt-12">
             <p class="text-white/25 text-[10px] tracking-widest uppercase mb-5">Limited seats · {WORKSHOP_DATE_LONG}</p>
@@ -188,7 +180,7 @@ const faqSchema = JSON.stringify({
           formats={['avif', 'webp']}
           widths={[600, 900, 1300]}
           sizes="(max-width: 768px) 100vw, 50vw"
-          alt="Defense Workshop — live training session with Rainers"
+          alt="Defense Workshop, live training session with Rainers"
           quality={80}
           loading="lazy"
           class="absolute inset-0 w-full h-full object-cover object-top"

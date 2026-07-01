@@ -40,12 +40,6 @@ const NAV_LINKS = [
   </div>
 </header>
 
-<!-- Mobile menu rendered OUTSIDE the <header>.
-     CRITICAL: the header has `backdrop-blur-md` which creates a new containing
-     block for fixed-positioned descendants. Putting the menu inside the header
-     traps its `position: fixed; inset: 0` to the header's box, so it gets clipped
-     to ~64px tall. Rendering it as a sibling of <header> escapes that trap and
-     the menu correctly covers the full viewport. -->
 <div id="mobile-menu"
   class="tr-mobile-menu"
   data-open="false"
