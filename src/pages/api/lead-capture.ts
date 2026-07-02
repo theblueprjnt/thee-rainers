@@ -130,9 +130,8 @@ ${FUNNEL_MAP}`,
   },
   'safe-boxing': {
     subject: 'You are on the list.',
-    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The resources for parents, coaches, and gym owners are in development. You will be first to know when they open.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">What is coming: parent guides, session structures, coach scripts, and contact-progression frameworks. Built on the same principle — structure before contact, defense from day one.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">If there is a specific question or situation you are navigating right now, reply to this email. I read these.</p>
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You are on the list. We will reach out when resources for parents, coaches, and gym owners open.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">If there is a specific situation you are navigating right now, reply to this email. I read these.</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
   },
 };
