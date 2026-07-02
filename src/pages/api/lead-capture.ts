@@ -231,20 +231,28 @@ async function sendResendWelcome(resendKey: string, email: string, source: strin
 // ── Kit v4 helpers ─────────────────────────────────────────────────────────
 
 async function kitFindOrCreate(apiKey: string, email: string, firstName: string): Promise<string | null> {
-  let res = await fetch('https://api.kit.com/v4/subscribers', {
+  const createRes = await fetch('https://api.kit.com/v4/subscribers', {
     method: 'POST',
     headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
     body: JSON.stringify({ email_address: email, first_name: firstName || undefined }),
   });
-  let data: Record<string, unknown> = await res.json().catch(() => ({}));
-  const sub = data?.subscriber as Record<string, unknown> | undefined;
-  if (sub?.id) return String(sub.id);
+  if (!createRes.ok) {
+    console.warn('[lead-capture] Kit create subscriber failed', { status: createRes.status, body: await createRes.text().catch(() => '') });
+  } else {
+    const data = await createRes.json().catch(() => ({})) as Record<string, unknown>;
+    const sub = data?.subscriber as Record<string, unknown> | undefined;
+    if (sub?.id) return String(sub.id);
+  }
 
-  res = await fetch(`https://api.kit.com/v4/subscribers?email_address=${encodeURIComponent(email)}`, {
+  const lookupRes = await fetch(`https://api.kit.com/v4/subscribers?email_address=${encodeURIComponent(email)}`, {
     headers: { 'X-Kit-Api-Key': apiKey },
   });
-  data = await res.json().catch(() => ({}));
-  const subs = data?.subscribers as Array<Record<string, unknown>> | undefined;
+  if (!lookupRes.ok) {
+    console.warn('[lead-capture] Kit lookup subscriber failed', { status: lookupRes.status, body: await lookupRes.text().catch(() => '') });
+    return null;
+  }
+  const lookupData = await lookupRes.json().catch(() => ({})) as Record<string, unknown>;
+  const subs = lookupData?.subscribers as Array<Record<string, unknown>> | undefined;
   return subs?.[0]?.id ? String(subs[0].id) : null;
 }
 
@@ -252,11 +260,14 @@ async function kitApplyTag(apiKey: string, email: string, firstName: string, tag
   if (!apiKey || !tagId) return;
   const id = await kitFindOrCreate(apiKey, email, firstName);
   if (!id) return;
-  await fetch(`https://api.kit.com/v4/tags/${tagId}/subscribers/${id}`, {
+  const res = await fetch(`https://api.kit.com/v4/tags/${tagId}/subscribers/${id}`, {
     method: 'POST',
     headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
     body: '{}',
   });
+  if (!res.ok) {
+    console.warn('[lead-capture] Kit apply tag failed', { status: res.status, tagId, body: await res.text().catch(() => '') });
+  }
 }
 
 // ── Airtable helper ────────────────────────────────────────────────────────
@@ -268,7 +279,7 @@ async function upsertAirtableLead(
   fields: Record<string, string>,
 ): Promise<void> {
   if (!token || !baseId || !fields.Email) return;
-  await fetch(`https://api.airtable.com/v0/${baseId}/${encodeURIComponent(table)}`, {
+  const res = await fetch(`https://api.airtable.com/v0/${baseId}/${encodeURIComponent(table)}`, {
     method: 'PATCH',
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -276,6 +287,9 @@ async function upsertAirtableLead(
       records: [{ fields }],
     }),
   });
+  if (!res.ok) {
+    console.warn('[lead-capture] Airtable upsert failed', { status: res.status, body: await res.text().catch(() => '') });
+  }
 }
 
 export async function OPTIONS(_ctx: APIContext): Promise<Response> {
