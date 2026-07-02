@@ -410,5 +410,5 @@ export async function POST({ request }: APIContext): Promise<Response> {
   const successHeaders = { ...headers, 'X-Lead-Webhook-Status': webhookStatus };
   return isJson
     ? jsonResponse({ success: true, webhookStatus }, 200, successHeaders)
-    : redirectResponse('/thank-you/foundation');
+    : redirectResponse('/thank-you/footwork-blueprint');
 }
