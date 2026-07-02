@@ -42,13 +42,10 @@ const KIT_MEMBER_TAG = '19807647';
 const KIT_TRIAL_TAG_ID = '20130499';
 const BLUEPRINT_TRIAL_SLUGS = new Set(['footwork', 'shadowboxing', 'bundle']);
 
-// Post-purchase Kit sequences — create in Kit (Grow > Sequences), paste numeric IDs below.
-// Replay:    D+2 tip email, D+7 community CTA
-// Community: D+3 prep / what to expect email
-// Blueprints already covered by the trial-conversion tag sequence above.
-// Leave as empty string '' to skip silently until the sequence exists in Kit.
-const KIT_REPLAY_SEQ_ID     = '';
-const KIT_COMMUNITY_SEQ_ID  = '';
+// Post-purchase Kit sequences (created 2026-07-02 via Kit MCP).
+const KIT_REPLAY_SEQ_ID     = '2813703'; // Workshop Replay Buyer — 3 emails, D+2/7/14
+const KIT_COMMUNITY_SEQ_ID  = '2813705'; // Greatness Community Welcome — 3 emails, D+1/3/7
+const KIT_BUNDLE_SEQ_ID     = '2813702'; // Bundle Buyer Nurture — 5 emails, D+0/2/5/9/14
 
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
 const SITE_URL = 'https://theerainers.com';
@@ -526,6 +523,10 @@ export async function POST({ request }: APIContext): Promise<Response> {
         }
         if (slug === 'greatness' && KIT_COMMUNITY_SEQ_ID) {
           await addToKitSequence(kitKey, email, KIT_COMMUNITY_SEQ_ID);
+        }
+        // Bundle buyer nurture sequence
+        if (slug === 'bundle' && KIT_BUNDLE_SEQ_ID) {
+          await addToKitSequence(kitKey, email, KIT_BUNDLE_SEQ_ID);
         }
         // Start the 14-day Community trial for Blueprint buyers.
         if (slug && BLUEPRINT_TRIAL_SLUGS.has(slug)) {
