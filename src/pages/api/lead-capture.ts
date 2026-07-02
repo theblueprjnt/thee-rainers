@@ -296,7 +296,10 @@ export async function OPTIONS(_ctx: APIContext): Promise<Response> {
   return new Response(null, { status: 204, headers: corsHeaders(origin) });
 }
 
-export async function POST({ request }: APIContext): Promise<Response> {
+export async function POST({ request, locals }: APIContext): Promise<Response> {
+  const waitUntil = (locals as { runtime?: { ctx?: { waitUntil?: (p: Promise<unknown>) => void } } }).runtime?.ctx?.waitUntil?.bind(
+    (locals as { runtime?: { ctx?: object } }).runtime?.ctx,
+  ) ?? ((p: Promise<unknown>) => p);
   const e = cfEnv as unknown as Record<string, string>;
   const origin = e['SITE_URL'] || 'https://theerainers.com';
   const headers = corsHeaders(origin);
@@ -367,27 +370,17 @@ export async function POST({ request }: APIContext): Promise<Response> {
     }
   }
 
-  // ── Resend welcome email (fire-and-forget) ───────────────────────────
+  // ── Resend welcome email ─────────────────────────────────────────────
   const resendKey = e['RESEND_API_KEY'] ?? '';
-  sendResendWelcome(resendKey, email, source).catch(() => {});
 
-  // ── Kit — subscribe + tag (fire-and-forget, never blocks response) ────
+  // ── Kit — subscribe + tag ────────────────────────────────────────────
   const kitKey   = e['KIT_API_KEY'] ?? '';
   const kitTagId = e['KIT_LEAD_TAG_ID'] ?? '';
   if (!kitKey) {
     console.warn('[lead-capture] KIT_API_KEY not set — subscriber will NOT be added to Kit', { source, emailLog });
-  } else if (!kitTagId) {
-    console.warn('[lead-capture] KIT_LEAD_TAG_ID not set — subscriber will be created in Kit but not tagged', { source, emailLog });
-    kitFindOrCreate(kitKey, email, full_name).catch((err) =>
-      console.warn('[lead-capture] Kit create failed', { emailLog, err: String(err) }),
-    );
-  } else {
-    kitApplyTag(kitKey, email, full_name, kitTagId).catch((err) =>
-      console.warn('[lead-capture] Kit tag failed', { emailLog, err: String(err) }),
-    );
   }
 
-  // ── Airtable — upsert lead record (fire-and-forget) ──────────────────
+  // ── Airtable — upsert lead record ────────────────────────────────────
   const airtableToken = e['AIRTABLE_API_KEY'] ?? '';
   const airtableBase  = e['AIRTABLE_BASE_ID'] ?? '';
   const airtableTable = e['AIRTABLE_LEADS_TABLE'] ?? 'Leads';
@@ -395,17 +388,33 @@ export async function POST({ request }: APIContext): Promise<Response> {
     console.warn('[lead-capture] AIRTABLE_API_KEY not set — lead will NOT be saved to Airtable', { source, emailLog });
   } else if (!airtableBase) {
     console.warn('[lead-capture] AIRTABLE_BASE_ID not set — lead will NOT be saved to Airtable', { source, emailLog });
-  } else {
-    upsertAirtableLead(airtableToken, airtableBase, airtableTable, {
-      Email:            email,
-      Name:             full_name,
-      Source:           source,
-      Phone:            phone,
-      'Date Submitted': new Date().toISOString(),
-    }).catch((err) =>
-      console.warn('[lead-capture] Airtable upsert failed', { emailLog, err: String(err) }),
-    );
   }
+
+  // All background I/O registered with waitUntil so Cloudflare keeps the
+  // Worker alive until every promise settles — not killed on response return.
+  waitUntil(Promise.all([
+    sendResendWelcome(resendKey, email, source).catch(() => {}),
+    kitKey && kitTagId
+      ? kitApplyTag(kitKey, email, full_name, kitTagId).catch((err) =>
+          console.warn('[lead-capture] Kit tag failed', { emailLog, err: String(err) }),
+        )
+      : kitKey
+        ? kitFindOrCreate(kitKey, email, full_name).catch((err) =>
+            console.warn('[lead-capture] Kit create failed', { emailLog, err: String(err) }),
+          )
+        : Promise.resolve(),
+    airtableToken && airtableBase
+      ? upsertAirtableLead(airtableToken, airtableBase, airtableTable, {
+          Email:            email,
+          Name:             full_name,
+          Source:           source,
+          Phone:            phone,
+          'Date Submitted': new Date().toISOString(),
+        }).catch((err) =>
+            console.warn('[lead-capture] Airtable upsert failed', { emailLog, err: String(err) }),
+          )
+      : Promise.resolve(),
+  ]));
 
   const successHeaders = { ...headers, 'X-Lead-Webhook-Status': webhookStatus };
   return isJson
