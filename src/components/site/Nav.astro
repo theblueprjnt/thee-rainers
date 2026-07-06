@@ -1,34 +1,52 @@
 ---
 import { WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
 
-// Single source of truth for nav links. Desktop bar + mobile panel both
-// iterate this array so they cannot drift.
 const NAV_LINKS = [
-  { label: 'Library', href: '/library' },
-  { label: 'Shop',    href: '/shop' },
-  { label: 'About',   href: '/about' },
+  { label: 'Blueprints', href: '/shop' },
+  { label: 'Workshop',   href: '/workshop' },
+  { label: 'Community',  href: '/community' },
 ];
 ---
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-[#0A0A0A]/8">
+
+  <!-- Announcement bar — state determined at runtime by JS -->
+  <div id="tr-bar" style="display:none;" class="bg-[#0A0A0A] relative">
+    <div class="max-w-[1140px] mx-auto px-6 py-2 flex items-center justify-center">
+      <a id="tr-bar-pre" href="/workshop"
+        class="text-white text-[10px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-75 transition-opacity text-center">
+        Live Workshop · {WORKSHOP_DATE_SHORT} · Reserve your spot →
+      </a>
+      <a id="tr-bar-post" href="/workshop-replay"
+        class="text-white text-[10px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-75 transition-opacity text-center"
+        style="display:none;">
+        Workshop replay available · Watch it now →
+      </a>
+      <button id="tr-bar-close" aria-label="Dismiss announcement"
+        class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-2 leading-none text-base">
+        ×
+      </button>
+    </div>
+  </div>
+
   <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center gap-3 md:gap-6">
     <a href="/" class="z-[60] flex items-center shrink-0" aria-label="Thee Rainers — home">
       <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 md:h-12 w-auto" />
     </a>
 
-    <!-- Workshop gradient pill — leftmost, always visible (mobile + desktop) -->
-    <a href="/workshop" data-nav-path="/workshop"
-      class="tr-nav-workshop tr-gradient-cta inline-flex items-center gap-1.5 text-white font-bold tracking-widest uppercase
+    <!-- Free Blueprint CTA — primary entry, always visible -->
+    <a href="/foundation" data-nav-path="/foundation"
+      class="inline-flex items-center bg-[var(--blue)] text-white font-bold tracking-widest uppercase
              text-[9px] md:text-[10px] px-2.5 md:px-3 py-1.5 md:py-2 leading-none whitespace-nowrap
-             transition-opacity duration-150
+             transition-opacity duration-150 hover:opacity-80
              focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-      <span class="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse" aria-hidden="true"></span>
-      <span>Workshop · {WORKSHOP_DATE_SHORT}</span>
+      Get Blueprint · Free →
     </a>
 
     <nav class="hidden md:flex items-center gap-8 ml-auto" aria-label="Primary">
       {NAV_LINKS.map((l) => (
         <a href={l.href} data-nav-path={l.href} class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">{l.label}</a>
       ))}
+      <a href="/command" class="text-[var(--purple)] text-[11px] tracking-widest uppercase font-bold hover:opacity-70 transition-opacity duration-200">Apply →</a>
     </nav>
 
     <button id="menu-open" type="button" class="tr-menu-toggle md:hidden z-[60] ml-auto p-2 -mr-2 text-[#0A0A0A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2"
@@ -45,10 +63,8 @@ const NAV_LINKS = [
   data-open="false"
   role="dialog" aria-modal="true" aria-label="Site navigation">
 
-  <!-- Backdrop tap area for close -->
   <div id="menu-backdrop" class="tr-menu-backdrop" aria-hidden="true"></div>
 
-  <!-- Top bar — same height as nav with logo + close -->
   <div class="tr-menu-topbar">
     <a href="/" class="flex items-center" aria-label="Thee Rainers — home">
       <img src="/images/logo-trb.png" alt="Thee Rainers" class="h-10 w-auto" />
@@ -60,11 +76,10 @@ const NAV_LINKS = [
     </button>
   </div>
 
-  <!-- Scrollable nav body -->
   <nav class="tr-menu-body" aria-label="Site navigation">
-    <!-- Workshop gradient first — the primary 2026 offer -->
-    <a href="/workshop" data-nav-path="/workshop" class="tr-menu-cta tr-gradient-cta text-white" style="margin-top: 0.5rem;">
-      Workshop · {WORKSHOP_DATE_SHORT} · $197 →
+    <!-- Foundation — primary free offer -->
+    <a href="/foundation" data-nav-path="/foundation" class="tr-menu-cta" style="margin-top:0.5rem;background-color:var(--blue);color:#FFFFFF;">
+      Get the Blueprint · Free →
     </a>
 
     <ul class="flex flex-col mt-4">
@@ -77,9 +92,6 @@ const NAV_LINKS = [
       ))}
     </ul>
 
-    <a href="/community" class="tr-menu-cta tr-menu-cta-red">Join the Community</a>
-    <a href="/foundation" class="tr-menu-cta tr-menu-cta-outline">Get the Footwork Blueprint · Free</a>
-
     <p class="mt-8 text-[10px] tracking-widest uppercase text-[#0A0A0A]/35">1-on-1 Coaching · Application Only</p>
     <a href="/command" class="block text-xs tracking-widest uppercase font-bold mt-2 text-[var(--purple)] hover:opacity-70 transition-opacity duration-200">
       Apply →
@@ -88,8 +100,6 @@ const NAV_LINKS = [
 </div>
 
 <style>
-  /* Mobile menu — explicit CSS, not dependent on any Tailwind utility class
-     being generated. Driven entirely by the [data-open] attribute. */
   .tr-mobile-menu {
     position: fixed;
     inset: 0;
@@ -151,42 +161,15 @@ const NAV_LINKS = [
     text-transform: uppercase;
     letter-spacing: 0.025em;
     border-radius: 0;
-    transition: background-color 150ms, color 150ms;
+    transition: opacity 150ms;
   }
-  .tr-menu-cta-red {
-    margin-top: 2rem;
-    background-color: var(--red);
-    color: #FFFFFF;
-  }
-  .tr-menu-cta-red:hover { opacity: 0.88; }
-  .tr-menu-cta-outline {
-    margin-top: 0.75rem;
-    border: 2px solid var(--blue);
-    color: var(--blue);
-    background-color: transparent;
-  }
-  .tr-menu-cta-outline:hover {
-    background-color: #0A0A0A;
-    color: #FFFFFF;
-    border-color: #0A0A0A;
-  }
-  /* Lock body scroll while menu is open — toggled by JS via [data-menu-open] */
+  .tr-menu-cta:hover { opacity: 0.85; }
   html[data-menu-open="true"], body[data-menu-open="true"] {
     overflow: hidden;
   }
 </style>
 
 <script>
-  // ────────────────────────────────────────────────────────────────────────
-  // Mobile menu — bulletproof binding pattern:
-  // Idempotent: dataset.bound guard prevents double-attaching listeners.
-  // Synchronous: init() runs immediately when this script executes
-  //   (Astro <script> tags defer until DOM is parsed, so elements exist).
-  // Declarative state: panel visibility driven by data-open attribute +
-  //   explicit CSS rules, NOT class toggling. No Tailwind dependency for
-  //   the open/close behavior.
-  // ────────────────────────────────────────────────────────────────────────
-
   function initNav() {
     const openBtn   = document.getElementById('menu-open') as HTMLButtonElement | null;
     const closeBtn  = document.getElementById('menu-close') as HTMLButtonElement | null;
@@ -199,7 +182,6 @@ const NAV_LINKS = [
     const setOpen = (open: boolean) => {
       menu.setAttribute('data-open', String(open));
       openBtn.setAttribute('aria-expanded', String(open));
-      // Lock scroll on BOTH html and body for iOS Safari compatibility
       document.documentElement.setAttribute('data-menu-open', String(open));
       document.body.setAttribute('data-menu-open', String(open));
     };
@@ -212,15 +194,12 @@ const NAV_LINKS = [
     closeBtn?.addEventListener('click', () => setOpen(false));
     backdrop?.addEventListener('click', () => setOpen(false));
 
-    // Close on link tap (delegated inside menu).
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
 
-    // Close on Escape.
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && menu.getAttribute('data-open') === 'true') setOpen(false);
     });
 
-    // Active link styling for current page.
     const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
     document.querySelectorAll<HTMLAnchorElement>('[data-nav-path]').forEach((link) => {
       const target = link.dataset.navPath ?? '';
@@ -245,6 +224,37 @@ const NAV_LINKS = [
     update();
   }
 
+  function initAnnouncementBar() {
+    const bar   = document.getElementById('tr-bar');
+    const pre   = document.getElementById('tr-bar-pre') as HTMLElement | null;
+    const post  = document.getElementById('tr-bar-post') as HTMLElement | null;
+    const close = document.getElementById('tr-bar-close');
+    if (!bar) return;
+
+    const DISMISS_KEY = 'tr_bar_v1';
+    try { if (localStorage.getItem(DISMISS_KEY)) return; } catch(e) { /* noop */ }
+
+    const now         = Date.now();
+    const workshopEnd = new Date('2026-07-25T23:59:59Z').getTime();
+    const barEnd      = new Date('2026-08-31T23:59:59Z').getTime();
+
+    if (now < workshopEnd) {
+      if (pre) pre.style.display = '';
+      bar.style.display = '';
+    } else if (now < barEnd) {
+      if (post) post.style.display = '';
+      bar.style.display = '';
+    } else {
+      return;
+    }
+
+    close?.addEventListener('click', () => {
+      try { localStorage.setItem(DISMISS_KEY, '1'); } catch(e) { /* noop */ }
+      bar.style.display = 'none';
+    });
+  }
+
   initNav();
   initNavGlass();
+  initAnnouncementBar();
 </script>

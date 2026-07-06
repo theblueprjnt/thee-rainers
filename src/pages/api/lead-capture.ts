@@ -297,9 +297,10 @@ export async function OPTIONS(_ctx: APIContext): Promise<Response> {
 }
 
 export async function POST({ request, locals }: APIContext): Promise<Response> {
-  const waitUntil = (locals as { runtime?: { ctx?: { waitUntil?: (p: Promise<unknown>) => void } } }).runtime?.ctx?.waitUntil?.bind(
-    (locals as { runtime?: { ctx?: object } }).runtime?.ctx,
-  ) ?? ((p: Promise<unknown>) => p);
+  const cfCtx = (locals as { cfContext?: { waitUntil(p: Promise<unknown>): void } }).cfContext;
+  const waitUntil = cfCtx
+    ? (p: Promise<unknown>) => cfCtx.waitUntil(p)
+    : (p: Promise<unknown>) => { p.catch(() => {}); };
   const e = cfEnv as unknown as Record<string, string>;
   const origin = e['SITE_URL'] || 'https://theerainers.com';
   const headers = corsHeaders(origin);

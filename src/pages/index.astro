@@ -14,16 +14,16 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
     <!-- Rainers cutout — anchored bottom-right, desktop only -->
     <div class="absolute right-0 bottom-0 h-full hidden md:block pointer-events-none select-none" aria-hidden="true">
       <img src="/images/herocropped.webp" alt=""
-        class="h-full w-auto object-contain object-bottom"
+        class="h-full w-auto object-contain object-top"
         style="max-height: 100svh;"
         loading="eager" decoding="async" fetchpriority="high" />
-      <div class="absolute inset-y-0 left-0 w-64" style="background: linear-gradient(to right, #0A0A0A 0%, transparent 100%);"></div>
+      <div class="absolute inset-y-0 left-0 w-48" style="background: linear-gradient(to right, #0A0A0A 0%, transparent 100%);"></div>
     </div>
 
     <!-- Mobile: fight photo as full bg at low opacity -->
     <div class="absolute inset-0 md:hidden" aria-hidden="true">
       <img src="/images/coldfightpic2.jpg" alt=""
-        class="w-full h-full object-cover object-center opacity-20"
+        class="w-full h-full object-cover object-center opacity-30"
         loading="eager" decoding="async" fetchpriority="high" />
       <div class="absolute inset-0" style="background: linear-gradient(to top, #0A0A0A 30%, transparent 100%);"></div>
     </div>
@@ -42,10 +42,6 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
           <a href="/foundation"
             class="inline-flex items-center justify-center bg-[var(--blue)] text-white font-bold px-7 py-4 text-sm tracking-wide uppercase hover:bg-white hover:text-[#0A0A0A] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
             Start Free · Footwork Blueprint →
-          </a>
-          <a href="#the-method"
-            class="inline-flex items-center justify-center border border-white/20 text-white font-bold px-7 py-4 text-sm tracking-wide uppercase hover:border-white/50 transition-colors duration-200">
-            See the Method ↓
           </a>
         </div>
         <a href="#proof"
@@ -68,59 +64,6 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
     </div>
   </a>
 
-  <!-- ── THE PROBLEM ───────────────────────────────────────────────────── -->
-  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[900px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Why this is different</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-14"
-        style="font-size: clamp(2rem, 4.5vw, 3.25rem);">
-        Most gyms teach you to throw.<br/>Almost none teach you to not get hit, or to limit unnecessary damage.
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-[#0A0A0A]/8 pt-10">
-        <div>
-          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">No structure</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Training hard without a clear path. Group classes move fast and skip the mechanics that actually build a boxer. The foundation never gets set.</p>
-        </div>
-        <div>
-          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">No defense</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Offense gets all the attention. Movement logic, guard discipline, and composure under pressure are treated as extras. They are not extras. They are the sport.</p>
-        </div>
-        <div>
-          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">No feedback</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Patterns you can't see in yourself get trained harder. Individualized correction changes the entire trajectory. Most people never get it.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── THE METHOD ────────────────────────────────────────────────────── -->
-  <section id="the-method" class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-white/5 scroll-mt-16">
-    <div class="max-w-[1000px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">The Rainers Method</p>
-      <h2 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-12"
-        style="font-size: clamp(2rem, 4.5vw, 3.25rem);">
-        Structure first.<br/>Defense always.<br/>Progress you can measure.
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/8">
-        <div class="bg-[#0A0A0A] p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">01</p>
-          <p class="font-black text-white uppercase tracking-tight text-lg mb-4">Structure</p>
-          <p class="text-white/40 text-sm leading-relaxed">Every clean punch starts at the floor. Balance, weight transfer, kinetic chain. Build the base and everything above it works. Skip it and nothing does.</p>
-        </div>
-        <div class="bg-[#0A0A0A] p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">02</p>
-          <p class="font-black text-white uppercase tracking-tight text-lg mb-4">Defense</p>
-          <p class="text-white/40 text-sm leading-relaxed">Boxing is a two-way sport. Movement logic, guard discipline, composure under pressure. Full offense and full defense. Minimum unnecessary damage.</p>
-        </div>
-        <div class="bg-[#0A0A0A] p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">03</p>
-          <p class="font-black text-white uppercase tracking-tight text-lg mb-4">Progress</p>
-          <p class="text-white/40 text-sm leading-relaxed">Structure tells you what to do. Feedback tells you how you're doing. Clear steps, honest assessment, and real correction turn training into actual improvement.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ── CHOOSE YOUR PATH ──────────────────────────────────────────────── -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1000px] mx-auto">
@@ -136,7 +79,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         <a href="/foundation" class="group flex flex-col p-8 border-2 border-[var(--blue)]/20 hover:border-[var(--blue)] transition-colors duration-200">
           <p class="text-[var(--blue)] text-[10px] tracking-widest uppercase font-bold mb-5">Free · Start Here</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-4">Build the base.</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">New to structure, or resetting from the ground up. Free. The foundation everything else runs on.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">The foundation. Free.</p>
           <p class="mt-6 text-[var(--blue)] text-[11px] font-bold tracking-widest uppercase group-hover:opacity-60 transition-opacity">Get the Free Blueprint →</p>
         </a>
 
@@ -144,7 +87,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         <a href="/community" class="group flex flex-col p-8 border border-[#0A0A0A]/10 hover:border-[#6A0DAD]/50 transition-colors duration-200">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase font-bold mb-5">$39/mo · Greatness Community</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-4">Train with live correction.</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">Training consistently but lacking feedback. Weekly live Proving Ground sessions. Camera on. Real-time correction on movement.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">Weekly live sessions. Real-time correction on movement.</p>
           <p class="mt-6 text-[#6A0DAD] text-[11px] font-bold tracking-widest uppercase group-hover:opacity-60 transition-opacity">See the Community →</p>
         </a>
 
@@ -152,7 +95,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         <a href="/command" class="group flex flex-col p-8 border border-[#0A0A0A]/10 hover:border-[#0A0A0A]/30 transition-colors duration-200">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase font-bold mb-5">Application · 1-on-1 Coaching</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-4">Built around you.</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">A specific fight, flaw, or goal. Custom coaching built around one fighter. No templates. No cohorts. Application only.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">Application only. Built around one fighter.</p>
           <p class="mt-6 text-[#0A0A0A] text-[11px] font-bold tracking-widest uppercase group-hover:opacity-60 transition-opacity">Apply for Coaching →</p>
         </a>
 
@@ -160,7 +103,7 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
         <a href="/safe" class="group flex flex-col p-8 border border-[#0A0A0A]/10 hover:border-[#0A0A0A]/30 transition-colors duration-200">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase font-bold mb-5">Parents · Coaches · Gym Owners</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-4">Non-damage boxing for youth and gyms.</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">Full offense and defense, structured drills, and clear limits on unnecessary head contact. A framework coaches can defend to parents.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed flex-1">Structured drills. Clear limits. A framework coaches can defend to parents.</p>
           <p class="mt-6 text-[#0A0A0A] text-[11px] font-bold tracking-widest uppercase group-hover:opacity-60 transition-opacity">See the Framework →</p>
         </a>
 
@@ -320,11 +263,8 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
             style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
             6 years coaching.<br/>Over a decade<br/>in the martial arts.
           </h2>
-          <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-4">
-            Competitive amateur boxer. Coach since 2020. Martial arts from childhood, boxing seriously since 16. The method comes from real reps on both sides of the pads.
-          </p>
           <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-8">
-            The work here started from a clear-eyed read of what most training leaves out. Not hype. Not shortcuts. Structure, defense, and honest progress.
+            Competitive amateur boxer. Coach since 2020. Martial arts from childhood, boxing seriously since 16. The method comes from real reps on both sides of the pads.
           </p>
           <div class="flex flex-wrap gap-8 border-t border-[#0A0A0A]/8 pt-8">
             <div>
@@ -349,9 +289,8 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
   <!-- ── SOCIAL REACH ───────────────────────────────────────────────────── -->
   <section class="bg-white py-12 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1100px] mx-auto px-6 md:px-12 lg:px-20">
-      <div class="flex items-baseline justify-between gap-4 mb-6">
+      <div class="mb-6">
         <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">The Reach</p>
-        <p class="text-[#0A0A0A]/30 text-[10px] tracking-wide uppercase text-right">Fighters and coaches across five platforms</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-5 gap-[1px] bg-[#0A0A0A]/8">
         <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
