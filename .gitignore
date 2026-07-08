@@ -45,3 +45,12 @@ screenshots/
 !public/**/*.jpeg
 !public/**/*.png
 !public/**/*.PNG
+tests/smoke/artifacts/
+tests/smoke/artifacts/html-report/
+
+# Playwright intermediate test results
+test-results/
+
+# Claude-generated analysis files
+analysis/
+tests/color_audit_*.md

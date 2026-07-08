@@ -1,5 +1,24 @@
 # Thee Rainers — Project Context
 
+## Definition of Done (non-negotiable, applies to all tasks)
+
+1. Any task touching UI, routes, forms, checkout, delivery, or email is NOT done until the LIVE URL passes the affected smoke journeys on one mobile and one desktop viewport.
+2. Evidence or it did not happen: after-screenshot, Playwright trace or HTML report, and a backend receipt for side effects (API response, Kit subscriber ID, Airtable record ID, Resend event, Worker log line).
+3. Anything not automatable must be reported as UNVERIFIED, in that word. Claiming success without evidence is the one forbidden act.
+4. Silent-failure classes to always suspect: captured-but-never-sent email, renamed env vars, Worker dying before third-party calls finish, blank renders, dead buttons.
+
+### Smoke suite
+```
+npx playwright test --config tests/smoke/playwright.config.ts
+```
+Artifacts saved to `tests/smoke/artifacts/`. Commit SHA artifact required before Stop is allowed when code was touched.
+
+### Env contract check
+```
+bash scripts/check-env-contract.sh
+```
+Runs automatically after every Edit/Write via `.claude/hooks/post-edit-check.sh`. Any env var referenced in code but absent from DOCUMENTED list or ALLOWLIST in the script fails the check.
+
 ## Skills (load these before copy or visual work)
 - Voice rules: `.claude/skills/trb-voice/SKILL.md` — banned words, punctuation, system names, proof copy rules.
 - Design rules: `.claude/skills/trb-design/SKILL.md` — color tokens, spacing scale, button shapes, contrast, verification loop.
