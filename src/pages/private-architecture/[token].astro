@@ -12,7 +12,7 @@ const airtableBase = e['AIRTABLE_BASE_ID']            ?? '';
 const r2AccountId  = e['R2_ACCOUNT_ID']               ?? '';
 const r2AccessKey  = e['R2_ACCESS_KEY_ID']            ?? '';
 const r2Secret     = e['R2_SECRET_ACCESS_KEY']        ?? '';
-const r2Bucket     = e['R2_BUCKET']                   ?? '';
+const r2Bucket     = e['R2_BUCKET_NAME']               ?? '';
 
 // Product ID → R2 file keys (exact filenames in theerainers-vault bucket)
 const PDF_MAP: Record<string, string[]> = {

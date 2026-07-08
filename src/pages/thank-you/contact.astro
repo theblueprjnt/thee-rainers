@@ -1,39 +1,45 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Container from '../../components/primitives/Container.astro';
-import Rule from '../../components/primitives/Rule.astro';
-import Button from '../../components/primitives/Button.astro';
 ---
-
 <Base
   title="Message received · Thee Rainers"
-  description="Thank you for reaching out. We reply within two business days."
+  description="Thank you for reaching out."
 >
-  <section class="bg-bg pt-36 pb-24 md:pt-44 md:pb-32">
-    <Container size="prose">
-      <h1
-        class="font-bold text-navy mb-6"
-        style="font-size: var(--font-size-h1); line-height: 1.1;"
-      >
-        Message received.
-      </h1>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
 
-      <p class="text-ink leading-[1.55] mb-4" style="font-size: var(--font-size-body);">
+  <section class="bg-white px-6 md:px-12 lg:px-20 pt-32 pb-24 md:pt-44 md:pb-32 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[680px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Thee Rainers</p>
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-6"
+        style="font-size: clamp(2.25rem, 5vw, 3.75rem);">
+        Message<br/>received.
+      </h1>
+      <p class="text-[#0A0A0A]/50 text-base leading-relaxed mb-12 max-w-[440px]">
         Thank you for reaching out. We reply within two business days.
       </p>
 
-      <Rule class="my-12" />
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="/"
+          class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/20 text-[#0A0A0A] bg-transparent px-8 py-3 text-xs tracking-widest uppercase hover:border-[#0A0A0A]/50 transition-colors duration-150">
+          Back to home
+        </a>
+        <a href="/workshop"
+          class="inline-flex items-center justify-center font-bold bg-[var(--red)] text-white px-8 py-3 text-xs tracking-widest uppercase hover:opacity-85 transition-opacity duration-150">
+          See the Defense Workshop →
+        </a>
+      </div>
+    </div>
+  </section>
 
-      <nav aria-label="Next steps">
-        <ul class="flex flex-col gap-5 list-none p-0 m-0">
-          <li>
-            <Button href="/" variant="tertiary">Back to home</Button>
-          </li>
-          <li>
-            <Button href="/workshop" variant="tertiary">See the next workshop</Button>
-          </li>
-        </ul>
-      </nav>
-    </Container>
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-20">
+    <div class="max-w-[600px] mx-auto">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] mb-5 text-white/40"
+        style="font-size: clamp(1.5rem, 3.5vw, 2.25rem);">
+        "I do not run aimlessly. I do not box as one beating the air."
+      </p>
+      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
+    </div>
   </section>
 </Base>

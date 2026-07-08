@@ -17,6 +17,10 @@ import { env as cfEnv } from 'cloudflare:workers';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 function phoneDigits(phone: string): number {
   return (phone.match(/\d/g) ?? []).length;
 }
@@ -108,17 +112,22 @@ export async function POST({ request }: APIContext): Promise<Response> {
   let delivered = false;
   if (resendKey) {
     try {
+      const safeReason  = escapeHtml(reason);
+      const safeName    = escapeHtml(full_name);
+      const safeEmail   = escapeHtml(email);
+      const safePhone   = escapeHtml(phone);
+      const safeMessage = escapeHtml(message).replace(/\n/g, '<br/>');
       const html =
         `<div style="font-family:monospace;max-width:600px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
         `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Contact Form</p>` +
-        `<p style="font-size:18px;font-weight:700;margin:0 0 24px;">${reason}</p>` +
+        `<p style="font-size:18px;font-weight:700;margin:0 0 24px;">${safeReason}</p>` +
         `<table style="width:100%;border-collapse:collapse;margin:0 0 24px;">` +
-        `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;width:25%;">Name</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;">${full_name}</td></tr>` +
-        `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;">Email</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;"><a href="mailto:${email}" style="color:#E11D2A;">${email}</a></td></tr>` +
-        `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;">Phone</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;">${phone}</td></tr>` +
-        `<tr><td style="padding:10px 0;font-size:11px;text-transform:uppercase;color:#888;vertical-align:top;">Message</td><td style="padding:10px 0;font-size:14px;line-height:1.6;">${message.replace(/\n/g, '<br/>')}</td></tr>` +
+        `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;width:25%;">Name</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;">${safeName}</td></tr>` +
+        `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;">Email</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;"><a href="mailto:${safeEmail}" style="color:#E11D2A;">${safeEmail}</a></td></tr>` +
+        `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;">Phone</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;">${safePhone}</td></tr>` +
+        `<tr><td style="padding:10px 0;font-size:11px;text-transform:uppercase;color:#888;vertical-align:top;">Message</td><td style="padding:10px 0;font-size:14px;line-height:1.6;">${safeMessage}</td></tr>` +
         `</table>` +
-        `<p style="margin:0;"><a href="mailto:${email}" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Reply</a></p>` +
+        `<p style="margin:0;"><a href="mailto:${safeEmail}" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Reply</a></p>` +
         `</div>`;
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',

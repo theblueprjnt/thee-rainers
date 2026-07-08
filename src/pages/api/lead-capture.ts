@@ -136,6 +136,19 @@ ${FUNNEL_MAP}`,
   },
 };
 
+// Sources that receive the nurture sequence. Q&A and safe-boxing are excluded.
+const SEQUENCE_SOURCES = new Set([
+  'footwork-foundation', 'popup-footwork-blueprint',
+  'lever-audit', 'lever-audit-quiz', 'footwork-blueprint',
+]);
+
+// Maps alias sources to their WELCOME_CONFIG key.
+function resolveEmailSource(source: string): string {
+  if (source === 'popup-footwork-blueprint') return 'footwork-foundation';
+  if (source.startsWith('quiz-')) return 'lever-audit-quiz';
+  return source;
+}
+
 // ── Sequence emails — add here as Rainers writes them ─────────────────────
 // delayDays: how many days after opt-in this email sends
 const SEQUENCE: Array<{ delayDays: number; subject: string; preview: string; body: string }> = [
@@ -152,18 +165,6 @@ const SEQUENCE: Array<{ delayDays: number; subject: string; preview: string; bod
 ${FUNNEL_MAP}`,
   },
   {
-    delayDays: 5,
-    subject: 'The Footwork Blueprint (Control Inside Ring)',
-    preview: 'This is where the control starts',
-    body: `<p style="font-size:14px;font-weight:700;color:#0A0A0A;margin:0 0 20px;">The Footwork Blueprint.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Control in the ring starts from the ground up. I built this around 4 main footwork bases and over 56 rounds of drills. I used this to prepare for my first fight without a coach. I ended up winning using simple positioning and a jab, scoring 2 knockdowns.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">Here's a breakdown of the 4 bases.</p>
-<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">WATCH THE BREAKDOWN →</a></p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
-${FUNNEL_MAP}`,
-  },
-  {
     delayDays: 4,
     subject: 'the session is recorded',
     preview: '90 minutes on defense. On demand.',
@@ -174,6 +175,18 @@ ${FUNNEL_MAP}`,
 <p style="font-size:12px;color:#aaa;margin:0 0 28px;">7-day access from purchase. Watch it when you're ready.</p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
+  },
+  {
+    delayDays: 5,
+    subject: 'The Footwork Blueprint (Control Inside Ring)',
+    preview: 'This is where the control starts',
+    body: `<p style="font-size:14px;font-weight:700;color:#0A0A0A;margin:0 0 20px;">The Footwork Blueprint.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Control in the ring starts from the ground up. I built this around 4 main footwork bases and over 56 rounds of drills. I used this to prepare for my first fight without a coach. I ended up winning using simple positioning and a jab, scoring 2 knockdowns.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">Here's a breakdown of the 4 bases.</p>
+<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">WATCH THE BREAKDOWN →</a></p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+${FUNNEL_MAP}`,
   },
   {
     delayDays: 8,
@@ -196,7 +209,7 @@ function wrapEmail(body: string): string {
 }
 
 async function sendResendWelcome(resendKey: string, email: string, source: string): Promise<void> {
-  const cfg = WELCOME_CONFIG[source];
+  const cfg = WELCOME_CONFIG[resolveEmailSource(source)];
   if (!resendKey || !cfg) return;
 
   // Immediate welcome email
@@ -211,6 +224,9 @@ async function sendResendWelcome(resendKey: string, email: string, source: strin
   } catch (err) {
     console.error('[lead-capture] Resend welcome fetch error:', String(err));
   }
+
+  // Sequence only for footwork/audit funnel sources — not Q&A or safe-boxing
+  if (!SEQUENCE_SOURCES.has(source) && !source.startsWith('quiz-')) return;
 
   // Schedule sequence emails — fires at opt-in, Resend delivers on schedule
   for (const seq of SEQUENCE) {
