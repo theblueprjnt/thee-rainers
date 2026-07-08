@@ -1,8 +1,8 @@
 // Update this weekly. Rebuild + push deploys the new date everywhere it shows.
 // PROVING_GROUND_ISO drives the build-time freshness check.
-export const PROVING_GROUND_ISO = '2026-07-04';
+export const PROVING_GROUND_ISO = '2026-07-11';
 export const NEXT_PROVING_GROUND = {
-  date: 'Saturday, July 4',
+  date: 'Saturday, July 11',
   time: '10am ET',
 };
 

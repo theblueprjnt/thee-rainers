@@ -16,16 +16,21 @@ Visual verification: Chrome DevTools MCP screenshot at 390x844 after every chang
 Astro 6 on Cloudflare Pages/Workers. `@astrojs/cloudflare` adapter. Tailwind v4 (`@theme` CSS vars, no config file). All SSR API routes use `export const prerender = false` and `import { env as cfEnv } from 'cloudflare:workers'` for env vars. No wrangler.toml — managed via Cloudflare Pages dashboard.
 
 ## Brand rules — non-negotiable
-- Rainers Blue `#0057FF` — primary CTAs for one-time purchases (Blueprints, Workshop, Replay), lead capture (download, submit), and standard buttons
-- Copper `#D4A373` — metadata labels and separators ONLY. Never a CTA. Reserved for focus rings on purple buttons (accessibility).
-- Royal Purple `#6A0DAD` — Private Architecture, Apply, AND Greatness Community. Signals recurring membership / inner-circle commitment — separates ongoing membership from one-time Blueprint purchases.
-- Void `#0A0A0A` — primary text, scripture section backgrounds, instant hover state on purple buttons.
-- White `#FFFFFF` — primary background everywhere else
+
+### Color law (strict — no exceptions)
+- Red `#E11D2A` (`var(--red)`) — the ONLY fill color for action CTAs. One per screen. Used for: Blueprint purchase, Workshop reserve, lead capture submit, any primary "buy/get/join" button. Never used for labels, links, or decorative elements.
+- Blue `#2348C6` (`var(--blue)`) — entry-tier labels and inline text links ONLY. Never a fill CTA. Used for: "Learn more →" links, secondary text links, metadata labels, free-offer labels.
+- Purple `#7C3AED` (`var(--purple)`) — Private Architecture and Greatness Community ONLY. Signals recurring membership / inner-circle commitment. Separates subscription from one-time purchases.
+- Void `#0A0A0A` — primary text, scripture section backgrounds.
+- White `#FFFFFF` — primary background everywhere else.
+- Multi-hue gradients: BANNED. Single-color-to-transparent overlays (hero masks) are legal.
+- WCAG AA: 4.5:1 text contrast minimum. Footer/legal opacity must be `/70` or higher (not `/55`).
+
+### Other brand rules
 - No emojis anywhere in the codebase or copy
-- No Telegram references — replaced by Monthly Q&A
+- No Telegram references
 - Scripture sections stay dark (`bg-[#0A0A0A]`) for gravitas
 - Button shape: `rounded-none` everywhere (brutalist square edges, no pill/rounded buttons)
-- Footer/legal microcopy: minimum 12px (`text-xs`) at /55 opacity for WCAG AA contrast. Never `text-[10px]` at low opacity.
 
 ## Font
 Bricolage Grotesque Variable — loaded via Base.astro
@@ -190,12 +195,13 @@ Counts live in `src/data/social-stats.ts` (single source of truth). Update that 
 - YouTube: @Rainers
 
 ## Pending — prioritized
-1. **[VERIFY] Make.com delivery scenario** — Resend is the primary delivery path and IS wired (stripe-webhook.ts:394). Buyers get the email if RESEND_API_KEY is set in Cloudflare Pages. Make.com is secondary/optional. Confirm RESEND_API_KEY is set in dashboard; if yes, this is resolved.
-2. **[URGENT] Stripe Workshop Replay success URL** — update in Stripe Dashboard to `/thank-you/workshop-replay`
-3. **[WEEK] Membership section on site** — subscription products exist in Stripe + webhook, but no page offers them. Naming/copy TBD by Rainers.
-4. **[WEEK] Post-purchase email sequence in Make.com** — Day 0 delivery, Day 3 check-in, Day 7 upsell, Day 14 workshop invite
-5. **[WEEK] Lever-audit.pdf** — generate from print template (Chrome → Print → Save as PDF)
-6. **[ONGOING] Platform bios** — update to theerainers.com/links once all is confirmed live
+1. **[WEEK] Post-purchase email sequence in Make.com** — Day 0 delivery, Day 3 check-in, Day 7 upsell, Day 14 workshop invite
+2. **[WEEK] Lever-audit.pdf** — generate from print template (Chrome → Print → Save as PDF)
+3. **[ONGOING] Platform bios** — update to theerainers.com/links once all is confirmed live
+
+## Done — reference
+- Make.com + Airtable wiring complete (2026-06-25)
+- Stripe Workshop Replay success URL set to `/thank-you/workshop-replay` in Stripe Dashboard (2026-06-16)
 
 ## Deployment
 `git push` → Cloudflare Pages auto-deploys `main`. No manual steps.

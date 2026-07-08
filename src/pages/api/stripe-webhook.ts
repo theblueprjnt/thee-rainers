@@ -305,11 +305,11 @@ function buildDeliveryHtml(slug: string, url: string, url2: string | null, env?:
     `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
     `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
     inner +
-    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#0057FF;">rainers@theerainers.com</a></p>` +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#E11D2A;">rainers@theerainers.com</a></p>` +
     `</div>`;
 
   const btn = (href: string, label: string) =>
-    `<p style="margin:0 0 24px;"><a href="${href}" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">${label}</a></p>`;
+    `<p style="margin:0 0 24px;"><a href="${href}" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">${label}</a></p>`;
 
   if (slug === 'bundle' && url2) {
     return wrap(
@@ -332,7 +332,7 @@ function buildDeliveryHtml(slug: string, url: string, url2: string | null, env?:
   if (slug === 'greatness') {
     const chatInvite = env?.['COMMUNITY_CHAT_INVITE'] ?? '';
     const chatLine = chatInvite
-      ? `<p style="margin:0 0 24px;"><a href="${chatInvite}" style="display:inline-block;background:#6A0DAD;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Join Community Chat →</a></p>`
+      ? `<p style="margin:0 0 24px;"><a href="${chatInvite}" style="display:inline-block;background:#7C3AED;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Join Community Chat →</a></p>`
       : `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 24px;">Community chat invite and Zoom link for the next session will follow in a separate email.</p>`;
     return wrap(
       `<p style="font-size:15px;line-height:1.6;margin:0 0 8px;">You are in.</p>` +
@@ -341,7 +341,7 @@ function buildDeliveryHtml(slug: string, url: string, url2: string | null, env?:
       `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">What happens next</p>` +
       `<table style="width:100%;border-collapse:collapse;margin:0 0 24px;">` +
       `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;width:60%;">The Proving Ground</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;">Weekly live — date and Zoom in next email</td></tr>` +
-      `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;">Drill Library</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;"><a href="https://theerainers.com/library" style="color:#0057FF;">theerainers.com/library</a></td></tr>` +
+      `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;">Drill Library</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;"><a href="https://theerainers.com/library" style="color:#E11D2A;">theerainers.com/library</a></td></tr>` +
       `<tr><td style="padding:10px 0;font-size:13px;color:#0A0A0A;">Manage / cancel</td><td style="padding:10px 0;font-size:12px;color:#888;text-align:right;">Via Customer Portal — link in member area</td></tr>` +
       `</table>` +
       chatLine,

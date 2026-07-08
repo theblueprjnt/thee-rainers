@@ -1,3 +1,12 @@
+/*
+ * COLOR LAW — enforced, no exceptions in visible copy or code
+ * RED    #E11D2A  (--red)    — action fills only. One primary CTA per screen.
+ * BLUE   #2348C6  (--blue)   — entry-tier labels and inline links only. Never a fill CTA.
+ * PURPLE #7C3AED  (--purple) — Private Architecture + Community labels only.
+ * Gradients: multi-hue banned. Single-color-to-transparent overlay fades are legal (hero image masks).
+ * WCAG: 4.5:1 text, 3:1 UI components. Never communicate state by color alone.
+ */
+
 @import "tailwindcss";
 @import "@fontsource-variable/bricolage-grotesque/index.css";
 
@@ -101,9 +110,9 @@
     transform: translateZ(0);
   }
 
-  /* Primary CTA — Instagram gradient, one per screen */
+  /* Primary CTA — solid red, one per screen */
   .tr-gradient-cta {
-    background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+    background: var(--red);
     will-change: opacity, transform;
     transition: opacity 0.15s ease, transform 0.15s ease;
   }
@@ -144,13 +153,13 @@
   .tr-link-primary:hover { background: var(--blue); color: #FFFFFF; }
   .tr-link-primary:hover .tr-link-meta { opacity: 1; }
 
-  .tr-link-gradient {
+  .tr-link-accent {
     border: 1px solid transparent;
     color: #FFFFFF;
     background: var(--red);
     transition: opacity 0.15s ease;
   }
-  .tr-link-gradient:hover { opacity: 0.88; }
+  .tr-link-accent:hover { opacity: 0.88; }
 
   .tr-link-quiet {
     border: 1px solid rgba(10,10,10,0.12);

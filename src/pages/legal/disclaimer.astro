@@ -9,8 +9,8 @@ import Layout from '../../layouts/Base.astro';
     <div class="max-w-2xl mx-auto">
 
       <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Legal</p>
-      <h1 class="font-black text-[#141414] text-3xl md:text-4xl leading-tight tracking-tight mb-3">Disclaimer</h1>
-      <p class="text-[#141414]/40 text-sm mb-12">Last updated: 26 May 2026</p>
+      <h1 class="font-black text-[var(--color-charcoal)] text-3xl md:text-4xl leading-tight tracking-tight mb-3">Disclaimer</h1>
+      <p class="text-[var(--color-charcoal)]/40 text-sm mb-12">Last updated: 26 May 2026</p>
 
       <div class="prose-legal">
 
@@ -73,7 +73,7 @@ import Layout from '../../layouts/Base.astro';
 
 <style>
   .prose-legal {
-    color: #141414;
+    color: var(--color-charcoal);
     font-size: 0.9375rem;
     line-height: 1.7;
   }
@@ -81,13 +81,13 @@ import Layout from '../../layouts/Base.astro';
     font-family: var(--font-sans);
     font-weight: 800;
     font-size: 1.125rem;
-    color: #141414;
+    color: var(--color-charcoal);
     margin-top: 2.5rem;
     margin-bottom: 0.75rem;
     letter-spacing: -0.01em;
   }
   .prose-legal p, .prose-legal li {
-    color: #141414;
+    color: var(--color-charcoal);
     margin-bottom: 0.9rem;
   }
   .prose-legal ul {
@@ -107,6 +107,6 @@ import Layout from '../../layouts/Base.astro';
   }
   .prose-legal strong {
     font-weight: 700;
-    color: #141414;
+    color: var(--color-charcoal);
   }
 </style>

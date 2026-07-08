@@ -34,12 +34,12 @@ export async function POST({ request }: APIContext): Promise<Response> {
       `<p style="font-size:18px;font-weight:700;margin:0 0 24px;">New application from ${name || email}</p>` +
       `<table style="width:100%;border-collapse:collapse;margin:0 0 24px;">` +
       `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;width:30%;">Name</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;">${name || '—'}</td></tr>` +
-      `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;">Email</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;"><a href="mailto:${email}" style="color:#0057FF;">${email}</a></td></tr>` +
+      `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;">Email</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;"><a href="mailto:${email}" style="color:#E11D2A;">${email}</a></td></tr>` +
       `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;vertical-align:top;">Record</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;line-height:1.6;">${record || '—'}</td></tr>` +
       `<tr><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:11px;text-transform:uppercase;color:#888;vertical-align:top;">Flaw</td><td style="padding:10px 0;border-bottom:1px solid #eee;font-size:14px;line-height:1.6;">${flaw || '—'}</td></tr>` +
       `<tr><td style="padding:10px 0;font-size:11px;text-transform:uppercase;color:#888;vertical-align:top;">Goal</td><td style="padding:10px 0;font-size:14px;line-height:1.6;">${goal || '—'}</td></tr>` +
       `</table>` +
-      `<p style="margin:0;"><a href="mailto:${email}" style="display:inline-block;background:#6A0DAD;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Reply to Applicant</a></p>` +
+      `<p style="margin:0;"><a href="mailto:${email}" style="display:inline-block;background:#7C3AED;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Reply to Applicant</a></p>` +
       `</div>`;
     fetch('https://api.resend.com/emails', {
       method: 'POST',

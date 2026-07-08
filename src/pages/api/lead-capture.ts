@@ -53,7 +53,7 @@ const FUNNEL_MAP = `
         <p style="font-size:12px;color:#888;margin:0;">90 minutes on demand. Defense mechanics from the ground up.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
-        <a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0057FF;text-decoration:none;">$47 →</a>
+        <a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$47 →</a>
       </td>
     </tr>
     <tr>
@@ -62,7 +62,7 @@ const FUNNEL_MAP = `
         <p style="font-size:12px;color:#888;margin:0;">Footwork and shadowboxing. Both systems together.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
-        <a href="https://theerainers.com/vault" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0057FF;text-decoration:none;">$87 →</a>
+        <a href="https://theerainers.com/vault" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$87 →</a>
       </td>
     </tr>
     <tr>
@@ -71,7 +71,7 @@ const FUNNEL_MAP = `
         <p style="font-size:12px;color:#888;margin:0;">Built around your training. Your fight, your body, your timeline.</p>
       </td>
       <td style="padding:12px 0 12px 16px;vertical-align:middle;text-align:right;">
-        <a href="https://theerainers.com/command" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A0DAD;text-decoration:none;">Apply →</a>
+        <a href="https://theerainers.com/command" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7C3AED;text-decoration:none;">Apply →</a>
       </td>
     </tr>
   </table>
@@ -83,7 +83,7 @@ const WELCOME_CONFIG: Record<string, { subject: string; body: string }> = {
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">A lot of the damage you take in training is damage you do not have to take. The simpler way starts before the cause has happened. The same applies to boxing.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You do not have to block a punch you are not in front of. Defense starts with distance. A small step, a couple inches, and the world's hardest punch can't hit you. It takes less effort than defending and dealing with potential damage.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">This is a fundamental principle we train to develop control in boxing. Your hands are the last line of defense.</p>
-<p style="margin:0 0 28px;"><a href="https://theerainers.com/pdfs/footwork-foundation.pdf" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Your Protocol →</a></p>
+<p style="margin:0 0 28px;"><a href="https://theerainers.com/pdfs/footwork-foundation.pdf" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Your Protocol →</a></p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 8px;">Reply to this email and tell me: <strong>what would change in your training if you never had to worry about getting hit?</strong></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">I read these.</p>
 <p style="font-size:13px;color:#888;margin:0;">Train well,<br/>Rainers</p>
@@ -93,7 +93,7 @@ ${FUNNEL_MAP}`,
     subject: 'Your 7-Lever Audit',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Your 7-Lever Self-Assessment is ready.</p>
 <p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Seven levers. One broken lever limits performance across all the others. Find yours.</p>
-<p style="margin:0 0 24px;"><a href="https://theerainers.com/pdfs/lever-audit.pdf" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Audit →</a></p>
+<p style="margin:0 0 24px;"><a href="https://theerainers.com/pdfs/lever-audit.pdf" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Audit →</a></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Work through each lever honestly. Score what you actually see in sparring, not what you wish was true.</p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
@@ -108,7 +108,7 @@ ${FUNNEL_MAP}`,
 ${FUNNEL_MAP}`,
   },
   'qa-registration': {
-    subject: 'Monthly Q&A — you are in',
+    subject: 'Monthly Q&A. You are in.',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You are registered for the Monthly Q&amp;A.</p>
 <p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Bring a specific question. The more specific you are about your mechanical problem, the more precise the diagnosis.</p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">The link and time will come closer to the session date.</p>
@@ -118,12 +118,12 @@ ${FUNNEL_MAP}`,
   },
   'footwork-blueprint': {
     subject: 'Your Blueprint. Start on page 9.',
-    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The PDF arrived with your download confirmation. If you missed it, it is also here: <a href="https://theerainers.com/pdfs/foundation.pdf" style="color:#0057FF;">The Footwork Blueprint</a></p>
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The PDF arrived with your download confirmation. If you missed it, it is also here: <a href="https://theerainers.com/pdfs/foundation.pdf" style="color:#E11D2A;">The Footwork Blueprint</a></p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">There are 56 rounds in the blueprint. Most people start on page 1. Page 9 is where the base work begins.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Work through the stance and balance drills before anything else. Not because the opening pages are wrong. Because everything in the drills compounds only when the base they build on is stable.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">One thing to notice as you go through it: most of what the blueprint corrects is not complex. The issues are structural - stance breaks, being off-balance and movement without intention. They are pattern problems. Humans can change patterns with the right repetitions.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The full sequence is 30 days. Run it from the base forward.</p>
-<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Watch the 11-min Breakdown →</a></p>
+<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Watch the 11-min Breakdown →</a></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
 ${FUNNEL_MAP}`,
@@ -145,8 +145,8 @@ const SEQUENCE: Array<{ delayDays: number; subject: string; preview: string; bod
     preview: '',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">I won my last 3 fights without a coach in my corner. Prior to that I trained with a group coach and competition was always confusing for me. I thought intensity = key, until I left group training for boxing growth and less damage inflicted on the body and brain.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">When I prepped for my first fight I had so many things on my mind as you gather different opinions and information along your boxing journey. All I knew was footwork mattered. So I found a coach and trained that way. I won the fight in a simple fashion simply outboxing my opponent and knocking him down twice.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">Whether you train for health, skill or performance — essentially you're looking for control, not intensity or "hitting harder". Over the next couple of weeks I'll break down the fundamentals and bring you clarity and control both inside and outside the ring.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 8px;">I always read replies — tell me: <strong>what made you start boxing?</strong></p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">Whether you train for health, skill or performance, you are looking for control. Not intensity or hitting harder. Over the next couple of weeks I will break down the fundamentals and bring you clarity and control both inside and outside the ring.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 8px;">I always read replies. Tell me: <strong>what made you start boxing?</strong></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
 ${FUNNEL_MAP}`,
@@ -156,9 +156,9 @@ ${FUNNEL_MAP}`,
     subject: 'The Footwork Blueprint (Control Inside Ring)',
     preview: 'This is where the control starts',
     body: `<p style="font-size:14px;font-weight:700;color:#0A0A0A;margin:0 0 20px;">The Footwork Blueprint.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Control in the ring starts from the ground up. I built this around 4 main footwork bases and over 56 rounds of drills. I used this to prepare for my first fight without a coach — I ended up winning using simple positioning and a jab, scoring 2 knockdowns.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Control in the ring starts from the ground up. I built this around 4 main footwork bases and over 56 rounds of drills. I used this to prepare for my first fight without a coach. I ended up winning using simple positioning and a jab, scoring 2 knockdowns.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">Here's a breakdown of the 4 bases.</p>
-<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">WATCH THE BREAKDOWN →</a></p>
+<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">WATCH THE BREAKDOWN →</a></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
 ${FUNNEL_MAP}`,
@@ -168,9 +168,9 @@ ${FUNNEL_MAP}`,
     subject: 'the session is recorded',
     preview: '90 minutes on defense. On demand.',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The defense workshop is recorded and available now.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">90 minutes. The 5 layers of defense. How to position with your opponent to hit and not get hit. The full live Q&amp;A from fighters in the session is included — the questions they asked are probably the ones you have.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">90 minutes. The 5 layers of defense. How to position with your opponent to hit and not get hit. The full live Q&amp;A from fighters in the session is included. The questions they asked are probably the ones you have.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">If your movement breaks down in sparring, the break is almost always in your stance or your distance before pressure even comes. The session works through that from the base up.</p>
-<p style="margin:0 0 12px;"><a href="https://theerainers.com/workshop-replay" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">GET THE REPLAY · $47 →</a></p>
+<p style="margin:0 0 12px;"><a href="https://theerainers.com/workshop-replay" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">GET THE REPLAY · $47 →</a></p>
 <p style="font-size:12px;color:#aaa;margin:0 0 28px;">7-day access from purchase. Watch it when you're ready.</p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
@@ -181,11 +181,11 @@ ${FUNNEL_MAP}`,
     preview: '',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The first question I get asked after people learn footwork is: how do I defend myself? I'm not letting my hands go in sparring, because I'm afraid I'll get countered or hit.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">I'm running a live workshop on ${WORKSHOP_DATE_LONG} teaching defense and the 5 layers of defense in boxing. Learn to defend yourself on all 5 levels, how to use each to position yourself with the opponent to hit and not get hit.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">If you're still flinching or getting hit more than 3 times per round when sparring — reserve your spot below.</p>
-<p style="margin:0 0 16px;"><a href="https://theerainers.com/workshop" style="display:inline-block;background:#0057FF;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">RESERVE MY SPOT · $197 →</a></p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">If you're still flinching or getting hit more than 3 times per round when sparring, reserve your spot below.</p>
+<p style="margin:0 0 16px;"><a href="https://theerainers.com/workshop" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">RESERVE MY SPOT · $197 →</a></p>
 <p style="font-size:12px;color:#aaa;margin:0 0 24px;">Live · ${WORKSHOP_DATE_SHORT} · 12PM ET</p>
 <p style="font-size:14px;color:#0A0A0A;margin:0 0 8px;">Can't make ${WORKSHOP_DATE_SHORT}? The full session is already recorded.</p>
-<p style="margin:0 0 28px;"><a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#0057FF;text-decoration:none;">GET THE REPLAY · $47 →</a></p>
+<p style="margin:0 0 28px;"><a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">GET THE REPLAY · $47 →</a></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
   },
