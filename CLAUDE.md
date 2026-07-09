@@ -234,7 +234,6 @@ Counts live in `src/data/social-stats.ts` (single source of truth). Update that 
 1. **[WEEK] Lever-audit.pdf** — generate from print template (Chrome → Print → Save as PDF)
 2. **[ONGOING] Platform bios** — update to theerainers.com/links once all is confirmed live
 3. **[WEEK] Contact form delivery** — currently depends on MAKE_CONTACT_WEBHOOK_URL (Make.com middleman). Move to Resend to align with ownership doctrine.
-4. **[WEEK] Workshop Replay buy button color** — three buttons on /workshop-replay are blue (var(--blue)), violating the color law for purchase CTAs. Must be red (var(--red)). One-line fix per button, direct conversion impact.
 
 ## Done — reference
 - Make.com + Airtable wiring complete (2026-06-25)
@@ -243,6 +242,7 @@ Counts live in `src/data/social-stats.ts` (single source of truth). Update that 
 - Workshop Replay price fixed: EUR Payment Link superseded by USD Checkout Session via price_1TaFZPHzlarU775HLnMC6yNB. Page buttons converted to data-checkout="workshop_replay". Commit de8c9e3 (2026-07-09).
 - Email_Events Airtable table created (tblOV5M1FGzHGopbJ) in base applzsBz15zEAua4s. Schema matches resend-webhook.ts exactly (2026-07-08).
 - Post-purchase delivery wired directly in stripe-webhook.ts via Resend. No Make.com dependency for delivery.
+- Workshop Replay buy buttons corrected to red (#E11D2A) per color law. Commit 7c7286c (2026-07-09).
 
 ## Deployment
 `git push` → Cloudflare Pages auto-deploys `main`. No manual steps.
