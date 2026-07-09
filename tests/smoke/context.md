@@ -72,29 +72,27 @@ Resend must have the webhook endpoint registered at `https://theerainers.com/api
 ### A3 — Airtable base confirmation (CONFIRMED)
 All handlers (`lead-capture.ts`, `stripe-webhook.ts`, `resend-webhook.ts`) read `e['AIRTABLE_BASE_ID']` from the CF env. No hardcoded base IDs. Live test confirmed `AIRTABLE_BASE_ID` resolves to `applzsBz15zEAua4s` (THEE_RAINERS_HUB), not the template base. If the env var were wrong, upserts and logs would silently 404 against a wrong base ID.
 
-### A1 — Workshop Replay USD price (BLOCKED — Rainers action required)
-`create-checkout.ts` `workshop_replay.priceId` is `price_1Tb1ILHzlarU775H0NVAhRgb` — Stripe returns "No such price" for this ID.
-Shadowboxing (`price_1Tb1DHHzlarU775HIzI4fY8r`) is valid and returns a live USD Checkout Session.
-Current `/workshop-replay` buttons use EUR Payment Link `https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p`. US buyers see $47. EU browsers see ~$56.87 with VAT added by Stripe.
-
-**Rainers must do in Stripe Dashboard before code can be updated:**
-1. Products > find Workshop Replay (`prod_UZOMBOeJ0mm15I`)
-2. Add price: One-time · USD · $47.00
-3. Copy the new `price_1...` ID
-4. Provide the ID — code changes to `create-checkout.ts` and `workshop-replay.astro` are ready to apply once the ID exists
-
-**Code changes pending (do not deploy until ID is provided):**
-- `create-checkout.ts`: update `workshop_replay.priceId` to the new USD price ID
-- `workshop-replay.astro`: convert all three `<a href="https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p">` to `<button data-checkout="workshop_replay">` with `type="button"` and red CTA styling
-- `smoke.spec.ts` J5: update assertion from `a[href="...6J20p"]` to `button[data-checkout="workshop_replay"]`
+### A1 — Workshop Replay USD price (DONE — commit de8c9e3, 2026-07-09)
+EUR Payment Link `https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p` was charging US buyers $56.87 (EUR base price with FX conversion).
+Fixed: all three buy buttons on `/workshop-replay` converted from `<a href>` Payment Link to `<button data-checkout="workshop_replay">`. Route hits `/api/create-checkout` which creates a Stripe Checkout Session.
+`create-checkout.ts` `workshop_replay.priceId` updated to `price_1TaFZPHzlarU775HLnMC6yNB` (USD $47, product `prod_UZOMBOeJ0mm15I`, created by Rainers 2026-07-09).
+`smoke.spec.ts` J5 assertion updated: checks `button[data-checkout="workshop_replay"]` on `/workshop-replay`.
+Deploy confirmed live: Stripe Checkout Session showed USD $47.00 after deploy.
 
 ### Money path broadcast silence
-Last broadcast to Kit list: 77 days before 2026-07-08 (no sends since ~April 22 2026).
-No purchases in Airtable Members table (zero rows confirmed). No Kit buyer tags assigned.
-Both the free opt-in path (Kit tag `Footwork_lead`) and the paid path (Kit tag `Member`) are wired correctly in code. The wire just has not been fired by a real buyer yet.
+Last broadcast to Kit list: April 22 2026 (subject: "question for you"). 78 days of silence as of 2026-07-09.
+Kit list: 258 active subscribers. 159 tagged Lead, 70 tagged Buyers, 25 tagged Footwork_lead (recent CF Worker opt-ins).
+No purchases in Airtable Members table (zero rows as of 2026-07-08). No Kit buyer tags (Member, workshop_replay, etc.) assigned.
+3-email broadcast campaign drafted 2026-07-09: Email 1 "why you keep getting hit" (Day 0), Email 2 "5 months" (Day 4), Email 3 "last one on this" (Day 8). Rainers polishing copy before Kit drafts are created.
+
+### Resend send truth — CONFIRMED (2026-07-09)
+RESEND_API_KEY confirmed set in CF Pages env. Resend Emails dashboard (last 15 days) shows:
+- `facethomas20@gmail.com` (Jonathan Jackson): "Your Blueprint. Start on page 9." delivered 2026-07-09. Four sequence emails (days 2/4/5/8) scheduled.
+- `aaron.lynch43@gmail.com`: same pattern, same timestamp.
+Welcome email and full nurture sequence fire correctly for every new opt-in. Primary delivery path is live.
 
 ### Resend webhook registration — UNVERIFIED
-`/api/resend-webhook` endpoint exists and deploys correctly. Whether Resend's dashboard has this URL registered as a webhook is UNVERIFIED. Without registration, Email_Events rows will never appear regardless of email sends. Rainers must confirm in Resend dashboard: Settings > Webhooks > verify `https://theerainers.com/api/resend-webhook` is listed for `email.delivered`, `email.bounced`, `email.complained` events.
+`/api/resend-webhook` endpoint exists and deploys correctly. Whether Resend's dashboard has this URL registered as a webhook for delivery events is UNVERIFIED. Without registration, Email_Events rows will never appear. Rainers must confirm: Resend > Settings > Webhooks > verify `https://theerainers.com/api/resend-webhook` is listed for `email.delivered`, `email.bounced`, `email.complained`.
 
 ---
 

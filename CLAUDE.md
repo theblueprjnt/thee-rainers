@@ -19,6 +19,23 @@ bash scripts/check-env-contract.sh
 ```
 Runs automatically after every Edit/Write via `.claude/hooks/post-edit-check.sh`. Any env var referenced in code but absent from DOCUMENTED list or ALLOWLIST in the script fails the check.
 
+## Ownership Doctrine
+
+### What we own (the moat, fully vertically integrated)
+- Delivery: Cloudflare R2, presigned URLs. Ours.
+- Payment: Stripe, direct. Ours.
+- Data: Airtable (Leads, Members, Workshop_Registrants, Purchases, Email_Events). Ours.
+- Relationship: Kit list + sequences + Resend email. Ours.
+- The site and the rail: Astro on Cloudflare Workers. Ours end to end. Gumroad is dead and never returns.
+
+### What we do not own (the standing work)
+Audience, traffic, and the initial attention live on social (600K+ across IG, TikTok, FB, YouTube, Threads). This is rented land. The permanent job of the funnel is to move rented attention onto the owned list. We do not control the algorithms; we control the doorway and everything after it.
+
+### Operating principle
+We are past building and into essentialism. The default answer to any new feature is no, unless it measurably moves retention or conversion. Strip to bone and muscle. Own more, depend less, add nothing that can be taken or taxed by a middleman.
+
+---
+
 ## Skills (load these before copy or visual work)
 - Voice rules: `.claude/skills/trb-voice/SKILL.md` — banned words, punctuation, system names, proof copy rules.
 - Design rules: `.claude/skills/trb-design/SKILL.md` — color tokens, spacing scale, button shapes, contrast, verification loop.
@@ -59,7 +76,7 @@ Bricolage Grotesque Variable — loaded via Base.astro
 
 ## Funnel architecture (vertical integration)
 ```
-YouTube / Instagram / TikTok (18K / 332K / 95K)
+Platforms: 600K+ across IG, TikTok, FB, YouTube, Threads (rented — individual counts in src/data/social-stats.ts)
     ↓
 /links — universal bio hub
     ↓
@@ -87,7 +104,7 @@ YouTube / Instagram / TikTok (18K / 332K / 95K)
 - `/watch/workshop-replay` — token-gated watch page (server-validates HMAC before rendering embed)
 - `/vault` — all products
 - `/command` — 1-on-1 Coaching application
-- `/qa` — Monthly Q&A · next session June 13
+- `/qa` — Monthly Q&A · next session date TBD
 - `/library` — YouTube knowledge library
 - `/arena` — training resources
 - `/links` — universal bio link hub
@@ -135,7 +152,7 @@ Receives free form submissions. Payload:
 ```json
 { "email": "...", "full_name": "", "source": "footwork-foundation|lever-audit|lever-audit-quiz|qa-registration" }
 ```
-**STATUS: Webhook URL set. Scenario needs to exist in Make.com: Webhook → Airtable + welcome email with PDF link.**
+**STATUS: Secondary path only. Resend (via lead-capture.ts) is the primary delivery method for welcome email and nurture sequence — confirmed live 2026-07-09. Make.com receives the same payload as a fallback and for any additional automations (e.g. internal Airtable notifications), but is not required for email delivery.**
 
 ### MAKE_DELIVERY_WEBHOOK_URL
 Receives purchase events (initial + monthly renewals). Payload:
@@ -149,8 +166,8 @@ Receives purchase events (initial + monthly renewals). Payload:
   "expiring_url_2": "second R2 URL for bundle (null for all other products)"
 }
 ```
-**STATUS: Webhook URL set. Scenario needs to exist in Make.com: Webhook → email delivery.**
-**For bundle:** `expiring_url` = footwork PDF, `expiring_url_2` = shadowboxing PDF. Add conditional second link in email template when `expiring_url_2` is not null.
+**STATUS: Secondary path only. Resend (via stripe-webhook.ts) is the primary post-purchase delivery method — wired directly in the CF Worker, no Make.com dependency. Make.com receives the same payload if MAKE_DELIVERY_WEBHOOK_URL is set, for any additional automations. If MAKE_DELIVERY_WEBHOOK_URL is unset, delivery still works via Resend.**
+**For bundle:** `expiring_url` = footwork PDF, `expiring_url_2` = shadowboxing PDF. Resend template handles both links; Make.com template needs conditional second link when `expiring_url_2` is not null.
 **For workshop-replay:** `expiring_url` = `https://theerainers.com/watch/workshop-replay?sig=xxx&exp=xxx` (7-day signed URL).
 
 ### Airtable
@@ -170,7 +187,7 @@ AWS SigV4 signing implemented natively in CF Workers (`crypto.subtle`) — no AW
 
 ### Workshop Replay (token-gated YouTube)
 Video: unlisted YouTube `AtZmUk7cZFQ`
-Flow: purchase → webhook generates HMAC-signed URL → Make.com emails buyer → buyer clicks `/watch/workshop-replay?sig=xxx&exp=xxx` → page validates server-side → embed renders only if valid.
+Flow: purchase → stripe-webhook generates HMAC-signed URL → Resend emails buyer → buyer clicks `/watch/workshop-replay?sig=xxx&exp=xxx` → page validates server-side → embed renders only if valid.
 Expired token → repurchase CTA (no video in source). Invalid token → redirect to `/workshop-replay`.
 
 ### Subscription renewals
@@ -182,7 +199,7 @@ Expired token → repurchase CTA (no video in source). Invalid token → redirec
 | Product | Price | Stripe link | Product ID |
 |---|---|---|---|
 | Defense Workshop (live) | $197 | https://buy.stripe.com/7sY28r8lt1D06XU6446J20n | — |
-| Workshop Replay | $47 | https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p | prod_UZOMBOeJ0mm15I |
+| Workshop Replay | $47 USD | Checkout Session via price_1TaFZPHzlarU775HLnMC6yNB (USD, direct) | prod_UZOMBOeJ0mm15I |
 | Footwork Blueprint | $47 | https://buy.stripe.com/bJe14n8lt81ogyu3VW6J20k | prod_UZrejf6iuDorEA |
 | Shadowboxing Blueprint | $47 | https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l | prod_UZreDlek9325EY |
 | Bundle (both blueprints) | $87 | https://buy.stripe.com/14A4gz59hgxUaa65006J20m | prod_UZreHroYQEDAFU |
@@ -214,13 +231,18 @@ Counts live in `src/data/social-stats.ts` (single source of truth). Update that 
 - YouTube: @Rainers
 
 ## Pending — prioritized
-1. **[WEEK] Post-purchase email sequence in Make.com** — Day 0 delivery, Day 3 check-in, Day 7 upsell, Day 14 workshop invite
-2. **[WEEK] Lever-audit.pdf** — generate from print template (Chrome → Print → Save as PDF)
-3. **[ONGOING] Platform bios** — update to theerainers.com/links once all is confirmed live
+1. **[WEEK] Lever-audit.pdf** — generate from print template (Chrome → Print → Save as PDF)
+2. **[ONGOING] Platform bios** — update to theerainers.com/links once all is confirmed live
+3. **[WEEK] Contact form delivery** — currently depends on MAKE_CONTACT_WEBHOOK_URL (Make.com middleman). Move to Resend to align with ownership doctrine.
+4. **[WEEK] Workshop Replay buy button color** — three buttons on /workshop-replay are blue (var(--blue)), violating the color law for purchase CTAs. Must be red (var(--red)). One-line fix per button, direct conversion impact.
 
 ## Done — reference
 - Make.com + Airtable wiring complete (2026-06-25)
 - Stripe Workshop Replay success URL set to `/thank-you/workshop-replay` in Stripe Dashboard (2026-06-16)
+- Resend email system confirmed live (2026-07-09): welcome email + 4-email nurture sequence fires for every new opt-in. RESEND_API_KEY confirmed set in CF env.
+- Workshop Replay price fixed: EUR Payment Link superseded by USD Checkout Session via price_1TaFZPHzlarU775HLnMC6yNB. Page buttons converted to data-checkout="workshop_replay". Commit de8c9e3 (2026-07-09).
+- Email_Events Airtable table created (tblOV5M1FGzHGopbJ) in base applzsBz15zEAua4s. Schema matches resend-webhook.ts exactly (2026-07-08).
+- Post-purchase delivery wired directly in stripe-webhook.ts via Resend. No Make.com dependency for delivery.
 
 ## Deployment
 `git push` → Cloudflare Pages auto-deploys `main`. No manual steps.
@@ -253,7 +275,8 @@ curl -s https://theerainers.com | grep -o "GTM-[A-Z0-9]*"
 
 # Stripe buy links live — should each return 200 (not 404)
 curl -s -o /dev/null -w "%{http_code}" https://buy.stripe.com/7sY28r8lt1D06XU6446J20n
-curl -s -o /dev/null -w "%{http_code}" https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p
+# Workshop Replay now uses Checkout Session — verify /workshop-replay has data-checkout button
+curl -s https://theerainers.com/workshop-replay | grep -q 'data-checkout="workshop_replay"' && echo "PASS" || echo "FAIL"
 ```
 
 ### copy-pass (run before any page goes live)
