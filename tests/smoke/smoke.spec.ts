@@ -117,10 +117,10 @@ test('J5 paid path: shop Stripe links present; Workshop Replay link present on i
     'Defense Workshop Stripe link').toBeVisible();
   await page.screenshot({ path: `tests/smoke/artifacts/j5-shop-${SMOKE_TS}.png` });
 
-  // Workshop Replay sales page — its own buy link
+  // Workshop Replay sales page — data-checkout button wired to USD Checkout Session
   await page.goto(smokeUrl('/workshop-replay'));
-  const replayLink = page.locator('a[href="https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p"]').first();
-  await expect(replayLink, 'Workshop Replay Stripe link on /workshop-replay').toBeVisible();
+  const replayBtn = page.locator('button[data-checkout="workshop_replay"]').first();
+  await expect(replayBtn, 'Workshop Replay buy button on /workshop-replay').toBeVisible();
   await page.screenshot({ path: `tests/smoke/artifacts/j5-workshop-replay-${SMOKE_TS}.png` });
 });
 

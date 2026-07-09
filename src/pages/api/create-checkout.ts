@@ -26,7 +26,7 @@ const PRODUCTS: Record<string, ProductConfig> = {
     cancelPath: '/shadowboxing-blueprint',
   },
   workshop_replay: {
-    priceId: 'price_1Tb1ILHzlarU775H0NVAhRgb',
+    priceId: 'price_1TaFZPHzlarU775HLnMC6yNB',
     mode: 'payment',
     successPath: '/thank-you/workshop-replay',
     cancelPath: '/workshop-replay',

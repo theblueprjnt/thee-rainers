@@ -61,6 +61,43 @@ These were test-code issues, not production bugs:
 
 ---
 
+## Part A — Money Path Audit (2026-07-08)
+
+### A2 — Email_Events Airtable table (DONE)
+Table `Email_Events` created in base `applzsBz15zEAua4s` (THEE_RAINERS_HUB).
+Table ID: `tblOV5M1FGzHGopbJ`. Fields: `Event` (text), `Email` (text), `Message_ID` (text), `Timestamp` (text).
+Schema is an exact match to `src/pages/api/resend-webhook.ts` field writes.
+Resend must have the webhook endpoint registered at `https://theerainers.com/api/resend-webhook` pointing to this CF Worker for rows to appear.
+
+### A3 — Airtable base confirmation (CONFIRMED)
+All handlers (`lead-capture.ts`, `stripe-webhook.ts`, `resend-webhook.ts`) read `e['AIRTABLE_BASE_ID']` from the CF env. No hardcoded base IDs. Live test confirmed `AIRTABLE_BASE_ID` resolves to `applzsBz15zEAua4s` (THEE_RAINERS_HUB), not the template base. If the env var were wrong, upserts and logs would silently 404 against a wrong base ID.
+
+### A1 — Workshop Replay USD price (BLOCKED — Rainers action required)
+`create-checkout.ts` `workshop_replay.priceId` is `price_1Tb1ILHzlarU775H0NVAhRgb` — Stripe returns "No such price" for this ID.
+Shadowboxing (`price_1Tb1DHHzlarU775HIzI4fY8r`) is valid and returns a live USD Checkout Session.
+Current `/workshop-replay` buttons use EUR Payment Link `https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p`. US buyers see $47. EU browsers see ~$56.87 with VAT added by Stripe.
+
+**Rainers must do in Stripe Dashboard before code can be updated:**
+1. Products > find Workshop Replay (`prod_UZOMBOeJ0mm15I`)
+2. Add price: One-time · USD · $47.00
+3. Copy the new `price_1...` ID
+4. Provide the ID — code changes to `create-checkout.ts` and `workshop-replay.astro` are ready to apply once the ID exists
+
+**Code changes pending (do not deploy until ID is provided):**
+- `create-checkout.ts`: update `workshop_replay.priceId` to the new USD price ID
+- `workshop-replay.astro`: convert all three `<a href="https://buy.stripe.com/6oUaEX7hp6Xk3LIdww6J20p">` to `<button data-checkout="workshop_replay">` with `type="button"` and red CTA styling
+- `smoke.spec.ts` J5: update assertion from `a[href="...6J20p"]` to `button[data-checkout="workshop_replay"]`
+
+### Money path broadcast silence
+Last broadcast to Kit list: 77 days before 2026-07-08 (no sends since ~April 22 2026).
+No purchases in Airtable Members table (zero rows confirmed). No Kit buyer tags assigned.
+Both the free opt-in path (Kit tag `Footwork_lead`) and the paid path (Kit tag `Member`) are wired correctly in code. The wire just has not been fired by a real buyer yet.
+
+### Resend webhook registration — UNVERIFIED
+`/api/resend-webhook` endpoint exists and deploys correctly. Whether Resend's dashboard has this URL registered as a webhook is UNVERIFIED. Without registration, Email_Events rows will never appear regardless of email sends. Rainers must confirm in Resend dashboard: Settings > Webhooks > verify `https://theerainers.com/api/resend-webhook` is listed for `email.delivered`, `email.bounced`, `email.complained` events.
+
+---
+
 ## Env Contract
 
 Script: `scripts/check-env-contract.sh`
