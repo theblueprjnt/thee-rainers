@@ -300,12 +300,14 @@ const DELIVERY_SUBJECTS: Record<string, string> = {
   'greatness':       'You are in.',
 };
 
-function buildDeliveryHtml(slug: string, url: string, url2: string | null, env?: Record<string, string>): string {
+function buildDeliveryHtml(slug: string, url: string, url2: string | null, email: string, env?: Record<string, string>): string {
+  const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
   const wrap = (inner: string) =>
     `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
     `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
     inner +
-    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#E11D2A;">rainers@theerainers.com</a></p>` +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#E11D2A;">rainers@theerainers.com</a></p>` +
+    `<p style="font-size:11px;text-align:center;margin:0;"><a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p>` +
     `</div>`;
 
   const btn = (href: string, label: string) =>
@@ -367,6 +369,7 @@ async function sendResendDelivery(
   if (!resendKey || !url) return;
   const subject = DELIVERY_SUBJECTS[slug] ?? 'Your purchase from Thee Rainers';
   try {
+    const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
@@ -374,7 +377,11 @@ async function sendResendDelivery(
         from: 'Thee Rainers <rainers@theerainers.com>',
         to: [email],
         subject,
-        html: buildDeliveryHtml(slug, url, url2, env),
+        html: buildDeliveryHtml(slug, url, url2, email, env),
+        headers: {
+          'List-Unsubscribe': `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${unsubUrl}>`,
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+        },
       }),
     });
     if (!res.ok) {

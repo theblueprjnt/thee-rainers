@@ -204,11 +204,15 @@ ${FUNNEL_MAP}`,
   },
 ];
 
-function wrapEmail(body: string): string {
-  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">${body}</div>`;
+function wrapEmail(body: string, email = '', siteUrl = 'https://theerainers.com'): string {
+  const unsubUrl = `${siteUrl}/api/unsubscribe?email=${encodeURIComponent(email)}`;
+  const unsubFooter = email
+    ? `<div style="border-top:1px solid #eee;margin:32px 0 0;padding:16px 0 0;text-align:center;"><p style="font-size:11px;color:#ccc;margin:0;">You received this because you opted in at theerainers.com. <a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p></div>`
+    : '';
+  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">${body}${unsubFooter}</div>`;
 }
 
-async function sendResendWelcome(resendKey: string, email: string, source: string): Promise<void> {
+async function sendResendWelcome(resendKey: string, email: string, source: string, siteUrl = 'https://theerainers.com'): Promise<void> {
   const cfg = WELCOME_CONFIG[resolveEmailSource(source)];
   if (!resendKey || !cfg) return;
 
@@ -217,7 +221,7 @@ async function sendResendWelcome(resendKey: string, email: string, source: strin
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: cfg.subject, html: wrapEmail(cfg.body) }),
+      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: cfg.subject, html: wrapEmail(cfg.body, email, siteUrl), headers: { 'List-Unsubscribe': `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${siteUrl}/api/unsubscribe?email=${encodeURIComponent(email)}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } }),
     });
     if (!res.ok) console.error('[lead-capture] Resend welcome failed', res.status, await res.text());
     else console.log('[lead-capture] Resend welcome sent', { source });
@@ -231,10 +235,11 @@ async function sendResendWelcome(resendKey: string, email: string, source: strin
   // Schedule sequence emails — fires at opt-in, Resend delivers on schedule
   for (const seq of SEQUENCE) {
     const scheduledAt = new Date(Date.now() + seq.delayDays * 24 * 60 * 60 * 1000).toISOString();
+    const unsubLink = `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${siteUrl}/api/unsubscribe?email=${encodeURIComponent(email)}>`;
     fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: seq.subject, html: wrapEmail((seq.preview ? `<div style="display:none;max-height:0;overflow:hidden;">${seq.preview}</div>` : '') + seq.body), scheduled_at: scheduledAt }),
+      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: seq.subject, html: wrapEmail((seq.preview ? `<div style="display:none;max-height:0;overflow:hidden;">${seq.preview}</div>` : '') + seq.body, email, siteUrl), scheduled_at: scheduledAt, headers: { 'List-Unsubscribe': unsubLink, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } }),
     }).then(async r => {
       if (!r.ok) console.error('[lead-capture] Resend schedule failed day', seq.delayDays, r.status, await r.text());
       else console.log('[lead-capture] Resend scheduled day', seq.delayDays, 'for', email);
@@ -410,7 +415,7 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
   // All background I/O registered with waitUntil so Cloudflare keeps the
   // Worker alive until every promise settles — not killed on response return.
   waitUntil(Promise.all([
-    sendResendWelcome(resendKey, email, source).catch(() => {}),
+    sendResendWelcome(resendKey, email, source, e['SITE_URL'] ?? 'https://theerainers.com').catch(() => {}),
     kitKey && kitTagId
       ? kitApplyTag(kitKey, email, full_name, kitTagId).catch((err) =>
           console.warn('[lead-capture] Kit tag failed', { emailLog, err: String(err) }),

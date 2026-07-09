@@ -13,7 +13,7 @@
 :root {
   --paper:    #FFFFFF;
   --ink:      #0A0A0A;
-  --ink-soft: #6B7280;
+  --ink-soft: #667280;
   --red:      #E11D2A;
   --blue:     #2348C6;
   --purple:   #7C3AED;
@@ -22,7 +22,7 @@
 @theme {
   --color-paper:    #FFFFFF;
   --color-ink:      #0A0A0A;
-  --color-ink-soft: #6B7280;
+  --color-ink-soft: #667280;
   --color-red:      #E11D2A;
   --color-blue:     #2348C6;
   --color-purple:   #7C3AED;
