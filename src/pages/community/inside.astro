@@ -8,20 +8,20 @@ import Layout from '../../layouts/Base.astro';
   </Fragment>
 
   <section class="bg-white min-h-screen px-6 md:px-12 lg:px-20 pt-28 md:pt-36 pb-20">
-    <div class="max-w-[640px] mx-auto">
+    <div class="max-w-[520px] mx-auto">
 
-      <!-- Gate — shown until verified -->
-      <div id="gate" class="">
+      <!-- Request state -->
+      <div id="gate">
         <p class="text-[var(--purple)] text-[11px] tracking-widest uppercase mb-6">Member Area</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6"
           style="font-size: clamp(2rem, 4.5vw, 3rem);">
-          Enter your<br/>member email.
+          Access your<br/>recordings.
         </h1>
-        <p class="text-[#0A0A0A]/45 text-sm leading-relaxed mb-10">
-          Use the email address you signed up with. We'll confirm your membership and let you in.
+        <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-10">
+          Enter the email address you joined with. We'll send you a link to the session recordings.
         </p>
 
-        <form id="gate-form" class="flex flex-col gap-4 max-w-[400px]">
+        <form id="gate-form" class="flex flex-col gap-4 max-w-[380px]">
           <input
             id="gate-email"
             type="email"
@@ -32,64 +32,34 @@ import Layout from '../../layouts/Base.astro';
           />
           <button type="submit" id="gate-btn"
             class="inline-flex items-center justify-center rounded-none disabled:opacity-40 bg-[var(--purple)] text-white font-bold px-8 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-            Verify Access →
+            Send Access Link →
           </button>
-          <p id="gate-error" class="text-red-500 text-xs hidden">No active membership found for that email. <a href="/community" class="underline font-bold">Join the Community →</a></p>
+          <p id="gate-error" class="text-[var(--red)] text-xs hidden">
+            No active membership found for that email.
+            <a href="/community" class="underline font-bold">Join the Community →</a>
+          </p>
         </form>
       </div>
 
-      <!-- Member content — hidden until verified -->
-      <div id="member-content" class="hidden">
-        <div class="mb-10 flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full bg-[#22C55E]"></div>
-          <p class="text-[var(--purple)] text-[11px] tracking-widest uppercase">Access Confirmed</p>
+      <!-- Success state -->
+      <div id="gate-success" class="hidden">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-2 h-2 rounded-full bg-[#22C55E]" aria-hidden="true"></div>
+          <p class="text-[var(--purple)] text-[11px] tracking-widest uppercase">Link sent</p>
         </div>
-
-        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-10"
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6"
           style="font-size: clamp(2rem, 4.5vw, 3rem);">
-          Welcome back.
+          Check your inbox.
         </h1>
+        <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">
+          A link to the session recordings is on the way. Check spam if you don't see it in a few minutes.
+        </p>
+      </div>
 
-        <div class="flex flex-col divide-y divide-[#0A0A0A]/8 mb-12">
-
-          <div class="py-6">
-            <p class="text-[var(--purple)] text-[10px] tracking-widest uppercase mb-2">Weekly Session</p>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">The Proving Ground</h3>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-4">Live every week. Session date, Zoom link, and prep instructions are sent to your email before each session. Check your inbox for the next one.</p>
-            <a href="mailto:rainers@theerainers.com?subject=Next%20Proving%20Ground%20Date"
-              class="text-[var(--purple)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
-              Email for next session details →
-            </a>
-          </div>
-
-          <div class="py-6">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Always On</p>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">Drill Library</h3>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-4">The full structured drill archive. Every session filed by lever. Work what's weak.</p>
-            <a href="/library"
-              class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
-              Browse Library →
-            </a>
-          </div>
-
-          <div class="py-6">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Free</p>
-            <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">The Footwork Blueprint</h3>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-4">The Footwork Blueprint and the 7-lever audit are free. Run them alongside your Proving Ground work to track structural progress.</p>
-            <div class="flex gap-6">
-              <a href="/foundation" class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">Get the Blueprint →</a>
-              <a href="/lever-audit-quiz" class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">7-Lever Audit →</a>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="pt-8 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p class="text-[#0A0A0A]/30 text-xs leading-relaxed">
-            Questions? <a href="mailto:rainers@theerainers.com" class="text-[var(--blue)] hover:opacity-60 transition-opacity font-bold">rainers@theerainers.com</a>
-          </p>
-          <a href="/shop" class="text-[#0A0A0A]/30 text-xs tracking-widest uppercase font-bold hover:text-[#0A0A0A]/60 transition-colors whitespace-nowrap">Browse Shop →</a>
-        </div>
+      <div class="mt-16 pt-8 border-t border-[#0A0A0A]/8">
+        <p class="text-[#0A0A0A]/30 text-xs leading-relaxed">
+          Questions? <a href="mailto:rainers@stepintoring.com" class="text-[var(--blue)] hover:opacity-60 transition-opacity font-bold">rainers@stepintoring.com</a>
+        </p>
       </div>
 
     </div>
@@ -98,14 +68,15 @@ import Layout from '../../layouts/Base.astro';
 </Layout>
 
 <script>
-  function initCommunityGate() {
-    const form = document.getElementById('gate-form') as HTMLFormElement | null;
+  function initGate() {
+    const form    = document.getElementById('gate-form') as HTMLFormElement | null;
     if (!form || form.dataset.bound === 'true') return;
     form.dataset.bound = 'true';
-    const btn = document.getElementById('gate-btn') as HTMLButtonElement;
-    const errorEl = document.getElementById('gate-error') as HTMLElement;
-    const gate = document.getElementById('gate') as HTMLElement;
-    const memberContent = document.getElementById('member-content') as HTMLElement;
+
+    const btn      = document.getElementById('gate-btn') as HTMLButtonElement;
+    const errorEl  = document.getElementById('gate-error') as HTMLElement;
+    const gate     = document.getElementById('gate') as HTMLElement;
+    const success  = document.getElementById('gate-success') as HTMLElement;
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -113,29 +84,31 @@ import Layout from '../../layouts/Base.astro';
       if (!email) return;
       errorEl.classList.add('hidden');
       btn.disabled = true;
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<svg class="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg> Checking...';
+      const original = btn.textContent;
+      btn.textContent = 'Sending...';
+
       try {
-        const res = await fetch('/api/community-access', {
+        const res  = await fetch('/api/community-magic-link', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email }),
         });
-        const data = await res.json() as { access: boolean };
-        if (data.access) {
+        const data = await res.json() as { ok: boolean; reason?: string };
+
+        if (data.ok) {
           gate.classList.add('hidden');
-          memberContent.classList.remove('hidden');
+          success.classList.remove('hidden');
         } else {
           errorEl.classList.remove('hidden');
           btn.disabled = false;
-          btn.innerHTML = originalText;
+          btn.textContent = original;
         }
       } catch {
         btn.disabled = false;
-        btn.innerHTML = originalText;
+        btn.textContent = original;
       }
     });
   }
 
-  initCommunityGate();
+  initGate();
 </script>

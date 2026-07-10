@@ -48,7 +48,8 @@ const KIT_COMMUNITY_SEQ_ID  = '2813705'; // Greatness Community Welcome — 3 em
 const KIT_BUNDLE_SEQ_ID     = '2813702'; // Bundle Buyer Nurture — 5 emails, D+0/2/5/9/14
 const KIT_WINBACK_SEQ_ID    = '2822141'; // Greatness Win-back — 2 emails, D+3/10
 
-const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
+const SEVEN_DAYS_SECONDS  = 7 * 24 * 60 * 60;
+const THIRTY_DAYS_SECONDS = 30 * 24 * 60 * 60;
 const SITE_URL = 'https://theerainers.com';
 
 // ── GA4 product catalog ────────────────────────────────────────────────────
@@ -291,6 +292,13 @@ async function generateWatchUrl(secret: string, product: string): Promise<string
   return `${SITE_URL}/watch/${product}?sig=${sig}&exp=${exp}`;
 }
 
+async function generateCommunityMagicLink(secret: string): Promise<string> {
+  const exp    = Math.floor(Date.now() / 1000) + THIRTY_DAYS_SECONDS;
+  const sigBuf = await hmacBuf(new TextEncoder().encode(secret), `community-access:${exp}`);
+  const sig    = Array.from(new Uint8Array(sigBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  return `${SITE_URL}/community?sig=${sig}&exp=${exp}#recordings`;
+}
+
 // ── delivery email via Resend ──────────────────────────────────────────────
 
 const DELIVERY_SUBJECTS: Record<string, string> = {
@@ -333,21 +341,17 @@ function buildDeliveryHtml(slug: string, url: string, url2: string | null, email
     );
   }
   if (slug === 'greatness') {
-    const chatInvite = env?.['COMMUNITY_CHAT_INVITE'] ?? '';
-    const chatLine = chatInvite
-      ? `<p style="margin:0 0 24px;"><a href="${chatInvite}" style="display:inline-block;background:#7C3AED;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Join Community Chat →</a></p>`
-      : `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 24px;">Community chat invite and Zoom link for the next session will follow in a separate email.</p>`;
     return wrap(
       `<p style="font-size:15px;line-height:1.6;margin:0 0 8px;">You are in.</p>` +
       `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">Your Greatness Community membership is active.</p>` +
-      btn(url, 'Enter the Member Area') +
+      btn(url, 'Access Member Area') +
       `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">What happens next</p>` +
-      `<table style="width:100%;border-collapse:collapse;margin:0 0 24px;">` +
-      `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;width:60%;">The Proving Ground</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;">Weekly live — date and Zoom in next email</td></tr>` +
-      `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;">Drill Library</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;"><a href="https://theerainers.com/library" style="color:#E11D2A;">theerainers.com/library</a></td></tr>` +
-      `<tr><td style="padding:10px 0;font-size:13px;color:#0A0A0A;">Manage / cancel</td><td style="padding:10px 0;font-size:12px;color:#888;text-align:right;">Via Customer Portal — link in member area</td></tr>` +
-      `</table>` +
-      chatLine,
+      `<table style="width:100%;border-collapse:collapse;margin:0 0 16px;">` +
+      `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;width:60%;">Tuesday Checkpoint</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;">Live on Google Meet, 3pm ET every Tuesday</td></tr>` +
+      `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;">Weekly drill</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;">Sent by email each week</td></tr>` +
+      `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;">Session recordings</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;">In the member area after each session</td></tr>` +
+      `<tr><td style="padding:10px 0;font-size:13px;color:#0A0A0A;">Manage / cancel</td><td style="padding:10px 0;font-size:12px;color:#888;text-align:right;">Via Customer Portal, link in member area</td></tr>` +
+      `</table>`,
     );
   }
   // footwork or shadowboxing
@@ -442,7 +446,16 @@ async function deliverProduct(email: string, productId: string, e: Record<string
       catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
     }
   } else if (productSlug === 'greatness') {
-    expiringUrl = `${SITE_URL}/community/inside`;
+    const watchSecret = e['WATCH_TOKEN_SECRET'] ?? '';
+    if (watchSecret) {
+      try { expiringUrl = await generateCommunityMagicLink(watchSecret); }
+      catch (err) {
+        console.error('[stripe-webhook] Community magic link error:', String(err));
+        expiringUrl = `${SITE_URL}/community/inside`;
+      }
+    } else {
+      expiringUrl = `${SITE_URL}/community/inside`;
+    }
   } else {
     const objectKeys = ASSET_MAP[productSlug] ?? [];
     const r2AccountId = e['R2_ACCOUNT_ID'] ?? '';

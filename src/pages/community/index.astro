@@ -1,5 +1,33 @@
 ---
+export const prerender = false;
 import Layout from '../../layouts/Base.astro';
+import { env as cfEnv } from 'cloudflare:workers';
+
+const e       = cfEnv as unknown as Record<string, string>;
+const secret  = e['WATCH_TOKEN_SECRET'] ?? '';
+const sig     = Astro.url.searchParams.get('sig') ?? '';
+const expParam = Astro.url.searchParams.get('exp') ?? '';
+
+let memberVerified = false;
+if (secret && sig && expParam) {
+  const expNum = parseInt(expParam, 10);
+  if (!isNaN(expNum) && expNum > Math.floor(Date.now() / 1000)) {
+    const key = await crypto.subtle.importKey(
+      'raw', new TextEncoder().encode(secret),
+      { name: 'HMAC', hash: 'SHA-256' }, false, ['sign'],
+    );
+    const sigBuf  = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`community-access:${expParam}`));
+    const expected = Array.from(new Uint8Array(sigBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    memberVerified = sig === expected;
+  }
+}
+
+// ── Add new recordings here after each Tuesday session (most recent first, keep 3 max) ──
+// { date: 'Jul 15, 2026', url: 'https://youtu.be/YOUR_UNLISTED_ID' },
+const RECORDINGS: Array<{ date: string; url: string }> = [
+];
+const latestRecording = RECORDINGS[0] ?? null;
+const recentRecordings = RECORDINGS.slice(0, 3);
 ---
 <Layout
   title="Greatness Community · Thee Rainers"
@@ -30,7 +58,7 @@ import Layout from '../../layouts/Base.astro';
           Become an athlete<br/>from day one.
         </h1>
         <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">
-          You put in the work. The question is whether it is the right work. Every week, someone who can see what you cannot looks at your movement and tells you what to fix.
+          Weekly training structure for people who train seriously and want feedback to know the work is right.
         </p>
 
         <div class="flex flex-col gap-3 max-w-[380px]">
@@ -214,6 +242,55 @@ import Layout from '../../layouts/Base.astro';
       <p class="text-[#0A0A0A]/60 text-xs mt-6 max-w-[480px]">Membership renews automatically. Cancel anytime, no lock-in. Cancel before your next billing date and you will not be charged again. <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/80">Refund Policy</a></p>
     </div>
   </section>
+
+  <!-- SESSION RECORDINGS: member only, server-side rendered when token valid -->
+  {memberVerified && (
+    <section id="recordings" class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+      <div class="max-w-[640px]">
+
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-2 h-2 rounded-full bg-[#22C55E] shrink-0" aria-hidden="true"></div>
+          <p class="text-[var(--purple)] text-[11px] tracking-widest uppercase">Member Area</p>
+        </div>
+
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-3"
+          style="font-size: clamp(1.6rem, 3vw, 2rem);">
+          Session Recordings
+        </h2>
+        <p class="text-[#0A0A0A]/60 text-sm mb-10">Recordings from past Checkpoints are available here.</p>
+
+        {latestRecording ? (
+          <>
+            <a href={latestRecording.url} target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center justify-center w-full sm:w-auto font-bold text-white px-8 py-4 text-sm tracking-widest uppercase transition-opacity hover:opacity-85 mb-10"
+              style="background: var(--red);">
+              Watch Latest Recording →
+            </a>
+
+            {recentRecordings.length > 0 && (
+              <ul class="flex flex-col divide-y divide-[#0A0A0A]/8">
+                {recentRecordings.map(r => (
+                  <li class="flex items-center justify-between py-5 gap-6">
+                    <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight">
+                      {r.date} · Checkpoint
+                    </p>
+                    <a href={r.url} target="_blank" rel="noopener noreferrer"
+                      class="text-[var(--purple)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity shrink-0">
+                      Watch Recording →
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        ) : (
+          <p class="text-[#0A0A0A]/40 text-sm">No recordings yet. The first one appears after Tuesday's Checkpoint.</p>
+        )}
+
+        <p class="text-[#0A0A0A]/35 text-xs mt-10">New recordings are added after each Tuesday session.</p>
+      </div>
+    </section>
+  )}
 
   <!-- CLOSING -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
