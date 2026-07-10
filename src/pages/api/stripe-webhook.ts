@@ -6,13 +6,24 @@ import { env as cfEnv } from 'cloudflare:workers';
 import { sendTelegramAlert } from '../../lib/telegram';
 
 // ── product map ────────────────────────────────────────────────────────────
-// Replace prod_Uaz6EzELZP6j0V after creating the product in Stripe Dashboard.
 const PRODUCT_MAP: Record<string, string> = {
   'prod_UZreHroYQEDAFU': 'bundle',
   'prod_UZrejf6iuDorEA': 'footwork',
   'prod_UZreDlek9325EY': 'shadowboxing',
   'prod_UZOMBOeJ0mm15I': 'workshop-replay',
   'prod_Uaz6EzELZP6j0V': 'greatness',
+};
+
+// Fallback: checkout session metadata.lookup_key -> slug
+// Used when the product ID is unknown or a placeholder. Source of truth is
+// the lookup_key set in create-checkout.ts at session creation time.
+const LOOKUP_KEY_MAP: Record<string, string> = {
+  'greatness_monthly': 'greatness',
+  'greatness_annual':  'greatness',
+  'workshop_replay':   'workshop-replay',
+  'footwork':          'footwork',
+  'shadowboxing':      'shadowboxing',
+  'bundle':            'bundle',
 };
 
 // ── asset map ──────────────────────────────────────────────────────────────
@@ -431,9 +442,9 @@ async function sendResendDelivery(
 
 // ── delivery ───────────────────────────────────────────────────────────────
 
-async function deliverProduct(email: string, productId: string, e: Record<string, string>): Promise<void> {
+async function deliverProduct(email: string, productId: string, e: Record<string, string>, slugHint?: string): Promise<void> {
   const token       = generateToken();
-  const productSlug = PRODUCT_MAP[productId] ?? 'unknown';
+  const productSlug = slugHint ?? PRODUCT_MAP[productId] ?? 'unknown';
   let expiringUrl: string | null  = null;
   let expiringUrl2: string | null = null;
 
@@ -548,8 +559,8 @@ export async function POST({ request }: APIContext): Promise<Response> {
       if (!email || !productId) {
         console.error('[stripe-webhook] checkout.session.completed missing email or productId', { sessionId: session.id, email: !!email, productId: !!productId });
       } else {
-        const slug = PRODUCT_MAP[productId];
-        await deliverProduct(email, productId, e);
+        const slug = PRODUCT_MAP[productId] ?? LOOKUP_KEY_MAP[session.metadata?.lookup_key ?? ''];
+        await deliverProduct(email, productId, e, slug);
         // Telegram sale alert
         sendTelegramAlert(
           e['TELEGRAM_BOT_TOKEN'] ?? '',
