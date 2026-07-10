@@ -124,6 +124,54 @@ All 6 legal pages (Privacy, Terms, Refund, Cookie, Accessibility, Disclaimer) li
 
 ---
 
+## Brief C — Community Retention Engine (2026-07-10, commits 9dd7d0f + 00880b3)
+
+### C1 — Annual lever (DONE, commit 9dd7d0f)
+Badge on annual pricing card: "Saves 2 Months" → "Save $78".
+Added subhead in purple: "Two months free vs monthly" directly below the $32.50/month breakdown line.
+
+### C2 — E6 Instant access (CONFIRMED, no code change)
+`community-access.ts` checks Airtable for `{Email}=email AND {Product}="greatness"` with Status in ('active', 'trialing', 'past_due').
+`stripe-webhook.ts` upserts Airtable with Status='active' on `checkout.session.completed`. Access is instant.
+UNVERIFIED: No live Greatness purchase has occurred to confirm end-to-end. Requires a paid member.
+
+### C3 — Welcome sequence rebuild (DONE, 2026-07-10)
+Seq 2813705 rebuilt. All 3 emails updated via Kit API (published: true confirmed in API response).
+- Email 10031138 (D+1): Short welcome. First action: theerainers.com/library, Stance section, one drill. Session time stated. Support line.
+- Email 10031148 (D+2): Drill library directive. Find the broken lever. Run one drill before Saturday.
+- Email 10031155 (D+4): Pre-session prep. Come with one specific thing. Camera on. Bring the question raised by drilling.
+
+### C4 — E7/E8 Attendance tagging (DONE, commit 00880b3)
+Kit tags created: Community_Attended (21027824), Community_Returned (21027825).
+Endpoint `GET /api/session-checkin?email=` logic:
+- Must have KIT_MEMBER_TAG (19807647) — rejects non-members
+- No Community_Attended: adds it (E7, first-session activated)
+- Has Community_Attended, no Community_Returned: adds it (E8, return-ritual confirmed)
+- Has both: returns "Already checked in."
+Check-in link for reminder emails: `https://theerainers.com/api/session-checkin?email={{ subscriber.email }}`
+UNVERIFIED: Requires a live member to click the personalized link. Kit liquid tag `{{ subscriber.email }}` must resolve in Kit email sends.
+
+### C5 — Flows (DONE, 2026-07-10)
+Three Kit sequences created:
+
+**Community Session Reminder** (seq 2822600, email 10064213)
+- Trigger: Rainers adds all members to this sequence each Friday before the session
+- Email D+0: "Session tomorrow. 10am ET." — includes [ZOOM LINK] placeholder + personalized check-in link
+- Action required: Rainers pastes Zoom link before adding members each Friday
+
+**Community Session Recap** (seq 2822601, email 10064214)
+- Trigger: Rainers adds all members to this sequence after each session (Saturday/Sunday)
+- Email D+0: "From today's session." — includes [LINK] and [CORRECTION] placeholders
+- Action required: Rainers fills in recording link and correction before adding members
+
+**Community Inactivity Nudge** (seq 2822602, emails 10064215-10064217)
+- Trigger: Rainers manually adds a member after they miss 2 consecutive sessions (~14 days no check-in)
+- Email D+0: "We have not seen you." — invitation back, no guilt
+- Email D+7: "Still here." — brief, no pressure
+- Email D+14: "Last one on this." — come back or cancel, no friction
+
+---
+
 ## Env Contract
 
 Script: `scripts/check-env-contract.sh`
