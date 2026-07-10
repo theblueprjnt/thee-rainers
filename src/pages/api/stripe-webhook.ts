@@ -46,6 +46,7 @@ const BLUEPRINT_TRIAL_SLUGS = new Set(['footwork', 'shadowboxing', 'bundle']);
 const KIT_REPLAY_SEQ_ID     = '2813703'; // Workshop Replay Buyer — 3 emails, D+2/7/14
 const KIT_COMMUNITY_SEQ_ID  = '2813705'; // Greatness Community Welcome — 3 emails, D+1/3/7
 const KIT_BUNDLE_SEQ_ID     = '2813702'; // Bundle Buyer Nurture — 5 emails, D+0/2/5/9/14
+const KIT_WINBACK_SEQ_ID    = '2822141'; // Greatness Win-back — 2 emails, D+3/10
 
 const SEVEN_DAYS_SECONDS = 7 * 24 * 60 * 60;
 const SITE_URL = 'https://theerainers.com';
@@ -358,6 +359,36 @@ function buildDeliveryHtml(slug: string, url: string, url2: string | null, email
   );
 }
 
+function buildPaymentFailedHtml(portalUrl: string, email: string): string {
+  const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
+  return (
+    `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
+    `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
+    `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Your payment was declined.</p>` +
+    `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">Your Greatness Community access is preserved for the next 7 days while the charge retries.</p>` +
+    `<p style="margin:0 0 24px;"><a href="${portalUrl}" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">UPDATE YOUR CARD</a></p>` +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">If you meant to cancel, ignore this. No charge will be made after retries are exhausted.</p>` +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#E11D2A;">rainers@theerainers.com</a></p>` +
+    `<p style="font-size:11px;text-align:center;margin:0;"><a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p>` +
+    `</div>`
+  );
+}
+
+function buildCanceledHtml(email: string): string {
+  const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
+  return (
+    `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
+    `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
+    `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Before you go.</p>` +
+    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 8px;">One question: what made you leave the Greatness Community?</p>` +
+    `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">Reply to this email. One sentence. I read every reply.</p>` +
+    `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 16px;">If you want back in: <a href="${SITE_URL}/community" style="color:#E11D2A;">${SITE_URL}/community</a></p>` +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Rainers</p>` +
+    `<p style="font-size:11px;text-align:center;margin:0;"><a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p>` +
+    `</div>`
+  );
+}
+
 async function sendResendDelivery(
   resendKey: string,
   email: string,
@@ -465,6 +496,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
   const airtableToken = e['AIRTABLE_API_KEY'] ?? '';
   const airtableBase  = e['AIRTABLE_BASE_ID'] ?? '';
   const airtableTable = e['AIRTABLE_TABLE'] ?? 'Members';
+  const resendKey     = e['RESEND_API_KEY'] ?? '';
 
   if (!webhookSecret || !stripeKey) {
     console.error('[stripe-webhook] Missing env vars');
@@ -587,6 +619,63 @@ export async function POST({ request }: APIContext): Promise<Response> {
             actualValue: amountCents != null ? amountCents / 100 : undefined,
           });
         }
+        // E11 — restore active status in Airtable (renewal and payment recovery)
+        await upsertAirtable(airtableToken, airtableBase, airtableTable, {
+          Email: email,
+          Status: 'active',
+          'Stripe Customer': typeof invoice.customer === 'string' ? invoice.customer : '',
+          'Stripe Subscription': subId ?? '',
+        });
+        if (kitKey) await tagKit(kitKey, email, KIT_MEMBER_TAG);
+      }
+    }
+
+    // ── payment failure — E10 ─────────────────────────────────────────────
+    if (event.type === 'invoice.payment_failed') {
+      const invoice = event.data.object as Stripe.Invoice;
+      if (invoice.subscription) {
+        const email = invoice.customer_email ?? '';
+        const customerId = typeof invoice.customer === 'string' ? invoice.customer : '';
+        if (email) {
+          await upsertAirtable(airtableToken, airtableBase, airtableTable, {
+            Email: email,
+            Status: 'payment_failed',
+            'Stripe Customer': customerId,
+            'Stripe Subscription': typeof invoice.subscription === 'string' ? invoice.subscription : '',
+          });
+        }
+        if (email && resendKey && customerId) {
+          let portalUrl = `${SITE_URL}/community`;
+          try {
+            const portal = await stripe.billingPortal.sessions.create({
+              customer: customerId,
+              return_url: `${SITE_URL}/community`,
+            });
+            portalUrl = portal.url;
+          } catch (err) {
+            console.warn('[stripe-webhook] E10 portal session unavailable, using fallback:', String(err));
+          }
+          try {
+            const emailRes = await fetch('https://api.resend.com/emails', {
+              method: 'POST',
+              headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                from: 'Thee Rainers <rainers@theerainers.com>',
+                to: [email],
+                subject: 'Your payment was declined.',
+                html: buildPaymentFailedHtml(portalUrl, email),
+                headers: {
+                  'List-Unsubscribe': `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}>`,
+                  'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+                },
+              }),
+            });
+            if (!emailRes.ok) console.error('[stripe-webhook] E10 Resend failed', emailRes.status, await emailRes.text());
+            else console.log('[stripe-webhook] E10 card-update email sent', email.replace(/(.).*(@.*)/, '$1***$2'));
+          } catch (err) {
+            console.error('[stripe-webhook] E10 Resend error:', String(err));
+          }
+        }
       }
     }
 
@@ -626,6 +715,32 @@ export async function POST({ request }: APIContext): Promise<Response> {
         'Stripe Subscription': sub.id,
       });
       if (email) await untagKit(kitKey, email, KIT_MEMBER_TAG);
+      // E12 — why-you-left email + win-back Kit sequence
+      if (email && resendKey) {
+        try {
+          const wlRes = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              from: 'Rainers <rainers@theerainers.com>',
+              to: [email],
+              subject: 'Before you go.',
+              html: buildCanceledHtml(email),
+              headers: {
+                'List-Unsubscribe': `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}>`,
+                'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+              },
+            }),
+          });
+          if (!wlRes.ok) console.error('[stripe-webhook] E12 email failed', wlRes.status, await wlRes.text());
+          else console.log('[stripe-webhook] E12 why-left email sent', email.replace(/(.).*(@.*)/, '$1***$2'));
+        } catch (err) {
+          console.error('[stripe-webhook] E12 email error:', String(err));
+        }
+      }
+      if (email && kitKey && KIT_WINBACK_SEQ_ID) {
+        await addToKitSequence(kitKey, email, KIT_WINBACK_SEQ_ID).catch(() => {});
+      }
     }
 
   } catch (err) {

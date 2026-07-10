@@ -96,6 +96,34 @@ Welcome email and full nurture sequence fire correctly for every new opt-in. Pri
 
 ---
 
+## Brief A — Deliverability, Compliance, Legal (2026-07-09, commit bd69290)
+
+### 1. RFC 8058 One-Click Unsubscribe — DONE
+`List-Unsubscribe` and `List-Unsubscribe-Post: List-Unsubscribe=One-Click` headers added to ALL Resend sends: welcome email, all 4 sequence emails (lead-capture.ts), all delivery emails (stripe-webhook.ts).
+In-body unsubscribe link added to all email footers via wrapEmail() and buildDeliveryHtml().
+`/api/unsubscribe` endpoint created: POST handles RFC 8058 one-click (calls Kit PATCH state=inactive), GET returns confirmation HTML page.
+
+### 2. Unsubscribe Honored Instantly — CODE DONE, UNVERIFIED (live test needed)
+Kit v4 PATCH to `state: inactive` fires on every unsubscribe request.
+Known limitation: Resend scheduled sequence emails already queued will still fire within their window. Kit stops all future sends immediately. Acceptable under CAN-SPAM 10-day rule.
+
+### 3. SPF/DKIM/DMARC
+- SPF: BROKEN (DNS only, code cannot fix). Current: `v=spf1 include:spf.privateemail.com include:spf.kit.com ~all`. Missing `include:spf.resend.com`. Rainers must add this in DNS panel.
+- DKIM Resend: CONFIRMED at `resend._domainkey.theerainers.com`
+- DKIM Kit: CANNOT VERIFY (no selector found)
+- DMARC: `p=none` (monitoring). Functional. Move to `p=quarantine` when confident.
+
+### 4. Legal Pages — CONFIRMED
+All 6 legal pages (Privacy, Terms, Refund, Cookie, Accessibility, Disclaimer) linked in footer. All return 307 redirect to HTTPS. Billing disclosure confirmed on /community line 186.
+
+### 5. Accessibility EAA — DONE
+- Footer social icons: /35 → /70 (1.88:1 → 5.94:1, passes 3:1 for UI)
+- Footer copyright + Legal label: /45 → /70 (2.75:1 → 5.94:1, passes 4.5:1)
+- ink-soft: #6B7280 → #667280. On cream (#F6F6F6): 4.47:1 → 4.54:1. On white: 4.83:1 → 4.90:1.
+- Scripture footer (/20, ~1.47:1): kept as decorative non-informational text.
+
+---
+
 ## Env Contract
 
 Script: `scripts/check-env-contract.sh`
