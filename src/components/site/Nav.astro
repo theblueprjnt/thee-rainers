@@ -9,7 +9,7 @@ const NAV_LINKS = [
 ---
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-[#0A0A0A]/8">
 
-  <!-- Announcement bar — state determined at runtime by JS -->
+  <!-- Announcement bar: state determined at runtime by JS -->
   <div id="tr-bar" style="display:none;" class="bg-[#0A0A0A] relative">
     <div class="max-w-[1140px] mx-auto px-6 py-2 flex items-center justify-center">
       <a id="tr-bar-pre" href="/workshop"
@@ -29,20 +29,21 @@ const NAV_LINKS = [
   </div>
 
   <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center gap-3 md:gap-6">
-    <a href="/" class="z-[60] flex items-center shrink-0" aria-label="Thee Rainers — home">
+    <a href="/" class="z-[60] flex items-center shrink-0" aria-label="Thee Rainers home">
       <picture>
         <source srcset="/images/logo-trb.webp" type="image/webp" />
         <img src="/images/logo-trb.png" alt="Thee Rainers" width="160" height="200" class="h-10 md:h-12 w-auto" />
       </picture>
     </a>
 
-    <!-- Free Blueprint CTA — primary entry, always visible -->
-    <a href="/foundation" data-nav-path="/foundation"
-      class="inline-flex items-center bg-[var(--red)] text-white font-bold tracking-widest uppercase
+    <!-- Community CTA: primary conversion path -->
+    <a href="/community" data-nav-path="/community"
+      class="inline-flex items-center text-white font-bold tracking-widest uppercase
              text-[9px] md:text-[10px] px-2.5 md:px-3 py-1.5 md:py-2 leading-none whitespace-nowrap
              transition-opacity duration-150 hover:opacity-80
-             focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2">
-      Get Blueprint · Free →
+             focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      style="background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);">
+      Community →
     </a>
 
     <nav class="hidden md:flex items-center gap-8 ml-auto" aria-label="Primary">
@@ -69,7 +70,7 @@ const NAV_LINKS = [
   <div id="menu-backdrop" class="tr-menu-backdrop" aria-hidden="true"></div>
 
   <div class="tr-menu-topbar">
-    <a href="/" class="flex items-center" aria-label="Thee Rainers — home">
+    <a href="/" class="flex items-center" aria-label="Thee Rainers home">
       <picture>
         <source srcset="/images/logo-trb.webp" type="image/webp" />
         <img src="/images/logo-trb.png" alt="Thee Rainers" width="160" height="200" class="h-10 w-auto" />
@@ -83,9 +84,9 @@ const NAV_LINKS = [
   </div>
 
   <nav class="tr-menu-body" aria-label="Site navigation">
-    <!-- Foundation — primary free offer -->
-    <a href="/foundation" data-nav-path="/foundation" class="tr-menu-cta" style="margin-top:0.5rem;background-color:var(--red);color:#FFFFFF;">
-      Get the Blueprint · Free →
+    <!-- Community: primary conversion path -->
+    <a href="/community" data-nav-path="/community" class="tr-menu-cta" style="margin-top:0.5rem;background:linear-gradient(135deg,#833ab4 0%,#fd1d1d 50%,#fcb045 100%);color:#FFFFFF;">
+      Community →
     </a>
 
     <ul class="flex flex-col mt-4">
