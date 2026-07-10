@@ -1,10 +1,9 @@
 ---
 import Layout from '../../layouts/Base.astro';
-import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
 ---
 <Layout
   title="Greatness Community · Thee Rainers"
-  description="The Weekly Session with Rainers. Live correction on your movement every week. Drill library, private community, session recordings. $39/month."
+  description="Weekly movement correction, a training drill on day one, a private group, and a path built layer by layer. $39/month."
 >
 
   <!-- HERO -->
@@ -23,23 +22,20 @@ import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
     <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[88vh]">
 
       <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Greatness Community · Founding Members</p>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Greatness Community</p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-8"
           style="font-size: clamp(2.8rem, 6vw, 4.5rem);">
-          Live with me.<br/>Every week.
+          Become an athlete<br/>from day one.
         </h1>
-        <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-6">
-          Live correction on your movement, your guard, and your footwork. Every week. A drill library built on structure and defense. Fighters who take the craft seriously, from anywhere.
-        </p>
-        <p class="text-[#0A0A0A]/35 text-sm max-w-[480px] leading-relaxed mb-10">
-          Founding cohort. First workshop July 4. The library grows with us, starting now.
+        <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">
+          You put in the work. The question is whether it is the right work. Every week, someone who can see what you cannot looks at your movement and tells you what to fix.
         </p>
 
         <div class="flex flex-col gap-3 max-w-[380px]">
           <button
             data-checkout="greatness_monthly"
             class="inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase whitespace-nowrap cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
-            style="background: var(--purple);">
+            style="background: var(--red);">
             Join the Community · $39/mo →
           </button>
           <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide">Checkout unavailable. Email rainers@theerainers.com</p>
@@ -64,52 +60,79 @@ import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
     </div>
   </section>
 
-  <!-- NEXT WORKSHOP -->
+  <!-- NEXT CHECKPOINT -->
   <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-6 border-b border-white/5">
     <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div class="flex items-center gap-4">
-        <span class="inline-block w-2 h-2 rounded-full bg-[var(--purple)] shrink-0"></span>
-        <p class="text-white/60 text-sm">Next session · <span class="text-white font-bold">{NEXT_PROVING_GROUND.date} · {NEXT_PROVING_GROUND.time}</span></p>
+        <span class="inline-block w-2 h-2 rounded-full bg-[var(--red)] shrink-0"></span>
+        <p class="text-white/60 text-sm">Next checkpoint · <span class="text-white font-bold">Tuesday · 3pm ET</span></p>
       </div>
       <button
         data-checkout="greatness_monthly"
-        class="text-[var(--purple)] text-xs font-bold tracking-widest uppercase hover:opacity-70 transition-opacity cursor-pointer bg-transparent border-0 shrink-0">
+        class="text-[var(--red)] text-xs font-bold tracking-widest uppercase hover:opacity-70 transition-opacity cursor-pointer bg-transparent border-0 shrink-0">
         Join before then →
       </button>
     </div>
   </section>
 
-  <!-- WHAT'S INSIDE -->
+  <!-- WHAT YOU GET -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-10">What's Inside</p>
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-10">What You Get</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-[#0A0A0A]/8">
 
         <div class="bg-white p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Weekly</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Weekly Session</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Live every week. Camera on. I watch your movement and call out what to fix.</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Day One</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">A Training Drill</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Sent the moment you join. Day one is real work, not a welcome video.</p>
         </div>
 
         <div class="bg-white p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Growing</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Drill Library</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Drills filed by lever. New ones added every week. Work what is weakest first.</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Every Tuesday · 3pm ET</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Live Checkpoint</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">45 minutes. Movement corrected. Questions answered with breakdowns from actual fights.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Private</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Community</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Ask between sessions. Post your clips. Work through what is breaking down.</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Group</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Train alongside others through the week. Post clips. Work through what is breaking down between checkpoints.</p>
         </div>
 
         <div class="bg-white p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Always</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Session Recordings</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Every workshop recorded. Watch when you can. Different time zones, same work.</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Built in Order</p>
+          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Path</h3>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Built from the ground up, layer by layer. Nothing skipped, nothing rushed.</p>
         </div>
 
       </div>
+    </div>
+  </section>
+
+  <!-- WHO IT IS FOR -->
+  <section class="bg-[#F6F6F6] px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[720px]">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Who This Is For</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-10"
+        style="font-size: clamp(2rem, 4vw, 3rem);">
+        People who train.<br/>Not people thinking<br/>about it.
+      </h2>
+      <ul class="flex flex-col gap-5 max-w-[520px]">
+        <li class="text-[#0A0A0A]/60 text-base leading-relaxed border-l-2 border-[#0A0A0A]/10 pl-5">Wants to start right or train better than they do now.</li>
+        <li class="text-[#0A0A0A]/60 text-base leading-relaxed border-l-2 border-[#0A0A0A]/10 pl-5">Needs correction and visible progress, not encouragement.</li>
+        <li class="text-[#0A0A0A]/60 text-base leading-relaxed border-l-2 border-[#0A0A0A]/10 pl-5">Wants questions answered with breakdowns from actual fights, not theory.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SYSTEM LINE -->
+  <section class="bg-white px-8 md:px-16 lg:px-24 py-14 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[720px]">
+      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-5">The Method</p>
+      <p class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.9]"
+        style="font-size: clamp(1.6rem, 3vw, 2.25rem);">
+        We build in layers. Footwork, movement, ring craft, defense, and power. Nothing skipped. Nothing rushed.
+      </p>
     </div>
   </section>
 
@@ -119,6 +142,39 @@ import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
       <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-10">Membership</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-[2px] max-w-[720px]">
+
+        <!-- Annual (featured) -->
+        <div class="bg-white border-2 p-10 flex flex-col gap-8 relative" style="border-color: var(--red);">
+          <div class="absolute -top-px right-6">
+            <span class="inline-block text-white text-[9px] font-bold tracking-widest uppercase px-3 py-1.5" style="background: var(--red);">Save $78</span>
+          </div>
+          <div>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Annual · Best Value</p>
+            <div class="flex items-baseline gap-1 mb-1">
+              <span class="font-black text-[#0A0A0A] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$390</span>
+              <span class="text-[#0A0A0A]/40 text-sm">/year</span>
+            </div>
+            <p class="text-[#0A0A0A]/30 text-xs">$32.50/month · billed once</p>
+            <p class="text-[var(--red)] text-xs font-bold tracking-wide mt-1">Two months free vs monthly</p>
+          </div>
+
+          <ul class="flex flex-col gap-3">
+            <li class="text-[#0A0A0A]/60 text-sm">Everything in monthly</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Two months free</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Full year of checkpoints</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Full year of path progression</li>
+          </ul>
+
+          <div>
+            <button
+              data-checkout="greatness_annual"
+              class="w-full inline-flex items-center justify-center font-bold text-white px-8 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
+              style="background: var(--red);">
+              Join Annual →
+            </button>
+            <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout unavailable. Email rainers@theerainers.com</p>
+          </div>
+        </div>
 
         <!-- Monthly -->
         <div class="bg-white border border-[#0A0A0A]/8 p-10 flex flex-col gap-8">
@@ -132,88 +188,56 @@ import { NEXT_PROVING_GROUND } from '../../data/proving-ground.ts';
           </div>
 
           <ul class="flex flex-col gap-3">
-            <li class="text-[#0A0A0A]/60 text-sm">Weekly workshop (live)</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Full drill library access</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Private community</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Session recordings</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Live checkpoint every Tuesday</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Training drill on day one</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Private group access</li>
+            <li class="text-[#0A0A0A]/60 text-sm">Checkpoint recordings</li>
           </ul>
 
           <div>
             <button
               data-checkout="greatness_monthly"
               class="w-full inline-flex items-center justify-center font-bold text-white px-8 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
-              style="background: var(--purple);">
+              style="background: var(--red);">
               Join Monthly →
             </button>
             <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout unavailable. Email rainers@theerainers.com</p>
           </div>
         </div>
 
-        <!-- Annual -->
-        <div class="bg-white border-2 p-10 flex flex-col gap-8 relative" style="border-color: var(--purple);">
-          <div class="absolute -top-px right-6">
-            <span class="inline-block text-white text-[9px] font-bold tracking-widest uppercase px-3 py-1.5" style="background: var(--purple);">Save $78</span>
-          </div>
-          <div>
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Annual</p>
-            <div class="flex items-baseline gap-1 mb-1">
-              <span class="font-black text-[#0A0A0A] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$390</span>
-              <span class="text-[#0A0A0A]/40 text-sm">/year</span>
-            </div>
-            <p class="text-[#0A0A0A]/30 text-xs">$32.50/month · billed once</p>
-            <p class="text-[var(--purple)] text-xs font-bold tracking-wide mt-1">Two months free vs monthly</p>
-          </div>
-
-          <ul class="flex flex-col gap-3">
-            <li class="text-[#0A0A0A]/60 text-sm">Everything in Monthly</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Two months free</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Full year of workshops</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Full year of library growth</li>
-          </ul>
-
-          <div>
-            <button
-              data-checkout="greatness_annual"
-              class="w-full inline-flex items-center justify-center font-bold text-white px-8 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
-              style="background: var(--purple);">
-              Join Annual →
-            </button>
-            <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout unavailable. Email rainers@theerainers.com</p>
-          </div>
-        </div>
-
       </div>
 
-      <p class="text-[#0A0A0A]/25 text-xs mt-6 max-w-[480px]">Membership renews automatically. Cancel before your next billing date and you will not be charged again. <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a></p>
+      <p class="text-[#0A0A0A]/25 text-xs mt-6 max-w-[480px]">Membership renews automatically. Cancel anytime, no lock-in. Cancel before your next billing date and you will not be charged again. <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a></p>
     </div>
   </section>
 
-  <!-- WHO IT'S FOR -->
+  <!-- CLOSING -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[720px]">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Who this is for</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-8"
+    <div class="max-w-[560px]">
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
         style="font-size: clamp(2rem, 4vw, 3rem);">
-        People who take<br/>the craft seriously.
+        Become an athlete<br/>from day one.
       </h2>
-      <p class="text-[#0A0A0A]/55 text-base leading-relaxed max-w-[560px] mb-6">
-        We watch our own movement. We want to fix what is actually broken. The work is the only entry requirement.
+      <p class="text-[#0A0A0A]/55 text-base leading-relaxed mb-10">
+        Join before Tuesday and your first checkpoint is this week.
       </p>
-      <div class="max-w-[480px] border border-[#0A0A0A]/10 p-6 mb-10">
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">In 90 days, this should be different.</p>
-        <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Show up weekly and do the work. Your stance, guard, and movement should change under pressure. If they don't, email rainers@theerainers.com. We fix it or let you go.</p>
+      <div class="flex flex-col gap-4 max-w-[380px]">
+        <button
+          data-checkout="greatness_annual"
+          class="inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
+          style="background: var(--red);">
+          Join Annual · $390/yr →
+        </button>
+        <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide">Checkout unavailable. Email rainers@theerainers.com</p>
+        <p class="text-[11px] text-[#0A0A0A]/25">Cancel anytime, no lock-in · Secure checkout via Stripe</p>
+        <a href="/foundation" class="text-center text-[#0A0A0A]/35 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors">
+          Not ready yet · Start with the free Foundation →
+        </a>
       </div>
-      <button
-        data-checkout="greatness_monthly"
-        class="inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
-        style="background: var(--purple);">
-        Join the Community · $39/mo →
-      </button>
-      <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout unavailable. Email rainers@theerainers.com</p>
     </div>
   </section>
 
-  <!-- PRIVATE ARCHITECTURE FOOTNOTE -->
+  <!-- 1-ON-1 FOOTNOTE -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-10 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-[#0A0A0A]/30 text-sm">Need the full framework built around your specific structure?</p>
