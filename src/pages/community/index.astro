@@ -15,6 +15,8 @@ import Layout from '../../layouts/Base.astro';
         alt="Training session"
         width="1200" height="1500"
         loading="eager"
+        fetchpriority="high"
+        decoding="async"
         class="w-full h-full object-cover object-center opacity-90 grayscale contrast-[1.2] brightness-[0.85]"
       />
     </div>
@@ -39,12 +41,12 @@ import Layout from '../../layouts/Base.astro';
             Join the Community · $39/mo →
           </button>
           <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide">Checkout unavailable. Email rainers@theerainers.com</p>
-          <a href="#pricing" class="text-center text-[#0A0A0A]/35 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors">
+          <a href="#pricing" class="text-center text-[#0A0A0A]/60 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/80 transition-colors">
             Pay yearly · save $78
           </a>
         </div>
 
-        <p class="text-[11px] text-[#0A0A0A]/25 mt-4">Cancel anytime · Secure checkout via Stripe</p>
+        <p class="text-[11px] text-[#0A0A0A]/60 mt-4">Cancel anytime · Secure checkout via Stripe</p>
       </div>
 
       <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]" aria-hidden="true">
@@ -53,6 +55,8 @@ import Layout from '../../layouts/Base.astro';
           alt=""
           width="1200" height="1500"
           loading="eager"
+          fetchpriority="high"
+          decoding="async"
           class="absolute inset-0 w-full h-full object-cover object-center opacity-90 grayscale contrast-[1.2] brightness-[0.85]"
         />
       </div>
@@ -69,7 +73,7 @@ import Layout from '../../layouts/Base.astro';
       </div>
       <button
         data-checkout="greatness_monthly"
-        class="text-[var(--red)] text-xs font-bold tracking-widest uppercase hover:opacity-70 transition-opacity cursor-pointer bg-transparent border-0 shrink-0">
+        class="text-white/80 text-xs font-bold tracking-widest uppercase hover:opacity-70 transition-opacity cursor-pointer bg-transparent border-0 shrink-0">
         Join before then →
       </button>
     </div>
@@ -78,31 +82,31 @@ import Layout from '../../layouts/Base.astro';
   <!-- WHAT YOU GET -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-10">What You Get</p>
+      <h2 class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-10 font-normal">What You Get</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-[#0A0A0A]/8">
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Day One</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">A Training Drill</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Sent the moment you join. Day one is real work, not a welcome video.</p>
+          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Sent the moment you join. Day one is real work, not a welcome video.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Every Tuesday · 3pm ET</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Live Checkpoint</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">45 minutes. Movement corrected. Questions answered with breakdowns from actual fights.</p>
+          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">45 minutes. Movement corrected. Questions answered with breakdowns from actual fights.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Private</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Group</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Train alongside others through the week. Post clips. Work through what is breaking down between checkpoints.</p>
+          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Train alongside others through the week. Post clips. Work through what is breaking down between checkpoints.</p>
         </div>
 
         <div class="bg-white p-8">
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Built in Order</p>
           <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Path</h3>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Built from the ground up, layer by layer. Nothing skipped, nothing rushed.</p>
+          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Built from the ground up, layer by layer. Nothing skipped, nothing rushed.</p>
         </div>
 
       </div>
@@ -152,9 +156,9 @@ import Layout from '../../layouts/Base.astro';
             <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Annual · Best Value</p>
             <div class="flex items-baseline gap-1 mb-1">
               <span class="font-black text-[#0A0A0A] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$390</span>
-              <span class="text-[#0A0A0A]/40 text-sm">/year</span>
+              <span class="text-[#0A0A0A]/60 text-sm">/year</span>
             </div>
-            <p class="text-[#0A0A0A]/30 text-xs">$32.50/month · billed once</p>
+            <p class="text-[#0A0A0A]/60 text-xs">$32.50/month · billed once</p>
             <p class="text-[var(--red)] text-xs font-bold tracking-wide mt-1">Two months free vs monthly</p>
           </div>
 
@@ -182,9 +186,9 @@ import Layout from '../../layouts/Base.astro';
             <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Monthly</p>
             <div class="flex items-baseline gap-1 mb-1">
               <span class="font-black text-[#0A0A0A] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$39</span>
-              <span class="text-[#0A0A0A]/40 text-sm">/month</span>
+              <span class="text-[#0A0A0A]/60 text-sm">/month</span>
             </div>
-            <p class="text-[#0A0A0A]/30 text-xs">Cancel anytime</p>
+            <p class="text-[#0A0A0A]/60 text-xs">Cancel anytime</p>
           </div>
 
           <ul class="flex flex-col gap-3">
@@ -207,7 +211,7 @@ import Layout from '../../layouts/Base.astro';
 
       </div>
 
-      <p class="text-[#0A0A0A]/25 text-xs mt-6 max-w-[480px]">Membership renews automatically. Cancel anytime, no lock-in. Cancel before your next billing date and you will not be charged again. <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a></p>
+      <p class="text-[#0A0A0A]/60 text-xs mt-6 max-w-[480px]">Membership renews automatically. Cancel anytime, no lock-in. Cancel before your next billing date and you will not be charged again. <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/80">Refund Policy</a></p>
     </div>
   </section>
 
@@ -218,7 +222,7 @@ import Layout from '../../layouts/Base.astro';
         style="font-size: clamp(2rem, 4vw, 3rem);">
         Become an athlete<br/>from day one.
       </h2>
-      <p class="text-[#0A0A0A]/55 text-base leading-relaxed mb-10">
+      <p class="text-[#0A0A0A]/60 text-base leading-relaxed mb-10">
         Join before Tuesday and your first checkpoint is this week.
       </p>
       <div class="flex flex-col gap-4 max-w-[380px]">
@@ -229,8 +233,8 @@ import Layout from '../../layouts/Base.astro';
           Join Annual · $390/yr →
         </button>
         <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide">Checkout unavailable. Email rainers@theerainers.com</p>
-        <p class="text-[11px] text-[#0A0A0A]/25">Cancel anytime, no lock-in · Secure checkout via Stripe</p>
-        <a href="/foundation" class="text-center text-[#0A0A0A]/35 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors">
+        <p class="text-[11px] text-[#0A0A0A]/60">Cancel anytime, no lock-in · Secure checkout via Stripe</p>
+        <a href="/foundation" class="text-center text-[#0A0A0A]/60 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/80 transition-colors">
           Not ready yet · Start with the free Foundation →
         </a>
       </div>
@@ -240,8 +244,8 @@ import Layout from '../../layouts/Base.astro';
   <!-- 1-ON-1 FOOTNOTE -->
   <section class="bg-white px-8 md:px-16 lg:px-24 py-10 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-[#0A0A0A]/30 text-sm">Need the full framework built around your specific structure?</p>
-      <a href="/command" class="text-[#0A0A0A]/35 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors shrink-0">1-on-1 Coaching · Application Only →</a>
+      <p class="text-[#0A0A0A]/60 text-sm">Need the full framework built around your specific structure?</p>
+      <a href="/command" class="text-[#0A0A0A]/60 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/80 transition-colors shrink-0">1-on-1 Coaching · Application Only →</a>
     </div>
   </section>
 
@@ -251,7 +255,7 @@ import Layout from '../../layouts/Base.astro';
       <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
         "As iron sharpens iron, so one person sharpens another."
       </p>
-      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Proverbs 27:17</p>
+      <p class="text-white/60 text-[10px] tracking-widest uppercase">Proverbs 27:17</p>
     </div>
   </section>
 
