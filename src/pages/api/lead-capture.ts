@@ -66,6 +66,15 @@ const FUNNEL_MAP = `
       </td>
     </tr>
     <tr>
+      <td style="padding:12px 0;border-bottom:1px solid #f0f0f0;vertical-align:top;">
+        <p style="font-size:13px;font-weight:700;color:#0A0A0A;margin:0 0 2px;">Greatness Community</p>
+        <p style="font-size:12px;color:#888;margin:0;">Live correction every Tuesday. Weekly drills. Movement checked.</p>
+      </td>
+      <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
+        <a href="https://theerainers.com/community" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#7C3AED;text-decoration:none;">$39/mo →</a>
+      </td>
+    </tr>
+    <tr>
       <td style="padding:12px 0;vertical-align:top;">
         <p style="font-size:13px;font-weight:700;color:#0A0A0A;margin:0 0 2px;">1-on-1 Coaching</p>
         <p style="font-size:12px;color:#888;margin:0;">Built around your training. Your fight, your body, your timeline.</p>
@@ -187,6 +196,18 @@ ${FUNNEL_MAP}`,
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
 ${FUNNEL_MAP}`,
+  },
+  {
+    delayDays: 6,
+    subject: 'are you running it right',
+    preview: '',
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">By now you have had time to work through the first drills in the blueprint. You know what to do. The part that is harder to know is whether you are doing it correctly.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Training without feedback is how people spend months reinforcing the wrong movement. Not because they are not working. Because nobody is watching.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Every Tuesday at 3pm ET I go live with the community. We check movement. I answer questions using breakdowns from actual fights. 45 minutes.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">If you want to know if the work is right, that is where you find out.</p>
+<p style="margin:0 0 28px;"><a href="https://theerainers.com/community" style="display:inline-block;background:#7C3AED;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">JOIN THE CHECKPOINT · $39/MO →</a></p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
   },
   {
     delayDays: 8,
