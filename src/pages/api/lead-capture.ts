@@ -313,16 +313,16 @@ async function kitApplyTag(apiKey: string, email: string, firstName: string, tag
   return id;
 }
 
-async function kitEnrollSequence(apiKey: string, subscriberId: string, sequenceId: string): Promise<void> {
+async function kitEnrollSequence(apiKey: string, email: string, sequenceId: string): Promise<void> {
   const res = await fetch(`https://api.kit.com/v4/sequences/${sequenceId}/subscribers`, {
     method: 'POST',
     headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ subscriber_id: subscriberId }),
+    body: JSON.stringify({ email_address: email }),
   });
   if (!res.ok) {
     console.warn('[lead-capture] Kit sequence enroll failed', { status: res.status, sequenceId, body: await res.text().catch(() => '') });
   } else {
-    console.log('[lead-capture] Kit sequence enrolled', { subscriberId, sequenceId });
+    console.log('[lead-capture] Kit sequence enrolled', { email, sequenceId });
   }
 }
 
@@ -443,7 +443,7 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
                 return null;
               });
           if (subId && shouldEnrollSequence) {
-            await kitEnrollSequence(kitKey, subId, KIT_NURTURE_SEQUENCE_ID).catch((err) =>
+            await kitEnrollSequence(kitKey, email, KIT_NURTURE_SEQUENCE_ID).catch((err) =>
               console.warn('[lead-capture] Kit enroll failed', { emailLog, err: String(err) }),
             );
           }
