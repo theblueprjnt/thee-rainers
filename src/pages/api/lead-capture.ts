@@ -3,7 +3,6 @@ import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts'
 // POST /api/lead-capture
 //
 // Environment variables required:
-//   MAKE_LEAD_WEBHOOK_URL  — Make.com webhook (resilient path for email delivery)
 //   KIT_API_KEY            — Kit (ConvertKit) v4 API key
 //   KIT_LEAD_TAG_ID        — Tag ID to apply to all free opt-in leads in Kit
 //                            Create in Kit: Grow > Tags > "footwork_lead", copy numeric ID
@@ -20,6 +19,7 @@ export const prerender = false;
 import type { APIContext } from 'astro';
 import { env as cfEnv } from 'cloudflare:workers';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const KIT_NURTURE_SEQUENCE_ID = '2814253';
 
 function corsHeaders(origin: string): Record<string, string> {
   return {
@@ -154,6 +154,7 @@ const SEQUENCE_SOURCES = new Set([
 // Maps alias sources to their WELCOME_CONFIG key.
 function resolveEmailSource(source: string): string {
   if (source === 'popup-footwork-blueprint') return 'footwork-foundation';
+  if (source === 'footwork-foundation') return 'footwork-blueprint';
   if (source.startsWith('quiz-')) return 'lever-audit-quiz';
   return source;
 }
@@ -297,10 +298,10 @@ async function kitFindOrCreate(apiKey: string, email: string, firstName: string)
   return subs?.[0]?.id ? String(subs[0].id) : null;
 }
 
-async function kitApplyTag(apiKey: string, email: string, firstName: string, tagId: string): Promise<void> {
-  if (!apiKey || !tagId) return;
+async function kitApplyTag(apiKey: string, email: string, firstName: string, tagId: string): Promise<string | null> {
+  if (!apiKey || !tagId) return null;
   const id = await kitFindOrCreate(apiKey, email, firstName);
-  if (!id) return;
+  if (!id) return null;
   const res = await fetch(`https://api.kit.com/v4/tags/${tagId}/subscribers/${id}`, {
     method: 'POST',
     headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
@@ -308,6 +309,20 @@ async function kitApplyTag(apiKey: string, email: string, firstName: string, tag
   });
   if (!res.ok) {
     console.warn('[lead-capture] Kit apply tag failed', { status: res.status, tagId, body: await res.text().catch(() => '') });
+  }
+  return id;
+}
+
+async function kitEnrollSequence(apiKey: string, subscriberId: string, sequenceId: string): Promise<void> {
+  const res = await fetch(`https://api.kit.com/v4/sequences/${sequenceId}/subscribers`, {
+    method: 'POST',
+    headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ subscriber_id: subscriberId }),
+  });
+  if (!res.ok) {
+    console.warn('[lead-capture] Kit sequence enroll failed', { status: res.status, sequenceId, body: await res.text().catch(() => '') });
+  } else {
+    console.log('[lead-capture] Kit sequence enrolled', { subscriberId, sequenceId });
   }
 }
 
@@ -390,29 +405,6 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
   const emailLog = email.replace(/(.).*(@.*)/, '$1***$2');
   console.log('[lead-capture] submission', { source, emailLog });
 
-  // ── Make.com webhook (resilient — never blocks response) ──────────────
-  const rawWebhook = (e['MAKE_LEAD_WEBHOOK_URL'] ?? '').trim().replace(/^["']|["']$/g, '');
-  let webhookStatus = 'unattempted';
-
-  if (!/^https?:\/\//.test(rawWebhook)) {
-    webhookStatus = 'config_missing';
-    console.warn('[LEAD_DEFERRED] MAKE_LEAD_WEBHOOK_URL missing or invalid', { source, emailLog });
-  } else {
-    try {
-      const res = await fetch(rawWebhook, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name, email, phone, source }),
-        signal: AbortSignal.timeout(8000),
-      });
-      webhookStatus = res.ok ? 'delivered' : `non_2xx_${res.status}`;
-      if (!res.ok) console.warn('[LEAD_DEFERRED] webhook non-2xx', { source, emailLog, status: res.status });
-    } catch (err) {
-      webhookStatus = 'fetch_failed';
-      console.warn('[LEAD_DEFERRED] webhook fetch failed', { source, emailLog, err: String(err) });
-    }
-  }
-
   // ── Resend welcome email ─────────────────────────────────────────────
   const resendKey = e['RESEND_API_KEY'] ?? '';
 
@@ -433,19 +425,30 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
     console.warn('[lead-capture] AIRTABLE_BASE_ID not set — lead will NOT be saved to Airtable', { source, emailLog });
   }
 
+  const shouldEnrollSequence = SEQUENCE_SOURCES.has(source) || source.startsWith('quiz-');
+
   // All background I/O registered with waitUntil so Cloudflare keeps the
   // Worker alive until every promise settles — not killed on response return.
   waitUntil(Promise.all([
     sendResendWelcome(resendKey, email, source, e['SITE_URL'] ?? 'https://theerainers.com').catch(() => {}),
-    kitKey && kitTagId
-      ? kitApplyTag(kitKey, email, full_name, kitTagId).catch((err) =>
-          console.warn('[lead-capture] Kit tag failed', { emailLog, err: String(err) }),
-        )
-      : kitKey
-        ? kitFindOrCreate(kitKey, email, full_name).catch((err) =>
-            console.warn('[lead-capture] Kit create failed', { emailLog, err: String(err) }),
-          )
-        : Promise.resolve(),
+    kitKey
+      ? (async () => {
+          const subId = kitTagId
+            ? await kitApplyTag(kitKey, email, full_name, kitTagId).catch((err) => {
+                console.warn('[lead-capture] Kit tag failed', { emailLog, err: String(err) });
+                return null;
+              })
+            : await kitFindOrCreate(kitKey, email, full_name).catch((err) => {
+                console.warn('[lead-capture] Kit create failed', { emailLog, err: String(err) });
+                return null;
+              });
+          if (subId && shouldEnrollSequence) {
+            await kitEnrollSequence(kitKey, subId, KIT_NURTURE_SEQUENCE_ID).catch((err) =>
+              console.warn('[lead-capture] Kit enroll failed', { emailLog, err: String(err) }),
+            );
+          }
+        })()
+      : Promise.resolve(),
     airtableToken && airtableBase
       ? upsertAirtableLead(airtableToken, airtableBase, airtableTable, {
           Email:            email,
@@ -459,8 +462,7 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
       : Promise.resolve(),
   ]));
 
-  const successHeaders = { ...headers, 'X-Lead-Webhook-Status': webhookStatus };
   return isJson
-    ? jsonResponse({ success: true, webhookStatus }, 200, successHeaders)
+    ? jsonResponse({ success: true }, 200, headers)
     : redirectResponse('/thank-you/footwork-blueprint');
 }
