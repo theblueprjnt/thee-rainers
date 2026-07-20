@@ -565,7 +565,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
         sendTelegramAlert(
           e['TELEGRAM_BOT_TOKEN'] ?? '',
           e['TELEGRAM_CHAT_ID'] ?? '',
-          `NEW SALE\nProduct: ${slug ?? productId}\nEmail: ${email.replace(/(.).*(@.*)/, '$1***$2')}`,
+          `SALE: ${slug ?? productId}, $${((session.amount_total ?? 0) / 100).toFixed(0)}, ${email.replace(/(.).*(@.*)/, '$1***$2')}`,
         ).catch(() => {});
         // Sync member into Airtable + tag in Kit
         await upsertAirtable(airtableToken, airtableBase, airtableTable, {

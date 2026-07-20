@@ -2,6 +2,7 @@ export const prerender = false;
 
 import type { APIContext } from 'astro';
 import { env as cfEnv } from 'cloudflare:workers';
+import { sendTelegramAlert } from '../../lib/telegram';
 
 function escapeHtml(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
@@ -131,6 +132,14 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
   } else if (!coachingTag) {
     console.warn('[coaching-capture] KIT_COACHING_TAG_ID not set — applicant not tagged in Kit');
   }
+
+  promises.push(
+    sendTelegramAlert(
+      e['TELEGRAM_BOT_TOKEN'] ?? '',
+      e['TELEGRAM_CHAT_ID'] ?? '',
+      `New 1-ON-1 application: ${name || '(no name)'}, ${email}\n${record.split('\n')[0]}`,
+    )
+  );
 
   waitUntil(Promise.all(promises));
 
