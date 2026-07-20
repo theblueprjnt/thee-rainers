@@ -113,6 +113,8 @@ const siteSchema = JSON.stringify({
 
       // Delegated click — fires begin_checkout for ANY buy button site-wide.
       // Covers <a href="buy.stripe.com/..."> AND <button data-checkout="...">.
+      var TR_SID = (function() { try { var s = sessionStorage.getItem('_tr_sid') || ''; if (!s) { s = Math.random().toString(36).slice(2,10); sessionStorage.setItem('_tr_sid', s); } return s; } catch(e2) { return ''; } })();
+
       document.addEventListener('click', function(e) {
         var t = e.target && e.target.closest && e.target.closest('a[href*="buy.stripe.com"], button[data-checkout]');
         if (!t) return;
@@ -124,6 +126,7 @@ const siteSchema = JSON.stringify({
           product = TR_PRODUCTS[t.getAttribute('data-checkout') || ''];
         }
         if (!product) return;
+        try { navigator.sendBeacon('/api/track', JSON.stringify({event:'checkout_click',page:location.pathname,detail:product.id,session:TR_SID})); window.trackEvent('checkout_click',{detail:product.id}); } catch(e2){}
         window.trackEvent('begin_checkout', {
           ecommerce: {
             currency: 'USD',
