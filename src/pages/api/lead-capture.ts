@@ -128,12 +128,12 @@ ${FUNNEL_MAP}`,
   'footwork-blueprint': {
     subject: 'Your Blueprint. Start on page 9.',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The PDF arrived with your download confirmation. If you missed it, it is also here: <a href="https://theerainers.com/pdfs/foundation.pdf" style="color:#E11D2A;">The Footwork Blueprint</a></p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">There are 56 rounds in the blueprint. Most people start on page 1. Page 9 is where the base work begins.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Work through the stance and balance drills before anything else. Not because the opening pages are wrong. Because everything in the drills compounds only when the base they build on is stable.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">One thing to notice as you go through it: most of what the blueprint corrects is not complex. The issues are structural - stance breaks, being off-balance and movement without intention. They are pattern problems. Humans can change patterns with the right repetitions.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The full sequence is 30 days. Run it from the base forward.</p>
-<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Watch the 11-min Breakdown →</a></p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">There are 56 rounds in the blueprint and page 9 is where the base work begins.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Work through the stance and balance drills before anything else, everything in the drills compounds only when the base is stable.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">One thing to notice as you go through it: most of what the blueprint corrects is not complex. The issues are structural and pattern problems. Humans can change patterns with the right repetitions.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">The full sequence is 30 days.</p>
+<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">WATCH THE VIDEO BREAKDOWN →</a></p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">See you inside,</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>
 ${FUNNEL_MAP}`,
   },
@@ -231,7 +231,8 @@ function wrapEmail(body: string, email = '', siteUrl = 'https://theerainers.com'
   const unsubFooter = email
     ? `<div style="border-top:1px solid #eee;margin:32px 0 0;padding:16px 0 0;text-align:center;"><p style="font-size:11px;color:#ccc;margin:0;">You received this because you opted in at theerainers.com. <a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p></div>`
     : '';
-  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">${body}${unsubFooter}</div>`;
+  const logo = `<div style="text-align:center;margin:0 0 32px;"><img src="${siteUrl}/images/logo-trb.png" alt="Thee Rainers" width="120" style="height:auto;display:inline-block;" /></div>`;
+  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">${logo}${body}${unsubFooter}</div>`;
 }
 
 async function sendResendWelcome(resendKey: string, email: string, source: string, siteUrl = 'https://theerainers.com'): Promise<void> {
