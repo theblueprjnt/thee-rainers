@@ -65,107 +65,117 @@ const productSchema = JSON.stringify(products.map(p => ({
     <script type="application/ld+json" set:html={productSchema} />
   </Fragment>
 
-  <section class="bg-white px-6 md:px-12 lg:px-20 pt-28 md:pt-36 pb-20">
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 pt-28 md:pt-36 pb-20">
     <div class="max-w-[1100px] mx-auto">
 
-      <div class="mb-10">
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-3">Shop</p>
-        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.88]">Blueprints.<br/>Workshops. Community.</h1>
-        <p class="text-[#0A0A0A]/45 text-sm mt-4">One-time purchase. Download and own it.</p>
+      <div class="mb-12">
+        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">Blueprints</p>
+        <h1 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.88]"
+          style="font-size: clamp(2.5rem, 5vw, 4rem);">
+          Blueprints.<br/>Workshops. Community.
+        </h1>
+        <div class="h-0.5 w-12 bg-[var(--terra)] mt-5 mb-4"></div>
+        <p class="text-[#0B0B0C]/45 text-sm">One-time purchase. Download and own it.</p>
       </div>
 
       <!-- Blueprint cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {products.map(p => (
-          <div class={`tr-card flex flex-col group transition-colors duration-200 relative ${p.featured ? 'border-2 border-[var(--blue)]/30 hover:border-[var(--blue)]' : 'border border-[#0A0A0A]/10 hover:border-[var(--blue)]/40'}`}>
-            {p.featured && <div class="absolute top-3 left-3 z-10 bg-[var(--blue)] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">Free · Start Here</div>}
-            <!-- Image + title now link to product page. Buy button stays direct to Stripe. -->
-            <a href={p.page} aria-label={`Learn more about ${p.title}`} class={`overflow-hidden relative block ${p.featured ? 'bg-[#0A0A0A]' : 'bg-[#F6F6F6]'}`}>
+          <div class={`tr-card flex flex-col group transition-colors duration-200 relative ${p.featured ? 'border-2 border-[var(--terra)]/40 hover:border-[var(--terra)]' : 'border border-[#0B0B0C]/10 hover:border-[var(--terra)]/40'}`}>
+            {p.featured && (
+              <div class="absolute top-3 left-3 z-10 bg-[var(--terra)] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">
+                Free · Start Here
+              </div>
+            )}
+            <a href={p.page} aria-label={`Learn more about ${p.title}`}
+              class={`overflow-hidden relative block ${p.featured ? 'bg-[#0B0B0C]' : 'bg-[var(--warm)]'}`}>
               <img src={p.image} alt={p.title}
                 loading="lazy"
                 class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
             </a>
-            <div class="p-5 flex flex-col flex-1">
-              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">{p.tag}</p>
-              <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl leading-tight mb-1">
-                <a href={p.page} class="hover:text-[var(--blue)] transition-colors">{p.title}</a>
+            <div class="bg-white p-5 flex flex-col flex-1">
+              <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">{p.tag}</p>
+              <h2 class="font-black text-[#0B0B0C] uppercase tracking-tight text-xl leading-tight mb-1">
+                <a href={p.page} class="hover:text-[var(--terra)] transition-colors">{p.title}</a>
               </h2>
-              <p class="text-[#0A0A0A]/50 text-xs mb-3 font-bold">{p.sub}</p>
-              <p class="text-[#0A0A0A]/60 text-xs leading-relaxed flex-1">{p.desc}</p>
+              <p class="text-[#0B0B0C]/50 text-xs mb-3 font-bold">{p.sub}</p>
+              <p class="text-[#0B0B0C]/60 text-xs leading-relaxed flex-1">{p.desc}</p>
               <div class="mt-4 flex items-center justify-between gap-3">
                 <div>
-                  <span class="font-black text-[#0A0A0A] text-2xl">{p.price}</span>
-                  {p.price_note && <p class="text-[10px] text-[#0A0A0A]/55 mt-0.5">{p.price_note}</p>}
+                  <span class="font-black text-[#0B0B0C] text-2xl">{p.price}</span>
+                  {p.price_note && <p class="text-[10px] text-[#0B0B0C]/50 mt-0.5">{p.price_note}</p>}
                 </div>
-                <a href={p.stripeUrl}
-                  class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--blue)] text-white font-bold px-6 py-3 text-sm tracking-wide uppercase hover:bg-[#0A0A0A] active:bg-[#0A0A0A]/90 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-                  {p.cta} →
+                <a href={p.stripeUrl} class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.625rem;">
+                  {p.cta}
                 </a>
               </div>
               <p class="mt-3 text-[11px]">
-                <a href={p.page} class="text-[var(--blue)] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity">Learn more →</a>
+                <a href={p.page} class="text-[var(--navy)] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity">
+                  Learn more
+                </a>
               </p>
               {p.stripeUrl.startsWith('https://') && (
-                <p class="mt-2 text-[10px] text-[#0A0A0A]/30">Secure checkout via Stripe · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a></p>
+                <p class="mt-2 text-[10px] text-[#0B0B0C]/30">
+                  Secure checkout via Stripe · <a href="/legal/refund-policy" class="underline hover:text-[#0B0B0C]/50">Refund Policy</a>
+                </p>
               )}
             </div>
           </div>
         ))}
       </div>
 
-      <!-- Proof — remote students who trained from the blueprint -->
-      <div class="mt-12 -mx-6 md:-mx-12 lg:-mx-20 border-t border-b border-[#0A0A0A]/8">
+      <!-- Proof -->
+      <div class="mt-12 -mx-6 md:-mx-12 lg:-mx-20 border-t border-b border-[#0B0B0C]/8">
         <Testimonials filter="remote" heading="Trained from the blueprint" kicker="Results · On Their Own" />
       </div>
 
       <!-- FAQ -->
-      <div class="mt-10 pt-10 border-t border-[#0A0A0A]/8">
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-xl mb-6">Common Questions</h2>
+      <div class="mt-10 pt-10 border-t border-[#0B0B0C]/8">
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-xl leading-tight mb-6">Common Questions</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 max-w-[900px]">
           <div>
-            <p class="font-bold text-[#0A0A0A] text-sm mb-1">How do I get access after purchase?</p>
-            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">A download link is sent to the email you use at checkout. It arrives within a few minutes and is valid for 7 days. Save the PDF once downloaded.</p>
+            <p class="font-bold text-[#0B0B0C] text-sm mb-1">How do I get access after purchase?</p>
+            <p class="text-[#0B0B0C]/50 text-xs leading-relaxed">A download link is sent to the email you use at checkout. It arrives within a few minutes and is valid for 7 days. Save the PDF once downloaded.</p>
           </div>
           <div>
-            <p class="font-bold text-[#0A0A0A] text-sm mb-1">Is this a subscription?</p>
-            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">No. Both Blueprints are one-time purchases. Pay once, own it.</p>
+            <p class="font-bold text-[#0B0B0C] text-sm mb-1">Is this a subscription?</p>
+            <p class="text-[#0B0B0C]/50 text-xs leading-relaxed">No. Both Blueprints are one-time purchases. Pay once, own it.</p>
           </div>
           <div>
-            <p class="font-bold text-[#0A0A0A] text-sm mb-1">Can I use this without a gym?</p>
-            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">Yes. The Footwork Blueprint requires no equipment. The Shadowboxing Blueprint works anywhere you have space to move.</p>
+            <p class="font-bold text-[#0B0B0C] text-sm mb-1">Can I use this without a gym?</p>
+            <p class="text-[#0B0B0C]/50 text-xs leading-relaxed">Yes. The Footwork Blueprint requires no equipment. The Shadowboxing Blueprint works anywhere you have space to move.</p>
           </div>
           <div>
-            <p class="font-bold text-[#0A0A0A] text-sm mb-1">What if I want live coaching alongside it?</p>
-            <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">The Greatness Community includes live Proving Ground sessions every week. <a href="/community" class="text-[var(--blue)] font-bold hover:opacity-70 transition-opacity">Learn more.</a></p>
+            <p class="font-bold text-[#0B0B0C] text-sm mb-1">What if I want live coaching alongside it?</p>
+            <p class="text-[#0B0B0C]/50 text-xs leading-relaxed">The Greatness Community includes live Checkpoint sessions every week. <a href="/community" class="text-[var(--navy)] font-bold hover:opacity-70 transition-opacity">Learn more.</a></p>
           </div>
         </div>
       </div>
 
-      <!-- Workshop + Q&A row -->
+      <!-- Workshop + Replay row -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
 
-        <div class="border border-white/10 bg-[#0A0A0A] flex flex-col group hover:border-white/20 transition-colors duration-200">
+        <div class="bg-[#0B0B0C] flex flex-col group border border-white/5 hover:border-white/15 transition-colors duration-200">
           <div class="relative overflow-hidden" style="height: 200px;">
             <img src="/images/defense_workshop.webp" alt="Defense Workshop"
               width="1920" height="1080"
               class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500" />
-            <div class="absolute inset-0 bg-[#0A0A0A]/45"></div>
+            <div class="absolute inset-0 bg-[#0B0B0C]/45"></div>
           </div>
           <div class="p-8 flex flex-col flex-1 justify-between">
             <div>
-              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Live · 90 min</p>
+              <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">Live · 90 min</p>
               <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-3">Defense Workshop</h2>
               <p class="text-white/40 text-xs leading-relaxed">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset.</p>
             </div>
             <div class="flex items-center justify-between mt-8">
               <span class="font-black text-white text-2xl">$197</span>
               <div class="flex flex-col items-end gap-1">
-                <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"
-                  class="inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[var(--blue)] hover:text-white transition-all duration-200 whitespace-nowrap">
-                  Reserve Seat →
+                <a href="/workshop" class="tr-btn" style="padding: 0.6rem 1.25rem; font-size: 0.625rem;">
+                  Reserve Seat
                 </a>
-                <p class="text-[11px] text-white/55 leading-relaxed">
+                <p class="text-[11px] text-white/45 leading-relaxed">
                   <a href="/legal/terms" class="underline hover:text-white">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-white">Refund Policy</a>
                 </p>
               </div>
@@ -173,24 +183,23 @@ const productSchema = JSON.stringify(products.map(p => ({
           </div>
         </div>
 
-        <div class="border border-[#0A0A0A]/10 bg-[#F6F6F6] flex flex-col justify-between group hover:border-[var(--blue)]/30 transition-colors duration-200">
+        <div class="bg-[var(--warm)] flex flex-col justify-between group border border-[#0B0B0C]/10 hover:border-[var(--terra)]/30 transition-colors duration-200">
           <div class="relative overflow-hidden" style="height: 200px;">
             <img src="/images/workshop_bacgkround.webp" alt="Workshop Replay"
               width="1920" height="1080"
               class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500" />
-            <div class="absolute inset-0 bg-[#0A0A0A]/55"></div>
+            <div class="absolute inset-0 bg-[#0B0B0C]/55"></div>
           </div>
           <div class="p-8 flex flex-col flex-1 justify-between">
             <div>
-              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">On Demand · Full Recording</p>
-              <h2 class="font-black text-[#0A0A0A] uppercase tracking-tight text-2xl leading-tight mb-3">Workshop Replay</h2>
-              <p class="text-[#0A0A0A]/60 text-xs leading-relaxed">The full 90-min session on demand. The framework applied. 7-day access from purchase.</p>
+              <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">On Demand · Full Recording</p>
+              <h2 class="font-black text-[#0B0B0C] uppercase tracking-tight text-2xl leading-tight mb-3">Workshop Replay</h2>
+              <p class="text-[#0B0B0C]/60 text-xs leading-relaxed">The full 90-min session on demand. The framework applied. 7-day access from purchase.</p>
             </div>
             <div class="flex items-center justify-between mt-8">
-              <span class="font-black text-[#0A0A0A] text-2xl">$47</span>
-              <a href="/workshop-replay"
-                class="inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-[var(--blue)] hover:text-white transition-all duration-200 whitespace-nowrap">
-                See Replay →
+              <span class="font-black text-[#0B0B0C] text-2xl">$47</span>
+              <a href="/workshop-replay" class="tr-btn" style="padding: 0.6rem 1.25rem; font-size: 0.625rem;">
+                See Replay
               </a>
             </div>
           </div>
@@ -199,40 +208,47 @@ const productSchema = JSON.stringify(products.map(p => ({
       </div>
 
       <!-- Community teaser -->
-      <div class="mt-4 border overflow-hidden" style="border-color: rgba(106,13,173,0.2);">
-        <div class="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div class="mt-4 border overflow-hidden border-[var(--purple)]/25">
+        <div class="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white">
           <div>
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-3">Greatness Community</p>
-            <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl leading-tight mb-3">Live Reps With Rainers.</h2>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed max-w-[520px]">The Weekly Session with Rainers. Live correction on your movement. Private community. Drill library. $39/mo.</p>
+            <p class="text-[var(--purple)] text-[10px] tracking-widest uppercase font-bold mb-3">Greatness Community</p>
+            <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl leading-tight mb-3">
+              Live Reps With Rainers.
+            </h2>
+            <p class="text-[#0B0B0C]/50 text-sm leading-relaxed max-w-[520px]">
+              Weekly Checkpoint with Rainers. Live correction on your movement. Private community. Drill library. $39/mo.
+            </p>
           </div>
           <a href="/community"
-            class="shrink-0 inline-flex items-center justify-center rounded-none whitespace-nowrap text-white font-bold px-8 py-3 text-sm tracking-wide uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none"
+            class="shrink-0 inline-flex items-center justify-center font-bold text-white px-8 py-4 text-[0.625rem] tracking-widest uppercase transition-opacity duration-150 hover:opacity-85"
             style="background: var(--purple);">
-            See the Community →
+            See the Community
           </a>
         </div>
       </div>
 
       <!-- Start free nudge -->
-      <div class="mt-10 pt-10 border-t border-[#0A0A0A]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <p class="text-[#0A0A0A]/30 text-sm">Start free with the Footwork Blueprint. Build the base first.</p>
-        <a href="/foundation" class="text-[var(--blue)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">Get the Free Blueprint →</a>
+      <div class="mt-10 pt-10 border-t border-[#0B0B0C]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <p class="text-[#0B0B0C]/30 text-sm">Start free with the Footwork Blueprint. Build the base first.</p>
+        <a href="/foundation" class="text-[var(--navy)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">
+          Get the Free Blueprint
+        </a>
       </div>
 
     </div>
   </section>
 
-  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20">
-    <div class="max-w-[680px] mx-auto">
-      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
+  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20">
+    <div class="max-w-[680px] mx-auto text-center">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/40 mb-5"
+        style="font-size: clamp(1.5rem, 3.5vw, 2.25rem);">
         "I do not run aimlessly. I do not box as one beating the air."
       </p>
-      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
+      <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">1 Corinthians 9:26-27</p>
     </div>
   </section>
 
-  <!-- GA4 view_item_list — fires once on shop load to record buy-page traffic -->
+  <!-- GA4 view_item_list -->
   <script is:inline>
     if (typeof window !== 'undefined' && window.trackEvent) {
       window.trackEvent('view_item_list', {

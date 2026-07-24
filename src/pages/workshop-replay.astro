@@ -7,7 +7,7 @@ import Layout from '../layouts/Base.astro';
   </Fragment>
 
   <!-- HERO — dark, full-bleed, CTA above the fold on mobile -->
-  <section class="relative overflow-hidden bg-[#0A0A0A]">
+  <section class="relative overflow-hidden bg-[#0B0B0C]">
     <img src="/images/workshop_bacgkround.webp" alt="" aria-hidden="true"
       width="1920" height="1080"
       class="absolute inset-0 w-full h-full object-cover object-center opacity-15 pointer-events-none select-none"
@@ -15,7 +15,7 @@ import Layout from '../layouts/Base.astro';
 
     <div class="relative z-10 px-6 md:px-16 lg:px-24 pt-28 md:pt-44 pb-14 md:pb-20">
       <div class="max-w-[680px]">
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">On Demand · Full Recording</p>
+        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">On Demand · Full Recording</p>
         <h1 class="font-black text-white uppercase tracking-tighter leading-[0.85] mb-6"
           style="font-size: clamp(2.8rem, 8vw, 4.75rem);">
           The Defense<br/>Workshop.<br/>Recorded.
@@ -25,7 +25,7 @@ import Layout from '../layouts/Base.astro';
         </p>
 
         <button type="button" data-checkout="workshop_replay"
-          class="inline-flex w-full sm:w-auto items-center justify-center rounded-none bg-[var(--red)] text-white font-bold px-10 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+          class="tr-btn w-full sm:w-auto">
           Get the Replay · $47 →
         </button>
 
@@ -41,7 +41,7 @@ import Layout from '../layouts/Base.astro';
   </section>
 
   <!-- PROOF — Giancarlo -->
-  <section class="bg-white px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-12 md:gap-20 items-center">
 
       <div class="flex flex-col items-center md:items-start">
@@ -56,11 +56,11 @@ import Layout from '../layouts/Base.astro';
             ></iframe>
           </div>
         </div>
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-4 text-center md:text-left">Giancarlo · 5 Months</p>
+        <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mt-4 text-center md:text-left">Giancarlo · 5 Months</p>
       </div>
 
       <div>
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Field Report</p>
+        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">Field Report</p>
         <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
           "My footwork makes sense. I can see openings instead of just swinging."
         </p>
@@ -68,7 +68,7 @@ import Layout from '../layouts/Base.astro';
           Giancarlo started sparring. Five months. What you see in this clip is built on the same mechanics this workshop teaches.
         </p>
         <button type="button" data-checkout="workshop_replay"
-          class="inline-flex items-center justify-center rounded-none bg-[var(--red)] text-white font-bold px-10 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2">
+          class="tr-btn">
           Get the Replay · $47 →
         </button>
         <p class="text-[9px] text-[#0A0A0A]/25 mt-2"><a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a></p>
@@ -78,22 +78,22 @@ import Layout from '../layouts/Base.astro';
   </section>
 
   <!-- WHAT'S INSIDE — 3 pillars, problem-framed -->
-  <section class="bg-white px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1100px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-3">What's inside.</p>
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">What's inside.</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
         Three things this session fixes.
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="border-t-2 border-[#0A0A0A] pt-5">
+        <div class="border-t-2 border-[var(--terra)] pt-5">
           <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Why you keep getting hit.</p>
           <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">The break is almost always in your stance or positioning. The session maps where your defense fails before pressure even comes.</p>
         </div>
-        <div class="border-t-2 border-[#0A0A0A] pt-5">
+        <div class="border-t-2 border-[var(--terra)] pt-5">
           <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Why your movement fails under pressure.</p>
           <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Footwork that works in drills breaks in sparring. The workshop finds where the chain disconnects and builds the fix from the base up.</p>
         </div>
-        <div class="border-t-2 border-[#0A0A0A] pt-5">
+        <div class="border-t-2 border-[var(--terra)] pt-5">
           <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Live Q&A. Real problems. Real answers.</p>
           <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Fighters in the live session asked the questions you probably have. Every answer is in the recording.</p>
         </div>
@@ -102,9 +102,9 @@ import Layout from '../layouts/Base.astro';
   </section>
 
   <!-- FAQ -->
-  <section class="bg-white px-6 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8" aria-labelledby="replay-faq-heading">
+  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8" aria-labelledby="replay-faq-heading">
     <div class="max-w-[800px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Questions</p>
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Questions</p>
       <h2 id="replay-faq-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-10">Common Questions</h2>
       <dl class="flex flex-col divide-y divide-[#0A0A0A]/8">
 
@@ -125,7 +125,7 @@ import Layout from '../layouts/Base.astro';
 
         <div class="py-6">
           <dt class="font-bold text-[#0A0A0A] text-sm mb-2">Is there a refund if it doesn't help?</dt>
-          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Yes. Email rainers@theerainers.com within 24 hours of accessing the replay and the refund is processed. See the full <a href="/legal/refund-policy" class="text-[var(--blue)] underline hover:opacity-70">Refund Policy</a>.</dd>
+          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Yes. Email rainers@theerainers.com within 24 hours of accessing the replay and the refund is processed. See the full <a href="/legal/refund-policy" class="text-[var(--navy)] underline hover:opacity-70">Refund Policy</a>.</dd>
         </div>
 
       </dl>
@@ -133,24 +133,24 @@ import Layout from '../layouts/Base.astro';
   </section>
 
   <!-- LADDER LINK -->
-  <section class="bg-white px-6 md:px-16 lg:px-24 py-10 border-b border-[#0A0A0A]/8">
+  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-10 border-b border-[#0A0A0A]/8">
     <div class="max-w-[780px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
       <p class="text-[#0A0A0A]/40 text-sm leading-relaxed max-w-[480px]">If this replay gives you the clarity you have been missing, the live workshop is where you get corrected in real time. This is the structural base. The workshop applies it to your movement directly.</p>
-      <a href="/workshop" class="shrink-0 text-[var(--blue)] text-[11px] font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">See the Live Workshop →</a>
+      <a href="/workshop" class="shrink-0 text-[var(--navy)] text-[11px] font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">See the Live Workshop →</a>
     </div>
   </section>
 
   <!-- SCRIPTURE + final CTA -->
-  <section class="bg-[#0A0A0A] px-6 md:px-16 lg:px-24 py-14 md:py-20">
+  <section class="bg-[#0B0B0C] px-6 md:px-16 lg:px-24 py-14 md:py-20">
     <div class="max-w-[780px] mx-auto flex flex-col md:flex-row md:items-end justify-between gap-10">
       <div>
         <p class="font-black uppercase tracking-tighter leading-[0.88] mb-4 text-white/50 text-2xl md:text-3xl max-w-[520px]">
           "I do not run aimlessly. I do not fight like a boxer beating the air."
         </p>
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26</p>
+        <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">1 Corinthians 9:26</p>
       </div>
       <button type="button" data-checkout="workshop_replay"
-        class="shrink-0 inline-flex items-center justify-center rounded-none bg-[var(--red)] text-white font-bold px-10 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none whitespace-nowrap">
+        class="tr-btn shrink-0">
         Get the Replay · $47 →
       </button>
     </div>
