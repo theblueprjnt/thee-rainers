@@ -1,0 +1,150 @@
+---
+// OfferStack — three-card offer section, Myron Golden card rhythm in TRB brand.
+// One image, one label, one title, one sentence, one button per card.
+// No secondary links inside cards.
+// Event strip below cards is opt-in via the `event` prop.
+
+interface EventConfig {
+  label: string;
+  date: string;
+  href: string;
+  cta: string;
+}
+
+interface Props {
+  event?: EventConfig | null;
+}
+
+const { event = null } = Astro.props;
+---
+
+<section class="bg-[#0A0A0A] border-t border-white/5">
+  <div class="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+
+    <div class="mb-12">
+      <p class="text-white/30 text-[11px] tracking-widest uppercase mb-4">The Work</p>
+      <h2 class="font-black text-white uppercase tracking-tighter leading-[0.86]"
+        style="font-size: clamp(2rem, 4vw, 3rem);">
+        <!-- DRAFT: voice pass Rainers -->
+        Pick up where<br class="hidden md:block"/>your training left off.
+      </h2>
+    </div>
+
+    <!-- Card grid: 1 col mobile → 3 col desktop -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+
+      <!-- Card 1: Blueprints -->
+      <div class="bg-[#0A0A0A] flex flex-col group">
+        <div class="overflow-hidden" style="aspect-ratio:4/3;">
+          <img
+            src="/images/3d_thefootworkblueprint_cover.jpg"
+            alt="The Footwork Blueprint"
+            width="600" height="450"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+        <div class="flex flex-col flex-1 p-8 md:p-10">
+          <p class="text-[var(--blue)] text-[10px] tracking-widest uppercase font-bold mb-4">Free · Start Here</p>
+          <h3 class="font-black text-white uppercase tracking-tight text-xl md:text-2xl leading-tight mb-3">
+            <!-- DRAFT: voice pass Rainers -->
+            The Blueprints.
+          </h3>
+          <p class="text-white/50 text-sm leading-relaxed flex-1">
+            <!-- DRAFT: voice pass Rainers -->
+            Step-by-step footwork and shadowboxing systems. Start with the free one.
+          </p>
+          <div class="mt-8">
+            <a href="/foundation"
+              class="inline-flex items-center justify-center w-full bg-[var(--red)] text-white font-bold px-6 py-4 text-[11px] tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+              Get the Free Blueprint
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Greatness Community -->
+      <div class="bg-[#0A0A0A] flex flex-col group">
+        <div class="overflow-hidden" style="aspect-ratio:4/3;">
+          <img
+            src="/images/sparring_withnetherlands.jpg"
+            alt="Live training session"
+            width="600" height="450"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover object-center grayscale transition-transform duration-500 group-hover:scale-[1.02]"
+            style="object-position: center 20%;"
+          />
+        </div>
+        <div class="flex flex-col flex-1 p-8 md:p-10">
+          <p class="text-[var(--purple)] text-[10px] tracking-widest uppercase font-bold mb-4">Greatness Community · $39/mo</p>
+          <h3 class="font-black text-white uppercase tracking-tight text-xl md:text-2xl leading-tight mb-3">
+            <!-- DRAFT: voice pass Rainers -->
+            Weekly correction, live.
+          </h3>
+          <p class="text-white/50 text-sm leading-relaxed flex-1">
+            <!-- DRAFT: voice pass Rainers -->
+            Movement watched and adjusted every Tuesday. Camera on. No recorded advice.
+          </p>
+          <div class="mt-8">
+            <a href="/community"
+              class="inline-flex items-center justify-center w-full bg-[var(--purple)] text-white font-bold px-6 py-4 text-[11px] tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--purple)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+              Join the Community
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Private Architecture -->
+      <div class="bg-[#0A0A0A] flex flex-col group">
+        <div class="overflow-hidden" style="aspect-ratio:4/3;">
+          <img
+            src="/images/rainers-coaching.jpg"
+            alt="1-on-1 coaching session"
+            width="600" height="450"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover object-center grayscale transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+        <div class="flex flex-col flex-1 p-8 md:p-10">
+          <p class="text-white/30 text-[10px] tracking-widest uppercase font-bold mb-4">Private Architecture · Application Only</p>
+          <h3 class="font-black text-white uppercase tracking-tight text-xl md:text-2xl leading-tight mb-3">
+            <!-- DRAFT: voice pass Rainers -->
+            Built around one fighter.
+          </h3>
+          <p class="text-white/50 text-sm leading-relaxed flex-1">
+            <!-- DRAFT: voice pass Rainers -->
+            A framework built around your structure, your schedule, and your goal.
+          </p>
+          <div class="mt-8">
+            <a href="/command"
+              class="inline-flex items-center justify-center w-full border border-white/20 text-white font-bold px-6 py-4 text-[11px] tracking-widest uppercase transition-colors duration-150 hover:border-white/60 hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A]">
+              Apply
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Event strip — renders only when event prop is set -->
+    {event && (
+      <div class="mt-px bg-[#111] border-t border-white/5 px-8 md:px-10 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="inline-block w-2 h-2 rounded-full bg-[var(--red)] shrink-0 animate-pulse" aria-hidden="true"></span>
+          <p class="text-white/60 text-[11px] font-bold tracking-widest uppercase">
+            {event.label} <span class="text-white/30 mx-1">·</span> {event.date}
+          </p>
+        </div>
+        <a href={event.href}
+          class="text-[var(--red)] text-[11px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity shrink-0">
+          <!-- DRAFT: voice pass Rainers -->
+          {event.cta} →
+        </a>
+      </div>
+    )}
+
+  </div>
+</section>
