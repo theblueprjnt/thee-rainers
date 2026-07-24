@@ -1,106 +1,249 @@
 ---
 import Layout from '../layouts/Base.astro';
+import Testimonials from '../components/site/Testimonials.astro';
+import { coachingPhotos } from '../data/coaching-photos';
 ---
-<Layout title="Apply · 1-on-1 Coaching | Thee Rainers">
+
+<Layout
+  title="Apply for 1-on-1 Coaching | Thee Rainers"
+  description="Private Architecture. A coaching framework built around your structure, your schedule, and your goal. Application only.">
   <Fragment slot="head">
-    <meta name="description" content="1-on-1 coaching built around your fight, your body, your schedule. Application only." />
+    <meta name="robots" content="noindex" />
   </Fragment>
 
-  <section class="bg-white flex flex-col justify-center px-8 md:px-16 lg:px-24 pt-28 pb-16 md:py-32 md:min-h-screen">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-16 md:gap-24">
+  <!-- ── HERO ──────────────────────────────────────────────────────────── -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 pt-28 pb-16 md:pt-36 md:pb-20 border-b border-white/5">
+    <div class="max-w-[860px]">
+      <p class="text-white/30 text-[11px] tracking-widest uppercase mb-6">Private Architecture · Application Only</p>
+      <h1 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-6"
+        style="font-size: clamp(2.75rem, 6vw, 5rem);">
+        <!-- DRAFT: voice pass Rainers -->
+        The whole<br/>framework<br/>is yours.
+      </h1>
+      <p class="text-white/50 text-base leading-relaxed mb-10 max-w-[480px]">
+        <!-- DRAFT: voice pass Rainers -->
+        Not a program. A structure built around how you move, when you train, and where the breakdown actually happens.
+      </p>
+      <a href="#apply"
+        class="inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-white/35 hover:text-white/60 transition-colors duration-200">
+        <span class="h-px w-8 bg-white/20"></span>
+        <!-- DRAFT: voice pass Rainers -->
+        See the work, then apply
+      </a>
+    </div>
+  </section>
 
-        <!-- Left: Form (60%) -->
-        <div>
-          <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Application</p>
-          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.9] mb-7">1-on-1<br/>Coaching.</h1>
-          <p class="text-[#0A0A0A]/60 text-base leading-relaxed mb-10 max-w-[460px]">Application only. I read every one myself. If your situation is right for this, we start.</p>
-
-          <div class="border-l-2 border-[#0A0A0A]/10 pl-6 mb-14">
-            <p class="text-[#0A0A0A]/25 text-sm leading-relaxed italic mb-3">"I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."</p>
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:26-27</p>
+  <!-- ── COACHING PHOTO GALLERY ────────────────────────────────────────── -->
+  {coachingPhotos.length > 0 && (
+    <section class="bg-[#0A0A0A] border-b border-white/5" aria-label="Coaching sessions">
+      <div class={`grid gap-px bg-white/5 ${coachingPhotos.length === 1 ? 'grid-cols-1' : coachingPhotos.length === 2 ? 'grid-cols-2' : coachingPhotos.length === 3 ? 'grid-cols-3' : 'grid-cols-2 md:grid-cols-4'}`}>
+        {coachingPhotos.map((photo) => (
+          <div class="overflow-hidden bg-[#0A0A0A]" style="aspect-ratio: 4/3;">
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover object-center grayscale"
+            />
           </div>
-
-          <form id="command-form" class="flex flex-col gap-10">
-            <div class="flex flex-col gap-2">
-              <label for="name" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Full Name</label>
-              <input type="text" id="name" name="full_name" required
-                class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
-            </div>
-
-            <div class="flex flex-col gap-2">
-              <label for="email" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Email</label>
-              <input type="email" id="email" name="email" required placeholder="—"
-                class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
-            </div>
-
-            <div class="flex flex-col gap-2">
-              <label for="record" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Current fight record and training structure</label>
-              <textarea id="record" name="record" rows="3" required placeholder="—"
-                class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
-            </div>
-
-            <div class="flex flex-col gap-2">
-              <label for="flaw" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Where do your mechanics break down under pressure?</label>
-              <textarea id="flaw" name="flaw" rows="3" required placeholder="—"
-                class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
-            </div>
-
-            <div class="flex flex-col gap-2">
-              <label for="goal" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">What do you want to change?</label>
-              <textarea id="goal" name="goal" rows="3" required placeholder="—"
-                class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
-            </div>
-
-            <div>
-              <button type="submit"
-                class="purple-btn inline-flex items-center justify-center font-bold border-2 border-[var(--purple)] text-[var(--purple)] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--purple)] hover:text-white">
-                Submit Application
-              </button>
-              <p id="form-status" class="hidden text-[var(--ink-soft)] text-sm tracking-wide mt-6"></p>
-            </div>
-          </form>
-        </div>
-
-        <!-- Right: Context (40%) -->
-        <div class="hidden md:flex flex-col justify-center gap-10">
-
-          <!-- Giancarlo testimonial -->
-          <div class="border border-[#0A0A0A]/8 overflow-hidden">
-            <div class="relative w-full" style="padding-bottom: 177.78%;">
-              <iframe
-                src="https://www.youtube.com/embed/VCj0Dgfoako"
-                title="Giancarlo · 5-Month 1-on-1 Coaching Result"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                class="absolute inset-0 w-full h-full"
-              ></iframe>
-            </div>
-            <div class="px-6 py-4 bg-[#F6F6F6] border-t border-[#0A0A0A]/8">
-              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-1">1-on-1 Coaching · 5 Months</p>
-              <p class="text-[#0A0A0A]/50 text-xs leading-relaxed">Giancarlo · entrepreneur. We built the work around his sparring and the way his body actually moves.</p>
-            </div>
-          </div>
-
-          <div class="border-l border-[#0A0A0A]/10 pl-10 flex flex-col gap-8">
-            <p class="text-[#0A0A0A]/20 text-[11px] tracking-widest uppercase">How it works</p>
-            <div>
-              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">01</p>
-              <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Single-track. No cohort. One fighter at a time.</p>
-            </div>
-            <div>
-              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">02</p>
-              <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Application first. I need to see what we're working with.</p>
-            </div>
-            <div>
-              <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">03</p>
-              <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">You leave with the playbook. The work has to compound after I'm gone.</p>
-            </div>
-          </div>
-
-        </div>
-
+        ))}
       </div>
+    </section>
+  )}
+
+  <!-- ── WHO THIS IS FOR ───────────────────────────────────────────────── -->
+  <section class="bg-white border-b border-[#0A0A0A]/8 px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+
+      <div>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Who this is for</p>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-8"
+          style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+          <!-- DRAFT: voice pass Rainers -->
+          Right for you if.
+        </h2>
+        <ul class="flex flex-col gap-4">
+          {[
+            'You train boxing seriously and compete or plan to compete.',
+            'You have access to a gym and regular sparring.',
+            'You have at least six months of consistent training behind you.',
+            'You want written structure, not general encouragement.',
+            'You will film your training and submit clips for review.',
+          ].map(item => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#0A0A0A]"></span>
+              <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">{item}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Not the right fit</p>
+        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-8"
+          style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+          <!-- DRAFT: voice pass Rainers -->
+          Pass on this if.
+        </h2>
+        <ul class="flex flex-col gap-4">
+          {[
+            'You are looking for motivation, not mechanics.',
+            'You are a complete beginner with no training base yet.',
+            'You cannot commit to weekly video submission.',
+            'You want a fixed program with no adjustments.',
+          ].map(item => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#0A0A0A]/25"></span>
+              <p class="text-[#0A0A0A]/40 text-sm leading-relaxed">{item}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── HOW THIS IS DIFFERENT ─────────────────────────────────────────── -->
+  <section class="bg-[#0A0A0A] border-b border-white/5 px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[1100px] mx-auto">
+      <p class="text-white/30 text-[11px] tracking-widest uppercase mb-10">How it works</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+        {[
+          {
+            num: '01',
+            heading: 'Movement assessment first.',
+            body: 'The first two weeks are diagnostic. I watch how you move before I write anything.'
+          },
+          {
+            num: '02',
+            heading: 'Written plan for your body.',
+            body: 'Everything is built around your structure, your schedule, and the flaws I actually see.'
+          },
+          {
+            num: '03',
+            heading: 'The playbook stays with you.',
+            body: 'You leave with something written. The work has to compound after the coaching ends.'
+          },
+        ].map(item => (
+          <div class="bg-[#0A0A0A] p-8 md:p-10">
+            <p class="text-white/20 text-[10px] tracking-widest uppercase font-bold mb-5">{item.num}</p>
+            <h3 class="font-black text-white uppercase tracking-tight text-lg leading-tight mb-4">
+              <!-- DRAFT: voice pass Rainers -->
+              {item.heading}
+            </h3>
+            <p class="text-white/50 text-sm leading-relaxed">
+              <!-- DRAFT: voice pass Rainers -->
+              {item.body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EVIDENCE (Giancarlo, 21 weeks) ────────────────────────────────── -->
+  <Testimonials
+    ids={["giancarlo-remote"]}
+    filter="all"
+    background="void"
+    heading="21 weeks."
+    kicker="Evidence"
+  />
+
+  <!-- ── WHAT YOU GET ───────────────────────────────────────────────────── -->
+  <section class="bg-white border-b border-[#0A0A0A]/8 px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[860px]">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">What is included</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-10"
+        style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">
+        <!-- DRAFT: voice pass Rainers -->
+        What you walk away with.
+      </h2>
+      <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
+        {[
+          { label: 'Movement review', detail: 'Diagnostic of how you currently move, what is working, and where force leaks.' },
+          { label: 'Written training plan', detail: 'Built specifically for your body structure, your schedule, and your stated goal.' },
+          { label: 'Async video feedback', detail: 'Submit clips. Receive written and recorded notes on what I see.' },
+          { label: 'Weekly check-in', detail: 'One structured session per week to review progress and adjust the plan.' },
+          { label: 'Playbook document', detail: 'A written record of everything we built together. Yours to train from after we finish.' },
+        ].map(item => (
+          <div class="py-6 grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-2 sm:gap-8">
+            <p class="text-[#0A0A0A] text-sm font-bold uppercase tracking-wide">{item.label}</p>
+            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">{item.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── APPLICATION FORM ──────────────────────────────────────────────── -->
+  <section id="apply" class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24 scroll-mt-20">
+    <div class="max-w-[680px]">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Application</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-4"
+        style="font-size: clamp(2rem, 4vw, 3rem);">
+        <!-- DRAFT: voice pass Rainers -->
+        Apply.
+      </h2>
+      <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-12 max-w-[460px]">
+        <!-- DRAFT: voice pass Rainers -->
+        I read every application myself. If your situation is right for this, we start.
+      </p>
+
+      <form id="command-form" class="flex flex-col gap-10">
+
+        <div class="flex flex-col gap-2">
+          <label for="name" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Full Name</label>
+          <input type="text" id="name" name="full_name" required
+            class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200" />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Email</label>
+          <input type="email" id="email" name="email" required placeholder="—"
+            class="border-b border-[#0A0A0A]/15 bg-transparent py-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/20" />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="record" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Current fight record and training structure</label>
+          <textarea id="record" name="record" rows="3" required placeholder="—"
+            class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="flaw" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">Where do your mechanics break down under pressure?</label>
+          <textarea id="flaw" name="flaw" rows="3" required placeholder="—"
+            class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="goal" class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">What do you want to change?</label>
+          <textarea id="goal" name="goal" rows="3" required placeholder="—"
+            class="border border-[#0A0A0A]/10 bg-transparent p-3 text-[#0A0A0A] text-sm focus:border-[var(--purple)] focus:outline-none transition-colors duration-200 resize-none placeholder:text-[#0A0A0A]/20"></textarea>
+        </div>
+
+        <div>
+          <button type="submit"
+            class="purple-btn inline-flex items-center justify-center font-bold border-2 border-[var(--purple)] text-[var(--purple)] bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--purple)] hover:text-white cursor-pointer">
+            Submit Application
+          </button>
+          <p id="form-status" class="hidden text-[var(--ink-soft)] text-sm tracking-wide mt-6"></p>
+        </div>
+
+      </form>
+
+      <div class="mt-16 pt-12 border-t border-[#0A0A0A]/8">
+        <p class="text-[#0A0A0A]/25 text-[11px] tracking-widest uppercase mb-3">Before you apply</p>
+        <p class="text-[#0A0A0A]/35 text-sm leading-relaxed max-w-[440px]">
+          If you are not sure whether this is the right step, start with the free Footwork Blueprint. It shows how this system is built.
+        </p>
+        <a href="/foundation"
+          class="mt-5 inline-flex items-center gap-2 text-[var(--blue)] text-[11px] font-bold tracking-widest uppercase hover:opacity-60 transition-opacity">
+          Get the Free Blueprint →
+        </a>
+      </div>
+
     </div>
   </section>
 
@@ -143,4 +286,5 @@ import Layout from '../layouts/Base.astro';
 
     initCommandForm();
   </script>
+
 </Layout>

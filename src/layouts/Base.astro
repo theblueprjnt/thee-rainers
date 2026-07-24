@@ -1,6 +1,7 @@
 ---
 import Nav from '../components/site/Nav.astro';
 import Footer from '../components/site/Footer.astro';
+import CookieConsent from '../components/site/CookieConsent.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -51,6 +52,29 @@ const siteSchema = JSON.stringify({
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- Google Consent Mode v2 defaults — must load before GTM -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 500,
+      });
+      // Restore prior 'granted' choice synchronously so GTM sees it on first load.
+      try {
+        if (localStorage.getItem('trb_consent_v1') === 'granted') {
+          gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
+          });
+        }
+      } catch (_) {}
+    </script>
     <!-- Google Tag Manager -->
     <script is:inline>
     if (new URLSearchParams(window.location.search).get('smoke') !== '1') {
@@ -284,6 +308,7 @@ const siteSchema = JSON.stringify({
     </div>
 
   <img src="https://tracker.metricool.com/c3po.jpg?hash=788f135aa4dcbab8c0bd6195948f6bfd" width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true" />
+  <CookieConsent />
   </body>
 </html>
 
