@@ -20,6 +20,7 @@ import type { APIContext } from 'astro';
 import { env as cfEnv } from 'cloudflare:workers';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const KIT_NURTURE_SEQUENCE_ID = '2814253';
+const KIT_WORKSHOP_WAITLIST_TAG_ID = '21454867';
 
 function corsHeaders(origin: string): Record<string, string> {
   return {
@@ -62,7 +63,7 @@ const FUNNEL_MAP = `
         <p style="font-size:12px;color:#888;margin:0;">Footwork and shadowboxing. Both systems together.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
-        <a href="https://theerainers.com/vault" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$87 →</a>
+        <a href="https://theerainers.com/shop" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$87 →</a>
       </td>
     </tr>
     <tr>
@@ -434,8 +435,12 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
     sendResendWelcome(resendKey, email, source, e['SITE_URL'] ?? 'https://theerainers.com').catch(() => {}),
     kitKey
       ? (async () => {
-          const subId = kitTagId
-            ? await kitApplyTag(kitKey, email, full_name, kitTagId).catch((err) => {
+          // workshop-waitlist uses its own dedicated tag, not the general lead tag
+          const resolvedTagId = source === 'workshop-waitlist'
+            ? KIT_WORKSHOP_WAITLIST_TAG_ID
+            : kitTagId;
+          const subId = resolvedTagId
+            ? await kitApplyTag(kitKey, email, full_name, resolvedTagId).catch((err) => {
                 console.warn('[lead-capture] Kit tag failed', { emailLog, err: String(err) });
                 return null;
               })
@@ -443,7 +448,8 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
                 console.warn('[lead-capture] Kit create failed', { emailLog, err: String(err) });
                 return null;
               });
-          if (subId && shouldEnrollSequence) {
+          // No sequence enrollment for workshop-waitlist
+          if (subId && shouldEnrollSequence && source !== 'workshop-waitlist') {
             await kitEnrollSequence(kitKey, email, KIT_NURTURE_SEQUENCE_ID).catch((err) =>
               console.warn('[lead-capture] Kit enroll failed', { emailLog, err: String(err) }),
             );
