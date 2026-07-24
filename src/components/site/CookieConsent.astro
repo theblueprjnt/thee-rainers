@@ -1,28 +1,31 @@
 ---
 // Cookie consent banner — Consent Mode v2 (Google).
-// Shows once. Choice stored in localStorage under key trb_consent_v1.
+// Shows on first paint. Choice stored in localStorage under key trb_consent_v1.
 // Accept: upgrades all consent signals to 'granted'.
-// Decline: keeps defaults (all denied). Banner gone either way.
+// Decline: keeps defaults (all denied). Banner hidden either way.
 ---
 
 <div
   id="trb-consent"
   role="dialog"
   aria-labelledby="trb-consent-title"
-  class="fixed bottom-0 left-0 right-0 z-[150] bg-[#111] border-t border-white/10 hidden"
+  class="fixed bottom-0 left-0 right-0 z-[150] bg-[#0B0B0C] border-t border-white/10 hidden"
   style="box-shadow: 0 -4px 32px rgba(0,0,0,0.5);"
 >
   <div class="max-w-[1280px] mx-auto px-6 md:px-10 py-4 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
-    <p id="trb-consent-title" class="text-white/55 text-xs leading-relaxed">
-      This site uses cookies for analytics. Accept to help us understand what is working.
+    <p id="trb-consent-title" class="text-white/55 text-xs leading-relaxed max-w-[640px]">
+      This site uses cookies for analytics and performance.
+      <a href="/legal/cookie-policy" class="underline hover:text-white/80 transition-colors">Cookie Policy</a>
+      &middot;
+      <a href="/legal/privacy-policy" class="underline hover:text-white/80 transition-colors">Privacy Policy</a>
     </p>
     <div class="flex gap-3 shrink-0">
       <button id="trb-consent-decline"
         class="text-white/40 text-[11px] font-bold tracking-widest uppercase border border-white/12 px-5 py-2.5 hover:border-white/30 hover:text-white/60 transition-colors duration-150 cursor-pointer bg-transparent">
-        Decline
+        Decline non-essential
       </button>
       <button id="trb-consent-accept"
-        class="bg-[var(--red)] text-white text-[11px] font-bold tracking-widest uppercase px-5 py-2.5 hover:opacity-85 transition-opacity duration-150 cursor-pointer border-0">
+        class="tr-btn" style="padding: 0.625rem 1.25rem; font-size: 0.625rem;">
         Accept
       </button>
     </div>

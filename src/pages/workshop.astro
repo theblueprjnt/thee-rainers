@@ -1,310 +1,528 @@
 ---
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
-import { Picture } from 'astro:assets';
-import defenseCover1 from '../assets/defense_cover1.jpg';
-import { WORKSHOP_DATE_ISO, WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../data/workshop.ts';
+import {
+  workshopState, nextDateDisplay,
+  WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT, WORKSHOP_TIME,
+  WORKSHOP_PRICE, WORKSHOP_PAYMENT_LINK,
+  WORKSHOP_QUOTE, WORKSHOP_QUOTE_ATTR, WORKSHOP_VIDEO_ID,
+  NEXT_DATE_ISO,
+} from '../data/workshop.ts';
 
-const faqItems = [
-  {
-    question: "I shadowbox a lot but it does not transfer in sparring. Will this help?",
-    answer: "Yes. The most common reason is that your stance breaks without you noticing. The Defense Workshop builds the awareness and the mechanical foundation that makes shadowboxing transfer to real boxing.",
-  },
-  {
-    question: "I have been training for years. Will this be too basic?",
-    answer: "If you can tell me exactly when your heel drops, where your weight transfers in a hook, and why your chain disconnects under fatigue. This is too basic for very few fighters. Most with five plus years cannot. This fills the gap.",
-  },
-  {
-    question: "I have a fight coming up. Will I be able to apply this in time?",
-    answer: "Fighters with matches inside 30 days have applied the framework in their next sparring round. First pass gives you the mental model. Every pass after that deepens the pattern.",
-  },
-  {
-    question: "I cannot attend live. Will it be recorded?",
-    answer: "Yes. Full recording within 24 hours. Live is preferred. Real-time correction only happens live. The recording lets you re-run the framework as many times as you need.",
-  },
-  {
-    question: "Can I get a refund?",
-    answer: "Yes. Email rainers@theerainers.com within 24 hours of the session ending and I return your money. No friction. No forms. No questions.",
-  },
-];
+const state       = workshopState();
+const dateDisplay = nextDateDisplay();
 
-const eventSchema = JSON.stringify({
+// Schema only valid when a real event is scheduled
+const eventSchema = (state === 'selling' && NEXT_DATE_ISO) ? JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Event",
   "name": "Defense Workshop",
-  "description": "90 minutes. Camera on. Real-time correction on your defensive structure, movement patterns, and mechanical foundation.",
-  "startDate": WORKSHOP_DATE_ISO,
+  "description": "90 minutes. Camera on. Real-time correction on defensive structure, movement, and mechanics.",
+  "startDate": NEXT_DATE_ISO,
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
   "location": { "@type": "VirtualLocation", "url": "https://theerainers.com/workshop" },
   "organizer": { "@type": "Organization", "name": "Thee Rainers", "url": "https://theerainers.com" },
   "offers": {
     "@type": "Offer",
-    "price": "197",
+    "price": String(WORKSHOP_PRICE),
     "priceCurrency": "USD",
-    "url": "https://buy.stripe.com/7sY28r8lt1D06XU6446J20n",
+    "url": WORKSHOP_PAYMENT_LINK,
     "availability": "https://schema.org/InStock"
   }
-});
+}) : null;
 
-const faqSchema = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((item) => ({
-    "@type": "Question",
-    name: item.question,
-    acceptedAnswer: { "@type": "Answer", text: item.answer },
-  })),
-});
+// Headline: real attendee quote when set, otherwise fallback
+const heroHeadline = WORKSHOP_QUOTE || null;
+const heroFallback = 'The mechanics most gyms skip.';
+
+const inclusions = [
+  { label: '90 minutes live', detail: 'Camera on. You are in the session, not watching from the side.' },
+  { label: '5 layers of defense', detail: 'Stance through full defensive structure, built in sequence.' },
+  { label: 'Real-time correction', detail: 'Rainers watching your movement and correcting it during the session.' },
+  { label: 'Sparring application block', detail: 'The framework applied to scenarios. You see where it holds.' },
+  { label: 'Q and A block', detail: 'Direct questions on what showed up in your movement.' },
+  { label: 'Full recording', detail: 'Delivered within 24 hours. Watch again whenever you need it.' },
+];
 ---
 
-<Layout title="Defense Workshop · Thee Rainers">
+<Layout
+  title="Defense Workshop · Thee Rainers"
+  description="90 minutes. Camera on. The 5 layers of defense in boxing. How to position to hit and not get hit.">
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={eventSchema} />
-    <script type="application/ld+json" set:html={faqSchema} />
-    <meta name="description" content={`90 minutes. Live. The 5 layers of defense in boxing. How to position yourself to hit and not get hit. ${WORKSHOP_DATE_LONG}. $197.`} />
-    <meta property="og:title" content="Defense Workshop · Thee Rainers" />
-    <meta property="og:description" content={`90 minutes. Live. The 5 layers of defense in boxing. ${WORKSHOP_DATE_LONG}. $197.`} />
-    <meta property="og:type" content="website" />
+    {eventSchema && <script type="application/ld+json" set:html={eventSchema} />}
+    <meta name="description" content="90 minutes. Camera on. The 5 layers of defense in boxing. How to position to hit and not get hit." />
   </Fragment>
 
-  <!-- HERO: 60/40 — defense_cover above the fold -->
-  <section class="bg-white overflow-hidden border-b border-[#0A0A0A]/8">
-
-    <!-- Mobile image strip -->
-    <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 65vw; max-height: 360px;">
-      <img
-        src="/images/rainers-training.jpg"
-        alt="Rainers demonstrating defensive mechanics"
-        width="1513" height="2171"
-        loading="eager"
-        fetchpriority="high"
-        class="w-full h-full object-cover"
-        style="object-position: 42% 5%;"
-      />
-    </div>
-
-    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[90vh]">
-
-      <!-- Left 60%: Content -->
-      <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Live · {WORKSHOP_DATE_SHORT} · 90 Min · <span id="workshop-countdown" class="tabular-nums" data-workshop-target={WORKSHOP_DATE_ISO}></span></p>
-        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-5xl md:text-7xl leading-[0.8] mb-8">The <span style="color: var(--red);">Defense</span><br/>Workshop.</h1>
-        <p class="text-[#0A0A0A]/60 text-base max-w-[480px] leading-relaxed mb-10">The 5 layers of defense in boxing. How to defend yourself at every level. How to position with your opponent to hit and not get hit. Camera on. Real-time correction.</p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"
-            class="tr-gradient-cta inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase whitespace-nowrap">
-            Reserve Your Seat · $197 →
-          </a>
+  <!-- ================================================================ -->
+  <!-- STATE: WAITLIST — date set, tickets closed (CURRENT STATE)       -->
+  <!-- ================================================================ -->
+  {state === 'waitlist' && (
+    <>
+      <!-- Hero -->
+      <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 pt-32 pb-20 md:pt-44 md:pb-28 border-b border-white/5">
+        <div class="max-w-[780px]">
+          <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Defense Workshop</p>
+          <h1 class="font-black text-white uppercase tracking-tighter leading-[0.84] mb-5"
+            style="font-size: clamp(2.75rem, 6vw, 5rem);">
+            <!-- DRAFT: voice pass Rainers -->
+            The next cohort<br/>is being planned.
+          </h1>
+          <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
+          <p class="text-white/50 text-base leading-relaxed max-w-[480px] mb-10">
+            <!-- DRAFT: voice pass Rainers -->
+            The next Defense Workshop runs Saturday, {WORKSHOP_DATE_LONG}. Add your name to the list and you will get the date and details before it opens publicly.
+          </p>
+          <p class="text-white/30 text-xs tracking-wide">Two options below.</p>
         </div>
-        <p class="text-[11px] text-[#0A0A0A]/30 mt-3">Secure checkout via Stripe · Instant delivery · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a></p>
-      </div>
+      </section>
 
-      <!-- Right 40%: training photo — desktop only -->
-      <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]">
-        <img
-          src="/images/rainers-training.jpg"
-          alt="Rainers demonstrating defensive mechanics"
-          width="1513" height="2171"
-          loading="eager"
-          fetchpriority="high"
-          class="absolute inset-0 w-full h-full object-cover"
-          style="object-position: 42% 5%;"
-        />
-      </div>
+      <!-- Two doors -->
+      <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-20">
+        <div class="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-[#0B0B0C]/10">
 
-    </div>
-  </section>
-
-  <!-- WHAT IS INCLUDED -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-10 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-6">What is included</p>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-6">
-        <div>
-          <p class="text-[#0A0A0A] text-sm font-bold mb-1">90 minutes live</p>
-          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Camera on. You are in the session, not watching from the side.</p>
-        </div>
-        <div>
-          <p class="text-[#0A0A0A] text-sm font-bold mb-1">5 layers of defense</p>
-          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Stance through full defensive structure, built in sequence.</p>
-        </div>
-        <div>
-          <p class="text-[#0A0A0A] text-sm font-bold mb-1">Real-time correction</p>
-          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Rainers watching your movement and correcting it during the session.</p>
-        </div>
-        <div>
-          <p class="text-[#0A0A0A] text-sm font-bold mb-1">Sparring application block</p>
-          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">The framework applied to scenarios. You see where it holds and where it breaks.</p>
-        </div>
-        <div>
-          <p class="text-[#0A0A0A] text-sm font-bold mb-1">Q&A block</p>
-          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Direct questions on what showed up in your movement.</p>
-        </div>
-        <div>
-          <p class="text-[#0A0A0A] text-sm font-bold mb-1">Full recording</p>
-          <p class="text-[#0A0A0A]/40 text-xs leading-relaxed">Delivered within 24 hours. Watch again whenever you need it.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCT CARD -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-[2px]">
-
-        <!-- Left 60%: Workshop — Flagship -->
-        <div class="bg-[#0D1F1F] border border-white/10 hover:border-white/25 transition-colors duration-300 p-12 md:p-16 flex flex-col justify-between min-h-[540px] group">
-          <div>
-            <span class="text-[var(--ink-soft)] text-[10px] tracking-wider md:tracking-widest uppercase">Live · {WORKSHOP_DATE_SHORT}</span>
-            <h2 class="font-black text-white uppercase tracking-tighter mt-4 mb-6 text-3xl md:text-4xl leading-[0.85]">Defense<br/>Workshop</h2>
-            <p class="text-white/55 text-sm leading-relaxed max-w-[380px] mb-10">5 layers of defense. How to position to hit and not get hit. The mechanics your gym doesn't teach.</p>
-            <p class="text-white/50 text-sm leading-relaxed">Foundation, live drilling, and a sparring application block. Full recording delivered within 24 hours.</p>
+          <!-- Door 1: Replay -->
+          <div class="bg-white p-10 md:p-12 flex flex-col">
+            <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">Available Now · $47</p>
+            <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-tight mb-4"
+              style="font-size: clamp(1.75rem, 3vw, 2.25rem);">
+              <!-- DRAFT: voice pass Rainers -->
+              Train the system now.
+            </h2>
+            <p class="text-[#0B0B0C]/55 text-sm leading-relaxed flex-1 mb-8">
+              <!-- DRAFT: voice pass Rainers -->
+              The full Defense Workshop recording. 90 minutes on the 5 layers. Same material. Watch on your schedule.
+            </p>
+            <a href="/workshop-replay" class="tr-btn" style="justify-content:center;">
+              Get the Replay · $47
+            </a>
           </div>
-          <div class="mt-12">
-            <p class="text-white/25 text-[10px] tracking-widest uppercase mb-5">Limited seats · {WORKSHOP_DATE_LONG}</p>
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <span class="text-white font-black text-4xl">$197</span>
-              <div class="flex flex-col items-end gap-1">
-                <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"
-                  class="tr-gradient-cta inline-flex items-center justify-center font-bold text-white px-8 py-4 text-sm tracking-widest uppercase whitespace-nowrap">
-                  Reserve Your Seat →
-                </a>
-                <p class="text-[9px] text-white/25">
-                  <a href="/legal/terms" class="underline hover:text-white/50">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-white/50">Refund Policy</a>
-                </p>
+
+          <!-- Door 2: Waitlist form -->
+          <div class="bg-white p-10 md:p-12 flex flex-col">
+            <p class="text-[var(--navy)] text-[10px] tracking-widest uppercase font-bold mb-4">Defense Workshop · Waitlist</p>
+            <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-tight mb-4"
+              style="font-size: clamp(1.75rem, 3vw, 2.25rem);">
+              <!-- DRAFT: voice pass Rainers -->
+              Join the list.
+            </h2>
+            <p class="text-[#0B0B0C]/55 text-sm leading-relaxed mb-8">
+              <!-- DRAFT: voice pass Rainers -->
+              You will get the date and link before it opens publicly. No commitment.
+            </p>
+
+            <form id="waitlist-form" class="flex flex-col gap-4 flex-1">
+              <div class="flex flex-col gap-1.5">
+                <label for="wl-name" class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase font-bold">First name</label>
+                <input type="text" id="wl-name" name="full_name" required autocomplete="given-name"
+                  class="border-b border-[#0B0B0C]/15 bg-transparent py-3 text-[#0B0B0C] text-sm focus:border-[var(--terra)] focus:outline-none transition-colors" />
               </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="wl-email" class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase font-bold">Email</label>
+                <input type="email" id="wl-email" name="email" required autocomplete="email"
+                  class="border-b border-[#0B0B0C]/15 bg-transparent py-3 text-[#0B0B0C] text-sm focus:border-[var(--terra)] focus:outline-none transition-colors" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="wl-phone" class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase font-bold">Phone <span class="text-[#0B0B0C]/25 normal-case not-uppercase">(optional)</span></label>
+                <input type="tel" id="wl-phone" name="phone" autocomplete="tel"
+                  class="border-b border-[#0B0B0C]/15 bg-transparent py-3 text-[#0B0B0C] text-sm focus:border-[var(--terra)] focus:outline-none transition-colors" />
+              </div>
+              <input type="text" name="website" class="hidden" autocomplete="off" tabindex="-1" />
+              <button type="submit" id="wl-submit"
+                class="tr-btn mt-2" style="justify-content:center;">
+                <!-- DRAFT: voice pass Rainers -->
+                Add me to the list
+              </button>
+            </form>
+
+            <div id="waitlist-success" class="hidden flex-col justify-center flex-1 py-6">
+              <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">You are on the list.</p>
+              <p class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl leading-tight mb-3">
+                <!-- DRAFT: voice pass Rainers -->
+                Details coming soon.
+              </p>
+              <p class="text-[#0B0B0C]/45 text-sm leading-relaxed">
+                <!-- DRAFT: voice pass Rainers -->
+                You will get an email when the date is confirmed and before the link goes public.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Replay proof below -->
+      <Testimonials ids={["giancarlo-remote", "elizabeth-inperson"]} heading="What fighters say" kicker="On Film" background="void" />
+    </>
+  )}
+
+  <!-- ================================================================ -->
+  <!-- STATE: BETWEEN — no date or date passed                          -->
+  <!-- ================================================================ -->
+  {state === 'between' && (
+    <>
+      <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 pt-32 pb-20 md:pt-44 md:pb-28 border-b border-white/5">
+        <div class="max-w-[680px]">
+          <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Defense Workshop</p>
+          <h1 class="font-black text-white uppercase tracking-tighter leading-[0.84] mb-5"
+            style="font-size: clamp(2.75rem, 6vw, 5rem);">
+            <!-- DRAFT: voice pass Rainers -->
+            No active cohort<br/>at the moment.
+          </h1>
+          <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
+          <p class="text-white/50 text-base leading-relaxed max-w-[440px]">
+            <!-- DRAFT: voice pass Rainers -->
+            The full recording from the last session is available. Add your name below and you will hear about the next one first.
+          </p>
+        </div>
+      </section>
+
+      <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-20">
+        <div class="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-[#0B0B0C]/10">
+          <div class="bg-white p-10 md:p-12 flex flex-col">
+            <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">Available Now · $47</p>
+            <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-tight mb-4"
+              style="font-size: clamp(1.75rem, 3vw, 2.25rem);">
+              <!-- DRAFT: voice pass Rainers -->
+              Train the system now.
+            </h2>
+            <p class="text-[#0B0B0C]/55 text-sm leading-relaxed flex-1 mb-8">
+              <!-- DRAFT: voice pass Rainers -->
+              The full Defense Workshop recording. 90 minutes. Same framework. Watch when you are ready.
+            </p>
+            <a href="/workshop-replay" class="tr-btn" style="justify-content:center;">
+              Get the Replay · $47
+            </a>
+          </div>
+          <div class="bg-white p-10 md:p-12 flex flex-col">
+            <p class="text-[var(--navy)] text-[10px] tracking-widest uppercase font-bold mb-4">Next Workshop · TBA</p>
+            <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-tight mb-4"
+              style="font-size: clamp(1.75rem, 3vw, 2.25rem);">
+              <!-- DRAFT: voice pass Rainers -->
+              Get notified first.
+            </h2>
+            <p class="text-[#0B0B0C]/55 text-sm leading-relaxed mb-8">
+              <!-- DRAFT: voice pass Rainers -->
+              Add your name. No commitment. You will hear about the next date before it is announced publicly.
+            </p>
+            <form id="waitlist-form" class="flex flex-col gap-4 flex-1">
+              <div class="flex flex-col gap-1.5">
+                <label for="wl-name" class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase font-bold">First name</label>
+                <input type="text" id="wl-name" name="full_name" required autocomplete="given-name"
+                  class="border-b border-[#0B0B0C]/15 bg-transparent py-3 text-[#0B0B0C] text-sm focus:border-[var(--terra)] focus:outline-none transition-colors" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="wl-email" class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase font-bold">Email</label>
+                <input type="email" id="wl-email" name="email" required autocomplete="email"
+                  class="border-b border-[#0B0B0C]/15 bg-transparent py-3 text-[#0B0B0C] text-sm focus:border-[var(--terra)] focus:outline-none transition-colors" />
+              </div>
+              <input type="text" name="website" class="hidden" autocomplete="off" tabindex="-1" />
+              <button type="submit" id="wl-submit" class="tr-btn mt-2" style="justify-content:center;">
+                <!-- DRAFT: voice pass Rainers -->
+                Notify me
+              </button>
+            </form>
+            <div id="waitlist-success" class="hidden flex-col justify-center flex-1 py-6">
+              <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">You are on the list.</p>
+              <p class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl leading-tight mb-3">
+                <!-- DRAFT: voice pass Rainers -->
+                Details coming soon.
+              </p>
+              <p class="text-[#0B0B0C]/45 text-sm leading-relaxed">
+                <!-- DRAFT: voice pass Rainers -->
+                You will get an email when the next date is confirmed.
+              </p>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Right 40%: Context stacked -->
-        <div class="flex flex-col gap-[2px]">
+      <Testimonials ids={["giancarlo-remote", "elizabeth-inperson"]} heading="What fighters say" kicker="On Film" background="void" />
+    </>
+  )}
 
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex-1">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Who this is for</p>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Fighters who train to improve. You know the problem is structural. You cannot name it yet.</p>
-          </div>
-
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex-1">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">The Composure Guarantee</p>
-            <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Show up and do the work. If you leave without a clear framework for how you defend yourself, email rainers@theerainers.com within 24 hours. Full refund. No questions.</p>
-          </div>
-
-          <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 p-10 flex-1">
-            <p class="text-[#0A0A0A]/20 text-xs leading-relaxed italic mb-4">"I discipline my body and keep it under control."</p>
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase">1 Corinthians 9:27</p>
-          </div>
-
+  <!-- ================================================================ -->
+  <!-- STATE: SELLING — tickets open, future date set                   -->
+  <!-- ================================================================ -->
+  {state === 'selling' && (
+    <>
+      <!-- 1. Hero -->
+      <section class="bg-[var(--warm)] overflow-hidden border-b border-[#0B0B0C]/8">
+        <div class="md:hidden w-full overflow-hidden bg-[#0B0B0C]" style="height: 65vw; max-height: 360px;">
+          <img src="/images/rainers-training.jpg" alt="Rainers demonstrating defensive mechanics"
+            width="1513" height="2171" loading="eager" fetchpriority="high"
+            class="w-full h-full object-cover grayscale" style="object-position: 42% 5%;" />
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- DEFENSE COVER 1: secondary image + testimonial text -->
-  <section class="bg-[#0A0A0A] overflow-hidden">
-    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1fr]">
-
-      <!-- Image: defense_cover1 -->
-      <div class="relative overflow-hidden" style="min-height: 480px;">
-        <Picture
-          src={defenseCover1}
-          formats={['avif', 'webp']}
-          widths={[600, 900, 1300]}
-          sizes="(max-width: 768px) 100vw, 50vw"
-          alt="Defense Workshop, live training session with Rainers"
-          quality={80}
-          loading="lazy"
-          class="absolute inset-0 w-full h-full object-cover object-top"
-        />
-      </div>
-
-      <!-- Testimonial -->
-      <div class="px-8 md:px-16 py-16 md:py-24 flex flex-col justify-center">
-        <p class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.88] mb-8">
-          "The structure that was missing from my entire training."
-        </p>
-        <p class="text-white/50 text-sm leading-relaxed mb-10 max-w-[400px]">
-          Real-time correction on live movement. The actual mechanical gaps showing up in sparring, addressed in the session.
-        </p>
-        <div class="border-t border-white/10 pt-6">
-          <p class="text-white/70 text-sm font-bold">Giancarlo</p>
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-1">Entrepreneur · 6 Months In The System</p>
+        <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[90vh]">
+          <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
+            <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Defense Workshop · Live · {WORKSHOP_DATE_SHORT}</p>
+            <!-- Quote headline or fallback -->
+            {heroHeadline ? (
+              <h1 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.84] mb-4"
+                style="font-size: clamp(2.25rem, 5vw, 3.75rem);">
+                <!-- DRAFT: voice pass Rainers -->
+                {heroHeadline}
+              </h1>
+              <p class="text-[#0B0B0C]/45 text-sm tracking-wide uppercase font-bold mb-8">{WORKSHOP_QUOTE_ATTR}</p>
+            ) : (
+              <h1 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.84] mb-8"
+                style="font-size: clamp(2.25rem, 5vw, 3.75rem);">
+                <!-- DRAFT: voice pass Rainers -->
+                {heroFallback}
+              </h1>
+            )}
+            <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
+            <p class="text-[#0B0B0C]/60 text-base max-w-[460px] leading-relaxed mb-10">
+              90 minutes. Camera on. Real-time correction on defensive structure, movement, and mechanics. {WORKSHOP_DATE_LONG} · {WORKSHOP_TIME}.
+            </p>
+            <div class="flex flex-col gap-3 max-w-[400px]">
+              <a href={WORKSHOP_PAYMENT_LINK} class="tr-btn" style="justify-content:center;">
+                Reserve your seat · ${WORKSHOP_PRICE}
+              </a>
+              <p class="text-[11px] text-[#0B0B0C]/30">
+                Secure checkout via Stripe ·
+                <a href="/legal/refund-policy" class="underline hover:text-[#0B0B0C]/60">Refund Policy</a>
+              </p>
+            </div>
+          </div>
+          <div class="hidden md:block relative overflow-hidden bg-[#0B0B0C]">
+            <img src="/images/rainers-training.jpg" alt="Rainers demonstrating defensive mechanics"
+              width="1513" height="2171" loading="eager" fetchpriority="high"
+              class="absolute inset-0 w-full h-full object-cover grayscale" style="object-position: 42% 5%;" />
+          </div>
         </div>
-      </div>
+      </section>
 
-    </div>
-  </section>
+      <!-- 2. Video slot — hidden when WORKSHOP_VIDEO_ID is empty -->
+      {WORKSHOP_VIDEO_ID && (
+        <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-16 md:py-24 border-b border-white/5">
+          <div class="max-w-[760px] mx-auto">
+            <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-8 text-center">Before you decide</p>
+            <div class="relative w-full" style="aspect-ratio: 16/9;">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${WORKSHOP_VIDEO_ID}?rel=0`}
+                title="Defense Workshop preview"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+                class="absolute inset-0 w-full h-full border-0"
+              ></iframe>
+            </div>
+          </div>
+        </section>
+      )}
 
-  <!-- Proof — fighters on film -->
-  <Testimonials ids={["giancarlo-remote", "elizabeth-inperson"]} heading="What fighters say" kicker="Results · On Film" background="void" />
+      <!-- 3. Pain block -->
+      <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20 md:py-28 border-b border-white/5">
+        <div class="max-w-[860px]">
+          <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-8">The problem</p>
+          <h2 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-8"
+            style="font-size: clamp(2rem, 4vw, 3.25rem);">
+            <!-- DRAFT: voice pass Rainers -->
+            You can see the punch coming.<br/>You still get hit.
+          </h2>
+          <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
+          <p class="text-white/50 text-base leading-relaxed max-w-[560px] mb-6">
+            <!-- DRAFT: voice pass Rainers -->
+            The punch you did not see is not the problem. The one you saw and could not move away from is. That is a position problem. Position is a stance problem. Stance is where this session starts.
+          </p>
+          <p class="text-white/35 text-sm leading-relaxed max-w-[520px]">
+            <!-- DRAFT: voice pass Rainers -->
+            Most defense training starts at the hands. This starts at the base. You cannot use your hands correctly if your feet and position are wrong first.
+          </p>
+        </div>
+        <div class="mt-14">
+          <a href={WORKSHOP_PAYMENT_LINK} class="tr-btn">
+            Reserve your seat · ${WORKSHOP_PRICE}
+          </a>
+        </div>
+      </section>
 
-  <!-- FAQ -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-20 border-t border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto w-full">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-12">Questions</p>
-      <div class="flex flex-col divide-y divide-[#0A0A0A]/8 max-w-[720px]">
-        {faqItems.map((item) => (
-          <details class="group py-8 cursor-pointer">
-            <summary class="font-bold text-[#0A0A0A]/60 text-sm tracking-wide list-none flex items-center justify-between gap-8 hover:text-[#0A0A0A] transition-colors duration-200">
-              {item.question}
-              <span class="text-[var(--ink-soft)] shrink-0 text-lg leading-none group-open:rotate-45 transition-transform duration-200">+</span>
-            </summary>
-            <p class="text-[#0A0A0A]/35 text-sm leading-relaxed mt-6">{item.answer}</p>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
+      <!-- 4. Fit list -->
+      <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-20 md:py-28 border-b border-[#0B0B0C]/8">
+        <div class="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+          <div>
+            <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">This is for you if</p>
+            <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.86] mb-8"
+              style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+              <!-- DRAFT: voice pass Rainers -->
+              Right for you.
+            </h2>
+            <ul class="flex flex-col gap-4">
+              {[
+                'You train boxing and want to stop eating punches you should be avoiding.',
+                'Your defense breaks down when pressure comes and you do not know why.',
+                'You can shadowbox cleanly but it does not transfer to sparring.',
+                'You want a structure you can drill, not advice you forget.',
+              ].map(item => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[var(--terra)]"></span>
+                  <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">
+                    <!-- DRAFT: voice pass Rainers -->
+                    {item}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p class="text-[#0B0B0C]/35 text-[11px] tracking-widest uppercase font-bold mb-6">Pass on this if</p>
+            <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.86] mb-8"
+              style="font-size: clamp(1.75rem, 3vw, 2.5rem);">
+              <!-- DRAFT: voice pass Rainers -->
+              Not the right fit.
+            </h2>
+            <ul class="flex flex-col gap-4">
+              {[
+                'You are looking for motivation or general fitness content.',
+                'You are a complete beginner with no boxing training at all.',
+                'You want recorded advice with no camera on.',
+              ].map(item => (
+                <li class="flex items-start gap-3">
+                  <span class="mt-1.5 h-1.5 w-1.5 shrink-0 bg-[#0B0B0C]/20"></span>
+                  <p class="text-[#0B0B0C]/40 text-sm leading-relaxed">
+                    <!-- DRAFT: voice pass Rainers -->
+                    {item}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
-  <!-- Replay down-path -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-12 border-t border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6">
-      <div>
-        <p class="text-[#0A0A0A]/60 text-sm font-bold mb-1">Can't make it live?</p>
-        <p class="text-[#0A0A0A]/30 text-sm">The full session recorded. Same framework. Watch on your schedule.</p>
-      </div>
-      <div class="flex gap-4 shrink-0">
-        <a href="/workshop-replay" class="inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-8 py-3 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white whitespace-nowrap">Get the Replay · $47 →</a>
-        <a href="/foundation" class="text-[#0A0A0A]/30 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/60 transition-colors self-center">Free Blueprint →</a>
-      </div>
-    </div>
-  </section>
+      <!-- 5. Objection pair -->
+      <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20 md:py-28 border-b border-white/5">
+        <div class="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+          <div>
+            <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">How this is different</p>
+            <h2 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-6"
+              style="font-size: clamp(1.75rem, 3vw, 2.25rem);">
+              <!-- DRAFT: voice pass Rainers -->
+              Base first.
+            </h2>
+            <div class="h-0.5 w-10 bg-[var(--terra)] mb-8"></div>
+            <p class="text-white/50 text-sm leading-relaxed">
+              <!-- DRAFT: voice pass Rainers -->
+              Most workshops teach you what to do under pressure. This session teaches you why the position breaks before pressure arrives. The base controls everything. Fix the base and the rest becomes trainable.
+            </p>
+          </div>
+          <div>
+            <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">How you know it is real</p>
+            <h2 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-6"
+              style="font-size: clamp(1.75rem, 3vw, 2.25rem);">
+              <!-- DRAFT: voice pass Rainers -->
+              Documented work.
+            </h2>
+            <div class="h-0.5 w-10 bg-[var(--terra)] mb-8"></div>
+            <p class="text-white/50 text-sm leading-relaxed mb-4">
+              <!-- DRAFT: voice pass Rainers -->
+              Rainers has run documented 1-on-1 coaching engagements. The Footwork Blueprint has been downloaded by fighters training at home, in gyms, and preparing for competition.
+            </p>
+            <p class="text-white/30 text-sm leading-relaxed">
+              <!-- DRAFT: voice pass Rainers -->
+              The Composure Guarantee: show up and do the work. If you leave without a clear framework for how you defend yourself, email rainers@theerainers.com within 24 hours. Full refund. No forms.
+            </p>
+          </div>
+        </div>
+        <div class="mt-14">
+          <a href={WORKSHOP_PAYMENT_LINK} class="tr-btn">
+            Reserve your seat · ${WORKSHOP_PRICE}
+          </a>
+        </div>
+      </section>
 
-  <!-- Final CTA -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-12 md:py-24 border-t border-[#0A0A0A]/8">
-    <div class="max-w-[1280px] mx-auto w-full flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
-      <div>
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">One session. The mechanics start here.</p>
-        <h2 class="font-black text-[#0A0A0A]/55 uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] max-w-[560px]">"I do not run aimlessly. I do not box as one beating the air."</h2>
-        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mt-4">1 Corinthians 9:26</p>
-      </div>
-      <div class="flex flex-col gap-4 shrink-0">
-        <a href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"
-          class="tr-gradient-cta inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase whitespace-nowrap">
-          Reserve Your Seat · $197 →
-        </a>
-        <a href="/workshop-replay"
-          class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/15 text-[#0A0A0A]/30 bg-transparent px-10 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:border-[#0A0A0A]/30 hover:text-[#0A0A0A]/50 whitespace-nowrap">
-          Get the Replay · $47 →
-        </a>
-        <p class="text-[9px] text-[#0A0A0A]/25 text-right"><a href="/legal/terms" class="underline hover:text-[#0A0A0A]/50">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/50">Refund Policy</a></p>
-        <a href="/foundation" class="text-[9px] text-[#0A0A0A]/30 font-bold tracking-widest uppercase hover:text-[#0A0A0A]/55 transition-colors text-right">Not ready · Free Blueprint →</a>
-      </div>
-    </div>
-  </section>
+      <!-- 6. What you get -->
+      <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-20 md:py-28 border-b border-[#0B0B0C]/8">
+        <div class="max-w-[860px]">
+          <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">What is included</p>
+          <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.86] mb-4"
+            style="font-size: clamp(2rem, 4vw, 3rem);">
+            <!-- DRAFT: voice pass Rainers -->
+            The full session.
+          </h2>
+          <div class="h-0.5 w-12 bg-[var(--terra)] mb-10"></div>
+          <div class="flex flex-col divide-y divide-[#0B0B0C]/8 mb-10">
+            {inclusions.map(item => (
+              <div class="py-5 grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-2 sm:gap-8">
+                <p class="text-[#0B0B0C] text-sm font-bold uppercase tracking-wide">{item.label}</p>
+                <p class="text-[#0B0B0C]/50 text-sm leading-relaxed">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+          <div class="flex items-center gap-6 flex-wrap">
+            <span class="font-black text-[#0B0B0C] text-4xl">${WORKSHOP_PRICE}</span>
+            <a href={WORKSHOP_PAYMENT_LINK} class="tr-btn">
+              Reserve your seat
+            </a>
+          </div>
+          <p class="mt-4 text-[11px] text-[#0B0B0C]/30">
+            Secure checkout via Stripe ·
+            <a href="/legal/terms" class="underline hover:text-[#0B0B0C]/60">Terms</a> &amp;
+            <a href="/legal/refund-policy" class="underline hover:text-[#0B0B0C]/60">Refund Policy</a>
+          </p>
+        </div>
+      </section>
+
+      <!-- 7. Proof slots -->
+      <Testimonials ids={["giancarlo-remote", "elizabeth-inperson"]} heading="What fighters say" kicker="On Film" background="void" />
+
+      <!-- 8. Final CTA -->
+      <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-16 md:py-24 border-t border-[#0B0B0C]/8">
+        <div class="max-w-[1100px] mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-10">
+          <div class="max-w-[560px]">
+            <p class="text-[#0B0B0C]/25 font-black uppercase tracking-tighter leading-[0.9] mb-4"
+              style="font-size: clamp(1.5rem, 3.5vw, 2.5rem);">
+              "I do not run aimlessly. I do not box as one beating the air."
+            </p>
+            <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">1 Corinthians 9:26</p>
+          </div>
+          <div class="flex flex-col gap-4 shrink-0">
+            <a href={WORKSHOP_PAYMENT_LINK} class="tr-btn">
+              Reserve your seat · ${WORKSHOP_PRICE}
+            </a>
+            <a href="/workshop-replay"
+              class="tr-btn tr-btn--secondary">
+              Get the Replay · $47
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  )}
+
 </Layout>
 
 <script>
-  const el = document.getElementById('workshop-countdown');
-  if (el) {
-    const iso = el.getAttribute('data-workshop-target') || '';
-    const target = new Date(iso + 'T00:00:00').getTime();
-    const update = () => {
-      const days = Math.ceil((target - Date.now()) / 86400000);
-      el.textContent = days > 0 ? days + ' days away' : 'Today';
-    };
-    update();
-  }
+  // Waitlist form handler — same pattern as popup
+  (function () {
+    var form    = document.getElementById('waitlist-form') as HTMLFormElement | null;
+    var submit  = document.getElementById('wl-submit') as HTMLButtonElement | null;
+    var success = document.getElementById('waitlist-success');
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name  = ((document.getElementById('wl-name')  as HTMLInputElement)?.value ?? '').trim();
+      var email = ((document.getElementById('wl-email') as HTMLInputElement)?.value ?? '').trim();
+      var phone = ((document.getElementById('wl-phone') as HTMLInputElement)?.value ?? '').trim();
+      if (!email) return;
+      if (submit) { submit.disabled = true; submit.textContent = 'Adding you...'; }
+
+      fetch('/api/lead-capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ full_name: name, email: email, phone: phone, source: 'workshop-waitlist' }),
+      }).catch(() => {}).finally(() => {
+        if (form) form.classList.add('hidden');
+        if (success) {
+          success.classList.remove('hidden');
+          success.style.display = 'flex';
+        }
+        if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'workshop-waitlist', currency: 'USD', value: 0 });
+      });
+    });
+  })();
 </script>

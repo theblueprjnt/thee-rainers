@@ -1,10 +1,14 @@
 /*
  * COLOR LAW — enforced, no exceptions in visible copy or code
- * RED    #E11D2A  (--red)    — action fills only. One primary CTA per screen.
- * BLUE   #2348C6  (--blue)   — entry-tier labels and inline links only. Never a fill CTA.
- * PURPLE #7C3AED  (--purple) — Private Architecture + Community labels only.
- * Gradients: multi-hue banned. Single-color-to-transparent overlay fades are legal (hero image masks).
+ * --terra #c84d3a  — primary CTA fills, eyebrow text, divider lines (Myron's gold role)
+ * --navy  #1e3a5f  — secondary accent, entry-tier labels only. Never a fill CTA.
+ * --purple #7C3AED — Community labels and buttons only.
+ * --void  #0B0B0C  — dark section backgrounds
+ * --warm  #f7f5f2  — warm white section backgrounds
+ * Gradients: multi-hue banned. Single-color-to-transparent overlay fades legal (hero masks).
  * WCAG: 4.5:1 text, 3:1 UI components. Never communicate state by color alone.
+ *
+ * Legacy aliases kept for backwards compat: --red = --terra, --blue = --navy.
  */
 
 @import "tailwindcss";
@@ -12,19 +16,28 @@
 
 :root {
   --paper:    #FFFFFF;
-  --ink:      #0A0A0A;
+  --warm:     #f7f5f2;
+  --ink:      #0B0B0C;
+  --void:     #0B0B0C;
   --ink-soft: #667280;
-  --red:      #E11D2A;
-  --blue:     #2348C6;
+  --terra:    #c84d3a;
+  --navy:     #1e3a5f;
   --purple:   #7C3AED;
+  /* legacy aliases */
+  --red:      #c84d3a;
+  --blue:     #1e3a5f;
 }
 
 @theme {
   --color-paper:    #FFFFFF;
-  --color-ink:      #0A0A0A;
+  --color-warm:     #f7f5f2;
+  --color-ink:      #0B0B0C;
+  --color-void:     #0B0B0C;
   --color-ink-soft: #667280;
-  --color-red:      #E11D2A;
-  --color-blue:     #2348C6;
+  --color-terra:    #c84d3a;
+  --color-navy:     #1e3a5f;
+  --color-red:      #c84d3a;
+  --color-blue:     #1e3a5f;
   --color-purple:   #7C3AED;
   --color-cream:    #F6F6F6;
   --color-charcoal: #141414;
@@ -66,9 +79,9 @@
   }
 
   #site-nav.is-scrolled {
-    background-color: rgba(255, 255, 255, 0.97);
-    border-bottom: 1px solid rgba(10, 10, 10, 0.10);
-    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+    background-color: rgba(11, 11, 12, 0.97);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 1px 16px rgba(0, 0, 0, 0.35);
   }
 }
 
@@ -196,6 +209,71 @@
   .copper-btn {
     will-change: background-color, color;
     transform: translateZ(0);
+  }
+
+  /* Primary site button — Myron pattern, terracotta fill */
+  .tr-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--terra);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: filter 0.15s ease;
+    text-decoration: none;
+  }
+  .tr-btn:hover { filter: brightness(0.88); }
+  .tr-btn:focus-visible {
+    outline: 2px solid var(--terra);
+    outline-offset: 3px;
+  }
+  .tr-btn--secondary {
+    background: transparent;
+    color: var(--terra);
+    border: 2px solid var(--terra);
+  }
+  .tr-btn--secondary:hover { background: var(--terra); color: #FFFFFF; }
+  .tr-btn--ghost {
+    background: transparent;
+    color: #FFFFFF;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+  .tr-btn--ghost:hover { border-color: #FFFFFF; }
+
+  /* Section header pattern — centered, uppercase, terracotta divider */
+  .tr-section-head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .tr-section-head .kicker {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 1rem;
+  }
+  .tr-section-head h2 {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.88;
+    margin: 0 0 1.25rem;
+  }
+  .tr-section-head .divider {
+    display: block;
+    width: 2.5rem;
+    height: 2px;
+    background: var(--terra);
+    margin: 0 auto;
   }
 
   /* Scripture block — kept dark for gravitas */

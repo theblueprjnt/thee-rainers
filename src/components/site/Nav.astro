@@ -1,62 +1,62 @@
 ---
-import { WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
+import { workshopState, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
 
 const NAV_LINKS = [
   { label: 'Blueprints', href: '/shop' },
   { label: 'Workshop',   href: '/workshop' },
   { label: 'Community',  href: '/community' },
 ];
+
+const wState = workshopState();
+const showBar = wState !== 'between';
+const barLabel = wState === 'selling'
+  ? `Defense Workshop · ${WORKSHOP_DATE_SHORT} · Reserve your seat →`
+  : `Defense Workshop · ${WORKSHOP_DATE_SHORT} · Join the waitlist →`;
 ---
-<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-[#0A0A0A]/8">
 
-  <!-- Announcement bar: state determined at runtime by JS -->
-  <div id="tr-bar" style="display:none;" class="bg-[#0A0A0A] relative">
-    <div class="max-w-[1140px] mx-auto px-6 py-2 flex items-center justify-center">
-      <a id="tr-bar-pre" href="/workshop"
-        class="text-white text-[10px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-75 transition-opacity text-center">
-        Live Workshop · {WORKSHOP_DATE_SHORT} · Reserve your spot →
-      </a>
-      <a id="tr-bar-post" href="/workshop-replay"
-        class="text-white text-[10px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-75 transition-opacity text-center"
-        style="display:none;">
-        Workshop replay available · Watch it now →
-      </a>
-      <button id="tr-bar-close" aria-label="Dismiss announcement"
-        class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-2 leading-none text-base">
-        ×
-      </button>
+<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0B0B0C] border-b border-white/8">
+
+  {showBar && (
+    <div id="tr-bar" class="bg-[#c84d3a] relative">
+      <div class="max-w-[1140px] mx-auto px-6 py-2 flex items-center justify-center">
+        <a href="/workshop"
+          class="text-white text-[10px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-75 transition-opacity text-center">
+          {barLabel}
+        </a>
+        <button id="tr-bar-close" aria-label="Dismiss announcement"
+          class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-2 leading-none text-base">
+          ×
+        </button>
+      </div>
     </div>
-  </div>
+  )}
 
-  <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center gap-3 md:gap-6">
+  <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center gap-4 md:gap-8">
     <a href="/" class="z-[60] flex items-center shrink-0" aria-label="Thee Rainers home">
-      <picture>
-        <source srcset="/images/logo-trb.webp" type="image/webp" />
-        <img src="/images/logo-trb.png" alt="Thee Rainers" width="160" height="200" class="h-10 md:h-12 w-auto" />
-      </picture>
-    </a>
-
-    <!-- Community CTA: primary conversion path -->
-    <a href="/community" data-nav-path="/community"
-      class="inline-flex items-center text-white font-bold tracking-widest uppercase
-             text-[9px] md:text-[10px] px-2.5 md:px-3 py-1.5 md:py-2 leading-none whitespace-nowrap
-             transition-opacity duration-150 hover:opacity-80
-             focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-      style="background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);">
-      Checkpoint →
+      <img src="/images/trb-logo-nobg.png" alt="Thee Rainers" width="120" height="40" class="h-9 md:h-10 w-auto" />
     </a>
 
     <nav class="hidden md:flex items-center gap-8 ml-auto" aria-label="Primary">
       {NAV_LINKS.map((l) => (
-        <a href={l.href} data-nav-path={l.href} class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase hover:text-[#0A0A0A] transition-colors duration-200">{l.label}</a>
+        <a href={l.href} data-nav-path={l.href}
+          class="text-white/50 text-[11px] tracking-widest uppercase hover:text-white transition-colors duration-200">
+          {l.label}
+        </a>
       ))}
-      <a href="/command" class="text-[var(--purple)] text-[11px] tracking-widest uppercase font-bold hover:opacity-70 transition-opacity duration-200">1-ON-1 →</a>
+      <a href="/command"
+        class="text-white/50 text-[11px] tracking-widest uppercase hover:text-white transition-colors duration-200">
+        1-ON-1
+      </a>
+      <a href="/community" data-nav-path="/community" class="tr-btn" style="padding: 0.6rem 1.25rem; font-size: 0.625rem;">
+        Checkpoint →
+      </a>
     </nav>
 
-    <button id="menu-open" type="button" class="tr-menu-toggle md:hidden z-[60] ml-auto p-2 -mr-2 text-[#0A0A0A] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2"
+    <button id="menu-open" type="button"
+      class="tr-menu-toggle md:hidden z-[60] ml-auto p-2 -mr-2 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--terra)] focus-visible:ring-offset-2"
       aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
   </div>
@@ -71,38 +71,35 @@ const NAV_LINKS = [
 
   <div class="tr-menu-topbar">
     <a href="/" class="flex items-center" aria-label="Thee Rainers home">
-      <picture>
-        <source srcset="/images/logo-trb.webp" type="image/webp" />
-        <img src="/images/logo-trb.png" alt="Thee Rainers" width="160" height="200" class="h-10 w-auto" />
-      </picture>
+      <img src="/images/trb-logo-nobg.png" alt="Thee Rainers" width="120" height="40" class="h-9 w-auto brightness-0 invert" />
     </a>
     <button id="menu-close" type="button" class="tr-menu-close" aria-label="Close menu">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
   </div>
 
   <nav class="tr-menu-body" aria-label="Site navigation">
-    <!-- Community: primary conversion path -->
-    <a href="/community" data-nav-path="/community" class="tr-menu-cta" style="margin-top:0.5rem;background:linear-gradient(135deg,#833ab4 0%,#fd1d1d 50%,#fcb045 100%);color:#FFFFFF;">
+    <a href="/community" data-nav-path="/community" class="tr-btn" style="width:100%;margin-top:0.5rem;justify-content:center;">
       Checkpoint →
     </a>
-
-    <ul class="flex flex-col mt-4">
+    <ul class="flex flex-col mt-6">
       {NAV_LINKS.map((l) => (
-        <li class="border-b border-[#0A0A0A]/10">
-          <a href={l.href} data-nav-path={l.href} class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0A0A0A] hover:opacity-70 transition-opacity">
+        <li class="border-b border-white/10">
+          <a href={l.href} data-nav-path={l.href}
+            class="block py-5 text-3xl font-black uppercase tracking-tighter text-white hover:text-[var(--terra)] transition-colors">
             {l.label}
           </a>
         </li>
       ))}
+      <li class="border-b border-white/10">
+        <a href="/command"
+          class="block py-5 text-3xl font-black uppercase tracking-tighter text-white hover:text-[var(--terra)] transition-colors">
+          1-ON-1
+        </a>
+      </li>
     </ul>
-
-    <p class="mt-8 text-[10px] tracking-widest uppercase text-[#0A0A0A]/35">1-on-1 Coaching · Application Only</p>
-    <a href="/command" class="block text-xs tracking-widest uppercase font-bold mt-2 text-[var(--purple)] hover:opacity-70 transition-opacity duration-200">
-      1-ON-1 →
-    </a>
   </nav>
 </div>
 
@@ -111,14 +108,12 @@ const NAV_LINKS = [
     position: fixed;
     inset: 0;
     z-index: 100;
-    background-color: #FFFFFF;
+    background-color: #0B0B0C;
     overscroll-behavior: contain;
     flex-direction: column;
     display: none;
   }
-  .tr-mobile-menu[data-open="true"] {
-    display: flex;
-  }
+  .tr-mobile-menu[data-open="true"] { display: flex; }
   .tr-menu-backdrop {
     position: absolute;
     inset: 0;
@@ -132,45 +127,27 @@ const NAV_LINKS = [
     justify-content: space-between;
     height: 4rem;
     padding: 0 1.5rem;
-    border-bottom: 1px solid rgba(10,10,10,0.08);
-    background-color: #FFFFFF;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background-color: #0B0B0C;
   }
   .tr-menu-close {
     position: relative;
     z-index: 2;
     margin-right: -0.5rem;
     padding: 0.5rem;
-    color: #0A0A0A;
+    color: #FFFFFF;
     background: transparent;
     border: 0;
     cursor: pointer;
-  }
-  .tr-menu-close:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--blue);
   }
   .tr-menu-body {
     position: relative;
     z-index: 1;
     flex: 1;
     overflow-y: auto;
-    padding: 0.5rem 1.5rem 2rem;
-    background-color: #FFFFFF;
+    padding: 1rem 1.5rem 3rem;
+    background-color: #0B0B0C;
   }
-  .tr-menu-cta {
-    display: inline-flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 1.5rem;
-    font-size: 0.875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-    border-radius: 0;
-    transition: opacity 150ms;
-  }
-  .tr-menu-cta:hover { opacity: 0.85; }
   html[data-menu-open="true"], body[data-menu-open="true"] {
     overflow: hidden;
   }
@@ -178,10 +155,10 @@ const NAV_LINKS = [
 
 <script>
   function initNav() {
-    const openBtn   = document.getElementById('menu-open') as HTMLButtonElement | null;
-    const closeBtn  = document.getElementById('menu-close') as HTMLButtonElement | null;
-    const backdrop  = document.getElementById('menu-backdrop');
-    const menu      = document.getElementById('mobile-menu') as HTMLElement | null;
+    const openBtn  = document.getElementById('menu-open') as HTMLButtonElement | null;
+    const closeBtn = document.getElementById('menu-close') as HTMLButtonElement | null;
+    const backdrop = document.getElementById('menu-backdrop');
+    const menu     = document.getElementById('mobile-menu') as HTMLElement | null;
     if (!openBtn || !menu) return;
     if (openBtn.dataset.bound === 'true') return;
     openBtn.dataset.bound = 'true';
@@ -193,75 +170,48 @@ const NAV_LINKS = [
       document.body.setAttribute('data-menu-open', String(open));
     };
 
-    openBtn.addEventListener('click', () => {
-      const isOpen = menu.getAttribute('data-open') === 'true';
-      setOpen(!isOpen);
-    });
-
+    openBtn.addEventListener('click', () => setOpen(menu.getAttribute('data-open') !== 'true'));
     closeBtn?.addEventListener('click', () => setOpen(false));
     backdrop?.addEventListener('click', () => setOpen(false));
-
-    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
-
-    document.addEventListener('keydown', (e) => {
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && menu.getAttribute('data-open') === 'true') setOpen(false);
     });
 
-    const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
-    document.querySelectorAll<HTMLAnchorElement>('[data-nav-path]').forEach((link) => {
-      const target = link.dataset.navPath ?? '';
-      const isActive = currentPath === target || (target.length > 1 && currentPath.startsWith(target + '/'));
-      if (!isActive) return;
-      link.setAttribute('aria-current', 'page');
-      link.classList.remove('text-[#0A0A0A]/40');
-      link.classList.add('text-[#0A0A0A]');
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-path]').forEach(link => {
+      const t = link.dataset.navPath ?? '';
+      if (path === t || (t.length > 1 && path.startsWith(t + '/'))) {
+        link.setAttribute('aria-current', 'page');
+      }
     });
   }
 
   function initNavGlass() {
-    const siteNav = document.getElementById('site-nav');
-    if (!siteNav) return;
-    if (siteNav.dataset.glassBound === 'true') return;
-    siteNav.dataset.glassBound = 'true';
+    const nav = document.getElementById('site-nav');
+    if (!nav || nav.dataset.glassBound === 'true') return;
+    nav.dataset.glassBound = 'true';
     const update = () => {
-      if (window.scrollY > 10) siteNav.classList.add('is-scrolled');
-      else                     siteNav.classList.remove('is-scrolled');
+      if (window.scrollY > 10) nav.classList.add('is-scrolled');
+      else                     nav.classList.remove('is-scrolled');
     };
     window.addEventListener('scroll', update, { passive: true });
     update();
   }
 
-  function initAnnouncementBar() {
+  function initBarDismiss() {
     const bar   = document.getElementById('tr-bar');
-    const pre   = document.getElementById('tr-bar-pre') as HTMLElement | null;
-    const post  = document.getElementById('tr-bar-post') as HTMLElement | null;
     const close = document.getElementById('tr-bar-close');
-    if (!bar) return;
-
-    const DISMISS_KEY = 'tr_bar_v1';
-    try { if (localStorage.getItem(DISMISS_KEY)) return; } catch(e) { /* noop */ }
-
-    const now         = Date.now();
-    const workshopEnd = new Date('2026-07-25T23:59:59Z').getTime();
-    const barEnd      = new Date('2026-08-31T23:59:59Z').getTime();
-
-    if (now < workshopEnd) {
-      if (pre) pre.style.display = '';
-      bar.style.display = '';
-    } else if (now < barEnd) {
-      if (post) post.style.display = '';
-      bar.style.display = '';
-    } else {
-      return;
-    }
-
-    close?.addEventListener('click', () => {
-      try { localStorage.setItem(DISMISS_KEY, '1'); } catch(e) { /* noop */ }
+    if (!bar || !close) return;
+    const KEY = 'tr_bar_v2';
+    try { if (localStorage.getItem(KEY)) { bar.style.display = 'none'; return; } } catch (_) {}
+    close.addEventListener('click', () => {
+      try { localStorage.setItem(KEY, '1'); } catch (_) {}
       bar.style.display = 'none';
     });
   }
 
   initNav();
   initNavGlass();
-  initAnnouncementBar();
+  initBarDismiss();
 </script>

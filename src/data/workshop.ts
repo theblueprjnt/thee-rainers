@@ -1,22 +1,36 @@
-// Single source of truth for the next live Defense Workshop date.
-// Update this file when scheduling the next session. The build will fail
-// (in production builds) if the date here is in the past, preventing
-// silent date rot on the live site.
+// Defense Workshop config. Flip TICKETS_OPEN = true when ready to sell.
+// Set NEXT_DATE_ISO = null (or omit) to enter "between" state with no date shown.
+// Nothing here may ever throw or fail a build.
 
-export const WORKSHOP_DATE_ISO = '2026-07-25';
-export const WORKSHOP_DATE_LONG = 'Saturday, July 25';
-export const WORKSHOP_DATE_SHORT = 'July 25';
-export const WORKSHOP_PRICE = 197;
-export const WORKSHOP_DURATION = '90 Min';
+export const NEXT_DATE_ISO: string | null = '2026-08-29';
+export const TICKETS_OPEN = false;
 
-// Fail the production build if the workshop date has passed and nobody
-// updated it. import.meta.env.PROD is true during `astro build`, false in dev.
-if (import.meta.env.PROD) {
-  const target = new Date(WORKSHOP_DATE_ISO + 'T23:59:59Z').getTime();
-  if (Date.now() > target) {
-    throw new Error(
-      `[date-freshness] Workshop date ${WORKSHOP_DATE_ISO} has passed. ` +
-      `Update WORKSHOP_DATE_ISO in src/data/workshop.ts before deploying.`
-    );
-  }
+export const WORKSHOP_DATE_LONG  = 'Saturday, August 29';
+export const WORKSHOP_DATE_SHORT = 'August 29';
+export const WORKSHOP_TIME       = '12:00 PM ET';
+export const WORKSHOP_PRICE      = 197;
+export const WORKSHOP_DURATION   = '90 Min';
+export const WORKSHOP_PAYMENT_LINK = 'https://buy.stripe.com/7sY28r8lt1D06XU6446J20n';
+
+// Quote from a past attendee — used in STATE A hero. Leave empty to use fallback.
+export const WORKSHOP_QUOTE      = '"The structure that was missing from my entire training."';
+export const WORKSHOP_QUOTE_ATTR = 'Giancarlo';
+
+// YouTube ID for a short Rainers intro clip. Leave empty to hide the video slot.
+export const WORKSHOP_VIDEO_ID = '';
+
+export type WorkshopState = 'selling' | 'waitlist' | 'between';
+
+export function workshopState(): WorkshopState {
+  if (!NEXT_DATE_ISO) return 'between';
+  const sessionEnd = new Date(NEXT_DATE_ISO + 'T23:59:59').getTime();
+  if (Date.now() > sessionEnd) return 'between';
+  // Date is in the future — check tickets
+  return TICKETS_OPEN ? 'selling' : 'waitlist';
+}
+
+export function nextDateDisplay(): string | null {
+  const state = workshopState();
+  if (state === 'between') return null;
+  return WORKSHOP_DATE_LONG;
 }
