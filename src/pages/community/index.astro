@@ -1,6 +1,7 @@
 ---
 export const prerender = false;
 import Layout from '../../layouts/Base.astro';
+import Testimonials from '../../components/site/Testimonials.astro';
 import { env as cfEnv } from 'cloudflare:workers';
 
 const e       = cfEnv as unknown as Record<string, string>;
@@ -28,279 +29,426 @@ const RECORDINGS: Array<{ date: string; url: string }> = [
 ];
 const latestRecording = RECORDINGS[0] ?? null;
 const recentRecordings = RECORDINGS.slice(0, 3);
+
+// Set to empty string to hide the preview video slot
+const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
 ---
 <Layout
   title="Greatness Community · Thee Rainers"
   description="Weekly movement correction, a training drill on day one, a private group, and a path built layer by layer. $39/month."
 >
 
-  <!-- HERO -->
-  <section class="bg-white overflow-hidden border-b border-[#0A0A0A]/8">
+  <!-- ── HERO ──────────────────────────────────────────────────────────── -->
+  <section class="relative bg-[#0B0B0C] overflow-hidden" style="min-height: 100svh;">
 
-    <div class="md:hidden w-full overflow-hidden bg-[#0A0A0A]" style="height: 60vw; max-height: 340px;">
-      <img
-        src="/images/sparring_withnetherlands.jpg"
-        alt="Training session"
-        width="1200" height="1500"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-        class="w-full h-full object-cover object-center opacity-90 grayscale contrast-[1.2] brightness-[0.85]"
-      />
+    <!-- Desktop: coaching photo, right anchor -->
+    <div class="absolute right-0 top-0 h-full hidden md:block pointer-events-none select-none"
+      aria-hidden="true" style="width: 44%;">
+      <img src="/images/rainers-coaching.jpg" alt=""
+        class="w-full h-full object-cover object-center grayscale"
+        loading="eager" decoding="async" fetchpriority="high" />
+      <div class="absolute inset-y-0 left-0 w-40"
+        style="background: linear-gradient(to right, #0B0B0C 0%, transparent 100%);"></div>
     </div>
 
-    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[88vh]">
+    <!-- Mobile: low-opacity bg -->
+    <div class="absolute inset-0 md:hidden" aria-hidden="true">
+      <img src="/images/sparring_withnetherlands.jpg" alt=""
+        class="w-full h-full object-cover object-center opacity-20 grayscale"
+        loading="eager" decoding="async" fetchpriority="high" />
+      <div class="absolute inset-0"
+        style="background: linear-gradient(to top, #0B0B0C 40%, transparent 100%);"></div>
+    </div>
 
-      <div class="px-8 md:px-16 lg:px-24 pt-14 md:pt-40 pb-12 md:pb-16 flex flex-col justify-center">
-        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Greatness Community</p>
-        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-8"
-          style="font-size: clamp(2.8rem, 6vw, 4.5rem);">
-          Become an athlete<br/>from day one.
-        </h1>
-        <p class="text-[#0A0A0A]/70 text-base max-w-[480px] leading-relaxed mb-10">
-          The Blueprint gives you the drill. The Checkpoint tells you if you are running it correctly.
+    <!-- Content -->
+    <div class="relative z-10 flex flex-col justify-end md:justify-center px-6 md:px-12 lg:px-20 pb-20 pt-32 md:py-0"
+      style="min-height: 100svh; max-width: 56%;">
+      <div class="md:max-w-[540px]">
+        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-8">
+          Greatness Community
         </p>
 
-        <div class="flex flex-col gap-3 max-w-[380px]">
+        <!-- Quote slot — replace with a stronger member quote when available -->
+        <blockquote class="font-black text-white leading-[0.88] tracking-tighter mb-4"
+          style="font-size: clamp(2rem, 4.5vw, 3.5rem);">
+          <!-- DRAFT: voice pass Rainers -->
+          "I know what to do and where to focus, instead of doing junk volume."
+        </blockquote>
+        <p class="text-white/45 text-[11px] font-bold tracking-widest uppercase mb-10">
+          <!-- DRAFT: voice pass Rainers -->
+          Elizabeth · Digital marketer
+        </p>
+
+        <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
+
+        <p class="text-white/50 text-base leading-relaxed mb-12 max-w-[400px]">
+          <!-- DRAFT: voice pass Rainers -->
+          Weekly correction, live. A path built in layers. The direction most training skips.
+        </p>
+
+        <button type="button" data-checkout="greatness_monthly" class="tr-btn">
+          <!-- DRAFT: voice pass Rainers -->
+          Claim your spot
+        </button>
+        <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-4">
+          Checkout unavailable. Email rainers@theerainers.com
+        </p>
+        <p class="text-white/35 text-xs mt-4 tracking-wide">
+          $39/month · $390/year · cancel anytime
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHAT YOU GET ───────────────────────────────────────────────────── -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto">
+
+      <div class="tr-section-head mb-16">
+        <span class="kicker">The Work</span>
+        <h2 style="font-size: clamp(2rem, 4vw, 3rem);">
+          <!-- DRAFT: voice pass Rainers -->
+          What you get.
+        </h2>
+        <span class="divider"></span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#0B0B0C]/10">
+        <div class="bg-[var(--warm)] p-8 md:p-10">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">Day One</p>
+          <h3 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-base leading-tight mb-3">
+            A Training Drill
+          </h3>
+          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">
+            Sent the moment you join. Day one is real work, not a welcome video.
+          </p>
+        </div>
+
+        <div class="bg-[var(--warm)] p-8 md:p-10">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">Every Tuesday · 3pm ET</p>
+          <h3 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-base leading-tight mb-3">
+            Live Checkpoint
+          </h3>
+          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">
+            45 minutes. Movement corrected. Questions answered with breakdowns from actual fights.
+          </p>
+        </div>
+
+        <div class="bg-[var(--warm)] p-8 md:p-10">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">Private</p>
+          <h3 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-base leading-tight mb-3">
+            The Group
+          </h3>
+          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">
+            Post clips, get feedback, work through what breaks down between checkpoints.
+          </p>
+        </div>
+
+        <div class="bg-[var(--warm)] p-8 md:p-10">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">Built in Order</p>
+          <h3 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-base leading-tight mb-3">
+            The Path
+          </h3>
+          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">
+            Footwork, movement, ring craft, defense, power. Nothing skipped. Nothing rushed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PAIN BLOCK ────────────────────────────────────────────────────── -->
+  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20 md:py-28">
+    <div class="max-w-[720px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-8">The Problem</p>
+      <p class="font-black text-white uppercase tracking-tighter leading-[0.88] mb-8"
+        style="font-size: clamp(2rem, 4.5vw, 3.25rem);">
+        <!-- DRAFT: voice pass Rainers -->
+        Training without correction builds the wrong habits faster.
+      </p>
+      <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
+      <p class="text-white/50 text-base leading-relaxed max-w-[520px]">
+        <!-- DRAFT: voice pass Rainers -->
+        You can drill the same thing for months and get further from correct. The gap is not effort. It is feedback. That is what the Checkpoint exists for.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── VIDEO SLOT ─────────────────────────────────────────────────────── -->
+  {PREVIEW_VIDEO_ID && (
+    <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 pb-20 md:pb-28">
+      <div class="max-w-[800px] mx-auto">
+        <p class="text-white/35 text-[10px] tracking-widest uppercase font-bold mb-6">
+          <!-- DRAFT: voice pass Rainers -->
+          See the method
+        </p>
+        <div class="relative w-full" style="aspect-ratio: 16/9;">
           <button
-            data-checkout="greatness_monthly"
-            class="inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase whitespace-nowrap cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
-            style="background: var(--red);">
-            Join the Community · $39/mo →
+            type="button"
+            class="group relative block w-full h-full overflow-hidden border border-white/10"
+            data-yt-facade
+            data-yt-id={PREVIEW_VIDEO_ID}
+            aria-label="Play video: Why You Can't Defend Yourself">
+            <img
+              src={`https://i.ytimg.com/vi/${PREVIEW_VIDEO_ID}/maxresdefault.jpg`}
+              data-fallback={PREVIEW_VIDEO_ID}
+              data-step="0"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              class="absolute inset-0 w-full h-full object-cover opacity-80 transition duration-150 group-hover:opacity-100"
+            />
+            <span class="absolute inset-0 grid place-items-center">
+              <span class="grid h-20 w-20 place-items-center bg-[var(--terra)] text-white transition-colors duration-150 group-hover:brightness-90">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </span>
           </button>
-          <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide">Checkout unavailable. Email rainers@theerainers.com</p>
-          <a href="#pricing" class="text-center text-[#0A0A0A]/60 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/80 transition-colors">
-            Pay yearly · save $78
-          </a>
         </div>
-
-        <p class="text-[11px] text-[#0A0A0A]/60 mt-4">Cancel anytime · Secure checkout via Stripe</p>
       </div>
+    </section>
+  )}
 
-      <div class="hidden md:block relative overflow-hidden bg-[#0A0A0A]" aria-hidden="true">
-        <img
-          src="/images/sparring_withnetherlands.jpg"
-          alt=""
-          width="1200" height="1500"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-          class="absolute inset-0 w-full h-full object-cover object-center opacity-90 grayscale contrast-[1.2] brightness-[0.85]"
-        />
-      </div>
-
-    </div>
-  </section>
-
-  <!-- NEXT CHECKPOINT -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-6 border-b border-white/5">
-    <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <div class="flex items-center gap-4">
-        <span class="inline-block w-2 h-2 rounded-full bg-[var(--red)] shrink-0"></span>
-        <p class="text-white/60 text-sm">Next checkpoint · <span class="text-white font-bold">Tuesday · 3pm ET</span></p>
-      </div>
-      <button
-        data-checkout="greatness_monthly"
-        class="text-white/80 text-xs font-bold tracking-widest uppercase hover:opacity-70 transition-opacity cursor-pointer bg-transparent border-0 shrink-0">
-        Join before then →
-      </button>
-    </div>
-  </section>
-
-  <!-- WHAT YOU GET -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+  <!-- ── FIT LIST ───────────────────────────────────────────────────────── -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-20 md:py-28">
     <div class="max-w-[1280px] mx-auto">
-      <h2 class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-10 font-normal">What You Get</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-[#0A0A0A]/8">
 
-        <div class="bg-white p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Day One</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">A Training Drill</h3>
-          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Sent the moment you join. Day one is real work, not a welcome video.</p>
+      <div class="tr-section-head mb-16">
+        <span class="kicker">Honest Fit</span>
+        <h2 style="font-size: clamp(2rem, 4vw, 3rem);">
+          <!-- DRAFT: voice pass Rainers -->
+          Right for you.
+        </h2>
+        <span class="divider"></span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-[900px] mx-auto">
+        <!-- Right for you -->
+        <div>
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-6">A good fit</p>
+          <ul class="flex flex-col gap-5">
+            <li class="text-[#0B0B0C]/70 text-base leading-relaxed border-l-2 border-[var(--terra)] pl-5">
+              <!-- DRAFT: voice pass Rainers -->
+              You want to start right and stay right as you go.
+            </li>
+            <li class="text-[#0B0B0C]/70 text-base leading-relaxed border-l-2 border-[var(--terra)] pl-5">
+              <!-- DRAFT: voice pass Rainers -->
+              You train alone and need someone to tell you what is actually breaking down.
+            </li>
+            <li class="text-[#0B0B0C]/70 text-base leading-relaxed border-l-2 border-[var(--terra)] pl-5">
+              <!-- DRAFT: voice pass Rainers -->
+              You are serious about the work and want answers grounded in real fights, not theory.
+            </li>
+          </ul>
         </div>
 
-        <div class="bg-white p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Every Tuesday · 3pm ET</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">Live Checkpoint</h3>
-          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">45 minutes. Movement corrected. Questions answered with breakdowns from actual fights.</p>
+        <!-- Not right for you -->
+        <div>
+          <p class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase font-bold mb-6">Not the right fit</p>
+          <ul class="flex flex-col gap-5">
+            <li class="text-[#0B0B0C]/50 text-base leading-relaxed border-l-2 border-[#0B0B0C]/15 pl-5">
+              <!-- DRAFT: voice pass Rainers -->
+              You are looking for hype or encouragement rather than correction.
+            </li>
+            <li class="text-[#0B0B0C]/50 text-base leading-relaxed border-l-2 border-[#0B0B0C]/15 pl-5">
+              <!-- DRAFT: voice pass Rainers -->
+              You want someone to tell you what you want to hear instead of what you need to fix.
+            </li>
+            <li class="text-[#0B0B0C]/50 text-base leading-relaxed border-l-2 border-[#0B0B0C]/15 pl-5">
+              <!-- DRAFT: voice pass Rainers -->
+              You are not willing to do the drill between sessions.
+            </li>
+          </ul>
         </div>
-
-        <div class="bg-white p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Private</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Group</h3>
-          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Train alongside others through the week. Post clips. Work through what is breaking down between checkpoints.</p>
-        </div>
-
-        <div class="bg-white p-8">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Built in Order</p>
-          <h3 class="font-black text-[#0A0A0A] uppercase tracking-tight text-base leading-tight mb-3">The Path</h3>
-          <p class="text-[#0A0A0A]/60 text-sm leading-relaxed">Built from the ground up, layer by layer. Nothing skipped, nothing rushed.</p>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- WHO IT IS FOR -->
-  <section class="bg-[#F6F6F6] px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[720px]">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Who This Is For</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-10"
-        style="font-size: clamp(2rem, 4vw, 3rem);">
-        People who train.<br/>Not people thinking<br/>about it.
-      </h2>
-      <ul class="flex flex-col gap-5 max-w-[520px]">
-        <li class="text-[#0A0A0A]/60 text-base leading-relaxed border-l-2 border-[#0A0A0A]/10 pl-5">Wants to start right or train better than they do now.</li>
-        <li class="text-[#0A0A0A]/60 text-base leading-relaxed border-l-2 border-[#0A0A0A]/10 pl-5">Needs correction and visible progress, not encouragement.</li>
-        <li class="text-[#0A0A0A]/60 text-base leading-relaxed border-l-2 border-[#0A0A0A]/10 pl-5">Wants questions answered with breakdowns from actual fights, not theory.</li>
-      </ul>
+  <!-- ── OBJECTION PAIR ────────────────────────────────────────────────── -->
+  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20 md:py-28">
+    <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+
+      <div>
+        <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">
+          <!-- DRAFT: voice pass Rainers -->
+          "I don't train at a gym."
+        </p>
+        <div class="h-0.5 w-8 bg-[var(--terra)] mb-6"></div>
+        <p class="text-white/60 text-base leading-relaxed">
+          <!-- DRAFT: voice pass Rainers -->
+          Most members do not. The system is built around what works at home, in a garage, or wherever you have space. The method does not require a full gym.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">
+          <!-- DRAFT: voice pass Rainers -->
+          "I'm not far enough along."
+        </p>
+        <div class="h-0.5 w-8 bg-[var(--terra)] mb-6"></div>
+        <p class="text-white/60 text-base leading-relaxed">
+          <!-- DRAFT: voice pass Rainers -->
+          The path is built from the ground up. Starting early means you build the right habits instead of spending years correcting the wrong ones.
+        </p>
+      </div>
+
     </div>
   </section>
 
-  <!-- SYSTEM LINE -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-14 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[720px]">
-      <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-5">The Method</p>
-      <p class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.9]"
-        style="font-size: clamp(1.6rem, 3vw, 2.25rem);">
-        We build in layers. Footwork, movement, ring craft, defense, and power. Nothing skipped. Nothing rushed.
-      </p>
-    </div>
-  </section>
-
-  <!-- FOUNDING MEMBERS BONUS -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-white/5">
-    <div class="max-w-[720px]">
-      <p class="text-white/40 text-[10px] tracking-widest uppercase mb-6">First Five Members</p>
-      <h2 class="font-black text-white uppercase tracking-tighter leading-[0.88] mb-8"
-        style="font-size: clamp(1.8rem, 3.5vw, 2.5rem);">
-        Five founding spots.
-      </h2>
-      <p class="text-white/60 text-base leading-relaxed mb-4 max-w-[480px]">
-        The first five members each receive something that will not be offered again.
-      </p>
-      <p class="text-white/40 text-sm leading-relaxed mb-10 max-w-[480px]">
-        One of them receives something personal. The path to where they already know they should be, built specifically for them.
-      </p>
-      <button
-        data-checkout="greatness_monthly"
-        class="inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
-        style="background: var(--red);">
-        Lock Your Spot · $39/mo →
-      </button>
-      <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-3">Checkout unavailable. Email rainers@theerainers.com</p>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" class="bg-[#F6F6F6] px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+  <!-- ── PRICING ────────────────────────────────────────────────────────── -->
+  <section id="pricing" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-20 md:py-28">
     <div class="max-w-[1280px] mx-auto">
-      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-10">Membership</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-[2px] max-w-[720px]">
+      <div class="tr-section-head mb-16">
+        <span class="kicker">Membership</span>
+        <h2 style="font-size: clamp(2rem, 4vw, 3rem);">
+          <!-- DRAFT: voice pass Rainers -->
+          Claim your spot.
+        </h2>
+        <span class="divider"></span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-[2px] max-w-[720px] mx-auto">
 
         <!-- Annual (featured) -->
-        <div class="bg-white border-2 p-10 flex flex-col gap-8 relative" style="border-color: var(--red);">
+        <div class="bg-white border-2 p-10 flex flex-col gap-8 relative" style="border-color: var(--terra);">
           <div class="absolute -top-px right-6">
-            <span class="inline-block text-white text-[9px] font-bold tracking-widest uppercase px-3 py-1.5" style="background: var(--red);">Save $78</span>
+            <span class="inline-block text-white text-[9px] font-bold tracking-widest uppercase px-3 py-1.5"
+              style="background: var(--terra);">Save $78</span>
           </div>
           <div>
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Annual · Best Value</p>
+            <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">Annual · Best Value</p>
             <div class="flex items-baseline gap-1 mb-1">
-              <span class="font-black text-[#0A0A0A] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$390</span>
-              <span class="text-[#0A0A0A]/60 text-sm">/year</span>
+              <span class="font-black text-[#0B0B0C] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$390</span>
+              <span class="text-[#0B0B0C]/60 text-sm">/year</span>
             </div>
-            <p class="text-[#0A0A0A]/60 text-xs">$32.50/month · billed once</p>
-            <p class="text-[var(--red)] text-xs font-bold tracking-wide mt-1">Two months free vs monthly</p>
+            <p class="text-[#0B0B0C]/60 text-xs">$32.50/month · billed once</p>
           </div>
 
           <ul class="flex flex-col gap-3">
-            <li class="text-[#0A0A0A]/60 text-sm">Everything in monthly</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Two months free</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Full year of checkpoints</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Full year of path progression</li>
+            <li class="text-[#0B0B0C]/65 text-sm">Everything in monthly</li>
+            <li class="text-[#0B0B0C]/65 text-sm">Two months free</li>
+            <li class="text-[#0B0B0C]/65 text-sm">Full year of checkpoints</li>
+            <li class="text-[#0B0B0C]/65 text-sm">Full year of path progression</li>
           </ul>
 
           <div>
-            <button
-              data-checkout="greatness_annual"
-              class="w-full inline-flex items-center justify-center font-bold text-white px-8 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
-              style="background: var(--red);">
-              Join Annual →
+            <button type="button" data-checkout="greatness_annual"
+              class="tr-btn" style="width:100%;justify-content:center;">
+              Join Annual
             </button>
-            <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout unavailable. Email rainers@theerainers.com</p>
+            <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-2">
+              Checkout unavailable. Email rainers@theerainers.com
+            </p>
           </div>
         </div>
 
         <!-- Monthly -->
-        <div class="bg-white border border-[#0A0A0A]/8 p-10 flex flex-col gap-8">
+        <div class="bg-white border border-[#0B0B0C]/8 p-10 flex flex-col gap-8">
           <div>
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Monthly</p>
+            <p class="text-[#0B0B0C]/50 text-[10px] tracking-widest uppercase font-bold mb-4">Monthly</p>
             <div class="flex items-baseline gap-1 mb-1">
-              <span class="font-black text-[#0A0A0A] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$39</span>
-              <span class="text-[#0A0A0A]/60 text-sm">/month</span>
+              <span class="font-black text-[#0B0B0C] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">$39</span>
+              <span class="text-[#0B0B0C]/60 text-sm">/month</span>
             </div>
-            <p class="text-[#0A0A0A]/60 text-xs">Cancel anytime</p>
+            <p class="text-[#0B0B0C]/60 text-xs">Cancel anytime</p>
           </div>
 
           <ul class="flex flex-col gap-3">
-            <li class="text-[#0A0A0A]/60 text-sm">Live checkpoint every Tuesday</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Training drill on day one</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Private group access</li>
-            <li class="text-[#0A0A0A]/60 text-sm">Checkpoint recordings</li>
+            <li class="text-[#0B0B0C]/65 text-sm">Live checkpoint every Tuesday</li>
+            <li class="text-[#0B0B0C]/65 text-sm">Training drill on day one</li>
+            <li class="text-[#0B0B0C]/65 text-sm">Private group access</li>
+            <li class="text-[#0B0B0C]/65 text-sm">Checkpoint recordings</li>
           </ul>
 
           <div>
-            <button
-              data-checkout="greatness_monthly"
-              class="w-full inline-flex items-center justify-center font-bold text-white px-8 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
-              style="background: var(--red);">
-              Join Monthly →
+            <button type="button" data-checkout="greatness_monthly"
+              class="tr-btn" style="width:100%;justify-content:center;">
+              Join Monthly
             </button>
-            <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout unavailable. Email rainers@theerainers.com</p>
+            <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-2">
+              Checkout unavailable. Email rainers@theerainers.com
+            </p>
           </div>
         </div>
 
       </div>
 
-      <p class="text-[#0A0A0A]/60 text-xs mt-6 max-w-[480px]">Membership renews automatically. Cancel anytime, no lock-in. Cancel before your next billing date and you will not be charged again. <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/80">Refund Policy</a></p>
+      <p class="text-[#0B0B0C]/50 text-xs mt-6 max-w-[520px] mx-auto text-center">
+        Membership renews automatically. Cancel anytime, no lock-in.
+        Cancel before your next billing date and you will not be charged again.
+        <a href="/legal/refund-policy" class="underline hover:text-[#0B0B0C]/80">Refund Policy</a>
+      </p>
     </div>
   </section>
 
-  <!-- SESSION RECORDINGS: member only, server-side rendered when token valid -->
+  <!-- ── PROOF ─────────────────────────────────────────────────────────── -->
+  <Testimonials heading="What fighters say." kicker="Field Report" background="white" />
+
+  <!-- ── REPEATED CTA ───────────────────────────────────────────────────── -->
+  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20 md:py-28">
+    <div class="max-w-[640px] mx-auto text-center">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-8">Join the work</p>
+      <h2 class="font-black text-white uppercase tracking-tighter leading-[0.88] mb-6"
+        style="font-size: clamp(2rem, 4vw, 3.25rem);">
+        <!-- DRAFT: voice pass Rainers -->
+        Weekly correction.<br/>A path built in order.
+      </h2>
+      <div class="h-0.5 w-12 bg-[var(--terra)] mx-auto mb-10"></div>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button type="button" data-checkout="greatness_annual" class="tr-btn">
+          <!-- DRAFT: voice pass Rainers -->
+          Join Annual · $390/yr
+        </button>
+        <button type="button" data-checkout="greatness_monthly" class="tr-btn tr-btn--secondary">
+          Join Monthly · $39/mo
+        </button>
+      </div>
+      <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-4">
+        Checkout unavailable. Email rainers@theerainers.com
+      </p>
+      <p class="text-white/30 text-xs mt-6">Cancel anytime · Secure checkout via Stripe</p>
+      <a href="/foundation" class="block text-white/30 text-[11px] font-bold tracking-widest uppercase hover:text-white/55 transition-colors mt-4">
+        Not ready yet · Start with the free Foundation
+      </a>
+    </div>
+  </section>
+
+  <!-- ── SESSION RECORDINGS (member only) ──────────────────────────────── -->
   {memberVerified && (
-    <section id="recordings" class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
+    <section id="recordings" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-16 md:py-24">
       <div class="max-w-[640px]">
 
         <div class="flex items-center gap-3 mb-8">
           <div class="w-2 h-2 rounded-full bg-[#22C55E] shrink-0" aria-hidden="true"></div>
-          <p class="text-[var(--purple)] text-[11px] tracking-widest uppercase">Member Area</p>
+          <p class="text-[var(--purple)] text-[11px] tracking-widest uppercase font-bold">Member Area</p>
         </div>
 
-        <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-3"
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.88] mb-3"
           style="font-size: clamp(1.6rem, 3vw, 2rem);">
           Session Recordings
         </h2>
-        <p class="text-[#0A0A0A]/60 text-sm mb-10">Recordings from past Checkpoints are available here.</p>
+        <p class="text-[#0B0B0C]/60 text-sm mb-10">Recordings from past Checkpoints are available here.</p>
 
         {latestRecording ? (
           <>
             <a href={latestRecording.url} target="_blank" rel="noopener noreferrer"
-              class="inline-flex items-center justify-center w-full sm:w-auto font-bold text-white px-8 py-4 text-sm tracking-widest uppercase transition-opacity hover:opacity-85 mb-10"
-              style="background: var(--red);">
-              Watch Latest Recording →
+              class="tr-btn mb-10 inline-flex">
+              Watch Latest Recording
             </a>
 
             {recentRecordings.length > 0 && (
-              <ul class="flex flex-col divide-y divide-[#0A0A0A]/8">
+              <ul class="flex flex-col divide-y divide-[#0B0B0C]/8">
                 {recentRecordings.map(r => (
                   <li class="flex items-center justify-between py-5 gap-6">
-                    <p class="font-black text-[#0A0A0A] text-sm uppercase tracking-tight">
+                    <p class="font-black text-[#0B0B0C] text-sm uppercase tracking-tight">
                       {r.date} · Checkpoint
                     </p>
                     <a href={r.url} target="_blank" rel="noopener noreferrer"
                       class="text-[var(--purple)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity shrink-0">
-                      Watch Recording →
+                      Watch Recording
                     </a>
                   </li>
                 ))}
@@ -308,55 +456,36 @@ const recentRecordings = RECORDINGS.slice(0, 3);
             )}
           </>
         ) : (
-          <p class="text-[#0A0A0A]/40 text-sm">No recordings yet. The first one appears after Tuesday's Checkpoint.</p>
+          <p class="text-[#0B0B0C]/40 text-sm">No recordings yet. The first one appears after Tuesday's Checkpoint.</p>
         )}
 
-        <p class="text-[#0A0A0A]/35 text-xs mt-10">New recordings are added after each Tuesday session.</p>
+        <p class="text-[#0B0B0C]/35 text-xs mt-10">New recordings are added after each Tuesday session.</p>
       </div>
     </section>
   )}
 
-  <!-- CLOSING -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[560px]">
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
-        style="font-size: clamp(2rem, 4vw, 3rem);">
-        Become an athlete<br/>from day one.
-      </h2>
-      <p class="text-[#0A0A0A]/60 text-base leading-relaxed mb-10">
-        Join before Tuesday and your first checkpoint is this week.
-      </p>
-      <div class="flex flex-col gap-4 max-w-[380px]">
-        <button
-          data-checkout="greatness_annual"
-          class="inline-flex items-center justify-center font-bold text-white px-10 py-4 text-sm tracking-widest uppercase cursor-pointer border-0 transition-opacity duration-150 hover:opacity-85"
-          style="background: var(--red);">
-          Join Annual · $390/yr →
-        </button>
-        <p data-checkout-error class="hidden text-[var(--red)] text-xs font-bold tracking-wide">Checkout unavailable. Email rainers@theerainers.com</p>
-        <p class="text-[11px] text-[#0A0A0A]/60">Cancel anytime, no lock-in · Secure checkout via Stripe</p>
-        <a href="/foundation" class="text-center text-[#0A0A0A]/60 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/80 transition-colors">
-          Not ready yet · Start with the free Foundation →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 1-ON-1 FOOTNOTE -->
-  <section class="bg-white px-8 md:px-16 lg:px-24 py-10 border-b border-[#0A0A0A]/8">
+  <!-- ── 1-ON-1 FOOTNOTE ───────────────────────────────────────────────── -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-10 border-t border-[#0B0B0C]/8">
     <div class="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-[#0A0A0A]/60 text-sm">Need the full framework built around your specific structure?</p>
-      <a href="/command" class="text-[#0A0A0A]/60 text-xs font-bold tracking-widest uppercase hover:text-[#0A0A0A]/80 transition-colors shrink-0">1-on-1 Coaching · Application Only →</a>
+      <p class="text-[#0B0B0C]/60 text-sm">
+        <!-- DRAFT: voice pass Rainers -->
+        Need the full framework built around your specific structure?
+      </p>
+      <a href="/command"
+        class="text-[#0B0B0C]/60 text-xs font-bold tracking-widest uppercase hover:text-[#0B0B0C]/80 transition-colors shrink-0">
+        1-ON-1 Coaching · Application Only
+      </a>
     </div>
   </section>
 
-  <!-- SCRIPTURE -->
-  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 py-20">
-    <div class="max-w-[680px] mx-auto">
-      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
+  <!-- ── SCRIPTURE ──────────────────────────────────────────────────────── -->
+  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[640px] mx-auto text-center">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/40 mb-5"
+        style="font-size: clamp(1.5rem, 3.5vw, 2.25rem);">
         "As iron sharpens iron, so one person sharpens another."
       </p>
-      <p class="text-white/60 text-[10px] tracking-widest uppercase">Proverbs 27:17</p>
+      <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Proverbs 27:17</p>
     </div>
   </section>
 
