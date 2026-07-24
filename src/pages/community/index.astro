@@ -34,7 +34,7 @@ const recentRecordings = RECORDINGS.slice(0, 3);
 const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
 ---
 <Layout
-  title="Greatness Community · Thee Rainers"
+  title="The Checkpoint · Thee Rainers"
   description="Weekly movement correction, a training drill on day one, a private group, and a path built layer by layer. $39/month."
 >
 
@@ -65,7 +65,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
       style="min-height: 100svh; max-width: 56%;">
       <div class="md:max-w-[540px]">
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-8">
-          Greatness Community
+          The Checkpoint
         </p>
 
         <!-- Quote slot — replace with a stronger member quote when available -->
@@ -127,7 +127,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
         <div class="bg-[var(--warm)] p-8 md:p-10">
           <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">Every Tuesday · 3pm ET</p>
           <h3 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-base leading-tight mb-3">
-            Live Checkpoint
+            The Weekly Session
           </h3>
           <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">
             45 minutes. Movement corrected. Questions answered with breakdowns from actual fights.
@@ -140,7 +140,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
             The Group
           </h3>
           <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">
-            Post clips, get feedback, work through what breaks down between checkpoints.
+            Post clips, get feedback, work through what breaks down between sessions.
           </p>
         </div>
 
@@ -357,10 +357,10 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
           </div>
 
           <ul class="flex flex-col gap-3">
-            <li class="text-[#0B0B0C]/65 text-sm">Live checkpoint every Tuesday</li>
+            <li class="text-[#0B0B0C]/65 text-sm">The Weekly Session every Tuesday</li>
             <li class="text-[#0B0B0C]/65 text-sm">Training drill on day one</li>
             <li class="text-[#0B0B0C]/65 text-sm">Private group access</li>
-            <li class="text-[#0B0B0C]/65 text-sm">Checkpoint recordings</li>
+            <li class="text-[#0B0B0C]/65 text-sm">Session recordings</li>
           </ul>
 
           <div>
@@ -430,7 +430,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
           style="font-size: clamp(1.6rem, 3vw, 2rem);">
           Session Recordings
         </h2>
-        <p class="text-[#0B0B0C]/60 text-sm mb-10">Recordings from past Checkpoints are available here.</p>
+        <p class="text-[#0B0B0C]/60 text-sm mb-10">Recordings from past Weekly Sessions are available here.</p>
 
         {latestRecording ? (
           <>
@@ -444,7 +444,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
                 {recentRecordings.map(r => (
                   <li class="flex items-center justify-between py-5 gap-6">
                     <p class="font-black text-[#0B0B0C] text-sm uppercase tracking-tight">
-                      {r.date} · Checkpoint
+                      {r.date} · Weekly Session
                     </p>
                     <a href={r.url} target="_blank" rel="noopener noreferrer"
                       class="text-[var(--purple)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity shrink-0">
@@ -456,7 +456,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
             )}
           </>
         ) : (
-          <p class="text-[#0B0B0C]/40 text-sm">No recordings yet. The first one appears after Tuesday's Checkpoint.</p>
+          <p class="text-[#0B0B0C]/40 text-sm">No recordings yet. The first one appears after Tuesday's Weekly Session.</p>
         )}
 
         <p class="text-[#0B0B0C]/35 text-xs mt-10">New recordings are added after each Tuesday session.</p>

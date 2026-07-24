@@ -7,7 +7,7 @@ const e = cfEnv as unknown as Record<string, string>;
 const meetLink = e['COMMUNITY_MEET_LINK'] ?? '';
 const sessionId = Astro.url.searchParams.get('session_id') ?? '';
 ---
-<Layout title="Welcome · Greatness Community · Thee Rainers">
+<Layout title="Welcome · The Checkpoint · Thee Rainers">
   <Fragment slot="head">
     <meta name="robots" content="noindex" />
     <style>
@@ -57,7 +57,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
         </div>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85]"
           style="font-size: clamp(2.5rem, 6vw, 4rem);">
-          You're in.<br/>Welcome to the<br/>Weekly Checkpoints.
+          You're in.<br/>Welcome to<br/>The Checkpoint.
         </h1>
       </div>
 
@@ -89,7 +89,7 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
         <div>
           <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-5">How This Works</p>
           <p class="text-[#0A0A0A] text-base leading-relaxed mb-2">
-            Your training center is the Tuesday Checkpoint at 3pm ET.
+            Your training center is The Checkpoint. The Weekly Session is every Tuesday at 3pm ET.
           </p>
           <p class="text-[#0A0A0A]/60 text-sm leading-relaxed mb-6">
             This is where the work and feedback connect.
@@ -111,11 +111,11 @@ const sessionId = Astro.url.searchParams.get('session_id') ?? '';
           <a href={meetLink} target="_blank" rel="noopener noreferrer"
             class="inline-flex items-center justify-center font-bold text-white px-8 py-4 text-sm tracking-widest uppercase transition-opacity hover:opacity-85 self-start"
             style="background: var(--red);">
-            Join Tuesday Checkpoint →
+            Join The Weekly Session →
           </a>
         ) : (
           <div class="bg-[#F6F6F6] border border-[#0A0A0A]/8 px-6 py-5">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-1">Next Checkpoint</p>
+            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-1">Next Session</p>
             <p class="text-[#0A0A0A] font-black uppercase tracking-tight text-sm">Tuesday · 3pm ET</p>
             <p class="text-[#0A0A0A]/50 text-xs mt-1">Google Meet link sent by email before each session.</p>
           </div>
