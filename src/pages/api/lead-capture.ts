@@ -1,5 +1,3 @@
-import { WORKSHOP_DATE_LONG, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
-
 // POST /api/lead-capture
 //
 // Environment variables required:
@@ -68,7 +66,7 @@ const FUNNEL_MAP = `
     </tr>
     <tr>
       <td style="padding:12px 0;border-bottom:1px solid #f0f0f0;vertical-align:top;">
-        <p style="font-size:13px;font-weight:700;color:#0A0A0A;margin:0 0 2px;">Greatness Community</p>
+        <p style="font-size:13px;font-weight:700;color:#0A0A0A;margin:0 0 2px;">The Checkpoint</p>
         <p style="font-size:12px;color:#888;margin:0;">Live correction every Tuesday. Weekly drills. Movement checked.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
@@ -160,72 +158,6 @@ function resolveEmailSource(source: string): string {
   return source;
 }
 
-// ── Sequence emails — add here as Rainers writes them ─────────────────────
-// delayDays: how many days after opt-in this email sends
-const SEQUENCE: Array<{ delayDays: number; subject: string; preview: string; body: string }> = [
-  {
-    delayDays: 2,
-    subject: 'why I started training this way',
-    preview: '',
-    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">I won my last 3 fights without a coach in my corner. Prior to that I trained with a group coach and competition was always confusing for me. I thought intensity = key, until I left group training for boxing growth and less damage inflicted on the body and brain.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">When I prepped for my first fight I had so many things on my mind as you gather different opinions and information along your boxing journey. All I knew was footwork mattered. So I found a coach and trained that way. I won the fight in a simple fashion simply outboxing my opponent and knocking him down twice.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">Whether you train for health, skill or performance, you are looking for control. Not intensity or hitting harder. Over the next couple of weeks I will break down the fundamentals and bring you clarity and control both inside and outside the ring.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 8px;">I always read replies. Tell me: <strong>what made you start boxing?</strong></p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
-${FUNNEL_MAP}`,
-  },
-  {
-    delayDays: 4,
-    subject: 'the session is recorded',
-    preview: '90 minutes on defense. On demand.',
-    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The defense workshop is recorded and available now.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">90 minutes. The 5 layers of defense. How to position with your opponent to hit and not get hit. The full live Q&amp;A from fighters in the session is included. The questions they asked are probably the ones you have.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">If your movement breaks down in sparring, the break is almost always in your stance or your distance before pressure even comes. The session works through that from the base up.</p>
-<p style="margin:0 0 12px;"><a href="https://theerainers.com/workshop-replay" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">GET THE REPLAY · $47 →</a></p>
-<p style="font-size:12px;color:#aaa;margin:0 0 28px;">7-day access from purchase. Watch it when you're ready.</p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
-  },
-  {
-    delayDays: 5,
-    subject: 'The Footwork Blueprint (Control Inside Ring)',
-    preview: 'This is where the control starts',
-    body: `<p style="font-size:14px;font-weight:700;color:#0A0A0A;margin:0 0 20px;">The Footwork Blueprint.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Control in the ring starts from the ground up. I built this around 4 main footwork bases and over 56 rounds of drills. I used this to prepare for my first fight without a coach. I ended up winning using simple positioning and a jab, scoring 2 knockdowns.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">Here's a breakdown of the 4 bases.</p>
-<p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">WATCH THE BREAKDOWN →</a></p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
-${FUNNEL_MAP}`,
-  },
-  {
-    delayDays: 6,
-    subject: 'are you running it right',
-    preview: '',
-    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">By now you have had time to work through the first drills in the blueprint. You know what to do. The part that is harder to know is whether you are doing it correctly.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Training without feedback is how people spend months reinforcing the wrong movement. Not because they are not working. Because nobody is watching.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Every Tuesday at 3pm ET I go live with the community. We check movement. I answer questions using breakdowns from actual fights. 45 minutes.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">If you want to know if the work is right, that is where you find out.</p>
-<p style="margin:0 0 28px;"><a href="https://theerainers.com/community" style="display:inline-block;background:#7C3AED;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">JOIN THE CHECKPOINT · $39/MO →</a></p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
-  },
-  {
-    delayDays: 8,
-    subject: 'how to defend yourself',
-    preview: '',
-    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The first question I get asked after people learn footwork is: how do I defend myself? I'm not letting my hands go in sparring, because I'm afraid I'll get countered or hit.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">I'm running a live workshop on ${WORKSHOP_DATE_LONG} teaching defense and the 5 layers of defense in boxing. Learn to defend yourself on all 5 levels, how to use each to position yourself with the opponent to hit and not get hit.</p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 24px;">If you're still flinching or getting hit more than 3 times per round when sparring, reserve your spot below.</p>
-<p style="margin:0 0 16px;"><a href="https://theerainers.com/workshop" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">RESERVE MY SPOT · $197 →</a></p>
-<p style="font-size:12px;color:#aaa;margin:0 0 24px;">Live · ${WORKSHOP_DATE_SHORT} · 12PM ET</p>
-<p style="font-size:14px;color:#0A0A0A;margin:0 0 8px;">Can't make ${WORKSHOP_DATE_SHORT}? The full session is already recorded.</p>
-<p style="margin:0 0 28px;"><a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">GET THE REPLAY · $47 →</a></p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
-  },
-];
 
 function wrapEmail(body: string, email = '', siteUrl = 'https://theerainers.com'): string {
   const unsubUrl = `${siteUrl}/api/unsubscribe?email=${encodeURIComponent(email)}`;
@@ -251,23 +183,6 @@ async function sendResendWelcome(resendKey: string, email: string, source: strin
     else console.log('[lead-capture] Resend welcome sent', { source });
   } catch (err) {
     console.error('[lead-capture] Resend welcome fetch error:', String(err));
-  }
-
-  // Sequence only for footwork/audit funnel sources — not Q&A or safe-boxing
-  if (!SEQUENCE_SOURCES.has(source) && !source.startsWith('quiz-')) return;
-
-  // Schedule sequence emails — fires at opt-in, Resend delivers on schedule
-  for (const seq of SEQUENCE) {
-    const scheduledAt = new Date(Date.now() + seq.delayDays * 24 * 60 * 60 * 1000).toISOString();
-    const unsubLink = `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${siteUrl}/api/unsubscribe?email=${encodeURIComponent(email)}>`;
-    fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: seq.subject, html: wrapEmail((seq.preview ? `<div style="display:none;max-height:0;overflow:hidden;">${seq.preview}</div>` : '') + seq.body, email, siteUrl), scheduled_at: scheduledAt, headers: { 'List-Unsubscribe': unsubLink, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } }),
-    }).then(async r => {
-      if (!r.ok) console.error('[lead-capture] Resend schedule failed day', seq.delayDays, r.status, await r.text());
-      else console.log('[lead-capture] Resend scheduled day', seq.delayDays, 'for', email);
-    }).catch(err => console.error('[lead-capture] Resend schedule error:', String(err)));
   }
 
 }
