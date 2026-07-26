@@ -1,14 +1,12 @@
 /*
  * COLOR LAW — enforced, no exceptions in visible copy or code
- * --terra #c84d3a  — primary CTA fills, eyebrow text, divider lines (Myron's gold role)
- * --navy  #1e3a5f  — secondary accent, entry-tier labels only. Never a fill CTA.
+ * --terra #E11D2A  — primary CTA fills, eyebrow text, divider lines
+ * --navy  #2348C6  — secondary accent, entry-tier labels only. Never a fill CTA.
  * --purple #7C3AED — Community labels and buttons only.
  * --void  #0B0B0C  — dark section backgrounds
  * --warm  #f7f5f2  — warm white section backgrounds
  * Gradients: multi-hue banned. Single-color-to-transparent overlay fades legal (hero masks).
  * WCAG: 4.5:1 text, 3:1 UI components. Never communicate state by color alone.
- *
- * Legacy aliases kept for backwards compat: --red = --terra, --blue = --navy.
  */
 
 @import "tailwindcss";
@@ -20,12 +18,11 @@
   --ink:      #0B0B0C;
   --void:     #0B0B0C;
   --ink-soft: #667280;
-  --terra:    #c84d3a;
-  --navy:     #1e3a5f;
+  --terra:    #E11D2A;
+  --navy:     #2348C6;
   --purple:   #7C3AED;
-  /* legacy aliases */
-  --red:      #c84d3a;
-  --blue:     #1e3a5f;
+  --red:      #E11D2A;
+  --blue:     #2348C6;
 }
 
 @theme {
@@ -34,10 +31,10 @@
   --color-ink:      #0B0B0C;
   --color-void:     #0B0B0C;
   --color-ink-soft: #667280;
-  --color-terra:    #c84d3a;
-  --color-navy:     #1e3a5f;
-  --color-red:      #c84d3a;
-  --color-blue:     #1e3a5f;
+  --color-terra:    #E11D2A;
+  --color-navy:     #2348C6;
+  --color-red:      #E11D2A;
+  --color-blue:     #2348C6;
   --color-purple:   #7C3AED;
   --color-cream:    #F6F6F6;
   --color-charcoal: #141414;
