@@ -66,7 +66,7 @@ const FUNNEL_MAP = `
     </tr>
     <tr>
       <td style="padding:12px 0;border-bottom:1px solid #f0f0f0;vertical-align:top;">
-        <p style="font-size:13px;font-weight:700;color:#0A0A0A;margin:0 0 2px;">The Checkpoint</p>
+        <p style="font-size:13px;font-weight:700;color:#0A0A0A;margin:0 0 2px;">The Weekly Session</p>
         <p style="font-size:12px;color:#888;margin:0;">Live correction every Tuesday. Weekly drills. Movement checked.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">

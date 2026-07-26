@@ -89,7 +89,7 @@ export async function POST({ request }: { request: Request }): Promise<Response>
     body: JSON.stringify({
       from: 'Rainers <rainers@theerainers.com>',
       to: email,
-      subject: 'Your Greatness Community access link',
+      subject: 'Your Weekly Session access link',
       html: buildEmail(magicLink),
     }),
   }).catch(err => console.error('[community-magic-link] Resend error:', String(err)));

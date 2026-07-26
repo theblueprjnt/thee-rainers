@@ -23,7 +23,7 @@ function checkinHtml(message: string): string {
     '</style></head><body>',
     '<div class="c">',
     '<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;',
-    'color:rgba(255,255,255,0.25);margin-bottom:16px;">Greatness Community</p>',
+    'color:rgba(255,255,255,0.25);margin-bottom:16px;">The Weekly Session</p>',
     `<p style="font-size:18px;font-weight:900;text-transform:uppercase;color:#fff;margin-bottom:12px;">${message}</p>`,
     `<a href="${SITE_URL}/community/inside">Member area →</a>`,
     '</div></body></html>',

@@ -354,7 +354,7 @@ function buildDeliveryHtml(slug: string, url: string, url2: string | null, email
   if (slug === 'greatness') {
     return wrap(
       `<p style="font-size:15px;line-height:1.6;margin:0 0 8px;">You are in.</p>` +
-      `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">Your Greatness Community membership is active.</p>` +
+      `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">Your Weekly Session membership is active.</p>` +
       btn(url, 'Access Member Area') +
       `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">What happens next</p>` +
       `<table style="width:100%;border-collapse:collapse;margin:0 0 16px;">` +
@@ -380,7 +380,7 @@ function buildPaymentFailedHtml(portalUrl: string, email: string): string {
     `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
     `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
     `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Your payment was declined.</p>` +
-    `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">Your Greatness Community access is preserved for the next 7 days while the charge retries.</p>` +
+    `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">Your Weekly Session access is preserved for the next 7 days while the charge retries.</p>` +
     `<p style="margin:0 0 24px;"><a href="${portalUrl}" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">UPDATE YOUR CARD</a></p>` +
     `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">If you meant to cancel, ignore this. No charge will be made after retries are exhausted.</p>` +
     `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#E11D2A;">rainers@theerainers.com</a></p>` +
@@ -395,7 +395,7 @@ function buildCanceledHtml(email: string): string {
     `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
     `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
     `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Before you go.</p>` +
-    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 8px;">One question: what made you leave the Greatness Community?</p>` +
+    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 8px;">One question: what made you leave The Weekly Session?</p>` +
     `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">Reply to this email. One sentence. I read every reply.</p>` +
     `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 16px;">If you want back in: <a href="${SITE_URL}/community" style="color:#E11D2A;">${SITE_URL}/community</a></p>` +
     `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Rainers</p>` +

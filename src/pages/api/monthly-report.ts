@@ -14,7 +14,7 @@ const PRODUCT_NAMES: Record<string, string> = {
   'prod_UZrejf6iuDorEA': 'Footwork Blueprint ($47)',
   'prod_UZreDlek9325EY': 'Shadowboxing Blueprint ($47)',
   'prod_UZreHroYQEDAFU': 'Bundle ($87)',
-  'prod_Uaz6EzELZP6j0V': 'Greatness Community ($39/mo)',
+  'prod_Uaz6EzELZP6j0V': 'The Weekly Session ($39/mo)',
 };
 
 function formatMoney(cents: number): string {

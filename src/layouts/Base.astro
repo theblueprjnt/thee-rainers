@@ -131,8 +131,8 @@ const siteSchema = JSON.stringify({
         'workshop_replay':         { id: 'workshop_replay',         name: 'Workshop Replay',         price:  47 },
         '6oUaEX7hp6Xk3LIdww6J20p': { id: 'workshop_replay',         name: 'Workshop Replay',         price:  47 },
         '5kQdR91X5dlIeqm8cc6J20l': { id: 'shadowboxing_blueprint',  name: 'Shadowboxing Blueprint',  price:  47 },
-        'greatness_monthly':       { id: 'greatness_monthly',       name: 'Greatness Community — Monthly', price: 39 },
-        'greatness_annual':        { id: 'greatness_annual',        name: 'Greatness Community — Annual',  price: 390 }
+        'greatness_monthly':       { id: 'greatness_monthly',       name: 'The Weekly Session Monthly', price: 39 },
+        'greatness_annual':        { id: 'greatness_annual',        name: 'The Weekly Session Annual',  price: 390 }
       };
 
       // Delegated click — fires begin_checkout for ANY buy button site-wide.
@@ -207,7 +207,7 @@ const siteSchema = JSON.stringify({
               if (errorEl) {
                 errorEl.classList.remove('hidden');
               } else {
-                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable — email rainers@theerainers.com</p>');
+                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable. Email rainers@theerainers.com</p>');
               }
             } catch (err) {
               console.error('[checkout] fetch error:', err);
@@ -215,7 +215,7 @@ const siteSchema = JSON.stringify({
               if (errorEl) {
                 errorEl.classList.remove('hidden');
               } else {
-                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable — email rainers@theerainers.com</p>');
+                btn.insertAdjacentHTML('afterend', '<p class="tr-checkout-err text-[var(--red)] text-xs font-bold tracking-wide mt-2">Checkout temporarily unavailable. Email rainers@theerainers.com</p>');
               }
             }
           });

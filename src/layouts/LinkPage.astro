@@ -7,7 +7,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title = 'Thee Rainers — Links', noindex = false } = Astro.props;
+const { title = 'Thee Rainers Links', noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
 ---
 
