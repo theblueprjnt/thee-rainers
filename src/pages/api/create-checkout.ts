@@ -20,13 +20,19 @@ interface ProductConfig {
 
 const PRODUCTS: Record<string, ProductConfig> = {
   shadowboxing: {
-    priceId: 'price_1Tb1DHHzlarU775HIzI4fY8r',
+    priceId: 'price_1TxVKCHzlarU775HOqg5tXQH',
     mode: 'payment',
     successPath: '/thank-you/shadowboxing',
     cancelPath: '/shadowboxing-blueprint',
   },
+  bundle: {
+    priceId: 'price_1TxVIjHzlarU775HKApDETjT',
+    mode: 'payment',
+    successPath: '/thank-you/bundle',
+    cancelPath: '/shop',
+  },
   workshop_replay: {
-    priceId: 'price_1TaFZPHzlarU775HLnMC6yNB',
+    priceId: 'price_1TxVHyHzlarU775Hcc8YKaUg',
     mode: 'payment',
     successPath: '/thank-you/workshop-replay',
     cancelPath: '/workshop-replay',

@@ -52,7 +52,7 @@ const FUNNEL_MAP = `
         <p style="font-size:12px;color:#888;margin:0;">90 minutes on demand. Defense mechanics from the ground up.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
-        <a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$47 →</a>
+        <a href="https://theerainers.com/workshop-replay" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$49 →</a>
       </td>
     </tr>
     <tr>
@@ -61,7 +61,7 @@ const FUNNEL_MAP = `
         <p style="font-size:12px;color:#888;margin:0;">Footwork and shadowboxing. Both systems together.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
-        <a href="https://theerainers.com/shop" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$87 →</a>
+        <a href="https://theerainers.com/shop" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$47 →</a>
       </td>
     </tr>
     <tr>
@@ -94,7 +94,7 @@ const WELCOME_CONFIG: Record<string, { subject: string; body: string }> = {
 <p style="margin:0 0 28px;"><a href="https://theerainers.com/pdfs/footwork-foundation.pdf" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Your Protocol →</a></p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 8px;">Reply to this email and tell me: <strong>what would change in your training if you never had to worry about getting hit?</strong></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">I read these.</p>
-<p style="font-size:13px;color:#888;margin:0;">Train well,<br/>Rainers</p>
+<p style="font-size:13px;color:#888;margin:0;">Keep winning,<br/>Rainers</p>
 ${FUNNEL_MAP}`,
   },
   'lever-audit': {
@@ -103,16 +103,14 @@ ${FUNNEL_MAP}`,
 <p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Seven levers. One broken lever limits performance across all the others. Find yours.</p>
 <p style="margin:0 0 24px;"><a href="https://theerainers.com/pdfs/lever-audit.pdf" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Audit →</a></p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">Work through each lever honestly. Score what you actually see in sparring, not what you wish was true.</p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+<p style="font-size:13px;color:#888;margin:0;">Keep winning,<br/>Rainers</p>
 ${FUNNEL_MAP}`,
   },
   'lever-audit-quiz': {
     subject: 'Your lever audit results',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You completed the 7-Lever Audit.</p>
 <p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Now you know which lever is limiting everything else. That gap is where the work starts.</p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+<p style="font-size:13px;color:#888;margin:0;">Keep winning,<br/>Rainers</p>
 ${FUNNEL_MAP}`,
   },
   'qa-registration': {
@@ -120,20 +118,18 @@ ${FUNNEL_MAP}`,
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You are registered for the Monthly Q&amp;A.</p>
 <p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Bring a specific question. The more specific you are about your mechanical problem, the more precise the diagnosis.</p>
 <p style="font-size:13px;color:#888;margin:0 0 4px;">The link and time will come closer to the session date.</p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Train well,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+<p style="font-size:13px;color:#888;margin:0;">Keep winning,<br/>Rainers</p>
 ${FUNNEL_MAP}`,
   },
   'footwork-blueprint': {
     subject: 'Your Blueprint. Start on page 9.',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">The PDF arrived with your download confirmation. If you missed it, it is also here: <a href="https://theerainers.com/pdfs/foundation.pdf" style="color:#E11D2A;">The Footwork Blueprint</a></p>
-<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">There are 56 rounds in the blueprint and page 9 is where the base work begins.</p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">There are 112 rounds in the blueprint and page 9 is where the base work begins.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Work through the stance and balance drills before anything else, everything in the drills compounds only when the base is stable.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">One thing to notice as you go through it: most of what the blueprint corrects is not complex. The issues are structural and pattern problems. Humans can change patterns with the right repetitions.</p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">The full sequence is 30 days.</p>
 <p style="margin:0 0 28px;"><a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">WATCH THE VIDEO BREAKDOWN →</a></p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">See you inside,</p>
-<p style="font-size:13px;color:#888;margin:0;">Rainers</p>
+<p style="font-size:13px;color:#888;margin:0;">Keep winning,<br/>Rainers</p>
 ${FUNNEL_MAP}`,
   },
   'safe-boxing': {
@@ -164,8 +160,10 @@ function wrapEmail(body: string, email = '', siteUrl = 'https://theerainers.com'
   const unsubFooter = email
     ? `<div style="border-top:1px solid #eee;margin:32px 0 0;padding:16px 0 0;text-align:center;"><p style="font-size:11px;color:#ccc;margin:0;">You received this because you opted in at theerainers.com. <a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p></div>`
     : '';
-  const logo = `<div style="text-align:center;margin:0 0 32px;"><img src="${siteUrl}/images/logo-trb.png" alt="Thee Rainers" width="120" style="height:auto;display:inline-block;" /></div>`;
-  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">${logo}${body}${unsubFooter}</div>`;
+  const topLogo = `<div style="text-align:center;margin:0 0 32px;"><img src="${siteUrl}/images/trb-logo-nobg.png" alt="Thee Rainers" width="80" style="height:auto;display:inline-block;" /></div>`;
+  const bottomLogo = `<div style="text-align:center;margin:32px 0 0;"><img src="${siteUrl}/images/trb-logo-nobg.png" alt="Thee Rainers" width="120" style="height:auto;display:inline-block;" /></div>`;
+  const socialLinks = `<div style="text-align:center;margin:16px 0 0;font-size:11px;color:#ccc;"><a href="https://www.instagram.com/theerainers" style="color:#ccc;text-decoration:none;margin:0 8px;">Instagram</a>&nbsp;·&nbsp;<a href="https://www.tiktok.com/@theerainers" style="color:#ccc;text-decoration:none;margin:0 8px;">TikTok</a>&nbsp;·&nbsp;<a href="https://www.youtube.com/@Rainers" style="color:#ccc;text-decoration:none;margin:0 8px;">YouTube</a></div>`;
+  return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">${topLogo}${body}${bottomLogo}${socialLinks}${unsubFooter}</div>`;
 }
 
 async function sendResendWelcome(resendKey: string, email: string, source: string, siteUrl = 'https://theerainers.com'): Promise<void> {

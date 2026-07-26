@@ -68,10 +68,10 @@ const SITE_URL = 'https://theerainers.com';
 // client-side TR_PRODUCTS map in Base.astro. Source of truth for server-side
 // purchase events fired via the GA4 Measurement Protocol.
 const GA4_CATALOG: Record<string, { name: string; price: number; category: string }> = {
-  'footwork':        { name: 'Footwork Blueprint',         price:  47, category: 'one_time' },
-  'shadowboxing':    { name: 'Shadowboxing Blueprint',     price:  47, category: 'one_time' },
-  'bundle':          { name: 'Bundle (Both Blueprints)',   price:  87, category: 'one_time' },
-  'workshop-replay': { name: 'Workshop Replay',            price:  47, category: 'on_demand' },
+  'footwork':        { name: 'Footwork Blueprint',         price:   0, category: 'one_time' },
+  'shadowboxing':    { name: 'Shadowboxing Blueprint',     price:  29, category: 'one_time' },
+  'bundle':          { name: 'Bundle (Both Blueprints)',   price:  47, category: 'one_time' },
+  'workshop-replay': { name: 'Workshop Replay',            price:  49, category: 'on_demand' },
   'greatness':       { name: 'Greatness Community',        price:  39, category: 'subscription' },
 };
 
