@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    height: 1920px;
+    background: #0B0B0C;
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  .bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/sparring_withnetherlands.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%);
+    opacity: 0.28;
+  }
+  /* dark gradient — heavier at bottom so logo reads clean */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #0B0B0C 18%, transparent 55%);
+  }
+  .overlay-top {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, #0B0B0C 10%, transparent 40%);
+  }
+  .content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 90px 80px;
+  }
+  .logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .kicker {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #E11D2A;
+  }
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: #E11D2A;
+  }
+  .url {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="overlay-top"></div>
+  <div class="overlay"></div>
+  <div class="content">
+    <img src="/images/logo-trb.png" alt="TRB" class="logo" />
+    <div class="bottom">
+      <div class="kicker">The Weekly Session</div>
+      <div class="divider"></div>
+      <div class="url">theerainers.com/community</div>
+    </div>
+  </div>
+</body>
+</html>
