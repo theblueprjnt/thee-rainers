@@ -3,20 +3,20 @@ import Layout from '../../layouts/Base.astro';
 ---
 <Layout
   title="Cookie Policy · Thee Rainers"
-  description="How Thee Rainers uses cookies. Short answer: we don't use tracking or advertising cookies."
+  description="How Thee Rainers uses cookies and your consent choices."
 >
   <section class="bg-[#F7F5F2] px-6 md:px-12 lg:px-20 pt-32 pb-24">
     <div class="max-w-2xl mx-auto">
 
       <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Legal</p>
       <h1 class="font-black text-[var(--color-charcoal)] text-3xl md:text-4xl leading-tight tracking-tight mb-3">Cookie Policy</h1>
-      <p class="text-[var(--color-charcoal)]/40 text-sm mb-12">Last updated: 26 May 2026</p>
+      <p class="text-[var(--color-charcoal)]/40 text-sm mb-12">Last updated: 30 July 2026</p>
 
       <div class="prose-legal">
 
         <h2>The short version</h2>
         <p>
-          We do not use advertising cookies, tracking cookies, or profiling cookies. There is no cookie consent banner on this site because no non-essential cookies are set by us.
+          We use Google Tag Manager with Consent Mode v2. By default, all analytics and advertising storage is denied. A consent banner appears on your first visit. If you decline, no analytics cookies are set. If you accept, Google Analytics 4 loads through GTM and may set cookies. We use no advertising cookies, no profiling cookies, and no third-party ad pixels.
         </p>
 
         <h2>What is a cookie?</h2>
@@ -25,27 +25,48 @@ import Layout from '../../layouts/Base.astro';
         </p>
 
         <h2>Cookies we set</h2>
-        <p>We do not set any first-party cookies. The following strictly necessary cookie may be set by our infrastructure provider:</p>
+        <p>We do not set any first-party cookies ourselves. The following cookies may be set depending on your consent choice and our infrastructure providers:</p>
 
         <table>
           <thead>
-            <tr><th>Cookie</th><th>Set by</th><th>Purpose</th><th>Duration</th></tr>
+            <tr><th>Cookie</th><th>Set by</th><th>Purpose</th><th>Consent required</th><th>Duration</th></tr>
           </thead>
           <tbody>
             <tr>
               <td><code>__cf_bm</code></td>
               <td>Cloudflare</td>
-              <td>Bot management and security. Identifies automated traffic to protect the site. Strictly necessary — cannot be disabled without breaking core security functions.</td>
+              <td>Bot management and security. Strictly necessary to protect the site from automated attacks.</td>
+              <td>No (strictly necessary)</td>
               <td>30 minutes</td>
+            </tr>
+            <tr>
+              <td><code>_ga</code>, <code>_ga_*</code></td>
+              <td>Google Analytics (via GTM)</td>
+              <td>Distinguishes unique visitors and sessions for aggregate traffic analytics.</td>
+              <td>Yes — only set after you accept</td>
+              <td>2 years</td>
             </tr>
           </tbody>
         </table>
 
+        <h2>Consent banner</h2>
+        <p>
+          A banner appears on your first visit with two options: Accept or Decline. Your choice is stored in your browser (<code>localStorage</code> key <code>trb_consent_v1</code>) so you are not asked again. If you decline, no analytics cookies are set and Google Tag Manager runs in a restricted mode with all storage denied.
+        </p>
+
         <h2>Analytics</h2>
         <p>
-          We use <strong>Cloudflare Web Analytics</strong>. This tool is privacy-first by design: it does not use cookies, does not store IP addresses, and does not track individual users across sessions or sites. It collects only aggregate, anonymous data (page views, referrer, country-level geographic data). No consent is required for cookieless analytics.
+          We use two analytics tools:
         </p>
-        <p>We do not use Google Analytics, Google Tag Manager, Facebook Pixel, TikTok Pixel, or any other cookie-based analytics or advertising tool.</p>
+        <ul>
+          <li>
+            <strong>Cloudflare Web Analytics</strong> (always active, no cookies) — cookieless, privacy-first aggregate data: page views, referrer, country-level location. Requires no consent because it sets no cookies and does not track individual users across sessions.
+          </li>
+          <li>
+            <strong>Google Analytics 4</strong> (via Google Tag Manager, consent-gated) — loads only if you accept the consent banner. Collects session and behaviour data to help us understand what content is useful. Governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
+          </li>
+        </ul>
+        <p>We do not use Facebook Pixel, TikTok Pixel, or any advertising or retargeting pixels.</p>
 
         <h2>Third-party cookies from embedded content</h2>
         <p>

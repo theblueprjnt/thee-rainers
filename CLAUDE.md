@@ -134,7 +134,8 @@ WATCH_TOKEN_SECRET          — HMAC signing key for /watch/ token-gated pages.
 R2_ACCOUNT_ID               — Cloudflare account ID.
 R2_ACCESS_KEY_ID            — R2 API token (access key).
 R2_SECRET_ACCESS_KEY        — R2 API token (secret).
-R2_BUCKET_NAME              — theerainers-vault.
+R2_BUCKET_NAME              — theerainers-vault. (secret deployed as R2_BUCKET — code reads both)
+R2_BUCKET                   — alias for R2_BUCKET_NAME, set in CF Worker secrets as "R2_BUCKET".
 AIRTABLE_API_KEY            — Airtable PAT.
 AIRTABLE_BASE_ID            — Airtable base ID.
 AIRTABLE_TABLE              — Airtable table name for member records. Defaults to "Customers" in /api/community-access, "Members" in stripe-webhook. SET THIS to match your actual table or both code paths will silently skip writes/reads.

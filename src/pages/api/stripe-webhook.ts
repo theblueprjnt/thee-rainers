@@ -472,7 +472,7 @@ async function deliverProduct(email: string, productId: string, e: Record<string
     const r2AccountId = e['R2_ACCOUNT_ID'] ?? '';
     const r2AccessKey = e['R2_ACCESS_KEY_ID'] ?? '';
     const r2SecretKey = e['R2_SECRET_ACCESS_KEY'] ?? '';
-    const r2Bucket    = e['R2_BUCKET_NAME'] ?? '';
+    const r2Bucket    = e['R2_BUCKET_NAME'] ?? e['R2_BUCKET'] ?? '';
     if (r2AccountId && r2AccessKey && r2SecretKey && r2Bucket && objectKeys.length > 0) {
       try {
         expiringUrl = await generateR2PresignedUrl(r2AccountId, r2AccessKey, r2SecretKey, r2Bucket, objectKeys[0]);
