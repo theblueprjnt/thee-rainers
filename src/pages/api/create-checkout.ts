@@ -70,9 +70,7 @@ export async function POST({ request }: { request: Request }): Promise<Response>
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
       mode: product.mode,
       line_items: [{ price: product.priceId, quantity: 1 }],
-      phone_number_collection: { enabled: true },
       allow_promotion_codes: true,
-      billing_address_collection: 'required',
       ...(customerEmail ? { customer_email: customerEmail } : {}),
       success_url: `${siteUrl}${product.successPath}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}${product.cancelPath}`,
