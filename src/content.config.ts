@@ -13,7 +13,7 @@ const products = defineCollection({
     description:   z.string(),
     includes:      z.string(),
     benefits_list: z.array(z.string()),
-    stripe_link:   z.string().url(),
+    checkout_key:  z.string().optional(),
     cta_text:      z.string(),
     featured:      z.boolean().default(false),
   }),
