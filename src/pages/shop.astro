@@ -18,13 +18,13 @@ const products = [
     tag: isFootworkFree ? 'Free · Start Here' : 'Blueprint',
     title: 'Footwork Blueprint',
     sub: '56 Rounds · Orthodox + Southpaw',
-    desc: 'The base layer. Full PDF. No payment.',
+    desc: 'Move with intention from round one.',
     price: isFootworkFree ? 'FREE' : '$9',
     price_note: null,
     href: isFootworkFree ? '/foundation' : null,
     checkoutKey: isFootworkFree ? null : 'footwork',
     page: '/foundation',
-    cta: isFootworkFree ? 'Get the PDF' : 'Get the Blueprint',
+    cta: 'Get the Blueprint',
     featured: true,
   },
   {
@@ -32,7 +32,7 @@ const products = [
     tag: 'Blueprint',
     title: 'Shadowboxing Blueprint',
     sub: '50+ Rounds · Orthodox + Southpaw',
-    desc: 'The next layer after footwork. Full PDF.',
+    desc: 'The next layer. 50+ rounds of structured solo output.',
     price: '$19',
     price_note: null,
     href: null,
@@ -118,7 +118,17 @@ const productSchema = JSON.stringify(products.map(p => ({
               <p class="text-[#0B0B0C]/60 text-xs leading-relaxed flex-1">{p.desc}</p>
               <div class="mt-4 flex items-center justify-between gap-3">
                 <div>
-                  <span class="font-black text-[#0B0B0C] text-2xl">{p.price}</span>
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-black text-[#0B0B0C] text-2xl">{p.price}</span>
+                    {p.featured && isFootworkFree && (
+                      <span class="text-[#0B0B0C]/30 text-sm line-through">$9</span>
+                    )}
+                  </div>
+                  {p.featured && isFootworkFree && (
+                    <p class="text-[10px] text-[var(--terra)] font-bold mt-0.5 uppercase tracking-widest">
+                      Goes to $9 · <span class="tr-shop-cd"></span>
+                    </p>
+                  )}
                   {p.price_note && <p class="text-[10px] text-[#0B0B0C]/50 mt-0.5">{p.price_note}</p>}
                 </div>
                 {p.checkoutKey ? (
@@ -262,6 +272,24 @@ const productSchema = JSON.stringify(products.map(p => ({
       <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">1 Corinthians 9:26-27</p>
     </div>
   </section>
+
+  <!-- Shop countdown — free footwork card -->
+  <script is:inline>
+    (function () {
+      var deadline = new Date('2026-08-01T23:00:00Z').getTime();
+      var el = document.querySelector('.tr-shop-cd');
+      if (!el) return;
+      function update() {
+        var r = deadline - Date.now();
+        if (r <= 0) { window.location.reload(); return; }
+        var h = Math.floor(r / 3600000);
+        var m = Math.floor((r % 3600000) / 60000);
+        var s = Math.floor((r % 60000) / 1000);
+        el.textContent = h + 'h ' + (m < 10 ? '0' : '') + m + 'm ' + (s < 10 ? '0' : '') + s + 's';
+      }
+      update(); setInterval(update, 1000);
+    })();
+  </script>
 
   <!-- GA4 view_item_list -->
   <script is:inline>
