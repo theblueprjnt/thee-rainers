@@ -124,15 +124,15 @@ const siteSchema = JSON.stringify({
       // and Checkout Session lookup keys mapped to GA4-shaped ecommerce items.
       // Keep in sync with shop.astro products array and create-checkout.ts.
       var TR_PRODUCTS = {
-        // Defense Workshop (live) still uses a Stripe Payment Link.
-        '7sY28r8lt1D06XU6446J20n': { id: 'defense_workshop',        name: 'Defense Workshop',        price: 197 },
-        // Lookup keys for data-checkout buttons (Checkout Session migration).
-        'shadowboxing':            { id: 'shadowboxing_blueprint',  name: 'Shadowboxing Blueprint',  price:  47 },
-        'workshop_replay':         { id: 'workshop_replay',         name: 'Workshop Replay',         price:  47 },
-        '6oUaEX7hp6Xk3LIdww6J20p': { id: 'workshop_replay',         name: 'Workshop Replay',         price:  47 },
-        '5kQdR91X5dlIeqm8cc6J20l': { id: 'shadowboxing_blueprint',  name: 'Shadowboxing Blueprint',  price:  47 },
-        'greatness_monthly':       { id: 'greatness_monthly',       name: 'The Weekly Session Monthly', price: 39 },
-        'greatness_annual':        { id: 'greatness_annual',        name: 'The Weekly Session Annual',  price: 390 }
+        // Checkout Session lookup keys — keep in sync with create-checkout.ts PRODUCTS map.
+        'footwork':                    { id: 'footwork_blueprint',      name: 'Footwork Blueprint',          price:   9 },
+        'shadowboxing':                { id: 'shadowboxing_blueprint',  name: 'Shadowboxing Blueprint',      price:  19 },
+        'bundle':                      { id: 'complete_bundle',         name: 'Complete Bundle',             price:  39 },
+        'defense_workshop_early':      { id: 'defense_workshop',        name: 'Defense Workshop (Early)',    price:  39 },
+        'defense_workshop_standard':   { id: 'defense_workshop',        name: 'Defense Workshop',           price:  49 },
+        'workshop_replay':             { id: 'workshop_replay',         name: 'Workshop Replay',             price:  49 },
+        'greatness_monthly':           { id: 'greatness_monthly',       name: 'The Weekly Session Monthly', price:  39 },
+        'greatness_annual':            { id: 'greatness_annual',        name: 'The Weekly Session Annual',  price: 390 }
       };
 
       // Delegated click — fires begin_checkout for ANY buy button site-wide.

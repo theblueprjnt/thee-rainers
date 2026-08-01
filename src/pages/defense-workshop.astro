@@ -1,0 +1,222 @@
+---
+import Layout from '../layouts/Base.astro';
+
+// Defense Workshop early bird until Aug 8 23:59 Lisbon = Aug 8 22:59 UTC
+const EARLY_BIRD_UNTIL = new Date('2026-08-08T22:59:00Z');
+const isEarlyBird = new Date() < EARLY_BIRD_UNTIL;
+const price = isEarlyBird ? '$39' : '$49';
+const checkoutKey = isEarlyBird ? 'defense_workshop_early' : 'defense_workshop_standard';
+
+const productSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Defense Workshop",
+  "description": "Live 90-minute defense mechanics workshop. Camera on. Real-time correction. Replay included.",
+  "url": "https://theerainers.com/defense-workshop",
+  "startDate": "2026-08-29",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+  "organizer": { "@type": "Organization", "name": "Thee Rainers", "url": "https://theerainers.com" },
+  "offers": {
+    "@type": "Offer",
+    "price": isEarlyBird ? "39.00" : "49.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://theerainers.com/defense-workshop",
+    "validThrough": isEarlyBird ? "2026-08-08T22:59:00Z" : "2026-08-29T00:00:00Z",
+  },
+});
+---
+<Layout
+  title="Defense Workshop · Live Aug 29 | Thee Rainers"
+  description={`Live 90-minute defense workshop. Camera on. Real-time correction on your movement. Replay included. ${price} ${isEarlyBird ? '· Early bird until Aug 8' : ''}.`}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={productSchema} />
+  </Fragment>
+
+  {isEarlyBird && (
+    <div class="bg-[var(--terra)] text-white text-center py-2 px-4 text-[11px] tracking-widest uppercase font-bold">
+      Early bird $39 until August 8. Goes to $49.
+    </div>
+  )}
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-[#0B0B0C]">
+    <img src="/images/defense_workshop.webp" alt="" aria-hidden="true"
+      width="1920" height="1080"
+      class="absolute inset-0 w-full h-full object-cover object-center opacity-20 pointer-events-none select-none"
+      loading="eager" fetchpriority="high" />
+
+    <div class="relative z-10 px-6 md:px-16 lg:px-24 pt-28 md:pt-44 pb-14 md:pb-20">
+      <div class="max-w-[720px]">
+        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">
+          Live · Aug 29 · 90 Min · Replay Included
+        </p>
+        <h1 class="font-black text-white uppercase tracking-tighter leading-[0.85] mb-6"
+          style="font-size: clamp(2.8rem, 8vw, 4.75rem);">
+          Defense<br/>Workshop.
+        </h1>
+
+        <!-- COPY: main hero paragraph — 2-3 sentences on what the workshop delivers -->
+        <p class="text-white/55 text-base leading-relaxed mb-10 max-w-[520px]">
+          Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset. Replay included with every seat.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
+          <button type="button" data-checkout={checkoutKey}
+            class="tr-btn w-full sm:w-auto">
+            Reserve Seat · {price}
+          </button>
+          <div class="text-white/30 text-[10px] tracking-widest uppercase">
+            {isEarlyBird ? 'Early bird until Aug 8' : 'Standard rate'} · One-time payment
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-x-6 gap-y-2 text-white/25 text-[10px] tracking-widest uppercase">
+          <span>Aug 29, 2026</span>
+          <span aria-hidden="true">·</span>
+          <span>Live Online</span>
+          <span aria-hidden="true">·</span>
+          <span>90 Minutes</span>
+          <span aria-hidden="true">·</span>
+          <span class="text-white/45 font-bold">Replay Included</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1100px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">What's Inside</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
+        <!-- COPY: section headline -->
+        What this session gives you.
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="border-t-2 border-[var(--terra)] pt-5">
+          <!-- COPY: pillar 1 headline and body -->
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Live correction.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Camera on. Rainers corrects your movement in real time. Not a lecture. Not slides. Your actual mechanics, fixed.</p>
+        </div>
+        <div class="border-t-2 border-[var(--terra)] pt-5">
+          <!-- COPY: pillar 2 headline and body -->
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">The defense structure.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">The mechanical system to hit, exit, and reset without leaving yourself open. Built from the base up.</p>
+        </div>
+        <div class="border-t-2 border-[var(--terra)] pt-5">
+          <!-- COPY: pillar 3 headline and body -->
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Replay included.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">The full session is yours after the live date. 7-day access window. Watch the corrections again. Own it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section class="bg-white px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[860px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">Who This Is For</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-8">
+        <!-- COPY: who-this-is-for headline -->
+        Fighters who want to stop getting hit.
+      </h2>
+      <!-- COPY: 2-3 sentences on the ideal attendee -->
+      <p class="text-[#0A0A0A]/55 text-base leading-relaxed max-w-[640px]">
+        You are training consistently. You know the mechanics exist. But under pressure the chain breaks and you cannot see why. This session fixes the break.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRICING + CTA -->
+  <section class="bg-[#0B0B0C] px-6 md:px-16 lg:px-24 py-14 md:py-20">
+    <div class="max-w-[680px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">
+        {isEarlyBird ? 'Early Bird · Until Aug 8' : 'Defense Workshop'}
+      </p>
+      <div class="flex items-baseline gap-4 mb-6">
+        <span class="font-black text-white text-5xl">{price}</span>
+        {isEarlyBird && <span class="text-white/30 text-sm line-through">$49</span>}
+      </div>
+      <ul class="text-white/40 text-sm leading-loose mb-8 space-y-1">
+        <li>Live session · August 29, 2026</li>
+        <li>90 minutes with Rainers</li>
+        <li>Camera on · real-time correction</li>
+        <li>Replay included · 7-day access after the live date</li>
+        <li>One-time payment</li>
+      </ul>
+      <button type="button" data-checkout={checkoutKey}
+        class="tr-btn w-full sm:w-auto text-base" style="padding: 1rem 2.5rem; font-size: 0.75rem;">
+        Reserve Seat · {price}
+      </button>
+      <p class="text-white/20 text-[10px] mt-4">
+        Secure checkout via Stripe · <a href="/legal/refund-policy" class="underline hover:text-white/50">Refund Policy</a> · <a href="/legal/terms" class="underline hover:text-white/50">Terms</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[800px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Questions</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-10">Common Questions</h2>
+      <dl class="flex flex-col divide-y divide-[#0A0A0A]/8">
+
+        <div class="py-6">
+          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">What if I can't make the live date?</dt>
+          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">The replay is included with every seat. You will have 7 days of access after the live session.</dd>
+        </div>
+
+        <div class="py-6">
+          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">Do I need a camera?</dt>
+          <!-- COPY: camera requirement answer -->
+          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Camera on is required for correction. If you cannot be on camera, the replay is still available to you after the live date.</dd>
+        </div>
+
+        <div class="py-6">
+          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">Is there a refund policy?</dt>
+          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Yes. Email rainers@theerainers.com before the live session date for a full refund. See the <a href="/legal/refund-policy" class="text-[var(--navy)] underline hover:opacity-70">Refund Policy</a>.</dd>
+        </div>
+
+        <div class="py-6">
+          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">What platform is this on?</dt>
+          <!-- COPY: platform answer -->
+          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Details sent by email after purchase.</dd>
+        </div>
+
+      </dl>
+    </div>
+  </section>
+
+  <!-- SCRIPTURE -->
+  <section class="bg-[#0B0B0C] px-6 md:px-16 lg:px-24 py-20">
+    <div class="max-w-[680px] mx-auto">
+      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
+        "I do not run aimlessly. I do not box as one beating the air."
+      </p>
+      <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">1 Corinthians 9:26-27</p>
+    </div>
+  </section>
+
+  <!-- GA4 view_item -->
+  <script is:inline>
+    if (typeof window !== 'undefined' && window.trackEvent) {
+      var earlyBirdUntil = new Date('2026-08-08T22:59:00Z').getTime();
+      var isEarlyBird = Date.now() < earlyBirdUntil;
+      window.trackEvent('view_item', {
+        ecommerce: {
+          currency: 'USD',
+          value: isEarlyBird ? 39 : 49,
+          items: [{
+            item_id: 'defense_workshop',
+            item_name: isEarlyBird ? 'Defense Workshop (Early Bird)' : 'Defense Workshop',
+            price: isEarlyBird ? 39 : 49,
+            quantity: 1,
+            item_category: 'live_event'
+          }]
+        }
+      });
+    }
+  </script>
+
+</Layout>

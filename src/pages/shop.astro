@@ -2,18 +2,29 @@
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
 
+// Aug 2 2026 00:00 Europe/Lisbon = Aug 1 2026 23:00:00 UTC
+const FOOTWORK_FREE_UNTIL = new Date('2026-08-01T23:00:00Z');
+const isFootworkFree = new Date() < FOOTWORK_FREE_UNTIL;
+
+// Defense Workshop early bird until Aug 8 23:59 Lisbon = Aug 8 22:59 UTC
+const EARLY_BIRD_UNTIL = new Date('2026-08-08T22:59:00Z');
+const isEarlyBird = new Date() < EARLY_BIRD_UNTIL;
+const workshopPrice = isEarlyBird ? '$39' : '$49';
+const workshopCheckoutKey = isEarlyBird ? 'defense_workshop_early' : 'defense_workshop_standard';
+
 const products = [
   {
     image: '/images/3d_thefootworkblueprint_cover.jpg',
-    tag: 'Free · Start Here',
+    tag: isFootworkFree ? 'Free · Start Here' : 'Blueprint',
     title: 'Footwork Blueprint',
     sub: '56 Rounds · Orthodox + Southpaw',
     desc: 'The base layer. Full PDF. No payment.',
-    price: 'FREE',
+    price: isFootworkFree ? 'FREE' : '$9',
     price_note: null,
-    stripeUrl: '/foundation',
+    href: isFootworkFree ? '/foundation' : null,
+    checkoutKey: isFootworkFree ? null : 'footwork',
     page: '/foundation',
-    cta: 'Get the PDF',
+    cta: isFootworkFree ? 'Get the PDF' : 'Get the Blueprint',
     featured: true,
   },
   {
@@ -22,9 +33,10 @@ const products = [
     title: 'Shadowboxing Blueprint',
     sub: '50+ Rounds · Orthodox + Southpaw',
     desc: 'The next layer after footwork. Full PDF.',
-    price: '$47',
+    price: '$19',
     price_note: null,
-    stripeUrl: 'https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l',
+    href: null,
+    checkoutKey: 'shadowboxing',
     page: '/shadowboxing-blueprint',
     cta: 'Get the Blueprint',
     featured: false,
@@ -32,13 +44,14 @@ const products = [
   {
     image: '/images/3d_thebundle_cover.png',
     tag: 'Bundle · Best Value',
-    title: 'Both Blueprints',
+    title: 'Complete Bundle',
     sub: 'Footwork + Shadowboxing · 100+ Rounds',
     desc: 'The full ground-up system. Both PDFs. One purchase.',
-    price: '$87',
-    price_note: 'Save $7 vs buying separately',
-    stripeUrl: 'https://buy.stripe.com/14A4gz59hgxUaa65006J20m',
-    page: '/shop',
+    price: '$39',
+    price_note: null,
+    href: null,
+    checkoutKey: 'bundle',
+    page: null,
     cta: 'Get the Bundle',
     featured: false,
   },
@@ -53,7 +66,7 @@ const productSchema = JSON.stringify(products.map(p => ({
   "brand": { "@type": "Brand", "name": "Thee Rainers" },
   "offers": {
     "@type": "Offer",
-    "price": parseFloat(p.price.replace(/[^0-9.]/g, '')),
+    "price": parseFloat(p.price.replace(/[^0-9.]/g, '')) || 0,
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock",
     "url": "https://theerainers.com/shop",
@@ -84,10 +97,10 @@ const productSchema = JSON.stringify(products.map(p => ({
           <div class={`tr-card flex flex-col group transition-colors duration-200 relative ${p.featured ? 'border-2 border-[var(--terra)]/40 hover:border-[var(--terra)]' : 'border border-[#0B0B0C]/10 hover:border-[var(--terra)]/40'}`}>
             {p.featured && (
               <div class="absolute top-3 left-3 z-10 bg-[var(--terra)] text-white text-[9px] font-bold tracking-widest uppercase px-2 py-1">
-                Free · Start Here
+                {p.tag}
               </div>
             )}
-            <a href={p.page} aria-label={`Learn more about ${p.title}`}
+            <a href={p.page ?? '/shop'} aria-label={`Learn more about ${p.title}`}
               class={`overflow-hidden relative block ${p.featured ? 'bg-[#0B0B0C]' : 'bg-[var(--warm)]'}`}>
               <img src={p.image} alt={p.title}
                 loading="lazy"
@@ -97,7 +110,9 @@ const productSchema = JSON.stringify(products.map(p => ({
             <div class="bg-white p-5 flex flex-col flex-1">
               <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">{p.tag}</p>
               <h2 class="font-black text-[#0B0B0C] uppercase tracking-tight text-xl leading-tight mb-1">
-                <a href={p.page} class="hover:text-[var(--terra)] transition-colors">{p.title}</a>
+                {p.page ? (
+                  <a href={p.page} class="hover:text-[var(--terra)] transition-colors">{p.title}</a>
+                ) : p.title}
               </h2>
               <p class="text-[#0B0B0C]/50 text-xs mb-3 font-bold">{p.sub}</p>
               <p class="text-[#0B0B0C]/60 text-xs leading-relaxed flex-1">{p.desc}</p>
@@ -106,16 +121,24 @@ const productSchema = JSON.stringify(products.map(p => ({
                   <span class="font-black text-[#0B0B0C] text-2xl">{p.price}</span>
                   {p.price_note && <p class="text-[10px] text-[#0B0B0C]/50 mt-0.5">{p.price_note}</p>}
                 </div>
-                <a href={p.stripeUrl} class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.625rem;">
-                  {p.cta}
-                </a>
+                {p.checkoutKey ? (
+                  <button type="button" data-checkout={p.checkoutKey} class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.625rem;">
+                    {p.cta}
+                  </button>
+                ) : (
+                  <a href={p.href ?? '/foundation'} class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.625rem;">
+                    {p.cta}
+                  </a>
+                )}
               </div>
-              <p class="mt-3 text-[11px]">
-                <a href={p.page} class="text-[var(--navy)] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity">
-                  Learn more
-                </a>
-              </p>
-              {p.stripeUrl.startsWith('https://') && (
+              {p.page && (
+                <p class="mt-3 text-[11px]">
+                  <a href={p.page} class="text-[var(--navy)] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity">
+                    Learn more
+                  </a>
+                </p>
+              )}
+              {p.checkoutKey && (
                 <p class="mt-2 text-[10px] text-[#0B0B0C]/30">
                   Secure checkout via Stripe · <a href="/legal/refund-policy" class="underline hover:text-[#0B0B0C]/50">Refund Policy</a>
                 </p>
@@ -153,11 +176,10 @@ const productSchema = JSON.stringify(products.map(p => ({
         </div>
       </div>
 
-      <!-- Workshop + Replay row -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
-
-        <div class="bg-[#0B0B0C] flex flex-col group border border-white/5 hover:border-white/15 transition-colors duration-200">
-          <div class="relative overflow-hidden" style="height: 200px;">
+      <!-- Defense Workshop -->
+      <div class="mt-10">
+        <div class="bg-[#0B0B0C] flex flex-col md:flex-row group border border-white/5 hover:border-white/15 transition-colors duration-200">
+          <div class="relative overflow-hidden md:w-[40%] shrink-0" style="min-height: 200px;">
             <img src="/images/defense_workshop.webp" alt="Defense Workshop"
               width="1920" height="1080"
               class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500" />
@@ -165,14 +187,19 @@ const productSchema = JSON.stringify(products.map(p => ({
           </div>
           <div class="p-8 flex flex-col flex-1 justify-between">
             <div>
-              <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">Live · 90 min</p>
+              <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">
+                Live · Aug 29 · Replay Included{isEarlyBird ? ' · Early Bird' : ''}
+              </p>
               <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-3">Defense Workshop</h2>
-              <p class="text-white/40 text-xs leading-relaxed">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset.</p>
+              <p class="text-white/40 text-xs leading-relaxed max-w-[480px]">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset. Replay included.</p>
             </div>
-            <div class="flex items-center justify-between mt-8">
-              <span class="font-black text-white text-2xl">$197</span>
+            <div class="flex items-center justify-between mt-8 gap-4">
+              <div>
+                <span class="font-black text-white text-2xl">{workshopPrice}</span>
+                {isEarlyBird && <p class="text-[10px] text-white/40 mt-0.5">Early bird until Aug 8. Goes to $49.</p>}
+              </div>
               <div class="flex flex-col items-end gap-1">
-                <a href="/workshop" class="tr-btn" style="padding: 0.6rem 1.25rem; font-size: 0.625rem;">
+                <a href="/defense-workshop" class="tr-btn" style="padding: 0.6rem 1.25rem; font-size: 0.625rem;">
                   Reserve Seat
                 </a>
                 <p class="text-[11px] text-white/45 leading-relaxed">
@@ -182,29 +209,6 @@ const productSchema = JSON.stringify(products.map(p => ({
             </div>
           </div>
         </div>
-
-        <div class="bg-[var(--warm)] flex flex-col justify-between group border border-[#0B0B0C]/10 hover:border-[var(--terra)]/30 transition-colors duration-200">
-          <div class="relative overflow-hidden" style="height: 200px;">
-            <img src="/images/workshop_bacgkround.webp" alt="Workshop Replay"
-              width="1920" height="1080"
-              class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500" />
-            <div class="absolute inset-0 bg-[#0B0B0C]/55"></div>
-          </div>
-          <div class="p-8 flex flex-col flex-1 justify-between">
-            <div>
-              <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">On Demand · Full Recording</p>
-              <h2 class="font-black text-[#0B0B0C] uppercase tracking-tight text-2xl leading-tight mb-3">Workshop Replay</h2>
-              <p class="text-[#0B0B0C]/60 text-xs leading-relaxed">The full 90-min session on demand. The framework applied. 7-day access from purchase.</p>
-            </div>
-            <div class="flex items-center justify-between mt-8">
-              <span class="font-black text-[#0B0B0C] text-2xl">$47</span>
-              <a href="/workshop-replay" class="tr-btn" style="padding: 0.6rem 1.25rem; font-size: 0.625rem;">
-                See Replay
-              </a>
-            </div>
-          </div>
-        </div>
-
       </div>
 
       <!-- Community teaser -->
@@ -227,12 +231,23 @@ const productSchema = JSON.stringify(products.map(p => ({
         </div>
       </div>
 
-      <!-- Start free nudge -->
+      <!-- Start nudge -->
       <div class="mt-10 pt-10 border-t border-[#0B0B0C]/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <p class="text-[#0B0B0C]/30 text-sm">Start free with the Footwork Blueprint. Build the base first.</p>
-        <a href="/foundation" class="text-[var(--navy)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">
-          Get the Free Blueprint
-        </a>
+        {isFootworkFree ? (
+          <>
+            <p class="text-[#0B0B0C]/30 text-sm">Start free with the Footwork Blueprint. Build the base first.</p>
+            <a href="/foundation" class="text-[var(--navy)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap">
+              Get the Free Blueprint
+            </a>
+          </>
+        ) : (
+          <>
+            <p class="text-[#0B0B0C]/30 text-sm">Start with the Footwork Blueprint. The base carries everything.</p>
+            <button type="button" data-checkout="footwork" class="text-[var(--navy)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap bg-transparent border-0 p-0 cursor-pointer">
+              Get the Blueprint · $9
+            </button>
+          </>
+        )}
       </div>
 
     </div>
@@ -251,16 +266,21 @@ const productSchema = JSON.stringify(products.map(p => ({
   <!-- GA4 view_item_list -->
   <script is:inline>
     if (typeof window !== 'undefined' && window.trackEvent) {
+      var now = Date.now();
+      var footworkFreeUntil = new Date('2026-08-01T23:00:00Z').getTime();
+      var earlyBirdUntil = new Date('2026-08-08T22:59:00Z').getTime();
+      var footworkPrice = now < footworkFreeUntil ? 0 : 9;
+      var workshopPrice = now < earlyBirdUntil ? 39 : 49;
       window.trackEvent('view_item_list', {
         item_list_id: 'shop',
         item_list_name: 'Shop: Blueprints + Workshops',
         ecommerce: {
           currency: 'USD',
           items: [
-            { item_id: 'footwork_blueprint',     item_name: 'Footwork Blueprint (Free)', price: 0,  quantity: 1, item_category: 'lead_magnet' },
-            { item_id: 'shadowboxing_blueprint', item_name: 'Shadowboxing Blueprint',   price: 47, quantity: 1, item_category: 'one_time' },
-            { item_id: 'defense_workshop',       item_name: 'Defense Workshop (Live)',  price: 197, quantity: 1, item_category: 'live_event' },
-            { item_id: 'workshop_replay',        item_name: 'Workshop Replay',          price: 47, quantity: 1, item_category: 'on_demand' }
+            { item_id: 'footwork_blueprint',     item_name: 'Footwork Blueprint',    price: footworkPrice, quantity: 1, item_category: footworkPrice === 0 ? 'lead_magnet' : 'one_time' },
+            { item_id: 'shadowboxing_blueprint', item_name: 'Shadowboxing Blueprint', price: 19, quantity: 1, item_category: 'one_time' },
+            { item_id: 'complete_bundle',        item_name: 'Complete Bundle',        price: 39, quantity: 1, item_category: 'one_time' },
+            { item_id: 'defense_workshop',       item_name: 'Defense Workshop',       price: workshopPrice, quantity: 1, item_category: 'live_event' }
           ]
         }
       });

@@ -3,7 +3,7 @@
   "eyebrow": "Blueprint",
   "title": "Shadowboxing Blueprint",
   "focus": "6 Punches. Range. Exits.",
-  "price": "$47",
+  "price": "$19",
   "description": "Done-with-me sessions. Skill standards. Rhythm.",
   "includes": "50+ rounds with clear intent for every minute of work.",
   "benefits_list": [
@@ -12,7 +12,7 @@
     "Exit lines trained as a reflex, not an afterthought",
     "Cognitive perception drills to see punches before they land"
   ],
-  "stripe_link": "https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l",
-  "cta_text": "Buy Now",
+  "checkout_key": "shadowboxing",
+  "cta_text": "Get the Blueprint",
   "featured": false
 }

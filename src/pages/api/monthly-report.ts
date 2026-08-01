@@ -10,10 +10,13 @@ import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 
 const PRODUCT_NAMES: Record<string, string> = {
-  'prod_UZOMBOeJ0mm15I': 'Workshop Replay ($47)',
-  'prod_UZrejf6iuDorEA': 'Footwork Blueprint ($47)',
-  'prod_UZreDlek9325EY': 'Shadowboxing Blueprint ($47)',
-  'prod_UZreHroYQEDAFU': 'Bundle ($87)',
+  'prod_UZOMBOeJ0mm15I': 'Workshop Replay (archived)',
+  'prod_UZrejf6iuDorEA': 'Footwork Blueprint (old — archived)',
+  'prod_UZreDlek9325EY': 'Shadowboxing Blueprint (old — archived)',
+  'prod_UZreHroYQEDAFU': 'Bundle (old — archived)',
+  'prod_UZ9lTK2PhsS4xs': 'Footwork Blueprint ($9)',
+  'prod_UZ9vV79TAun9yB': 'Shadowboxing Blueprint ($19)',
+  'prod_UZ9xqJt3glrCOO': 'Complete Bundle ($39)',
   'prod_Uaz6EzELZP6j0V': 'The Weekly Session ($39/mo)',
 };
 

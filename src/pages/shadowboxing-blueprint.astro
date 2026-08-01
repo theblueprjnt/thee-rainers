@@ -12,16 +12,16 @@ const productSchema = JSON.stringify({
   "brand": { "@type": "Brand", "name": "Thee Rainers" },
   "offers": {
     "@type": "Offer",
-    "price": "29.00",
+    "price": "19.00",
     "priceCurrency": "USD",
     "availability": "https://schema.org/InStock",
-    "url": "https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l",
+    "url": "https://theerainers.com/shadowboxing-blueprint",
   },
 });
 ---
 <Layout
   title="The Shadowboxing Blueprint: Common Mistakes + Done-With-Me Session + Skill Test"
-  description="Build boxing skill with or without a partner. The 6 punches, the 3 mistakes that kill skill, structured sessions, a 3-minute skill test, printable round PDF. $29.">
+  description="Build boxing skill with or without a partner. The 6 punches, the 3 mistakes that kill skill, structured sessions, a 3-minute skill test, printable round PDF. $19.">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={productSchema} />
   </Fragment>
@@ -42,13 +42,12 @@ const productSchema = JSON.stringify({
 
         <div class="flex flex-col gap-3 mb-6 max-w-[420px]">
           <div class="flex items-baseline gap-3">
-            <span class="font-black text-[#0A0A0A] text-4xl">$29</span>
+            <span class="font-black text-[#0A0A0A] text-4xl">$19</span>
             <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">One time</span>
           </div>
-          <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"
-            class="tr-btn">
-            Get the Blueprint · $29 →
-          </a>
+          <button type="button" data-checkout="shadowboxing" class="tr-btn">
+            Get the Blueprint · $19 →
+          </button>
           <p class="text-[11px] text-[#0A0A0A]/30">Secure checkout via Stripe · Instant delivery · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a></p>
         </div>
 
@@ -258,13 +257,12 @@ const productSchema = JSON.stringify({
   <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-10 md:py-14 border-b border-white/5">
     <div class="max-w-[720px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
       <div>
-        <p class="text-white/40 text-[11px] tracking-widest uppercase mb-2">The Shadowboxing Blueprint · $29</p>
+        <p class="text-white/40 text-[11px] tracking-widest uppercase mb-2">The Shadowboxing Blueprint · $19</p>
         <p class="font-black text-white uppercase tracking-tighter text-xl md:text-2xl leading-tight">Shadowbox with intent. Start today.</p>
       </div>
-      <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"
-        class="tr-btn shrink-0">
+      <button type="button" data-checkout="shadowboxing" class="tr-btn shrink-0">
         Get the Blueprint →
-      </a>
+      </button>
     </div>
   </section>
 
@@ -324,13 +322,12 @@ const productSchema = JSON.stringify({
         Shadowbox with intent.
       </h2>
       <div class="flex items-baseline justify-center gap-3 mb-6">
-        <span class="font-black text-[#0A0A0A] text-4xl">$29</span>
+        <span class="font-black text-[#0A0A0A] text-4xl">$19</span>
         <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">One time</span>
       </div>
-      <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"
-        class="tr-btn">
-        Get the Blueprint · $29 →
-      </a>
+      <button type="button" data-checkout="shadowboxing" class="tr-btn">
+        Get the Blueprint · $19 →
+      </button>
       <p class="text-[11px] text-[#0A0A0A]/55 mt-4">Instant digital download.</p>
       <p class="text-[11px] text-[#0A0A0A]/30 mt-2">Secure checkout via Stripe · Instant delivery · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a></p>
 
@@ -356,13 +353,12 @@ const productSchema = JSON.stringify({
     class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[var(--warm)] border-t border-[#0B0B0C]/12 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-200 ease-out"
     aria-hidden="true">
     <div class="flex items-baseline gap-2">
-      <span class="font-black text-[#0A0A0A] text-xl">$29</span>
+      <span class="font-black text-[#0A0A0A] text-xl">$19</span>
       <span class="text-[#0A0A0A]/40 text-[10px] uppercase tracking-widest">One time</span>
     </div>
-    <a href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"
-      class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">
+    <button type="button" data-checkout="shadowboxing" class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">
       Get the Blueprint →
-    </a>
+    </button>
   </div>
 
 </Layout>

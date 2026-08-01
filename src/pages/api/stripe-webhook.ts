@@ -6,11 +6,14 @@ import { env as cfEnv } from 'cloudflare:workers';
 import { sendTelegramAlert } from '../../lib/telegram';
 
 // ── product map ────────────────────────────────────────────────────────────
+// Canonical IDs come from create-checkout.ts — these are the product IDs that
+// Stripe checkout sessions actually reference. The old prod_UZre... IDs were
+// payment-link era products and no longer match any active checkout flow.
 const PRODUCT_MAP: Record<string, string> = {
-  'prod_UZreHroYQEDAFU': 'bundle',
-  'prod_UZrejf6iuDorEA': 'footwork',
-  'prod_UZreDlek9325EY': 'shadowboxing',
-  'prod_UZOMBOeJ0mm15I': 'workshop-replay',
+  'prod_UZ9lTK2PhsS4xs': 'footwork',
+  'prod_UZ9vV79TAun9yB': 'shadowboxing',
+  'prod_UZ9xqJt3glrCOO': 'bundle',
+  'prod_UZ9z2iC6xZMJVo': 'workshop-replay',
   'prod_Uaz6EzELZP6j0V': 'greatness',
 };
 
@@ -18,32 +21,36 @@ const PRODUCT_MAP: Record<string, string> = {
 // Used when the product ID is unknown or a placeholder. Source of truth is
 // the lookup_key set in create-checkout.ts at session creation time.
 const LOOKUP_KEY_MAP: Record<string, string> = {
-  'greatness_monthly': 'greatness',
-  'greatness_annual':  'greatness',
-  'workshop_replay':   'workshop-replay',
-  'footwork':          'footwork',
-  'shadowboxing':      'shadowboxing',
-  'bundle':            'bundle',
+  'greatness_monthly':        'greatness',
+  'greatness_annual':         'greatness',
+  'workshop_replay':          'workshop-replay',
+  'footwork':                 'footwork',
+  'shadowboxing':             'shadowboxing',
+  'bundle':                   'bundle',
+  'defense_workshop_early':   'defense-workshop',
+  'defense_workshop_standard':'defense-workshop',
 };
 
 // ── asset map ──────────────────────────────────────────────────────────────
 const ASSET_MAP: Record<string, string[]> = {
-  'footwork':     ['thefootworkblueprint/links_theFOOTWORKBlueprint.pdf'],
-  'shadowboxing': ['the shadowboxing blueprint/the shadowboxing blueprint.pdf'],
-  'bundle':       [
+  'footwork':          ['thefootworkblueprint/links_theFOOTWORKBlueprint.pdf'],
+  'shadowboxing':      ['the shadowboxing blueprint/the shadowboxing blueprint.pdf'],
+  'bundle':            [
     'bundle/thefootworkblueprint/links_theFOOTWORKBlueprint.pdf',
     'bundle/the shadowboxing blueprint/the shadowboxing blueprint.pdf',
   ],
+  // defense-workshop delivers the replay via watch URL (not R2 PDF)
 };
 
 // ── Kit tag IDs ────────────────────────────────────────────────────────────
 // TODO: Create tags in Kit (Grow > Tags) and paste the numeric IDs below.
 // Tag URL looks like: app.kit.com/tags/1234567 — the number is the ID.
 const KIT_PRODUCT_TAGS: Record<string, string> = {
-  'footwork':     '19807643',
-  'shadowboxing': '19807641',
-  'bundle':       '19807644',
-  'greatness':    '19830354',
+  'footwork':          '19807643', // FIXME: tag 19807643 does not exist in Kit — create it
+  'shadowboxing':      '19807641',
+  'bundle':            '19807644',
+  'defense-workshop':  '19807641', // uses same tag as shadowboxing until a dedicated tag is created
+  'greatness':         '19830354',
 };
 const KIT_MEMBER_TAG = '19807647';
 // 14-day Community trial tag — applied to Blueprint buyers so Kit can fire the
@@ -68,11 +75,12 @@ const SITE_URL = 'https://theerainers.com';
 // client-side TR_PRODUCTS map in Base.astro. Source of truth for server-side
 // purchase events fired via the GA4 Measurement Protocol.
 const GA4_CATALOG: Record<string, { name: string; price: number; category: string }> = {
-  'footwork':        { name: 'Footwork Blueprint',         price:   0, category: 'one_time' },
-  'shadowboxing':    { name: 'Shadowboxing Blueprint',     price:  29, category: 'one_time' },
-  'bundle':          { name: 'Bundle (Both Blueprints)',   price:  47, category: 'one_time' },
-  'workshop-replay': { name: 'Workshop Replay',            price:  49, category: 'on_demand' },
-  'greatness':       { name: 'Greatness Community',        price:  39, category: 'subscription' },
+  'footwork':          { name: 'Footwork Blueprint',         price:   9, category: 'one_time' },
+  'shadowboxing':      { name: 'Shadowboxing Blueprint',     price:  19, category: 'one_time' },
+  'bundle':            { name: 'Complete Bundle',            price:  39, category: 'one_time' },
+  'workshop-replay':   { name: 'Workshop Replay',            price:  49, category: 'on_demand' },
+  'defense-workshop':  { name: 'Defense Workshop',           price:  39, category: 'one_time' },
+  'greatness':         { name: 'Greatness Community',        price:  39, category: 'subscription' },
 };
 
 // ── GA4 Measurement Protocol — server-side purchase event ──────────────────
@@ -313,11 +321,12 @@ async function generateCommunityMagicLink(secret: string): Promise<string> {
 // ── delivery email via Resend ──────────────────────────────────────────────
 
 const DELIVERY_SUBJECTS: Record<string, string> = {
-  'footwork':        'Your Footwork Blueprint',
-  'shadowboxing':    'Your Shadowboxing Blueprint',
-  'bundle':          'Your Blueprints',
-  'workshop-replay': 'Your Defense Workshop Replay',
-  'greatness':       'You are in.',
+  'footwork':          'Your Footwork Blueprint',
+  'shadowboxing':      'Your Shadowboxing Blueprint',
+  'bundle':            'Your Blueprints',
+  'workshop-replay':   'Your Defense Workshop Replay',
+  'defense-workshop':  'Your Defense Workshop Replay',
+  'greatness':         'You are in.',
 };
 
 function buildDeliveryHtml(slug: string, url: string, url2: string | null, email: string, env?: Record<string, string>): string {
@@ -448,10 +457,10 @@ async function deliverProduct(email: string, productId: string, e: Record<string
   let expiringUrl: string | null  = null;
   let expiringUrl2: string | null = null;
 
-  if (productSlug === 'workshop-replay') {
+  if (productSlug === 'workshop-replay' || productSlug === 'defense-workshop') {
     const watchSecret = e['WATCH_TOKEN_SECRET'] ?? '';
     if (!watchSecret) {
-      console.error('[stripe-webhook] WATCH_TOKEN_SECRET not set — workshop-replay buyer will receive no watch link');
+      console.error('[stripe-webhook] WATCH_TOKEN_SECRET not set — ' + productSlug + ' buyer will receive no watch link');
     } else {
       try { expiringUrl = await generateWatchUrl(watchSecret, 'workshop-replay'); }
       catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
