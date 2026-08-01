@@ -13,29 +13,47 @@ import { env as cfEnv } from 'cloudflare:workers';
 
 interface ProductConfig {
   priceId: string;
+  useLookupKey?: boolean;
   mode: 'payment' | 'subscription';
   successPath: string;
   cancelPath: string;
 }
 
 const PRODUCTS: Record<string, ProductConfig> = {
+  footwork: {
+    priceId: 'price_1',
+    useLookupKey: true,
+    mode: 'payment',
+    successPath: '/thank-you/footwork-blueprint',
+    cancelPath: '/foundation',
+  },
   shadowboxing: {
-    priceId: 'price_1TxVKCHzlarU775HOqg5tXQH',
+    priceId: 'price_2',
+    useLookupKey: true,
     mode: 'payment',
     successPath: '/thank-you/shadowboxing',
     cancelPath: '/shadowboxing-blueprint',
   },
   bundle: {
-    priceId: 'price_1TxVIjHzlarU775HKApDETjT',
+    priceId: 'price_3',
+    useLookupKey: true,
     mode: 'payment',
     successPath: '/thank-you/bundle',
     cancelPath: '/shop',
   },
-  workshop_replay: {
-    priceId: 'price_1TxVHyHzlarU775Hcc8YKaUg',
+  defense_workshop_early: {
+    priceId: 'price_6',
+    useLookupKey: true,
     mode: 'payment',
-    successPath: '/thank-you/workshop-replay',
-    cancelPath: '/workshop-replay',
+    successPath: '/thank-you/defense-workshop',
+    cancelPath: '/defense-workshop',
+  },
+  defense_workshop_standard: {
+    priceId: 'price_5',
+    useLookupKey: true,
+    mode: 'payment',
+    successPath: '/thank-you/defense-workshop',
+    cancelPath: '/defense-workshop',
   },
   greatness_monthly: {
     priceId: 'price_1Tbn8WHzlarU775HMfmbxaJy',
@@ -67,9 +85,18 @@ export async function POST({ request }: { request: Request }): Promise<Response>
 
     // Build session params. optional_items is typed loosely because the param
     // shape moves faster than the Stripe SDK TypeScript definitions.
+    let resolvedPriceId = product.priceId;
+    if (product.useLookupKey) {
+      const found = await stripe.prices.list({ lookup_keys: [product.priceId], limit: 1 });
+      resolvedPriceId = found.data[0]?.id ?? '';
+      if (!resolvedPriceId) {
+        return new Response(JSON.stringify({ error: `price not found for lookup key: ${product.priceId}` }), { status: 500, headers });
+      }
+    }
+
     const sessionParams: Stripe.Checkout.SessionCreateParams = {
       mode: product.mode,
-      line_items: [{ price: product.priceId, quantity: 1 }],
+      line_items: [{ price: resolvedPriceId, quantity: 1 }],
       allow_promotion_codes: true,
       ...(customerEmail ? { customer_email: customerEmail } : {}),
       success_url: `${siteUrl}${product.successPath}?session_id={CHECKOUT_SESSION_ID}`,
