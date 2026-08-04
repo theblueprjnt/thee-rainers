@@ -66,8 +66,64 @@
     return;
   }
 
-  // First visit — show banner.
-  if (banner) banner.classList.remove('hidden');
+  // position:fixed means the banner floats above whatever is at that screen
+  // position regardless of body padding — it cannot be pushed out of the way.
+  // Instead: measure its footprint before showing it, and if that footprint
+  // would cover any interactive element already visible in the initial
+  // viewport (any page's hero CTA, not just one route), defer showing the
+  // banner until the first scroll (or a short timeout, so it still always
+  // appears even if the user never scrolls).
+  function measureHeight() {
+    if (!banner) return 0;
+    banner.style.visibility = 'hidden';
+    banner.classList.remove('hidden');
+    var h = banner.offsetHeight;
+    banner.classList.add('hidden');
+    banner.style.visibility = '';
+    return h;
+  }
+
+  function overlapsInteractive(bannerHeight) {
+    var vh = window.innerHeight;
+    var bannerTop = vh - bannerHeight;
+    var interactive = document.querySelectorAll('a[href], button');
+    for (var i = 0; i < interactive.length; i++) {
+      var el = interactive[i];
+      if (banner && banner.contains(el)) continue;
+      var r = el.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) continue;
+      if (r.bottom > bannerTop && r.top < vh) return true;
+    }
+    return false;
+  }
+
+  function showBanner() {
+    if (banner) banner.classList.remove('hidden');
+  }
+
+  // First visit — show banner, unless it would cover something tappable.
+  // Deferred two animation frames: measuring offsetHeight/getBoundingClientRect
+  // synchronously at parse time can race the stylesheet still applying,
+  // returning a too-small banner height and a false "no overlap" reading.
+  // Two rAFs guarantee at least one full style+layout pass has completed.
+  if (banner) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        var bannerHeight = measureHeight();
+        if (overlapsInteractive(bannerHeight)) {
+          var reveal = function () {
+            showBanner();
+            window.removeEventListener('scroll', reveal);
+            clearTimeout(fallback);
+          };
+          window.addEventListener('scroll', reveal, { once: true, passive: true });
+          var fallback = setTimeout(reveal, 4000);
+        } else {
+          showBanner();
+        }
+      });
+    });
+  }
 
   var acceptBtn = document.getElementById('trb-consent-accept');
   var declineBtn = document.getElementById('trb-consent-decline');
