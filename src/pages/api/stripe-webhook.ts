@@ -5,6 +5,17 @@ import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 import { sendTelegramAlert } from '../../lib/telegram';
 
+// ── D1 idempotency store ─────────────────────────────────────────────────────
+// Minimal shape for the WEBHOOK_EVENTS binding — avoids pulling in
+// @cloudflare/workers-types as a direct dependency for one binding.
+interface D1PreparedStatement {
+  bind(...values: unknown[]): D1PreparedStatement;
+  run(): Promise<unknown>;
+}
+interface D1Database {
+  prepare(query: string): D1PreparedStatement;
+}
+
 // ── product map ────────────────────────────────────────────────────────────
 // Canonical IDs come from create-checkout.ts — these are the product IDs that
 // Stripe checkout sessions actually reference. The old prod_UZre... IDs were
@@ -548,6 +559,27 @@ export async function POST({ request }: APIContext): Promise<Response> {
   } catch (err) {
     console.warn('[stripe-webhook] Signature verification failed:', String(err));
     return new Response('Invalid signature', { status: 400 });
+  }
+
+  // Claim event.id via D1's PRIMARY KEY constraint before doing anything else.
+  // Two webhook endpoints are currently registered on the same URL, so every
+  // event is delivered twice — this insert is the atomic gate that makes the
+  // second delivery a no-op instead of a second run of the full handler.
+  const db = (cfEnv as unknown as { WEBHOOK_EVENTS: D1Database }).WEBHOOK_EVENTS;
+  try {
+    await db
+      .prepare('INSERT INTO processed_stripe_events (event_id, event_type, processed_at) VALUES (?, ?, ?)')
+      .bind(event.id, event.type, Date.now())
+      .run();
+  } catch (err) {
+    const msg = String(err);
+    if (msg.includes('UNIQUE constraint failed')) {
+      console.log('[stripe-webhook] duplicate delivery ignored', event.id, event.type);
+      return new Response(JSON.stringify({ received: true, duplicate: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+    // Any other D1 failure is a real infrastructure error — surface it so
+    // Stripe retries, rather than silently proceeding unclaimed.
+    throw err;
   }
 
   try {

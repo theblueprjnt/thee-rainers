@@ -1,0 +1,11 @@
+{
+  "name": "thee-rainers",
+  "compatibility_date": "2026-04-15",
+  "d1_databases": [
+    {
+      "binding": "WEBHOOK_EVENTS",
+      "database_name": "thee-rainers-webhook-events",
+      "database_id": "96dd46d5-6d8b-48a6-9e7a-607b40b7d7e7"
+    }
+  ]
+}
