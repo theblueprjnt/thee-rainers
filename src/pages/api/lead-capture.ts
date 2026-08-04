@@ -97,22 +97,6 @@ const WELCOME_CONFIG: Record<string, { subject: string; body: string }> = {
 <p style="font-size:13px;color:#888;margin:0;">Keep winning,<br/>Rainers</p>
 ${FUNNEL_MAP}`,
   },
-  'lever-audit': {
-    subject: 'Your 7-Lever Audit',
-    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Your 7-Lever Self-Assessment is ready.</p>
-<p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Seven levers. One broken lever limits performance across all the others. Find yours.</p>
-<p style="margin:0 0 24px;"><a href="https://theerainers.com/pdfs/lever-audit.pdf" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download Audit →</a></p>
-<p style="font-size:13px;color:#888;margin:0 0 4px;">Work through each lever honestly. Score what you actually see in sparring, not what you wish was true.</p>
-<p style="font-size:13px;color:#888;margin:0;">Keep winning,<br/>Rainers</p>
-${FUNNEL_MAP}`,
-  },
-  'lever-audit-quiz': {
-    subject: 'Your lever audit results',
-    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You completed the 7-Lever Audit.</p>
-<p style="font-size:14px;line-height:1.8;color:#555;margin:0 0 24px;">Now you know which lever is limiting everything else. That gap is where the work starts.</p>
-<p style="font-size:13px;color:#888;margin:0;">Keep winning,<br/>Rainers</p>
-${FUNNEL_MAP}`,
-  },
   'qa-registration': {
     subject: 'Monthly Q&A. You are in.',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">You are registered for the Monthly Q&amp;A.</p>
@@ -142,15 +126,13 @@ ${FUNNEL_MAP}`,
 
 // Sources that receive the nurture sequence. Q&A and safe-boxing are excluded.
 const SEQUENCE_SOURCES = new Set([
-  'footwork-foundation', 'popup-footwork-blueprint',
-  'lever-audit', 'lever-audit-quiz', 'footwork-blueprint',
+  'footwork-foundation', 'popup-footwork-blueprint', 'footwork-blueprint',
 ]);
 
 // Maps alias sources to their WELCOME_CONFIG key.
 function resolveEmailSource(source: string): string {
   if (source === 'popup-footwork-blueprint') return 'footwork-foundation';
   if (source === 'footwork-foundation') return 'footwork-blueprint';
-  if (source.startsWith('quiz-')) return 'lever-audit-quiz';
   return source;
 }
 
@@ -340,7 +322,7 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
     console.warn('[lead-capture] AIRTABLE_BASE_ID not set — lead will NOT be saved to Airtable', { source, emailLog });
   }
 
-  const shouldEnrollSequence = SEQUENCE_SOURCES.has(source) || source.startsWith('quiz-');
+  const shouldEnrollSequence = SEQUENCE_SOURCES.has(source);
 
   // All background I/O registered with waitUntil so Cloudflare keeps the
   // Worker alive until every promise settles — not killed on response return.
