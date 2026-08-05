@@ -144,7 +144,10 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
 
   <header style="border-bottom: 1px solid rgba(255,255,255,0.06); padding: 1.25rem 2rem;">
     <a href="/">
-      <img src="/images/logo-trb.png" alt="Thee Rainers" style="height: 2rem; width: auto; opacity: 0.7;" />
+      <picture>
+        <source srcset="/images/logo-trb-opt.webp" type="image/webp" />
+        <img src="/images/logo-trb-opt.png" alt="Thee Rainers" style="height: 2rem; width: auto; opacity: 0.7;" />
+      </picture>
     </a>
   </header>
 

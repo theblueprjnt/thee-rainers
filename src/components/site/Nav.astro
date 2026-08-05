@@ -33,7 +33,10 @@ const barLabel = wState === 'selling'
 
   <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center gap-4 md:gap-8">
     <a href="/" class="z-[60] flex items-center shrink-0" aria-label="Thee Rainers home">
-      <img src="/images/trb-logo-nobg.png" alt="Thee Rainers" width="120" height="40" class="h-9 md:h-10 w-auto" />
+      <picture>
+        <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
+        <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-9 md:h-10 w-auto" />
+      </picture>
     </a>
 
     <nav class="hidden md:flex items-center gap-8 ml-auto" aria-label="Primary">
@@ -71,7 +74,10 @@ const barLabel = wState === 'selling'
 
   <div class="tr-menu-topbar">
     <a href="/" class="flex items-center" aria-label="Thee Rainers home">
-      <img src="/images/trb-logo-nobg.png" alt="Thee Rainers" width="120" height="40" class="h-9 w-auto brightness-0 invert" />
+      <picture>
+        <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
+        <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-9 w-auto brightness-0 invert" />
+      </picture>
     </a>
     <button id="menu-close" type="button" class="tr-menu-close" aria-label="Close menu">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

@@ -61,8 +61,11 @@ const year = new Date().getFullYear();
       <!-- Centered logo + wordmark -->
       <div class="text-center">
         <a href="/" aria-label="Thee Rainers home">
-          <img src="/images/trb-logo-nobg.png" alt="Thee Rainers"
-            class="h-10 w-auto mx-auto mb-3 opacity-70 hover:opacity-100 transition-opacity duration-200" />
+          <picture>
+            <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
+            <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers"
+              class="h-10 w-auto mx-auto mb-3 opacity-70 hover:opacity-100 transition-opacity duration-200" />
+          </picture>
         </a>
         <p class="text-white/25 text-[10px] tracking-widest uppercase">theerainers.com</p>
       </div>

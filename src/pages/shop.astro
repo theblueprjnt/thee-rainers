@@ -16,7 +16,8 @@ const workshopCheckoutKey = isEarlyBird ? 'defense_workshop_early' : 'defense_wo
 
 const products = [
   {
-    image: '/images/3d_thefootworkblueprint_cover.jpg',
+    image: '/images/footwork-cover-opt.jpg',
+    imageWebp: '/images/footwork-cover-opt.webp',
     tag: isFootworkFree ? 'Free · Start Here' : 'Blueprint',
     title: 'Footwork Blueprint',
     sub: '56 Rounds · Orthodox + Southpaw',
@@ -30,7 +31,8 @@ const products = [
     featured: true,
   },
   {
-    image: '/images/shadowboxingblueprint_covernew.png',
+    image: '/images/shadowbox-cover-opt.png',
+    imageWebp: '/images/shadowbox-cover-opt.webp',
     tag: 'Blueprint',
     title: 'Shadowboxing Blueprint',
     sub: '50+ Rounds · Orthodox + Southpaw',
@@ -44,7 +46,8 @@ const products = [
     featured: false,
   },
   {
-    image: '/images/3d_thebundle_cover.png',
+    image: '/images/bundle-cover-opt.png',
+    imageWebp: '/images/bundle-cover-opt.webp',
     tag: 'Bundle · Best Value',
     title: 'Complete Bundle',
     sub: 'Footwork + Shadowboxing · 100+ Rounds',
@@ -104,9 +107,12 @@ const productSchema = JSON.stringify(products.map(p => ({
             )}
             <a href={p.page ?? '/shop'} aria-label={`Learn more about ${p.title}`}
               class={`overflow-hidden relative block ${p.featured ? 'bg-[#0B0B0C]' : 'bg-[var(--warm)]'}`}>
-              <img src={p.image} alt={p.title}
-                loading="lazy"
-                class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
+              <picture>
+                <source srcset={p.imageWebp} type="image/webp" />
+                <img src={p.image} alt={p.title}
+                  loading="lazy"
+                  class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
+              </picture>
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
             </a>
             <div class="bg-white p-5 flex flex-col flex-1">

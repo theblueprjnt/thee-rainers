@@ -250,9 +250,12 @@ const inclusions = [
       <!-- 1. Hero -->
       <section class="bg-[var(--warm)] overflow-hidden border-b border-[#0B0B0C]/8">
         <div class="md:hidden w-full overflow-hidden bg-[#0B0B0C]" style="height: 65vw; max-height: 360px;">
-          <img src="/images/rainers-training.jpg" alt="Rainers demonstrating defensive mechanics"
-            width="1513" height="2171" loading="eager" fetchpriority="high"
-            class="w-full h-full object-cover grayscale" style="object-position: 42% 5%;" />
+          <picture>
+            <source srcset="/images/rainers-training-opt.webp" type="image/webp" />
+            <img src="/images/rainers-training-opt.jpg" alt="Rainers demonstrating defensive mechanics"
+              width="1166" height="1099" loading="eager" fetchpriority="high"
+              class="w-full h-full object-cover grayscale" style="object-position: 42% 5%;" />
+          </picture>
         </div>
 
         <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[60%_40%] md:min-h-[90vh]">
@@ -288,9 +291,12 @@ const inclusions = [
             </div>
           </div>
           <div class="hidden md:block relative overflow-hidden bg-[#0B0B0C]">
-            <img src="/images/rainers-training.jpg" alt="Rainers demonstrating defensive mechanics"
-              width="1513" height="2171" loading="eager" fetchpriority="high"
-              class="absolute inset-0 w-full h-full object-cover grayscale" style="object-position: 42% 5%;" />
+            <picture>
+              <source srcset="/images/rainers-training-opt.webp" type="image/webp" />
+              <img src="/images/rainers-training-opt.jpg" alt="Rainers demonstrating defensive mechanics"
+                width="1166" height="1099" loading="eager" fetchpriority="high"
+                class="absolute inset-0 w-full h-full object-cover grayscale" style="object-position: 42% 5%;" />
+            </picture>
           </div>
         </div>
       </section>

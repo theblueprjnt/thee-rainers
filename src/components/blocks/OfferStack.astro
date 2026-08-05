@@ -11,7 +11,8 @@ const stripLabel = wState === 'selling'
 
 const cards = [
   {
-    image: '/images/3d_thefootworkblueprint_cover.jpg',
+    image: '/images/footwork-cover-opt.jpg',
+    imageWebp: '/images/footwork-cover-opt.webp',
     imageAlt: 'The Footwork Blueprint',
     kicker: 'Blueprints',
     title: 'The Blueprints.',
@@ -27,7 +28,8 @@ const cards = [
     cta: 'Claim your spot',
   },
   {
-    image: '/images/rainers-coaching.jpg',
+    image: '/images/rainers-coaching-opt.jpg',
+    imageWebp: '/images/rainers-coaching-opt.webp',
     imageAlt: 'One-on-one coaching session',
     kicker: '1-ON-1 Coaching',
     title: 'Built around one fighter.',
@@ -54,13 +56,16 @@ const cards = [
         <div class="flex flex-col">
           <!-- Image with overlay -->
           <div class="relative overflow-hidden group" style="aspect-ratio: 3/4;">
-            <img
-              src={card.image}
-              alt={card.imageAlt}
-              loading="lazy"
-              decoding="async"
-              class="absolute inset-0 w-full h-full object-cover object-center grayscale transition-transform duration-700 group-hover:scale-[1.04]"
-            />
+            <picture>
+              {card.imageWebp && <source srcset={card.imageWebp} type="image/webp" />}
+              <img
+                src={card.image}
+                alt={card.imageAlt}
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 w-full h-full object-cover object-center grayscale transition-transform duration-700 group-hover:scale-[1.04]"
+              />
+            </picture>
             <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(11,11,12,0.85) 0%, rgba(11,11,12,0.25) 55%, transparent 100%);"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
               <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">{card.kicker}</p>

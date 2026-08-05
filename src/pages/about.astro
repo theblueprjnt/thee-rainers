@@ -32,13 +32,16 @@ import { SOCIAL_STATS } from '../data/social-stats';
         </div>
         <div class="hidden md:block max-w-[420px] mx-auto md:ml-auto md:mr-0">
           <div class="aspect-[5/6] overflow-hidden border border-[#0A0A0A]/8">
-            <img
-              src="/images/coaching_amateurboxerinnetherlands.png"
-              alt="Coaching in Netherlands."
-              width="1200" height="1440"
-              loading="lazy"
-              class="w-full h-full object-cover object-center"
-            />
+            <picture>
+              <source srcset="/images/coaching-nl-opt.webp" type="image/webp" />
+              <img
+                src="/images/coaching-nl-opt.png"
+                alt="Coaching in Netherlands."
+                width="840" height="1008"
+                loading="lazy"
+                class="w-full h-full object-cover object-center"
+              />
+            </picture>
           </div>
           <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase mt-4">In the work.</p>
         </div>
@@ -49,13 +52,16 @@ import { SOCIAL_STATS } from '../data/social-stats';
 
   <!-- Cinematic photo strip — visual break between sections -->
   <div class="w-full overflow-hidden bg-[#0A0A0A]" style="height: 50vw; max-height: 580px; min-height: 260px;">
-    <img
-      src="/images/rainers-competing.jpg"
-      alt="Rainers competing"
-      width="1200" height="800"
-      loading="lazy"
-      class="w-full h-full object-cover object-center"
-    />
+    <picture>
+      <source srcset="/images/rainers-competing-opt.webp" type="image/webp" />
+      <img
+        src="/images/rainers-competing-opt.jpg"
+        alt="Rainers competing"
+        width="1600" height="1068"
+        loading="lazy"
+        class="w-full h-full object-cover object-center"
+      />
+    </picture>
   </div>
 
   <!-- The Method + Scripture + CTA -->

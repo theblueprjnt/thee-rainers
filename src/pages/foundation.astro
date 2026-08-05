@@ -127,14 +127,17 @@ const productSchema = JSON.stringify({
       <div class="order-1 md:order-2 flex justify-center md:justify-end">
         <div class="relative w-full max-w-[420px] md:max-w-[460px]">
           <!-- Cover -->
-          <img
-            src="/images/3d_thefootworkblueprint_cover.jpg"
-            alt="The Footwork Blueprint, 3D book cover"
-            width="1600" height="2000"
-            loading="eager"
-            fetchpriority="high"
-            class="relative w-full h-auto object-contain drop-shadow-[0_40px_70px_rgba(0,0,0,0.30)] tr-blueprint-float"
-          />
+          <picture>
+            <source srcset="/images/footwork-cover-opt.webp" type="image/webp" />
+            <img
+              src="/images/footwork-cover-opt.jpg"
+              alt="The Footwork Blueprint, 3D book cover"
+              width="920" height="848"
+              loading="eager"
+              fetchpriority="high"
+              class="relative w-full h-auto object-contain tr-blueprint-float"
+            />
+          </picture>
         </div>
       </div>
 

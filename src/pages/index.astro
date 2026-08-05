@@ -22,9 +22,12 @@ import { SOCIAL_STATS } from '../data/social-stats';
 
     <!-- Mobile: fight photo at low opacity -->
     <div class="absolute inset-0 md:hidden" aria-hidden="true">
-      <img src="/images/coldfightpic2.jpg" alt=""
-        class="w-full h-full object-cover object-center opacity-25 grayscale"
-        loading="eager" decoding="async" fetchpriority="high" />
+      <picture>
+        <source srcset="/images/coldfightpic2-opt.webp" type="image/webp" />
+        <img src="/images/coldfightpic2-opt.jpg" alt=""
+          class="w-full h-full object-cover object-center opacity-25 grayscale"
+          loading="eager" decoding="async" fetchpriority="high" />
+      </picture>
       <div class="absolute inset-0" style="background: linear-gradient(to top, #0B0B0C 35%, transparent 100%);"></div>
     </div>
 

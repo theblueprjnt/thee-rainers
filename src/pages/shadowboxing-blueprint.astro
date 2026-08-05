@@ -74,9 +74,12 @@ const productSchema = JSON.stringify({
 
       <div class="order-first md:order-last">
         <div class="relative bg-[var(--warm)] border border-[#0A0A0A]/10 mx-auto max-w-[420px]">
-          <img src="/images/shadowboxingblueprint_covernew.png" alt="The Shadowboxing Blueprint"
-            width="1500" height="1150"
-            class="w-full h-auto object-contain" />
+          <picture>
+            <source srcset="/images/shadowbox-cover-opt.webp" type="image/webp" />
+            <img src="/images/shadowbox-cover-opt.png" alt="The Shadowboxing Blueprint"
+              width="840" height="644"
+              class="w-full h-auto object-contain" />
+          </picture>
         </div>
       </div>
 
@@ -227,9 +230,12 @@ const productSchema = JSON.stringify({
   <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[920px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-10 md:gap-16 items-center">
       <div class="overflow-hidden border border-[#0A0A0A]/8">
-        <img src="/images/rainers-coaching.jpg" alt="Rainers coaching"
-          width="800" height="900"
-          class="w-full h-full object-cover object-top" loading="lazy" />
+        <picture>
+          <source srcset="/images/rainers-coaching-opt.webp" type="image/webp" />
+          <img src="/images/rainers-coaching-opt.jpg" alt="Rainers coaching"
+            width="780" height="878"
+            class="w-full h-full object-cover object-top" loading="lazy" />
+        </picture>
       </div>
       <div>
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-6">The system behind this</p>

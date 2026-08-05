@@ -57,7 +57,7 @@
 
   html {
     font-family: var(--font-sans);
-    background-color: var(--color-bg);
+    background-color: var(--void);
     color: var(--color-ink);
     font-size: var(--font-size-body);
     line-height: 1.55;

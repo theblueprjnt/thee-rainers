@@ -5,6 +5,7 @@
 
 export interface CoachingPhoto {
   src: string;
+  webp?: string;
   alt: string;
 }
 
@@ -12,15 +13,18 @@ export interface CoachingPhoto {
 // Replace or extend when Rainers drops dedicated coaching session photos.
 export const coachingPhotos: CoachingPhoto[] = [
   {
-    src: '/images/rainers-coaching.jpg',
+    src: '/images/rainers-coaching-opt.jpg',
+    webp: '/images/rainers-coaching-opt.webp',
     alt: 'Rainers coaching a fighter on movement',
   },
   {
-    src: '/images/padwork-outdoor.jpg',
+    src: '/images/padwork-outdoor-opt.jpg',
+    webp: '/images/padwork-outdoor-opt.webp',
     alt: 'Pad work session outdoors',
   },
   {
-    src: '/images/corner-coach.jpg',
+    src: '/images/corner-coach-opt.jpg',
+    webp: '/images/corner-coach-opt.webp',
     alt: 'Corner coaching between rounds',
   },
   {
