@@ -261,48 +261,21 @@ const siteSchema = JSON.stringify({
         </button>
 
         <div class="p-6 pb-5">
-          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">Free · The Footwork Blueprint</p>
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-2">$9 · The Footwork Blueprint</p>
           <h2 id="tr-popup-heading" class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-2"
             style="font-size: clamp(1.4rem, 4vw, 1.75rem);">
             Start with the base.
           </h2>
           <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-5">
-            21 pages. 56 drills. Full video breakdown. Free.
+            21 pages. 56 drills. Full video breakdown. $9.
           </p>
 
-          <form id="tr-popup-form" class="flex flex-col gap-2.5">
-            <label for="tr-popup-name" class="sr-only">Your name</label>
-            <input
-              type="text"
-              id="tr-popup-name"
-              name="name"
-              placeholder="Your name"
-              autocomplete="name"
-              required
-              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-4 py-3 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[var(--blue)] focus:bg-white transition-colors duration-200"
-            />
-            <label for="tr-popup-email" class="sr-only">Email address</label>
-            <input
-              type="email"
-              id="tr-popup-email"
-              name="email"
-              placeholder="your@email.com"
-              autocomplete="email"
-              required
-              class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-4 py-3 text-sm text-[#0A0A0A] placeholder:text-[#0A0A0A]/30 focus:outline-none focus:border-[var(--blue)] focus:bg-white transition-colors duration-200"
-            />
-            <button type="submit" id="tr-popup-submit"
-              class="w-full inline-flex items-center justify-center rounded-none font-bold text-white bg-[var(--blue)] px-6 py-3.5 text-sm tracking-wide uppercase transition-colors duration-150 hover:bg-[#0A0A0A] disabled:opacity-50 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2">
-              Get the Blueprint · Free →
-            </button>
-          </form>
+          <button type="button" data-checkout="footwork" id="tr-popup-submit"
+            class="w-full inline-flex items-center justify-center rounded-none font-bold text-white bg-[var(--red)] px-6 py-3.5 text-sm tracking-wide uppercase transition-colors duration-150 hover:opacity-85 disabled:opacity-50 cursor-pointer border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2">
+            Get the Blueprint · $9 →
+          </button>
 
-          <div id="tr-popup-success" class="hidden text-center py-4">
-            <p class="font-black text-[#0A0A0A] text-base uppercase tracking-tight mb-1">It's downloading.</p>
-            <p class="text-[#0A0A0A]/50 text-sm">Save the PDF when prompted. Day 1 starts when you decide.</p>
-          </div>
-
-          <p class="text-[#0A0A0A]/30 text-[10px] mt-3 text-center tracking-wide">No payment. No spam. Unsubscribe any time.</p>
+          <p class="text-[#0A0A0A]/30 text-[10px] mt-3 text-center tracking-wide">One-time purchase. Instant PDF download.</p>
         </div>
       </div>
     </div>
@@ -338,8 +311,8 @@ const siteSchema = JSON.stringify({
     var popup = document.getElementById('tr-popup');
     if (!popup) return;
     popup.classList.remove('hidden');
-    var emailInput = document.getElementById('tr-popup-email');
-    if (emailInput) setTimeout(function() { emailInput.focus(); }, 50);
+    var submitBtn = document.getElementById('tr-popup-submit');
+    if (submitBtn) setTimeout(function() { submitBtn.focus(); }, 50);
   }
 
   // Fire on entry pages only — whichever happens first: 15s OR user scrolls past 40% of page.
@@ -360,51 +333,17 @@ const siteSchema = JSON.stringify({
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // Idempotent init — guard on form.dataset.bound prevents double-bind.
+  // Idempotent init — guard on popup.dataset.bound prevents double-bind.
+  // Checkout itself is handled by the site-wide data-checkout handler below.
   function initPopup() {
+    var popup    = document.getElementById('tr-popup');
     var closeBtn = document.getElementById('tr-popup-close');
-    var form     = document.getElementById('tr-popup-form');
-    var submit   = document.getElementById('tr-popup-submit');
-    var success  = document.getElementById('tr-popup-success');
-    if (!form || form.dataset.bound === 'true') return;
-    form.dataset.bound = 'true';
+    if (!popup || popup.dataset.bound === 'true') return;
+    popup.dataset.bound = 'true';
 
     if (closeBtn) closeBtn.addEventListener('click', dismiss);
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') dismiss();
-    });
-
-    // PDF-first wiring. The user always gets the file even if the lead-capture
-    // backend fails. Trigger download → show success → fire webhook in background.
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var name  = (document.getElementById('tr-popup-name').value  || '').trim();
-      var email = (document.getElementById('tr-popup-email').value || '').trim();
-      if (!email || !name) return;
-      submit.disabled = true;
-      submit.textContent = 'Preparing...';
-
-      // 1. PDF download first — contract with the user.
-      var a = document.createElement('a');
-      a.href = '/pdfs/foundation.pdf';
-      a.download = 'The-Footwork-Blueprint-Thee-Rainers.pdf';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-
-      // 2. Show success state immediately.
-      if (form) form.classList.add('hidden');
-      if (success) success.classList.remove('hidden');
-      if (window.trackEvent) window.trackEvent('generate_lead', { lead_source: 'popup-footwork-blueprint', currency: 'USD', value: 0 });
-
-      // 3. Fire Make.com in background (non-blocking).
-      fetch('/api/lead-capture', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, full_name: name, source: 'popup-footwork-blueprint' }),
-      }).catch(function(err) { console.warn('[popup] background webhook failed:', err); });
-
-      setTimeout(dismiss, 3200);
     });
   }
 
