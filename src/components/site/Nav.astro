@@ -3,15 +3,15 @@ import { workshopState, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
 
 const NAV_LINKS = [
   { label: 'Blueprints', href: '/shop' },
-  { label: 'Workshop',   href: '/workshop' },
+  { label: 'Workshop',   href: '/defense-workshop' },
   { label: 'Community',  href: '/community' },
 ];
 
 const wState = workshopState();
 const showBar = wState !== 'between';
-const barLabel = wState === 'selling'
-  ? `Defense Workshop · ${WORKSHOP_DATE_SHORT} · Reserve your seat →`
-  : `Defense Workshop · ${WORKSHOP_DATE_SHORT} · Join the waitlist →`;
+// /defense-workshop is unconditionally on sale (early-bird or standard price,
+// never a real waitlist), so the bar always reads as a live seat, not a signup.
+const barLabel = `Defense Workshop · ${WORKSHOP_DATE_SHORT} · Reserve your seat →`;
 ---
 
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0B0B0C] border-b border-white/8">
@@ -19,7 +19,7 @@ const barLabel = wState === 'selling'
   {showBar && (
     <div id="tr-bar" class="bg-[#c84d3a] relative">
       <div class="max-w-[1140px] mx-auto px-6 py-2 flex items-center justify-center">
-        <a href="/workshop"
+        <a href="/defense-workshop"
           class="text-white text-[10px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-75 transition-opacity text-center">
           {barLabel}
         </a>
@@ -88,7 +88,7 @@ const barLabel = wState === 'selling'
 
   <nav class="tr-menu-body" aria-label="Site navigation">
     <a href="/community" data-nav-path="/community" class="tr-btn" style="width:100%;margin-top:0.5rem;justify-content:center;">
-      Checkpoint →
+      The Weekly Session →
     </a>
     <ul class="flex flex-col mt-6">
       {NAV_LINKS.map((l) => (

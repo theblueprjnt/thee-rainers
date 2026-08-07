@@ -5,9 +5,9 @@ import { workshopState, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
 
 const wState = workshopState();
 const showStrip = wState !== 'between';
-const stripLabel = wState === 'selling'
-  ? `Defense Workshop · Saturday ${WORKSHOP_DATE_SHORT} · Reserve your seat`
-  : `Defense Workshop · Saturday ${WORKSHOP_DATE_SHORT} · Join the waitlist`;
+// /defense-workshop is unconditionally on sale (early-bird or standard price,
+// never a real waitlist), so the strip always reads as a live seat.
+const stripLabel = `Defense Workshop · Saturday ${WORKSHOP_DATE_SHORT} · Reserve your seat`;
 
 const cards = [
   {
@@ -94,7 +94,7 @@ const cards = [
           <span class="inline-block w-2 h-2 rounded-full bg-[var(--terra)] shrink-0 animate-pulse" aria-hidden="true"></span>
           <p class="text-white/60 text-[11px] font-bold tracking-widest uppercase">{stripLabel}</p>
         </div>
-        <a href="/workshop"
+        <a href="/defense-workshop"
           class="text-[var(--terra)] text-[11px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity shrink-0">
           Go to Workshop →
         </a>

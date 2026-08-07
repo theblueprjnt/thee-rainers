@@ -8,7 +8,6 @@ export const TICKETS_OPEN = false;
 export const WORKSHOP_DATE_LONG  = 'Saturday, August 29';
 export const WORKSHOP_DATE_SHORT = 'August 29';
 export const WORKSHOP_TIME       = '12:00 PM ET';
-export const WORKSHOP_PRICE      = 197;
 export const WORKSHOP_DURATION   = '90 Min';
 export const WORKSHOP_PAYMENT_LINK = 'https://buy.stripe.com/7sY28r8lt1D06XU6446J20n';
 
