@@ -46,6 +46,21 @@ const products = [
     featured: false,
   },
   {
+    image: '/images/defense-workshop-opt.jpg',
+    imageWebp: '/images/defense-workshop-opt.webp',
+    tag: isEarlyBird ? 'Live · Aug 29 · Early Bird' : 'Live · Aug 29',
+    title: 'Defense Workshop',
+    sub: '90 Min · Live · Replay Included',
+    desc: 'Camera on. Real-time correction on your movement.',
+    price: workshopPrice,
+    price_note: isEarlyBird ? 'Early bird until Aug 8. Goes to $49.' : null,
+    href: null,
+    checkoutKey: workshopCheckoutKey,
+    page: '/defense-workshop',
+    cta: 'Reserve Seat',
+    featured: false,
+  },
+  {
     image: '/images/bundle-cover-opt.png',
     imageWebp: '/images/bundle-cover-opt.webp',
     tag: 'Bundle · Best Value',
@@ -190,41 +205,6 @@ const productSchema = JSON.stringify(products.map(p => ({
           <div>
             <p class="font-bold text-[#0B0B0C] text-sm mb-1">What if I want live coaching alongside it?</p>
             <p class="text-[#0B0B0C]/50 text-xs leading-relaxed">The Weekly Session is live every Tuesday with Rainers. <a href="/community" class="text-[var(--navy)] font-bold hover:opacity-70 transition-opacity">Learn more.</a></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Defense Workshop -->
-      <div class="mt-10">
-        <div class="bg-[#0B0B0C] flex flex-col md:flex-row group border border-white/5 hover:border-white/15 transition-colors duration-200">
-          <div class="relative overflow-hidden md:w-[40%] shrink-0" style="min-height: 200px;">
-            <img src="/images/defense_workshop.webp" alt="Defense Workshop"
-              width="1920" height="1080"
-              class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500" />
-            <div class="absolute inset-0 bg-[#0B0B0C]/45"></div>
-          </div>
-          <div class="p-8 flex flex-col flex-1 justify-between">
-            <div>
-              <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">
-                Live · Aug 29 · Replay Included{isEarlyBird ? ' · Early Bird' : ''}
-              </p>
-              <h2 class="font-black text-white uppercase tracking-tight text-2xl leading-tight mb-3">Defense Workshop</h2>
-              <p class="text-white/40 text-xs leading-relaxed max-w-[480px]">Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset. Replay included.</p>
-            </div>
-            <div class="flex items-center justify-between mt-8 gap-4">
-              <div>
-                <span class="font-black text-white text-2xl">{workshopPrice}</span>
-                {isEarlyBird && <p class="text-[10px] text-white/40 mt-0.5">Early bird until Aug 8. Goes to $49.</p>}
-              </div>
-              <div class="flex flex-col items-end gap-1">
-                <a href="/defense-workshop" class="tr-btn" style="padding: 0.6rem 1.25rem; font-size: 0.625rem;">
-                  Reserve Seat
-                </a>
-                <p class="text-[11px] text-white/45 leading-relaxed">
-                  <a href="/legal/terms" class="underline hover:text-white">Terms</a> &amp; <a href="/legal/refund-policy" class="underline hover:text-white">Refund Policy</a>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
