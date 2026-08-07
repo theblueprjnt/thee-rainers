@@ -32,7 +32,7 @@ const PRODUCTS: Record<string, ProductConfig> = {
     cancelPath: '/shadowboxing-blueprint',
   },
   bundle: {
-    priceId: 'price_3',
+    priceId: 'price_1U1jK2HzlarU775HwLKCIkWC',
     mode: 'payment',
     successPath: '/thank-you/bundle',
     cancelPath: '/shop',

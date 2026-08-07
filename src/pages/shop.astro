@@ -67,7 +67,7 @@ const products = [
     title: 'Complete Bundle',
     sub: 'Footwork + Shadowboxing · 100+ Rounds',
     desc: 'Both blueprints. The base and what builds on it.',
-    price: '$39',
+    price: '$24',
     price_note: null,
     href: null,
     checkoutKey: 'bundle',
@@ -295,7 +295,7 @@ const productSchema = JSON.stringify(products.map(p => ({
           items: [
             { item_id: 'footwork_blueprint',     item_name: 'Footwork Blueprint',    price: footworkPrice, quantity: 1, item_category: footworkPrice === 0 ? 'lead_magnet' : 'one_time' },
             { item_id: 'shadowboxing_blueprint', item_name: 'Shadowboxing Blueprint', price: 19, quantity: 1, item_category: 'one_time' },
-            { item_id: 'complete_bundle',        item_name: 'Complete Bundle',        price: 39, quantity: 1, item_category: 'one_time' },
+            { item_id: 'complete_bundle',        item_name: 'Complete Bundle',        price: 24, quantity: 1, item_category: 'one_time' },
             { item_id: 'defense_workshop',       item_name: 'Defense Workshop',       price: workshopPrice, quantity: 1, item_category: 'live_event' }
           ]
         }

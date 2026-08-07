@@ -88,7 +88,7 @@ const SITE_URL = 'https://theerainers.com';
 const GA4_CATALOG: Record<string, { name: string; price: number; category: string }> = {
   'footwork':          { name: 'Footwork Blueprint',         price:   9, category: 'one_time' },
   'shadowboxing':      { name: 'Shadowboxing Blueprint',     price:  19, category: 'one_time' },
-  'bundle':            { name: 'Complete Bundle',            price:  39, category: 'one_time' },
+  'bundle':            { name: 'Complete Bundle',            price:  24, category: 'one_time' },
   'workshop-replay':   { name: 'Workshop Replay',            price:  49, category: 'on_demand' },
   'defense-workshop':  { name: 'Defense Workshop',           price:  39, category: 'one_time' },
   'greatness':         { name: 'Greatness Community',        price:  39, category: 'subscription' },
