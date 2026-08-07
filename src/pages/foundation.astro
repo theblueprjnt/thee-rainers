@@ -42,7 +42,7 @@ const productSchema = JSON.stringify({
   )}
 
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-[var(--warm)]">
+  <section class="relative overflow-hidden bg-[#0B0B0C]">
 
     <div class="relative max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-36 pb-16 md:pb-24
                 grid grid-cols-1 md:grid-cols-[55%_45%] gap-10 md:gap-14 items-center">
@@ -52,14 +52,14 @@ const productSchema = JSON.stringify({
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">
           {isFootworkFree ? 'Free · The Footwork Blueprint' : '$9 · The Footwork Blueprint'}
         </p>
-        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
+        <h1 class="font-black text-white uppercase tracking-tighter leading-[0.88] mb-6"
           style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
           The Footwork<br/>Blueprint.
         </h1>
-        <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-2 max-w-[520px]">
+        <p class="text-white/60 text-base md:text-lg leading-relaxed mb-2 max-w-[520px]">
           Win fights with footwork, and take fewer hits doing it. A practical playbook to move with balance, control, and intent. Every step has a job.{isFootworkFree ? ' Free.' : ' $9.'}
         </p>
-        <p class="text-[#0A0A0A]/35 text-sm mb-8 max-w-[520px]">For fighters who train seriously and want to move with purpose.<br/>Rainers</p>
+        <p class="text-white/35 text-sm mb-8 max-w-[520px]">For fighters who train seriously and want to move with purpose.<br/>Rainers</p>
 
         {isFootworkFree ? (
           <!-- Free: email capture form -->
@@ -71,7 +71,7 @@ const productSchema = JSON.stringify({
                 required
                 placeholder="Your name"
                 autocomplete="name"
-                class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-[#0A0A0A] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/30"
+                class="w-full border border-white/15 bg-white/5 px-5 py-4 text-white text-sm focus:border-[var(--blue)] focus:bg-white/10 focus:outline-none transition-colors duration-200 placeholder:text-white/30"
               />
               <input
                 type="email"
@@ -79,7 +79,7 @@ const productSchema = JSON.stringify({
                 required
                 placeholder="your@email.com"
                 autocomplete="email"
-                class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-[#0A0A0A] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/30"
+                class="w-full border border-white/15 bg-white/5 px-5 py-4 text-white text-sm focus:border-[var(--blue)] focus:bg-white/10 focus:outline-none transition-colors duration-200 placeholder:text-white/30"
               />
               <button
                 type="submit"
@@ -89,7 +89,7 @@ const productSchema = JSON.stringify({
                 Get the Blueprint · Free
               </button>
             </form>
-            <p class="text-[11px] text-[#0A0A0A]/35 mt-4">You get the Blueprint plus training emails from Rainers. Unsubscribe any time. <a href="/legal/privacy-policy" class="underline hover:text-[#0A0A0A]/60 transition-colors">Privacy Policy</a>.</p>
+            <p class="text-[11px] text-white/35 mt-4">You get the Blueprint plus training emails from Rainers. Unsubscribe any time. <a href="/legal/privacy-policy" class="underline hover:text-white/60 transition-colors">Privacy Policy</a>.</p>
           </div>
         ) : (
           <!-- Paid: Stripe checkout -->
@@ -98,27 +98,27 @@ const productSchema = JSON.stringify({
               class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--red)] text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2">
               Get the Blueprint · $9
             </button>
-            <p class="text-[11px] text-[#0A0A0A]/35">One-time purchase. Instant PDF download. <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60 transition-colors">Refund Policy</a>.</p>
+            <p class="text-[11px] text-white/35">One-time purchase. Instant PDF download. <a href="/legal/refund-policy" class="underline hover:text-white/60 transition-colors">Refund Policy</a>.</p>
           </div>
         )}
 
         <!-- Specs -->
-        <div class="max-w-[520px] border-t border-[#0A0A0A]/10">
-          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+        <div class="max-w-[520px] border-t border-white/10">
+          <div class="flex justify-between items-baseline py-3 border-b border-white/10">
             <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Drills</span>
-            <span class="text-[#0A0A0A] text-sm font-bold">56 rounds · Orthodox and Southpaw</span>
+            <span class="text-white text-sm font-bold">56 rounds · Orthodox and Southpaw</span>
           </div>
-          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+          <div class="flex justify-between items-baseline py-3 border-b border-white/10">
             <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Video Breakdown</span>
-            <span class="text-[#0A0A0A] text-sm font-bold">11 min</span>
+            <span class="text-white text-sm font-bold">11 min</span>
           </div>
-          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+          <div class="flex justify-between items-baseline py-3 border-b border-white/10">
             <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Format</span>
-            <span class="text-[#0A0A0A] text-sm font-bold">21-page playbook, zero filler</span>
+            <span class="text-white text-sm font-bold">21-page playbook, zero filler</span>
           </div>
           <div class="flex justify-between items-baseline py-3">
             <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Delivery</span>
-            <span class="text-[#0A0A0A] text-sm font-bold">Instant digital download</span>
+            <span class="text-white text-sm font-bold">Instant digital download</span>
           </div>
         </div>
       </div>
@@ -145,24 +145,24 @@ const productSchema = JSON.stringify({
   </section>
 
   <!-- WHY IT MATTERS — 3 pillars -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-14 md:py-20 border-t border-[#0B0B0C]/8">
+  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-14 md:py-20 border-t border-white/8">
     <div class="max-w-[1100px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">Why The Base</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
+      <h2 class="font-black text-white uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
         The base carries everything.
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="border-l-2 border-[#0A0A0A]/15 pl-5 py-1">
+        <div class="border-l-2 border-white/15 pl-5 py-1">
           <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">Power From The Floor</p>
-          <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Most of your punch power comes from the ground up. A broken base costs you before you throw a single punch.</p>
+          <p class="text-white/55 text-sm leading-relaxed">Most of your punch power comes from the ground up. A broken base costs you before you throw a single punch.</p>
         </div>
-        <div class="border-l-2 border-[#0A0A0A]/15 pl-5 py-1">
+        <div class="border-l-2 border-white/15 pl-5 py-1">
           <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">Holds Under Pressure</p>
-          <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">Drill the right movements now and they become automatic when it gets hard. That is what this builds.</p>
+          <p class="text-white/55 text-sm leading-relaxed">Drill the right movements now and they become automatic when it gets hard. That is what this builds.</p>
         </div>
-        <div class="border-l-2 border-[#0A0A0A]/15 pl-5 py-1">
+        <div class="border-l-2 border-white/15 pl-5 py-1">
           <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">No Gym Required</p>
-          <p class="text-[#0A0A0A]/55 text-sm leading-relaxed">21 pages. 56 rounds. Just you and the work. Your body is enough.</p>
+          <p class="text-white/55 text-sm leading-relaxed">21 pages. 56 rounds. Just you and the work. Your body is enough.</p>
         </div>
       </div>
     </div>
