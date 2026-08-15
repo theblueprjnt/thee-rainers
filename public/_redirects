@@ -9,9 +9,9 @@
 /lever-audit                     /  301
 /thank-you/footwork-foundation   /foundation?downloaded=1  301
 
-# Bundle killed 2026-06-12. Surviving traffic goes to the shop.
+# Bundle relaunched 2026-08-07 at $24 with a real checkout + confirmation page.
+# /thank-you/bundle rule removed -- it was overriding the real confirmation page.
 /bundle                /shop  301
-/thank-you/bundle      /shop  301
 
 # Legacy
 /vault                 /shop  301
