@@ -44,7 +44,10 @@ const LOOKUP_KEY_MAP: Record<string, string> = {
 
 // ── asset map ──────────────────────────────────────────────────────────────
 const ASSET_MAP: Record<string, string[]> = {
-  'footwork':          ['thefootworkblueprint/links_theFOOTWORKBlueprint.pdf'],
+  'footwork':          [
+    'thefootworkblueprint/The-Footwork-Blueprint-Thee-Rainers.pdf',
+    'thefootworkblueprint/links_theFOOTWORKBlueprint.pdf',
+  ],
   'shadowboxing':      ['the shadowboxing blueprint/the shadowboxing blueprint.pdf'],
   'bundle':            [
     'bundle/thefootworkblueprint/links_theFOOTWORKBlueprint.pdf',
@@ -385,7 +388,16 @@ function buildDeliveryHtml(slug: string, url: string, url2: string | null, email
       `</table>`,
     );
   }
-  // footwork or shadowboxing
+  if (slug === 'footwork' && url2) {
+    return wrap(
+      `<p style="font-size:15px;line-height:1.6;margin:0 0 24px;">Your Footwork Blueprint is ready.</p>` +
+      btn(url, 'Download Footwork Blueprint') +
+      `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Also included</p>` +
+      btn(url2, 'Download Resource Links') +
+      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">Both links expire in 7 days. Save both files before then.</p>`,
+    );
+  }
+  // footwork (single-link fallback) or shadowboxing
   const label = slug === 'footwork' ? 'Download Footwork Blueprint' : 'Download Shadowboxing Blueprint';
   return wrap(
     `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">${DELIVERY_SUBJECTS[slug] ?? 'Your purchase'} is ready.</p>` +
