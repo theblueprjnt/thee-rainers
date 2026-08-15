@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Unsubscribed · Thee Rainers">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <section class="bg-[#0A0A0A] px-8 md:px-16 lg:px-24 pt-32 pb-20 min-h-screen">
+    <div class="max-w-[680px] mx-auto w-full text-center">
+
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Thee Rainers</p>
+      <h1 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-6"
+        style="font-size: clamp(2.25rem, 5vw, 3.75rem);">
+        You've been<br/>unsubscribed.
+      </h1>
+      <p class="text-white/45 text-base leading-relaxed mb-16 max-w-[440px] mx-auto">
+        No further emails will be sent. The training still runs on social, if you want to keep watching.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[640px] mx-auto text-left">
+        <div class="border border-white/10 p-8">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">Instagram</p>
+          <p class="text-white/50 text-sm leading-relaxed mb-6">Technique breakdowns and training clips, posted regularly.</p>
+          <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener"
+            class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.625rem;">
+            Follow on Instagram →
+          </a>
+        </div>
+        <div class="border border-white/10 p-8">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-3">YouTube</p>
+          <p class="text-white/50 text-sm leading-relaxed mb-6">Full breakdowns of how the system works, free to watch.</p>
+          <a href="https://www.youtube.com/@Rainers" target="_blank" rel="noopener"
+            class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.625rem;">
+            Watch on YouTube →
+          </a>
+        </div>
+      </div>
+
+      <a href="/" class="inline-block mt-16 text-white/30 text-xs font-bold tracking-widest uppercase hover:text-white/55 transition-colors">
+        Back to theerainers.com
+      </a>
+
+    </div>
+  </section>
+</Base>

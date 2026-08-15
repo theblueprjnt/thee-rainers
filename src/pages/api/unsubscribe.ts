@@ -50,24 +50,5 @@ export async function GET({ request }: { request: Request }): Promise<Response> 
   const email = url.searchParams.get('email') ?? '';
   const kitKey = e['KIT_API_KEY'] ?? '';
   if (email && kitKey) await kitUnsubscribe(kitKey, email).catch(() => {});
-  const html = [
-    '<!doctype html><html lang="en"><head>',
-    '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">',
-    '<title>Unsubscribed · Thee Rainers</title>',
-    '<style>',
-    'body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#fff;',
-    'color:#0A0A0A;display:flex;align-items:center;justify-content:center;',
-    'min-height:100vh;margin:0;padding:24px;box-sizing:border-box;}',
-    '.c{max-width:400px;text-align:center;}',
-    'p{margin:0 0 12px;font-size:14px;color:#555;line-height:1.6;}',
-    'a{color:#E11D2A;text-decoration:none;font-size:13px;}',
-    '</style></head><body>',
-    '<div class="c">',
-    '<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#aaa;margin-bottom:16px;">Thee Rainers</p>',
-    '<p style="font-size:20px;font-weight:900;text-transform:uppercase;color:#0A0A0A;margin-bottom:12px;">Unsubscribed.</p>',
-    '<p>You have been removed from the list. No further emails will be sent.</p>',
-    `<a href="${SITE_URL}">Back to theerainers.com</a>`,
-    '</div></body></html>',
-  ].join('');
-  return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  return new Response(null, { status: 302, headers: { Location: `${SITE_URL}/unsubscribed` } });
 }
