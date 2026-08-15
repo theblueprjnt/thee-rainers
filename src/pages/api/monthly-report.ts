@@ -16,7 +16,7 @@ const PRODUCT_NAMES: Record<string, string> = {
   'prod_UZreHroYQEDAFU': 'Bundle (old — archived)',
   'prod_UZ9lTK2PhsS4xs': 'Footwork Blueprint ($9)',
   'prod_UZ9vV79TAun9yB': 'Shadowboxing Blueprint ($19)',
-  'prod_UZ9xqJt3glrCOO': 'Complete Bundle ($39)',
+  'prod_UZ9xqJt3glrCOO': 'Complete Bundle ($24)',
   'prod_Uaz6EzELZP6j0V': 'The Weekly Session ($39/mo)',
 };
 

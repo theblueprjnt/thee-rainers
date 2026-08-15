@@ -22,7 +22,7 @@ const PRODUCTS: Record<string, ProductConfig> = {
   footwork: {
     priceId: 'price_1',
     mode: 'payment',
-    successPath: '/thank-you/footwork-blueprint',
+    successPath: '/thank-you/footwork',
     cancelPath: '/foundation',
   },
   shadowboxing: {

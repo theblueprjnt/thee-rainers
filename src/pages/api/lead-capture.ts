@@ -61,7 +61,7 @@ const FUNNEL_MAP = `
         <p style="font-size:12px;color:#888;margin:0;">Footwork and shadowboxing. Both systems together.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
-        <a href="https://theerainers.com/shop" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$39 →</a>
+        <a href="https://theerainers.com/shop" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$24 →</a>
       </td>
     </tr>
     <tr>
