@@ -50,6 +50,7 @@ const ASSET_MAP: Record<string, string[]> = {
   ],
   'shadowboxing':      ['the shadowboxing blueprint/the shadowboxing blueprint.pdf'],
   'bundle':            [
+    'thefootworkblueprint/The-Footwork-Blueprint-Thee-Rainers.pdf',
     'bundle/thefootworkblueprint/links_theFOOTWORKBlueprint.pdf',
     'bundle/the shadowboxing blueprint/the shadowboxing blueprint.pdf',
   ],
@@ -343,7 +344,8 @@ const DELIVERY_SUBJECTS: Record<string, string> = {
   'greatness':         'You are in.',
 };
 
-function buildDeliveryHtml(slug: string, url: string, url2: string | null, email: string, env?: Record<string, string>): string {
+function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Record<string, string>): string {
+  const [url, url2, url3] = urls;
   const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
   const wrap = (inner: string) =>
     `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
@@ -356,14 +358,15 @@ function buildDeliveryHtml(slug: string, url: string, url2: string | null, email
   const btn = (href: string, label: string) =>
     `<p style="margin:0 0 24px;"><a href="${href}" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">${label}</a></p>`;
 
-  if (slug === 'bundle' && url2) {
+  if (slug === 'bundle' && url2 && url3) {
     return wrap(
       `<p style="font-size:15px;line-height:1.6;margin:0 0 24px;">Both blueprints are ready.</p>` +
       `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Footwork Blueprint</p>` +
       btn(url, 'Download Footwork Blueprint') +
+      btn(url2, 'Download Footwork Resource Links') +
       `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Shadowboxing Blueprint</p>` +
-      btn(url2, 'Download Shadowboxing Blueprint') +
-      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">Both links expire in 7 days. Save both files before then.</p>`,
+      btn(url3, 'Download Shadowboxing Blueprint') +
+      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">All links expire in 7 days. Save all files before then.</p>`,
     );
   }
   if (slug === 'workshop-replay') {
@@ -440,11 +443,10 @@ async function sendResendDelivery(
   resendKey: string,
   email: string,
   slug: string,
-  url: string | null,
-  url2: string | null,
+  urls: string[],
   env?: Record<string, string>,
 ): Promise<void> {
-  if (!resendKey || !url) return;
+  if (!resendKey || urls.length === 0) return;
   const subject = DELIVERY_SUBJECTS[slug] ?? 'Your purchase from Thee Rainers';
   try {
     const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
@@ -455,7 +457,7 @@ async function sendResendDelivery(
         from: 'Thee Rainers <rainers@theerainers.com>',
         to: [email],
         subject,
-        html: buildDeliveryHtml(slug, url, url2, email, env),
+        html: buildDeliveryHtml(slug, urls, email, env),
         headers: {
           'List-Unsubscribe': `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${unsubUrl}>`,
           'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
@@ -477,27 +479,26 @@ async function sendResendDelivery(
 async function deliverProduct(email: string, productId: string, e: Record<string, string>, slugHint?: string): Promise<void> {
   const token       = generateToken();
   const productSlug = slugHint ?? PRODUCT_MAP[productId] ?? 'unknown';
-  let expiringUrl: string | null  = null;
-  let expiringUrl2: string | null = null;
+  const expiringUrls: string[] = [];
 
   if (productSlug === 'workshop-replay' || productSlug === 'defense-workshop') {
     const watchSecret = e['WATCH_TOKEN_SECRET'] ?? '';
     if (!watchSecret) {
       console.error('[stripe-webhook] WATCH_TOKEN_SECRET not set — ' + productSlug + ' buyer will receive no watch link');
     } else {
-      try { expiringUrl = await generateWatchUrl(watchSecret, 'workshop-replay'); }
+      try { expiringUrls.push(await generateWatchUrl(watchSecret, 'workshop-replay')); }
       catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
     }
   } else if (productSlug === 'greatness') {
     const watchSecret = e['WATCH_TOKEN_SECRET'] ?? '';
     if (watchSecret) {
-      try { expiringUrl = await generateCommunityMagicLink(watchSecret); }
+      try { expiringUrls.push(await generateCommunityMagicLink(watchSecret)); }
       catch (err) {
         console.error('[stripe-webhook] Community magic link error:', String(err));
-        expiringUrl = `${SITE_URL}/community/inside`;
+        expiringUrls.push(`${SITE_URL}/community/inside`);
       }
     } else {
-      expiringUrl = `${SITE_URL}/community/inside`;
+      expiringUrls.push(`${SITE_URL}/community/inside`);
     }
   } else {
     const objectKeys = ASSET_MAP[productSlug] ?? [];
@@ -507,9 +508,8 @@ async function deliverProduct(email: string, productId: string, e: Record<string
     const r2Bucket    = e['R2_BUCKET_NAME'] ?? e['R2_BUCKET'] ?? '';
     if (r2AccountId && r2AccessKey && r2SecretKey && r2Bucket && objectKeys.length > 0) {
       try {
-        expiringUrl = await generateR2PresignedUrl(r2AccountId, r2AccessKey, r2SecretKey, r2Bucket, objectKeys[0]);
-        if (objectKeys[1]) {
-          expiringUrl2 = await generateR2PresignedUrl(r2AccountId, r2AccessKey, r2SecretKey, r2Bucket, objectKeys[1]);
+        for (const key of objectKeys) {
+          expiringUrls.push(await generateR2PresignedUrl(r2AccountId, r2AccessKey, r2SecretKey, r2Bucket, key));
         }
       } catch (err) { console.error('[stripe-webhook] R2 presign error:', String(err)); }
     }
@@ -518,17 +518,24 @@ async function deliverProduct(email: string, productId: string, e: Record<string
   // Primary: Resend (direct, no middleman)
   const resendKey = e['RESEND_API_KEY'] ?? '';
   if (resendKey) {
-    await sendResendDelivery(resendKey, email, productSlug, expiringUrl, expiringUrl2, e);
+    await sendResendDelivery(resendKey, email, productSlug, expiringUrls, e);
   }
 
   // Secondary: Make.com webhook (optional — fires if URL is set, for extra automations)
+  // expiring_url/expiring_url_2 kept as named fields for backward compatibility with any
+  // existing Make.com scenario; expiring_url_3 added for the 3-file Bundle case.
   const deliveryUrl = e['MAKE_DELIVERY_WEBHOOK_URL'] ?? '';
   if (deliveryUrl) {
     try {
       const res = await fetch(deliveryUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, product_id: productId, product_slug: productSlug, token, expiring_url: expiringUrl, expiring_url_2: expiringUrl2 }),
+        body: JSON.stringify({
+          email, product_id: productId, product_slug: productSlug, token,
+          expiring_url: expiringUrls[0] ?? null,
+          expiring_url_2: expiringUrls[1] ?? null,
+          expiring_url_3: expiringUrls[2] ?? null,
+        }),
       });
       if (!res.ok) console.warn('[stripe-webhook] Make.com delivery responded', res.status);
       else console.log('[stripe-webhook] Make.com delivery success for', productSlug);
