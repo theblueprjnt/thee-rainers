@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/Base.astro';
+import GradeSalesTemplate from '../../components/blocks/GradeSalesTemplate.astro';
+import { GRADE3_SEATS_TAKEN, GRADE3_MAX_SEATS } from '../../data/grade3-seats.ts';
+---
+<!-- COPY: meta description -->
+<Layout title="Grade 3 · Thee Rainers Coaching" description="">
+  <GradeSalesTemplate
+    gradeNumber={3}
+    name="Grade 3"
+    price="$12,000"
+    term="one time · 12 months"
+    priceId="grade3"
+    seatsTaken={GRADE3_SEATS_TAKEN}
+    seatsMax={GRADE3_MAX_SEATS}
+    features={[
+      'Two calls a week, plus a monthly review call on your measurables',
+      'Direct access for footage and messages, fast feedback',
+      'Fully customised training designed around their week',
+      'In-person option',
+      'Max 5 people',
+    ]}
+  />
+</Layout>

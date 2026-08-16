@@ -1,0 +1,32 @@
+---
+// The owner's four-layer framework. Names are verbatim, do not rephrase.
+// Body copy intentionally left as placeholders -- source notes for this
+// framework contain material (toxins, over-exercise, half-capacity rules)
+// the owner has said stays internal. Never fill these in from inference.
+const LAYERS = [
+  { n: '01', name: 'Body & Load' },
+  { n: '02', name: 'Recovery & Nervous System' },
+  { n: '03', name: 'Mind & Psychology' },
+  { n: '04', name: 'Social & Ethical Conduct' },
+];
+---
+
+<section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
+  <div class="max-w-[1000px] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#0B0B0C]/8">
+      {LAYERS.map(layer => (
+        <div class="bg-white p-8 md:p-10">
+          <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-4">{layer.n}</p>
+          <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-lg leading-tight mb-3">{layer.name}</h3>
+          {layer.n === '01' && <p class="text-[#0B0B0C]/50 text-sm leading-relaxed"><!-- COPY: how you move and how hard you push --></p>}
+          {layer.n === '02' && <p class="text-[#0B0B0C]/50 text-sm leading-relaxed"><!-- COPY: how you digest training --></p>}
+          {layer.n === '03' && <p class="text-[#0B0B0C]/50 text-sm leading-relaxed"><!-- COPY: how you think, feel and respond --></p>}
+          {layer.n === '04' && <p class="text-[#0B0B0C]/50 text-sm leading-relaxed"><!-- COPY: how you treat others and yourself --></p>}
+        </div>
+      ))}
+    </div>
+    <p class="text-[#0B0B0C]/50 text-sm leading-relaxed text-left mt-8 max-w-[640px]">
+      <!-- COPY: one line connecting the four layers to Grade 1 -->
+    </p>
+  </div>
+</section>

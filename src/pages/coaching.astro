@@ -2,6 +2,7 @@
 import Layout from '../layouts/Base.astro';
 import Section from '../components/primitives/Section.astro';
 import PricingCard from '../components/primitives/PricingCard.astro';
+import ProofSection from '../components/blocks/ProofSection.astro';
 ---
 <!-- COPY: meta description -->
 <Layout
@@ -11,9 +12,9 @@ import PricingCard from '../components/primitives/PricingCard.astro';
   <!-- ── HERO ──────────────────────────────────────────────────────────── -->
   <section class="relative bg-[#0B0B0C] overflow-hidden px-6 md:px-12 lg:px-20 py-28 md:py-36">
     <div class="max-w-[720px] mx-auto text-center">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Thee Rainers Coaching</p>
+      <p class="text-white/60 text-[11px] tracking-widest uppercase font-bold mb-6">Thee Rainers Coaching</p>
       <h1 class="font-black uppercase tracking-tighter text-white mb-6"
-        style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 0.86;">
+        style="font-size: clamp(3rem, 6vw, 4.5rem); line-height: 0.95;">
         <!-- COPY: headline -->
       </h1>
       <p class="text-white/50 text-base leading-relaxed mb-10 max-w-[520px] mx-auto">
@@ -27,8 +28,8 @@ import PricingCard from '../components/primitives/PricingCard.astro';
 
   <!-- ── WHO THIS IS FOR ───────────────────────────────────────────────── -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
-    <div class="max-w-[720px] mx-auto">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">Who This Is For</p>
+    <div class="max-w-[720px] mx-auto text-left">
+      <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-4">Who This Is For</p>
       <!-- COPY: who this is for. No exclusion block, no "not for" section. -->
     </div>
   </section>
@@ -36,28 +37,28 @@ import PricingCard from '../components/primitives/PricingCard.astro';
   <!-- ── HOW IT WORKS ──────────────────────────────────────────────────── -->
   <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[1100px] mx-auto">
-      <div class="tr-section-head mb-16">
-        <span class="kicker">How It Works</span>
+      <div class="text-center mb-16">
+        <span class="block text-[11px] font-bold tracking-widest uppercase text-[#0B0B0C]/60 mb-4">How It Works</span>
         <h2 style="font-size: clamp(2rem, 4vw, 3rem);"><!-- COPY: section headline --></h2>
-        <span class="divider"></span>
+        <span class="block w-10 h-0.5 bg-[#0B0B0C]/8 mx-auto mt-5"></span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#0B0B0C]/8">
-        <div class="bg-[var(--warm)] p-8 md:p-10">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-5">01</p>
+        <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
+          <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-5">01</p>
           <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">
             <!-- COPY: step 1 label (structured path) -->
           </h3>
           <p class="text-[#0B0B0C]/60 text-sm leading-relaxed"><!-- COPY: step 1 body --></p>
         </div>
-        <div class="bg-[var(--warm)] p-8 md:p-10">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-5">02</p>
+        <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
+          <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-5">02</p>
           <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">
             <!-- COPY: step 2 label (send footage) -->
           </h3>
           <p class="text-[#0B0B0C]/60 text-sm leading-relaxed"><!-- COPY: step 2 body --></p>
         </div>
-        <div class="bg-[var(--warm)] p-8 md:p-10">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-5">03</p>
+        <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
+          <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-5">03</p>
           <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">
             <!-- COPY: step 3 label (get feedback) -->
           </h3>
@@ -67,42 +68,54 @@ import PricingCard from '../components/primitives/PricingCard.astro';
     </div>
   </section>
 
+  <!-- ── SOCIAL PROOF (reuses the existing null-on-empty component) ─────── -->
+  <ProofSection />
+
   <!-- ── THE THREE GRADES ─────────────────────────────────────────────── -->
   <Section padding="lg" class="bg-white px-6 md:px-12 lg:px-20" id="grades">
     <div class="max-w-[1280px] mx-auto">
-      <div class="tr-section-head mb-16">
-        <span class="kicker">The Ladder</span>
+      <div class="text-center mb-16">
+        <span class="block text-[11px] font-bold tracking-widest uppercase text-[#0B0B0C]/60 mb-4">The Ladder</span>
         <h2 style="font-size: clamp(2rem, 4vw, 3rem);"><!-- COPY: grades section headline --></h2>
-        <span class="divider"></span>
+        <span class="block w-10 h-0.5 bg-[#0B0B0C]/8 mx-auto mt-5"></span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px]">
-        <div id="grade-1">
-          <!-- COPY: Grade 1 CTA label -->
-          <PricingCard
-            name="Grade 1 Foundation"
-            price="$347"
-            term="one time · 90 days"
-            priceId="grade1"
-            ctaLabel=""
-            features={[
-              'Structured curriculum: footwork, 8 punches, basic defense, rules and etiquette',
-              'Boxing psychology: fear, composure, controlled aggression',
-              'Unlimited video feedback',
-              'Simple metrics: land more, get hit less, stay calm',
-            ]}
-          />
-          <!-- COPY: outcome line. Owner rewriting. Do NOT ship a sparring-readiness claim. -->
-        </div>
+      <!-- Grade 1 -- full-width block. $347 to $12,000 is a 34x spread; three
+           equal columns read as a price comparison, not an entry point. -->
+      <div id="grade-1" class="max-w-[820px] mx-auto mb-14">
+        <!-- COPY: Grade 1 CTA label -->
+        <!-- COPY: Grade 1 outcome line -->
+        <PricingCard
+          name="Grade 1 Foundation"
+          price="$347"
+          term="one time · 90 days"
+          outcome=""
+          priceId="grade1"
+          featured={true}
+          size="lg"
+          ctaLabel=""
+          features={[
+            'Structured curriculum: footwork, 8 punches, basic defense, rules and etiquette',
+            'Boxing psychology: fear, composure, controlled aggression',
+            'Unlimited video feedback',
+            'Simple metrics: land more, get hit less, stay calm',
+          ]}
+        />
+      </div>
 
+      <!-- COPY: eyebrow for where the path goes next -->
+      <p class="text-[#0B0B0C]/40 text-[11px] tracking-widest uppercase font-bold mb-8 text-center max-w-[820px] mx-auto"></p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-[2px] max-w-[820px] mx-auto">
         <div id="grade-2">
           <!-- COPY: Grade 2 CTA label -->
+          <!-- COPY: Grade 2 outcome line -->
           <PricingCard
             name="Grade 2 Development"
             price="$997"
             term="one time · 90 days"
+            outcome=""
             priceId="grade2"
-            featured={true}
             ctaLabel=""
             features={[
               'Everything in Grade 1 at a higher technical standard, including elastic energy and snap in punches',
@@ -110,27 +123,29 @@ import PricingCard from '../components/primitives/PricingCard.astro';
               'Deeper psychology: identity as a boxer, handling pressure, emotional regulation in rounds',
               'Personalised programming adjusted from their footage and goals',
               'Small group of Grade 2 students',
+              'Weekly 1-1 check-in call',
             ]}
           />
-          <!-- COPY: DECISION PENDING (Grade 2). Bi-weekly group calls OR 1-1 check-ins. Owner picks. Render nothing until decided. -->
         </div>
 
         <div id="grade-3">
           <!-- COPY: Grade 3 CTA label -->
+          <!-- COPY: Grade 3 outcome line -->
           <PricingCard
             name="Grade 3"
             price="$12,000"
             term="one time · 12 months"
+            outcome=""
             priceId="grade3"
             ctaLabel=""
             features={[
+              'Two calls a week, plus a monthly review call on your measurables',
               'Direct access for footage and messages, fast feedback',
               'Fully customised training designed around their week',
               'In-person option',
               'Max 5 people',
             ]}
           />
-          <!-- COPY: DECISION PENDING (Grade 3). Weekly calls OR 3x weekly. Pricing was modelled on weekly. Owner picks. Render nothing until decided. -->
         </div>
       </div>
     </div>
@@ -139,7 +154,8 @@ import PricingCard from '../components/primitives/PricingCard.astro';
   <!-- ── BLUEPRINTS (secondary) ───────────────────────────────────────── -->
   <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-14 border-t border-[#0B0B0C]/8">
     <div class="max-w-[1100px] mx-auto">
-      <p class="text-[#0B0B0C]/40 text-[11px] tracking-widest uppercase font-bold mb-8">Not ready for a Grade yet</p>
+      <!-- COPY: eyebrow framing blueprints as the smaller way in, not a failure state -->
+      <p class="text-[#0B0B0C]/40 text-[11px] tracking-widest uppercase font-bold mb-8"></p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <a href="/foundation" class="flex flex-col p-6 border border-[#0B0B0C]/10 hover:border-[#0B0B0C]/25 transition-colors duration-200">
           <p class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase mb-3">$9 · Footwork Blueprint</p>
@@ -160,27 +176,39 @@ import PricingCard from '../components/primitives/PricingCard.astro';
     <p class="text-[#0B0B0C]/40 text-xs max-w-[520px] mx-auto"><!-- COPY: risk line --></p>
   </section>
 
-  <!-- ── FAQ ───────────────────────────────────────────────────────────── -->
+  <!-- ── FAQ (single-column accordion) ───────────────────────────────── -->
   <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-16 md:py-24">
-    <div class="max-w-[900px] mx-auto">
-      <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl leading-tight mb-10">Common Questions</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-        <div>
-          <p class="font-bold text-[#0B0B0C] text-sm mb-1"><!-- COPY: FAQ question 1 --></p>
-          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed"><!-- COPY: FAQ answer 1 --></p>
-        </div>
-        <div>
-          <p class="font-bold text-[#0B0B0C] text-sm mb-1"><!-- COPY: FAQ question 2 --></p>
-          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed"><!-- COPY: FAQ answer 2 --></p>
-        </div>
-        <div>
-          <p class="font-bold text-[#0B0B0C] text-sm mb-1"><!-- COPY: FAQ question 3 --></p>
-          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed"><!-- COPY: FAQ answer 3 --></p>
-        </div>
-        <div>
-          <p class="font-bold text-[#0B0B0C] text-sm mb-1"><!-- COPY: FAQ question 4 --></p>
-          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed"><!-- COPY: FAQ answer 4 --></p>
-        </div>
+    <div class="max-w-[720px] mx-auto">
+      <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl leading-tight mb-10 text-left">Common Questions</h2>
+      <div class="flex flex-col divide-y divide-[#0B0B0C]/10 border-t border-b border-[#0B0B0C]/10">
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            <!-- COPY: FAQ question 1 -->
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 1 --></p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            <!-- COPY: FAQ question 2 -->
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 2 --></p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            <!-- COPY: FAQ question 3 -->
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 3 --></p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            <!-- COPY: FAQ question 4 -->
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 4 --></p>
+        </details>
       </div>
     </div>
   </section>

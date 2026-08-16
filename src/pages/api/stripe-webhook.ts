@@ -70,6 +70,17 @@ const KIT_PRODUCT_TAGS: Record<string, string> = {
   'defense-workshop':  '19807641', // uses same tag as shadowboxing until a dedicated tag is created
   'greatness':         '19830354',
 };
+
+// Grade buyer tags — creation via Kit v4 API FAILED 2026-08-16 (account is
+// plan-gated for MCP write access, same block documented for the trb-session-cron
+// build). tagKit() already no-ops on any ID starting with 'KIT_TAG_', so these
+// are safe placeholders: create the tags in Kit (Grow > Tags), paste the numeric
+// ID from app.kit.com/tags/XXXXX, and tagging activates with no other code change.
+const KIT_GRADE_TAGS: Record<string, string> = {
+  'grade1': 'KIT_TAG_GRADE1_BUYER',
+  'grade2': 'KIT_TAG_GRADE2_BUYER',
+  'grade3': 'KIT_TAG_GRADE3_BUYER',
+};
 const KIT_MEMBER_TAG = '19807647';
 // 14-day Community trial tag — applied to Blueprint buyers so Kit can fire the
 // Day 0 / Day 7 / Day 12 / Day 14 trial-conversion sequence.
@@ -415,6 +426,62 @@ function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Re
   );
 }
 
+// ── Grade purchase confirmation (Phase 3, Step 4) ───────────────────────────
+// Grade buyers previously got a thank-you page and silence -- no email, no
+// tag. This is the fix: fires on checkout.session.completed for grade1/2/3,
+// alongside the existing deliverProduct() call (which correctly no-ops for
+// these slugs since there's no ASSET_MAP entry -- Grades aren't a file).
+const GRADE_CALENDLY_URL = 'https://calendly.com/theerainers/1-1';
+
+function buildGradeConfirmationHtml(gradeName: string, priceLabel: string, email: string): string {
+  const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
+  return (
+    `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
+    `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
+    `<p style="font-size:15px;line-height:1.6;margin:0 0 8px;"><!-- COPY: confirmation opening line --></p>` +
+    `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">${gradeName} &middot; ${priceLabel}</p>` +
+    `<p style="margin:0 0 24px;"><a href="${GRADE_CALENDLY_URL}" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Book Your Call</a></p>` +
+    `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Before your first call</p>` +
+    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 20px;"><!-- COPY: what to film before the first call --></p>` +
+    `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Where to send it</p>` +
+    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 24px;"><!-- COPY: where to send clips --></p>` +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#E11D2A;">rainers@theerainers.com</a></p>` +
+    `<p style="font-size:11px;text-align:center;margin:0;"><a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p>` +
+    `</div>`
+  );
+}
+
+async function sendGradeConfirmation(
+  resendKey: string,
+  email: string,
+  gradeName: string,
+  priceLabel: string,
+): Promise<void> {
+  if (!resendKey) return;
+  // COPY: grade confirmation email subject. Left blank on purpose -- do not
+  // invent a fallback string here, that's copy too.
+  const subject = '';
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'Thee Rainers <rainers@theerainers.com>',
+        to: [email],
+        subject,
+        html: buildGradeConfirmationHtml(gradeName, priceLabel, email),
+      }),
+    });
+    if (!res.ok) {
+      console.error('[stripe-webhook] Grade confirmation email failed', res.status, await res.text());
+    } else {
+      console.log('[stripe-webhook] Grade confirmation email sent for', gradeName);
+    }
+  } catch (err) {
+    console.error('[stripe-webhook] Grade confirmation email fetch error:', String(err));
+  }
+}
+
 function buildPaymentFailedHtml(portalUrl: string, email: string): string {
   const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
   return (
@@ -627,6 +694,20 @@ export async function POST({ request }: APIContext): Promise<Response> {
       } else {
         const slug = PRODUCT_MAP[productId] ?? LOOKUP_KEY_MAP[session.metadata?.lookup_key ?? ''];
         await deliverProduct(email, productId, e, slug);
+        // Grade purchase confirmation — deliverProduct() correctly no-ops for
+        // grade1/2/3 (no ASSET_MAP entry, it's a call not a file), so this is
+        // the actual confirmation + booking email for these three slugs.
+        if (slug === 'grade1' || slug === 'grade2' || slug === 'grade3') {
+          const gradeName  = GA4_CATALOG[slug]?.name ?? slug;
+          const priceCents = session.amount_total ?? null;
+          const priceLabel = priceCents != null
+            ? `$${(priceCents / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+            : '';
+          await sendGradeConfirmation(resendKey, email, gradeName, priceLabel);
+          if (KIT_GRADE_TAGS[slug]) {
+            await tagKit(kitKey, email, KIT_GRADE_TAGS[slug]);
+          }
+        }
         // Telegram sale alert
         sendTelegramAlert(
           e['TELEGRAM_BOT_TOKEN'] ?? '',

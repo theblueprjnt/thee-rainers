@@ -2,6 +2,8 @@
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
 import OfferStack from '../components/blocks/OfferStack.astro';
+import FourLayers from '../components/blocks/FourLayers.astro';
+import ProofSection from '../components/blocks/ProofSection.astro';
 import { SOCIAL_STATS } from '../data/social-stats';
 ---
 <Layout
@@ -49,12 +51,19 @@ import { SOCIAL_STATS } from '../data/social-stats';
         <a href="#programs" class="tr-btn">
           Find your foundation
         </a>
+        <!-- COPY: trust line, owner supplies verified numbers only -->
       </div>
     </div>
   </section>
 
+  <!-- ── THE FOUR LAYERS ──────────────────────────────────────────────── -->
+  <FourLayers />
+
   <!-- ── OFFER STACK ────────────────────────────────────────────────────── -->
   <OfferStack />
+
+  <!-- ── GRADE COACHING PROOF (null on empty) ─────────────────────────── -->
+  <ProofSection />
 
   <!-- ── PROOF ─────────────────────────────────────────────────────────── -->
   <div id="proof" class="scroll-mt-20">
@@ -69,6 +78,23 @@ import { SOCIAL_STATS } from '../data/social-stats';
         "I do not run aimlessly. I do not box as one beating the air. I discipline my body and keep it under control."
       </p>
       <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">1 Corinthians 9:26-27</p>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ─────────────────────────────────────────────────────── -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 md:py-28 text-center">
+    <div class="max-w-[600px] mx-auto">
+      <h2 class="font-black uppercase tracking-tighter text-[#0B0B0C] mb-8"
+        style="font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95;">
+        <!-- COPY: headline -->
+      </h2>
+      <a href="/coaching" class="tr-btn">
+        <!-- COPY: final CTA button label -->
+      </a>
+      <p class="mt-6">
+        <!-- COPY: secondary link label -->
+        <a href="/foundation" class="text-[var(--navy)] text-[11px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity"></a>
+      </p>
     </div>
   </section>
 

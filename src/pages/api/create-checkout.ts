@@ -2,6 +2,7 @@ export const prerender = false;
 
 import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
+import { GRADE3_SEATS_TAKEN, GRADE3_MAX_SEATS } from '../../data/grade3-seats.ts';
 
 // ── Product catalog ───────────────────────────────────────────────────────
 // Single source of truth for Stripe Checkout Sessions across the site.
@@ -86,8 +87,8 @@ const PRODUCTS: Record<string, ProductConfig> = {
 // doesn't apply -- this is the server-side equivalent. Owner increments this
 // manually as seats sell; at 5 people and this price point he knows about
 // every sale personally, so a manual count is reliable here.
-const GRADE3_SEATS_TAKEN = 0;
-const GRADE3_MAX_SEATS = 5;
+// Constants now live in data/grade3-seats.ts -- coaching/grade-3.astro reads
+// the same source to render "X of 5" instead of duplicating the number.
 
 export async function POST({ request }: { request: Request }): Promise<Response> {
   const e = cfEnv as unknown as Record<string, string>;
