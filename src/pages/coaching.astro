@@ -4,10 +4,9 @@ import Section from '../components/primitives/Section.astro';
 import PricingCard from '../components/primitives/PricingCard.astro';
 import ProofSection from '../components/blocks/ProofSection.astro';
 ---
-<!-- COPY: meta description -->
 <Layout
   title="Coaching · Thee Rainers"
-  description="">
+  description="Three grades of 1-on-1 boxing coaching. Pick your level, send your footage, get corrected.">
 
   <!-- ── HERO ──────────────────────────────────────────────────────────── -->
   <section class="relative bg-[#0B0B0C] overflow-hidden px-6 md:px-12 lg:px-20 py-28 md:py-36">
@@ -15,13 +14,13 @@ import ProofSection from '../components/blocks/ProofSection.astro';
       <p class="text-white/60 text-[11px] tracking-widest uppercase font-bold mb-6">Thee Rainers Coaching</p>
       <h1 class="font-black uppercase tracking-tighter text-white mb-6"
         style="font-size: clamp(3rem, 6vw, 4.5rem); line-height: 0.95;">
-        <!-- COPY: headline -->
+        Coaching, graded.
       </h1>
       <p class="text-white/50 text-base leading-relaxed mb-10 max-w-[520px] mx-auto">
-        <!-- COPY: subhead -->
+        Three levels of 1-on-1 boxing coaching. Start where you are. Move up once you've earned it.
       </p>
       <a href="#grades" class="tr-btn">
-        <!-- COPY: hero CTA label -->
+        See the grades
       </a>
     </div>
   </section>
@@ -30,7 +29,9 @@ import ProofSection from '../components/blocks/ProofSection.astro';
   <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[720px] mx-auto text-left">
       <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-4">Who This Is For</p>
-      <!-- COPY: who this is for. No exclusion block, no "not for" section. -->
+      <p class="text-[#0B0B0C]/70 text-base leading-relaxed">
+        You train seriously, with or without a gym that can give you real correction. You want a coach who watches your actual movement and tells you exactly what to fix next. Pick a grade based on your budget and how much direct contact you want, then start.
+      </p>
     </div>
   </section>
 
@@ -39,30 +40,30 @@ import ProofSection from '../components/blocks/ProofSection.astro';
     <div class="max-w-[1100px] mx-auto">
       <div class="text-center mb-16">
         <span class="block text-[11px] font-bold tracking-widest uppercase text-[#0B0B0C]/60 mb-4">How It Works</span>
-        <h2 style="font-size: clamp(2rem, 4vw, 3rem);"><!-- COPY: section headline --></h2>
+        <h2 style="font-size: clamp(2rem, 4vw, 3rem);">How it works.</h2>
         <span class="block w-10 h-0.5 bg-[#0B0B0C]/8 mx-auto mt-5"></span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#0B0B0C]/8">
         <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
           <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-5">01</p>
           <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">
-            <!-- COPY: step 1 label (structured path) -->
+            Pick your grade
           </h3>
-          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed"><!-- COPY: step 1 body --></p>
+          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">Choose Grade 1, 2, or 3 based on your budget and how much direct contact you want.</p>
         </div>
         <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
           <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-5">02</p>
           <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">
-            <!-- COPY: step 2 label (send footage) -->
+            Send your footage
           </h3>
-          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed"><!-- COPY: step 2 body --></p>
+          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">Film yourself training and send it in. Rainers reviews your actual mechanics, not a generic checklist.</p>
         </div>
         <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
           <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-5">03</p>
           <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">
-            <!-- COPY: step 3 label (get feedback) -->
+            Get corrected
           </h3>
-          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed"><!-- COPY: step 3 body --></p>
+          <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">You get specific feedback on what to fix next. Run it, film again, repeat.</p>
         </div>
       </div>
     </div>
@@ -76,24 +77,22 @@ import ProofSection from '../components/blocks/ProofSection.astro';
     <div class="max-w-[1280px] mx-auto">
       <div class="text-center mb-16">
         <span class="block text-[11px] font-bold tracking-widest uppercase text-[#0B0B0C]/60 mb-4">The Ladder</span>
-        <h2 style="font-size: clamp(2rem, 4vw, 3rem);"><!-- COPY: grades section headline --></h2>
+        <h2 style="font-size: clamp(2rem, 4vw, 3rem);">Pick your grade.</h2>
         <span class="block w-10 h-0.5 bg-[#0B0B0C]/8 mx-auto mt-5"></span>
       </div>
 
       <!-- Grade 1 -- full-width block. $347 to $12,000 is a 34x spread; three
            equal columns read as a price comparison, not an entry point. -->
       <div id="grade-1" class="max-w-[820px] mx-auto mb-14">
-        <!-- COPY: Grade 1 CTA label -->
-        <!-- COPY: Grade 1 outcome line -->
         <PricingCard
           name="Grade 1 Foundation"
           price="$347"
           term="one time · 90 days"
-          outcome=""
+          outcome="Build the foundation. Footwork, punches, and defense that hold up under pressure."
           priceId="grade1"
           featured={true}
           size="lg"
-          ctaLabel=""
+          ctaLabel="Start Grade 1"
           features={[
             'Structured curriculum: footwork, 8 punches, basic defense, rules and etiquette',
             'Boxing psychology: fear, composure, controlled aggression',
@@ -103,20 +102,17 @@ import ProofSection from '../components/blocks/ProofSection.astro';
         />
       </div>
 
-      <!-- COPY: eyebrow for where the path goes next -->
-      <p class="text-[#0B0B0C]/40 text-[11px] tracking-widest uppercase font-bold mb-8 text-center max-w-[820px] mx-auto"></p>
+      <p class="text-[#0B0B0C]/40 text-[11px] tracking-widest uppercase font-bold mb-8 text-center max-w-[820px] mx-auto">After Grade 1</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-[2px] max-w-[820px] mx-auto">
         <div id="grade-2">
-          <!-- COPY: Grade 2 CTA label -->
-          <!-- COPY: Grade 2 outcome line -->
           <PricingCard
             name="Grade 2 Development"
             price="$997"
             term="one time · 90 days"
-            outcome=""
+            outcome="Sharpen what you have. Structured sparring and a plan built around your footage."
             priceId="grade2"
-            ctaLabel=""
+            ctaLabel="Start Grade 2"
             features={[
               'Everything in Grade 1 at a higher technical standard, including elastic energy and snap in punches',
               'Structured sparring plans with monthly goals, drills and progress tracking',
@@ -129,15 +125,13 @@ import ProofSection from '../components/blocks/ProofSection.astro';
         </div>
 
         <div id="grade-3">
-          <!-- COPY: Grade 3 CTA label -->
-          <!-- COPY: Grade 3 outcome line -->
           <PricingCard
             name="Grade 3"
             price="$12,000"
             term="one time · 12 months"
-            outcome=""
+            outcome="Full access. A program built entirely around you, two calls a week."
             priceId="grade3"
-            ctaLabel=""
+            ctaLabel="Apply for Grade 3"
             features={[
               'Two calls a week, plus a monthly review call on your measurables',
               'Direct access for footage and messages, fast feedback',
@@ -154,17 +148,16 @@ import ProofSection from '../components/blocks/ProofSection.astro';
   <!-- ── BLUEPRINTS (secondary) ───────────────────────────────────────── -->
   <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-14 border-t border-[#0B0B0C]/8">
     <div class="max-w-[1100px] mx-auto">
-      <!-- COPY: eyebrow framing blueprints as the smaller way in, not a failure state -->
-      <p class="text-[#0B0B0C]/40 text-[11px] tracking-widest uppercase font-bold mb-8"></p>
+      <p class="text-[#0B0B0C]/40 text-[11px] tracking-widest uppercase font-bold mb-8">Not ready for a grade yet? Start here.</p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <a href="/foundation" class="flex flex-col p-6 border border-[#0B0B0C]/10 hover:border-[#0B0B0C]/25 transition-colors duration-200">
           <p class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase mb-3">$9 · Footwork Blueprint</p>
-          <p class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-3"><!-- COPY: Footwork Blueprint teaser line --></p>
+          <p class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-3">Stance and footwork before you spend on coaching.</p>
           <p class="mt-auto text-[var(--navy)] text-[11px] font-bold tracking-widest uppercase">Learn more →</p>
         </a>
         <a href="/shop" class="flex flex-col p-6 border border-[#0B0B0C]/10 hover:border-[#0B0B0C]/25 transition-colors duration-200">
           <p class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase mb-3">$24 · Complete Bundle</p>
-          <p class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-3"><!-- COPY: Bundle teaser line --></p>
+          <p class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-3">Footwork and shadowboxing, together.</p>
           <p class="mt-auto text-[var(--navy)] text-[11px] font-bold tracking-widest uppercase">Learn more →</p>
         </a>
       </div>
@@ -173,7 +166,7 @@ import ProofSection from '../components/blocks/ProofSection.astro';
 
   <!-- ── RISK LINE ─────────────────────────────────────────────────────── -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-10 text-center">
-    <p class="text-[#0B0B0C]/40 text-xs max-w-[520px] mx-auto"><!-- COPY: risk line --></p>
+    <p class="text-[#0B0B0C]/40 text-xs max-w-[520px] mx-auto">Coaching isn't refundable once your first session starts. If it isn't producing clear progress, we keep working at no charge until it does. See the <a href="/legal/refund-policy" class="underline hover:text-[#0B0B0C]/60">Refund Policy</a>.</p>
   </section>
 
   <!-- ── FAQ (single-column accordion) ───────────────────────────────── -->
@@ -183,31 +176,31 @@ import ProofSection from '../components/blocks/ProofSection.astro';
       <div class="flex flex-col divide-y divide-[#0B0B0C]/10 border-t border-b border-[#0B0B0C]/10">
         <details class="group py-5">
           <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
-            <!-- COPY: FAQ question 1 -->
+            What if I don't know which grade to pick?
             <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
           </summary>
-          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 1 --></p>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">Start with Grade 1. It's the foundation every fighter needs, and you can move up once you've built it.</p>
         </details>
         <details class="group py-5">
           <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
-            <!-- COPY: FAQ question 2 -->
+            How fast do I hear back after I send footage?
             <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
           </summary>
-          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 2 --></p>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">Rainers reviews every submission personally. Expect feedback within a few days.</p>
         </details>
         <details class="group py-5">
           <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
-            <!-- COPY: FAQ question 3 -->
+            Can I switch grades later?
             <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
           </summary>
-          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 3 --></p>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">Yes. Most fighters start at Grade 1 and move up once they've built the foundation.</p>
         </details>
         <details class="group py-5">
           <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
-            <!-- COPY: FAQ question 4 -->
+            Do I need a gym or a training partner?
             <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
           </summary>
-          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 4 --></p>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">No. The curriculum is built to work solo, with drills you can run in a mirror or on your own footage.</p>
         </details>
       </div>
     </div>

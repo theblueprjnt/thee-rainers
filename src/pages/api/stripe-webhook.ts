@@ -438,13 +438,13 @@ function buildGradeConfirmationHtml(gradeName: string, priceLabel: string, email
   return (
     `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
     `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
-    `<p style="font-size:15px;line-height:1.6;margin:0 0 8px;"><!-- COPY: confirmation opening line --></p>` +
+    `<p style="font-size:15px;line-height:1.6;margin:0 0 8px;">You're in. Book your first call below.</p>` +
     `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">${gradeName} &middot; ${priceLabel}</p>` +
     `<p style="margin:0 0 24px;"><a href="${GRADE_CALENDLY_URL}" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Book Your Call</a></p>` +
     `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Before your first call</p>` +
-    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 20px;"><!-- COPY: what to film before the first call --></p>` +
+    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 20px;">Film a short clip of yourself shadowboxing or hitting pads, whatever you have access to. Good lighting, full body in frame.</p>` +
     `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Where to send it</p>` +
-    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 24px;"><!-- COPY: where to send clips --></p>` +
+    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 24px;">Email it to rainers@theerainers.com before your call, or bring it on the call itself.</p>` +
     `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#E11D2A;">rainers@theerainers.com</a></p>` +
     `<p style="font-size:11px;text-align:center;margin:0;"><a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p>` +
     `</div>`
@@ -458,9 +458,7 @@ async function sendGradeConfirmation(
   priceLabel: string,
 ): Promise<void> {
   if (!resendKey) return;
-  // COPY: grade confirmation email subject. Left blank on purpose -- do not
-  // invent a fallback string here, that's copy too.
-  const subject = '';
+  const subject = "You're in. Book your first call.";
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',

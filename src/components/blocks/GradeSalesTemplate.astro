@@ -20,6 +20,81 @@ interface Props {
 
 const { gradeNumber, name, price, term, priceId, features, seatsTaken, seatsMax } = Astro.props;
 const isGrade3 = gradeNumber === 3;
+
+// Launch copy, written to be usable now. Flagged for an owner voice pass in
+// coaching-copy-review.md -- treat every line here as a first draft, not final.
+const COPY = {
+  1: {
+    headline: 'Grade 1 Foundation.',
+    subhead: "For fighters starting from zero, or fixing habits nobody's corrected. Footwork, punches, and defense, built in the right order.",
+    heroCta: 'Start Grade 1 · $347',
+    problem: "You're training without a real foundation. Maybe you're self-taught, maybe you picked up habits at a gym that never watched you closely. You don't know what you don't know, and it shows up under pressure.",
+    before: 'Guessing at technique. No one watching your actual movement.',
+    after: 'A structured base you can build your whole career on.',
+    howHeadline: 'How Grade 1 works.',
+    step1: { label: 'Enrol and get access', body: 'Pay once and get the full 90-day curriculum immediately.' },
+    step2: { label: 'Train and send video', body: 'Run the drills, film yourself training, and send in your footage.' },
+    step3: { label: 'Get feedback and progress', body: "Rainers corrects your mechanics and tells you what to work on next." },
+    whatHappensNext: "You get access to the curriculum right after purchase. Start filming and sending footage whenever you're ready.",
+    priceCta: 'Start Grade 1',
+    finalHeadline: 'Build the foundation.',
+    finalCta: 'Start Grade 1 · $347',
+    faqs: [
+      { q: "What if I've never trained before?", a: 'Grade 1 is built for exactly that. It starts from the base and assumes nothing.' },
+      { q: 'How much time does it take per week?', a: "That's on you. The curriculum is self-paced over 90 days, run it as often as your schedule allows." },
+      { q: 'Do I need equipment?', a: 'No. The drills are built to run with just your body and a mirror or camera.' },
+      { q: 'What if I want more direct contact with Rainers?', a: "Grade 2 adds a weekly check-in call. You can move up once you've finished Grade 1." },
+      { q: 'Is this refundable?', a: "Coaching isn't refundable once your first session starts. If it isn't producing clear progress, we keep working at no charge until it does." },
+    ],
+  },
+  2: {
+    headline: 'Grade 2 Development.',
+    subhead: "For fighters who've built the foundation and are ready to spar with a real plan behind it.",
+    heroCta: 'Start Grade 2 · $997',
+    problem: "You can move and you can punch, but sparring still feels chaotic. You're improvising instead of executing a plan, and nobody's tracking whether you're actually getting better.",
+    before: "Sparring without a plan. Progress you can't measure.",
+    after: 'Structured sparring goals and a coach reviewing your footage every week.',
+    howHeadline: 'How Grade 2 works.',
+    step1: { label: 'Enrol and get access', body: 'Pay once and get your Grade 2 program, built on top of the Grade 1 foundation.' },
+    step2: { label: 'Train and send video', body: 'Run your sparring plan, film your sessions, and send in your footage.' },
+    step3: { label: 'Get feedback and progress', body: 'Weekly check-in call plus footage review to adjust your plan.' },
+    whatHappensNext: 'You get access right after purchase. Your first weekly check-in call gets scheduled by email.',
+    priceCta: 'Start Grade 2',
+    finalHeadline: 'Sharpen what you have.',
+    finalCta: 'Start Grade 2 · $997',
+    faqs: [
+      { q: 'Do I need to finish Grade 1 first?', a: 'You need the foundation Grade 1 builds. If you already have it from other training, email before you buy if you\'re unsure.' },
+      { q: 'How does the weekly call work?', a: 'One call a week with Rainers, scheduled after you enrol.' },
+      { q: 'How is this different from Grade 1?', a: "Grade 2 adds structured sparring plans, deeper feedback, and a weekly call. It's built for fighters already sparring." },
+      { q: 'Can I move up to Grade 3 later?', a: 'Yes. Fighters who want more direct access can apply for Grade 3 at any point.' },
+      { q: 'Is this refundable?', a: "Coaching isn't refundable once your first session starts. If it isn't producing clear progress, we keep working at no charge until it does." },
+    ],
+  },
+  3: {
+    headline: 'Grade 3.',
+    subhead: 'Full access. A program built entirely around you, with direct contact every week.',
+    heroCta: 'Apply for Grade 3',
+    problem: "You're serious enough that generic programming doesn't work anymore. You need a coach who knows your fight, your schedule, and your body, not a template.",
+    before: 'Generic programming. Feedback that arrives slow or thin.',
+    after: 'A fully custom plan and direct access to Rainers every week.',
+    howHeadline: 'How Grade 3 works.',
+    step1: { label: 'Apply and get approved', body: 'Grade 3 is limited to 5 people at a time. Apply and Rainers will confirm your spot.' },
+    step2: { label: 'Train and send video', body: 'Run your custom program, film your sessions, and send in footage as you go.' },
+    step3: { label: 'Get feedback and progress', body: 'Two calls a week, plus a monthly review call on your measurables.' },
+    whatHappensNext: "Grade 3 is limited to 5 people. After you enrol, you'll book your first call and we'll build your program around your schedule.",
+    priceCta: 'Apply for Grade 3',
+    finalHeadline: 'A program built around you.',
+    finalCta: 'Apply for Grade 3 · $12,000',
+    faqs: [
+      { q: 'Is Grade 3 in-person or online?', a: 'Both. Most sessions run online with two calls a week. In-person sessions can be arranged, see In-Person Terms above.' },
+      { q: 'What happens if all 5 seats are full?', a: 'Email rainers@theerainers.com to ask about the next opening.' },
+      { q: 'How is Grade 3 different from Grade 2?', a: 'Grade 3 is fully custom. Two calls a week, a monthly review on your measurables, and a program built entirely around your schedule.' },
+      { q: 'Can I pay in installments?', a: 'No. Grade 3 is a single payment of $12,000 for the full 12 months.' },
+      { q: 'Is this refundable?', a: "Coaching isn't refundable once your first session starts. If it isn't producing clear progress, we keep working at no charge until it does." },
+    ],
+  },
+} as const;
+const c = COPY[gradeNumber];
 ---
 
 <!-- ── HERO ──────────────────────────────────────────────────────────── -->
@@ -28,13 +103,13 @@ const isGrade3 = gradeNumber === 3;
     <p class="text-white/60 text-[11px] tracking-widest uppercase font-bold mb-6">{name}</p>
     <h1 class="font-black uppercase tracking-tighter text-white mb-6"
       style="font-size: clamp(3rem, 6vw, 4.5rem); line-height: 0.95;">
-      <!-- COPY: headline -->
+      {c.headline}
     </h1>
     <p class="text-white/50 text-base leading-relaxed mb-10 max-w-[520px] mx-auto">
-      <!-- COPY: subhead, who it's for plus main outcome -->
+      {c.subhead}
     </p>
     <button type="button" data-checkout={priceId} class="tr-btn">
-      <!-- COPY: hero CTA label -->
+      {c.heroCta}
     </button>
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
@@ -46,7 +121,7 @@ const isGrade3 = gradeNumber === 3;
 <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
   <div class="max-w-[720px] mx-auto text-left">
     <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-4">Where You Are Now</p>
-    <!-- COPY: problem / current state -->
+    <p class="text-[#0B0B0C]/70 text-base leading-relaxed">{c.problem}</p>
   </div>
 </section>
 
@@ -57,11 +132,11 @@ const isGrade3 = gradeNumber === 3;
     <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#0B0B0C]/8">
       <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
         <p class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase font-bold mb-4">Before</p>
-        <!-- COPY: before -->
+        <p class="text-[#0B0B0C]/70 text-sm leading-relaxed">{c.before}</p>
       </div>
       <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
         <p class="text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase font-bold mb-4">After</p>
-        <!-- COPY: after -->
+        <p class="text-[#0B0B0C]/70 text-sm leading-relaxed">{c.after}</p>
       </div>
     </div>
   </div>
@@ -87,24 +162,24 @@ const isGrade3 = gradeNumber === 3;
   <div class="max-w-[1100px] mx-auto">
     <div class="text-center mb-16">
       <span class="block text-[11px] font-bold tracking-widest uppercase text-[#0B0B0C]/60 mb-4">How It Works</span>
-      <h2 style="font-size: clamp(2rem, 4vw, 3rem);"><!-- COPY: section headline --></h2>
+      <h2 style="font-size: clamp(2rem, 4vw, 3rem);">{c.howHeadline}</h2>
       <span class="block w-10 h-0.5 bg-[#0B0B0C]/8 mx-auto mt-5"></span>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#0B0B0C]/8">
       <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
         <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-5">01</p>
-        <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4"><!-- COPY: step 1 label --></h3>
-        <p class="text-[#0B0B0C]/60 text-sm leading-relaxed"><!-- COPY: step 1 body --></p>
+        <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">{c.step1.label}</h3>
+        <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">{c.step1.body}</p>
       </div>
       <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
         <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-5">02</p>
-        <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4"><!-- COPY: step 2 label --></h3>
-        <p class="text-[#0B0B0C]/60 text-sm leading-relaxed"><!-- COPY: step 2 body --></p>
+        <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">{c.step2.label}</h3>
+        <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">{c.step2.body}</p>
       </div>
       <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
         <p class="text-[#0B0B0C]/60 text-[10px] tracking-widest uppercase font-bold mb-5">03</p>
-        <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4"><!-- COPY: step 3 label --></h3>
-        <p class="text-[#0B0B0C]/60 text-sm leading-relaxed"><!-- COPY: step 3 body --></p>
+        <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">{c.step3.label}</h3>
+        <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">{c.step3.body}</p>
       </div>
     </div>
   </div>
@@ -120,7 +195,7 @@ const isGrade3 = gradeNumber === 3;
       <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-3">Availability</p>
       <p class="font-black text-[#0B0B0C] text-2xl tracking-tight mb-10">{seatsTaken ?? 0} of {seatsMax ?? 5} seats taken</p>
       <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-3">In-Person Terms</p>
-      <p class="text-[#0B0B0C]/70 text-sm leading-relaxed"><!-- COPY: who travels, who pays, how it is scheduled --></p>
+      <p class="text-[#0B0B0C]/70 text-sm leading-relaxed">In-person sessions are scheduled by mutual agreement based on your location and Rainers' travel schedule. Travel costs are covered by the student. Email rainers@theerainers.com to discuss logistics before you apply if in-person access matters to you.</p>
     </div>
   </section>
 )}
@@ -133,9 +208,9 @@ const isGrade3 = gradeNumber === 3;
       <span class="text-[#0B0B0C]/60 text-sm">{term}</span>
     </div>
     <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-3">What Happens Next</p>
-    <p class="text-[#0B0B0C]/70 text-sm leading-relaxed mb-10"><!-- COPY: what happens next --></p>
+    <p class="text-[#0B0B0C]/70 text-sm leading-relaxed mb-10">{c.whatHappensNext}</p>
     <button type="button" data-checkout={priceId} class="tr-btn">
-      <!-- COPY: price section CTA label -->
+      {c.priceCta}
     </button>
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
@@ -148,41 +223,15 @@ const isGrade3 = gradeNumber === 3;
   <div class="max-w-[720px] mx-auto">
     <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl leading-tight mb-10 text-left">Common Questions</h2>
     <div class="flex flex-col divide-y divide-[#0B0B0C]/10 border-t border-b border-[#0B0B0C]/10">
-      <details class="group py-5">
-        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
-          <!-- COPY: FAQ question 1 -->
-          <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
-        </summary>
-        <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 1 --></p>
-      </details>
-      <details class="group py-5">
-        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
-          <!-- COPY: FAQ question 2 -->
-          <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
-        </summary>
-        <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 2 --></p>
-      </details>
-      <details class="group py-5">
-        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
-          <!-- COPY: FAQ question 3 -->
-          <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
-        </summary>
-        <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 3 --></p>
-      </details>
-      <details class="group py-5">
-        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
-          <!-- COPY: FAQ question 4 -->
-          <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
-        </summary>
-        <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 4 --></p>
-      </details>
-      <details class="group py-5">
-        <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
-          <!-- COPY: FAQ question 5 -->
-          <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
-        </summary>
-        <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3"><!-- COPY: FAQ answer 5 --></p>
-      </details>
+      {c.faqs.map(faq => (
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            {faq.q}
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">{faq.a}</p>
+        </details>
+      ))}
     </div>
   </div>
 </section>
@@ -192,10 +241,10 @@ const isGrade3 = gradeNumber === 3;
   <div class="max-w-[600px] mx-auto">
     <h2 class="font-black uppercase tracking-tighter text-white mb-8"
       style="font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95;">
-      <!-- COPY: headline -->
+      {c.finalHeadline}
     </h2>
     <button type="button" data-checkout={priceId} class="tr-btn">
-      <!-- COPY: final CTA label -->
+      {c.finalCta}
     </button>
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
