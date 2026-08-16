@@ -9,7 +9,25 @@ const showStrip = wState !== 'between';
 // never a real waitlist), so the strip always reads as a live seat.
 const stripLabel = `Defense Workshop · Saturday ${WORKSHOP_DATE_SHORT} · Reserve your seat`;
 
+// Community retired sitewide (zero subscribers at retirement) -- card 2 was
+// "The Weekly Session" -> /community, now repointed to Blueprints (the card 1
+// slot's original content, moved here verbatim). Card 1 and card 3 are new
+// Grade 1 / Grade 3 slots; title and cta are owner copy, not yet written --
+// left empty (renders nothing) rather than invented. Image reuse is an
+// interim choice (no Grade-specific photography exists yet): card 1 reuses
+// the coaching photo, card 3 reuses the sparring photo, just to avoid two
+// identical images back to back -- swap both once real assets exist.
 const cards = [
+  {
+    // COPY: Grade 1 card title and cta (kicker uses the owner-approved product name verbatim)
+    image: '/images/rainers-coaching-opt.jpg',
+    imageWebp: '/images/rainers-coaching-opt.webp',
+    imageAlt: 'One-on-one coaching session',
+    kicker: 'Grade 1 Foundation',
+    title: '',
+    href: '/coaching',
+    cta: '',
+  },
   {
     image: '/images/footwork-cover-opt.jpg',
     imageWebp: '/images/footwork-cover-opt.webp',
@@ -20,21 +38,13 @@ const cards = [
     cta: 'Get the Blueprints',
   },
   {
+    // COPY: Grade 3 card title and cta (kicker uses the owner-approved product name verbatim)
     image: '/images/sparring_withnetherlands.jpg',
     imageAlt: 'Live training session',
-    kicker: 'The Weekly Session',
-    title: 'Weekly correction, live.',
-    href: '/community',
-    cta: 'Claim your spot',
-  },
-  {
-    image: '/images/rainers-coaching-opt.jpg',
-    imageWebp: '/images/rainers-coaching-opt.webp',
-    imageAlt: 'One-on-one coaching session',
-    kicker: '1-ON-1 Coaching',
-    title: 'Built around one fighter.',
-    href: '/command',
-    cta: 'Apply to see if you qualify',
+    kicker: 'Grade 3',
+    title: '',
+    href: '/coaching#grade-3',
+    cta: '',
   },
 ];
 ---

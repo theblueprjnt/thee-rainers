@@ -1,35 +1,24 @@
 ---
-import { workshopState, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
-
 const NAV_LINKS = [
   { label: 'Blueprints', href: '/shop' },
   { label: 'Workshop',   href: '/defense-workshop' },
-  { label: 'Community',  href: '/community' },
 ];
-
-const wState = workshopState();
-const showBar = wState !== 'between';
-// /defense-workshop is unconditionally on sale (early-bird or standard price,
-// never a real waitlist), so the bar always reads as a live seat, not a signup.
-const barLabel = `Defense Workshop · ${WORKSHOP_DATE_SHORT} · Reserve your seat →`;
 ---
 
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0B0B0C] border-b border-white/8">
 
-  {showBar && (
-    <div id="tr-bar" class="bg-[#c84d3a] relative">
-      <div class="max-w-[1140px] mx-auto px-6 py-2 flex items-center justify-center">
-        <a href="/defense-workshop"
-          class="text-white text-[10px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-75 transition-opacity text-center">
-          {barLabel}
-        </a>
-        <button id="tr-bar-close" aria-label="Dismiss announcement"
-          class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-2 leading-none text-base">
-          ×
-        </button>
-      </div>
+  <div id="tr-bar" class="bg-[var(--terra)] relative">
+    <div class="max-w-[1140px] mx-auto px-6 py-2 flex items-center justify-center">
+      <!-- COPY: top announcement bar label. Now points to /coaching, the flagship offer. Was a hardcoded Defense Workshop promo before the Grade launch. -->
+      <a href="/coaching"
+        class="text-white text-[10px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-75 transition-opacity text-center">
+      </a>
+      <button id="tr-bar-close" aria-label="Dismiss announcement"
+        class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-2 leading-none text-base">
+        ×
+      </button>
     </div>
-  )}
+  </div>
 
   <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center gap-4 md:gap-8">
     <a href="/" class="z-[60] flex items-center shrink-0" aria-label="Thee Rainers home">
@@ -50,8 +39,8 @@ const barLabel = `Defense Workshop · ${WORKSHOP_DATE_SHORT} · Reserve your sea
         class="text-white/50 text-[11px] tracking-widest uppercase hover:text-white transition-colors duration-200">
         1-ON-1
       </a>
-      <a href="/community" data-nav-path="/community" class="tr-btn" style="padding: 0.6rem 1.25rem; font-size: 0.625rem;">
-        The Weekly Session →
+      <!-- COPY: nav CTA label -->
+      <a href="/coaching" data-nav-path="/coaching" class="tr-btn" style="padding: 0.6rem 1.25rem; font-size: 0.625rem;">
       </a>
     </nav>
 
@@ -87,8 +76,8 @@ const barLabel = `Defense Workshop · ${WORKSHOP_DATE_SHORT} · Reserve your sea
   </div>
 
   <nav class="tr-menu-body" aria-label="Site navigation">
-    <a href="/community" data-nav-path="/community" class="tr-btn" style="width:100%;margin-top:0.5rem;justify-content:center;">
-      The Weekly Session →
+    <!-- COPY: nav CTA label (mobile) -->
+    <a href="/coaching" data-nav-path="/coaching" class="tr-btn" style="width:100%;margin-top:0.5rem;justify-content:center;">
     </a>
     <ul class="flex flex-col mt-6">
       {NAV_LINKS.map((l) => (

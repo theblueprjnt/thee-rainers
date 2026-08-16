@@ -6,7 +6,7 @@ interface Props {
   date?: string;
   duration?: string;
   format?: string;
-  price?: string;
+  price: string;
   seats?: string;
   cta_href?: string;
   cta_text?: string;
@@ -16,7 +16,7 @@ const {
   date = WORKSHOP_DATE_LONG,
   duration = '90 minutes',
   format = 'live online',
-  price = '$39',
+  price,
   seats = 'Limited to 30 seats per cohort to keep correction quality high.',
   cta_href = '/defense-workshop',
   cta_text = 'Reserve your seat',

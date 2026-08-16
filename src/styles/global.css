@@ -2,7 +2,10 @@
  * COLOR LAW — enforced, no exceptions in visible copy or code
  * --terra #E11D2A  — primary CTA fills, eyebrow text, divider lines
  * --navy  #2348C6  — secondary accent, entry-tier labels only. Never a fill CTA.
- * --purple #7C3AED — Community labels and buttons only.
+ * --purple #7C3AED — UNASSIGNED as of the Grade 1/2/3 coaching launch. Was
+ *                     Community-only; Community has been retired sitewide
+ *                     (zero subscribers at retirement). Do not reuse this
+ *                     color until the owner assigns it to something new.
  * --void  #0B0B0C  — dark section backgrounds
  * --warm  #f7f5f2  — warm white section backgrounds
  * Gradients: multi-hue banned. Single-color-to-transparent overlay fades legal (hero masks).

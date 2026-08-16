@@ -13,5 +13,16 @@
 # /thank-you/bundle rule removed -- it was overriding the real confirmation page.
 /bundle                /shop  301
 
+# /command folded into the Grade ladder -- Grade 3 is the 1-on-1 tier now.
+/command                /coaching  301
+
 # Legacy
 /vault                 /shop  301
+
+# Community retired 2026-08-16, zero active subscribers at retirement.
+# Files kept (community/index.astro, community/inside.astro, welcome.astro),
+# not deleted, per "never delete a route" -- just shadowed here at the edge,
+# same pattern /vault above. /community/* (splat) kept last -- exact-match
+# rules should come before splat/placeholder rules for routing performance.
+/community              /coaching  301
+/community/*            /coaching  301

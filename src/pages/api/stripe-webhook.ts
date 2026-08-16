@@ -40,6 +40,9 @@ const LOOKUP_KEY_MAP: Record<string, string> = {
   'bundle':                   'bundle',
   'defense_workshop_early':   'defense-workshop',
   'defense_workshop_standard':'defense-workshop',
+  'grade1':                   'grade1',
+  'grade2':                   'grade2',
+  'grade3':                   'grade3',
 };
 
 // ── asset map ──────────────────────────────────────────────────────────────
@@ -96,6 +99,9 @@ const GA4_CATALOG: Record<string, { name: string; price: number; category: strin
   'workshop-replay':   { name: 'Workshop Replay',            price:  49, category: 'on_demand' },
   'defense-workshop':  { name: 'Defense Workshop',           price:  39, category: 'one_time' },
   'greatness':         { name: 'Greatness Community',        price:  39, category: 'subscription' },
+  'grade1':            { name: 'Grade 1 Foundation',         price: 347, category: 'one_time' },
+  'grade2':            { name: 'Grade 2 Development',        price: 997, category: 'one_time' },
+  'grade3':            { name: 'Grade 3',                    price: 12000, category: 'one_time' },
 };
 
 // ── GA4 Measurement Protocol — server-side purchase event ──────────────────

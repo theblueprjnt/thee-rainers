@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="You're In · Thee Rainers Coaching">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
+    <div class="max-w-[760px] mx-auto w-full">
+
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Confirmed</p>
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6"
+        style="font-size: clamp(2.25rem, 5vw, 3.75rem);">
+        <!-- COPY: confirmation headline -->
+      </h1>
+      <p class="text-[#0A0A0A]/50 text-base leading-relaxed mb-12 max-w-[520px]">
+        <!-- COPY: confirmation body -- next step is booking the call below -->
+      </p>
+
+      <!-- Calendly inline widget begin -->
+      <div
+        class="calendly-inline-widget"
+        data-url="https://calendly.com/theerainers/1-1"
+        style="min-width:320px;height:700px;"
+      ></div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      <!-- Calendly inline widget end -->
+
+      <p class="text-[#0A0A0A]/25 text-[10px] tracking-wide mt-6 text-center">
+        <!-- COPY: reassurance line, e.g. confirmation email details -->
+      </p>
+
+    </div>
+  </section>
+
+</Base>

@@ -61,7 +61,33 @@ const PRODUCTS: Record<string, ProductConfig> = {
     successPath: '/welcome',
     cancelPath: '/community',
   },
+  grade1: {
+    priceId: 'price_1U4q3eHzlarU775Hfstnii3t',
+    mode: 'payment',
+    successPath: '/thank-you/coaching',
+    cancelPath: '/coaching',
+  },
+  grade2: {
+    priceId: 'price_1U4qbjHzlarU775HijJLIBDl',
+    mode: 'payment',
+    successPath: '/thank-you/coaching',
+    cancelPath: '/coaching',
+  },
+  grade3: {
+    priceId: 'price_1U4qerHzlarU775HfPUhdhNb',
+    mode: 'payment',
+    successPath: '/thank-you/coaching',
+    cancelPath: '/coaching',
+  },
 };
+
+// Grade 3 is capped at 5 seats ($12,000, 12-month program). Checkout Sessions
+// are created here in code, so a Stripe Payment Link's built-in payment limit
+// doesn't apply -- this is the server-side equivalent. Owner increments this
+// manually as seats sell; at 5 people and this price point he knows about
+// every sale personally, so a manual count is reliable here.
+const GRADE3_SEATS_TAKEN = 0;
+const GRADE3_MAX_SEATS = 5;
 
 export async function POST({ request }: { request: Request }): Promise<Response> {
   const e = cfEnv as unknown as Record<string, string>;
@@ -73,6 +99,10 @@ export async function POST({ request }: { request: Request }): Promise<Response>
     const product = PRODUCTS[lookupKey];
     if (!product) {
       return new Response(JSON.stringify({ error: 'unknown lookupKey' }), { status: 400, headers });
+    }
+
+    if (lookupKey === 'grade3' && GRADE3_SEATS_TAKEN >= GRADE3_MAX_SEATS) {
+      return new Response(JSON.stringify({ error: 'Grade 3 is full. Email rainers@theerainers.com to ask about the next opening.' }), { status: 400, headers });
     }
 
     const stripe = new Stripe(e['STRIPE_SECRET_KEY'] ?? '', { httpClient: Stripe.createFetchHttpClient() });

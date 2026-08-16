@@ -1,0 +1,59 @@
+---
+// PricingCard — visual pattern lifted from community/index.astro's Annual/Monthly
+// cards (the cleanest existing precedent in this codebase for this shape).
+// Color law: --terra for the featured accent + CTA, --navy for non-featured
+// labels only. Purple intentionally not used -- see global.css color-law
+// comment (Purple was Community-only; Community is being retired in this
+// build, so purple is marked unassigned pending the owner's decision).
+interface Props {
+  name: string;
+  price: string;
+  term?: string;
+  features: string[];
+  priceId: string;
+  ctaLabel: string;
+  note?: string;
+  featured?: boolean;
+}
+
+const { name, price, term, features, priceId, ctaLabel, note, featured = false } = Astro.props;
+---
+
+<div
+  class:list={[
+    'bg-white p-10 flex flex-col gap-8 relative',
+    featured ? 'border-2' : 'border border-[#0B0B0C]/8',
+  ]}
+  style={featured ? 'border-color: var(--terra);' : undefined}
+>
+  <div>
+    <p
+      class:list={[
+        'text-[10px] tracking-widest uppercase font-bold mb-4',
+        featured ? 'text-[var(--terra)]' : 'text-[var(--navy)]',
+      ]}
+    >{name}</p>
+    <div class="flex items-baseline gap-1 mb-1">
+      <span class="font-black text-[#0B0B0C] tracking-tighter" style="font-size: clamp(2.5rem, 5vw, 3rem);">{price}</span>
+      {term && <span class="text-[#0B0B0C]/60 text-sm">{term}</span>}
+    </div>
+  </div>
+
+  <ul class="flex flex-col gap-3">
+    {features.map(f => (
+      <li class="text-[#0B0B0C]/65 text-sm">{f}</li>
+    ))}
+  </ul>
+
+  {note && <p class="text-[#0B0B0C]/50 text-xs leading-relaxed">{note}</p>}
+
+  <div>
+    <button type="button" data-checkout={priceId}
+      class="tr-btn" style="width:100%;justify-content:center;">
+      {ctaLabel}
+    </button>
+    <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-2">
+      Checkout unavailable. Email rainers@theerainers.com
+    </p>
+  </div>
+</div>
