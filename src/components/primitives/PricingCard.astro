@@ -1,16 +1,9 @@
 ---
-// PricingCard. Visual pattern lifted from community/index.astro's Annual/Monthly
-// cards (the cleanest existing precedent in this codebase for this shape).
-//
-// Phase 3 layout fix: at the mobile clamp floor, a black-weight price the
-// same size as the H1 was reading as the dominant element on the page and
-// made the card look like a price tag, not a sales pitch. Fixed order is
-// now name -> outcome (largest text on the card) -> price (small, regular
-// weight) -> features -> CTA.
-//
-// Color law: terra is restricted to the CTA fill only. The featured
-// treatment (border + name label) uses ink/60 instead of terra. Purple
-// stays unassigned (Community retired) -- see global.css color-law comment.
+// PricingCard. Checkmark/badge pricing-card style, recreated from a
+// reference the owner sent (membership cards: name, price, description,
+// divider, checkmark feature list, full-width CTA). Adapted to our color
+// law: terra marks the featured tier (border + badge + checkmarks), never
+// blue. Used on both /coaching and the homepage pricing section.
 interface Props {
   name: string;
   price: string;
@@ -21,44 +14,50 @@ interface Props {
   ctaLabel: string;
   note?: string;
   featured?: boolean;
+  badge?: string;
   size?: 'default' | 'lg';
 }
 
-const { name, price, term, outcome, features, priceId, ctaLabel, note, featured = false, size = 'default' } = Astro.props;
+const { name, price, term, outcome, features, priceId, ctaLabel, note, featured = false, badge, size = 'default' } = Astro.props;
 
 const padding = size === 'lg' ? 'p-10 md:p-16' : 'p-10';
 ---
 
 <div
   class:list={[
-    'bg-white flex flex-col gap-8 relative',
+    'bg-white flex flex-col gap-6 relative',
     padding,
     featured ? 'border-2' : 'border border-[#0B0B0C]/8',
   ]}
-  style={featured ? 'border-color: rgba(11,11,12,0.6);' : undefined}
+  style={featured ? 'border-color: var(--terra);' : undefined}
 >
+  {badge && (
+    <span class="absolute top-0 right-6 -translate-y-1/2 bg-[var(--terra)] text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5">
+      {badge}
+    </span>
+  )}
+
   <div>
-    <p
-      class:list={[
-        'text-[10px] tracking-widest uppercase font-bold mb-4',
-        featured ? 'text-[#0B0B0C]/60' : 'text-[var(--navy)]',
-      ]}
-    >{name}</p>
+    <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-lg leading-tight mb-4">{name}</h3>
 
-    <p class="font-black text-[#0B0B0C] tracking-tight leading-[0.95] mb-5"
-      style={`font-size: clamp(1.5rem, ${size === 'lg' ? '4.5vw' : '3.5vw'}, ${size === 'lg' ? '2.25rem' : '1.875rem'});`}>
-      {outcome}
-    </p>
-
-    <div class="flex items-baseline gap-1">
-      <span class="font-medium text-[#0B0B0C]" style="font-size: 1.5rem;">{price}</span>
-      {term && <span class="text-[#0B0B0C]/60 text-sm">{term}</span>}
+    <div class="flex items-baseline gap-1 mb-2">
+      <span class="font-black text-[#0B0B0C] tracking-tight" style="font-size: clamp(2rem, 4vw, 2.5rem);">{price}</span>
+      {term && <span class="text-[#0B0B0C]/50 text-sm">{term}</span>}
     </div>
+
+    <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">{outcome}</p>
   </div>
+
+  <div class="h-px bg-[#0B0B0C]/8"></div>
 
   <ul class="flex flex-col gap-3">
     {features.map(f => (
-      <li class="text-[#0B0B0C]/65 text-sm">{f}</li>
+      <li class="flex items-start gap-2.5 text-[#0B0B0C]/70 text-sm leading-snug">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0 mt-0.5" aria-hidden="true">
+          <path d="M3 8.5L6.2 11.5L13 4.5" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        {f}
+      </li>
     ))}
   </ul>
 

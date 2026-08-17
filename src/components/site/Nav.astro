@@ -1,8 +1,8 @@
 ---
-// Phase 3, Step 6: 5 top-level items max per the owner's doc. Everything
-// else (Workshop) moved to the footer. Grades is a dropdown, not a link --
-// built with native <details>/<summary> so no JS framework or new dependency
-// is needed for the open/close behavior.
+// 5 top-level items max. Everything else (Workshop) moved to the footer.
+// Coaching is a single link to /coaching, not a dropdown -- the per-grade
+// pages (/coaching/grade-1/2/3) still exist but are intentionally not
+// surfaced in nav while the offer is still being built out.
 ---
 
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0B0B0C] border-b border-white/8">
@@ -34,17 +34,10 @@
         Home
       </a>
 
-      <details class="tr-nav-dropdown relative">
-        <summary class="text-white/50 text-[11px] tracking-widest uppercase hover:text-white transition-colors duration-200 cursor-pointer list-none flex items-center gap-1.5">
-          Coaching
-          <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M1 2l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </summary>
-        <div class="absolute top-full left-0 mt-4 bg-[#0B0B0C] border border-white/10 py-2 min-w-[160px] z-50">
-          <a href="/coaching/grade-1" data-nav-path="/coaching/grade-1" class="block px-4 py-2.5 text-white/60 hover:text-white text-[11px] tracking-widest uppercase transition-colors">Grade 1</a>
-          <a href="/coaching/grade-2" data-nav-path="/coaching/grade-2" class="block px-4 py-2.5 text-white/60 hover:text-white text-[11px] tracking-widest uppercase transition-colors">Grade 2</a>
-          <a href="/coaching/grade-3" data-nav-path="/coaching/grade-3" class="block px-4 py-2.5 text-white/60 hover:text-white text-[11px] tracking-widest uppercase transition-colors">Grade 3</a>
-        </div>
-      </details>
+      <a href="/coaching" data-nav-path="/coaching"
+        class="text-white/50 text-[11px] tracking-widest uppercase hover:text-white transition-colors duration-200">
+        Coaching
+      </a>
 
       <a href="/shop" data-nav-path="/shop"
         class="text-white/50 text-[11px] tracking-widest uppercase hover:text-white transition-colors duration-200">
@@ -107,17 +100,10 @@
         </a>
       </li>
       <li class="border-b border-white/10">
-        <details>
-          <summary class="flex items-center justify-between py-5 text-3xl font-black uppercase tracking-tighter text-white cursor-pointer list-none">
-            Coaching
-            <svg width="16" height="16" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M1 2l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </summary>
-          <div class="flex flex-col pb-5">
-            <a href="/coaching/grade-1" data-nav-path="/coaching/grade-1" class="py-3 text-lg font-bold uppercase tracking-tight text-white/60 hover:text-white transition-colors">Grade 1</a>
-            <a href="/coaching/grade-2" data-nav-path="/coaching/grade-2" class="py-3 text-lg font-bold uppercase tracking-tight text-white/60 hover:text-white transition-colors">Grade 2</a>
-            <a href="/coaching/grade-3" data-nav-path="/coaching/grade-3" class="py-3 text-lg font-bold uppercase tracking-tight text-white/60 hover:text-white transition-colors">Grade 3</a>
-          </div>
-        </details>
+        <a href="/coaching" data-nav-path="/coaching"
+          class="block py-5 text-3xl font-black uppercase tracking-tighter text-white hover:text-[var(--terra)] transition-colors">
+          Coaching
+        </a>
       </li>
       <li class="border-b border-white/10">
         <a href="/shop" data-nav-path="/shop"
@@ -189,8 +175,6 @@
   html[data-menu-open="true"], body[data-menu-open="true"] {
     overflow: hidden;
   }
-  .tr-nav-dropdown > summary::-webkit-details-marker { display: none; }
-  .tr-nav-dropdown[open] > summary svg { transform: rotate(180deg); }
 </style>
 
 <script>
@@ -251,18 +235,7 @@
     });
   }
 
-  // Desktop-only: close the Grades dropdown when clicking outside it.
-  function initDropdownOutsideClick() {
-    const dropdown = document.querySelector('.tr-nav-dropdown') as HTMLDetailsElement | null;
-    if (!dropdown || dropdown.dataset.bound === 'true') return;
-    dropdown.dataset.bound = 'true';
-    document.addEventListener('click', (e) => {
-      if (dropdown.open && !dropdown.contains(e.target as Node)) dropdown.open = false;
-    });
-  }
-
   initNav();
   initNavGlass();
   initBarDismiss();
-  initDropdownOutsideClick();
 </script>

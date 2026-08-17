@@ -3,6 +3,8 @@ import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
 import OfferStack from '../components/blocks/OfferStack.astro';
 import ProofSection from '../components/blocks/ProofSection.astro';
+import Objections from '../components/blocks/Objections.astro';
+import GradePricing from '../components/blocks/GradePricing.astro';
 import { SOCIAL_STATS } from '../data/social-stats';
 ---
 <Layout
@@ -55,16 +57,22 @@ import { SOCIAL_STATS } from '../data/social-stats';
     </div>
   </section>
 
-  <!-- ── OFFER STACK ────────────────────────────────────────────────────── -->
-  <OfferStack />
-
-  <!-- ── GRADE COACHING PROOF (null on empty) ─────────────────────────── -->
-  <ProofSection />
+  <!-- ── BEFORE YOU START (old way vs our way) ────────────────────────── -->
+  <Objections />
 
   <!-- ── PROOF ─────────────────────────────────────────────────────────── -->
   <div id="proof" class="scroll-mt-20">
     <Testimonials heading="What fighters say." kicker="Field Report" background="white" />
   </div>
+
+  <!-- ── OFFER STACK ────────────────────────────────────────────────────── -->
+  <OfferStack />
+
+  <!-- ── GRADE PRICING ─────────────────────────────────────────────────── -->
+  <GradePricing />
+
+  <!-- ── GRADE COACHING PROOF (null on empty) ─────────────────────────── -->
+  <ProofSection />
 
   <!-- ── SCRIPTURE ──────────────────────────────────────────────────────── -->
   <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-16 md:py-24">

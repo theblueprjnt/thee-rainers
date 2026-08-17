@@ -1,0 +1,62 @@
+---
+// Homepage summary of the Grade 1/2/3 ladder, reusing the same PricingCard
+// primitive and the same approved copy as /coaching (kept in sync there,
+// not duplicated with different wording). Straightforward 3-equal-column
+// layout here since this is a glance/summary, not the primary sales moment
+// -- the asymmetric full-width-Grade-1 layout lives on /coaching itself.
+import PricingCard from '../primitives/PricingCard.astro';
+---
+
+<section class="bg-white px-6 md:px-12 lg:px-20 py-20 md:py-28">
+  <div class="max-w-[1280px] mx-auto">
+    <div class="text-center mb-16">
+      <span class="block text-[11px] font-bold tracking-widest uppercase text-[#0B0B0C]/60 mb-4">Coaching</span>
+      <h2 class="font-black uppercase tracking-tighter text-[#0B0B0C]" style="font-size: clamp(2rem, 4vw, 3rem);">Three grades. One system.</h2>
+      <span class="block w-10 h-0.5 bg-[#0B0B0C]/8 mx-auto mt-5"></span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <PricingCard
+        name="Grade 1 Foundation"
+        price="$347"
+        term="one time · 90 days"
+        outcome="Build the foundation. Footwork, punches, and defense that hold up under pressure."
+        priceId="grade1"
+        featured={true}
+        badge="Start Here"
+        ctaLabel="Start Grade 1"
+        features={[
+          'Structured curriculum: footwork, 8 punches, basic defense, rules and etiquette',
+          'Boxing psychology: fear, composure, controlled aggression',
+          'Unlimited video feedback',
+        ]}
+      />
+      <PricingCard
+        name="Grade 2 Development"
+        price="$997"
+        term="one time · 90 days"
+        outcome="Sharpen what you have. Structured sparring and a plan built around your footage."
+        priceId="grade2"
+        ctaLabel="Start Grade 2"
+        features={[
+          'Everything in Grade 1 at a higher technical standard',
+          'Structured sparring plans with monthly goals and progress tracking',
+          'Weekly 1-1 check-in call',
+        ]}
+      />
+      <PricingCard
+        name="Grade 3"
+        price="$12,000"
+        term="one time · 12 months"
+        outcome="Full access. A program built entirely around you, two calls a week."
+        priceId="grade3"
+        ctaLabel="Apply for Grade 3"
+        features={[
+          'Two calls a week, plus a monthly review call on your measurables',
+          'Direct access for footage and messages, fast feedback',
+          'Fully customised training designed around their week',
+        ]}
+      />
+    </div>
+  </div>
+</section>
