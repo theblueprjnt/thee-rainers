@@ -71,16 +71,12 @@ const KIT_PRODUCT_TAGS: Record<string, string> = {
   'greatness':         '19830354',
 };
 
-// Grade buyer tags — creation via Kit v4 API FAILED 2026-08-16 (account is
-// plan-gated for MCP write access, same block documented for the trb-session-cron
-// build). tagKit() already no-ops on any ID starting with 'KIT_TAG_', so these
-// are safe placeholders: create the tags in Kit (Grow > Tags), paste the numeric
-// ID from app.kit.com/tags/XXXXX, and tagging activates with no other code change.
-const KIT_GRADE_TAGS: Record<string, string> = {
-  'grade1': 'KIT_TAG_GRADE1_BUYER',
-  'grade2': 'KIT_TAG_GRADE2_BUYER',
-  'grade3': 'KIT_TAG_GRADE3_BUYER',
-};
+// Grade buyer tag — one shared tag for all three grades (KIT_COACHING_TAG_ID,
+// set as a Cloudflare secret, confirmed live 2026-08-17). Per-grade tags
+// (grade-1/2/3-buyer) were requested but never created — Kit v4 tag creation
+// via API failed 2026-08-16 (account plan-gated for MCP write access). Read
+// from env at call time rather than hardcoded, same pattern as every other
+// secret in this file.
 const KIT_MEMBER_TAG = '19807647';
 // 14-day Community trial tag — applied to Blueprint buyers so Kit can fire the
 // Day 0 / Day 7 / Day 12 / Day 14 trial-conversion sequence.
@@ -702,8 +698,11 @@ export async function POST({ request }: APIContext): Promise<Response> {
             ? `$${(priceCents / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
             : '';
           await sendGradeConfirmation(resendKey, email, gradeName, priceLabel);
-          if (KIT_GRADE_TAGS[slug]) {
-            await tagKit(kitKey, email, KIT_GRADE_TAGS[slug]);
+          const coachingTagId = e['KIT_COACHING_TAG_ID'] ?? '';
+          if (coachingTagId) {
+            await tagKit(kitKey, email, coachingTagId);
+          } else {
+            console.error('[stripe-webhook] KIT_COACHING_TAG_ID not set — ' + slug + ' buyer ' + email + ' was not tagged in Kit.');
           }
         }
         // Telegram sale alert
