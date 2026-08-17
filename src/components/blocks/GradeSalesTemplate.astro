@@ -4,7 +4,6 @@
 // and section order from the owner's doc so the three pages stay consistent.
 //
 // Color law: terra restricted to CTA fills only (same fix as /coaching).
-import FourLayers from './FourLayers.astro';
 import ProofSection from './ProofSection.astro';
 
 interface Props {
@@ -14,11 +13,9 @@ interface Props {
   term: string;
   priceId: string;
   features: string[];
-  seatsTaken?: number;
-  seatsMax?: number;
 }
 
-const { gradeNumber, name, price, term, priceId, features, seatsTaken, seatsMax } = Astro.props;
+const { gradeNumber, name, price, term, priceId, features } = Astro.props;
 const isGrade3 = gradeNumber === 3;
 
 // Launch copy, written to be usable now. Flagged for an owner voice pass in
@@ -78,16 +75,15 @@ const COPY = {
     before: 'Generic programming. Feedback that arrives slow or thin.',
     after: 'A fully custom plan and direct access to Rainers every week.',
     howHeadline: 'How Grade 3 works.',
-    step1: { label: 'Apply and get approved', body: 'Grade 3 is limited to 5 people at a time. Apply and Rainers will confirm your spot.' },
+    step1: { label: 'Apply and get approved', body: "Apply, and Rainers will confirm your spot." },
     step2: { label: 'Train and send video', body: 'Run your custom program, film your sessions, and send in footage as you go.' },
     step3: { label: 'Get feedback and progress', body: 'Two calls a week, plus a monthly review call on your measurables.' },
-    whatHappensNext: "Grade 3 is limited to 5 people. After you enrol, you'll book your first call and we'll build your program around your schedule.",
+    whatHappensNext: "After you enrol, you'll book your first call and we'll build your program around your schedule.",
     priceCta: 'Apply for Grade 3',
     finalHeadline: 'A program built around you.',
     finalCta: 'Apply for Grade 3 · $12,000',
     faqs: [
       { q: 'Is Grade 3 in-person or online?', a: 'Both. Most sessions run online with two calls a week. In-person sessions can be arranged, see In-Person Terms above.' },
-      { q: 'What happens if all 5 seats are full?', a: 'Email rainers@theerainers.com to ask about the next opening.' },
       { q: 'How is Grade 3 different from Grade 2?', a: 'Grade 3 is fully custom. Two calls a week, a monthly review on your measurables, and a program built entirely around your schedule.' },
       { q: 'Can I pay in installments?', a: 'No. Grade 3 is a single payment of $12,000 for the full 12 months.' },
       { q: 'Is this refundable?', a: "Coaching isn't refundable once your first session starts. If it isn't producing clear progress, we keep working at no charge until it does." },
@@ -154,9 +150,6 @@ const c = COPY[gradeNumber];
   </div>
 </section>
 
-<!-- ── THE FOUR LAYERS ──────────────────────────────────────────────── -->
-<FourLayers />
-
 <!-- ── HOW IT WORKS ──────────────────────────────────────────────────── -->
 <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-16 md:py-24">
   <div class="max-w-[1100px] mx-auto">
@@ -189,11 +182,9 @@ const c = COPY[gradeNumber];
 <ProofSection />
 
 {isGrade3 && (
-  <!-- ── GRADE 3 ONLY: seats + in-person terms ─────────────────────── -->
+  <!-- ── GRADE 3 ONLY: in-person terms ────────────────────────────────── -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-14 border-t border-[#0B0B0C]/8">
     <div class="max-w-[720px] mx-auto text-left">
-      <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-3">Availability</p>
-      <p class="font-black text-[#0B0B0C] text-2xl tracking-tight mb-10">{seatsTaken ?? 0} of {seatsMax ?? 5} seats taken</p>
       <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-3">In-Person Terms</p>
       <p class="text-[#0B0B0C]/70 text-sm leading-relaxed">In-person sessions are scheduled by mutual agreement based on your location and Rainers' travel schedule. Travel costs are covered by the student. Email rainers@theerainers.com to discuss logistics before you apply if in-person access matters to you.</p>
     </div>
