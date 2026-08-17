@@ -3,8 +3,12 @@
 // (a flowchart-style "old way vs new way" comparison), adapted to TRB's
 // existing visual language instead of copying the reference's layout
 // directly: the numbered-step pattern here is the same one already used in
-// FourLayers.astro and the coaching pages' "How It Works" sections, not a
-// new pattern. Old-way pain points are the ones the owner confirmed.
+// FourLayers.astro and the coaching pages' "How It Works" sections.
+//
+// First pass had both columns on flat white -- read as bland/corporate.
+// Fix: left column sits on a dark grayscale photo (same treatment as the
+// homepage hero's mobile background) so the two columns read as genuinely
+// different states, not just two lists with different label colors.
 const OLD_WAY = [
   'Random YouTube tutorials',
   'Gym drills, no real feedback',
@@ -13,10 +17,10 @@ const OLD_WAY = [
 ];
 
 const NEW_WAY = [
-  { n: '01', label: 'Send your footage' },
-  { n: '02', label: 'Get your diagnosis' },
-  { n: '03', label: 'Fix one thing' },
-  { n: '04', label: 'Train with structure' },
+  { n: '01', label: 'Start training with structure' },
+  { n: '02', label: 'Send footage & get diagnosis' },
+  { n: '03', label: 'Fix mistakes step-by-step' },
+  { n: '04', label: 'Measure progress & improve' },
 ];
 ---
 
@@ -32,16 +36,34 @@ const NEW_WAY = [
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-      <div>
-        <p class="text-[#0B0B0C]/40 text-[11px] tracking-widest uppercase font-bold mb-6">Training on your own</p>
-        <ul class="flex flex-col gap-3">
-          {OLD_WAY.map(item => (
-            <li class="border border-[#0B0B0C]/10 px-5 py-4 text-[#0B0B0C]/60 text-sm">{item}</li>
-          ))}
-        </ul>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+      <!-- OLD WAY — dark, photo-backed, feels unresolved -->
+      <div class="relative overflow-hidden bg-[#0B0B0C]">
+        <picture>
+          <source srcset="/images/coldfightpic2-opt.webp" type="image/webp" />
+          <img src="/images/coldfightpic2-opt.jpg" alt=""
+            class="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-30"
+            loading="lazy" decoding="async" aria-hidden="true" />
+        </picture>
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(11,11,12,0.75) 0%, rgba(11,11,12,0.92) 100%);"></div>
+        <div class="relative p-6 md:p-8">
+          <p class="text-white/50 text-[11px] tracking-widest uppercase font-bold mb-6">Training on your own</p>
+          <ul class="flex flex-col gap-3">
+            {OLD_WAY.map(item => (
+              <li class="flex items-center gap-3 border border-white/10 bg-white/[0.03] px-5 py-4">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="shrink-0" aria-hidden="true">
+                  <path d="M2 2L12 12M12 2L2 12" stroke="rgba(255,255,255,0.35)" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+                <span class="text-white/70 text-sm font-bold">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div>
+
+      <!-- OUR WAY — clean, structured -->
+      <div class="bg-white border border-[#0B0B0C]/8 p-6 md:p-8">
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Training with Thee Rainers</p>
         <ul class="flex flex-col gap-3">
           {NEW_WAY.map(step => (
