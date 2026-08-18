@@ -3,6 +3,9 @@ export const prerender = false;
 
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
+import { PRODUCTS } from '../data/products.ts';
+
+const priceDollars = `$${(PRODUCTS.footwork.priceCents / 100).toFixed(0)}`;
 
 // Aug 2 2026 00:00 Europe/Lisbon = Aug 1 2026 23:00:00 UTC
 const FOOTWORK_FREE_UNTIL = new Date('2026-08-01T23:00:00Z');
@@ -20,16 +23,16 @@ const productSchema = JSON.stringify({
   "author": { "@type": "Organization", "name": "Thee Rainers", "url": "https://theerainers.com" },
   "offers": {
     "@type": "Offer",
-    "price": isFootworkFree ? "0" : "9.00",
-    "priceCurrency": "USD",
+    "price": isFootworkFree ? "0" : (PRODUCTS.footwork.priceCents / 100).toFixed(2),
+    "priceCurrency": PRODUCTS.footwork.currency,
     "availability": "https://schema.org/InStock",
     "url": "https://theerainers.com/foundation",
   },
 });
 ---
 <Layout
-  title={isFootworkFree ? "The Footwork Blueprint · Free Download | Thee Rainers" : "The Footwork Blueprint · $9 | Thee Rainers"}
-  description={isFootworkFree ? "The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw. Free download." : "The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw. $9."}>
+  title={isFootworkFree ? "The Footwork Blueprint · Free Download | Thee Rainers" : `The Footwork Blueprint · ${priceDollars} | Thee Rainers`}
+  description={isFootworkFree ? "The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw. Free download." : `The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw. ${priceDollars}.`}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={productSchema} />
   </Fragment>
@@ -37,7 +40,7 @@ const productSchema = JSON.stringify({
   <!-- Countdown banner — only visible while free -->
   {isFootworkFree && (
     <div class="bg-[var(--terra)] text-white text-center py-2 px-4 text-[11px] tracking-widest uppercase font-bold">
-      Free until August 2. Goes to $9. &nbsp;<span id="tr-countdown" class="font-black"></span>
+      Free until August 2. Goes to {priceDollars}. &nbsp;<span id="tr-countdown" class="font-black"></span>
     </div>
   )}
 
@@ -50,14 +53,14 @@ const productSchema = JSON.stringify({
       <!-- Left: copy + capture/checkout -->
       <div class="order-2 md:order-1">
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">
-          {isFootworkFree ? 'Free · The Footwork Blueprint' : '$9 · The Footwork Blueprint'}
+          {isFootworkFree ? 'Free · The Footwork Blueprint' : `${priceDollars} · The Footwork Blueprint`}
         </p>
         <h1 class="font-black text-white uppercase tracking-tighter leading-[0.88] mb-6"
           style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
           The Footwork<br/>Blueprint.
         </h1>
         <p class="text-white/60 text-base md:text-lg leading-relaxed mb-2 max-w-[520px]">
-          Win fights with footwork, and take fewer hits doing it. A practical playbook to move with balance, control, and intent. Every step has a job.{isFootworkFree ? ' Free.' : ' $9.'}
+          Win fights with footwork, and take fewer hits doing it. A practical playbook to move with balance, control, and intent. Every step has a job.{isFootworkFree ? ' Free.' : ` ${priceDollars}.`}
         </p>
         <p class="text-white/35 text-sm mb-8 max-w-[520px]">For fighters who train seriously and want to move with purpose.<br/>Rainers</p>
 
@@ -96,7 +99,7 @@ const productSchema = JSON.stringify({
           <div class="max-w-[520px] mb-8 flex flex-col gap-3">
             <button type="button" data-checkout="footwork"
               class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--red)] text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2">
-              Get the Blueprint · $9
+              Get the Blueprint · {priceDollars}
             </button>
             <p class="text-[11px] text-white/35">One-time purchase. Instant PDF download. <a href="/legal/refund-policy" class="underline hover:text-white/60 transition-colors">Refund Policy</a>.</p>
           </div>

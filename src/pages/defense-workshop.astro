@@ -2,11 +2,18 @@
 export const prerender = false;
 
 import Layout from '../layouts/Base.astro';
+import { PRODUCTS } from '../data/products.ts';
+
+// Standard price comes from the single source of truth. The early-bird
+// price ($39, price_6) is a temporary promo variant on top of the
+// canonical price below, not a product fact itself -- not represented in
+// products.ts, kept as a local literal same as before.
+const standardPrice = `$${(PRODUCTS['defense-workshop'].priceCents / 100).toFixed(0)}`;
 
 // Defense Workshop early bird until Aug 8 23:59 Lisbon = Aug 8 22:59 UTC
 const EARLY_BIRD_UNTIL = new Date('2026-08-08T22:59:00Z');
 const isEarlyBird = new Date() < EARLY_BIRD_UNTIL;
-const price = isEarlyBird ? '$39' : '$49';
+const price = isEarlyBird ? '$39' : standardPrice;
 const checkoutKey = isEarlyBird ? 'defense_workshop_early' : 'defense_workshop_standard';
 
 const productSchema = JSON.stringify({
@@ -21,8 +28,8 @@ const productSchema = JSON.stringify({
   "organizer": { "@type": "Organization", "name": "Thee Rainers", "url": "https://theerainers.com" },
   "offers": {
     "@type": "Offer",
-    "price": isEarlyBird ? "39.00" : "49.00",
-    "priceCurrency": "USD",
+    "price": isEarlyBird ? "39.00" : (PRODUCTS['defense-workshop'].priceCents / 100).toFixed(2),
+    "priceCurrency": PRODUCTS['defense-workshop'].currency,
     "availability": "https://schema.org/InStock",
     "url": "https://theerainers.com/defense-workshop",
     "validThrough": isEarlyBird ? "2026-08-08T22:59:00Z" : "2026-08-29T00:00:00Z",
@@ -38,7 +45,7 @@ const productSchema = JSON.stringify({
 
   {isEarlyBird && (
     <div class="bg-[var(--terra)] text-white text-center py-2 px-4 text-[11px] tracking-widest uppercase font-bold">
-      Early bird $39 until August 8. Goes to $49.
+      Early bird $39 until August 8. Goes to {standardPrice}.
     </div>
   )}
 
@@ -131,7 +138,7 @@ const productSchema = JSON.stringify({
       </p>
       <div class="flex items-baseline gap-4 mb-6">
         <span class="font-black text-white text-5xl">{price}</span>
-        {isEarlyBird && <span class="text-white/30 text-sm line-through">$49</span>}
+        {isEarlyBird && <span class="text-white/30 text-sm line-through">{standardPrice}</span>}
       </div>
       <ul class="text-white/40 text-sm leading-loose mb-8 space-y-1">
         <li>Live session · August 29, 2026</li>

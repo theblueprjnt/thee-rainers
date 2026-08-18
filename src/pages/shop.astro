@@ -3,15 +3,23 @@ export const prerender = false;
 
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
+import { PRODUCTS } from '../data/products.ts';
+
+const dollars = (cents: number) => `$${(cents / 100).toFixed(0)}`;
 
 // Aug 2 2026 00:00 Europe/Lisbon = Aug 1 2026 23:00:00 UTC
 const FOOTWORK_FREE_UNTIL = new Date('2026-08-01T23:00:00Z');
 const isFootworkFree = new Date() < FOOTWORK_FREE_UNTIL;
 
+// Standard price comes from the single source of truth. Early-bird ($39,
+// price_6) is a temporary promo variant, not a product fact -- same as
+// defense-workshop.astro, kept as a local literal.
+const workshopStandardPrice = dollars(PRODUCTS['defense-workshop'].priceCents);
+
 // Defense Workshop early bird until Aug 8 23:59 Lisbon = Aug 8 22:59 UTC
 const EARLY_BIRD_UNTIL = new Date('2026-08-08T22:59:00Z');
 const isEarlyBird = new Date() < EARLY_BIRD_UNTIL;
-const workshopPrice = isEarlyBird ? '$39' : '$49';
+const workshopPrice = isEarlyBird ? '$39' : workshopStandardPrice;
 const workshopCheckoutKey = isEarlyBird ? 'defense_workshop_early' : 'defense_workshop_standard';
 
 const products = [
@@ -22,7 +30,7 @@ const products = [
     title: 'Footwork Blueprint',
     sub: '56 Rounds · Orthodox + Southpaw',
     desc: 'Move with intention from round one.',
-    price: isFootworkFree ? 'FREE' : '$9',
+    price: isFootworkFree ? 'FREE' : dollars(PRODUCTS.footwork.priceCents),
     price_note: null,
     href: isFootworkFree ? '/foundation' : null,
     checkoutKey: isFootworkFree ? null : 'footwork',
@@ -37,7 +45,7 @@ const products = [
     title: 'Shadowboxing Blueprint',
     sub: '2 Videos + Do-With-Me Training · Orthodox + Southpaw',
     desc: 'The next layer. 2 videos + do-with-me training.',
-    price: '$19',
+    price: dollars(PRODUCTS.shadowboxing.priceCents),
     price_note: null,
     href: null,
     checkoutKey: 'shadowboxing',
@@ -53,7 +61,7 @@ const products = [
     sub: '90 Min · Live · Replay Included',
     desc: 'Camera on. Real-time correction on your movement.',
     price: workshopPrice,
-    price_note: isEarlyBird ? 'Early bird until Aug 8. Goes to $49.' : null,
+    price_note: isEarlyBird ? `Early bird until Aug 8. Goes to ${workshopStandardPrice}.` : null,
     href: null,
     checkoutKey: workshopCheckoutKey,
     page: '/defense-workshop',
@@ -67,7 +75,7 @@ const products = [
     title: 'Complete Bundle',
     sub: 'Footwork + Shadowboxing · 100+ Rounds',
     desc: 'Both blueprints. The base and what builds on it.',
-    price: '$24',
+    price: dollars(PRODUCTS.bundle.priceCents),
     price_note: null,
     href: null,
     checkoutKey: 'bundle',
@@ -260,13 +268,18 @@ const productSchema = JSON.stringify(products.map(p => ({
   </script>
 
   <!-- GA4 view_item_list -->
-  <script is:inline>
+  <script define:vars={{
+    footworkPriceDollars: PRODUCTS.footwork.priceCents / 100,
+    shadowboxingPriceDollars: PRODUCTS.shadowboxing.priceCents / 100,
+    bundlePriceDollars: PRODUCTS.bundle.priceCents / 100,
+    workshopStandardPriceDollars: PRODUCTS['defense-workshop'].priceCents / 100,
+  }}>
     if (typeof window !== 'undefined' && window.trackEvent) {
       var now = Date.now();
       var footworkFreeUntil = new Date('2026-08-01T23:00:00Z').getTime();
       var earlyBirdUntil = new Date('2026-08-08T22:59:00Z').getTime();
-      var footworkPrice = now < footworkFreeUntil ? 0 : 9;
-      var workshopPrice = now < earlyBirdUntil ? 39 : 49;
+      var footworkPrice = now < footworkFreeUntil ? 0 : footworkPriceDollars;
+      var workshopPrice = now < earlyBirdUntil ? 39 : workshopStandardPriceDollars;
       window.trackEvent('view_item_list', {
         item_list_id: 'shop',
         item_list_name: 'Shop: Blueprints + Workshops',
@@ -274,8 +287,8 @@ const productSchema = JSON.stringify(products.map(p => ({
           currency: 'USD',
           items: [
             { item_id: 'footwork_blueprint',     item_name: 'Footwork Blueprint',    price: footworkPrice, quantity: 1, item_category: footworkPrice === 0 ? 'lead_magnet' : 'one_time' },
-            { item_id: 'shadowboxing_blueprint', item_name: 'Shadowboxing Blueprint', price: 19, quantity: 1, item_category: 'one_time' },
-            { item_id: 'complete_bundle',        item_name: 'Complete Bundle',        price: 24, quantity: 1, item_category: 'one_time' },
+            { item_id: 'shadowboxing_blueprint', item_name: 'Shadowboxing Blueprint', price: shadowboxingPriceDollars, quantity: 1, item_category: 'one_time' },
+            { item_id: 'complete_bundle',        item_name: 'Complete Bundle',        price: bundlePriceDollars, quantity: 1, item_category: 'one_time' },
             { item_id: 'defense_workshop',       item_name: 'Defense Workshop',       price: workshopPrice, quantity: 1, item_category: 'live_event' }
           ]
         }

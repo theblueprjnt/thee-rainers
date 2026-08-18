@@ -5,6 +5,7 @@ import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 import { sendTelegramAlert } from '../../lib/telegram';
 import { kitSubscriberId, addToKitSequence } from '../../lib/kit';
+import { PRODUCTS } from '../../data/products.ts';
 
 // ── D1 idempotency store ─────────────────────────────────────────────────────
 // Minimal shape for the WEBHOOK_EVENTS binding — avoids pulling in
@@ -100,13 +101,23 @@ const SITE_URL = 'https://theerainers.com';
 // Slug → GA4 ecommerce item shape. Keep in sync with PRODUCT_MAP and the
 // client-side TR_PRODUCTS map in Base.astro. Source of truth for server-side
 // purchase events fired via the GA4 Measurement Protocol.
+//
+// Prices below come from src/data/products.ts (single source of truth) --
+// this used to hardcode defense-workshop at 39 while the live price was
+// already 49 (early-bird window closed 2026-08-08), so every GA4 purchase
+// event for it understated revenue by $10 unless actualValue overrode it.
+// GA4 item `name`/`category` stay as local literals here on purpose: they're
+// analytics categorization, not the same thing as the site's product
+// display name, and changing them isn't what was asked -- only the price
+// mismatch was flagged. Grade 1/2/3 stay hardcoded too, untouched --
+// navigation and the Grade pages are a separate decision.
 const GA4_CATALOG: Record<string, { name: string; price: number; category: string }> = {
-  'footwork':          { name: 'Footwork Blueprint',         price:   9, category: 'one_time' },
-  'shadowboxing':      { name: 'Shadowboxing Blueprint',     price:  19, category: 'one_time' },
-  'bundle':            { name: 'Complete Bundle',            price:  24, category: 'one_time' },
-  'workshop-replay':   { name: 'Workshop Replay',            price:  49, category: 'on_demand' },
-  'defense-workshop':  { name: 'Defense Workshop',           price:  39, category: 'one_time' },
-  'greatness':         { name: 'Greatness Community',        price:  39, category: 'subscription' },
+  'footwork':          { name: 'Footwork Blueprint',         price: PRODUCTS.footwork.priceCents / 100,             category: 'one_time' },
+  'shadowboxing':      { name: 'Shadowboxing Blueprint',     price: PRODUCTS.shadowboxing.priceCents / 100,         category: 'one_time' },
+  'bundle':            { name: 'Complete Bundle',            price: PRODUCTS.bundle.priceCents / 100,               category: 'one_time' },
+  'workshop-replay':   { name: 'Workshop Replay',            price: PRODUCTS['workshop-replay'].priceCents / 100,   category: 'on_demand' },
+  'defense-workshop':  { name: 'Defense Workshop',           price: PRODUCTS['defense-workshop'].priceCents / 100,  category: 'one_time' },
+  'greatness':         { name: 'Greatness Community',        price: PRODUCTS.greatness.priceCents / 100,            category: 'subscription' },
   'grade1':            { name: 'Grade 1 Foundation',         price: 347, category: 'one_time' },
   'grade2':            { name: 'Grade 2 Development',        price: 997, category: 'one_time' },
   'grade3':            { name: 'Grade 3',                    price: 12000, category: 'one_time' },
