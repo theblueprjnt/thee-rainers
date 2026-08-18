@@ -7,5 +7,11 @@
       "database_name": "thee-rainers-webhook-events",
       "database_id": "96dd46d5-6d8b-48a6-9e7a-607b40b7d7e7"
     }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "ddfe33c423d14e4a81133a5c55985ef7"
+    }
   ]
 }
