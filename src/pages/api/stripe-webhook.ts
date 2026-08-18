@@ -5,6 +5,7 @@ import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 import { sendTelegramAlert } from '../../lib/telegram';
 import { kitSubscriberId, addToKitSequence } from '../../lib/kit';
+import { getKitAccessToken } from '../../lib/kit-oauth';
 import { PRODUCTS } from '../../data/products.ts';
 
 // ── D1 idempotency store ─────────────────────────────────────────────────────
@@ -199,6 +200,68 @@ async function sendGA4Purchase(
     }
   } catch (err) {
     console.error('[ga4] purchase fetch failed', String(err));
+  }
+}
+
+// ── Kit purchases (OAuth2-only endpoint) ────────────────────────────────────
+// Schema confirmed live against developers.kit.com/api-reference/purchases/
+// create-a-purchase 2026-08-18, not from memory. Requires a Bearer access
+// token from getKitAccessToken() -- the X-Kit-Api-Key header used
+// everywhere else in this file does not work for this endpoint.
+//
+// Guarded like every other side effect in this handler: a Kit outage or a
+// missing/expired connection logs and returns, it never throws, and this
+// call sits inside the same outer try/catch that guarantees the webhook
+// always responds 200 to Stripe regardless.
+async function sendKitPurchase(
+  kv: { get(key: string): Promise<string | null>; put(key: string, value: string): Promise<void> } | undefined,
+  clientId: string,
+  args: { slug: string; email: string; transactionId: string; amountCents: number; currency: string },
+): Promise<void> {
+  if (!kv || !clientId) return;
+  const accessToken = await getKitAccessToken(kv, clientId);
+  if (!accessToken) return; // already logged inside getKitAccessToken
+
+  const product = GA4_CATALOG[args.slug];
+  const totalDollars = args.amountCents / 100;
+
+  const payload = {
+    purchase: {
+      email_address: args.email,
+      transaction_id: args.transactionId, // Stripe checkout session id -- idempotent, Kit matches purchases on this field
+      status: 'paid',
+      subtotal: totalDollars, // Stripe Checkout doesn't expose a separate pre-tax breakdown here, so subtotal = total
+      tax: 0,
+      shipping: 0,
+      discount: 0,
+      total: totalDollars,
+      currency: args.currency.toUpperCase(),
+      transaction_time: new Date().toISOString(),
+      products: [{
+        name: product?.name ?? args.slug,
+        pid: args.slug,
+        lid: '1',
+        quantity: 1,
+        unit_price: totalDollars,
+        sku: args.slug,
+      }],
+    },
+  };
+
+  try {
+    const res = await fetch('https://api.kit.com/v4/purchases', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const body = await res.text().catch(() => '');
+    if (!res.ok) {
+      console.error('[kit] purchase POST failed', { slug: args.slug, status: res.status, body });
+    } else {
+      console.log('[kit] purchase POST response', { slug: args.slug, status: res.status, body });
+    }
+  } catch (err) {
+    console.error('[kit] purchase POST fetch error:', String(err));
   }
 }
 
@@ -733,6 +796,18 @@ export async function POST({ request }: APIContext): Promise<Response> {
             customerEmail: email,
             customerStripeId: String(session.customer ?? ''),
             actualValue: amountCents != null ? amountCents / 100 : undefined,
+          });
+        }
+        // Kit purchase record — after tagging, so the subscriber already
+        // carries the right tags by the time this purchase lands in Kit.
+        if (slug && session.amount_total != null) {
+          const kv = (cfEnv as unknown as { SESSION?: { get(k: string): Promise<string | null>; put(k: string, v: string): Promise<void> } }).SESSION;
+          await sendKitPurchase(kv, e['KIT_OAUTH_CLIENT_ID'] ?? '', {
+            slug,
+            email,
+            transactionId: session.id,
+            amountCents: session.amount_total,
+            currency: session.currency ?? 'usd',
           });
         }
       }
