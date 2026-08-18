@@ -13,7 +13,7 @@ const productSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Event",
   "name": "Defense Workshop",
-  "description": "Live 90-minute defense mechanics workshop. Camera on. Real-time correction. Replay included.",
+  "description": "A live 90-minute workshop on the five layers of defense in boxing. 60 min + 30 min live Q&A. Replay included.",
   "url": "https://theerainers.com/defense-workshop",
   "startDate": "2026-08-29",
   "eventStatus": "https://schema.org/EventScheduled",
@@ -31,7 +31,7 @@ const productSchema = JSON.stringify({
 ---
 <Layout
   title="Defense Workshop · Live Aug 29 | Thee Rainers"
-  description={`Live 90-minute defense workshop. Camera on. Real-time correction on your movement. Replay included. ${price} ${isEarlyBird ? '· Early bird until Aug 8' : ''}.`}>
+  description={`A live workshop on the five layers of defense in boxing. 60 min + 30 min live Q&A. Replay included. ${price} ${isEarlyBird ? '· Early bird until Aug 8' : ''}.`}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={productSchema} />
   </Fragment>
@@ -51,20 +51,16 @@ const productSchema = JSON.stringify({
 
     <div class="relative z-10 px-6 md:px-16 lg:px-24 pt-28 md:pt-44 pb-14 md:pb-20">
       <div class="max-w-[720px]">
-        <p class="text-[var(--terra)] text-[11px] tracking-widest font-bold mb-6">
-          anyone can throw a punch. only the best boxers learn defense.
-        </p>
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">
-          Live · Aug 29 · 90 Min · Replay Included
+          Live Workshop · Aug 29
         </p>
         <h1 class="font-black text-white uppercase tracking-tighter leading-[0.85] mb-6"
           style="font-size: clamp(2.8rem, 8vw, 4.75rem);">
           Defense<br/>Workshop.
         </h1>
 
-        <!-- COPY: main hero paragraph — 2-3 sentences on what the workshop delivers -->
         <p class="text-white/55 text-base leading-relaxed mb-10 max-w-[520px]">
-          Camera on. Real-time correction on your movement. The mechanical structure to hit, exit, and reset. Replay included with every seat.
+          A live session on the five layers of defense in boxing. 60 min + 30 min live Q&A. Every seat includes the replay.
         </p>
 
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
@@ -95,24 +91,20 @@ const productSchema = JSON.stringify({
     <div class="max-w-[1100px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">What's Inside</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
-        <!-- COPY: section headline -->
         What this session gives you.
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="border-t-2 border-[var(--terra)] pt-5">
-          <!-- COPY: pillar 1 headline and body -->
-          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Live correction.</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Camera on. Rainers corrects your movement in real time. Not a lecture. Not slides. Your actual mechanics, fixed.</p>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">The 5-layer system.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">A complete defensive framework, broken into five layers and taught in order. Nothing skipped, nothing assumed.</p>
         </div>
         <div class="border-t-2 border-[var(--terra)] pt-5">
-          <!-- COPY: pillar 2 headline and body -->
-          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">The defense structure.</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">The mechanical system to hit, exit, and reset without leaving yourself open. Built from the base up.</p>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Live Q&A.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">The last 30 minutes are yours. Bring your own questions and get a direct answer from Rainers in real time.</p>
         </div>
         <div class="border-t-2 border-[var(--terra)] pt-5">
-          <!-- COPY: pillar 3 headline and body -->
           <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Replay included.</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">The full session is yours after the live date. 7-day access window. Watch the corrections again. Own it.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">The full session is yours after the live date, with 7 days of access to watch it again.</p>
         </div>
       </div>
     </div>
@@ -123,12 +115,10 @@ const productSchema = JSON.stringify({
     <div class="max-w-[860px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">Who This Is For</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-8">
-        <!-- COPY: who-this-is-for headline -->
         Fighters who want to stop getting hit.
       </h2>
-      <!-- COPY: 2-3 sentences on the ideal attendee -->
       <p class="text-[#0A0A0A]/55 text-base leading-relaxed max-w-[640px]">
-        You are training consistently. You know the mechanics exist. But under pressure the chain breaks and you cannot see why. This session fixes the break.
+        You train consistently and know defense matters, but under pressure your guard breaks down and you can't pinpoint why. This workshop gives you the structure that's missing.
       </p>
     </div>
   </section>
@@ -145,8 +135,8 @@ const productSchema = JSON.stringify({
       </div>
       <ul class="text-white/40 text-sm leading-loose mb-8 space-y-1">
         <li>Live session · August 29, 2026</li>
-        <li>90 minutes with Rainers</li>
-        <li>Camera on · real-time correction</li>
+        <li>90 minutes with Rainers · 60 min + 30 min live Q&A</li>
+        <li>The 5 layers of defense in boxing</li>
         <li>Replay included · 7-day access after the live date</li>
         <li>One-time payment</li>
       </ul>
@@ -165,31 +155,36 @@ const productSchema = JSON.stringify({
     <div class="max-w-[800px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Questions</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-10">Common Questions</h2>
-      <dl class="flex flex-col divide-y divide-[#0A0A0A]/8">
-
-        <div class="py-6">
-          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">What if I can't make the live date?</dt>
-          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">The replay is included with every seat. You will have 7 days of access after the live session.</dd>
-        </div>
-
-        <div class="py-6">
-          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">Do I need a camera?</dt>
-          <!-- COPY: camera requirement answer -->
-          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Camera on is required for correction. If you cannot be on camera, the replay is still available to you after the live date.</dd>
-        </div>
-
-        <div class="py-6">
-          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">Is there a refund policy?</dt>
-          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Yes. Email rainers@theerainers.com before the live session date for a full refund. See the <a href="/legal/refund-policy" class="text-[var(--navy)] underline hover:opacity-70">Refund Policy</a>.</dd>
-        </div>
-
-        <div class="py-6">
-          <dt class="font-bold text-[#0A0A0A] text-sm mb-2">What platform is this on?</dt>
-          <!-- COPY: platform answer -->
-          <dd class="text-[#0A0A0A]/50 text-sm leading-relaxed">Details sent by email after purchase.</dd>
-        </div>
-
-      </dl>
+      <div class="flex flex-col divide-y divide-[#0A0A0A]/10 border-t border-b border-[#0A0A0A]/10">
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0A0A0A] text-sm">
+            What if I can't make the live date?
+            <span class="shrink-0 text-[#0A0A0A]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mt-3">The replay is included with every seat, with 7 days of access after the live session.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0A0A0A] text-sm">
+            Do I need a camera?
+            <span class="shrink-0 text-[#0A0A0A]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mt-3">A camera is recommended for the Q&A portion. If you can't be on camera, the replay is still yours after the live date.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0A0A0A] text-sm">
+            Is there a refund policy?
+            <span class="shrink-0 text-[#0A0A0A]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mt-3">Yes. Email rainers@theerainers.com before the live session date for a full refund. See the <a href="/legal/refund-policy" class="text-[var(--navy)] underline hover:opacity-70">Refund Policy</a>.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0A0A0A] text-sm">
+            What platform is this on?
+            <span class="shrink-0 text-[#0A0A0A]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mt-3">Details are sent by email after purchase.</p>
+        </details>
+      </div>
     </div>
   </section>
 
