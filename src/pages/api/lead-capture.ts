@@ -16,6 +16,7 @@ export const prerender = false;
 
 import type { APIContext } from 'astro';
 import { env as cfEnv } from 'cloudflare:workers';
+import { addToKitSequence } from '../../lib/kit';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const KIT_NURTURE_SEQUENCE_ID = '2814253';
 const KIT_WORKSHOP_WAITLIST_TAG_ID = '21454867';
@@ -210,19 +211,6 @@ async function kitApplyTag(apiKey: string, email: string, firstName: string, tag
   return id;
 }
 
-async function kitEnrollSequence(apiKey: string, email: string, sequenceId: string): Promise<void> {
-  const res = await fetch(`https://api.kit.com/v4/sequences/${sequenceId}/subscribers`, {
-    method: 'POST',
-    headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email_address: email }),
-  });
-  if (!res.ok) {
-    console.warn('[lead-capture] Kit sequence enroll failed', { status: res.status, sequenceId, body: await res.text().catch(() => '') });
-  } else {
-    console.log('[lead-capture] Kit sequence enrolled', { email, sequenceId });
-  }
-}
-
 // ── Airtable helper ────────────────────────────────────────────────────────
 
 async function upsertAirtableLead(
@@ -345,7 +333,7 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
               });
           // No sequence enrollment for workshop-waitlist
           if (subId && shouldEnrollSequence && source !== 'workshop-waitlist') {
-            await kitEnrollSequence(kitKey, email, KIT_NURTURE_SEQUENCE_ID).catch((err) =>
+            await addToKitSequence(kitKey, email, KIT_NURTURE_SEQUENCE_ID).catch((err) =>
               console.warn('[lead-capture] Kit enroll failed', { emailLog, err: String(err) }),
             );
           }

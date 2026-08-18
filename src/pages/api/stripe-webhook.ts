@@ -4,6 +4,7 @@ import type { APIContext } from 'astro';
 import Stripe from 'stripe';
 import { env as cfEnv } from 'cloudflare:workers';
 import { sendTelegramAlert } from '../../lib/telegram';
+import { kitSubscriberId, addToKitSequence } from '../../lib/kit';
 
 // ── D1 idempotency store ─────────────────────────────────────────────────────
 // Minimal shape for the WEBHOOK_EVENTS binding — avoids pulling in
@@ -191,26 +192,8 @@ async function sendGA4Purchase(
 }
 
 // ── Kit v4 helpers ─────────────────────────────────────────────────────────
-
-async function kitSubscriberId(apiKey: string, email: string): Promise<string | null> {
-  // find-or-create
-  let res = await fetch('https://api.kit.com/v4/subscribers', {
-    method: 'POST',
-    headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email_address: email }),
-  });
-  let data: Record<string, unknown> = await res.json().catch(() => ({}));
-  const subObj = data?.subscriber as Record<string, unknown> | undefined;
-  if (subObj?.id) return String(subObj.id);
-
-  // fallback: look up by email
-  res = await fetch(`https://api.kit.com/v4/subscribers?email_address=${encodeURIComponent(email)}`, {
-    headers: { 'X-Kit-Api-Key': apiKey },
-  });
-  data = await res.json().catch(() => ({}));
-  const subs = data?.subscribers as Array<Record<string, unknown>> | undefined;
-  return subs?.[0]?.id ? String(subs[0].id) : null;
-}
+// kitSubscriberId + addToKitSequence live in ../../lib/kit.ts (shared with
+// lead-capture.ts). tagKit/untagKit stay here — only this file uses them.
 
 async function tagKit(apiKey: string, email: string, tagId: string): Promise<void> {
   if (!apiKey || tagId.startsWith('KIT_TAG_')) return; // placeholder — skip silently
@@ -231,20 +214,6 @@ async function untagKit(apiKey: string, email: string, tagId: string): Promise<v
     method: 'DELETE',
     headers: { 'X-Kit-Api-Key': apiKey },
   });
-}
-
-// Add subscriber to a Kit sequence — no-op if sequenceId is empty/placeholder.
-// Create sequences in Kit (Grow > Sequences), copy the numeric ID from the URL.
-async function addToKitSequence(apiKey: string, email: string, sequenceId: string): Promise<void> {
-  if (!apiKey || !sequenceId || sequenceId.startsWith('KIT_SEQ_')) return;
-  const id = await kitSubscriberId(apiKey, email);
-  if (!id) return;
-  const res = await fetch(`https://api.kit.com/v4/sequences/${sequenceId}/subscribers`, {
-    method: 'POST',
-    headers: { 'X-Kit-Api-Key': apiKey, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id }),
-  });
-  if (!res.ok) console.warn('[stripe-webhook] Kit sequence subscribe failed', sequenceId, res.status);
 }
 
 // ── Airtable helpers ───────────────────────────────────────────────────────
