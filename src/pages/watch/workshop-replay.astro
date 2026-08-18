@@ -4,41 +4,33 @@ export const prerender = false;
 import Layout from '../../layouts/Base.astro';
 import { env as cfEnv } from 'cloudflare:workers';
 
-const secret   = (cfEnv as unknown as Record<string, string>)['WATCH_TOKEN_SECRET'] ?? '';
-const sig      = Astro.url.searchParams.get('sig') ?? '';
-const expParam = Astro.url.searchParams.get('exp') ?? '';
+// No expiry -- it's an unlisted YouTube video, access doesn't need a
+// countdown. The signature still keeps the URL from being guessable.
+const secret = (cfEnv as unknown as Record<string, string>)['WATCH_TOKEN_SECRET'] ?? '';
+const sig    = Astro.url.searchParams.get('sig') ?? '';
 
-let valid   = false;
-let expired = false;
+let valid = false;
 
-if (secret && sig && expParam) {
-  const expNum     = parseInt(expParam, 10);
-  const nowSeconds = Math.floor(Date.now() / 1000);
-
-  if (isNaN(expNum) || expNum < nowSeconds) {
-    expired = true;
-  } else {
-    const key = await crypto.subtle.importKey(
-      'raw',
-      new TextEncoder().encode(secret),
-      { name: 'HMAC', hash: 'SHA-256' },
-      false,
-      ['sign'],
-    );
-    const sigBuf = await crypto.subtle.sign(
-      'HMAC',
-      key,
-      new TextEncoder().encode(`workshop-replay:${expParam}`),
-    );
-    const expected = Array.from(new Uint8Array(sigBuf))
-      .map(b => b.toString(16).padStart(2, '0'))
-      .join('');
-    valid = sig === expected;
-  }
+if (secret && sig) {
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  );
+  const sigBuf = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    new TextEncoder().encode('workshop-replay'),
+  );
+  const expected = Array.from(new Uint8Array(sigBuf))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+  valid = sig === expected;
 }
 
-// Invalid token with no expiry state — send to sales page, not a 404
-if (!valid && !expired) {
+if (!valid) {
   return Astro.redirect('/workshop-replay');
 }
 ---
@@ -50,75 +42,57 @@ if (!valid && !expired) {
   <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
     <div class="max-w-[900px] mx-auto w-full">
 
-      {expired ? (
-        <!-- Expired state — no video URL in source -->
-        <div>
-          <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Link expired</p>
-          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-6">
-            Your access<br/>has expired.
-          </h1>
-          <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-10 max-w-[440px]">
-            This link was valid for 7 days from purchase. To watch the replay, get a fresh copy below.
-          </p>
-          <a href="/defense-workshop"
-            class="blue-btn inline-flex items-center justify-center font-bold border-2 border-[var(--blue)] text-[var(--blue)] bg-transparent px-8 py-4 text-sm tracking-widest uppercase transition-all duration-200 hover:bg-[var(--blue)] hover:text-white">
-            Defense Workshop · $39 →
-          </a>
-        </div>
-      ) : (
-        <!-- Valid token — embed rendered server-side only for authenticated access -->
-        <div>
-          <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Access confirmed</p>
-          <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-4">
-            Your replay<br/>is live.
-          </h1>
-          <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-12 max-w-[440px]">
-            90 minutes. Watch it through once, then use the timestamps to drill the specific section that matches your primary constraint.
-          </p>
+      <div>
+        <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-4">Access confirmed</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-4xl md:text-5xl leading-[0.85] mb-4">
+          Your replay<br/>is live.
+        </h1>
+        <p class="text-[#0A0A0A]/40 text-sm leading-relaxed mb-12 max-w-[440px]">
+          90 minutes. Watch it through once, then use the timestamps to drill the specific section that matches your primary constraint.
+        </p>
 
-          <!-- VIDEO -->
-          <div class="border border-[#0A0A0A]/8 overflow-hidden mb-12">
-            <div class="relative w-full" style="padding-bottom: 56.25%;">
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/AtZmUk7cZFQ"
-                title="Workshop Replay · Defense Workshop"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                loading="lazy"
-                class="absolute inset-0 w-full h-full"
-              ></iframe>
+        <!-- VIDEO -->
+        <div class="border border-[#0A0A0A]/8 overflow-hidden mb-12">
+          <div class="relative w-full" style="padding-bottom: 56.25%;">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/AtZmUk7cZFQ"
+              title="Workshop Replay · Defense Workshop"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              class="absolute inset-0 w-full h-full"
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- TIMESTAMPS -->
+        <div class="border border-[#0A0A0A]/8 p-8 mb-12">
+          <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-6">Jump to your section</p>
+          <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
+            <div class="flex gap-6 py-3">
+              <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">0:00</span>
+              <span class="text-[#0A0A0A]/55 text-sm">Footwork &amp; Balance · the base layer</span>
+            </div>
+            <div class="flex gap-6 py-3">
+              <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~20m</span>
+              <span class="text-[#0A0A0A]/55 text-sm">Athletic Stance · your custom platform</span>
+            </div>
+            <div class="flex gap-6 py-3">
+              <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~40m</span>
+              <span class="text-[#0A0A0A]/55 text-sm">Punch Mechanics · kinetic chain from floor to fist</span>
+            </div>
+            <div class="flex gap-6 py-3">
+              <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~60m</span>
+              <span class="text-[#0A0A0A]/55 text-sm">Defensive Structure · offence and defence as one movement</span>
+            </div>
+            <div class="flex gap-6 py-3">
+              <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~75m</span>
+              <span class="text-[#0A0A0A]/55 text-sm">Live Q&amp;A · specific mechanical problems diagnosed</span>
             </div>
           </div>
-
-          <!-- TIMESTAMPS -->
-          <div class="border border-[#0A0A0A]/8 p-8 mb-12">
-            <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-6">Jump to your section</p>
-            <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
-              <div class="flex gap-6 py-3">
-                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">0:00</span>
-                <span class="text-[#0A0A0A]/55 text-sm">Footwork &amp; Balance · the base layer</span>
-              </div>
-              <div class="flex gap-6 py-3">
-                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~20m</span>
-                <span class="text-[#0A0A0A]/55 text-sm">Athletic Stance · your custom platform</span>
-              </div>
-              <div class="flex gap-6 py-3">
-                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~40m</span>
-                <span class="text-[#0A0A0A]/55 text-sm">Punch Mechanics · kinetic chain from floor to fist</span>
-              </div>
-              <div class="flex gap-6 py-3">
-                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~60m</span>
-                <span class="text-[#0A0A0A]/55 text-sm">Defensive Structure · offence and defence as one movement</span>
-              </div>
-              <div class="flex gap-6 py-3">
-                <span class="text-[#0A0A0A]/25 text-xs font-black tracking-widest min-w-[40px]">~75m</span>
-                <span class="text-[#0A0A0A]/55 text-sm">Live Q&amp;A · specific mechanical problems diagnosed</span>
-              </div>
-            </div>
-          </div>
-
         </div>
-      )}
+
+      </div>
 
     </div>
   </section>

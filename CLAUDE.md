@@ -163,13 +163,13 @@ Receives purchase events (initial + monthly renewals). Payload:
   "product_id": "prod_XXX",
   "product_slug": "footwork|shadowboxing|bundle|workshop-replay",
   "token": "64-char hex",
-  "expiring_url": "7-day R2 presigned URL or signed /watch/ page URL",
+  "expiring_url": "7-day R2 presigned URL, or a non-expiring signed /watch/ page URL",
   "expiring_url_2": "second R2 URL for bundle (null for all other products)"
 }
 ```
 **STATUS: Secondary path only. Resend (via stripe-webhook.ts) is the primary post-purchase delivery method — wired directly in the CF Worker, no Make.com dependency. Make.com receives the same payload if MAKE_DELIVERY_WEBHOOK_URL is set, for any additional automations. If MAKE_DELIVERY_WEBHOOK_URL is unset, delivery still works via Resend.**
 **For bundle:** `expiring_url` = footwork PDF, `expiring_url_2` = shadowboxing PDF. Resend template handles both links; Make.com template needs conditional second link when `expiring_url_2` is not null.
-**For workshop-replay:** `expiring_url` = `https://theerainers.com/watch/workshop-replay?sig=xxx&exp=xxx` (7-day signed URL).
+**For workshop-replay:** `expiring_url` = `https://theerainers.com/watch/workshop-replay?sig=xxx` (signed, does not expire — it's an unlisted YouTube video, not a file, so there's nothing worth timing out).
 
 ### Airtable
 `source` field is Single line text (verified 2026-06-25). Upsert uses `fieldsToMergeOn: ['Email']`.
@@ -188,8 +188,8 @@ AWS SigV4 signing implemented natively in CF Workers (`crypto.subtle`) — no AW
 
 ### Workshop Replay (token-gated YouTube)
 Video: unlisted YouTube `AtZmUk7cZFQ`
-Flow: purchase → stripe-webhook generates HMAC-signed URL → Resend emails buyer → buyer clicks `/watch/workshop-replay?sig=xxx&exp=xxx` → page validates server-side → embed renders only if valid.
-Expired token → repurchase CTA (no video in source). Invalid token → redirect to `/workshop-replay`.
+Flow: purchase → stripe-webhook generates HMAC-signed URL (no expiry) → Resend emails buyer → buyer clicks `/watch/workshop-replay?sig=xxx` → page validates the signature server-side → embed renders only if valid.
+No expiry by design (2026-08-18) — it's an unlisted YouTube video, not a downloadable file, so a time window has no real purpose. Invalid/missing signature → redirect to `/workshop-replay`. Shared by both the standalone $47 Workshop Replay purchase and Defense Workshop attendee delivery (same `generateWatchUrl('workshop-replay')` call either way).
 
 ### Subscription renewals
 `invoice.payment_succeeded` (billing_reason: subscription_cycle) → regenerates fresh 7-day URLs → sends to MAKE_DELIVERY_WEBHOOK_URL. Initial purchase handled by `checkout.session.completed` only.

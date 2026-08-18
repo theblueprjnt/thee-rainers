@@ -332,11 +332,13 @@ async function generateR2PresignedUrl(
   return `https://${host}/${encodedKey}?${canonicalQS}&X-Amz-Signature=${signature}`;
 }
 
+// No expiry -- it's just an unlisted YouTube video, there's nothing to
+// meaningfully cut off access to. The signature still stops the URL from
+// being guessable/enumerable, it just never times out.
 async function generateWatchUrl(secret: string, product: string): Promise<string> {
-  const exp    = Math.floor(Date.now() / 1000) + SEVEN_DAYS_SECONDS;
-  const sigBuf = await hmacBuf(new TextEncoder().encode(secret), `${product}:${exp}`);
+  const sigBuf = await hmacBuf(new TextEncoder().encode(secret), product);
   const sig    = Array.from(new Uint8Array(sigBuf)).map(b => b.toString(16).padStart(2, '0')).join('');
-  return `${SITE_URL}/watch/${product}?sig=${sig}&exp=${exp}`;
+  return `${SITE_URL}/watch/${product}?sig=${sig}`;
 }
 
 async function generateCommunityMagicLink(secret: string): Promise<string> {
@@ -386,8 +388,7 @@ function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Re
     return wrap(
       `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Your Defense Workshop replay is ready.</p>` +
       btn(url, 'Watch the Replay') +
-      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">90 minutes. Footwork, stance, punch mechanics, defensive structure, live Q&amp;A.</p>` +
-      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">This link expires in 7 days. Watch it before then.</p>`,
+      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">90 minutes. Footwork, stance, punch mechanics, defensive structure, live Q&amp;A. This link doesn't expire.</p>`,
     );
   }
   if (slug === 'greatness') {
