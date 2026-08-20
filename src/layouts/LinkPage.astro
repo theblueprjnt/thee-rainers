@@ -15,6 +15,17 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- Google Tag Manager -->
+    <script is:inline>
+    if (new URLSearchParams(window.location.search).get('smoke') !== '1') {
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5LQ7HPXG');
+    }
+    </script>
+    <!-- End Google Tag Manager -->
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon-opt.png" />
@@ -30,6 +41,9 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
     <Analytics />
   </head>
   <body class="bg-white text-[#0A0A0A] min-h-screen">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LQ7HPXG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <slot />
   <img src="https://tracker.metricool.com/c3po.jpg?hash=788f135aa4dcbab8c0bd6195948f6bfd" />
   </body>

@@ -125,6 +125,17 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <!-- Google Tag Manager -->
+  <script is:inline>
+  if (new URLSearchParams(window.location.search).get('smoke') !== '1') {
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5LQ7HPXG');
+  }
+  </script>
+  <!-- End Google Tag Manager -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
   <title>{isValid ? `${record!.product_name} | Thee Rainers` : 'Access | Thee Rainers'}</title>
@@ -141,6 +152,9 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
   </style>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LQ7HPXG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <header style="border-bottom: 1px solid rgba(255,255,255,0.06); padding: 1.25rem 2rem;">
     <a href="/">
