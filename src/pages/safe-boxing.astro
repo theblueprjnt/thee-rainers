@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Base.astro';
+import ProofSection from '../components/blocks/ProofSection.astro';
+
+const CALENDLY_URL = 'https://calendly.com/theerainers/1-1';
+
+const included = [
+  {
+    label: 'Deep Personalization',
+    body: 'A 60-90 min initial assessment to map your history, goals, and movement patterns. You get a custom boxing plan integrated with your existing sport or work routine.',
+  },
+  {
+    label: 'Weekly 1:1 Coaching Calls',
+    body: '45-60 min live form checks, progress reviews, and real-time adjustments to keep you moving safely and effectively.',
+  },
+  {
+    label: 'Daily Async Support',
+    body: 'Direct access to me via voice notes, short videos, or messages between calls. Stuck on a combo? Send a video, get feedback within 24-48 hours.',
+  },
+  {
+    label: 'Lifetime Access to Your Plan',
+    body: 'All videos, progressions, and your final maintenance routine are yours to keep forever.',
+  },
+];
+
+const weeks = [
+  { n: 'Week 4', title: "You're moving confidently.", body: "You've built a solid routine, learned basic punches, and established foundational footwork." },
+  { n: 'Week 8', title: "You're flowing.", body: 'Your routine is now a consistent 30 minutes, you have added 6 punches and basic combinations, and boxing is integrated into your weekly training.' },
+  { n: 'Week 12', title: "You're self-sufficient.", body: 'You have a lifetime routine locked in, a clear maintenance plan, and the confidence to train safely on your own forever.' },
+];
+---
+<Layout
+  title="Safe Boxing Coaching for Adults 30-65 · Thee Rainers"
+  description="1:1 safe boxing coaching for adults 30-65. Build a lifelong, no-damage boxing routine in 12 weeks. Fitness, joint health, and stress relief, without ever getting hit.">
+
+  <!-- ── HERO ──────────────────────────────────────────────────────────── -->
+  <section class="relative bg-[#0B0B0C] overflow-hidden px-6 md:px-12 lg:px-20 pt-28 md:pt-36 pb-16 md:pb-24">
+    <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[58%_42%] gap-10 md:gap-14 items-center">
+
+      <div>
+        <p class="text-white/60 text-[11px] tracking-widest uppercase font-bold mb-6">Thee Rainers · Safe Boxing Coaching</p>
+        <h1 class="font-black uppercase tracking-tighter text-white mb-6"
+          style="font-size: clamp(2.5rem, 5.5vw, 4rem); line-height: 0.9;">
+          1:1 Safe Boxing for Adults.
+        </h1>
+        <p class="text-white/50 text-base md:text-lg leading-relaxed mb-10 max-w-[520px]">
+          Build a lifelong, no-damage boxing routine in 12 weeks that boosts fitness, protects your joints, and makes boxing your primary stress-management tool.
+        </p>
+        <a href={CALENDLY_URL} class="tr-btn" target="_blank" rel="noopener">
+          Book Your Free Discovery Call
+        </a>
+      </div>
+
+      <div class="relative overflow-hidden" style="aspect-ratio: 4/5;">
+        <picture>
+          <source srcset="/images/padwork-outdoor-opt.webp" type="image/webp" />
+          <img src="/images/padwork-outdoor-opt.jpg" alt="Rainers coaching padwork"
+            class="absolute inset-0 w-full h-full object-cover object-center grayscale"
+            loading="eager" decoding="async" fetchpriority="high" />
+        </picture>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── WHO THIS IS FOR ───────────────────────────────────────────────── -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[720px] mx-auto text-left">
+      <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-4">Who This Is For</p>
+      <p class="text-[#0B0B0C]/70 text-base leading-relaxed">
+        Adults 30-65 who already train, or want to, but refuse to risk brain damage or sparring. You want the fitness, coordination, and stress relief of boxing, without the damage.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── THE 12-WEEK PROMISE ──────────────────────────────────────────── -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[720px] mx-auto text-left">
+      <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-4">The 12-Week Promise</p>
+      <p class="text-[#0B0B0C]/70 text-base leading-relaxed">
+        By week 12, you will have a locked-in, 30-minute boxing routine you can do for life. You will master 6 core punches, move with proper footwork, and use boxing as your go-to tool for fitness and stress, safely and sustainably.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── WHAT'S INCLUDED ───────────────────────────────────────────────── -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[900px] mx-auto">
+      <div class="text-center mb-16">
+        <span class="block text-[11px] font-bold tracking-widest uppercase text-[#0B0B0C]/60 mb-4">What's Inside</span>
+        <h2 class="font-black uppercase tracking-tighter text-[#0B0B0C]" style="font-size: clamp(2rem, 4vw, 3rem);">What's included.</h2>
+        <span class="block w-10 h-0.5 bg-[#0B0B0C]/8 mx-auto mt-5"></span>
+      </div>
+      <div class="flex flex-col divide-y divide-[#0B0B0C]/10 border-t border-b border-[#0B0B0C]/10">
+        {included.map(item => (
+          <div class="py-6">
+            <p class="font-black text-[#0B0B0C] uppercase tracking-tight text-sm mb-2">{item.label}</p>
+            <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 12-WEEK PROGRESS MAP ─────────────────────────────────────────── -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="text-center mb-16">
+        <span class="block text-[11px] font-bold tracking-widest uppercase text-[#0B0B0C]/60 mb-4">The Path</span>
+        <h2 class="font-black uppercase tracking-tighter text-[#0B0B0C]" style="font-size: clamp(2rem, 4vw, 3rem);">Your 12-week progress map.</h2>
+        <span class="block w-10 h-0.5 bg-[#0B0B0C]/8 mx-auto mt-5"></span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#0B0B0C]/8">
+        {weeks.map(w => (
+          <div class="bg-[var(--warm)] p-8 md:p-10 text-left">
+            <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-5">{w.n}</p>
+            <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-base leading-tight mb-4">{w.title}</h3>
+            <p class="text-[#0B0B0C]/60 text-sm leading-relaxed">{w.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INVESTMENT ────────────────────────────────────────────────────── -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[560px] mx-auto text-center border border-[#0B0B0C]/10 p-10 md:p-14">
+      <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-6">Investment</p>
+      <p class="font-black text-[#0B0B0C] tracking-tight mb-2" style="font-size: clamp(2.5rem, 5vw, 3.25rem);">$2,500</p>
+      <p class="text-[#0B0B0C]/60 text-sm mb-8">for 12 weeks of 1:1 coaching.</p>
+      <p class="text-[var(--terra)] text-[11px] font-bold tracking-widest uppercase mb-8">Only 3 spots available per quarter.</p>
+      <a href={CALENDLY_URL} class="tr-btn" style="width:100%;justify-content:center;" target="_blank" rel="noopener">
+        Book Your Free Discovery Call
+      </a>
+      <p class="text-[#0B0B0C]/40 text-xs mt-4">See if you qualify.</p>
+    </div>
+  </section>
+
+  <!-- ── SOCIAL PROOF (null on empty) ─────────────────────────────────── -->
+  <ProofSection />
+
+</Layout>
