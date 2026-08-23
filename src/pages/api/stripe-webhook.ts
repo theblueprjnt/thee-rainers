@@ -53,6 +53,7 @@ const ASSET_MAP: Record<string, string[]> = {
   'footwork':          [
     'thefootworkblueprint/The-Footwork-Blueprint-Thee-Rainers.pdf',
     'thefootworkblueprint/links_theFOOTWORKBlueprint.pdf',
+    'thefootworkblueprint/masterboxingbasein30days_playbook.pdf',
   ],
   'shadowboxing':      ['the shadowboxing blueprint/the shadowboxing blueprint.pdf'],
   'bundle':            [
@@ -446,6 +447,16 @@ function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Re
       `<tr><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0A0A0A;">Session recordings</td><td style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:12px;color:#888;text-align:right;">In the member area after each session</td></tr>` +
       `<tr><td style="padding:10px 0;font-size:13px;color:#0A0A0A;">Manage / cancel</td><td style="padding:10px 0;font-size:12px;color:#888;text-align:right;">Via Customer Portal, link in member area</td></tr>` +
       `</table>`,
+    );
+  }
+  if (slug === 'footwork' && url2 && url3) {
+    return wrap(
+      `<p style="font-size:15px;line-height:1.6;margin:0 0 24px;">Your Footwork Blueprint is ready.</p>` +
+      btn(url, 'Download Footwork Blueprint') +
+      `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Also included</p>` +
+      btn(url2, 'Download Resource Links') +
+      btn(url3, 'Download Master Boxing Base in 30 Days') +
+      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 8px;">All links expire in 7 days. Save all files before then.</p>`,
     );
   }
   if (slug === 'footwork' && url2) {

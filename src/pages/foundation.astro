@@ -45,7 +45,7 @@ const productSchema = JSON.stringify({
   )}
 
   <!-- HERO -->
-  <section class="relative overflow-hidden bg-[#0B0B0C]">
+  <section class="relative overflow-hidden bg-white">
 
     <div class="relative max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-36 pb-16 md:pb-24
                 grid grid-cols-1 md:grid-cols-[55%_45%] gap-10 md:gap-14 items-center">
@@ -55,14 +55,14 @@ const productSchema = JSON.stringify({
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">
           {isFootworkFree ? 'Free · The Footwork Blueprint' : `${priceDollars} · The Footwork Blueprint`}
         </p>
-        <h1 class="font-black text-white uppercase tracking-tighter leading-[0.88] mb-6"
+        <h1 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.88] mb-6"
           style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
           The Footwork<br/>Blueprint.
         </h1>
-        <p class="text-white/60 text-base md:text-lg leading-relaxed mb-2 max-w-[520px]">
+        <p class="text-[#0B0B0C]/60 text-base md:text-lg leading-relaxed mb-2 max-w-[520px]">
           Win fights with footwork, and take fewer hits doing it. A practical playbook to move with balance, control, and intent. Every step has a job.
         </p>
-        <p class="text-white/35 text-sm mb-8 max-w-[520px]">For fighters who train seriously and want to move with purpose.<br/>Rainers</p>
+        <p class="text-[#0B0B0C]/35 text-sm mb-8 max-w-[520px]">For fighters who train seriously and want to move with purpose.<br/>Rainers</p>
 
         {isFootworkFree ? (
           <!-- Free: email capture form -->
@@ -74,7 +74,7 @@ const productSchema = JSON.stringify({
                 required
                 placeholder="Your name"
                 autocomplete="name"
-                class="w-full border border-white/15 bg-white/5 px-5 py-4 text-white text-sm focus:border-[var(--blue)] focus:bg-white/10 focus:outline-none transition-colors duration-200 placeholder:text-white/30"
+                class="w-full border border-[#0B0B0C]/15 bg-[#F7F6F4] px-5 py-4 text-[#0B0B0C] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0B0B0C]/30"
               />
               <input
                 type="email"
@@ -82,7 +82,7 @@ const productSchema = JSON.stringify({
                 required
                 placeholder="your@email.com"
                 autocomplete="email"
-                class="w-full border border-white/15 bg-white/5 px-5 py-4 text-white text-sm focus:border-[var(--blue)] focus:bg-white/10 focus:outline-none transition-colors duration-200 placeholder:text-white/30"
+                class="w-full border border-[#0B0B0C]/15 bg-[#F7F6F4] px-5 py-4 text-[#0B0B0C] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0B0B0C]/30"
               />
               <button
                 type="submit"
@@ -92,7 +92,7 @@ const productSchema = JSON.stringify({
                 Get the Blueprint · Free
               </button>
             </form>
-            <p class="text-[11px] text-white/35 mt-4">You get the Blueprint plus training emails from Rainers. Unsubscribe any time. <a href="/legal/privacy-policy" class="underline hover:text-white/60 transition-colors">Privacy Policy</a>.</p>
+            <p class="text-[11px] text-[#0B0B0C]/35 mt-4">You get the Blueprint plus training emails from Rainers. Unsubscribe any time. <a href="/legal/privacy-policy" class="underline hover:text-[#0B0B0C]/60 transition-colors">Privacy Policy</a>.</p>
           </div>
         ) : (
           <!-- Paid: Stripe checkout -->
@@ -101,27 +101,27 @@ const productSchema = JSON.stringify({
               class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--red)] text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2">
               Get the Blueprint · {priceDollars}
             </button>
-            <p class="text-[11px] text-white/35">One-time purchase. Instant PDF download. <a href="/legal/refund-policy" class="underline hover:text-white/60 transition-colors">Refund Policy</a>.</p>
+            <p class="text-[11px] text-[#0B0B0C]/35">One-time purchase. Instant PDF download. <a href="/legal/refund-policy" class="underline hover:text-[#0B0B0C]/60 transition-colors">Refund Policy</a>.</p>
           </div>
         )}
 
         <!-- Specs -->
-        <div class="max-w-[520px] border-t border-white/10">
-          <div class="flex justify-between items-baseline py-3 border-b border-white/10">
+        <div class="max-w-[520px] border-t border-[#0B0B0C]/10">
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0B0B0C]/10">
             <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Drills</span>
-            <span class="text-white text-sm font-bold">56 rounds · Orthodox and Southpaw</span>
+            <span class="text-[#0B0B0C] text-sm font-bold">56 rounds · Orthodox and Southpaw</span>
           </div>
-          <div class="flex justify-between items-baseline py-3 border-b border-white/10">
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0B0B0C]/10">
             <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Video Breakdown</span>
-            <span class="text-white text-sm font-bold">11 min</span>
+            <span class="text-[#0B0B0C] text-sm font-bold">11 min</span>
           </div>
-          <div class="flex justify-between items-baseline py-3 border-b border-white/10">
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0B0B0C]/10">
             <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Format</span>
-            <span class="text-white text-sm font-bold">21-page playbook, zero filler</span>
+            <span class="text-[#0B0B0C] text-sm font-bold">21-page playbook, zero filler</span>
           </div>
           <div class="flex justify-between items-baseline py-3">
             <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Delivery</span>
-            <span class="text-white text-sm font-bold">Instant digital download</span>
+            <span class="text-[#0B0B0C] text-sm font-bold">Instant digital download</span>
           </div>
         </div>
       </div>
@@ -147,49 +147,114 @@ const productSchema = JSON.stringify({
     </div>
   </section>
 
-  <!-- WHY IT MATTERS — 3 pillars -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-14 md:py-20 border-t border-white/8">
-    <div class="max-w-[1100px] mx-auto">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">Why The Base</p>
-      <h2 class="font-black text-white uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
-        The base carries everything.
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="border-l-2 border-white/15 pl-5 py-1">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">Power From The Floor</p>
-          <p class="text-white/55 text-sm leading-relaxed">Most of your punch power comes from the ground up. A broken base costs you before you throw a single punch.</p>
-        </div>
-        <div class="border-l-2 border-white/15 pl-5 py-1">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">Holds Under Pressure</p>
-          <p class="text-white/55 text-sm leading-relaxed">Drill the right movements now and they become automatic when it gets hard.</p>
-        </div>
-        <div class="border-l-2 border-white/15 pl-5 py-1">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">No Gym Required</p>
-          <p class="text-white/55 text-sm leading-relaxed">56+ rounds of drills, no equipment needed. Your body is enough to build the base.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- PRODUCT DETAILS — Gumroad structure, proven to convert -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-14 md:py-20 border-t border-[#0B0B0C]/8">
+    <div class="max-w-[720px] mx-auto">
 
+      <!-- What's in it? -->
+      <div class="mb-14">
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+          What's in it?
+        </h2>
 
-  <!-- 30-DAY OUTCOME -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-14 border-b border-white/5">
-    <div class="max-w-[860px] mx-auto">
-      <p class="text-white/50 text-[10px] tracking-widest uppercase mb-5">With consistent work, this is what changes.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/8">
-        <div class="bg-[#0B0B0C] p-8">
-          <p class="text-white font-black uppercase tracking-tight text-sm mb-3">You stop moving randomly.</p>
-          <p class="text-white/40 text-sm leading-relaxed">Every step gets a purpose. Your stance connects to the ground and the ground connects to your punch.</p>
-        </div>
-        <div class="bg-[#0B0B0C] p-8">
-          <p class="text-white font-black uppercase tracking-tight text-sm mb-3">Your base holds under pressure.</p>
-          <p class="text-white/40 text-sm leading-relaxed">The drills build it in repetition. When you step, punch, and recover, the base stays intact instead of collapsing.</p>
-        </div>
-        <div class="bg-[#0B0B0C] p-8">
-          <p class="text-white font-black uppercase tracking-tight text-sm mb-3">You know exactly where you are.</p>
-          <p class="text-white/40 text-sm leading-relaxed">Balance, weight transfer, and foot position become readable. You stop guessing and start seeing what needs fixing next.</p>
-        </div>
+        <p class="text-[#0B0B0C] text-sm font-bold mb-2">Foundations Footwork Video <span class="text-[var(--terra)]">(NEW)</span></p>
+        <p class="text-[#0B0B0C]/55 text-sm leading-relaxed mb-3">A clear explanation of footwork:</p>
+        <ul class="mb-4 space-y-2">
+          <li class="text-[#0B0B0C]/55 text-sm leading-relaxed pl-4 border-l-2 border-[#0B0B0C]/15">How to step and punch without breaking your stance</li>
+          <li class="text-[#0B0B0C]/55 text-sm leading-relaxed pl-4 border-l-2 border-[#0B0B0C]/15">How weight transfer affects power and recovery</li>
+          <li class="text-[#0B0B0C]/55 text-sm leading-relaxed pl-4 border-l-2 border-[#0B0B0C]/15">How elite fighters stay balanced while moving, striking, and resetting</li>
+        </ul>
+        <p class="text-[#0B0B0C]/55 text-sm leading-relaxed mb-6">This video explains the logic behind the drills so you know why you're doing them.</p>
+
+        <ul class="space-y-3">
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">56 Rounds of Drills to build elite movement (Orthodox & Southpaw)</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Used by boxers, kickboxers, MMA strikers & coaches</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">The full Blueprint in a clean, easy-to-follow breakdown</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">30-Day Base Training Structure <span class="text-[var(--terra)]">(NEW)</span>. A simple way to apply the drills correctly instead of guessing, so you know how to run the Blueprint inside your own training</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Early access to the private community chat. Connect with other fighters and get tips.</li>
+        </ul>
       </div>
+
+      <!-- Who this is for -->
+      <div class="mb-14">
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+          Who this is for.
+        </h2>
+        <ul class="space-y-3">
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Boxers and combat athletes who want better balance, angles, and movement</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Fighters who feel stiff, flat-footed, or inconsistent when moving</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Coaches who want a simple footwork structure they can reuse</li>
+        </ul>
+      </div>
+
+      <!-- How it helps -->
+      <div class="mb-14">
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+          Here's how it helps you become a better boxer.
+        </h2>
+        <ul class="space-y-3">
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">You learn to keep balance while moving and throwing punches (stance and mechanics foundation)</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">You learn to transfer force from your feet</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">You learn to control the center of the ring better</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">You learn to apply and escape pressure easier</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Bonus: you learn how to choose the best drills for your progress without wasting time</li>
+        </ul>
+      </div>
+
+      <!-- How can I make sure it has value? -->
+      <div class="mb-14">
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+          How can I make sure it has value?
+        </h2>
+        <p class="text-[#0B0B0C] font-bold text-sm mb-4">Buy once. Train forever.</p>
+        <ul class="space-y-3">
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Open the Blueprint even five years from now, pick drills, and train.</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Save time by learning the way top fighters train.</li>
+        </ul>
+      </div>
+
+      <!-- Why me? -->
+      <div class="mb-14">
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+          Why me?
+        </h2>
+        <p class="text-[#0B0B0C]/55 text-sm leading-relaxed mb-3">It's not about me.</p>
+        <p class="text-[#0B0B0C]/55 text-sm leading-relaxed mb-3">I gathered top fighters' and coaches' knowledge in one place to give you the skills needed to win.</p>
+        <p class="text-[#0B0B0C]/55 text-sm leading-relaxed">These drills are tested and proven.</p>
+      </div>
+
+      <!-- Who gets the most out of it? -->
+      <div class="mb-14">
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+          Who gets the most out of it?
+        </h2>
+        <p class="text-[#0B0B0C]/70 text-sm leading-relaxed">People who have wasted time watching scattered YouTube tutorials and want effective training that lasts.</p>
+      </div>
+
+      <!-- Hesitation? -->
+      <div class="mb-14">
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+          Hesitation?
+        </h2>
+        <p class="text-[#0B0B0C]/55 text-sm leading-relaxed mb-5">If you think you don't have space for footwork drills in your current training plan: reduce other workouts by 20 percent and do footwork in the remaining time. You will feel the improvement in your movement, attacks, and defense.</p>
+        <a href="https://www.loom.com/share/5dcc29c1138645858c2a100cb2fd1350?sid=875dcfa4-96c0-411d-8548-0655d993cfb4"
+          target="_blank" rel="noopener"
+          class="text-[var(--terra)] text-[11px] font-bold tracking-widest uppercase hover:opacity-80 transition-opacity inline-flex items-center gap-2">
+          Watch: Preview on Loom <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- Bonuses -->
+      <div class="border-t border-[#0B0B0C]/10 pt-10">
+        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-5">Bonuses</p>
+        <ul class="space-y-3">
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">English and Spanish versions</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Loom video breakdown: 4 bases explained</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Perfect for solo training, gym warmups, and skill gaps</li>
+          <li class="text-[#0B0B0C]/70 text-sm leading-relaxed">Lifetime access, plus future minor updates</li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
@@ -199,29 +264,19 @@ const productSchema = JSON.stringify({
   </div>
 
   <!-- UPSELL: Defense Workshop -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-14 md:py-20 border-t border-white/5">
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-14 md:py-20 border-t border-[#0B0B0C]/8">
     <div class="max-w-[1100px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
       <div class="max-w-[640px]">
-        <p class="text-white/50 text-[10px] tracking-widest uppercase mb-3">When the base holds · Next step</p>
-        <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-4">
+        <p class="text-[#0B0B0C]/50 text-[10px] tracking-widest uppercase mb-3">When the base holds · Next step</p>
+        <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-4">
           The Defense Workshop.
         </h2>
-        <p class="text-white/55 text-sm leading-relaxed">A live session on the five layers of defense in boxing, Aug 29. Replay included.</p>
+        <p class="text-[#0B0B0C]/55 text-sm leading-relaxed">A live session on the five layers of defense in boxing, Aug 29. Replay included.</p>
       </div>
       <a href="/defense-workshop"
         class="tr-btn shrink-0">
         Reserve Seat · $49
       </a>
-    </div>
-  </section>
-
-  <!-- SCRIPTURE -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20">
-    <div class="max-w-[680px] mx-auto">
-      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/50 text-2xl md:text-3xl mb-4">
-        "I do not run aimlessly; I do not box as one beating the air."
-      </p>
-      <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">1 Corinthians 9:26</p>
     </div>
   </section>
 

@@ -30,9 +30,9 @@ export const PRODUCTS: Record<string, Product> = {
   footwork: {
     key: 'footwork',
     displayName: 'The Footwork Blueprint',
-    priceCents: 900,
+    priceCents: 1900,
     currency: 'USD',
-    stripePriceId: 'price_1',
+    stripePriceId: 'price_1U7ZfRHzlarU775H5rxIJ2VS',
     pagePath: '/foundation',
     kitTagId: '19807643', // FIXME: tag 19807643 does not exist in Kit — create it
     status: { state: 'live' },
@@ -51,9 +51,9 @@ export const PRODUCTS: Record<string, Product> = {
   bundle: {
     key: 'bundle',
     displayName: 'Footwork + Shadowboxing Bundle',
-    priceCents: 2400,
+    priceCents: 3000,
     currency: 'USD',
-    stripePriceId: 'price_1U1jK2HzlarU775HwLKCIkWC',
+    stripePriceId: 'price_1U7ZizHzlarU775HDKLCmNza',
     pagePath: '/shop',
     kitTagId: '19807644',
     status: { state: 'live' },

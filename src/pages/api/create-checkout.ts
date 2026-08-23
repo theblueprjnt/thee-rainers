@@ -21,7 +21,7 @@ interface ProductConfig {
 
 const PRODUCTS: Record<string, ProductConfig> = {
   footwork: {
-    priceId: 'price_1',
+    priceId: 'price_1U7ZfRHzlarU775H5rxIJ2VS',
     mode: 'payment',
     successPath: '/thank-you/footwork',
     cancelPath: '/foundation',
@@ -33,7 +33,7 @@ const PRODUCTS: Record<string, ProductConfig> = {
     cancelPath: '/shadowboxing-blueprint',
   },
   bundle: {
-    priceId: 'price_1U1jK2HzlarU775HwLKCIkWC',
+    priceId: 'price_1U7ZizHzlarU775HDKLCmNza',
     mode: 'payment',
     successPath: '/thank-you/bundle',
     cancelPath: '/shop',

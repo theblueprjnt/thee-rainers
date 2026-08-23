@@ -22,9 +22,10 @@ These apply to every .astro, .md, .mdx, and content file. Visible copy only. Do 
 - "not X, it's Y" constructions (e.g. "Not random bouncing. Not wasted steps.")
 - em/en dash anywhere
 
-## Required header replacements
-- "WHAT'S IN IT?" → "WHAT'S INSIDE."
-- "HOW CAN I MAKE SURE IT HAS VALUE?" → "VALUE THAT HOLDS."
+## Header replacements reversed 2026-08-23
+Rainers explicitly overrode these two — he likes the original headers, keep them as-is on any page:
+- "What's in it?" (previously banned in favor of "WHAT'S INSIDE.")
+- "How can I make sure it has value?" (previously banned in favor of "VALUE THAT HOLDS.")
 
 ## Negation pattern fix
 - "Not random bouncing. Not wasted steps." → "Every step has a job. Balance, control, and intent on each one."

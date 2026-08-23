@@ -129,7 +129,7 @@ const productSchema = JSON.stringify(products.map(p => ({
               </div>
             )}
             <a href={p.page ?? '/shop'} aria-label={`Learn more about ${p.title}`}
-              class={`overflow-hidden relative block ${p.featured ? 'bg-[#0B0B0C]' : 'bg-[var(--warm)]'}`}>
+              class={`overflow-hidden relative block bg-[var(--warm)]`}>
               <picture>
                 <source srcset={p.imageWebp} type="image/webp" />
                 <img src={p.image} alt={p.title}
@@ -152,12 +152,12 @@ const productSchema = JSON.stringify(products.map(p => ({
                   <div class="flex items-baseline gap-2">
                     <span class="font-black text-[#0B0B0C] text-2xl">{p.price}</span>
                     {p.featured && isFootworkFree && (
-                      <span class="text-[#0B0B0C]/30 text-sm line-through">$9</span>
+                      <span class="text-[#0B0B0C]/30 text-sm line-through">$19</span>
                     )}
                   </div>
                   {p.featured && isFootworkFree && (
                     <p class="text-[10px] text-[var(--terra)] font-bold mt-0.5 uppercase tracking-widest">
-                      Goes to $9 · <span class="tr-shop-cd"></span>
+                      Goes to $19 · <span class="tr-shop-cd"></span>
                     </p>
                   )}
                   {p.price_note && <p class="text-[10px] text-[#0B0B0C]/50 mt-0.5">{p.price_note}</p>}
@@ -230,22 +230,12 @@ const productSchema = JSON.stringify(products.map(p => ({
           <>
             <p class="text-[#0B0B0C]/30 text-sm">Start with the Footwork Blueprint. The base carries everything.</p>
             <button type="button" data-checkout="footwork" class="text-[var(--navy)] text-xs font-bold tracking-widest uppercase hover:opacity-60 transition-opacity whitespace-nowrap bg-transparent border-0 p-0 cursor-pointer">
-              Get the Blueprint · $9
+              Get the Blueprint · $19
             </button>
           </>
         )}
       </div>
 
-    </div>
-  </section>
-
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20">
-    <div class="max-w-[680px] mx-auto text-center">
-      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/40 mb-5"
-        style="font-size: clamp(1.5rem, 3.5vw, 2.25rem);">
-        "I do not run aimlessly. I do not box as one beating the air."
-      </p>
-      <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">1 Corinthians 9:26-27</p>
     </div>
   </section>
 
