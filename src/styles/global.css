@@ -1,7 +1,9 @@
 /*
  * COLOR LAW — enforced, no exceptions in visible copy or code
- * --terra #E11D2A  — primary CTA fills, eyebrow text, divider lines
- * --navy  #2348C6  — secondary accent, entry-tier labels only. Never a fill CTA.
+ * --terra #2348C6  — primary CTA fills, eyebrow text, divider lines. Changed
+ *                     from red (#E11D2A) to blue 2026-08-23 at owner request.
+ * --navy  #2348C6  — secondary accent, entry-tier labels. Same hex as --terra
+ *                     now; kept as a separate token for future re-splitting.
  * --purple #7C3AED — UNASSIGNED as of the Grade 1/2/3 coaching launch. Was
  *                     Community-only; Community has been retired sitewide
  *                     (zero subscribers at retirement). Do not reuse this
@@ -21,10 +23,10 @@
   --ink:      #0B0B0C;
   --void:     #0B0B0C;
   --ink-soft: #667280;
-  --terra:    #E11D2A;
+  --terra:    #2348C6;
   --navy:     #2348C6;
   --purple:   #7C3AED;
-  --red:      #E11D2A;
+  --red:      #2348C6;
   --blue:     #2348C6;
 }
 
@@ -34,9 +36,9 @@
   --color-ink:      #0B0B0C;
   --color-void:     #0B0B0C;
   --color-ink-soft: #667280;
-  --color-terra:    #E11D2A;
+  --color-terra:    #2348C6;
   --color-navy:     #2348C6;
-  --color-red:      #E11D2A;
+  --color-red:      #2348C6;
   --color-blue:     #2348C6;
   --color-purple:   #7C3AED;
   --color-cream:    #F6F6F6;

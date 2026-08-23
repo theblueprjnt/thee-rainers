@@ -10,10 +10,10 @@ metadata:
 ## Site is light mode, sitewide (2026-08-23)
 Rainers converted the entire site from dark to light. Dark section backgrounds (`bg-[#0A0A0A]` / `bg-[#0B0B0C]`) are no longer the default anywhere — use white (`bg-white`) or the warm cream (`--warm` #F7F5F2) instead, with dark text. There is no remaining deliberate dark exception (Scripture blocks, previously the one named exception, were removed from the site entirely on the same date — see below).
 
-## Color tokens — corrected against the live codebase (2026-08-23)
-This file previously named `--accent` #0057FF as the CTA color. That token does not exist in `src/styles/global.css` and was never the real CTA color — the actual, verified tokens are:
-- `--terra` / `--red` #E11D2A — the real primary CTA fill, eyebrow/kicker text, divider lines. Matches CLAUDE.md's brand law exactly.
-- `--navy` / `--blue` #2348C6 — secondary accent, entry-tier labels and inline links only. Never a fill CTA.
+## Color tokens — corrected against the live codebase (2026-08-23, updated same day)
+This file previously named `--accent` #0057FF as the CTA color. That token does not exist in `src/styles/global.css` and was never the real CTA color. As of 2026-08-23 (later same day) the primary CTA color was changed from red to blue at the owner's request — the actual, verified tokens are:
+- `--terra` / `--red` #2348C6 — the real primary CTA fill, eyebrow/kicker text, divider lines. Was #E11D2A (red); changed to blue 2026-08-23.
+- `--navy` / `--blue` #2348C6 — secondary accent, entry-tier labels and inline links. Same hex as `--terra` now.
 - `--ink` #0B0B0C — primary text color (not a background default anymore, see above).
 - `--white` #FFFFFF and `--warm` #F7F5F2 — primary backgrounds everywhere.
 - Purple #6A0DAD — permitted ONLY on /community routes as a deliberate sub-brand. Nowhere else on the site.
@@ -21,10 +21,10 @@ This file previously named `--accent` #0057FF as the CTA color. That token does 
 
 ## Button rules
 - Shape: `rounded-none` everywhere. No pill or rounded buttons.
-- One-time purchase CTAs: red/terra (#E11D2A) filled.
+- One-time purchase CTAs: blue/terra (#2348C6) filled.
 - Community/subscription CTAs: purple (#6A0DAD) filled — /community pages only.
-- Free/lead capture CTAs: red/terra (#E11D2A) outline or filled.
-- No four-accent drift. If in doubt, use red/terra.
+- Free/lead capture CTAs: blue/terra (#2348C6) outline or filled.
+- No four-accent drift. If in doubt, use blue/terra.
 
 ## Mobile spacing scale
 - Target device: 390x844 (iPhone class).

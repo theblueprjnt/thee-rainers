@@ -54,8 +54,8 @@ Astro 6 on Cloudflare Pages/Workers. `@astrojs/cloudflare` adapter. Tailwind v4 
 ## Brand rules — non-negotiable
 
 ### Color law (strict — no exceptions)
-- Red `#E11D2A` (`var(--red)`) — the ONLY fill color for action CTAs. One per screen. Used for: Blueprint purchase, Workshop reserve, lead capture submit, any primary "buy/get/join" button. Never used for labels, links, or decorative elements.
-- Blue `#2348C6` (`var(--blue)`) — entry-tier labels and inline text links ONLY. Never a fill CTA. Used for: "Learn more →" links, secondary text links, metadata labels, free-offer labels.
+- Blue `#2348C6` (`var(--red)` / `var(--terra)`, same hex now) — the ONLY fill color for action CTAs. One per screen. Used for: Blueprint purchase, Workshop reserve, lead capture submit, any primary "buy/get/join" button. Never used for labels, links, or decorative elements. Changed from red (`#E11D2A`) to blue 2026-08-23 at owner request — see `src/styles/global.css` COLOR LAW comment.
+- Blue `#2348C6` (`var(--blue)` / `var(--navy)`) — entry-tier labels and inline text links. Same hex as the CTA fill color now, since both tokens point at blue.
 - Purple `#7C3AED` (`var(--purple)`) — Private Architecture and Greatness Community ONLY. Signals recurring membership / inner-circle commitment. Separates subscription from one-time purchases.
 - Void `#0A0A0A` — primary text, scripture section backgrounds.
 - White `#FFFFFF` — primary background everywhere else.
