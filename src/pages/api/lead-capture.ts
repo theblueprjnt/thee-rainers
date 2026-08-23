@@ -8,6 +8,7 @@
 //   AIRTABLE_BASE_ID       — Airtable base ID
 //   AIRTABLE_LEADS_TABLE   — Airtable table for leads (default: "Leads")
 //                            NOTE: "source" field must be Single line text, not Single Select
+//                            NOTE: "Background" field must be Single line text, not Single Select
 //   SITE_URL               — production domain, e.g. https://theerainers.com
 //   TELEGRAM_BOT_TOKEN     — Telegram bot token from @BotFather
 //   TELEGRAM_CHAT_ID       — Your personal Telegram chat ID (get via @userinfobot)
@@ -62,7 +63,7 @@ const FUNNEL_MAP = `
         <p style="font-size:12px;color:#888;margin:0;">Footwork and shadowboxing. Both systems together.</p>
       </td>
       <td style="padding:12px 0 12px 16px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:right;">
-        <a href="https://theerainers.com/shop" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$24 →</a>
+        <a href="https://theerainers.com/shop" style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#E11D2A;text-decoration:none;">$30 →</a>
       </td>
     </tr>
     <tr>
@@ -253,24 +254,27 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
   let full_name = '';
   let email = '';
   let phone = '';
+  let background = '';
   let source = 'footwork-free';
 
   let honeypot = '';
   try {
     if (isJson) {
       const body = (await request.json()) as Record<string, string>;
-      full_name = (body.full_name ?? '').trim();
-      email     = (body.email    ?? '').trim();
-      phone     = (body.phone    ?? '').trim();
-      source    = (body.source   ?? source).trim();
-      honeypot  = (body.website  ?? '').trim();
+      full_name  = (body.full_name  ?? '').trim();
+      email      = (body.email      ?? '').trim();
+      phone      = (body.phone      ?? '').trim();
+      background = (body.background ?? '').trim();
+      source     = (body.source     ?? source).trim();
+      honeypot   = (body.website    ?? '').trim();
     } else {
       const data = await request.formData();
-      full_name = ((data.get('full_name') as string) ?? '').trim();
-      email     = ((data.get('email')     as string) ?? '').trim();
-      phone     = ((data.get('phone')     as string) ?? '').trim();
-      source    = ((data.get('source')    as string) ?? source).trim();
-      honeypot  = ((data.get('website')   as string) ?? '').trim();
+      full_name  = ((data.get('full_name')  as string) ?? '').trim();
+      email      = ((data.get('email')      as string) ?? '').trim();
+      phone      = ((data.get('phone')      as string) ?? '').trim();
+      background = ((data.get('background') as string) ?? '').trim();
+      source     = ((data.get('source')     as string) ?? source).trim();
+      honeypot   = ((data.get('website')    as string) ?? '').trim();
     }
   } catch {
     return isJson
@@ -345,6 +349,7 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
           Name:             full_name,
           Source:           source,
           Phone:            phone,
+          Background:       background,
           'Date Submitted': new Date().toISOString(),
         }).catch((err) =>
             console.warn('[lead-capture] Airtable upsert failed', { emailLog, err: String(err) }),
