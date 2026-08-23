@@ -39,7 +39,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
 >
 
   <!-- ── HERO ──────────────────────────────────────────────────────────── -->
-  <section class="relative bg-[#0B0B0C] overflow-hidden" style="min-height: 100svh;">
+  <section class="relative bg-white overflow-hidden" style="min-height: 100svh;">
 
     <!-- Desktop: sparring photo, right anchor -->
     <div class="absolute right-0 top-0 h-full hidden md:block pointer-events-none select-none"
@@ -48,16 +48,16 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
         class="w-full h-full object-cover object-center grayscale"
         loading="eager" decoding="async" fetchpriority="high" />
       <div class="absolute inset-y-0 left-0 w-40"
-        style="background: linear-gradient(to right, #0B0B0C 0%, transparent 100%);"></div>
+        style="background: linear-gradient(to right, #FFFFFF 0%, transparent 100%);"></div>
     </div>
 
     <!-- Mobile: low-opacity bg -->
     <div class="absolute inset-0 md:hidden" aria-hidden="true">
       <img src="/images/sparring_withnetherlands.jpg" alt=""
-        class="w-full h-full object-cover object-center opacity-20 grayscale"
+        class="w-full h-full object-cover object-center opacity-15 grayscale"
         loading="eager" decoding="async" fetchpriority="high" />
       <div class="absolute inset-0"
-        style="background: linear-gradient(to top, #0B0B0C 40%, transparent 100%);"></div>
+        style="background: linear-gradient(to top, #FFFFFF 40%, transparent 100%);"></div>
     </div>
 
     <!-- Content -->
@@ -68,7 +68,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
           The Weekly Session
         </p>
 
-        <blockquote class="font-black text-white leading-[0.88] tracking-tighter mb-4"
+        <blockquote class="font-black text-[#0B0B0C] leading-[0.88] tracking-tighter mb-4"
           style="font-size: clamp(2rem, 4.5vw, 3.5rem);">
           "I feel comfortable training on my own."
         </blockquote>
@@ -79,14 +79,14 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
               class="w-10 h-10 object-cover object-top shrink-0"
               loading="eager" decoding="async" />
           </picture>
-          <p class="text-white/45 text-[11px] font-bold tracking-widest uppercase">
+          <p class="text-[#0B0B0C]/45 text-[11px] font-bold tracking-widest uppercase">
             Giancarlo · Entrepreneur
           </p>
         </div>
 
         <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
 
-        <p class="text-white/50 text-base leading-relaxed mb-12 max-w-[400px]">
+        <p class="text-[#0B0B0C]/50 text-base leading-relaxed mb-12 max-w-[400px]">
           Weekly correction, live. A path built in layers. The direction most training skips.
         </p>
 
@@ -96,7 +96,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
         <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-4">
           Checkout unavailable. Email rainers@theerainers.com
         </p>
-        <p class="text-white/35 text-xs mt-4 tracking-wide">
+        <p class="text-[#0B0B0C]/35 text-xs mt-4 tracking-wide">
           $39/month · $390/year · cancel anytime
         </p>
       </div>
@@ -160,15 +160,15 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
   </section>
 
   <!-- ── PAIN BLOCK ────────────────────────────────────────────────────── -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20 md:py-28">
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 md:py-28">
     <div class="max-w-[720px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-8">The Problem</p>
-      <p class="font-black text-white uppercase tracking-tighter leading-[0.88] mb-8"
+      <p class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.88] mb-8"
         style="font-size: clamp(2rem, 4.5vw, 3.25rem);">
         Training with correction builds the right habits faster.
       </p>
       <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
-      <p class="text-white/50 text-base leading-relaxed max-w-[520px]">
+      <p class="text-[#0B0B0C]/50 text-base leading-relaxed max-w-[520px]">
         You can train for months and still stay stuck if there is a gap. The Weekly Session exists to close that gap.
       </p>
     </div>
@@ -176,15 +176,15 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
 
   <!-- ── VIDEO SLOT ─────────────────────────────────────────────────────── -->
   {PREVIEW_VIDEO_ID && (
-    <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 pb-20 md:pb-28">
+    <section class="bg-white px-6 md:px-12 lg:px-20 pb-20 md:pb-28">
       <div class="max-w-[800px] mx-auto">
-        <p class="text-white/35 text-[10px] tracking-widest uppercase font-bold mb-6">
+        <p class="text-[#0B0B0C]/35 text-[10px] tracking-widest uppercase font-bold mb-6">
           See the method
         </p>
         <div class="relative w-full" style="aspect-ratio: 16/9;">
           <button
             type="button"
-            class="group relative block w-full h-full overflow-hidden border border-white/10"
+            class="group relative block w-full h-full overflow-hidden border border-[#0B0B0C]/10"
             data-yt-facade
             data-yt-id={PREVIEW_VIDEO_ID}
             aria-label="Play video: Why You Can't Defend Yourself">
@@ -259,7 +259,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
   </section>
 
   <!-- ── OBJECTION PAIR ────────────────────────────────────────────────── -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20 md:py-28">
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 md:py-28">
     <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
 
       <div>
@@ -267,7 +267,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
           "I don't train at a gym."
         </p>
         <div class="h-0.5 w-8 bg-[var(--terra)] mb-6"></div>
-        <p class="text-white/60 text-base leading-relaxed">
+        <p class="text-[#0B0B0C]/60 text-base leading-relaxed">
           Most members do not. The system is built around what works at home, in a garage, or wherever you have space. The method does not require a full gym.
         </p>
       </div>
@@ -277,7 +277,7 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
           "I'm not far enough along."
         </p>
         <div class="h-0.5 w-8 bg-[var(--terra)] mb-6"></div>
-        <p class="text-white/60 text-base leading-relaxed">
+        <p class="text-[#0B0B0C]/60 text-base leading-relaxed">
           The path is built from the ground up. Starting early means you build the right habits instead of spending years correcting the wrong ones.
         </p>
       </div>
@@ -375,10 +375,10 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
   <Testimonials heading="What fighters say." kicker="Field Report" background="white" />
 
   <!-- ── REPEATED CTA ───────────────────────────────────────────────────── -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-20 md:py-28">
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-20 md:py-28">
     <div class="max-w-[640px] mx-auto text-center">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-8">Join the work</p>
-      <h2 class="font-black text-white uppercase tracking-tighter leading-[0.88] mb-6"
+      <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.88] mb-6"
         style="font-size: clamp(2rem, 4vw, 3.25rem);">
         Weekly correction with training drills.
       </h2>
@@ -394,8 +394,8 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
       <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-4">
         Checkout unavailable. Email rainers@theerainers.com
       </p>
-      <p class="text-white/30 text-xs mt-6">Cancel anytime · Secure checkout via Stripe</p>
-      <a href="/foundation" class="block text-white/30 text-[11px] font-bold tracking-widest uppercase hover:text-white/55 transition-colors mt-4">
+      <p class="text-[#0B0B0C]/30 text-xs mt-6">Cancel anytime · Secure checkout via Stripe</p>
+      <a href="/foundation" class="block text-[#0B0B0C]/30 text-[11px] font-bold tracking-widest uppercase hover:text-[#0B0B0C]/55 transition-colors mt-4">
         Not ready yet · Start with the free Foundation
       </a>
     </div>
@@ -459,17 +459,6 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
         class="text-[#0B0B0C]/60 text-xs font-bold tracking-widest uppercase hover:text-[#0B0B0C]/80 transition-colors shrink-0">
         1-ON-1 Coaching · Application Only
       </a>
-    </div>
-  </section>
-
-  <!-- ── SCRIPTURE ──────────────────────────────────────────────────────── -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-16 md:py-24">
-    <div class="max-w-[640px] mx-auto text-center">
-      <p class="font-black uppercase tracking-tighter leading-[0.88] text-white/40 mb-5"
-        style="font-size: clamp(1.5rem, 3.5vw, 2.25rem);">
-        "As iron sharpens iron, so one person sharpens another."
-      </p>
-      <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">Proverbs 27:17</p>
     </div>
   </section>
 

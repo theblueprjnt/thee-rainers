@@ -10,19 +10,19 @@ const CHANNEL_ID = 'UC66qVS7EJyvCLJeaUzdoCfQ';
     <meta name="robots" content="noindex" />
   </Fragment>
 
-  <div class="min-h-screen bg-[#0A0A0A] flex flex-col items-center justify-center px-6 py-24">
+  <div class="min-h-screen bg-white flex flex-col items-center justify-center px-6 py-24">
 
     <!-- OFFLINE STATE (default — rendered server-side, no flash) -->
     <div id="offline-state" class="w-full max-w-[560px] mx-auto text-center">
       <div class="flex items-center justify-center gap-2 mb-6">
-        <span class="inline-block w-2 h-2 rounded-full bg-white/20"></span>
-        <p class="text-white/25 text-[10px] tracking-widest uppercase">Offline</p>
+        <span class="inline-block w-2 h-2 rounded-full bg-[#0A0A0A]/20"></span>
+        <p class="text-[#0A0A0A]/40 text-[10px] tracking-widest uppercase">Offline</p>
       </div>
-      <h1 class="font-black text-white uppercase tracking-tighter leading-[0.85] mb-4"
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-4"
         style="font-size: clamp(2.2rem, 7vw, 4rem);">
         Not live<br/>right now.
       </h1>
-      <p class="text-white/40 text-sm leading-relaxed mb-12 max-w-[340px] mx-auto">
+      <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mb-12 max-w-[340px] mx-auto">
         Follow me so you catch the next session.
       </p>
 
@@ -66,13 +66,13 @@ const CHANNEL_ID = 'UC66qVS7EJyvCLJeaUzdoCfQ';
       <div class="text-center mb-8">
         <div class="flex items-center justify-center gap-2 mb-4">
           <span class="live-dot inline-block w-2.5 h-2.5 rounded-full bg-[var(--red)]"></span>
-          <p class="text-white/50 text-[10px] tracking-widest uppercase">Live now</p>
+          <p class="text-[#0A0A0A]/60 text-[10px] tracking-widest uppercase">Live now</p>
         </div>
-        <h1 class="font-black text-white uppercase tracking-tighter leading-[0.85] mb-3"
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-3"
           style="font-size: clamp(2.5rem, 8vw, 5rem);">
           I'm live.
         </h1>
-        <p id="live-title" class="text-white/50 text-base leading-relaxed max-w-[480px] mx-auto"></p>
+        <p id="live-title" class="text-[#0A0A0A]/60 text-base leading-relaxed max-w-[480px] mx-auto"></p>
       </div>
 
       <!-- 16:9 player -->
@@ -89,10 +89,10 @@ const CHANNEL_ID = 'UC66qVS7EJyvCLJeaUzdoCfQ';
       </div>
 
       <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4">
-        <p class="text-white/30 text-xs tracking-wide">Live now. Tap the player to unmute.</p>
+        <p class="text-[#0A0A0A]/40 text-xs tracking-wide">Live now. Tap the player to unmute.</p>
         <a href="https://youtube.com/@theerainers/live"
           target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center justify-center font-bold text-white bg-[var(--red)] px-6 py-3 text-xs tracking-widest uppercase transition-opacity duration-150 hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] whitespace-nowrap">
+          class="inline-flex items-center justify-center font-bold text-white bg-[var(--red)] px-6 py-3 text-xs tracking-widest uppercase transition-opacity duration-150 hover:opacity-80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2 focus-visible:ring-offset-white whitespace-nowrap">
           Join the chat on YouTube →
         </a>
       </div>
@@ -110,8 +110,8 @@ const CHANNEL_ID = 'UC66qVS7EJyvCLJeaUzdoCfQ';
     justify-content: space-between;
     gap: 1rem;
     padding: 0.875rem 1.25rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(11, 11, 12, 0.12);
+    color: rgba(11, 11, 12, 0.55);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -120,8 +120,8 @@ const CHANNEL_ID = 'UC66qVS7EJyvCLJeaUzdoCfQ';
     transition: border-color 0.15s ease, color 0.15s ease;
   }
   .follow-btn:hover {
-    border-color: rgba(255, 255, 255, 0.25);
-    color: rgba(255, 255, 255, 0.75);
+    border-color: rgba(11, 11, 12, 0.3);
+    color: rgba(11, 11, 12, 0.85);
   }
   .follow-btn:focus-visible {
     outline: 2px solid var(--blue);

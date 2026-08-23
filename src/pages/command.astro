@@ -12,24 +12,24 @@ import { coachingPhotos } from '../data/coaching-photos';
   </Fragment>
 
   <!-- ── HERO ──────────────────────────────────────────────────────────── -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 pt-28 pb-16 md:pt-36 md:pb-20">
+  <section class="bg-white px-6 md:px-12 lg:px-20 pt-28 pb-16 md:pt-36 md:pb-20">
     <div class="max-w-[860px]">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">
         Private Architecture · Application Only
       </p>
-      <h1 class="font-black text-white uppercase tracking-tighter leading-[0.86] mb-6"
+      <h1 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.86] mb-6"
         style="font-size: clamp(2.75rem, 6vw, 5rem);">
         <!-- DRAFT: voice pass Rainers -->
         The whole<br/>framework<br/>is yours.
       </h1>
       <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
-      <p class="text-white/50 text-base leading-relaxed mb-10 max-w-[480px]">
+      <p class="text-[#0B0B0C]/50 text-base leading-relaxed mb-10 max-w-[480px]">
         <!-- DRAFT: voice pass Rainers -->
         Not a program. A structure built around how you move, when you train, and where the breakdown happens.
       </p>
       <a href="#apply"
-        class="inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-white/40 hover:text-white/65 transition-colors duration-200">
-        <span class="h-px w-8 bg-white/20"></span>
+        class="inline-flex items-center gap-3 text-[10px] font-bold tracking-widest uppercase text-[#0B0B0C]/40 hover:text-[#0B0B0C]/65 transition-colors duration-200">
+        <span class="h-px w-8 bg-[#0B0B0C]/20"></span>
         <!-- DRAFT: voice pass Rainers -->
         See the work, then apply
       </a>
@@ -38,10 +38,10 @@ import { coachingPhotos } from '../data/coaching-photos';
 
   <!-- ── COACHING PHOTO GALLERY ────────────────────────────────────────── -->
   {coachingPhotos.length > 0 ? (
-    <section class="bg-[#0B0B0C]" aria-label="Coaching sessions">
-      <div class={`grid gap-px bg-white/5 ${coachingPhotos.length === 1 ? 'grid-cols-1' : coachingPhotos.length === 2 ? 'grid-cols-2' : coachingPhotos.length === 3 ? 'grid-cols-3' : 'grid-cols-2 md:grid-cols-4'}`}>
+    <section class="bg-white" aria-label="Coaching sessions">
+      <div class={`grid gap-px bg-[#0B0B0C]/8 ${coachingPhotos.length === 1 ? 'grid-cols-1' : coachingPhotos.length === 2 ? 'grid-cols-2' : coachingPhotos.length === 3 ? 'grid-cols-3' : 'grid-cols-2 md:grid-cols-4'}`}>
         {coachingPhotos.map((photo) => (
-          <div class="overflow-hidden bg-[#0B0B0C]" style="aspect-ratio: 4/3;">
+          <div class="overflow-hidden bg-white" style="aspect-ratio: 4/3;">
             <picture>
               {photo.webp && <source srcset={photo.webp} type="image/webp" />}
               <img
@@ -57,7 +57,7 @@ import { coachingPhotos } from '../data/coaching-photos';
       </div>
     </section>
   ) : (
-    <div class="bg-[#0B0B0C] border-t border-white/5" aria-hidden="true" style="height: 2px;"></div>
+    <div class="bg-white border-t border-[#0B0B0C]/8" aria-hidden="true" style="height: 2px;"></div>
   )}
 
   <!-- ── WHO THIS IS FOR ───────────────────────────────────────────────── -->
@@ -113,10 +113,10 @@ import { coachingPhotos } from '../data/coaching-photos';
   </section>
 
   <!-- ── HOW THIS WORKS ────────────────────────────────────────────────── -->
-  <section class="bg-[#0B0B0C] px-6 md:px-12 lg:px-20 py-16 md:py-24">
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[1100px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-10">How it works</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#0B0B0C]/8">
         {[
           {
             num: '01',
@@ -134,13 +134,13 @@ import { coachingPhotos } from '../data/coaching-photos';
             body: 'You leave with something written. The work has to compound after the coaching ends.'
           },
         ].map(item => (
-          <div class="bg-[#0B0B0C] p-8 md:p-10">
+          <div class="bg-white p-8 md:p-10">
             <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-5">{item.num}</p>
-            <h3 class="font-black text-white uppercase tracking-tight text-lg leading-tight mb-4">
+            <h3 class="font-black text-[#0B0B0C] uppercase tracking-tight text-lg leading-tight mb-4">
               <!-- DRAFT: voice pass Rainers -->
               {item.heading}
             </h3>
-            <p class="text-white/50 text-sm leading-relaxed">
+            <p class="text-[#0B0B0C]/50 text-sm leading-relaxed">
               <!-- DRAFT: voice pass Rainers -->
               {item.body}
             </p>
@@ -154,7 +154,6 @@ import { coachingPhotos } from '../data/coaching-photos';
   <Testimonials
     ids={["giancarlo-remote"]}
     filter="all"
-    background="void"
     heading="21 weeks."
     kicker="Evidence"
   />

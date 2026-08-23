@@ -143,8 +143,8 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #0A0A0A;
-      color: #fff;
+      background: #FFFFFF;
+      color: #0A0A0A;
       font-family: system-ui, sans-serif;
       min-height: 100svh;
     }
@@ -156,7 +156,7 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LQ7HPXG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <header style="border-bottom: 1px solid rgba(255,255,255,0.06); padding: 1.25rem 2rem;">
+  <header style="border-bottom: 1px solid rgba(10,10,10,0.08); padding: 1.25rem 2rem;">
     <a href="/">
       <picture>
         <source srcset="/images/logo-trb-opt.webp" type="image/webp" />
@@ -170,14 +170,14 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
     {isValid && (
       <>
         <!-- PRODUCT HEADER -->
-        <div style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+        <div style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(10,10,10,0.1);">
           <p style="color: var(--ink-soft); font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">
             Your Access · Thee Rainers
           </p>
           <h1 style="font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.88; font-size: clamp(2rem, 6vw, 3.5rem); margin-bottom: 1rem;">
             {record!.product_name}
           </h1>
-          <p style="color: rgba(255,255,255,0.35); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
+          <p style="color: rgba(10,10,10,0.45); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;">
             Permanent access · {record!.email}
           </p>
         </div>
@@ -190,7 +190,7 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
             </p>
             <div style="display: flex; flex-direction: column; gap: 1.5rem;">
               {videoUrls.map((url) => (
-                <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #111; border: 1px solid rgba(255,255,255,0.06);">
+                <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #111; border: 1px solid rgba(10,10,10,0.08);">
                   <iframe
                     src={embedUrl(url)}
                     title={record!.product_name}
@@ -224,16 +224,16 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
                 </a>
               ))}
             </div>
-            <p style="color: rgba(255,255,255,0.2); font-size: 0.75rem; margin-top: 1rem; line-height: 1.5;">
+            <p style="color: rgba(10,10,10,0.35); font-size: 0.75rem; margin-top: 1rem; line-height: 1.5;">
               Download links expire after 1 hour. Refresh this page to generate a fresh link.
             </p>
           </section>
         )}
 
         <!-- SUPPORT -->
-        <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);">
-          <p style="color: rgba(255,255,255,0.2); font-size: 0.75rem; line-height: 1.6;">
-            Questions or issues? Email <a href="mailto:rainers@theerainers.com" style="color: rgba(255,255,255,0.4);">rainers@theerainers.com</a> with your order email.
+        <div style="padding-top: 2rem; border-top: 1px solid rgba(10,10,10,0.08);">
+          <p style="color: rgba(10,10,10,0.35); font-size: 0.75rem; line-height: 1.6;">
+            Questions or issues? Email <a href="mailto:rainers@theerainers.com" style="color: rgba(10,10,10,0.5);">rainers@theerainers.com</a> with your order email.
           </p>
         </div>
       </>
@@ -241,14 +241,14 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
 
     {!isValid && (
       <>
-        <div style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);">
+        <div style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(10,10,10,0.1);">
           <p style="color: var(--ink-soft); font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;">
             {showExpired ? 'Link Expired' : 'Link Not Found'}
           </p>
           <h1 style="font-weight: 900; text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.88; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem;">
             {showExpired ? 'This link\nhas expired.' : 'This link\nis not valid.'}
           </h1>
-          <p style="color: rgba(255,255,255,0.4); font-size: 0.875rem; line-height: 1.6; max-width: 440px;">
+          <p style="color: rgba(10,10,10,0.5); font-size: 0.875rem; line-height: 1.6; max-width: 440px;">
             {showExpired
               ? 'Your access link has expired. Enter your purchase email below and we will send a fresh link.'
               : 'This link was not found or may have already been used. Enter the email you used to purchase and we will resend your access link.'}
@@ -257,7 +257,7 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
 
         <!-- RESEND FORM -->
         <div style="max-width: 420px;">
-          <p style="color: rgba(255,255,255,0.25); font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.25rem;">
+          <p style="color: rgba(10,10,10,0.4); font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.25rem;">
             Resend Access Link
           </p>
           <form id="resend-form" style="display: flex; flex-direction: column; gap: 0.75rem;">
@@ -266,9 +266,9 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
               id="resend-email"
               required
               placeholder="your@email.com"
-              style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 1rem 1.25rem; font-size: 0.875rem; outline: none; font-family: inherit;"
-              onfocus="this.style.borderColor='rgba(255,255,255,0.4)'"
-              onblur="this.style.borderColor='rgba(255,255,255,0.15)'"
+              style="background: transparent; border: 1px solid rgba(10,10,10,0.15); color: #0A0A0A; padding: 1rem 1.25rem; font-size: 0.875rem; outline: none; font-family: inherit;"
+              onfocus="this.style.borderColor='rgba(10,10,10,0.5)'"
+              onblur="this.style.borderColor='rgba(10,10,10,0.15)'"
             />
             <button
               type="submit"
@@ -283,29 +283,20 @@ const videoUrls = [record?.youtube_url_1, record?.youtube_url_2].filter(Boolean)
           <p id="resend-success" style="display:none; color: var(--blue); font-size: 0.875rem; margin-top: 1.25rem; letter-spacing: 0.05em;">
             If that email has a purchase on file, the link is on its way.
           </p>
-          <p id="resend-error" style="display:none; color: rgba(255,255,255,0.4); font-size: 0.875rem; margin-top: 1.25rem;">
+          <p id="resend-error" style="display:none; color: rgba(10,10,10,0.5); font-size: 0.875rem; margin-top: 1.25rem;">
             Something went wrong. Email rainers@theerainers.com directly.
           </p>
         </div>
 
-        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06);">
-          <p style="color: rgba(255,255,255,0.2); font-size: 0.75rem; line-height: 1.6;">
-            Purchased but still having issues? Contact <a href="mailto:rainers@theerainers.com" style="color: rgba(255,255,255,0.35);">rainers@theerainers.com</a> with your order email and we will sort it out.
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(10,10,10,0.08);">
+          <p style="color: rgba(10,10,10,0.35); font-size: 0.75rem; line-height: 1.6;">
+            Purchased but still having issues? Contact <a href="mailto:rainers@theerainers.com" style="color: rgba(10,10,10,0.45);">rainers@theerainers.com</a> with your order email and we will sort it out.
           </p>
         </div>
       </>
     )}
 
   </main>
-
-  <footer style="border-top: 1px solid rgba(255,255,255,0.06); padding: 3rem 1.5rem; text-align: center;">
-    <p style="font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; color: rgba(255,255,255,0.06); font-size: clamp(0.875rem, 2.5vw, 1.25rem); line-height: 1; margin-bottom: 0.75rem;">
-      "I do not run aimlessly. I do not box as one beating the air."
-    </p>
-    <p style="color: var(--ink-soft); font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase;">
-      1 Corinthians 9:26–27
-    </p>
-  </footer>
 
 </body>
 </html>

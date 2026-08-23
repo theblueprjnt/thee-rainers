@@ -6,21 +6,21 @@ import Layout from '../layouts/Base.astro';
     <meta name="description" content="The Defense Workshop replay is now included with every Defense Workshop seat. Live Aug 29. $49." />
   </Fragment>
 
-  <!-- HERO — dark, full-bleed, CTA above the fold on mobile -->
-  <section class="relative overflow-hidden bg-[#0B0B0C]">
+  <!-- HERO — light, full-bleed, CTA above the fold on mobile -->
+  <section class="relative overflow-hidden bg-white">
     <img src="/images/workshop_bacgkround.webp" alt="" aria-hidden="true"
       width="1920" height="1080"
-      class="absolute inset-0 w-full h-full object-cover object-center opacity-15 pointer-events-none select-none"
+      class="absolute inset-0 w-full h-full object-cover object-center opacity-10 pointer-events-none select-none"
       loading="lazy" fetchpriority="low" />
 
     <div class="relative z-10 px-6 md:px-16 lg:px-24 pt-28 md:pt-44 pb-14 md:pb-20">
       <div class="max-w-[680px]">
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Replay Included · Defense Workshop</p>
-        <h1 class="font-black text-white uppercase tracking-tighter leading-[0.85] mb-6"
+        <h1 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.85] mb-6"
           style="font-size: clamp(2.8rem, 8vw, 4.75rem);">
           The Defense<br/>Workshop.<br/>Recorded.
         </h1>
-        <p class="text-white/55 text-base leading-relaxed mb-10 max-w-[460px]">
+        <p class="text-[#0B0B0C]/65 text-base leading-relaxed mb-10 max-w-[460px]">
           The framework for not getting hit. Footwork, stance, defensive structure, live Q&A. 90 minutes. The replay is now included with every Defense Workshop seat.
         </p>
 
@@ -29,12 +29,12 @@ import Layout from '../layouts/Base.astro';
           Reserve Seat · $49
         </a>
 
-        <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-white/25 text-[10px] tracking-widest uppercase">
+        <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[#0B0B0C]/40 text-[10px] tracking-widest uppercase">
           <span>90 Min</span>
           <span aria-hidden="true">·</span>
           <span>Live Aug 29</span>
           <span aria-hidden="true">·</span>
-          <span class="text-white/45 font-bold">Replay Included</span>
+          <span class="text-[#0B0B0C]/55 font-bold">Replay Included</span>
         </div>
       </div>
     </div>
@@ -140,15 +140,9 @@ import Layout from '../layouts/Base.astro';
     </div>
   </section>
 
-  <!-- SCRIPTURE + final CTA -->
-  <section class="bg-[#0B0B0C] px-6 md:px-16 lg:px-24 py-14 md:py-20">
-    <div class="max-w-[780px] mx-auto flex flex-col md:flex-row md:items-end justify-between gap-10">
-      <div>
-        <p class="font-black uppercase tracking-tighter leading-[0.88] mb-4 text-white/50 text-2xl md:text-3xl max-w-[520px]">
-          "I do not run aimlessly. I do not fight like a boxer beating the air."
-        </p>
-        <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">1 Corinthians 9:26</p>
-      </div>
+  <!-- FINAL CTA -->
+  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-14 md:py-20">
+    <div class="max-w-[780px] mx-auto flex items-center justify-center">
       <a href="/defense-workshop"
         class="tr-btn shrink-0">
         Reserve Seat · $49

@@ -38,24 +38,24 @@ const NEW_WAY = [
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 
-      <!-- OLD WAY — dark, photo-backed, feels unresolved -->
-      <div class="relative overflow-hidden bg-[#0B0B0C]">
+      <!-- OLD WAY — muted, photo-backed, feels unresolved -->
+      <div class="relative overflow-hidden bg-[#EEECE6]">
         <picture>
           <source srcset="/images/coldfightpic2-opt.webp" type="image/webp" />
           <img src="/images/coldfightpic2-opt.jpg" alt=""
-            class="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-30"
+            class="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-20"
             loading="lazy" decoding="async" aria-hidden="true" />
         </picture>
-        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(11,11,12,0.75) 0%, rgba(11,11,12,0.92) 100%);"></div>
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(238,236,230,0.75) 0%, rgba(238,236,230,0.92) 100%);"></div>
         <div class="relative p-6 md:p-8">
-          <p class="text-white/50 text-[11px] tracking-widest uppercase font-bold mb-6">Training on your own</p>
+          <p class="text-[#0B0B0C]/50 text-[11px] tracking-widest uppercase font-bold mb-6">Training on your own</p>
           <ul class="flex flex-col gap-3">
             {OLD_WAY.map(item => (
-              <li class="flex items-center gap-3 border border-white/10 bg-white/[0.03] px-5 py-4">
+              <li class="flex items-center gap-3 border border-[#0B0B0C]/10 bg-white/40 px-5 py-4">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="shrink-0" aria-hidden="true">
-                  <path d="M2 2L12 12M12 2L2 12" stroke="rgba(255,255,255,0.35)" stroke-width="1.75" stroke-linecap="round"/>
+                  <path d="M2 2L12 12M12 2L2 12" stroke="rgba(11,11,12,0.35)" stroke-width="1.75" stroke-linecap="round"/>
                 </svg>
-                <span class="text-white/70 text-sm font-bold">{item}</span>
+                <span class="text-[#0B0B0C]/70 text-sm font-bold">{item}</span>
               </li>
             ))}
           </ul>

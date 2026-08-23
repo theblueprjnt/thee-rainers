@@ -81,7 +81,7 @@ const cards = [
             </div>
           </div>
           <!-- Button below card -->
-          <div class="bg-[#0B0B0C] px-8 py-6">
+          <div class="bg-[var(--warm)] border border-[#0B0B0C]/8 px-8 py-6">
             <a href={card.href} class="tr-btn" style="width:100%;justify-content:center;">
               <!-- DRAFT: voice pass Rainers -->
               {card.cta}
@@ -93,10 +93,10 @@ const cards = [
 
     <!-- Event strip — shows when selling or waitlist, hidden when between -->
     {showStrip && (
-      <div class="mt-6 bg-[#0B0B0C] px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div class="mt-6 bg-[var(--warm)] border border-[#0B0B0C]/8 px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div class="flex items-center gap-3">
           <span class="inline-block w-2 h-2 rounded-full bg-[var(--terra)] shrink-0 animate-pulse" aria-hidden="true"></span>
-          <p class="text-white/60 text-[11px] font-bold tracking-widest uppercase">{stripLabel}</p>
+          <p class="text-[#0B0B0C]/60 text-[11px] font-bold tracking-widest uppercase">{stripLabel}</p>
         </div>
         <a href="/defense-workshop"
           class="text-[var(--terra)] text-[11px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity shrink-0">

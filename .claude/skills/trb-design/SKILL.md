@@ -7,20 +7,24 @@ metadata:
 
 # TRB Design Rules — Locked
 
-## Color tokens
-- `--accent` #0057FF — single CTA and link color, sitewide. One-time purchase buttons, lead capture buttons, standard links.
-- `--metal` #D4A373 — kickers and horizontal rules ONLY. Never a CTA color.
-- `--ink` #0A0A0A or #141414 range — primary text, dark section backgrounds.
-- `--white` #FFFFFF — primary background everywhere else.
+## Site is light mode, sitewide (2026-08-23)
+Rainers converted the entire site from dark to light. Dark section backgrounds (`bg-[#0A0A0A]` / `bg-[#0B0B0C]`) are no longer the default anywhere — use white (`bg-white`) or the warm cream (`--warm` #F7F5F2) instead, with dark text. There is no remaining deliberate dark exception (Scripture blocks, previously the one named exception, were removed from the site entirely on the same date — see below).
+
+## Color tokens — corrected against the live codebase (2026-08-23)
+This file previously named `--accent` #0057FF as the CTA color. That token does not exist in `src/styles/global.css` and was never the real CTA color — the actual, verified tokens are:
+- `--terra` / `--red` #E11D2A — the real primary CTA fill, eyebrow/kicker text, divider lines. Matches CLAUDE.md's brand law exactly.
+- `--navy` / `--blue` #2348C6 — secondary accent, entry-tier labels and inline links only. Never a fill CTA.
+- `--ink` #0B0B0C — primary text color (not a background default anymore, see above).
+- `--white` #FFFFFF and `--warm` #F7F5F2 — primary backgrounds everywhere.
 - Purple #6A0DAD — permitted ONLY on /community routes as a deliberate sub-brand. Nowhere else on the site.
 - Kill the gradient on "ENGINEERED." Solid white. The photo carries the energy.
 
 ## Button rules
 - Shape: `rounded-none` everywhere. No pill or rounded buttons.
-- One-time purchase CTAs: blue (#0057FF) filled.
+- One-time purchase CTAs: red/terra (#E11D2A) filled.
 - Community/subscription CTAs: purple (#6A0DAD) filled — /community pages only.
-- Free/lead capture CTAs: blue (#0057FF) outline or filled.
-- No four-accent drift. If in doubt, use blue.
+- Free/lead capture CTAs: red/terra (#E11D2A) outline or filled.
+- No four-accent drift. If in doubt, use red/terra.
 
 ## Mobile spacing scale
 - Target device: 390x844 (iPhone class).
@@ -38,10 +42,8 @@ metadata:
 ## Layout pattern
 - 60/40 asymmetric grid for all hero sections. Left 60% = text/form. Right 40% = image/video.
 
-## Scripture block rule
-- Always after the final CTA, as a coda. One verse sitewide, attributed.
-- Never move it next to a price, timer, or discount mechanic.
-- Section stays dark (bg-[#0A0A0A]) for gravitas.
+## Scripture block rule — removed 2026-08-23
+Rainers removed all Scripture verse sections from the public site (they stay internal to him for now). Do not add a Scripture block to any new page. If you find one during other work, that's leftover from before this date — flag it, don't assume it's intentional.
 
 ## Verification loop (required for every change)
 1. Implement change.
