@@ -52,9 +52,6 @@ const productSchema = JSON.stringify({
 
       <!-- Left: copy + capture/checkout -->
       <div class="order-2 md:order-1">
-        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">
-          {isFootworkFree ? 'Free · The Footwork Blueprint' : `${priceDollars} · The Footwork Blueprint`}
-        </p>
         <h1 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.88] mb-6"
           style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
           The Footwork<br/>Blueprint.
@@ -99,7 +96,7 @@ const productSchema = JSON.stringify({
           <div class="max-w-[520px] mb-8 flex flex-col gap-3">
             <button type="button" data-checkout="footwork"
               class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--red)] text-white font-bold px-8 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2">
-              Get the Blueprint · {priceDollars}
+              I want this
             </button>
             <p class="text-[11px] text-[#0B0B0C]/35">One-time purchase. Instant PDF download. <a href="/legal/refund-policy" class="underline hover:text-[#0B0B0C]/60 transition-colors">Refund Policy</a>.</p>
           </div>

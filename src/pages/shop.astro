@@ -30,6 +30,7 @@ const products = [
     title: 'Footwork Blueprint',
     sub: '56 Rounds · Orthodox + Southpaw',
     desc: 'Move with intention from round one.',
+    imagePosition: 'top',
     price: isFootworkFree ? 'FREE' : dollars(PRODUCTS.footwork.priceCents),
     price_note: null,
     href: isFootworkFree ? '/foundation' : null,
@@ -45,6 +46,7 @@ const products = [
     title: 'Shadowboxing Blueprint',
     sub: '2 Videos + Do-With-Me Training · Orthodox + Southpaw',
     desc: 'The next layer. 2 videos + do-with-me training.',
+    imagePosition: 'top',
     price: dollars(PRODUCTS.shadowboxing.priceCents),
     price_note: null,
     href: null,
@@ -134,6 +136,7 @@ const productSchema = JSON.stringify(products.map(p => ({
                 <source srcset={p.imageWebp} type="image/webp" />
                 <img src={p.image} alt={p.title}
                   loading="lazy"
+                  style={`object-position: ${p.imagePosition ?? 'center'};`}
                   class="w-full object-cover aspect-[4/3] group-hover:scale-[1.02] transition-transform duration-300" />
               </picture>
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
