@@ -31,8 +31,8 @@ const productSchema = JSON.stringify({
 });
 ---
 <Layout
-  title={isFootworkFree ? "The Footwork Blueprint · Free Download | Thee Rainers" : `The Footwork Blueprint · ${priceDollars} | Thee Rainers`}
-  description={isFootworkFree ? "The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw. Free download." : `The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw. ${priceDollars}.`}>
+  title={isFootworkFree ? "The Footwork Blueprint · Free Download | Thee Rainers" : "The Footwork Blueprint | Thee Rainers"}
+  description={isFootworkFree ? "The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw. Free download." : "The Footwork Blueprint. 56 rounds of drills, full video breakdown, 30-Day base training structure. Orthodox and Southpaw."}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={productSchema} />
   </Fragment>
