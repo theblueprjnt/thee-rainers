@@ -7,11 +7,13 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  hideFooterHelp?: boolean;
 }
 
 const {
   title = 'Thee Rainers',
   description = 'Boxing built on purpose. Free footwork blueprint, live defense workshops, and 1-on-1 coaching from Rainers.',
+  hideFooterHelp = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
@@ -245,7 +247,7 @@ const siteSchema = JSON.stringify({
     <main class="flex-1">
       <slot />
     </main>
-    <Footer />
+    <Footer hideHelp={hideFooterHelp} />
 
     <!-- Email capture — entry pages only. Centered, Apple-restraint, single product. -->
     <div id="tr-popup" role="dialog" aria-modal="true" aria-labelledby="tr-popup-heading"

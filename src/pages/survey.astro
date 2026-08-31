@@ -8,6 +8,7 @@ const TOTAL_STEPS = 5;
 <Base
   title="Quick survey · Thee Rainers"
   description="Five questions on your training. Helps shape what comes next."
+  hideFooterHelp
 >
   <Fragment slot="head">
     <meta name="robots" content="noindex" />
@@ -173,7 +174,7 @@ const TOTAL_STEPS = 5;
       });
     }
 
-    nextBtn?.addEventListener('click', () => {
+    function advance() {
       if (!currentStepValid()) {
         if (errorEl) { errorEl.textContent = 'Please select an option to continue.'; errorEl.classList.remove('hidden'); }
         return;
@@ -181,12 +182,22 @@ const TOTAL_STEPS = 5;
       if (errorEl) errorEl.classList.add('hidden');
       if (current < TOTAL_STEPS) current += 1;
       render();
-    });
+    }
+
+    nextBtn?.addEventListener('click', advance);
 
     backBtn?.addEventListener('click', () => {
       if (errorEl) errorEl.classList.add('hidden');
       if (current > 1) current -= 1;
       render();
+    });
+
+    // Single-choice questions (radio) auto-advance on selection — a short
+    // delay lets the selected state render before the step changes.
+    document.querySelectorAll('input[name="product"], input[name="progress"]').forEach((input) => {
+      input.addEventListener('change', () => {
+        window.setTimeout(advance, 220);
+      });
     });
 
     form.addEventListener('submit', async (e) => {
