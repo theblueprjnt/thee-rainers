@@ -1,0 +1,233 @@
+---
+import Base from '../layouts/Base.astro';
+
+const radioClass = 'flex items-start gap-3 py-3 border-b border-[#0B0B0C]/10 cursor-pointer';
+const checkboxClass = radioClass;
+const TOTAL_STEPS = 5;
+---
+<Base
+  title="Quick survey · Thee Rainers"
+  description="Five questions on your training. Helps shape what comes next."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <section class="bg-white px-6 md:px-12 lg:px-20 pt-32 pb-24 md:pt-44 md:pb-32">
+    <div class="max-w-[640px] mx-auto">
+
+      <p id="survey-eyebrow" class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">Anonymous · Question 1 of {TOTAL_STEPS}</p>
+      <h1 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-[0.88] mb-6"
+        style="font-size: clamp(2.25rem, 5vw, 3.5rem);">
+        Quick survey.
+      </h1>
+
+      <!-- Progress bar -->
+      <div class="w-full h-1 bg-[#0B0B0C]/10 mb-12">
+        <div id="survey-progress-fill" class="h-full bg-[var(--blue)] transition-all duration-300 ease-out" style="width: 20%;"></div>
+      </div>
+
+      <form id="survey-form" method="POST" action="/api/survey" class="flex flex-col">
+
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+        <!-- Step 1: Product -->
+        <div class="survey-step" data-step="1">
+          <p class="font-bold text-[#0B0B0C] text-lg mb-1">Which product did you use?</p>
+          <div class="flex flex-col mt-4">
+            <label class={radioClass}>
+              <input type="radio" name="product" value="Footwork/Shadowboxing Blueprint" required class="mt-1" />
+              <span class="text-[#0B0B0C] text-sm">Footwork Blueprint/Shadowboxing Blueprint</span>
+            </label>
+            <label class={radioClass}>
+              <input type="radio" name="product" value="1-on-1 Coaching" required class="mt-1" />
+              <span class="text-[#0B0B0C] text-sm">1-on-1 Coaching</span>
+            </label>
+            <label class={radioClass}>
+              <input type="radio" name="product" value="Live Workshop" required class="mt-1" />
+              <span class="text-[#0B0B0C] text-sm">Live Workshop</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 2: Progress -->
+        <div class="survey-step hidden" data-step="2">
+          <p class="font-bold text-[#0B0B0C] text-lg mb-1">How far did you get?</p>
+          <div class="flex flex-col mt-4">
+            <label class={radioClass}>
+              <input type="radio" name="progress" value="Never started" required class="mt-1" />
+              <span class="text-[#0B0B0C] text-sm">Never started</span>
+            </label>
+            <label class={radioClass}>
+              <input type="radio" name="progress" value="Started and stopped" required class="mt-1" />
+              <span class="text-[#0B0B0C] text-sm">Started and stopped</span>
+            </label>
+            <label class={radioClass}>
+              <input type="radio" name="progress" value="Completed it" required class="mt-1" />
+              <span class="text-[#0B0B0C] text-sm">Completed it</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 3: If stopped, why -->
+        <div class="survey-step hidden" data-step="3">
+          <label for="stopped-reason" class="font-bold text-[#0B0B0C] text-lg mb-1 block">If you stopped, why?</label>
+          <textarea id="stopped-reason" name="stopped_reason" rows={3}
+            class="w-full mt-4 border border-[#0B0B0C]/15 bg-[#F7F6F4] px-5 py-4 text-[#0B0B0C] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200"
+            placeholder="Optional"></textarea>
+        </div>
+
+        <!-- Step 4: What would have kept you going, pick 2 -->
+        <div class="survey-step hidden" data-step="4">
+          <p class="font-bold text-[#0B0B0C] text-lg mb-1">What would have kept you going? Pick 2.</p>
+          <div id="kept-going-group" class="flex flex-col mt-4">
+            <label class={checkboxClass}>
+              <input type="checkbox" name="kept_going" value="A coach checking my technique and giving feedback" class="mt-1 kept-going-input" />
+              <span class="text-[#0B0B0C] text-sm">A coach checking my technique and giving feedback</span>
+            </label>
+            <label class={checkboxClass}>
+              <input type="checkbox" name="kept_going" value="A set weekly schedule to follow" class="mt-1 kept-going-input" />
+              <span class="text-[#0B0B0C] text-sm">A set weekly schedule to follow</span>
+            </label>
+            <label class={checkboxClass}>
+              <input type="checkbox" name="kept_going" value="Weekly targets and a way to track progress" class="mt-1 kept-going-input" />
+              <span class="text-[#0B0B0C] text-sm">Weekly targets and a way to track progress</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 5: One change, open text -->
+        <div class="survey-step hidden" data-step="5">
+          <label for="one-change" class="font-bold text-[#0B0B0C] text-lg mb-1 block">What one change would have made you keep training?</label>
+          <textarea id="one-change" name="one_change" rows={4}
+            class="w-full mt-4 border border-[#0B0B0C]/15 bg-[#F7F6F4] px-5 py-4 text-[#0B0B0C] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200"
+            placeholder="Your answer"></textarea>
+        </div>
+
+        <div class="flex items-center justify-between mt-12">
+          <button type="button" id="survey-back" class="hidden font-bold text-[#0B0B0C]/60 text-xs tracking-widest uppercase hover:text-[#0B0B0C] transition-colors">
+            ← Back
+          </button>
+          <div class="flex-1"></div>
+          <button type="button" id="survey-next" class="tr-btn">
+            Next →
+          </button>
+          <button type="submit" id="survey-submit" class="tr-btn hidden">
+            Submit
+          </button>
+        </div>
+        <p id="survey-error" class="hidden text-[var(--red)] text-sm mt-3" aria-live="polite">Something went wrong. Please try again.</p>
+
+      </form>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ TOTAL_STEPS }}>
+  function initSurveyForm() {
+    const form = document.getElementById('survey-form');
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const steps = Array.from(document.querySelectorAll('.survey-step'));
+    const eyebrow = document.getElementById('survey-eyebrow');
+    const progressFill = document.getElementById('survey-progress-fill');
+    const backBtn = document.getElementById('survey-back');
+    const nextBtn = document.getElementById('survey-next');
+    const submitBtn = document.getElementById('survey-submit');
+    const errorEl = document.getElementById('survey-error');
+    const keptGoingInputs = Array.from(document.querySelectorAll('.kept-going-input'));
+
+    let current = 1;
+
+    function render() {
+      steps.forEach((el) => {
+        el.classList.toggle('hidden', Number(el.dataset.step) !== current);
+      });
+      if (eyebrow) eyebrow.textContent = `Anonymous · Question ${current} of ${TOTAL_STEPS}`;
+      if (progressFill) progressFill.style.width = `${(current / TOTAL_STEPS) * 100}%`;
+      if (backBtn) backBtn.classList.toggle('hidden', current === 1);
+      if (nextBtn) nextBtn.classList.toggle('hidden', current === TOTAL_STEPS);
+      if (submitBtn) submitBtn.classList.toggle('hidden', current !== TOTAL_STEPS);
+    }
+
+    keptGoingInputs.forEach((input) => {
+      input.addEventListener('change', () => {
+        const checked = keptGoingInputs.filter((i) => i.checked);
+        keptGoingInputs.forEach((i) => { i.disabled = checked.length >= 2 && !i.checked; });
+      });
+    });
+
+    // Scoped to the current step only — a form-wide reportValidity() also
+    // inspects required fields on hidden later steps, since display:none
+    // does not exempt a field from HTML constraint validation.
+    function currentStepValid() {
+      const stepEl = steps.find((s) => Number(s.dataset.step) === current);
+      if (!stepEl) return true;
+      const requiredInputs = Array.from(stepEl.querySelectorAll('[required]'));
+      return requiredInputs.every((input) => {
+        if (input.type === 'radio') {
+          return Array.from(stepEl.querySelectorAll(`input[name="${input.name}"]`)).some((r) => r.checked);
+        }
+        return input.checkValidity();
+      });
+    }
+
+    nextBtn?.addEventListener('click', () => {
+      if (!currentStepValid()) {
+        if (errorEl) { errorEl.textContent = 'Please select an option to continue.'; errorEl.classList.remove('hidden'); }
+        return;
+      }
+      if (errorEl) errorEl.classList.add('hidden');
+      if (current < TOTAL_STEPS) current += 1;
+      render();
+    });
+
+    backBtn?.addEventListener('click', () => {
+      if (errorEl) errorEl.classList.add('hidden');
+      if (current > 1) current -= 1;
+      render();
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!currentStepValid()) {
+        if (errorEl) { errorEl.textContent = 'Please select an option to continue.'; errorEl.classList.remove('hidden'); }
+        return;
+      }
+      if (submitBtn) submitBtn.disabled = true;
+      if (errorEl) errorEl.classList.add('hidden');
+
+      const data = new FormData(form);
+      const payload = {
+        product: (data.get('product') ?? '').toString().trim(),
+        progress: (data.get('progress') ?? '').toString().trim(),
+        stopped_reason: (data.get('stopped_reason') ?? '').toString().trim(),
+        kept_going: data.getAll('kept_going').map(String),
+        one_change: (data.get('one_change') ?? '').toString().trim(),
+        website: (data.get('website') ?? '').toString().trim(),
+      };
+
+      try {
+        const res = await fetch('/api/survey', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const result = await res.json();
+        if (result.success) {
+          window.location.href = '/thank-you/survey';
+        } else {
+          throw new Error(result.error || 'Submit failed');
+        }
+      } catch {
+        if (errorEl) { errorEl.textContent = 'Something went wrong. Please try again.'; errorEl.classList.remove('hidden'); }
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+
+    render();
+  }
+  initSurveyForm();
+  document.addEventListener('astro:page-load', initSurveyForm);
+</script>

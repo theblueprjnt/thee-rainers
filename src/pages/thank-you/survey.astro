@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Thanks · Thee Rainers"
+  description="Thank you for your answers."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <section class="bg-white px-6 md:px-12 lg:px-20 pt-32 pb-24 md:pt-44 md:pb-32 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[680px] mx-auto">
+      <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-6">Thee Rainers</p>
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.86] mb-12"
+        style="font-size: clamp(2.25rem, 5vw, 3.75rem);">
+        Thank you.
+      </h1>
+
+      <a href="/"
+        class="inline-flex items-center justify-center font-bold border border-[#0A0A0A]/20 text-[#0A0A0A] bg-transparent px-8 py-3 text-xs tracking-widest uppercase hover:border-[#0A0A0A]/50 transition-colors duration-150">
+        Back to home
+      </a>
+    </div>
+  </section>
+</Base>

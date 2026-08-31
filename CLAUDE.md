@@ -114,11 +114,14 @@ Platforms: 600K+ across IG, TikTok, FB, YouTube, Threads (rented — individual 
 - `/thank-you/workshop` — post-workshop-purchase (July 25 live)
 - `/thank-you/workshop-replay` — post-replay-purchase (check email, link incoming)
 - `/thank-you/contact` — post-contact
+- `/survey` — anonymous product feedback survey (one question per step + progress bar), no email captured. Built for email/story distribution, not linked from nav.
+- `/thank-you/survey` — post-survey
 
 ## API routes
 - `/api/lead-capture` — all free forms (email required, source tag varies)
 - `/api/coaching-capture` — 1-on-1 Coaching application
 - `/api/contact` — contact + feedback forms
+- `/api/survey` — anonymous survey submissions. Writes one record per submission to Airtable table `Survey_Responses` (base `applzsBz15zEAua4s`, same base as Leads/Members/etc.) via `AIRTABLE_API_KEY` + `AIRTABLE_BASE_ID` (already set). `AIRTABLE_SURVEY_TABLE` overrides the table name if needed.
 - `/api/stripe-webhook` — Stripe event handler (signature-verified, CF Workers compatible)
 
 ## Environment variables (Cloudflare Pages)

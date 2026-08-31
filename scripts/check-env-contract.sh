@@ -23,6 +23,7 @@ ALLOWLIST=(
   TELEGRAM_BOT_TOKEN   # legacy Telegram path, disabled
   TELEGRAM_CHAT_ID     # legacy Telegram path, disabled
   AIRTABLE_LEADS_TABLE # lead-specific table override, subset of AIRTABLE_TABLE
+  AIRTABLE_SURVEY_TABLE # survey-specific table override, subset of AIRTABLE_TABLE
   KIT_LEAD_TAG_ID      # Kit tag for footwork leads
   KIT_COACHING_TAG_ID  # Kit tag for coaching applicants
 )
