@@ -90,8 +90,8 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
           Weekly correction, live. A path built in layers. The direction most training skips.
         </p>
 
-        <button type="button" data-checkout="greatness_monthly" class="tr-btn">
-          Claim your spot
+        <button type="button" disabled class="tr-btn opacity-50 cursor-not-allowed">
+          Currently Unavailable
         </button>
         <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-4">
           Checkout unavailable. Email rainers@theerainers.com
@@ -127,7 +127,6 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
         </div>
 
         <div class="bg-[var(--warm)] p-8 md:p-10">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-4">Every Tuesday · 3pm ET</p>
           <h3 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-base leading-tight mb-3">
             The Weekly Session
           </h3>
@@ -322,9 +321,9 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
           </ul>
 
           <div>
-            <button type="button" data-checkout="greatness_annual"
-              class="tr-btn" style="width:100%;justify-content:center;">
-              Join Annual
+            <button type="button" disabled
+              class="tr-btn opacity-50 cursor-not-allowed" style="width:100%;justify-content:center;">
+              Currently Unavailable
             </button>
             <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-2">
               Checkout unavailable. Email rainers@theerainers.com
@@ -344,16 +343,16 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
           </div>
 
           <ul class="flex flex-col gap-3">
-            <li class="text-[#0B0B0C]/65 text-sm">The Weekly Session every Tuesday</li>
+            <li class="text-[#0B0B0C]/65 text-sm">The Weekly Session</li>
             <li class="text-[#0B0B0C]/65 text-sm">Training drill on day one</li>
             <li class="text-[#0B0B0C]/65 text-sm">Private group access</li>
             <li class="text-[#0B0B0C]/65 text-sm">Session recordings</li>
           </ul>
 
           <div>
-            <button type="button" data-checkout="greatness_monthly"
-              class="tr-btn" style="width:100%;justify-content:center;">
-              Join Monthly
+            <button type="button" disabled
+              class="tr-btn opacity-50 cursor-not-allowed" style="width:100%;justify-content:center;">
+              Currently Unavailable
             </button>
             <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-2">
               Checkout unavailable. Email rainers@theerainers.com
@@ -384,11 +383,8 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
       </h2>
       <div class="h-0.5 w-12 bg-[var(--terra)] mx-auto mb-10"></div>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button type="button" data-checkout="greatness_annual" class="tr-btn">
-          Join Annual · $390/yr
-        </button>
-        <button type="button" data-checkout="greatness_monthly" class="tr-btn tr-btn--secondary">
-          Join Monthly · $39/mo
+        <button type="button" disabled class="tr-btn opacity-50 cursor-not-allowed">
+          Currently Unavailable
         </button>
       </div>
       <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-4">
@@ -441,10 +437,10 @@ const PREVIEW_VIDEO_ID = 'vdUDuFRUqGo';
             )}
           </>
         ) : (
-          <p class="text-[#0B0B0C]/40 text-sm">No recordings yet. The first one appears after Tuesday's Weekly Session.</p>
+          <p class="text-[#0B0B0C]/40 text-sm">No recordings yet. The first one appears after the Weekly Session.</p>
         )}
 
-        <p class="text-[#0B0B0C]/35 text-xs mt-10">New recordings are added after each Tuesday session.</p>
+        <p class="text-[#0B0B0C]/35 text-xs mt-10">New recordings are added after each session.</p>
       </div>
     </section>
   )}

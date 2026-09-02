@@ -103,8 +103,8 @@ const c = COPY[gradeNumber];
     <p class="text-[#0B0B0C]/60 text-base leading-relaxed mb-10 max-w-[520px] mx-auto">
       {c.subhead}
     </p>
-    <button type="button" data-checkout={priceId} class="tr-btn">
-      {c.heroCta}
+    <button type="button" disabled class="tr-btn opacity-50 cursor-not-allowed">
+      Currently Unavailable
     </button>
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
@@ -199,8 +199,8 @@ const c = COPY[gradeNumber];
     </div>
     <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-3">What Happens Next</p>
     <p class="text-[#0B0B0C]/70 text-sm leading-relaxed mb-10">{c.whatHappensNext}</p>
-    <button type="button" data-checkout={priceId} class="tr-btn">
-      {c.priceCta}
+    <button type="button" disabled class="tr-btn opacity-50 cursor-not-allowed">
+      Currently Unavailable
     </button>
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
@@ -233,8 +233,8 @@ const c = COPY[gradeNumber];
       style="font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95;">
       {c.finalHeadline}
     </h2>
-    <button type="button" data-checkout={priceId} class="tr-btn">
-      {c.finalCta}
+    <button type="button" disabled class="tr-btn opacity-50 cursor-not-allowed">
+      Currently Unavailable
     </button>
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com

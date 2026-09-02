@@ -64,12 +64,9 @@ const padding = size === 'lg' ? 'p-10 md:p-16' : 'p-10';
   {note && <p class="text-[#0B0B0C]/50 text-xs leading-relaxed">{note}</p>}
 
   <div>
-    <button type="button" data-checkout={priceId}
-      class="tr-btn" style="width:100%;justify-content:center;">
-      {ctaLabel}
+    <button type="button" disabled
+      class="tr-btn opacity-50 cursor-not-allowed" style="width:100%;justify-content:center;">
+      Currently Unavailable
     </button>
-    <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-2">
-      Checkout unavailable. Email rainers@theerainers.com
-    </p>
   </div>
 </div>

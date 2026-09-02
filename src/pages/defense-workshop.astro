@@ -14,40 +14,11 @@ const standardPrice = `$${(PRODUCTS['defense-workshop'].priceCents / 100).toFixe
 const EARLY_BIRD_UNTIL = new Date('2026-08-08T22:59:00Z');
 const isEarlyBird = new Date() < EARLY_BIRD_UNTIL;
 const price = isEarlyBird ? '$39' : standardPrice;
-const checkoutKey = isEarlyBird ? 'defense_workshop_early' : 'defense_workshop_standard';
 
-const productSchema = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Event",
-  "name": "Defense Workshop",
-  "description": "A live 90-minute workshop on the five layers of defense in boxing. 60 min + 30 min live Q&A. Replay included.",
-  "url": "https://theerainers.com/defense-workshop",
-  "startDate": "2026-08-29",
-  "eventStatus": "https://schema.org/EventScheduled",
-  "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
-  "organizer": { "@type": "Organization", "name": "Thee Rainers", "url": "https://theerainers.com" },
-  "offers": {
-    "@type": "Offer",
-    "price": isEarlyBird ? "39.00" : (PRODUCTS['defense-workshop'].priceCents / 100).toFixed(2),
-    "priceCurrency": PRODUCTS['defense-workshop'].currency,
-    "availability": "https://schema.org/InStock",
-    "url": "https://theerainers.com/defense-workshop",
-    "validThrough": isEarlyBird ? "2026-08-08T22:59:00Z" : "2026-08-29T00:00:00Z",
-  },
-});
 ---
 <Layout
-  title="Defense Workshop · Live Aug 29 | Thee Rainers"
-  description={`A live workshop on the five layers of defense in boxing. 60 min + 30 min live Q&A. Replay included. ${price} ${isEarlyBird ? '· Early bird until Aug 8' : ''}.`}>
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={productSchema} />
-  </Fragment>
-
-  {isEarlyBird && (
-    <div class="bg-[var(--terra)] text-white text-center py-2 px-4 text-[11px] tracking-widest uppercase font-bold">
-      Early bird $39 until August 8. Goes to {standardPrice}.
-    </div>
-  )}
+  title="Defense Workshop | Thee Rainers"
+  description="A live workshop on the five layers of defense in boxing. 60 min + 30 min live Q&A. Replay included.">
 
   <!-- HERO -->
   <section class="relative overflow-hidden bg-white">
@@ -59,7 +30,7 @@ const productSchema = JSON.stringify({
     <div class="relative z-10 px-6 md:px-16 lg:px-24 pt-28 md:pt-44 pb-14 md:pb-20">
       <div class="max-w-[720px]">
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">
-          Live Workshop · Aug 29
+          Live Workshop
         </p>
         <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.85] mb-6"
           style="font-size: clamp(2.8rem, 8vw, 4.75rem);">
@@ -71,18 +42,16 @@ const productSchema = JSON.stringify({
         </p>
 
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-          <button type="button" data-checkout={checkoutKey}
-            class="tr-btn w-full sm:w-auto">
-            Reserve Seat · {price}
+          <button type="button" disabled
+            class="tr-btn w-full sm:w-auto opacity-50 cursor-not-allowed">
+            Currently Unavailable
           </button>
           <div class="text-[#0A0A0A]/40 text-[10px] tracking-widest uppercase">
-            {isEarlyBird ? 'Early bird until Aug 8' : 'Standard rate'} · One-time payment
+            One-time payment
           </div>
         </div>
 
         <div class="flex flex-wrap gap-x-6 gap-y-2 text-[#0A0A0A]/40 text-[10px] tracking-widest uppercase">
-          <span>Aug 29, 2026</span>
-          <span aria-hidden="true">·</span>
           <span>Live Online</span>
           <span aria-hidden="true">·</span>
           <span>90 Minutes</span>
@@ -134,22 +103,21 @@ const productSchema = JSON.stringify({
   <section class="bg-white px-6 md:px-16 lg:px-24 py-14 md:py-20">
     <div class="max-w-[680px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">
-        {isEarlyBird ? 'Early Bird · Until Aug 8' : 'Defense Workshop'}
+        Defense Workshop
       </p>
       <div class="flex items-baseline gap-4 mb-6">
         <span class="font-black text-[#0A0A0A] text-5xl">{price}</span>
-        {isEarlyBird && <span class="text-[#0A0A0A]/40 text-sm line-through">{standardPrice}</span>}
       </div>
       <ul class="text-[#0A0A0A]/50 text-sm leading-loose mb-8 space-y-1">
-        <li>Live session · August 29, 2026</li>
+        <li>Live session</li>
         <li>90 minutes with Rainers · 60 min + 30 min live Q&A</li>
         <li>The 5 layers of defense in boxing</li>
         <li>Replay included · permanent access</li>
         <li>One-time payment</li>
       </ul>
-      <button type="button" data-checkout={checkoutKey}
-        class="tr-btn w-full sm:w-auto text-base" style="padding: 1rem 2.5rem; font-size: 0.75rem;">
-        Reserve Seat · {price}
+      <button type="button" disabled
+        class="tr-btn w-full sm:w-auto text-base opacity-50 cursor-not-allowed" style="padding: 1rem 2.5rem; font-size: 0.75rem;">
+        Currently Unavailable
       </button>
       <p class="text-[#0A0A0A]/40 text-[10px] mt-4">
         Secure checkout via Stripe · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a> · <a href="/legal/terms" class="underline hover:text-[#0A0A0A]/60">Terms</a>

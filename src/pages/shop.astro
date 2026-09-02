@@ -58,14 +58,15 @@ const products = [
   {
     image: '/images/defense-workshop-opt.jpg',
     imageWebp: '/images/defense-workshop-opt.webp',
-    tag: isEarlyBird ? 'Live · Aug 29 · Early Bird' : 'Live · Aug 29',
+    tag: 'Live',
     title: 'Defense Workshop',
     sub: '90 Min · Live · Replay Included',
     desc: 'Camera on. Real-time correction on your movement.',
     price: workshopPrice,
-    price_note: isEarlyBird ? `Early bird until Aug 8. Goes to ${workshopStandardPrice}.` : null,
+    price_note: null,
     href: null,
     checkoutKey: workshopCheckoutKey,
+    disabled: true,
     page: '/defense-workshop',
     cta: 'Reserve Seat',
     featured: false,
@@ -165,7 +166,11 @@ const productSchema = JSON.stringify(products.map(p => ({
                   )}
                   {p.price_note && <p class="text-[10px] text-[#0B0B0C]/50 mt-0.5">{p.price_note}</p>}
                 </div>
-                {p.checkoutKey ? (
+                {p.disabled ? (
+                  <button type="button" disabled class="tr-btn opacity-50 cursor-not-allowed" style="padding: 0.75rem 1.5rem; font-size: 0.625rem;">
+                    Currently Unavailable
+                  </button>
+                ) : p.checkoutKey ? (
                   <button type="button" data-checkout={p.checkoutKey} class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.625rem;">
                     {p.cta}
                   </button>
@@ -182,7 +187,7 @@ const productSchema = JSON.stringify(products.map(p => ({
                   </a>
                 </p>
               )}
-              {p.checkoutKey && (
+              {p.checkoutKey && !p.disabled && (
                 <p class="mt-2 text-[10px] text-[#0B0B0C]/30">
                   Secure checkout via Stripe · <a href="/legal/refund-policy" class="underline hover:text-[#0B0B0C]/50">Refund Policy</a>
                 </p>
