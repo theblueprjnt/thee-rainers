@@ -17,7 +17,10 @@ const CLOSED_HTML = `<!doctype html>
 </body>
 </html>`;
 
-export const onRequest = defineMiddleware(async () => {
+export const onRequest = defineMiddleware(async (context, next) => {
+  if (context.url.pathname === '/robots.txt') {
+    return next();
+  }
   return new Response(CLOSED_HTML, {
     status: 410,
     headers: {
