@@ -87,7 +87,7 @@ const FUNNEL_MAP = `
   </table>
 </div>`;
 
-const WELCOME_CONFIG: Record<string, { subject: string; body: string }> = {
+const WELCOME_CONFIG: Record<string, { subject: string; body: string; hideTopLogo?: boolean }> = {
   'footwork-foundation': {
     subject: 'the signal you\'re ignoring',
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">A lot of the damage you take in training is damage you do not have to take. The simpler way starts before the cause has happened. The same applies to boxing.</p>
@@ -126,6 +126,7 @@ ${FUNNEL_MAP}`,
   },
   'safe-sparring': {
     subject: 'Your First Sparrings Readiness Manual',
+    hideTopLogo: true,
     body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Here is your copy of the First Sparrings Readiness Manual.</p>
 <p style="margin:0 0 28px;"><a href="https://theerainers.com/pdfs/first-sparring-readiness-manual.pdf" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download the Manual →</a></p>
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">It covers what first sparring really is, what your gym and coach should provide, the sparring action itself, and what to do after.</p>
@@ -147,12 +148,12 @@ function resolveEmailSource(source: string): string {
 }
 
 
-function wrapEmail(body: string, email = '', siteUrl = 'https://theerainers.com'): string {
+function wrapEmail(body: string, email = '', siteUrl = 'https://theerainers.com', hideTopLogo = false): string {
   const unsubUrl = `${siteUrl}/api/unsubscribe?email=${encodeURIComponent(email)}`;
   const unsubFooter = email
     ? `<div style="border-top:1px solid #eee;margin:32px 0 0;padding:16px 0 0;text-align:center;"><p style="font-size:11px;color:#ccc;margin:0;">You received this because you opted in at theerainers.com. <a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p></div>`
     : '';
-  const topLogo = `<div style="text-align:center;margin:0 0 32px;"><img src="${siteUrl}/images/trb-logo-nobg.png" alt="Thee Rainers" width="80" style="height:auto;display:inline-block;" /></div>`;
+  const topLogo = hideTopLogo ? '' : `<div style="text-align:center;margin:0 0 32px;"><img src="${siteUrl}/images/trb-logo-nobg.png" alt="Thee Rainers" width="80" style="height:auto;display:inline-block;" /></div>`;
   const bottomLogo = `<div style="text-align:center;margin:32px 0 0;"><img src="${siteUrl}/images/trb-logo-nobg.png" alt="Thee Rainers" width="120" style="height:auto;display:inline-block;" /></div>`;
   const socialLinks = `<div style="text-align:center;margin:16px 0 0;font-size:11px;color:#ccc;"><a href="https://www.instagram.com/theerainers" style="color:#ccc;text-decoration:none;margin:0 8px;">Instagram</a>&nbsp;·&nbsp;<a href="https://www.tiktok.com/@theerainers" style="color:#ccc;text-decoration:none;margin:0 8px;">TikTok</a>&nbsp;·&nbsp;<a href="https://www.youtube.com/@Rainers" style="color:#ccc;text-decoration:none;margin:0 8px;">YouTube</a></div>`;
   return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;padding:40px 24px;color:#0A0A0A;background:#ffffff;">${topLogo}${body}${bottomLogo}${socialLinks}${unsubFooter}</div>`;
@@ -167,7 +168,7 @@ async function sendResendWelcome(resendKey: string, email: string, source: strin
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: cfg.subject, html: wrapEmail(cfg.body, email, siteUrl), headers: { 'List-Unsubscribe': `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${siteUrl}/api/unsubscribe?email=${encodeURIComponent(email)}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } }),
+      body: JSON.stringify({ from: 'Rainers <rainers@theerainers.com>', to: [email], subject: cfg.subject, html: wrapEmail(cfg.body, email, siteUrl, cfg.hideTopLogo), headers: { 'List-Unsubscribe': `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${siteUrl}/api/unsubscribe?email=${encodeURIComponent(email)}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } }),
     });
     if (!res.ok) console.error('[lead-capture] Resend welcome failed', res.status, await res.text());
     else console.log('[lead-capture] Resend welcome sent', { source });
@@ -234,6 +235,7 @@ async function upsertAirtableLead(
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       performUpsert: { fieldsToMergeOn: ['Email'] },
+      typecast: true,
       records: [{ fields }],
     }),
   });
