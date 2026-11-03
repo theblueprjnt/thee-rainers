@@ -124,6 +124,14 @@ ${FUNNEL_MAP}`,
 <p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 28px;">If there is a specific situation you are navigating right now, reply to this email. I read these.</p>
 <p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
   },
+  'safe-sparring': {
+    subject: 'Your First Sparrings Readiness Manual',
+    body: `<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">Here is your copy of the First Sparrings Readiness Manual.</p>
+<p style="margin:0 0 28px;"><a href="https://theerainers.com/pdfs/first-sparring-readiness-manual.pdf" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Download the Manual →</a></p>
+<p style="font-size:14px;line-height:1.8;color:#0A0A0A;margin:0 0 20px;">It covers what first sparring really is, what your gym and coach should provide, the sparring action itself, and what to do after.</p>
+<p style="font-size:13px;color:#888;margin:0 0 4px;">Keep winning,</p>
+<p style="font-size:13px;color:#888;margin:0;">Rainers</p>`,
+  },
 };
 
 // Sources that receive the nurture sequence. Q&A and safe-boxing are excluded.

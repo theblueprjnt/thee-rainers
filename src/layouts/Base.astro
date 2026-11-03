@@ -8,12 +8,16 @@ interface Props {
   title?: string;
   description?: string;
   hideFooterHelp?: boolean;
+  hideNav?: boolean;
+  hideFooter?: boolean;
 }
 
 const {
   title = 'Thee Rainers',
   description = 'Boxing built on purpose. Free footwork blueprint, live defense workshops, and 1-on-1 coaching from Rainers.',
   hideFooterHelp = false,
+  hideNav = false,
+  hideFooter = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
@@ -243,11 +247,11 @@ const siteSchema = JSON.stringify({
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LQ7HPXG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <Nav />
+    {!hideNav && <Nav />}
     <main class="flex-1">
       <slot />
     </main>
-    <Footer hideHelp={hideFooterHelp} />
+    {!hideFooter && <Footer hideHelp={hideFooterHelp} />}
 
     <!-- Email capture — entry pages only. Centered, Apple-restraint, single product. -->
     <div id="tr-popup" role="dialog" aria-modal="true" aria-labelledby="tr-popup-heading"

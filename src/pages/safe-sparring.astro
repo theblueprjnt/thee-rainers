@@ -1,0 +1,153 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Base.astro';
+---
+<Layout
+  title="Free Sparring Guide · First Sparrings Readiness Manual | Thee Rainers"
+  description="Fix your sparring in 10 minutes. 5 detailed chapters on gym, coach, partners, the sparring action, and what to do after. Free download."
+  hideNav
+  hideFooter>
+
+  <a href="/" class="absolute top-5 left-5 md:top-6 md:left-8 z-10" aria-label="Thee Rainers home">
+    <picture>
+      <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
+      <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-7 w-auto" />
+    </picture>
+  </a>
+
+  <section class="min-h-[100dvh] flex items-center bg-white px-6 md:px-12 lg:px-16 py-6 md:py-16">
+    <div class="max-w-[1120px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[50%_50%] gap-5 lg:gap-6 items-center">
+
+      <div>
+        <span class="inline-block bg-[var(--terra)] text-white text-[10px] font-bold tracking-widest uppercase px-3.5 py-1.5 mb-5">
+          Free Sparring Guide
+        </span>
+
+        <h1 class="font-black uppercase tracking-tighter leading-[0.92] mb-5"
+          style="font-size: clamp(1.9rem, 4.2vw, 3.1rem);">
+          <span class="text-[#0A0A0A]">Must have</span><br/>
+          <span class="text-[var(--terra)]">sparring manual.</span>
+        </h1>
+
+        <ul class="flex flex-col gap-2.5 mb-6">
+          <li class="flex gap-2.5 items-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0" aria-hidden="true">
+              <path d="M3 8.5L6.2 11.5L13 4.5" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-[#0A0A0A] text-sm md:text-base font-bold">Fix your sparring in 10 minutes</span>
+          </li>
+          <li class="flex gap-2.5 items-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0" aria-hidden="true">
+              <path d="M3 8.5L6.2 11.5L13 4.5" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-[#0A0A0A] text-sm md:text-base font-bold">Boost your skills fast</span>
+          </li>
+          <li class="flex gap-2.5 items-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0" aria-hidden="true">
+              <path d="M3 8.5L6.2 11.5L13 4.5" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-[#0A0A0A] text-sm md:text-base font-bold">5 detailed chapters</span>
+          </li>
+        </ul>
+
+        <p class="text-[#0A0A0A]/55 text-sm md:text-base font-bold mb-6">
+          Sloppy technique? Taking damage? Not progressing?
+        </p>
+
+        <div id="spar-wrap" class="max-w-[440px]">
+          <form id="spar-form" class="flex flex-col gap-4">
+            <div>
+              <label for="spar-email" class="block text-[11px] font-bold tracking-widest uppercase text-[#0A0A0A] mb-2">Email Address</label>
+              <input
+                type="email"
+                id="spar-email"
+                required
+                autocomplete="email"
+                class="w-full border border-[#0A0A0A]/20 bg-white px-4 py-4 text-[#0A0A0A] text-sm focus:border-[var(--blue)] focus:outline-none transition-colors duration-200"
+              />
+            </div>
+            <!-- Honeypot -->
+            <input type="text" id="spar-website" name="website" autocomplete="off" tabindex="-1" class="hidden" aria-hidden="true" />
+            <button
+              type="submit"
+              id="spar-submit"
+              class="w-full inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--red)] text-white font-bold px-6 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2"
+            >
+              Download Free Guide
+            </button>
+          </form>
+
+          <div id="spar-success" class="hidden">
+            <p class="text-[#0A0A0A] text-sm font-bold tracking-wide mb-3">You're in. Check your email, or download it right now below.</p>
+            <a href="/pdfs/first-sparring-readiness-manual.pdf" target="_blank" rel="noopener"
+              class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0A0A0A] text-white font-bold px-6 py-3.5 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85">
+              Download the Guide →
+            </a>
+          </div>
+
+          <p id="spar-error" class="hidden text-[var(--red)] text-sm mt-3">Something went wrong. Try again or email rainers@theerainers.com</p>
+
+          <p class="text-[10px] text-[#0A0A0A]/35 leading-relaxed mt-4">
+            No spam, unsubscribe any time. Educational material written by a coach, not medical advice. Sparring carries a risk of head injury every session.
+          </p>
+        </div>
+      </div>
+
+      <div class="order-first lg:order-last">
+        <picture>
+          <img src="/images/sparring-manual-mockup.png" alt="First Sparrings Readiness Manual"
+            width="1720" height="2000"
+            class="w-full h-auto max-h-[29vh] md:max-h-[44vh] lg:max-h-[82vh] object-contain mx-auto lg:-ml-4" />
+        </picture>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  function wireSparForm(): void {
+    const form = document.getElementById('spar-form') as HTMLFormElement | null;
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const emailEl   = document.getElementById('spar-email')   as HTMLInputElement | null;
+    const websiteEl = document.getElementById('spar-website') as HTMLInputElement | null;
+    const submit    = document.getElementById('spar-submit')  as HTMLButtonElement | null;
+    const success   = document.getElementById('spar-success') as HTMLElement;
+    const error     = document.getElementById('spar-error')   as HTMLElement;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email   = emailEl?.value.trim()   ?? '';
+      const website = websiteEl?.value.trim() ?? '';
+      if (!email) return;
+
+      if (submit) { submit.disabled = true; submit.textContent = 'One moment...'; }
+      error.classList.add('hidden');
+
+      try {
+        await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, source: 'safe-sparring', website }),
+        });
+      } catch {
+        // non-blocking — show success regardless
+      }
+
+      (window as Window & { trackEvent?: (n: string, d: Record<string, unknown>) => void }).trackEvent?.('generate_lead', {
+        lead_source: 'safe-sparring',
+        currency: 'USD',
+        value: 0,
+      });
+
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+    });
+  }
+
+  wireSparForm();
+</script>
