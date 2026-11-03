@@ -1,0 +1,272 @@
+---
+import Layout from '../layouts/Base.astro';
+import Testimonials from '../components/site/Testimonials.astro';
+
+// SCAFFOLD ONLY — no final copy, pricing, or checkout wiring yet.
+// Structure mirrors shadowboxing-blueprint.astro. Fill bracketed
+// placeholders once the course name, price, and content are locked.
+---
+<Layout
+  title="[Course Name] — [One-line value prop]"
+  description="[Meta description placeholder — fill once copy is locked.]">
+
+  <!-- HERO -->
+  <section id="buy-bar-sentinel" class="bg-[var(--warm)] pt-20 md:pt-36 pb-16 md:pb-20">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-[58%_42%] gap-10 md:gap-16 items-center">
+
+      <div>
+        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Eyebrow — e.g. Course]</p>
+        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
+          style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
+          [Course Name]
+        </h1>
+        <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-8 max-w-[520px]">
+          [Hero subhead — one or two sentences on the outcome.]
+        </p>
+
+        <div class="flex flex-col gap-3 mb-6 max-w-[420px]">
+          <div class="flex items-baseline gap-3">
+            <span class="font-black text-[#0A0A0A] text-4xl">$[PRICE]</span>
+            <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">[One time / per month]</span>
+          </div>
+          <!-- TODO: wire data-checkout once the Stripe product + checkout key exist -->
+          <button type="button" class="tr-btn">
+            [CTA — e.g. Get the Course] →
+          </button>
+          <p class="text-[11px] text-[#0A0A0A]/30">[Trust line — delivery, refund policy link, etc.]</p>
+        </div>
+
+        <!-- Specs (Gumroad-style fact sheet) -->
+        <div class="max-w-[420px] border-t border-[#0A0A0A]/10">
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">[Spec label]</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">[Spec value]</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
+            <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">[Spec label]</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">[Spec value]</span>
+          </div>
+          <div class="flex justify-between items-baseline py-3">
+            <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">[Spec label]</span>
+            <span class="text-[#0A0A0A] text-sm font-bold">[Spec value]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-first md:order-last">
+        <div class="relative bg-[var(--warm)] border border-[#0A0A0A]/10 mx-auto max-w-[420px] aspect-[840/644] flex items-center justify-center">
+          <p class="text-[#0A0A0A]/30 text-xs uppercase tracking-widest">[Cover image]</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHAT'S IN IT -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[720px] mx-auto">
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-8">
+        [What's inside.]
+      </h2>
+      <ul class="flex flex-col gap-7 text-[#0A0A0A]/80 text-base leading-relaxed">
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]">
+            <span class="text-[var(--terra)] shrink-0">◆</span>
+            <span>[Module / component 1]</span>
+          </p>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">[What it covers.]</p>
+        </li>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]">
+            <span class="text-[var(--terra)] shrink-0">◆</span>
+            <span>[Module / component 2]</span>
+          </p>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">[What it covers.]</p>
+        </li>
+        <li>
+          <p class="flex gap-3 font-bold text-[#0A0A0A]">
+            <span class="text-[var(--terra)] shrink-0">◆</span>
+            <span>[Module / component 3]</span>
+          </p>
+          <p class="ml-7 mt-2 text-[#0A0A0A]/70">[What it covers.]</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHO THIS IS FOR -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Who this is for]</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
+        [Headline]
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#0B0B0C]/8">
+        <div class="bg-white p-8">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase mb-3">01</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">[Audience segment 1.]</p>
+        </div>
+        <div class="bg-white p-8">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase mb-3">02</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">[Audience segment 2.]</p>
+        </div>
+        <div class="bg-white p-8">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase mb-3">03</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">[Audience segment 3.]</p>
+        </div>
+        <div class="bg-white p-8">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase mb-3">04</p>
+          <p class="text-[#0A0A0A] text-sm leading-relaxed">[Audience segment 4.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT CHANGES YOU -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[How it changes you]</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-12">
+        [Headline]
+      </h2>
+      <ul class="flex flex-col divide-y divide-[#0A0A0A]/8">
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">01</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">[Gain 1.]</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">02</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">[Gain 2.]</span>
+        </li>
+        <li class="py-6 flex gap-6 items-baseline">
+          <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">03</span>
+          <span class="text-[#0A0A0A] text-base leading-relaxed">[Gain 3.]</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- WHY THIS WORKS -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[720px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Why this works]</p>
+      <p class="text-[#0A0A0A] text-lg leading-relaxed mb-3">[Core mechanism, sentence 1.]</p>
+      <p class="text-[#0A0A0A]/70 text-base leading-relaxed">[Core mechanism, sentence 2.]</p>
+    </div>
+  </section>
+
+  <!-- AUTHORITY -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-10 md:gap-16 items-center">
+      <div class="overflow-hidden border border-[#0A0A0A]/8 aspect-[780/878] flex items-center justify-center bg-white">
+        <p class="text-[#0A0A0A]/30 text-xs uppercase tracking-widest">[Photo]</p>
+      </div>
+      <div>
+        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-6">[The system behind this]</p>
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">Rainers.</p>
+        <p class="text-[#0A0A0A]/70 text-base leading-relaxed mb-4">[Authority line 1.]</p>
+        <p class="text-[#0A0A0A]/70 text-base leading-relaxed">[Authority line 2.]</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <Testimonials filter="remote" heading="[Testimonials heading]" kicker="[Kicker]" />
+
+  <!-- MID-PAGE CTA -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-10 md:py-14 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[720px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div>
+        <p class="text-[#0A0A0A]/50 text-[11px] tracking-widest uppercase mb-2">[Course Name] · $[PRICE]</p>
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-xl md:text-2xl leading-tight">[Mid-page CTA headline.]</p>
+      </div>
+      <button type="button" class="tr-btn shrink-0">
+        [CTA] →
+      </button>
+    </div>
+  </section>
+
+  <!-- HESITATION -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-t border-[#0A0A0A]/8">
+    <div class="max-w-[720px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[If you are hesitating]</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
+        "[Common objection, quoted.]"
+      </h2>
+      <p class="text-[#0A0A0A]/65 text-base leading-relaxed mb-3">[Response line 1.]</p>
+      <p class="text-[#0A0A0A]/55 text-base leading-relaxed">[Response line 2.]</p>
+    </div>
+  </section>
+
+  <!-- BONUSES -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Bonuses]</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
+        [What ships with it.]
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[var(--terra)] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">[Bonus 1.]</p>
+        </div>
+        <div class="flex gap-3 items-baseline">
+          <span class="text-[var(--terra)] font-bold text-sm shrink-0">·</span>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">[Bonus 2.]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="final-cta-section" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[680px] mx-auto text-center">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Access the Course]</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] mb-8">
+        [Final CTA headline.]
+      </h2>
+      <div class="flex items-baseline justify-center gap-3 mb-6">
+        <span class="font-black text-[#0A0A0A] text-4xl">$[PRICE]</span>
+        <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">[One time / per month]</span>
+      </div>
+      <button type="button" class="tr-btn">
+        [CTA] →
+      </button>
+      <p class="text-[11px] text-[#0A0A0A]/55 mt-4">[Delivery line.]</p>
+      <p class="text-[11px] text-[#0A0A0A]/30 mt-2">[Trust line, refund policy link.]</p>
+    </div>
+  </section>
+
+  <!-- STICKY BUY BAR (mobile only) -->
+  <div id="sticky-bar"
+    class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[var(--warm)] border-t border-[#0B0B0C]/12 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-200 ease-out"
+    aria-hidden="true">
+    <div class="flex items-baseline gap-2">
+      <span class="font-black text-[#0A0A0A] text-xl">$[PRICE]</span>
+      <span class="text-[#0A0A0A]/40 text-[10px] uppercase tracking-widest">[One time / per month]</span>
+    </div>
+    <button type="button" class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">
+      [CTA] →
+    </button>
+  </div>
+
+</Layout>
+
+<script>
+  {
+    const bar = document.getElementById('sticky-bar') as HTMLElement | null;
+    const sentinel = document.getElementById('buy-bar-sentinel');
+    const finalCta = document.getElementById('final-cta-section');
+    if (bar && sentinel && finalCta) {
+      let heroGone = false;
+      let finalVisible = false;
+      function sync() {
+        const show = heroGone && !finalVisible;
+        bar.classList.toggle('translate-y-full', !show);
+        bar.setAttribute('aria-hidden', String(!show));
+      }
+      new IntersectionObserver(([e]) => { heroGone = !e.isIntersecting; sync(); }).observe(sentinel);
+      new IntersectionObserver(([e]) => { finalVisible = e.isIntersecting; sync(); }).observe(finalCta);
+    }
+  }
+</script>
