@@ -18,6 +18,7 @@ export const prerender = false;
 import type { APIContext } from 'astro';
 import { env as cfEnv } from 'cloudflare:workers';
 import { addToKitSequence } from '../../lib/kit';
+import { sendTelegramAlert } from '../../lib/telegram';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const KIT_NURTURE_SEQUENCE_ID = '2814253';
 const KIT_WORKSHOP_WAITLIST_TAG_ID = '21454867';
@@ -365,6 +366,11 @@ export async function POST({ request, locals }: APIContext): Promise<Response> {
             console.warn('[lead-capture] Airtable upsert failed', { emailLog, err: String(err) }),
           )
       : Promise.resolve(),
+    sendTelegramAlert(
+      e['TELEGRAM_BOT_TOKEN'] ?? '',
+      e['TELEGRAM_CHAT_ID'] ?? '',
+      `New lead: ${source}, ${full_name || '(no name)'}, ${email}`,
+    ),
   ]));
 
   return isJson
