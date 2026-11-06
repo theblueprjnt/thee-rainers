@@ -168,6 +168,22 @@ import Testimonials from '../components/site/Testimonials.astro';
     </div>
   </section>
 
+  <!-- 5-STAR REVIEWS -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div class="text-center md:text-left">
+        <p class="text-[var(--terra)] text-base tracking-widest mb-4">★★★★★</p>
+        <p class="text-[#0A0A0A] text-base leading-relaxed mb-4">"After the first month of training I know going into sparrings will be a lot easier for me and more fun."</p>
+        <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Kristaps</p>
+      </div>
+      <div class="text-center md:text-left">
+        <p class="text-[var(--terra)] text-base tracking-widest mb-4">★★★★★</p>
+        <p class="text-[#0A0A0A] text-base leading-relaxed mb-4">"I've already got a lot of value out of it, going back to it for the second time because I know there's so much more that I didn't get the first time."</p>
+        <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Kevin</p>
+      </div>
+    </div>
+  </section>
+
   <!-- WHAT'S INCLUDED -->
   <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[720px] mx-auto">
@@ -249,8 +265,7 @@ import Testimonials from '../components/site/Testimonials.astro';
           <span class="font-black text-[#0A0A0A] text-4xl">$97</span>
           <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">One time</span>
         </div>
-        <!-- TODO: wire data-checkout once the Stripe product + checkout key exist -->
-        <button type="button" class="tr-btn">
+        <button type="button" data-checkout="course" class="tr-btn">
           Get Step Into The Ring · $97 →
         </button>
         <p class="text-[11px] text-[#0A0A0A]/30 mt-4">Secure checkout via Stripe · Instant access · 7-Day Money-Back Guarantee · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a></p>
@@ -312,7 +327,7 @@ import Testimonials from '../components/site/Testimonials.astro';
         <span class="font-black text-white text-4xl">$97</span>
         <span class="text-white/50 text-xs uppercase tracking-widest">One time</span>
       </div>
-      <button type="button" class="tr-btn">
+      <button type="button" data-checkout="course" class="tr-btn">
         Try It Risk-Free for 7 Days →
       </button>
       <p class="text-[11px] text-white/70 mt-4">Instant access.</p>
@@ -328,7 +343,7 @@ import Testimonials from '../components/site/Testimonials.astro';
       <span class="font-black text-[#0A0A0A] text-xl">$97</span>
       <span class="text-[#0A0A0A]/40 text-[10px] uppercase tracking-widest">One time</span>
     </div>
-    <button type="button" class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">
+    <button type="button" data-checkout="course" class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">
       Get Access →
     </button>
   </div>

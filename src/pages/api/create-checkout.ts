@@ -80,6 +80,12 @@ const PRODUCTS: Record<string, ProductConfig> = {
     successPath: '/thank-you/coaching',
     cancelPath: '/coaching',
   },
+  course: {
+    priceId: 'price_1UYndFHzlarU775HNR8fuogl',
+    mode: 'payment',
+    successPath: '/thank-you/course',
+    cancelPath: '/course',
+  },
 };
 
 // Grade 3 is capped at 5 seats ($12,000, 12-month program). Checkout Sessions

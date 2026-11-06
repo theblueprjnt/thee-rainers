@@ -46,6 +46,7 @@ const LOOKUP_KEY_MAP: Record<string, string> = {
   'grade1':                   'grade1',
   'grade2':                   'grade2',
   'grade3':                   'grade3',
+  'course':                   'course',
 };
 
 // ── asset map ──────────────────────────────────────────────────────────────
@@ -401,6 +402,7 @@ const DELIVERY_SUBJECTS: Record<string, string> = {
   'workshop-replay':   'Your Defense Workshop Replay',
   'defense-workshop':  'Your Defense Workshop Replay',
   'greatness':         'You are in.',
+  'course':            'Your Step Into The Ring Access',
 };
 
 function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Record<string, string>): string {
@@ -433,6 +435,13 @@ function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Re
       `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Your Defense Workshop replay is ready.</p>` +
       btn(url, 'Watch the Replay') +
       `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">90 minutes. Footwork, stance, punch mechanics, defensive structure, live Q&amp;A. This link doesn't expire.</p>`,
+    );
+  }
+  if (slug === 'course') {
+    return wrap(
+      `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Step Into The Ring is ready.</p>` +
+      btn(url, 'Access Step Into The Ring') +
+      `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Ten lessons in order, plus the 6-week structure video and the Footwork Blueprint PDF. This link doesn't expire.</p>`,
     );
   }
   if (slug === 'greatness') {
@@ -611,6 +620,14 @@ async function deliverProduct(email: string, productId: string, e: Record<string
       try { expiringUrls.push(await generateWatchUrl(watchSecret, 'workshop-replay')); }
       catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
     }
+  } else if (productSlug === 'course') {
+    const watchSecret = e['WATCH_TOKEN_SECRET'] ?? '';
+    if (!watchSecret) {
+      console.error('[stripe-webhook] WATCH_TOKEN_SECRET not set — course buyer will receive no watch link');
+    } else {
+      try { expiringUrls.push(await generateWatchUrl(watchSecret, 'course')); }
+      catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
+    }
   } else if (productSlug === 'greatness') {
     const watchSecret = e['WATCH_TOKEN_SECRET'] ?? '';
     if (watchSecret) {
@@ -760,12 +777,13 @@ export async function POST({ request }: APIContext): Promise<Response> {
             console.error('[stripe-webhook] KIT_COACHING_TAG_ID not set — ' + slug + ' buyer ' + email + ' was not tagged in Kit.');
           }
         }
-        // Telegram sale alert
-        sendTelegramAlert(
+        // Telegram sale alert. Awaited: an un-awaited fetch gets cancelled
+        // when the Worker returns its response, so the alert never lands.
+        await sendTelegramAlert(
           e['TELEGRAM_BOT_TOKEN'] ?? '',
           e['TELEGRAM_CHAT_ID'] ?? '',
           `SALE: ${slug ?? productId}, $${((session.amount_total ?? 0) / 100).toFixed(0)}, ${email.replace(/(.).*(@.*)/, '$1***$2')}`,
-        ).catch(() => {});
+        );
         // Sync member into Airtable + tag in Kit
         await upsertAirtable(airtableToken, airtableBase, airtableTable, {
           Email: email,

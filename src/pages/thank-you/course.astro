@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Base.astro';
+import PurchaseMoment from '../../components/site/PurchaseMoment.astro';
+---
+<Layout title="Check Your Email · Thee Rainers" description="Your Step Into The Ring access link is on its way.">
+  <Fragment slot="head">
+    <meta name="robots" content="noindex" />
+  </Fragment>
+
+  <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
+    <div class="max-w-[720px] mx-auto w-full">
+
+      <PurchaseMoment
+        productName="Step Into The Ring"
+        firstActionCopy="Your access link is in your email. Open it and start with Lesson 01."
+      />
+
+      <div class="border-t border-[#0A0A0A]/6 pt-8">
+        <p class="text-[#0A0A0A]/20 text-[10px] tracking-widest uppercase mb-3">Also from Thee Rainers</p>
+        <div class="flex flex-col gap-2">
+          <a href="/coaching#grade-1" class="text-[#0A0A0A]/30 text-xs hover:text-[#0A0A0A]/55 transition-colors">Want a coach watching your form? Grade 1 Coaching · $347 →</a>
+          <a href="/command" class="text-[#0A0A0A]/30 text-xs hover:text-[#0A0A0A]/55 transition-colors">1-on-1 Coaching · application only →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>
