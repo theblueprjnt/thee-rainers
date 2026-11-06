@@ -2,238 +2,321 @@
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
 
-// SCAFFOLD ONLY — no final copy, pricing, or checkout wiring yet.
-// Structure mirrors shadowboxing-blueprint.astro. Fill bracketed
-// placeholders once the course name, price, and content are locked.
+// Checkout TODO: data-checkout="step_into_the_ring" is not wired yet.
+// Once the Stripe product/price exists, add an entry to
+// src/pages/api/create-checkout.ts PRODUCTS and src/data/products.ts,
+// and build /thank-you/course.astro.
 ---
 <Layout
-  title="[Course Name] — [One-line value prop]"
-  description="[Meta description placeholder — fill once copy is locked.]">
+  title="Step Into The Ring · The Complete Boxing Fundamentals Course | Thee Rainers"
+  description="Ten step-by-step video lessons plus the Footwork Blueprint PDF (56+ rounds). Stance to sparring-ready, built in order so every rep stands on the one before it.">
 
   <!-- HERO -->
-  <section id="buy-bar-sentinel" class="bg-[var(--warm)] pt-20 md:pt-36 pb-16 md:pb-20">
-    <div class="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-[58%_42%] gap-10 md:gap-16 items-center">
+  <section id="buy-bar-sentinel" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-16 md:pb-24">
+    <div class="max-w-[820px] mx-auto text-center">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">Course</p>
+      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.9] mb-6"
+        style="font-size: clamp(2.5rem, 6vw, 4.5rem);">
+        Step Into The Ring.
+      </h1>
+      <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-10 max-w-[560px] mx-auto">
+        The complete boxing fundamentals course. Ten lessons, stance to sparring-ready, built in order so every rep stands on the one before it.
+      </p>
 
-      <div>
-        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Eyebrow — e.g. Course]</p>
-        <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.88] mb-6"
-          style="font-size: clamp(2.5rem, 5.5vw, 4.25rem);">
-          [Course Name]
-        </h1>
-        <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-8 max-w-[520px]">
-          [Hero subhead — one or two sentences on the outcome.]
-        </p>
-
-        <div class="flex flex-col gap-3 mb-6 max-w-[420px]">
-          <div class="flex items-baseline gap-3">
-            <span class="font-black text-[#0A0A0A] text-4xl">$[PRICE]</span>
-            <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">[One time / per month]</span>
-          </div>
-          <!-- TODO: wire data-checkout once the Stripe product + checkout key exist -->
-          <button type="button" class="tr-btn">
-            [CTA — e.g. Get the Course] →
-          </button>
-          <p class="text-[11px] text-[#0A0A0A]/30">[Trust line — delivery, refund policy link, etc.]</p>
-        </div>
-
-        <!-- Specs (Gumroad-style fact sheet) -->
-        <div class="max-w-[420px] border-t border-[#0A0A0A]/10">
-          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
-            <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">[Spec label]</span>
-            <span class="text-[#0A0A0A] text-sm font-bold">[Spec value]</span>
-          </div>
-          <div class="flex justify-between items-baseline py-3 border-b border-[#0A0A0A]/10">
-            <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">[Spec label]</span>
-            <span class="text-[#0A0A0A] text-sm font-bold">[Spec value]</span>
-          </div>
-          <div class="flex justify-between items-baseline py-3">
-            <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold">[Spec label]</span>
-            <span class="text-[#0A0A0A] text-sm font-bold">[Spec value]</span>
-          </div>
-        </div>
+      <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-10 max-w-[720px] mx-auto overflow-hidden">
+        <iframe
+          src="https://player.vimeo.com/video/1244251517?title=0&byline=0&portrait=0"
+          class="absolute inset-0 w-full h-full"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title="Step Into The Ring · course preview">
+        </iframe>
       </div>
 
-      <div class="order-first md:order-last">
-        <div class="relative bg-[var(--warm)] border border-[#0A0A0A]/10 mx-auto max-w-[420px] aspect-[840/644] flex items-center justify-center">
-          <p class="text-[#0A0A0A]/30 text-xs uppercase tracking-widest">[Cover image]</p>
-        </div>
-      </div>
+      <a href="#curriculum" class="tr-btn inline-flex">
+        See What's Inside ↓
+      </a>
 
+      <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase mt-6">Join 100+ aspiring fighters and athletes worldwide</p>
     </div>
   </section>
 
-  <!-- WHAT'S IN IT -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[720px] mx-auto">
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-8">
-        [What's inside.]
-      </h2>
-      <ul class="flex flex-col gap-7 text-[#0A0A0A]/80 text-base leading-relaxed">
-        <li>
-          <p class="flex gap-3 font-bold text-[#0A0A0A]">
-            <span class="text-[var(--terra)] shrink-0">◆</span>
-            <span>[Module / component 1]</span>
-          </p>
-          <p class="ml-7 mt-2 text-[#0A0A0A]/70">[What it covers.]</p>
-        </li>
-        <li>
-          <p class="flex gap-3 font-bold text-[#0A0A0A]">
-            <span class="text-[var(--terra)] shrink-0">◆</span>
-            <span>[Module / component 2]</span>
-          </p>
-          <p class="ml-7 mt-2 text-[#0A0A0A]/70">[What it covers.]</p>
-        </li>
-        <li>
-          <p class="flex gap-3 font-bold text-[#0A0A0A]">
-            <span class="text-[var(--terra)] shrink-0">◆</span>
-            <span>[Module / component 3]</span>
-          </p>
-          <p class="ml-7 mt-2 text-[#0A0A0A]/70">[What it covers.]</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- WHO THIS IS FOR -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[920px] mx-auto">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Who this is for]</p>
+  <!-- CURRICULUM -->
+  <section id="curriculum" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1000px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">What's inside</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
-        [Headline]
+        The structure.
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#0B0B0C]/8">
-        <div class="bg-white p-8">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase mb-3">01</p>
-          <p class="text-[#0A0A0A] text-sm leading-relaxed">[Audience segment 1.]</p>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-px bg-[#0B0B0C]/8">
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">01</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Intro & Safety Precautions</p>
         </div>
-        <div class="bg-white p-8">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase mb-3">02</p>
-          <p class="text-[#0A0A0A] text-sm leading-relaxed">[Audience segment 2.]</p>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">02</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">How to Wrap Your Hands</p>
         </div>
-        <div class="bg-white p-8">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase mb-3">03</p>
-          <p class="text-[#0A0A0A] text-sm leading-relaxed">[Audience segment 3.]</p>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">03</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Boxing Mindset</p>
         </div>
-        <div class="bg-white p-8">
-          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase mb-3">04</p>
-          <p class="text-[#0A0A0A] text-sm leading-relaxed">[Audience segment 4.]</p>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">04</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Athletic Fight Stance</p>
+        </div>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">05</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Boxing Settings to Keep in Mind</p>
+        </div>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">06</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Defense</p>
+        </div>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">07</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Punches</p>
+        </div>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">08</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">How to Hit the Heavy Bag</p>
+        </div>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">09</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Training Plans</p>
+        </div>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">10</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Footwork In-Depth (4 Bases)</p>
+        </div>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-[9px] font-bold shrink-0">BONUS</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">6-Week Structure + Video</p>
+        </div>
+        <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
+          <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-[8px] font-bold shrink-0 leading-none text-center">PDF</span>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Footwork Blueprint (56+ Rounds)</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT CHANGES YOU -->
+  <!-- TESTIMONIALS ROW (video) -->
   <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[920px] mx-auto">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[How it changes you]</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-12">
-        [Headline]
+    <div class="max-w-[1140px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4 text-center">What others say</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-12 text-center">
+        They did it. So can you.
       </h2>
-      <ul class="flex flex-col divide-y divide-[#0A0A0A]/8">
-        <li class="py-6 flex gap-6 items-baseline">
-          <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">01</span>
-          <span class="text-[#0A0A0A] text-base leading-relaxed">[Gain 1.]</span>
-        </li>
-        <li class="py-6 flex gap-6 items-baseline">
-          <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">02</span>
-          <span class="text-[#0A0A0A] text-base leading-relaxed">[Gain 2.]</span>
-        </li>
-        <li class="py-6 flex gap-6 items-baseline">
-          <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold shrink-0 w-12">03</span>
-          <span class="text-[#0A0A0A] text-base leading-relaxed">[Gain 3.]</span>
-        </li>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <a href="https://vimeo.com/1069667987" target="_blank" rel="noopener" class="group block">
+          <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-4 overflow-hidden">
+            <img src="/images/course-jacob-thumb.jpg" alt="Jacob's review" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-[#0A0A0A]/20 group-hover:bg-[#0A0A0A]/35 transition-colors flex items-center justify-center">
+              <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-xl">▶</span>
+            </div>
+          </div>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"I lost 4.8kg in 6 weeks and felt more powerful than ever."</p>
+          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Jacob</p>
+        </a>
+        <a href="https://vimeo.com/1069667918" target="_blank" rel="noopener" class="group block">
+          <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-4 overflow-hidden">
+            <img src="/images/course-richard-thumb.jpg" alt="Richard's review" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-[#0A0A0A]/20 group-hover:bg-[#0A0A0A]/35 transition-colors flex items-center justify-center">
+              <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-xl">▶</span>
+            </div>
+          </div>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"Every session was different. Kept me engaged and improving."</p>
+          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Richard</p>
+        </a>
+        <a href="https://vimeo.com/1069668209" target="_blank" rel="noopener" class="group block">
+          <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-4 overflow-hidden">
+            <img src="/images/course-elizabeth-thumb.jpg" alt="Elizabeth's review" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-[#0A0A0A]/20 group-hover:bg-[#0A0A0A]/35 transition-colors flex items-center justify-center">
+              <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-xl">▶</span>
+            </div>
+          </div>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"I gained strength and confidence I never thought possible."</p>
+          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Elizabeth</p>
+        </a>
+      </div>
+      <!-- TODO: swap in Kristaps (1244255475, quote: "After the first month of
+      training, I know going into sparring will be a lot easier for me and
+      more fun.") and Giancarlo (1244255737, no quote given), and upgrade all
+      5 new links to live embeds, once their Vimeo privacy is changed from
+      Private to Unlisted. Confirmed via direct test (not a guess): these 5
+      show a "Sign in to Vimeo" wall even embedded in-page. -->
+    </div>
+  </section>
+
+  <!-- STAT CARDS -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-[#0B0B0C]/8">
+      <div class="bg-white p-8 text-center">
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-lg mb-3">Real Progress</p>
+        <p class="text-[#0A0A0A]/65 text-sm leading-relaxed">Step-by-step structure. Every lesson builds on the one before.</p>
+      </div>
+      <div class="bg-white p-8 text-center">
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-lg mb-3">100+ Students, 500K+ Followers</p>
+        <p class="text-[#0A0A0A]/65 text-sm leading-relaxed">Aspiring fighters and athletes training this system worldwide.</p>
+      </div>
+      <div class="bg-white p-8 text-center">
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-lg mb-3">Beginner to Advanced</p>
+        <p class="text-[#0A0A0A]/65 text-sm leading-relaxed">Start from zero or sharpen what you already have. Every lesson moves you forward.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[720px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">What's inside</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-8">
+        What's in it?
+      </h2>
+      <ul class="flex flex-col gap-4">
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Step-by-step structure. Every lesson builds on the last.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Ten video lessons covering the complete boxing fundamentals.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Bonus: the 6-week structure, with a video walkthrough.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Bonus: the Footwork Blueprint PDF, 56+ rounds of drills.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Direct email access to ask Rainers questions.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Lifetime access. Revisit any lesson whenever you want.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">One-time payment. No subscription.</p></li>
       </ul>
     </div>
   </section>
 
-  <!-- WHY THIS WORKS -->
+  <!-- COMPARISON TABLE -->
   <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[720px] mx-auto">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Why this works]</p>
-      <p class="text-[#0A0A0A] text-lg leading-relaxed mb-3">[Core mechanism, sentence 1.]</p>
-      <p class="text-[#0A0A0A]/70 text-base leading-relaxed">[Core mechanism, sentence 2.]</p>
-    </div>
-  </section>
-
-  <!-- AUTHORITY -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[920px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_1.6fr] gap-10 md:gap-16 items-center">
-      <div class="overflow-hidden border border-[#0A0A0A]/8 aspect-[780/878] flex items-center justify-center bg-white">
-        <p class="text-[#0A0A0A]/30 text-xs uppercase tracking-widest">[Photo]</p>
-      </div>
-      <div>
-        <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-6">[The system behind this]</p>
-        <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">Rainers.</p>
-        <p class="text-[#0A0A0A]/70 text-base leading-relaxed mb-4">[Authority line 1.]</p>
-        <p class="text-[#0A0A0A]/70 text-base leading-relaxed">[Authority line 2.]</p>
+    <div class="max-w-[820px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">Why this and not free content</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-10">
+        No more random videos.
+      </h2>
+      <div class="border border-[#0A0A0A]/10 overflow-x-auto">
+        <div class="grid grid-cols-[1fr_auto_auto] gap-4 px-5 py-3 border-b border-[#0A0A0A]/10 bg-white min-w-[480px]">
+          <span class="text-[#0A0A0A]/40 text-[10px] tracking-widest uppercase">Feature</span>
+          <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold w-32 text-center">Step Into The Ring</span>
+          <span class="text-[#0A0A0A]/40 text-[10px] tracking-widest uppercase w-32 text-center">Free YouTube</span>
+        </div>
+        <div class="grid grid-cols-[1fr_auto_auto] gap-4 px-5 py-3 border-b border-[#0A0A0A]/10 items-center min-w-[480px]">
+          <span class="text-[#0A0A0A] text-sm">Structured, step-by-step path</span>
+          <span class="text-[#0A0A0A] text-sm font-bold w-32 text-center">Yes</span>
+          <span class="text-[#0A0A0A]/40 text-sm w-32 text-center">No</span>
+        </div>
+        <div class="grid grid-cols-[1fr_auto_auto] gap-4 px-5 py-3 border-b border-[#0A0A0A]/10 items-center min-w-[480px]">
+          <span class="text-[#0A0A0A] text-sm">Built for boxing fundamentals specifically</span>
+          <span class="text-[#0A0A0A] text-sm font-bold w-32 text-center">100% Focused</span>
+          <span class="text-[#0A0A0A]/40 text-sm w-32 text-center">Mixed, generic</span>
+        </div>
+        <div class="grid grid-cols-[1fr_auto_auto] gap-4 px-5 py-3 border-b border-[#0A0A0A]/10 items-center min-w-[480px]">
+          <span class="text-[#0A0A0A] text-sm">Direct access to ask questions</span>
+          <span class="text-[#0A0A0A] text-sm font-bold w-32 text-center">Yes</span>
+          <span class="text-[#0A0A0A]/40 text-sm w-32 text-center">No</span>
+        </div>
+        <div class="grid grid-cols-[1fr_auto_auto] gap-4 px-5 py-3 items-center min-w-[480px]">
+          <span class="text-[#0A0A0A] text-sm">One-time payment</span>
+          <span class="text-[#0A0A0A] text-sm font-bold w-32 text-center">Yes</span>
+          <span class="text-[#0A0A0A]/40 text-sm w-32 text-center">Ad-supported, endless search</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- PROOF -->
-  <Testimonials filter="remote" heading="[Testimonials heading]" kicker="[Kicker]" />
+  <Testimonials filter="all" heading="Trained the fundamentals" kicker="Results" />
 
-  <!-- MID-PAGE CTA -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-10 md:py-14 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[720px] mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-      <div>
-        <p class="text-[#0A0A0A]/50 text-[11px] tracking-widest uppercase mb-2">[Course Name] · $[PRICE]</p>
-        <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-xl md:text-2xl leading-tight">[Mid-page CTA headline.]</p>
-      </div>
-      <button type="button" class="tr-btn shrink-0">
-        [CTA] →
-      </button>
-    </div>
-  </section>
-
-  <!-- HESITATION -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-t border-[#0A0A0A]/8">
-    <div class="max-w-[720px] mx-auto">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[If you are hesitating]</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.9] mb-6">
-        "[Common objection, quoted.]"
+  <!-- BONUS STACK + PRICE -->
+  <section id="offer" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[680px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4 text-center">What you'll get</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-10 text-center">
+        Step Into The Ring
       </h2>
-      <p class="text-[#0A0A0A]/65 text-base leading-relaxed mb-3">[Response line 1.]</p>
-      <p class="text-[#0A0A0A]/55 text-base leading-relaxed">[Response line 2.]</p>
+
+      <p class="text-[#0A0A0A]/80 text-base leading-relaxed mb-8 text-center">Ten video lessons plus the Footwork Blueprint. Everything you need to go from first rep to sparring-ready.</p>
+
+      <ul class="flex flex-col gap-4 mb-10">
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Ten step-by-step video lessons</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Bonus: the 6-week structure, with a video walkthrough</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Bonus: the Footwork Blueprint PDF, 56+ rounds of drills</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Direct email access to ask Rainers questions</p></li>
+      </ul>
+
+      <div class="border-t border-[#0A0A0A]/10 pt-8 text-center">
+        <div class="flex items-baseline justify-center gap-3 mb-6">
+          <span class="font-black text-[#0A0A0A] text-4xl">$97</span>
+          <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">One time</span>
+        </div>
+        <!-- TODO: wire data-checkout once the Stripe product + checkout key exist -->
+        <button type="button" class="tr-btn">
+          Get Step Into The Ring · $97 →
+        </button>
+        <p class="text-[11px] text-[#0A0A0A]/30 mt-4">Secure checkout via Stripe · Instant access · 7-Day Money-Back Guarantee · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a></p>
+      </div>
     </div>
   </section>
 
-  <!-- BONUSES -->
+  <!-- GUARANTEE -->
   <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[920px] mx-auto">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Bonuses]</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
-        [What ships with it.]
+    <div class="max-w-[680px] mx-auto text-center">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">Risk-free</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-6">
+        7-Day Money-Back Guarantee
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
-        <div class="flex gap-3 items-baseline">
-          <span class="text-[var(--terra)] font-bold text-sm shrink-0">·</span>
-          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">[Bonus 1.]</p>
-        </div>
-        <div class="flex gap-3 items-baseline">
-          <span class="text-[var(--terra)] font-bold text-sm shrink-0">·</span>
-          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed">[Bonus 2.]</p>
-        </div>
+      <p class="text-[#0A0A0A]/70 text-base leading-relaxed">If Step Into The Ring is not what you expected, for any reason, email us within 7 days of purchase for a full refund. No questions asked.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+    <div class="max-w-[720px] mx-auto">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-8">FAQ</p>
+      <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
+        <details class="py-5">
+          <summary class="font-bold text-[#0A0A0A] text-base cursor-pointer list-none">Is there a refund if I'm not satisfied?</summary>
+          <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mt-3">Yes. Step Into The Ring carries a 7-day money-back guarantee. Email us within 7 days of purchase for a full refund, no questions asked.</p>
+        </details>
+        <details class="py-5">
+          <summary class="font-bold text-[#0A0A0A] text-base cursor-pointer list-none">Do I get lifetime access?</summary>
+          <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mt-3">Yes. Once you're in, every lesson and the PDF are yours to keep. Go at your own pace and revisit lessons whenever you want.</p>
+        </details>
+        <details class="py-5">
+          <summary class="font-bold text-[#0A0A0A] text-base cursor-pointer list-none">Can beginners take this course?</summary>
+          <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mt-3">Yes. Step Into The Ring starts with the fundamentals, stance and hand wrapping before anything else, so you don't need prior experience.</p>
+        </details>
+        <details class="py-5">
+          <summary class="font-bold text-[#0A0A0A] text-base cursor-pointer list-none">What makes this different from free YouTube videos?</summary>
+          <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mt-3">This isn't random lessons. It's ten lessons in order, each one building on the last, with the Footwork Blueprint and direct access to ask questions. Free content isn't built as one system.</p>
+        </details>
       </div>
     </div>
   </section>
+
+  <!-- FOUNDER STORY, removed for now per Rainers, good copy worth reusing elsewhere:
+  "Meet your coach" / Rainers. origin story (At 16, I was lost...). See git history. -->
 
   <!-- FINAL CTA -->
-  <section id="final-cta-section" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+  <section id="final-cta-section" class="relative px-6 md:px-12 lg:px-20 py-20 md:py-28 overflow-hidden">
+    <picture class="absolute inset-0 -z-10">
+      <img src="/images/herocropped.png" alt="" class="w-full h-full object-cover object-top" loading="lazy" />
+    </picture>
+    <div class="absolute inset-0 -z-10 bg-[#0A0A0A]/80"></div>
     <div class="max-w-[680px] mx-auto text-center">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">[Access the Course]</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] mb-8">
-        [Final CTA headline.]
+      <p class="text-white/60 text-[11px] tracking-widest uppercase mb-4">Step Into The Ring</p>
+      <h2 class="font-black text-white uppercase tracking-tighter text-3xl md:text-5xl leading-[0.9] mb-8">
+        Build the fundamentals once.<br/>Use them forever.
       </h2>
       <div class="flex items-baseline justify-center gap-3 mb-6">
-        <span class="font-black text-[#0A0A0A] text-4xl">$[PRICE]</span>
-        <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">[One time / per month]</span>
+        <span class="font-black text-white text-4xl">$97</span>
+        <span class="text-white/50 text-xs uppercase tracking-widest">One time</span>
       </div>
       <button type="button" class="tr-btn">
-        [CTA] →
+        Try It Risk-Free for 7 Days →
       </button>
-      <p class="text-[11px] text-[#0A0A0A]/55 mt-4">[Delivery line.]</p>
-      <p class="text-[11px] text-[#0A0A0A]/30 mt-2">[Trust line, refund policy link.]</p>
+      <p class="text-[11px] text-white/70 mt-4">Instant access.</p>
+      <p class="text-[11px] text-white/40 mt-2">Secure checkout via Stripe · 7-Day Money-Back Guarantee · <a href="/legal/refund-policy" class="underline hover:text-white/70">Refund Policy</a></p>
     </div>
   </section>
 
@@ -242,11 +325,11 @@ import Testimonials from '../components/site/Testimonials.astro';
     class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[var(--warm)] border-t border-[#0B0B0C]/12 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-200 ease-out"
     aria-hidden="true">
     <div class="flex items-baseline gap-2">
-      <span class="font-black text-[#0A0A0A] text-xl">$[PRICE]</span>
-      <span class="text-[#0A0A0A]/40 text-[10px] uppercase tracking-widest">[One time / per month]</span>
+      <span class="font-black text-[#0A0A0A] text-xl">$97</span>
+      <span class="text-[#0A0A0A]/40 text-[10px] uppercase tracking-widest">One time</span>
     </div>
     <button type="button" class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">
-      [CTA] →
+      Get Access →
     </button>
   </div>
 

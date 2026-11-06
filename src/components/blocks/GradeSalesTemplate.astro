@@ -26,8 +26,8 @@ const COPY = {
     subhead: "For fighters starting from zero, or fixing habits nobody's corrected. Footwork, punches, and defense, built in the right order.",
     heroCta: 'Start Grade 1 · $347',
     problem: "You're training without a real foundation. Maybe you're self-taught, maybe you picked up habits at a gym that never watched you closely. You don't know what you don't know, and it shows up under pressure.",
-    before: 'Guessing at technique. No one watching your actual movement.',
-    after: 'A structured base you can build your whole career on.',
+    before: 'Guessing at technique, no one correcting your movement.',
+    after: 'A structured base you can build your boxing on.',
     howHeadline: 'How Grade 1 works.',
     step1: { label: 'Enrol and get access', body: 'Pay once and get the full 90-day curriculum immediately.' },
     step2: { label: 'Train and send video', body: 'Run the drills, film yourself training, and send in your footage.' },
@@ -93,7 +93,7 @@ const c = COPY[gradeNumber];
 ---
 
 <!-- ── HERO ──────────────────────────────────────────────────────────── -->
-<section class="relative bg-white overflow-hidden px-6 md:px-12 lg:px-20 py-28 md:py-36">
+<section class="relative bg-white overflow-hidden px-6 md:px-12 lg:px-20 pt-28 md:pt-36 pb-16 md:pb-20">
   <div class="max-w-[720px] mx-auto text-center">
     <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-6">{name}</p>
     <h1 class="font-black uppercase tracking-tighter text-[#0B0B0C] mb-6"
@@ -103,8 +103,8 @@ const c = COPY[gradeNumber];
     <p class="text-[#0B0B0C]/60 text-base leading-relaxed mb-10 max-w-[520px] mx-auto">
       {c.subhead}
     </p>
-    <button type="button" disabled class="tr-btn opacity-50 cursor-not-allowed">
-      Currently Unavailable
+    <button type="button" data-checkout={priceId} class="tr-btn">
+      {c.heroCta}
     </button>
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
@@ -113,7 +113,7 @@ const c = COPY[gradeNumber];
 </section>
 
 <!-- ── PROBLEM / CURRENT STATE ──────────────────────────────────────── -->
-<section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
+<section class="bg-white px-6 md:px-12 lg:px-20 pt-8 pb-16 md:pt-10 md:pb-24">
   <div class="max-w-[720px] mx-auto text-left">
     <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-4">Where You Are Now</p>
     <p class="text-[#0B0B0C]/70 text-base leading-relaxed">{c.problem}</p>
@@ -199,8 +199,8 @@ const c = COPY[gradeNumber];
     </div>
     <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-3">What Happens Next</p>
     <p class="text-[#0B0B0C]/70 text-sm leading-relaxed mb-10">{c.whatHappensNext}</p>
-    <button type="button" disabled class="tr-btn opacity-50 cursor-not-allowed">
-      Currently Unavailable
+    <button type="button" data-checkout={priceId} class="tr-btn">
+      {c.priceCta}
     </button>
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
@@ -233,8 +233,8 @@ const c = COPY[gradeNumber];
       style="font-size: clamp(2rem, 4vw, 3rem); line-height: 0.95;">
       {c.finalHeadline}
     </h2>
-    <button type="button" disabled class="tr-btn opacity-50 cursor-not-allowed">
-      Currently Unavailable
+    <button type="button" data-checkout={priceId} class="tr-btn">
+      {c.finalCta}
     </button>
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
