@@ -80,7 +80,7 @@ export const testimonials: Testimonial[] = [
     persona: "Startup founder · 3 months in the system",
     setting: "remote",
     youtubeId: "LY8MNzbhg2o",
-    quote: "I'm going back to it for a second time. There's so much more I didn't get the first.",
+    quote: "Every session felt different. A good mix of techniques, high intensity stuff, and drills that actually made me better. Even while traveling, the remote program kept me on track.",
   },
 
   // ─── Removed entries ─────────────────────────────────────────────────────

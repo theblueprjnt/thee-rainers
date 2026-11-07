@@ -110,47 +110,41 @@ import Testimonials from '../components/site/Testimonials.astro';
         They did it. So can you.
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <a href="https://vimeo.com/1069667987" target="_blank" rel="noopener" class="group block">
+        <div>
           <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-4 overflow-hidden">
-            <img src="/images/course-jacob-thumb.jpg" alt="Jacob's review" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-            <div class="absolute inset-0 bg-[#0A0A0A]/20 group-hover:bg-[#0A0A0A]/35 transition-colors flex items-center justify-center">
-              <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-xl">▶</span>
-            </div>
+            <iframe src="https://player.vimeo.com/video/1244252839?title=0&byline=0&portrait=0" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Jacob's review"></iframe>
           </div>
           <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"I lost 4.8kg in 6 weeks and felt more powerful than ever."</p>
           <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Jacob</p>
-        </a>
-        <a href="https://vimeo.com/1069667918" target="_blank" rel="noopener" class="group block">
+        </div>
+        <div>
           <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-4 overflow-hidden">
-            <img src="/images/course-richard-thumb.jpg" alt="Richard's review" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-            <div class="absolute inset-0 bg-[#0A0A0A]/20 group-hover:bg-[#0A0A0A]/35 transition-colors flex items-center justify-center">
-              <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-xl">▶</span>
-            </div>
+            <iframe src="https://player.vimeo.com/video/1244253311?title=0&byline=0&portrait=0" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Richard's review"></iframe>
           </div>
           <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"Every session felt different. A good mix of techniques, high intensity stuff, and drills that actually made me better."</p>
           <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Richard</p>
-        </a>
-        <a href="https://vimeo.com/1069668209" target="_blank" rel="noopener" class="group block">
+        </div>
+        <div>
           <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-4 overflow-hidden">
-            <img src="/images/course-elizabeth-thumb.jpg" alt="Elizabeth's review" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-            <div class="absolute inset-0 bg-[#0A0A0A]/20 group-hover:bg-[#0A0A0A]/35 transition-colors flex items-center justify-center">
-              <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-xl">▶</span>
-            </div>
+            <iframe src="https://player.vimeo.com/video/1244253557?title=0&byline=0&portrait=0" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Elizabeth's review"></iframe>
           </div>
           <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"I gained strength and confidence I never thought possible."</p>
           <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Elizabeth</p>
-        </a>
+        </div>
+        <div>
+          <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-4 overflow-hidden">
+            <iframe src="https://player.vimeo.com/video/1244255475?title=0&byline=0&portrait=0" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Kristaps's review"></iframe>
+          </div>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"After the first month of training, I know going into sparring will be a lot easier for me and more fun."</p>
+          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Kristaps</p>
+        </div>
+        <div>
+          <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-4 overflow-hidden">
+            <iframe src="https://player.vimeo.com/video/1244255737?title=0&byline=0&portrait=0" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Giancarlo's review"></iframe>
+          </div>
+          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Giancarlo</p>
+        </div>
       </div>
-      <!-- TODO: swap in Kristaps (1244255475), Giancarlo (1244255737), and
-      the 3 new jacob/richard/elizabeth IDs (1244252839/1244253311/1244253557)
-      as live embeds once Vimeo's EMBED (not privacy/visibility) setting is
-      fixed. Confirmed precisely: oEmbed now succeeds and returns a valid
-      embed (visibility is fine, changing to Public worked), but the actual
-      player iframe still returns "we couldn't verify the security of your
-      connection" -- that's Vimeo's "Where can this be embedded?" domain
-      allowlist, a SEPARATE setting from privacy. Set it to "Anywhere" (or
-      add theerainers.com specifically) per video, then these are ready to
-      swap in immediately. -->
     </div>
   </section>
 
