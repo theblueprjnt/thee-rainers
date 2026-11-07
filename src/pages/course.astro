@@ -25,7 +25,7 @@ import Testimonials from '../components/site/Testimonials.astro';
 
       <div class="relative bg-white border border-[#0A0A0A]/10 aspect-video mb-10 max-w-[720px] mx-auto overflow-hidden">
         <iframe
-          src="https://player.vimeo.com/video/1244251517?title=0&byline=0&portrait=0"
+          src="https://player.vimeo.com/video/1244251517?app_id=122963&title=0&byline=0&portrait=0"
           class="absolute inset-0 w-full h-full"
           frameborder="0"
           allow="autoplay; fullscreen; picture-in-picture"
@@ -127,7 +127,7 @@ import Testimonials from '../components/site/Testimonials.astro';
               <span class="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-xl">▶</span>
             </div>
           </div>
-          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"Every session was different. Kept me engaged and improving."</p>
+          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"Every session felt different. A good mix of techniques, high intensity stuff, and drills that actually made me better."</p>
           <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Richard</p>
         </a>
         <a href="https://vimeo.com/1069668209" target="_blank" rel="noopener" class="group block">
@@ -141,12 +141,16 @@ import Testimonials from '../components/site/Testimonials.astro';
           <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Elizabeth</p>
         </a>
       </div>
-      <!-- TODO: swap in Kristaps (1244255475, quote: "After the first month of
-      training, I know going into sparring will be a lot easier for me and
-      more fun.") and Giancarlo (1244255737, no quote given), and upgrade all
-      5 new links to live embeds, once their Vimeo privacy is changed from
-      Private to Unlisted. Confirmed via direct test (not a guess): these 5
-      show a "Sign in to Vimeo" wall even embedded in-page. -->
+      <!-- TODO: swap in Kristaps (1244255475), Giancarlo (1244255737), and
+      the 3 new jacob/richard/elizabeth IDs (1244252839/1244253311/1244253557)
+      as live embeds once Vimeo's EMBED (not privacy/visibility) setting is
+      fixed. Confirmed precisely: oEmbed now succeeds and returns a valid
+      embed (visibility is fine, changing to Public worked), but the actual
+      player iframe still returns "we couldn't verify the security of your
+      connection" -- that's Vimeo's "Where can this be embedded?" domain
+      allowlist, a SEPARATE setting from privacy. Set it to "Anywhere" (or
+      add theerainers.com specifically) per video, then these are ready to
+      swap in immediately. -->
     </div>
   </section>
 
