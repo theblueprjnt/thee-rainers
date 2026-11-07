@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Base.astro';
-import Testimonials from '../components/site/Testimonials.astro';
 
 // Checkout TODO: data-checkout="step_into_the_ring" is not wired yet.
 // Once the Stripe product/price exists, add an entry to
@@ -12,18 +11,18 @@ import Testimonials from '../components/site/Testimonials.astro';
   description="Ten step-by-step video lessons plus the Footwork Blueprint PDF (56+ rounds). Stance to sparring-ready, built in order so every rep stands on the one before it.">
 
   <!-- HERO -->
-  <section id="buy-bar-sentinel" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-16 md:pb-24">
+  <section id="buy-bar-sentinel" class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-16 md:pb-24">
     <div class="max-w-[820px] mx-auto text-center">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">Course</p>
-      <h1 class="font-black text-[#0A0A0A] uppercase tracking-tighter leading-[0.9] mb-6"
+      <h1 class="font-black text-white uppercase tracking-tighter leading-[0.9] mb-6"
         style="font-size: clamp(2.5rem, 6vw, 4.5rem);">
         Step Into The Ring.
       </h1>
-      <p class="text-[#0A0A0A]/60 text-base md:text-lg leading-relaxed mb-10 max-w-[560px] mx-auto">
+      <p class="text-white/60 text-base md:text-lg leading-relaxed mb-10 max-w-[560px] mx-auto">
         The complete boxing fundamentals course. Ten lessons, stance to sparring-ready, built in order so every rep stands on the one before it.
       </p>
 
-      <div class="relative bg-white border border-[#0A0A0A]/10 mb-10 max-w-[720px] mx-auto overflow-hidden" style="padding-top: 56.25%;">
+      <div class="relative bg-white border border-white/10 mb-10 max-w-[720px] mx-auto overflow-hidden" style="padding-top: 56.25%;">
         <iframe
           src="https://player.vimeo.com/video/1244251517?badge=0&autopause=0&player_id=0&app_id=58479"
           class="absolute inset-0 w-full h-full"
@@ -39,18 +38,18 @@ import Testimonials from '../components/site/Testimonials.astro';
         See What's Inside ↓
       </a>
 
-      <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase mt-6">Join 100+ aspiring fighters and athletes worldwide</p>
+      <p class="text-white/40 text-[11px] tracking-widest uppercase mt-6">Join 100+ aspiring fighters and athletes worldwide</p>
     </div>
   </section>
 
   <!-- CURRICULUM -->
-  <section id="curriculum" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+  <section id="curriculum" class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[1000px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">What's inside</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
+      <h2 class="font-black text-white uppercase tracking-tighter text-3xl md:text-4xl leading-[0.9] mb-10">
         The structure.
       </h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-px bg-[#0B0B0C]/8">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
           <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">01</span>
           <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Intro & Safety Precautions</p>
@@ -104,46 +103,46 @@ import Testimonials from '../components/site/Testimonials.astro';
   </section>
 
   <!-- TESTIMONIALS ROW (video) -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[1140px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4 text-center">What others say</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-12 text-center">
+      <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-12 text-center">
         They did it. So can you.
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         <div>
-          <div class="relative bg-white border border-[#0A0A0A]/10 mb-4 overflow-hidden" style="padding-top: 66.67%;">
-            <iframe src="https://player.vimeo.com/video/1244252839?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="videoreview (720p)"></iframe>
+          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
+            <iframe src="https://player.vimeo.com/video/1244252839?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Jacob's review"></iframe>
           </div>
-          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"I lost 4.8kg in 6 weeks and felt more powerful than ever."</p>
-          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Jacob</p>
+          <p class="text-white/70 text-xs leading-relaxed mb-2">"I lost 4.8kg in 6 weeks and felt more powerful than ever."</p>
+          <p class="text-white/35 text-[10px] tracking-widest uppercase">Jacob</p>
         </div>
         <div>
-          <div class="relative bg-white border border-[#0A0A0A]/10 mb-4 overflow-hidden max-w-[260px] mx-auto md:mx-0" style="padding-top: 177.78%;">
-            <iframe src="https://player.vimeo.com/video/1244253311?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="videoreview (540p)"></iframe>
+          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
+            <iframe src="https://player.vimeo.com/video/1244253311?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Richard's review"></iframe>
           </div>
-          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"Every session felt different. A good mix of techniques, high intensity stuff, and drills that actually made me better."</p>
-          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Richard</p>
+          <p class="text-white/70 text-xs leading-relaxed mb-2">"Every session felt different. A good mix of techniques and drills that actually made me better."</p>
+          <p class="text-white/35 text-[10px] tracking-widest uppercase">Richard</p>
         </div>
         <div>
-          <div class="relative bg-white border border-[#0A0A0A]/10 mb-4 overflow-hidden" style="padding-top: 56.25%;">
-            <iframe src="https://player.vimeo.com/video/1244253557?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="hellalong_reviewbyelizabete (1080p)"></iframe>
+          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
+            <iframe src="https://player.vimeo.com/video/1244253557?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Elizabeth's review"></iframe>
           </div>
-          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"I gained strength and confidence I never thought possible."</p>
-          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Elizabeth</p>
+          <p class="text-white/70 text-xs leading-relaxed mb-2">"I gained strength and confidence I never thought possible."</p>
+          <p class="text-white/35 text-[10px] tracking-widest uppercase">Elizabeth</p>
         </div>
         <div>
-          <div class="relative bg-white border border-[#0A0A0A]/10 mb-4 overflow-hidden" style="padding-top: 56.25%;">
+          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
             <iframe src="https://player.vimeo.com/video/1244255475?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Kristaps's review"></iframe>
           </div>
-          <p class="text-[#0A0A0A]/80 text-sm leading-relaxed mb-2">"After the first month of training, I know going into sparring will be a lot easier for me and more fun."</p>
-          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Kristaps</p>
+          <p class="text-white/70 text-xs leading-relaxed mb-2">"After the first month, I know sparring will be easier and more fun."</p>
+          <p class="text-white/35 text-[10px] tracking-widest uppercase">Kristaps</p>
         </div>
         <div>
-          <div class="relative bg-white border border-[#0A0A0A]/10 mb-4 overflow-hidden max-w-[320px] mx-auto md:mx-0" style="padding-top: 125%;">
-            <iframe src="https://player.vimeo.com/video/1244255737?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Giancarlo_testominal"></iframe>
+          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
+            <iframe src="https://player.vimeo.com/video/1244255737?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Giancarlo's review"></iframe>
           </div>
-          <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Giancarlo</p>
+          <p class="text-white/35 text-[10px] tracking-widest uppercase">Giancarlo</p>
         </div>
       </div>
     </div>
@@ -152,8 +151,8 @@ import Testimonials from '../components/site/Testimonials.astro';
   <script src="https://player.vimeo.com/api/player.js" is:inline></script>
 
   <!-- STAT CARDS -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-[#0B0B0C]/8">
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-3">
       <div class="bg-white p-8 text-center">
         <p class="font-black text-[#0A0A0A] uppercase tracking-tighter text-lg mb-3">Real Progress</p>
         <p class="text-[#0A0A0A]/65 text-sm leading-relaxed">Step-by-step structure. Every lesson builds on the one before.</p>
@@ -170,49 +169,49 @@ import Testimonials from '../components/site/Testimonials.astro';
   </section>
 
   <!-- 5-STAR REVIEWS -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
       <div class="text-center md:text-left">
         <p class="text-[var(--terra)] text-base tracking-widest mb-4">★★★★★</p>
-        <p class="text-[#0A0A0A] text-base leading-relaxed mb-4">"After the first month of training I know going into sparrings will be a lot easier for me and more fun."</p>
-        <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Kristaps</p>
+        <p class="text-white text-base leading-relaxed mb-4">"After the first month of training I know going into sparrings will be a lot easier for me and more fun."</p>
+        <p class="text-white/40 text-[11px] tracking-widest uppercase">Kristaps</p>
       </div>
       <div class="text-center md:text-left">
         <p class="text-[var(--terra)] text-base tracking-widest mb-4">★★★★★</p>
-        <p class="text-[#0A0A0A] text-base leading-relaxed mb-4">"I've already got a lot of value out of it, going back to it for the second time because I know there's so much more that I didn't get the first time."</p>
-        <p class="text-[#0A0A0A]/40 text-[11px] tracking-widest uppercase">Kevin</p>
+        <p class="text-white text-base leading-relaxed mb-4">"I've already got a lot of value out of it, going back to it for the second time because I know there's so much more that I didn't get the first time."</p>
+        <p class="text-white/40 text-[11px] tracking-widest uppercase">Kevin</p>
       </div>
     </div>
   </section>
 
   <!-- WHAT'S INCLUDED -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[720px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">What's inside</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-8">
+      <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-8">
         What's in it?
       </h2>
       <ul class="flex flex-col gap-4">
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Step-by-step structure. Every lesson builds on the last.</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Ten video lessons covering the complete boxing fundamentals.</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Bonus: the 6-week structure, with a video walkthrough.</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Bonus: the Footwork Blueprint PDF, 56+ rounds of drills.</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Direct email access to ask Rainers questions.</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Lifetime access. Revisit any lesson whenever you want.</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">One-time payment. No subscription.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Step-by-step structure. Every lesson builds on the last.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Ten video lessons covering the complete boxing fundamentals.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Bonus: the 6-week structure, with a video walkthrough.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Bonus: the Footwork Blueprint PDF, 56+ rounds of drills.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Direct email access to ask Rainers questions.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Lifetime access. Revisit any lesson whenever you want.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">One-time payment. No subscription.</p></li>
       </ul>
     </div>
   </section>
 
   <!-- COMPARISON TABLE -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[820px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">Why this and not free content</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-10">
+      <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-10">
         No more random videos.
       </h2>
-      <div class="border border-[#0A0A0A]/10 overflow-x-auto">
-        <div class="grid grid-cols-[1fr_auto_auto] gap-4 px-5 py-3 border-b border-[#0A0A0A]/10 bg-white min-w-[480px]">
+      <div class="bg-white overflow-x-auto">
+        <div class="grid grid-cols-[1fr_auto_auto] gap-4 px-5 py-3 border-b border-[#0A0A0A]/10 min-w-[480px]">
           <span class="text-[#0A0A0A]/40 text-[10px] tracking-widest uppercase">Feature</span>
           <span class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold w-32 text-center">Step Into The Ring</span>
           <span class="text-[#0A0A0A]/40 text-[10px] tracking-widest uppercase w-32 text-center">Free YouTube</span>
@@ -241,68 +240,65 @@ import Testimonials from '../components/site/Testimonials.astro';
     </div>
   </section>
 
-  <!-- PROOF -->
-  <Testimonials filter="all" heading="Trained the fundamentals" kicker="Results" />
-
   <!-- BONUS STACK + PRICE -->
-  <section id="offer" class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+  <section id="offer" class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[680px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4 text-center">What you'll get</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-10 text-center">
+      <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-10 text-center">
         Step Into The Ring
       </h2>
 
-      <p class="text-[#0A0A0A]/80 text-base leading-relaxed mb-8 text-center">Ten video lessons plus the Footwork Blueprint. Everything you need to go from first rep to sparring-ready.</p>
+      <p class="text-white/75 text-base leading-relaxed mb-8 text-center">Ten video lessons plus the Footwork Blueprint. Everything you need to go from first rep to sparring-ready.</p>
 
       <ul class="flex flex-col gap-4 mb-10">
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Ten step-by-step video lessons</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Bonus: the 6-week structure, with a video walkthrough</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Bonus: the Footwork Blueprint PDF, 56+ rounds of drills</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-[#0A0A0A]/80 text-base leading-relaxed">Direct email access to ask Rainers questions</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Ten step-by-step video lessons</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Bonus: the 6-week structure, with a video walkthrough</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Bonus: the Footwork Blueprint PDF, 56+ rounds of drills</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Direct email access to ask Rainers questions</p></li>
       </ul>
 
-      <div class="border-t border-[#0A0A0A]/10 pt-8 text-center">
+      <div class="border-t border-white/10 pt-8 text-center">
         <div class="flex items-baseline justify-center gap-3 mb-6">
-          <span class="font-black text-[#0A0A0A] text-4xl">$97</span>
-          <span class="text-[#0A0A0A]/40 text-xs uppercase tracking-widest">One time</span>
+          <span class="font-black text-white text-4xl">$97</span>
+          <span class="text-white/40 text-xs uppercase tracking-widest">One time</span>
         </div>
         <button type="button" data-checkout="course" class="tr-btn">
           Get Step Into The Ring · $97 →
         </button>
-        <p class="text-[11px] text-[#0A0A0A]/30 mt-4">Secure checkout via Stripe · Instant access · 7-Day Money-Back Guarantee · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a></p>
+        <p class="text-[11px] text-white/30 mt-4">Secure checkout via Stripe · Instant access · 7-Day Money-Back Guarantee · <a href="/legal/refund-policy" class="underline hover:text-white/60">Refund Policy</a></p>
       </div>
     </div>
   </section>
 
   <!-- GUARANTEE -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[680px] mx-auto text-center">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">Risk-free</p>
-      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-6">
+      <h2 class="font-black text-white uppercase tracking-tighter text-2xl md:text-3xl leading-[0.95] mb-6">
         7-Day Money-Back Guarantee
       </h2>
-      <p class="text-[#0A0A0A]/70 text-base leading-relaxed">If Step Into The Ring is not what you expected, for any reason, email us within 7 days of purchase for a full refund. No questions asked.</p>
+      <p class="text-white/70 text-base leading-relaxed">If Step Into The Ring is not what you expected, for any reason, email us within 7 days of purchase for a full refund. No questions asked.</p>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-12 md:py-20 border-b border-[#0A0A0A]/8">
-    <div class="max-w-[720px] mx-auto">
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[820px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-8">FAQ</p>
-      <div class="flex flex-col divide-y divide-[#0A0A0A]/8">
-        <details class="py-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <details class="bg-white p-6">
           <summary class="font-bold text-[#0A0A0A] text-base cursor-pointer list-none">Is there a refund if I'm not satisfied?</summary>
           <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mt-3">Yes. Step Into The Ring carries a 7-day money-back guarantee. Email us within 7 days of purchase for a full refund, no questions asked.</p>
         </details>
-        <details class="py-5">
+        <details class="bg-white p-6">
           <summary class="font-bold text-[#0A0A0A] text-base cursor-pointer list-none">Do I get lifetime access?</summary>
           <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mt-3">Yes. Once you're in, every lesson and the PDF are yours to keep. Go at your own pace and revisit lessons whenever you want.</p>
         </details>
-        <details class="py-5">
+        <details class="bg-white p-6">
           <summary class="font-bold text-[#0A0A0A] text-base cursor-pointer list-none">Can beginners take this course?</summary>
           <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mt-3">Yes. Step Into The Ring starts with the fundamentals, stance and hand wrapping before anything else, so you don't need prior experience.</p>
         </details>
-        <details class="py-5">
+        <details class="bg-white p-6">
           <summary class="font-bold text-[#0A0A0A] text-base cursor-pointer list-none">What makes this different from free YouTube videos?</summary>
           <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mt-3">This isn't random lessons. It's ten lessons in order, each one building on the last, with the Footwork Blueprint and direct access to ask questions. Free content isn't built as one system.</p>
         </details>
@@ -338,11 +334,11 @@ import Testimonials from '../components/site/Testimonials.astro';
 
   <!-- STICKY BUY BAR (mobile only) -->
   <div id="sticky-bar"
-    class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[var(--warm)] border-t border-[#0B0B0C]/12 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-200 ease-out"
+    class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0A0A0A] border-t border-white/10 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-200 ease-out"
     aria-hidden="true">
     <div class="flex items-baseline gap-2">
-      <span class="font-black text-[#0A0A0A] text-xl">$97</span>
-      <span class="text-[#0A0A0A]/40 text-[10px] uppercase tracking-widest">One time</span>
+      <span class="font-black text-white text-xl">$97</span>
+      <span class="text-white/40 text-[10px] uppercase tracking-widest">One time</span>
     </div>
     <button type="button" data-checkout="course" class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">
       Get Access →
