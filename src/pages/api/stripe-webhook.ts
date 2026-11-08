@@ -46,7 +46,7 @@ const LOOKUP_KEY_MAP: Record<string, string> = {
   'grade1':                   'grade1',
   'grade2':                   'grade2',
   'grade3':                   'grade3',
-  'course':                   'course',
+  'masterclass':              'masterclass',
 };
 
 // ── asset map ──────────────────────────────────────────────────────────────
@@ -402,7 +402,7 @@ const DELIVERY_SUBJECTS: Record<string, string> = {
   'workshop-replay':   'Your Defense Workshop Replay',
   'defense-workshop':  'Your Defense Workshop Replay',
   'greatness':         'You are in.',
-  'course':            'Your Step Into The Ring Access',
+  'masterclass':       'Your Step Into The Ring Access',
 };
 
 function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Record<string, string>): string {
@@ -437,7 +437,7 @@ function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Re
       `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">90 minutes. Footwork, stance, punch mechanics, defensive structure, live Q&amp;A. This link doesn't expire.</p>`,
     );
   }
-  if (slug === 'course') {
+  if (slug === 'masterclass') {
     return wrap(
       `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Step Into The Ring is ready.</p>` +
       btn(url, 'Access Step Into The Ring') +
@@ -620,12 +620,12 @@ async function deliverProduct(email: string, productId: string, e: Record<string
       try { expiringUrls.push(await generateWatchUrl(watchSecret, 'workshop-replay')); }
       catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
     }
-  } else if (productSlug === 'course') {
+  } else if (productSlug === 'masterclass') {
     const watchSecret = e['WATCH_TOKEN_SECRET'] ?? '';
     if (!watchSecret) {
-      console.error('[stripe-webhook] WATCH_TOKEN_SECRET not set — course buyer will receive no watch link');
+      console.error('[stripe-webhook] WATCH_TOKEN_SECRET not set — masterclass buyer will receive no watch link');
     } else {
-      try { expiringUrls.push(await generateWatchUrl(watchSecret, 'course')); }
+      try { expiringUrls.push(await generateWatchUrl(watchSecret, 'masterclass')); }
       catch (err) { console.error('[stripe-webhook] Watch URL signing error:', String(err)); }
     }
   } else if (productSlug === 'greatness') {

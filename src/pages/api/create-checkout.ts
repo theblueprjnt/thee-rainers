@@ -80,11 +80,11 @@ const PRODUCTS: Record<string, ProductConfig> = {
     successPath: '/thank-you/coaching',
     cancelPath: '/coaching',
   },
-  course: {
+  masterclass: {
     priceId: 'price_1UZbeWHzlarU775Hz6RkaVet',
     mode: 'payment',
-    successPath: '/thank-you/course',
-    cancelPath: '/course',
+    successPath: '/thank-you/masterclass',
+    cancelPath: '/masterclass',
   },
 };
 

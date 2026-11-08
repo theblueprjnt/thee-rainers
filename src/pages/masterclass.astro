@@ -1,10 +1,5 @@
 ---
 import Layout from '../layouts/Base.astro';
-
-// Checkout TODO: data-checkout="step_into_the_ring" is not wired yet.
-// Once the Stripe product/price exists, add an entry to
-// src/pages/api/create-checkout.ts PRODUCTS and src/data/products.ts,
-// and build /thank-you/course.astro.
 ---
 <Layout
   title="Step Into The Ring · The Complete Boxing Fundamentals Course | Thee Rainers"
@@ -13,26 +8,21 @@ import Layout from '../layouts/Base.astro';
   <!-- HERO -->
   <section id="buy-bar-sentinel" class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 pt-28 md:pt-40 pb-16 md:pb-24">
     <div class="max-w-[820px] mx-auto text-center">
-      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">Course</p>
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase mb-4">Masterclass</p>
       <h1 class="font-black text-white uppercase tracking-tighter leading-[0.9] mb-6"
         style="font-size: clamp(2.5rem, 6vw, 4.5rem);">
         Step Into The Ring.
       </h1>
       <p class="text-white/60 text-base md:text-lg leading-relaxed mb-10 max-w-[560px] mx-auto">
-        The complete boxing fundamentals course in ten lessons.
+        The complete boxing fundamentals masterclass in ten lessons.
       </p>
 
-      <div class="relative bg-white border border-white/10 mb-10 max-w-[720px] mx-auto overflow-hidden" style="padding-top: 56.25%;">
-        <iframe
-          src="https://player.vimeo.com/video/1244251517?badge=0&autopause=0&player_id=0&app_id=58479"
-          class="absolute inset-0 w-full h-full"
-          frameborder="0"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-          title="vsl">
-        </iframe>
-      </div>
+      <button type="button" class="vimeo-facade relative block w-full bg-white border border-white/10 mb-10 max-w-[720px] mx-auto overflow-hidden cursor-pointer" style="padding-top: 56.25%;" data-vimeo-id="1244251517" data-vimeo-title="vsl" aria-label="Play video">
+        <img src="/images/course-vsl-thumb.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" />
+        <span class="absolute inset-0 bg-[#0A0A0A]/25 flex items-center justify-center">
+          <span class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-2xl">▶</span>
+        </span>
+      </button>
 
       <a href="#curriculum" class="tr-btn inline-flex">
         See What's Inside ↓
@@ -131,7 +121,7 @@ import Layout from '../layouts/Base.astro';
         <p class="text-white/40 text-[11px] tracking-widest uppercase mb-1">Step Into The Ring · $57</p>
         <p class="font-black text-white uppercase tracking-tighter text-xl leading-tight">Ready to start?</p>
       </div>
-      <button type="button" data-checkout="course" class="tr-btn shrink-0">
+      <button type="button" data-checkout="masterclass" class="tr-btn shrink-0">
         Get Access · $57 →
       </button>
     </div>
@@ -146,44 +136,79 @@ import Layout from '../layouts/Base.astro';
       </h2>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         <div>
-          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
-            <iframe src="https://player.vimeo.com/video/1244252839?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Jacob's review"></iframe>
-          </div>
+          <button type="button" class="vimeo-facade relative block w-full bg-white border border-white/10 mb-3 overflow-hidden cursor-pointer" style="padding-top: 100%;" data-vimeo-id="1244252839" data-vimeo-title="Jacob's review" aria-label="Play Jacob's review">
+            <img src="/images/course-jacob-thumb.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <span class="absolute inset-0 bg-[#0A0A0A]/25 flex items-center justify-center">
+              <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-sm">▶</span>
+            </span>
+          </button>
           <p class="text-white/70 text-xs leading-relaxed mb-2">"I lost 4.8kg in 6 weeks and felt more powerful than ever."</p>
           <p class="text-white/35 text-[10px] tracking-widest uppercase">Jacob</p>
         </div>
         <div>
-          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
-            <iframe src="https://player.vimeo.com/video/1244253311?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Richard's review"></iframe>
-          </div>
+          <button type="button" class="vimeo-facade relative block w-full bg-white border border-white/10 mb-3 overflow-hidden cursor-pointer" style="padding-top: 100%;" data-vimeo-id="1244253311" data-vimeo-title="Richard's review" aria-label="Play Richard's review">
+            <img src="/images/course-richard-thumb.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <span class="absolute inset-0 bg-[#0A0A0A]/25 flex items-center justify-center">
+              <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-sm">▶</span>
+            </span>
+          </button>
           <p class="text-white/70 text-xs leading-relaxed mb-2">"Every session felt different. A good mix of techniques and drills that actually made me better."</p>
           <p class="text-white/35 text-[10px] tracking-widest uppercase">Richard</p>
         </div>
         <div>
-          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
-            <iframe src="https://player.vimeo.com/video/1244253557?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Elizabeth's review"></iframe>
-          </div>
+          <button type="button" class="vimeo-facade relative block w-full bg-white border border-white/10 mb-3 overflow-hidden cursor-pointer" style="padding-top: 100%;" data-vimeo-id="1244253557" data-vimeo-title="Elizabeth's review" aria-label="Play Elizabeth's review">
+            <img src="/images/course-elizabeth-thumb.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <span class="absolute inset-0 bg-[#0A0A0A]/25 flex items-center justify-center">
+              <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-sm">▶</span>
+            </span>
+          </button>
           <p class="text-white/70 text-xs leading-relaxed mb-2">"I gained strength and confidence I never thought possible."</p>
           <p class="text-white/35 text-[10px] tracking-widest uppercase">Elizabeth</p>
         </div>
         <div>
-          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
-            <iframe src="https://player.vimeo.com/video/1244255475?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Kristaps's review"></iframe>
-          </div>
+          <button type="button" class="vimeo-facade relative block w-full bg-white border border-white/10 mb-3 overflow-hidden cursor-pointer" style="padding-top: 100%;" data-vimeo-id="1244255475" data-vimeo-title="Kristaps's review" aria-label="Play Kristaps's review">
+            <img src="/images/course-kristaps-thumb.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <span class="absolute inset-0 bg-[#0A0A0A]/25 flex items-center justify-center">
+              <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-sm">▶</span>
+            </span>
+          </button>
           <p class="text-white/70 text-xs leading-relaxed mb-2">"After the first month, I know sparring will be easier and more fun."</p>
           <p class="text-white/35 text-[10px] tracking-widest uppercase">Kristaps</p>
         </div>
         <div>
-          <div class="relative bg-white border border-white/10 mb-3 overflow-hidden" style="padding-top: 100%;">
-            <iframe src="https://player.vimeo.com/video/1244255737?badge=0&autopause=0&player_id=0&app_id=58479" class="absolute inset-0 w-full h-full" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" title="Giancarlo's review"></iframe>
-          </div>
+          <button type="button" class="vimeo-facade relative block w-full bg-white border border-white/10 mb-3 overflow-hidden cursor-pointer" style="padding-top: 100%;" data-vimeo-id="1244255737" data-vimeo-title="Giancarlo's review" aria-label="Play Giancarlo's review">
+            <img src="/images/course-giancarlo-thumb.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <span class="absolute inset-0 bg-[#0A0A0A]/25 flex items-center justify-center">
+              <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-[#0A0A0A] text-sm">▶</span>
+            </span>
+          </button>
           <p class="text-white/35 text-[10px] tracking-widest uppercase">Giancarlo</p>
         </div>
       </div>
     </div>
   </section>
 
-  <script src="https://player.vimeo.com/api/player.js" is:inline></script>
+  <script is:inline>
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.vimeo-facade');
+      if (!btn) return;
+      var id = btn.dataset.vimeoId;
+      var title = btn.dataset.vimeoTitle || '';
+      var wrap = document.createElement('div');
+      wrap.className = btn.className.replace('vimeo-facade', '').replace('cursor-pointer', '').trim();
+      wrap.setAttribute('style', btn.getAttribute('style') || '');
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://player.vimeo.com/video/' + id + '?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1';
+      iframe.className = 'absolute inset-0 w-full h-full';
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share');
+      iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      iframe.allowFullscreen = true;
+      iframe.title = title;
+      wrap.appendChild(iframe);
+      btn.replaceWith(wrap);
+    });
+  </script>
 
   <!-- STAT CARDS -->
   <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
@@ -226,7 +251,7 @@ import Layout from '../layouts/Base.astro';
         <p class="text-white/40 text-[11px] tracking-widest uppercase mb-1">Step Into The Ring · $57</p>
         <p class="font-black text-white uppercase tracking-tighter text-xl leading-tight">Ready to start?</p>
       </div>
-      <button type="button" data-checkout="course" class="tr-btn shrink-0">
+      <button type="button" data-checkout="masterclass" class="tr-btn shrink-0">
         Get Access · $57 →
       </button>
     </div>
@@ -310,7 +335,7 @@ import Layout from '../layouts/Base.astro';
           <span class="font-black text-white text-4xl">$57</span>
           <span class="text-white/40 text-xs uppercase tracking-widest">One time</span>
         </div>
-        <button type="button" data-checkout="course" class="tr-btn">
+        <button type="button" data-checkout="masterclass" class="tr-btn">
           Get Step Into The Ring · $57 →
         </button>
         <p class="text-[11px] text-white/30 mt-4">Secure checkout via Stripe · Instant access · 7-Day Money-Back Guarantee · <a href="/legal/refund-policy" class="underline hover:text-white/60">Refund Policy</a></p>
@@ -372,7 +397,7 @@ import Layout from '../layouts/Base.astro';
         <span class="font-black text-white text-4xl">$57</span>
         <span class="text-white/50 text-xs uppercase tracking-widest">One time</span>
       </div>
-      <button type="button" data-checkout="course" class="tr-btn">
+      <button type="button" data-checkout="masterclass" class="tr-btn">
         Try It Risk-Free for 7 Days →
       </button>
       <p class="text-[11px] text-white/70 mt-4">Instant access.</p>
@@ -388,7 +413,7 @@ import Layout from '../layouts/Base.astro';
       <span class="font-black text-white text-xl">$57</span>
       <span class="text-white/40 text-[10px] uppercase tracking-widest">One time</span>
     </div>
-    <button type="button" data-checkout="course" class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">
+    <button type="button" data-checkout="masterclass" class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">
       Get Access →
     </button>
   </div>

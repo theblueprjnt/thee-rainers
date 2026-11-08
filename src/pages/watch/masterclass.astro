@@ -22,7 +22,7 @@ if (secret && sig) {
   const sigBuf = await crypto.subtle.sign(
     'HMAC',
     key,
-    new TextEncoder().encode('course'),
+    new TextEncoder().encode('masterclass'),
   );
   const expected = Array.from(new Uint8Array(sigBuf))
     .map(b => b.toString(16).padStart(2, '0'))
@@ -31,7 +31,7 @@ if (secret && sig) {
 }
 
 if (!valid) {
-  return Astro.redirect('/course');
+  return Astro.redirect('/masterclass');
 }
 
 const LESSONS = [
