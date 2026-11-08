@@ -19,7 +19,7 @@ import Layout from '../layouts/Base.astro';
         Step Into The Ring.
       </h1>
       <p class="text-white/60 text-base md:text-lg leading-relaxed mb-10 max-w-[560px] mx-auto">
-        The complete boxing fundamentals course. Ten lessons, stance to sparring-ready, built in order so every rep stands on the one before it.
+        The complete boxing fundamentals course in ten lessons.
       </p>
 
       <div class="relative bg-white border border-white/10 mb-10 max-w-[720px] mx-auto overflow-hidden" style="padding-top: 56.25%;">
@@ -68,7 +68,7 @@ import Layout from '../layouts/Base.astro';
         </div>
         <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
           <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">05</span>
-          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Boxing Settings to Keep in Mind</p>
+          <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Boxing Settings</p>
         </div>
         <div class="bg-white p-4 md:p-5 flex flex-col items-center text-center gap-2">
           <span class="w-9 h-9 rounded-full border-2 border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-xs font-bold shrink-0">06</span>
@@ -99,6 +99,41 @@ import Layout from '../layouts/Base.astro';
           <p class="font-bold text-[#0A0A0A] text-sm leading-tight">Footwork Blueprint (56+ Rounds)</p>
         </div>
       </div>
+
+      <!-- Photo strip — breaks up the grid, gives people something to visualize -->
+      <div class="grid grid-cols-3 gap-3 mt-3">
+        <div class="aspect-[4/3] overflow-hidden">
+          <picture>
+            <source srcset="/images/rainers-training-opt.webp" type="image/webp" />
+            <img src="/images/rainers-training-opt.jpg" alt="" width="600" height="450" loading="lazy" class="w-full h-full object-cover" />
+          </picture>
+        </div>
+        <div class="aspect-[4/3] overflow-hidden">
+          <picture>
+            <source srcset="/images/padwork-outdoor-opt.webp" type="image/webp" />
+            <img src="/images/padwork-outdoor-opt.jpg" alt="" width="600" height="450" loading="lazy" class="w-full h-full object-cover" />
+          </picture>
+        </div>
+        <div class="aspect-[4/3] overflow-hidden">
+          <picture>
+            <source srcset="/images/corner-coach-opt.webp" type="image/webp" />
+            <img src="/images/corner-coach-opt.jpg" alt="" width="600" height="450" loading="lazy" class="w-full h-full object-cover" />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID-PAGE CTA -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 pb-16 md:pb-20">
+    <div class="max-w-[680px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-white/10 pt-10">
+      <div class="text-center sm:text-left">
+        <p class="text-white/40 text-[11px] tracking-widest uppercase mb-1">Step Into The Ring · $57</p>
+        <p class="font-black text-white uppercase tracking-tighter text-xl leading-tight">Ready to start?</p>
+      </div>
+      <button type="button" data-checkout="course" class="tr-btn shrink-0">
+        Get Access · $57 →
+      </button>
     </div>
   </section>
 
@@ -184,6 +219,19 @@ import Layout from '../layouts/Base.astro';
     </div>
   </section>
 
+  <!-- MID-PAGE CTA -->
+  <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 pb-16 md:pb-20">
+    <div class="max-w-[680px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-white/10 pt-10">
+      <div class="text-center sm:text-left">
+        <p class="text-white/40 text-[11px] tracking-widest uppercase mb-1">Step Into The Ring · $57</p>
+        <p class="font-black text-white uppercase tracking-tighter text-xl leading-tight">Ready to start?</p>
+      </div>
+      <button type="button" data-checkout="course" class="tr-btn shrink-0">
+        Get Access · $57 →
+      </button>
+    </div>
+  </section>
+
   <!-- WHAT'S INCLUDED -->
   <section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-24">
     <div class="max-w-[720px] mx-auto">
@@ -198,7 +246,7 @@ import Layout from '../layouts/Base.astro';
         <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Bonus: the Footwork Blueprint PDF, 56+ rounds of drills.</p></li>
         <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Direct email access to ask Rainers questions.</p></li>
         <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">Lifetime access. Revisit any lesson whenever you want.</p></li>
-        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">One-time payment. No subscription.</p></li>
+        <li class="flex gap-3 items-baseline"><span class="text-[var(--terra)] font-bold shrink-0">◆</span><p class="text-white/75 text-base leading-relaxed">One-time payment.</p></li>
       </ul>
     </div>
   </section>
@@ -259,11 +307,11 @@ import Layout from '../layouts/Base.astro';
 
       <div class="border-t border-white/10 pt-8 text-center">
         <div class="flex items-baseline justify-center gap-3 mb-6">
-          <span class="font-black text-white text-4xl">$97</span>
+          <span class="font-black text-white text-4xl">$57</span>
           <span class="text-white/40 text-xs uppercase tracking-widest">One time</span>
         </div>
         <button type="button" data-checkout="course" class="tr-btn">
-          Get Step Into The Ring · $97 →
+          Get Step Into The Ring · $57 →
         </button>
         <p class="text-[11px] text-white/30 mt-4">Secure checkout via Stripe · Instant access · 7-Day Money-Back Guarantee · <a href="/legal/refund-policy" class="underline hover:text-white/60">Refund Policy</a></p>
       </div>
@@ -321,7 +369,7 @@ import Layout from '../layouts/Base.astro';
         Build the fundamentals once.<br/>Use them forever.
       </h2>
       <div class="flex items-baseline justify-center gap-3 mb-6">
-        <span class="font-black text-white text-4xl">$97</span>
+        <span class="font-black text-white text-4xl">$57</span>
         <span class="text-white/50 text-xs uppercase tracking-widest">One time</span>
       </div>
       <button type="button" data-checkout="course" class="tr-btn">
@@ -332,12 +380,12 @@ import Layout from '../layouts/Base.astro';
     </div>
   </section>
 
-  <!-- STICKY BUY BAR (mobile only) -->
+  <!-- STICKY BUY BAR (all breakpoints — always a buy button within reach) -->
   <div id="sticky-bar"
-    class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0A0A0A] border-t border-white/10 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-200 ease-out"
+    class="fixed bottom-0 left-0 right-0 z-50 bg-[#0A0A0A] border-t border-white/10 px-5 py-3 flex items-center justify-between gap-4 translate-y-full transition-transform duration-200 ease-out"
     aria-hidden="true">
     <div class="flex items-baseline gap-2">
-      <span class="font-black text-white text-xl">$97</span>
+      <span class="font-black text-white text-xl">$57</span>
       <span class="text-white/40 text-[10px] uppercase tracking-widest">One time</span>
     </div>
     <button type="button" data-checkout="course" class="tr-btn" style="padding: 0.75rem 1.5rem; font-size: 0.75rem;">

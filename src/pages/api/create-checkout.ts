@@ -81,7 +81,7 @@ const PRODUCTS: Record<string, ProductConfig> = {
     cancelPath: '/coaching',
   },
   course: {
-    priceId: 'price_1UYndFHzlarU775HNR8fuogl',
+    priceId: 'price_1UZbeWHzlarU775Hz6RkaVet',
     mode: 'payment',
     successPath: '/thank-you/course',
     cancelPath: '/course',
