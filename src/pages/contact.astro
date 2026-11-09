@@ -44,6 +44,9 @@ const labelClass = 'block font-medium text-navy mb-2';
           action="/api/contact"
           class="flex flex-col gap-5"
         >
+          <!-- Honeypot -->
+          <input type="text" name="website" id="contact-website" autocomplete="off" tabindex="-1" class="hidden" aria-hidden="true" />
+
           <div>
             <label for="contact-name" class={labelClass} style="font-size: var(--font-size-small);">
               Full name
@@ -204,6 +207,7 @@ const labelClass = 'block font-medium text-navy mb-2';
         phone:     (data.get('phone')     as string ?? '').trim(),
         reason:    (data.get('reason')    as string ?? '').trim(),
         message:   (data.get('message')   as string ?? '').trim(),
+        website:   (data.get('website')   as string ?? '').trim(),
       };
       try {
         const res = await fetch('/api/contact', {

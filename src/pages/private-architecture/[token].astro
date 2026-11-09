@@ -54,11 +54,19 @@ let expired  = false;
 let inactive = false;
 let fetchError = false;
 
+// Airtable's filterByFormula treats the request body as formula source, not
+// a parameter -- a raw quote in the token (fully attacker-controlled, it's a
+// URL path segment) can break out of the string literal and inject formula
+// logic. Escape backslashes first, then quotes.
+function escapeAirtableFormula(str: string): string {
+  return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
 if (!token || !airtableKey || !airtableBase) {
   fetchError = true;
 } else {
   try {
-    const formula = encodeURIComponent(`{access_token}="${token}"`);
+    const formula = encodeURIComponent(`{access_token}="${escapeAirtableFormula(token)}"`);
     const url     = `https://api.airtable.com/v0/${airtableBase}/Purchases?filterByFormula=${formula}&maxRecords=1`;
     const res     = await fetch(url, { headers: { Authorization: `Bearer ${airtableKey}` } });
 

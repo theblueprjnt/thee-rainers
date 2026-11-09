@@ -7,6 +7,16 @@ import { env as cfEnv } from 'cloudflare:workers';
 // with the legitimate not-found case. Only 400 is returned for malformed input.
 // Errors are logged for diagnosis but never surface as 5xx to the gate page.
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Airtable's filterByFormula treats the request body as formula source, not
+// a parameter -- a raw quote in user input can break out of the string
+// literal and inject formula logic (e.g. OR(1=1) to match any record).
+// Escape backslashes first, then quotes, same order a formula parser expects.
+function escapeAirtableFormula(str: string): string {
+  return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
 function deny(headers: Record<string, string>): Response {
   return new Response(JSON.stringify({ access: false }), { status: 200, headers });
 }
@@ -21,7 +31,7 @@ export async function POST({ request }: { request: Request }): Promise<Response>
   } catch {
     return new Response(JSON.stringify({ access: false, error: 'bad_request' }), { status: 400, headers });
   }
-  if (!email || !email.includes('@')) {
+  if (!email || !EMAIL_RE.test(email)) {
     return new Response(JSON.stringify({ access: false, error: 'invalid_email' }), { status: 400, headers });
   }
 
@@ -37,7 +47,7 @@ export async function POST({ request }: { request: Request }): Promise<Response>
 
   try {
     const url = `https://api.airtable.com/v0/${airtableBase}/${encodeURIComponent(airtableTable)}` +
-      `?filterByFormula=${encodeURIComponent(`AND({Email}="${email.toLowerCase()}",{Product}="greatness")`)}` +
+      `?filterByFormula=${encodeURIComponent(`AND({Email}="${escapeAirtableFormula(email.toLowerCase())}",{Product}="greatness")`)}` +
       `&fields%5B%5D=Status&fields%5B%5D=Email&maxRecords=1`;
 
     const res = await fetch(url, { headers: { Authorization: `Bearer ${airtableToken}` } });

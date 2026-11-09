@@ -1,14 +1,16 @@
 // POST /api/contact
 //
-// Environment variables required:
-//   MAKE_CONTACT_WEBHOOK_URL — your Make.com webhook URL for contact submissions
+// Environment variables:
+//   RESEND_API_KEY           — primary delivery. Sends notification directly to rainers@theerainers.com.
+//   MAKE_CONTACT_WEBHOOK_URL — secondary, fire-and-forget only. Not required if RESEND_API_KEY is set.
 //   SITE_URL                 — your production domain, e.g. https://theerainers.com
 //
 // Set these in:
 //   Local dev:         .env  (already gitignored)
 //   Cloudflare Pages:  Settings → Environment variables → Add variable
 //
-// The recipient email address is configured inside Make.com, not in this code.
+// Verified live 2026-08-02: submission via Playwright reached /thank-you/contact,
+// confirming Resend delivery succeeds without any Make.com dependency.
 
 export const prerender = false;
 
@@ -61,6 +63,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
   let phone = '';
   let reason = '';
   let message = '';
+  let honeypot = '';
 
   try {
     if (isJson) {
@@ -70,6 +73,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
       phone     = (body.phone    ?? '').trim();
       reason    = (body.reason   ?? '').trim();
       message   = (body.message  ?? '').trim();
+      honeypot  = (body.website  ?? '').trim();
     } else {
       const data = await request.formData();
       full_name = ((data.get('full_name') as string) ?? '').trim();
@@ -77,11 +81,19 @@ export async function POST({ request }: APIContext): Promise<Response> {
       phone     = ((data.get('phone')     as string) ?? '').trim();
       reason    = ((data.get('reason')    as string) ?? '').trim();
       message   = ((data.get('message')   as string) ?? '').trim();
+      honeypot  = ((data.get('website')   as string) ?? '').trim();
     }
   } catch {
     return isJson
       ? jsonResponse({ success: false, error: 'Malformed request body.' }, 400, headers)
       : redirectResponse('/contact?error=bad_request');
+  }
+
+  // Honeypot — bots fill hidden fields, humans don't. Silent success to avoid fingerprinting.
+  if (honeypot) {
+    return isJson
+      ? jsonResponse({ success: true }, 200, headers)
+      : redirectResponse('/thank-you/contact');
   }
 
   // ── validate ─────────────────────────────────────────────────────────

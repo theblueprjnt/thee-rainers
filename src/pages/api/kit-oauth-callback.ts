@@ -17,15 +17,20 @@ import { exchangeCodeForTokens, storeInitialRefreshToken } from '../../lib/kit-o
 const SITE_URL = 'https://theerainers.com';
 const REDIRECT_URI = `${SITE_URL}/api/kit-oauth-callback`;
 
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 export async function GET({ request }: APIContext): Promise<Response> {
   const e = cfEnv as unknown as Record<string, string>;
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
   const oauthError = url.searchParams.get('error');
 
+  // title/body can carry request-derived values (oauthError) -- always escape.
   const html = (title: string, body: string, status: number) =>
     new Response(
-      `<html><body style="font-family:monospace;padding:40px;max-width:560px;margin:0 auto;"><h1>${title}</h1><p>${body}</p></body></html>`,
+      `<html><body style="font-family:monospace;padding:40px;max-width:560px;margin:0 auto;"><h1>${escapeHtml(title)}</h1><p>${escapeHtml(body)}</p></body></html>`,
       { status, headers: { 'Content-Type': 'text/html' } },
     );
 

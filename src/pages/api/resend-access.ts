@@ -5,6 +5,13 @@ import { env as cfEnv } from 'cloudflare:workers';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Airtable's filterByFormula treats the request body as formula source, not
+// a parameter -- a raw quote in user input can break out of the string
+// literal and inject formula logic. Escape backslashes first, then quotes.
+function escapeAirtableFormula(str: string): string {
+  return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
+
 export async function POST({ request }: APIContext): Promise<Response> {
   const e = cfEnv as unknown as Record<string, string>;
   const airtableKey  = e['AIRTABLE_API_KEY']          ?? '';
@@ -25,7 +32,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
   }
 
   try {
-    const formula = encodeURIComponent(`LOWER({email})="${email}"`);
+    const formula = encodeURIComponent(`LOWER({email})="${escapeAirtableFormula(email)}"`);
     const sort = encodeURIComponent('fields[]=created_at&sort[0][field]=created_at&sort[0][direction]=desc');
     const url = `https://api.airtable.com/v0/${airtableBase}/Purchases?filterByFormula=${formula}&maxRecords=1&${sort}`;
 
