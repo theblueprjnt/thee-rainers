@@ -24,6 +24,9 @@
 # Legacy
 /vault                 /shop  301
 
+# /course renamed to /masterclass 2026-11-08 -- old links/ads keep working.
+/course                /masterclass  301
+
 # Community retired 2026-08-16, zero active subscribers at retirement.
 # Files kept (community/index.astro, community/inside.astro, welcome.astro),
 # not deleted, per "never delete a route" -- just shadowed here at the edge,
