@@ -34,3 +34,8 @@
 # rules should come before splat/placeholder rules for routing performance.
 /community              /coaching  301
 /community/*            /coaching  301
+
+# welcome.astro was part of the same 2026-08-16 community retirement (see
+# comment above) but never got its own redirect rule until now -- it was
+# still reachable live with zero internal links pointing to it.
+/welcome                /coaching  301
