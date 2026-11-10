@@ -249,7 +249,8 @@ const siteSchema = JSON.stringify({
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LQ7HPXG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     {!hideNav && <Nav />}
-    <main class="flex-1">
+    <!-- pt-14 compensates for the promo bar added above the nav row -->
+    <main class="flex-1 pt-14">
       <slot />
     </main>
     {!hideFooter && <Footer hideHelp={hideFooterHelp} />}
