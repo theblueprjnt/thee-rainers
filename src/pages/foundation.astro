@@ -123,7 +123,7 @@ const productSchema = JSON.stringify({
         </div>
       </div>
 
-      <!-- Right: 3D cover floating on a soft IG-gradient halo -->
+      <!-- Right: 3D cover on a soft IG-gradient halo -->
       <div class="order-1 md:order-2 flex justify-center md:justify-end">
         <div class="relative w-full max-w-[420px] md:max-w-[460px]">
           <!-- Cover -->
@@ -135,7 +135,7 @@ const productSchema = JSON.stringify({
               width="920" height="848"
               loading="eager"
               fetchpriority="high"
-              class="relative w-full h-auto object-contain tr-blueprint-float"
+              class="relative w-full h-auto object-contain"
             />
           </picture>
         </div>
@@ -278,20 +278,6 @@ const productSchema = JSON.stringify({
 
 </Layout>
 
-<style>
-  /* Subtle float to make the 3D cover feel weighted, not pasted. */
-  @keyframes tr-cover-float {
-    0%, 100% { transform: translateY(0) rotateZ(-1.5deg); }
-    50%      { transform: translateY(-8px) rotateZ(-1deg); }
-  }
-  .tr-blueprint-float {
-    animation: tr-cover-float 6s ease-in-out infinite;
-    transform-origin: center;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .tr-blueprint-float { animation: none; transform: rotateZ(-1.5deg); }
-  }
-</style>
 
 <script>
   // Countdown timer — only runs when the banner element is present (free state only)
