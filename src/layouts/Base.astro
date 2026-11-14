@@ -299,7 +299,8 @@ const siteSchema = JSON.stringify({
 
   // Only fire on organic entry pages — never interrupt purchase flow
   // /foundation is itself a capture page — don't double-prompt.
-  var ENTRY_PAGES = ['/'];
+  // Disabled for now (empty list) -- popup markup/logic kept intact to re-enable later.
+  var ENTRY_PAGES = [];
   var path = window.location.pathname.replace(/\/$/, '') || '/';
   var isEntryPage = ENTRY_PAGES.indexOf(path) !== -1;
 
