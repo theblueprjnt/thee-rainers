@@ -45,7 +45,7 @@ import Layout from '../layouts/Base.astro';
       </h1>
 
       <p class="text-[#0A0A0A]/55 text-xs md:text-sm font-bold mb-3 max-w-[360px]">
-        Never trained before? Don't know where to start? Scared of doing it wrong?
+        Never boxed before? Don't know where to start? No real boxing skills?
       </p>
 
       <ul class="flex flex-col gap-1.5 mb-3 items-start">
@@ -88,7 +88,7 @@ import Layout from '../layouts/Base.astro';
             id="ft-submit"
             class="w-full inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--red)] text-white font-bold px-6 py-3.5 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2"
           >
-            Get the Free Session Plan
+            Download Free Guide
           </button>
         </form>
 
@@ -139,7 +139,7 @@ import Layout from '../layouts/Base.astro';
           body: JSON.stringify({ email, source: 'first-training', website }),
         });
       } catch {
-        // non-blocking — show success regardless
+        // non-blocking, show success regardless
       }
 
       (window as Window & { trackEvent?: (n: string, d: Record<string, unknown>) => void }).trackEvent?.('generate_lead', {
