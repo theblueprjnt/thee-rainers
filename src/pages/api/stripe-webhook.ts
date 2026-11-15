@@ -301,14 +301,21 @@ async function upsertAirtable(
   fields: Record<string, string>,
 ): Promise<void> {
   if (!token || !baseId || !fields.Email) return;
-  await fetch(`https://api.airtable.com/v0/${baseId}/${encodeURIComponent(table)}`, {
-    method: 'PATCH',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      performUpsert: { fieldsToMergeOn: ['Email'] },
-      records: [{ fields }],
-    }),
-  });
+  try {
+    const res = await fetch(`https://api.airtable.com/v0/${baseId}/${encodeURIComponent(table)}`, {
+      method: 'PATCH',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        performUpsert: { fieldsToMergeOn: ['Email'] },
+        records: [{ fields }],
+      }),
+    });
+    if (!res.ok) {
+      console.error('[stripe-webhook] Airtable upsert failed', res.status, await res.text().catch(() => ''), { table, email: fields.Email });
+    }
+  } catch (err) {
+    console.error('[stripe-webhook] Airtable upsert fetch error:', String(err), { table, email: fields.Email });
+  }
 }
 
 // ── token ──────────────────────────────────────────────────────────────────
@@ -577,7 +584,16 @@ async function sendResendDelivery(
   urls: string[],
   env?: Record<string, string>,
 ): Promise<void> {
-  if (!resendKey || urls.length === 0) return;
+  if (!resendKey) return;
+  if (urls.length === 0) {
+    console.error('[stripe-webhook] FATAL: no delivery URLs generated — Resend email NOT sent', { slug, email });
+    await sendTelegramAlert(
+      env?.['TELEGRAM_BOT_TOKEN'] ?? '',
+      env?.['TELEGRAM_CHAT_ID'] ?? '',
+      `DELIVERY FAILED: ${slug} bought by ${email.replace(/(.).*(@.*)/, '$1***$2')} — no delivery link generated, email NOT sent. Deliver manually.`,
+    );
+    return;
+  }
   const subject = DELIVERY_SUBJECTS[slug] ?? 'Your purchase from Thee Rainers';
   try {
     const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
