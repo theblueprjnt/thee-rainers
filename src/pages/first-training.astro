@@ -1,0 +1,159 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Base.astro';
+---
+<Layout
+  title="Free Guide · First Boxing Training Session Plan | Thee Rainers"
+  description="Know what to do your first session. Warm-up to cooldown, step by step. A free 3-page plan, about 30 minutes."
+  hideNav
+  hideFooter>
+
+  <a href="/" class="absolute top-5 left-5 md:top-6 md:left-8 z-10" aria-label="Thee Rainers home">
+    <picture>
+      <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
+      <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-7 w-auto" />
+    </picture>
+  </a>
+
+  <section class="min-h-[100dvh] flex items-center bg-white px-6 md:px-12 lg:px-16 py-6 md:py-16">
+    <div class="max-w-[1120px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[50%_50%] gap-5 lg:gap-6 items-center">
+
+      <div>
+        <span class="inline-block bg-[var(--terra)] text-white text-[10px] font-bold tracking-widest uppercase px-3.5 py-1.5 mb-5">
+          Free Guide
+        </span>
+
+        <h1 class="font-black uppercase tracking-tighter leading-[0.92] mb-5"
+          style="font-size: clamp(1.9rem, 4.2vw, 3.1rem);">
+          <span class="text-[var(--terra)]">Training manual.</span>
+        </h1>
+
+        <p class="text-[#0A0A0A]/55 text-sm md:text-base font-bold mb-6">
+          Never trained before? Don't know where to start? Scared of doing it wrong?
+        </p>
+
+        <ul class="flex flex-col gap-2.5 mb-6">
+          <li class="flex gap-2.5 items-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0" aria-hidden="true">
+              <path d="M3 8.5L6.2 11.5L13 4.5" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-[#0A0A0A] text-sm md:text-base font-bold">4 structured steps</span>
+          </li>
+          <li class="flex gap-2.5 items-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0" aria-hidden="true">
+              <path d="M3 8.5L6.2 11.5L13 4.5" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-[#0A0A0A] text-sm md:text-base font-bold">Boost your skills long-term</span>
+          </li>
+          <li class="flex gap-2.5 items-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="shrink-0" aria-hidden="true">
+              <path d="M3 8.5L6.2 11.5L13 4.5" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-[#0A0A0A] text-sm md:text-base font-bold">Done in 30 minutes, start to finish</span>
+          </li>
+        </ul>
+
+        <div id="ft-wrap" class="max-w-[440px]">
+          <form id="ft-form" class="flex flex-col gap-4">
+            <div>
+              <label for="ft-email" class="block text-[11px] font-bold tracking-widest uppercase text-[#0A0A0A] mb-2">Email Address</label>
+              <input
+                type="email"
+                id="ft-email"
+                required
+                autocomplete="email"
+                class="w-full border border-[#0A0A0A]/20 bg-white px-4 py-4 text-[#0A0A0A] text-sm focus:border-[var(--blue)] focus:outline-none transition-colors duration-200"
+              />
+            </div>
+            <!-- Honeypot -->
+            <input type="text" id="ft-website" name="website" autocomplete="off" tabindex="-1" class="hidden" aria-hidden="true" />
+            <button
+              type="submit"
+              id="ft-submit"
+              class="w-full inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[var(--red)] text-white font-bold px-6 py-4 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)] focus-visible:ring-offset-2"
+            >
+              Get the Free Session Plan
+            </button>
+          </form>
+
+          <div id="ft-success" class="hidden">
+            <p class="text-[#0A0A0A] text-sm font-bold tracking-wide mb-3">You're in. Check your email, or download it right now below.</p>
+            <a href="/pdfs/first-session-plan.pdf" target="_blank" rel="noopener"
+              class="inline-flex items-center justify-center rounded-none whitespace-nowrap bg-[#0A0A0A] text-white font-bold px-6 py-3.5 text-sm tracking-widest uppercase transition-opacity duration-150 hover:opacity-85">
+              Download the Plan →
+            </a>
+          </div>
+
+          <p id="ft-error" class="hidden text-[var(--red)] text-sm mt-3">Something went wrong. Try again or email rainers@theerainers.com</p>
+
+          <p class="text-[10px] text-[#0A0A0A]/35 leading-relaxed mt-4">
+            No spam, unsubscribe any time. Educational material written by a coach, not medical advice.
+          </p>
+        </div>
+      </div>
+
+      <div class="order-first lg:order-last">
+        <div class="relative max-w-[260px] md:max-w-[420px] mx-auto lg:max-w-none" style="padding-top: 10%;">
+          <img src="/images/first-training-page-2.png" alt="Session plan, warm-up and stance page"
+            class="absolute top-0 left-[6%] w-[70%] h-auto border border-[#0A0A0A]/10"
+            style="transform: rotate(-7deg); box-shadow: 0 10px 30px rgba(0,0,0,0.22);" />
+          <img src="/images/first-training-page-3.png" alt="Session plan, rounds and cooldown page"
+            class="absolute top-0 right-[6%] w-[70%] h-auto border border-[#0A0A0A]/10"
+            style="transform: rotate(6deg); box-shadow: 0 10px 30px rgba(0,0,0,0.22);" />
+          <img src="/images/first-training-cover.png" alt="First Boxing Training session plan cover"
+            width="1006" height="1482"
+            class="relative mx-auto w-[62%] h-auto"
+            style="box-shadow: 0 30px 70px rgba(0,0,0,0.28);" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  function wireFirstTrainingForm(): void {
+    const form = document.getElementById('ft-form') as HTMLFormElement | null;
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const emailEl   = document.getElementById('ft-email')   as HTMLInputElement | null;
+    const websiteEl = document.getElementById('ft-website') as HTMLInputElement | null;
+    const submit    = document.getElementById('ft-submit')  as HTMLButtonElement | null;
+    const success   = document.getElementById('ft-success') as HTMLElement;
+    const error     = document.getElementById('ft-error')   as HTMLElement;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email   = emailEl?.value.trim()   ?? '';
+      const website = websiteEl?.value.trim() ?? '';
+      if (!email) return;
+
+      if (submit) { submit.disabled = true; submit.textContent = 'One moment...'; }
+      error.classList.add('hidden');
+
+      try {
+        await fetch('/api/lead-capture', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, source: 'first-training', website }),
+        });
+      } catch {
+        // non-blocking — show success regardless
+      }
+
+      (window as Window & { trackEvent?: (n: string, d: Record<string, unknown>) => void }).trackEvent?.('generate_lead', {
+        lead_source: 'first-training',
+        currency: 'USD',
+        value: 0,
+      });
+
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+    });
+  }
+
+  wireFirstTrainingForm();
+</script>
