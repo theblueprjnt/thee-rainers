@@ -141,7 +141,7 @@ R2_BUCKET_NAME              — theerainers-vault. (secret deployed as R2_BUCKET
 R2_BUCKET                   — alias for R2_BUCKET_NAME, set in CF Worker secrets as "R2_BUCKET".
 AIRTABLE_API_KEY            — Airtable PAT.
 AIRTABLE_BASE_ID            — Airtable base ID.
-AIRTABLE_TABLE              — Airtable table name for member records. Defaults to "Customers" in /api/community-access, "Members" in stripe-webhook. SET THIS to match your actual table or both code paths will silently skip writes/reads.
+AIRTABLE_TABLE               — Airtable table name for member/customer records. All three call sites (stripe-webhook, community-access, session-checkin) default to "Members" if unset — confirmed consistent 2026-11-15. The "Members" table holds every Stripe buyer, one-time and subscription alike, not just recurring members.
 KIT_API_KEY                 — Kit (ConvertKit) API key. Used by stripe-webhook to tag members on purchase. If unset, Kit tagging is skipped silently (Stripe events still process).
 GA4_MEASUREMENT_ID          — Public GA4 measurement ID for server-side purchase events (e.g. G-DX93RTR69T). Required for stripe-webhook → GA4 attribution.
 GA4_API_SECRET              — GA4 Measurement Protocol API secret. Generate in GA4 → Admin → Data Streams → web stream → Measurement Protocol API secrets → Create. Pair with GA4_MEASUREMENT_ID. If either is unset, server-side purchase events are skipped (logged as warning) and only client-side begin_checkout fires.
@@ -176,6 +176,20 @@ Receives purchase events (initial + monthly renewals). Payload:
 
 ### Airtable
 `source` field is Single line text (verified 2026-06-25). Upsert uses `fieldsToMergeOn: ['Email']`.
+
+**Base:** `THEE_RAINERS_HUB.` (`applzsBz15zEAua4s`) is the only live base — the only one `AIRTABLE_BASE_ID` ever points to. A second base, "Thee Rainers HQ," existed as unused Airtable-template demo data (Athletes/Purchases/Coaching Applications/etc., fake names and placeholder Stripe IDs) and was mostly deleted 2026-11-15 — if it still shows up in `list_bases`, finish deleting it manually (Airtable UI has no API for base deletion).
+
+**Tables and what writes to them:**
+| Table | Written by | Notes |
+|---|---|---|
+| Leads | `lead-capture.ts` (`AIRTABLE_LEADS_TABLE`, default `Leads`) | Free opt-ins. 364 empty ghost records (Jul 4–Aug 6, 2026, pre-dating current guards) deleted 2026-11-15. |
+| Members | `stripe-webhook.ts`, `community-access.ts`, `session-checkin.ts` (`AIRTABLE_TABLE`, default `Members`) | Every Stripe buyer, one-time and subscription alike — name is historical, not scope-limiting. Was empty for all of 2026 due to a schema mismatch (see Done section) fixed 2026-11-15; not yet confirmed against a real purchase. |
+| Events | `track.ts` (hardcoded `Events`) | Sitewide `checkout_click` beacon log. Table did not exist until created 2026-11-15 — every click event before that was silently dropped (the auto-create fallback in `track.ts` never succeeded, cause unconfirmed, likely the Worker's PAT lacking schema-write scope). |
+| Email_Events | `resend-webhook.ts` (hardcoded) | Resend delivery events. |
+| Survey_Responses | `survey.ts` (`AIRTABLE_SURVEY_TABLE`, default `Survey_Responses`) | Anonymous product feedback. |
+| Purchases | Read-only by `resend-access.ts` (hardcoded `Purchases`), filtered on an `access_token` field | **No code path writes to this table.** Either dead (the Private Architecture resend-access flow has no live writer) or something external populates it manually — unconfirmed, worth checking before relying on it. |
+
+`Customers` and the base's default `Table 1` were deleted 2026-11-15 — zero code referenced either, and both held only placeholder/empty data.
 
 ## Delivery system architecture
 
@@ -238,8 +252,12 @@ Counts live in `src/data/social-stats.ts` (single source of truth). Update that 
 1. **[WEEK] Lever-audit.pdf** — generate from print template (Chrome → Print → Save as PDF)
 2. **[ONGOING] Platform bios** — update to theerainers.com/links once all is confirmed live
 3. **[WEEK] Contact form delivery** — currently depends on MAKE_CONTACT_WEBHOOK_URL (Make.com middleman). Move to Resend to align with ownership doctrine.
+4. **[VERIFY] Members table Airtable sync** — root cause of a near-empty Members table for all of 2026 (schema mismatch: code sent `Name`/`Stripe Customer`/`Stripe Subscription` fields the table didn't have) fixed 2026-11-15, both the schema and the silent-failure logging. Not yet confirmed against a real purchase post-fix — check the Members table after the next sale, or resend a recent `checkout.session.completed` event from the Stripe Dashboard to test immediately.
+5. **[UNCONFIRMED] Purchases table has no writer** — `resend-access.ts` reads it (filtered on `access_token`) but no code in this repo ever writes to it. Either the Private Architecture resend flow is dead, or something outside this repo populates it. Worth checking before trusting that flow.
+6. **[MANUAL STEP] Finish deleting "Thee Rainers HQ" base** — confirmed unused Airtable-template demo data, most tables deleted via API 2026-11-15, but the API can't delete a base outright (and can't delete a base's last remaining table). Delete it from the Airtable UI directly.
 
 ## Done — reference
+- Airtable cleanup 2026-11-15: deleted 364 empty ghost records from Leads (explains the old "378 total, only 13 visible" complaint), created the missing Events table (`track.ts`'s sitewide click-tracking had been silently failing since the table never existed), deleted the unused default `Table 1` and the dead `Customers` table (zero code references), confirmed all three `AIRTABLE_TABLE` call sites agree on `Members`.
 - Make.com + Airtable wiring complete (2026-06-25)
 - Stripe Workshop Replay success URL set to `/thank-you/workshop-replay` in Stripe Dashboard (2026-06-16)
 - Resend email system confirmed live (2026-07-09): welcome email + 4-email nurture sequence fires for every new opt-in. RESEND_API_KEY confirmed set in CF env.
