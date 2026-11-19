@@ -88,6 +88,15 @@ import PurchaseMoment from '../../components/site/PurchaseMoment.astro';
     if (tier === 'call') document.getElementById('tier-call')?.classList.remove('hidden');
   }
 
+  // Meta Pixel Purchase (task 12) -- this page serves all three ticket
+  // tiers, so the value has to come from the same ?tier= param
+  // showTierSection() already reads, not a single hardcoded price.
+  function fireMetaPurchase(): void {
+    const tier = new URLSearchParams(window.location.search).get('tier');
+    const value = tier === 'review' ? 99 : tier === 'call' ? 199 : 49;
+    (window as Window & { __trbMetaPurchase?: (v: number) => void }).__trbMetaPurchase?.(value);
+  }
+
   function wireClipForm(): void {
     const form = document.getElementById('clip-form') as HTMLFormElement | null;
     if (!form || form.dataset.bound === 'true') return;
@@ -128,4 +137,5 @@ import PurchaseMoment from '../../components/site/PurchaseMoment.astro';
 
   showTierSection();
   wireClipForm();
+  fireMetaPurchase();
 </script>

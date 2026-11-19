@@ -16,7 +16,7 @@ import Layout from '../../layouts/Base.astro';
 
         <h2>The short version</h2>
         <p>
-          We use Google Tag Manager with Consent Mode v2. By default, all analytics and advertising storage is denied. A consent banner appears on your first visit. If you decline, no analytics cookies are set. If you accept, Google Analytics 4 loads through GTM and may set cookies. We use no advertising cookies, no profiling cookies, and no third-party ad pixels.
+          We use Google Tag Manager with Consent Mode v2. By default, all analytics and advertising storage is denied. A consent banner appears on your first visit. If you decline, no analytics or advertising cookies are set. If you accept, Google Analytics 4 loads through GTM and the Meta Pixel loads directly, and both may set cookies.
         </p>
 
         <h2>What is a cookie?</h2>
@@ -46,6 +46,13 @@ import Layout from '../../layouts/Base.astro';
               <td>Yes — only set after you accept</td>
               <td>2 years</td>
             </tr>
+            <tr>
+              <td><code>_fbp</code></td>
+              <td>Meta Pixel</td>
+              <td>Distinguishes unique visitors for advertising measurement (page views, lead form submissions, purchases).</td>
+              <td>Yes, only set after you accept</td>
+              <td>90 days</td>
+            </tr>
           </tbody>
         </table>
 
@@ -54,9 +61,9 @@ import Layout from '../../layouts/Base.astro';
           A banner appears on your first visit with two options: Accept or Decline. Your choice is stored in your browser (<code>localStorage</code> key <code>trb_consent_v1</code>) so you are not asked again. If you decline, no analytics cookies are set and Google Tag Manager runs in a restricted mode with all storage denied.
         </p>
 
-        <h2>Analytics</h2>
+        <h2>Analytics and advertising</h2>
         <p>
-          We use two analytics tools:
+          We use three tools:
         </p>
         <ul>
           <li>
@@ -65,8 +72,11 @@ import Layout from '../../layouts/Base.astro';
           <li>
             <strong>Google Analytics 4</strong> (via Google Tag Manager, consent-gated) — loads only if you accept the consent banner. Collects session and behaviour data to help us understand what content is useful. Governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
           </li>
+          <li>
+            <strong>Meta Pixel</strong> (consent-gated), loads only if you accept the consent banner. Used to measure the effectiveness of ads run on Facebook and Instagram: page views, free guide opt-ins, and purchases. Governed by <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Meta's Privacy Policy</a>.
+          </li>
         </ul>
-        <p>We do not use Facebook Pixel, TikTok Pixel, or any advertising or retargeting pixels.</p>
+        <p>We do not use TikTok Pixel or any other advertising or retargeting pixel beyond the Meta Pixel described above.</p>
 
         <h2>Third-party cookies from embedded content</h2>
         <p>
@@ -74,7 +84,7 @@ import Layout from '../../layouts/Base.astro';
         </p>
         <ul>
           <li>
-            <strong>YouTube video embeds</strong> — The Library page (<a href="/library">/library</a>) embeds YouTube videos using the standard YouTube player. YouTube may set cookies when you interact with or view these videos. The token-gated Workshop Replay page uses <code>youtube-nocookie.com</code>, which YouTube states does not set cookies until you interact with the video.
+            <strong>YouTube video embeds</strong>: the homepage's Videos section (<a href="/#videos">/#videos</a>) links out to YouTube and Instagram directly rather than embedding a player. Several purchase confirmation pages embed a standard YouTube player, which may set cookies when you interact with or view the video. The token-gated Workshop Replay and Masterclass watch pages use <code>youtube-nocookie.com</code> instead, which YouTube states does not set cookies until you interact with the video.
           </li>
         </ul>
         <p>
