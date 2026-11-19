@@ -1,13 +1,26 @@
 ---
-// 5 top-level items max. Everything else (Workshop) moved to the footer.
-// Coaching is a single link to /coaching, not a dropdown -- the per-grade
+// Task 9: HOME / TRAINING (dropdown) / ABOUT / CONTACT, plus a primary
+// "Free Guide" button. TRAINING holds the four offer pages in order:
+// Blueprints, Defense Workshop, Masterclass, Coaching -- the per-grade
 // pages (/coaching/grade-1/2/3) still exist but are intentionally not
 // surfaced in nav while the offer is still being built out.
+interface Props {
+  hidePromoBar?: boolean;
+}
+const { hidePromoBar = false } = Astro.props;
+
+const trainingLinks = [
+  { href: '/shop', label: 'Blueprints' },
+  { href: '/defense-workshop', label: 'Defense Workshop' },
+  { href: '/masterclass', label: 'Masterclass' },
+  { href: '/coaching', label: 'Coaching' },
+];
 ---
 
 <header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-[#0B0B0C]/8">
 
   <!-- Promo bar -->
+  {!hidePromoBar && (
   <div class="bg-[#0A0A0A]">
     <div class="max-w-[1140px] mx-auto px-6 py-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 md:justify-start">
       <a href="/" class="hidden md:flex items-center shrink-0" aria-label="Thee Rainers home">
@@ -26,39 +39,55 @@
       </div>
     </div>
   </div>
+  )}
 
-  <div class="max-w-[1140px] mx-auto px-6 h-16 flex items-center gap-4 md:gap-8">
+  <div class="max-w-[1140px] mx-auto px-6 h-20 flex items-center gap-4 md:gap-8">
     <a href="/" class="z-[60] flex items-center shrink-0" aria-label="Thee Rainers home">
       <picture>
         <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
-        <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-9 md:h-10 w-auto" />
+        <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-12 md:h-14 w-auto" />
       </picture>
     </a>
 
-    <nav class="hidden md:flex items-center gap-8 ml-auto" aria-label="Primary">
+    <nav class="hidden md:flex items-center gap-7 ml-auto" aria-label="Primary">
       <a href="/" data-nav-path="/"
-        class="text-[#0B0B0C]/50 text-[11px] tracking-widest uppercase hover:text-[#0B0B0C] transition-colors duration-200">
+        class="text-[#0B0B0C] text-[13px] font-semibold tracking-wide uppercase hover:text-[var(--terra)] transition-colors duration-200">
         Home
       </a>
 
-      <a href="/coaching" data-nav-path="/coaching"
-        class="text-[#0B0B0C]/50 text-[11px] tracking-widest uppercase hover:text-[#0B0B0C] transition-colors duration-200">
-        Coaching
-      </a>
+      <!-- TRAINING dropdown -->
+      <div class="relative" id="nav-training">
+        <button type="button" id="nav-training-trigger"
+          aria-haspopup="true" aria-expanded="false" aria-controls="nav-training-menu"
+          class="flex items-center gap-1.5 text-[#0B0B0C] text-[13px] font-semibold tracking-wide uppercase hover:text-[var(--terra)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--terra)] focus-visible:ring-offset-2">
+          Training
+          <svg id="nav-training-chevron" class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div id="nav-training-menu" role="menu" aria-label="Training"
+          class="hidden absolute left-0 top-full mt-2 min-w-[220px] bg-white border border-[#0B0B0C]/10 shadow-lg py-2">
+          {trainingLinks.map(link => (
+            <a href={link.href} role="menuitem" data-nav-path={link.href}
+              class="block px-5 py-3 text-[#0B0B0C] text-[13px] font-semibold tracking-wide uppercase hover:text-[var(--terra)] hover:bg-[var(--warm)] transition-colors duration-150">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
 
-      <a href="/shop" data-nav-path="/shop"
-        class="text-[#0B0B0C]/50 text-[11px] tracking-widest uppercase hover:text-[#0B0B0C] transition-colors duration-200">
-        Blueprints
-      </a>
       <a href="/about" data-nav-path="/about"
-        class="text-[#0B0B0C]/50 text-[11px] tracking-widest uppercase hover:text-[#0B0B0C] transition-colors duration-200">
+        class="text-[#0B0B0C] text-[13px] font-semibold tracking-wide uppercase hover:text-[var(--terra)] transition-colors duration-200">
         About
       </a>
       <a href="/contact" data-nav-path="/contact"
-        class="text-[#0B0B0C]/50 text-[11px] tracking-widest uppercase hover:text-[#0B0B0C] transition-colors duration-200">
+        class="text-[#0B0B0C] text-[13px] font-semibold tracking-wide uppercase hover:text-[var(--terra)] transition-colors duration-200">
         Contact
       </a>
 
+      <a href="/first-training" class="tr-btn">
+        Free Guide
+      </a>
     </nav>
 
     <button id="menu-open" type="button"
@@ -82,7 +111,7 @@
     <a href="/" class="flex items-center" aria-label="Thee Rainers home">
       <picture>
         <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
-        <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-9 w-auto" />
+        <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-11 w-auto" />
       </picture>
     </a>
     <button id="menu-close" type="button" class="tr-menu-close" aria-label="Close menu">
@@ -93,7 +122,10 @@
   </div>
 
   <nav class="tr-menu-body" aria-label="Site navigation">
-    <ul class="flex flex-col mt-6">
+    <a href="/first-training" class="tr-btn block text-center mb-6" style="width:100%;justify-content:center;">
+      Free Guide
+    </a>
+    <ul class="flex flex-col">
       <li class="border-b border-[#0B0B0C]/10">
         <a href="/" data-nav-path="/"
           class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0B0B0C] hover:text-[var(--terra)] transition-colors">
@@ -101,16 +133,21 @@
         </a>
       </li>
       <li class="border-b border-[#0B0B0C]/10">
-        <a href="/coaching" data-nav-path="/coaching"
-          class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0B0B0C] hover:text-[var(--terra)] transition-colors">
-          Coaching
-        </a>
-      </li>
-      <li class="border-b border-[#0B0B0C]/10">
-        <a href="/shop" data-nav-path="/shop"
-          class="block py-5 text-3xl font-black uppercase tracking-tighter text-[#0B0B0C] hover:text-[var(--terra)] transition-colors">
-          Blueprints
-        </a>
+        <button type="button" id="mobile-training-trigger" aria-expanded="false" aria-controls="mobile-training-panel"
+          class="w-full flex items-center justify-between py-5 text-3xl font-black uppercase tracking-tighter text-[#0B0B0C] hover:text-[var(--terra)] transition-colors">
+          Training
+          <svg id="mobile-training-chevron" class="w-6 h-6 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div id="mobile-training-panel" class="hidden pb-4 flex flex-col">
+          {trainingLinks.map(link => (
+            <a href={link.href} data-nav-path={link.href}
+              class="block py-3 pl-4 text-lg font-bold uppercase tracking-tight text-[#0B0B0C]/70 hover:text-[var(--terra)] transition-colors">
+              {link.label}
+            </a>
+          ))}
+        </div>
       </li>
       <li class="border-b border-[#0B0B0C]/10">
         <a href="/about" data-nav-path="/about"
@@ -212,6 +249,60 @@
     });
   }
 
+  // Desktop TRAINING dropdown -- click or keyboard (Enter/Space to toggle,
+  // Escape to close, click-outside to close). role="menu" kept simple
+  // (no roving tabindex) since there are only four links; each is a normal
+  // tab stop and Escape/outside-click are the only extra keyboard paths
+  // needed for this size of menu.
+  function initTrainingDropdown() {
+    const wrap     = document.getElementById('nav-training');
+    const trigger  = document.getElementById('nav-training-trigger') as HTMLButtonElement | null;
+    const menu     = document.getElementById('nav-training-menu');
+    const chevron  = document.getElementById('nav-training-chevron');
+    if (!wrap || !trigger || !menu) return;
+    if (trigger.dataset.bound === 'true') return;
+    trigger.dataset.bound = 'true';
+
+    const setOpen = (open: boolean) => {
+      menu.classList.toggle('hidden', !open);
+      trigger.setAttribute('aria-expanded', String(open));
+      chevron?.classList.toggle('rotate-180', open);
+    };
+
+    trigger.addEventListener('click', () => {
+      setOpen(trigger.getAttribute('aria-expanded') !== 'true');
+    });
+    document.addEventListener('click', (e) => {
+      if (!wrap.contains(e.target as Node)) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        trigger.focus();
+      }
+    });
+    wrap.addEventListener('focusout', (e) => {
+      if (!wrap.contains(e.relatedTarget as Node)) setOpen(false);
+    });
+  }
+
+  // Mobile TRAINING accordion inside the full-screen menu
+  function initMobileTrainingAccordion() {
+    const trigger = document.getElementById('mobile-training-trigger') as HTMLButtonElement | null;
+    const panel   = document.getElementById('mobile-training-panel');
+    const chevron = document.getElementById('mobile-training-chevron');
+    if (!trigger || !panel) return;
+    if (trigger.dataset.bound === 'true') return;
+    trigger.dataset.bound = 'true';
+
+    trigger.addEventListener('click', () => {
+      const open = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', String(!open));
+      panel.classList.toggle('hidden', open);
+      chevron?.classList.toggle('rotate-180', !open);
+    });
+  }
+
   function initNavGlass() {
     const nav = document.getElementById('site-nav');
     if (!nav || nav.dataset.glassBound === 'true') return;
@@ -225,5 +316,7 @@
   }
 
   initNav();
+  initTrainingDropdown();
+  initMobileTrainingAccordion();
   initNavGlass();
 </script>
