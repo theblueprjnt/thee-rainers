@@ -3,6 +3,7 @@ import Layout from '../layouts/Base.astro';
 import Section from '../components/primitives/Section.astro';
 import PricingCard from '../components/primitives/PricingCard.astro';
 import ProofSection from '../components/blocks/ProofSection.astro';
+import { GRADE3_MAX_SEATS } from '../data/grade3-seats.ts';
 ---
 <Layout
   title="Coaching · Thee Rainers"
@@ -24,7 +25,7 @@ import ProofSection from '../components/blocks/ProofSection.astro';
     <div class="max-w-[720px] mx-auto text-left mt-10 md:mt-12">
       <p class="text-[#0B0B0C]/60 text-[11px] tracking-widest uppercase font-bold mb-4">Who This Is For</p>
       <p class="text-[#0B0B0C]/70 text-base leading-relaxed">
-        You train seriously, with or without a gym that can give you correction. You want a structure to measurably progress, a coach who watches your boxing and tells you exactly what to fix next. Pick a grade based on your budget and how much direct contact you want, then start.
+        First bag session to first sparring. Every step graded.
       </p>
     </div>
   </section>
@@ -94,6 +95,8 @@ import ProofSection from '../components/blocks/ProofSection.astro';
             'Unlimited video feedback',
             'Simple metrics: track improvement',
           ]}
+          anchorLine="One private lesson a week until your first sparring: about $1,300 to $2,000. Grade 1: $347."
+          anchorSource="Typical 1:1 rates in the UK, Germany and the US, one lesson a week for 20 weeks, Nov 2026. Gym fees not included."
         />
       </div>
 
@@ -114,7 +117,10 @@ import ProofSection from '../components/blocks/ProofSection.astro';
               'Deeper psychology: handling pressure, emotional regulation in rounds',
               'Personalised programming adjusted from their footage and goals',
               'Weekly 1-1 check-in call',
+              'Bonus: a mystery gift, shipped to you. A tool that improves the snap in your punches.',
             ]}
+            planPriceId="grade2_plan"
+            planLabel="or 3 payments of $365"
           />
         </div>
 
@@ -126,6 +132,7 @@ import ProofSection from '../components/blocks/ProofSection.astro';
             outcome="Full access. A program built entirely around you, two calls a week."
             priceId="grade3"
             ctaLabel="Apply for Grade 3"
+            note={`Application only. ${GRADE3_MAX_SEATS} seats.`}
             features={[
               'Everything in Grade 1 & 2',
               'Two calls a week, plus a monthly review call on your measurables',
@@ -133,6 +140,8 @@ import ProofSection from '../components/blocks/ProofSection.astro';
               'Fully customised training designed around their week',
               'In-person option',
             ]}
+            planPriceId="grade3_plan"
+            planLabel="or 3 payments of $4,400"
           />
         </div>
       </div>

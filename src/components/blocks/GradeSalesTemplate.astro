@@ -5,6 +5,7 @@
 //
 // Color law: terra restricted to CTA fills only (same fix as /coaching).
 import ProofSection from './ProofSection.astro';
+import { GRADE3_MAX_SEATS } from '../../data/grade3-seats.ts';
 
 interface Props {
   gradeNumber: 1 | 2 | 3;
@@ -13,10 +14,14 @@ interface Props {
   term: string;
   priceId: string;
   features: string[];
+  /** Optional secondary checkout for a payment-plan variant (task 5). */
+  planPriceId?: string;
+  planLabel?: string;
 }
 
-const { gradeNumber, name, price, term, priceId, features } = Astro.props;
+const { gradeNumber, name, price, term, priceId, features, planPriceId, planLabel } = Astro.props;
 const isGrade3 = gradeNumber === 3;
+const isGrade1 = gradeNumber === 1;
 
 // Launch copy, written to be usable now. Flagged for an owner voice pass in
 // coaching-copy-review.md -- treat every line here as a first draft, not final.
@@ -101,7 +106,7 @@ const c = COPY[gradeNumber];
       {c.headline}
     </h1>
     <p class="text-[#0B0B0C]/60 text-base leading-relaxed mb-10 max-w-[520px] mx-auto">
-      {c.subhead}
+      {c.subhead}{isGrade3 && ` Application only. ${GRADE3_MAX_SEATS} seats.`}
     </p>
     <button type="button" data-checkout={priceId} class="tr-btn">
       {c.heroCta}
@@ -109,6 +114,13 @@ const c = COPY[gradeNumber];
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
     </p>
+
+    {isGrade1 && (
+      <div class="mt-10 pt-8 border-t border-[#0B0B0C]/8 max-w-[480px] mx-auto">
+        <p class="text-[#0B0B0C]/70 text-sm leading-relaxed">One private lesson a week until your first sparring: about $1,300 to $2,000. Grade 1: $347.</p>
+        <p class="text-[#0B0B0C]/35 text-[10px] leading-relaxed mt-2">Typical 1:1 rates in the UK, Germany and the US, one lesson a week for 20 weeks, Nov 2026. Gym fees not included.</p>
+      </div>
+    )}
   </div>
 </section>
 
@@ -202,6 +214,12 @@ const c = COPY[gradeNumber];
     <button type="button" data-checkout={priceId} class="tr-btn">
       {c.priceCta}
     </button>
+    {planPriceId && planLabel && (
+      <button type="button" data-checkout={planPriceId}
+        class="block text-left text-[#0B0B0C]/50 text-xs underline hover:text-[#0B0B0C]/70 transition-colors duration-200 mt-4">
+        {planLabel}
+      </button>
+    )}
     <p data-checkout-error class="hidden text-[var(--terra)] text-xs font-bold tracking-wide mt-3">
       Checkout unavailable. Email rainers@theerainers.com
     </p>
