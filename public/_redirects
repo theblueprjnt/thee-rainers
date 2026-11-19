@@ -39,3 +39,18 @@
 # comment above) but never got its own redirect rule until now -- it was
 # still reachable live with zero internal links pointing to it.
 /welcome                /coaching  301
+
+# Task 7 (2026-11-19): /library deleted outright (library.astro removed from
+# the repo, not just shadowed) and /arena's own file-based redirect
+# (arena.astro -> /library, 301) deleted too -- it would otherwise have
+# chained through this rule into a second hop. Both now point straight at
+# the homepage's new Videos section (task 8), replacing the standalone
+# archive page.
+/library                /#videos  301
+/arena                  /#videos  301
+
+# Task 7: /safe-sparring and /safe-boxing retired in favor of /first-training.
+# Files kept (not deleted), same "never delete a route" pattern as /community
+# above -- shadowed here at the edge instead.
+/safe-sparring          /first-training  301
+/safe-boxing            /first-training  301
