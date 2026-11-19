@@ -2,10 +2,9 @@
 import Layout from '../../layouts/Base.astro';
 import PurchaseMoment from '../../components/site/PurchaseMoment.astro';
 ---
-<Layout title="You're In · Defense Workshop | Thee Rainers">
+<Layout title="You're In · Defense Workshop | Thee Rainers" description="Your Defense Workshop seat is confirmed. Details arriving by email.">
   <Fragment slot="head">
     <meta name="robots" content="noindex" />
-    <meta name="description" content="Your Defense Workshop seat is confirmed. Details arriving by email." />
   </Fragment>
 
   <section class="bg-white px-8 md:px-16 lg:px-24 pt-32 pb-20">
@@ -15,6 +14,43 @@ import PurchaseMoment from '../../components/site/PurchaseMoment.astro';
         productName="Defense Workshop"
         firstActionCopy="Your confirmation is on its way by email. Check your inbox for session details and the link."
       />
+
+      <!-- Footage review tier: clip submission form -->
+      <div id="tier-review" class="hidden border-t border-[#0A0A0A]/6 pt-12 mb-12">
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Your Footage Review</p>
+        <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mb-6 max-w-[520px]">
+          Send one clip, an unlisted YouTube or Google Drive link. Accepted until Dec 6. Your recorded breakdown arrives within 7 days of submitting.
+        </p>
+        <form id="clip-form" class="flex flex-col gap-3 max-w-[460px]">
+          <input
+            type="email"
+            id="clip-email"
+            required
+            placeholder="your@email.com"
+            autocomplete="email"
+            class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-[#0A0A0A] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/30"
+          />
+          <input
+            type="url"
+            id="clip-url"
+            required
+            placeholder="Unlisted YouTube or Google Drive link"
+            class="w-full border border-[#0A0A0A]/15 bg-[#F7F6F4] px-5 py-4 text-[#0A0A0A] text-sm focus:border-[var(--blue)] focus:bg-white focus:outline-none transition-colors duration-200 placeholder:text-[#0A0A0A]/30"
+          />
+          <button type="submit" id="clip-submit" class="tr-btn">Submit Your Clip</button>
+        </form>
+        <p id="clip-success" class="hidden text-[#0A0A0A] text-sm font-bold tracking-wide mt-4">Got it. Your breakdown arrives within 7 days.</p>
+        <p id="clip-error" class="hidden text-[var(--red)] text-sm mt-3">Something went wrong. Email rainers@theerainers.com with your clip link instead.</p>
+      </div>
+
+      <!-- 1:1 call tier: Calendly booking -->
+      <div id="tier-call" class="hidden border-t border-[#0A0A0A]/6 pt-12 mb-12">
+        <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Your 1:1 Call</p>
+        <p class="text-[#0A0A0A]/65 text-sm leading-relaxed mb-6 max-w-[520px]">
+          Book your 30-minute call for any time after Nov 29.
+        </p>
+        <a href="https://calendly.com/theerainers/1-1" target="_blank" rel="noopener" class="tr-btn">Book Your Call</a>
+      </div>
 
       <div class="border-t border-[#0A0A0A]/6 pt-12 mb-12">
         <p class="text-[var(--ink-soft)] text-[10px] tracking-widest uppercase mb-4">Watch while you wait</p>
@@ -36,10 +72,60 @@ import PurchaseMoment from '../../components/site/PurchaseMoment.astro';
         <div class="flex flex-col gap-2">
           <a href="/coaching#grade-1" class="text-[#0A0A0A]/30 text-xs hover:text-[#0A0A0A]/55 transition-colors">Want a coach watching your form? Grade 1 Coaching · $347 →</a>
           <a href="/shadowboxing-blueprint" class="text-[#0A0A0A]/30 text-xs hover:text-[#0A0A0A]/55 transition-colors">Shadowboxing Blueprint · 2 videos + do-with-me training, $19 →</a>
-          <a href="/command" class="text-[#0A0A0A]/30 text-xs hover:text-[#0A0A0A]/55 transition-colors">1-on-1 Coaching · application only →</a>
+          <a href="/coaching" class="text-[#0A0A0A]/30 text-xs hover:text-[#0A0A0A]/55 transition-colors">1-on-1 Coaching →</a>
         </div>
       </div>
 
     </div>
   </section>
 </Layout>
+
+<script>
+  function showTierSection(): void {
+    const params = new URLSearchParams(window.location.search);
+    const tier = params.get('tier');
+    if (tier === 'review') document.getElementById('tier-review')?.classList.remove('hidden');
+    if (tier === 'call') document.getElementById('tier-call')?.classList.remove('hidden');
+  }
+
+  function wireClipForm(): void {
+    const form = document.getElementById('clip-form') as HTMLFormElement | null;
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const emailEl   = document.getElementById('clip-email')  as HTMLInputElement | null;
+    const urlEl     = document.getElementById('clip-url')    as HTMLInputElement | null;
+    const submit    = document.getElementById('clip-submit') as HTMLButtonElement | null;
+    const success   = document.getElementById('clip-success') as HTMLElement;
+    const error     = document.getElementById('clip-error')   as HTMLElement;
+    const sessionId = new URLSearchParams(window.location.search).get('session_id') ?? '';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email   = emailEl?.value.trim() ?? '';
+      const clipUrl = urlEl?.value.trim()   ?? '';
+      if (!email || !clipUrl) return;
+
+      if (submit) { submit.disabled = true; submit.textContent = 'Submitting...'; }
+      error.classList.add('hidden');
+
+      try {
+        const res = await fetch('/api/submit-clip', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, clipUrl, sessionId }),
+        });
+        const data = await res.json() as { success: boolean; error?: string };
+        if (!data.success) throw new Error(data.error ?? 'failed');
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      } catch {
+        error.classList.remove('hidden');
+        if (submit) { submit.disabled = false; submit.textContent = 'Submit Your Clip'; }
+      }
+    });
+  }
+
+  showTierSection();
+  wireClipForm();
+</script>
