@@ -7,45 +7,47 @@
 // goes stale between deploys.
 import { WORKSHOP_DATE_LABEL } from '../../data/defense-workshop.ts';
 
-// Three distinct entry points: cheapest/lowest-commitment first, then the
-// full shop, then coaching broadly (not anchored to Grade 3 specifically --
-// the offer is still being built out, so this points to the ladder overview,
-// not a single tier).
+// Task 8.4: the ladder, cheapest first. Free guide, then $30 bundle, then
+// the Defense Workshop strip (rendered between the two card rows below --
+// its own before/after toggle is unchanged from task 1/2), then the $79
+// Masterclass. Grades ($347/$997/$12,000) render separately in
+// GradePricing.astro, directly below this section on the homepage.
 const cards = [
   {
     image: '/images/rainers-coaching-opt.jpg',
     imageWebp: '/images/rainers-coaching-opt.webp',
     imageAlt: 'Padwork training',
-    kicker: 'Footwork Blueprint',
-    title: 'Start with the foundation.',
-    href: '/foundation',
-    cta: 'Get the Footwork Blueprint',
+    kicker: 'Free',
+    title: 'Start free.',
+    href: '/first-training',
+    cta: 'Get the Free Guide',
   },
   {
     image: '/images/footwork-cover-opt.jpg',
     imageWebp: '/images/footwork-cover-opt.webp',
     imageAlt: 'The Footwork Blueprint',
-    kicker: 'Shop',
+    kicker: '$30 · Bundle',
     title: 'The Blueprints.',
     href: '/shop',
     cta: 'Get the Blueprints',
   },
-  {
-    image: '/images/sparring_withnetherlands.jpg',
-    imageAlt: 'Live training session',
-    kicker: 'Coaching',
-    title: 'Structured 1-on-1 coaching.',
-    href: '/coaching',
-    cta: 'Explore Coaching',
-  },
 ];
+
+const masterclassCard = {
+  image: '/images/course-vsl-thumb.jpg',
+  imageAlt: 'The Masterclass',
+  kicker: '$79 · Masterclass',
+  title: 'The Masterclass.',
+  href: '/masterclass',
+  cta: 'Get the Masterclass',
+};
 ---
 
 <section class="bg-[var(--warm)] py-20 md:py-28" id="programs">
   <div class="max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
 
     <div class="tr-section-head mb-16">
-      <span class="kicker">The Layer Most Gyms Skip</span>
+      <span class="kicker">The Ladder</span>
       <h2 style="font-size: clamp(2rem, 4vw, 3rem);">
         <!-- DRAFT: voice pass Rainers -->
         Choose where to start.
@@ -53,7 +55,7 @@ const cards = [
       <span class="divider"></span>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {cards.map(card => (
         <div class="flex flex-col">
           <!-- Image with overlay -->
@@ -111,6 +113,30 @@ const cards = [
         class="text-[var(--terra)] text-[11px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity shrink-0">
         Watch the Replay →
       </a>
+    </div>
+
+    <!-- Masterclass, $79 -- last rung before Grades (GradePricing, next section) -->
+    <div class="mt-6 max-w-[520px] mx-auto md:mx-0">
+      <div class="flex flex-col sm:flex-row">
+        <div class="relative overflow-hidden group shrink-0" style="width: 160px; aspect-ratio: 3/4;">
+          <img
+            src={masterclassCard.image}
+            alt={masterclassCard.imageAlt}
+            loading="lazy"
+            decoding="async"
+            class="absolute inset-0 w-full h-full object-cover object-center grayscale transition-transform duration-700 group-hover:scale-[1.04]"
+          />
+        </div>
+        <div class="bg-[var(--warm)] border border-[#0B0B0C]/8 sm:border-l-0 px-6 py-6 flex-1 flex flex-col justify-center">
+          <p class="text-[var(--terra)] text-[10px] tracking-widest uppercase font-bold mb-2">{masterclassCard.kicker}</p>
+          <h3 class="font-black text-[#0B0B0C] uppercase tracking-tighter leading-tight mb-4" style="font-size: clamp(1.25rem, 2vw, 1.5rem);">
+            {masterclassCard.title}
+          </h3>
+          <a href={masterclassCard.href} class="tr-btn" style="width:100%;justify-content:center;">
+            {masterclassCard.cta}
+          </a>
+        </div>
+      </div>
     </div>
 
   </div>

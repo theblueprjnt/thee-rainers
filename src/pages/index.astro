@@ -2,109 +2,75 @@
 import Layout from '../layouts/Base.astro';
 import Testimonials from '../components/site/Testimonials.astro';
 import OfferStack from '../components/blocks/OfferStack.astro';
-import ProofSection from '../components/blocks/ProofSection.astro';
 import Objections from '../components/blocks/Objections.astro';
 import GradePricing from '../components/blocks/GradePricing.astro';
-import { SOCIAL_STATS } from '../data/social-stats';
-import { PRODUCTS } from '../data/products.ts';
+import { videos } from '../data/videos.ts';
 
-const stripProducts = [
-  {
-    title: 'Footwork Blueprint',
-    href: PRODUCTS.footwork.pagePath,
-    image: '/images/footwork-cover-opt.jpg',
-    imageWebp: '/images/footwork-cover-opt.webp',
-  },
-  {
-    title: 'Shadowboxing Blueprint',
-    href: PRODUCTS.shadowboxing.pagePath,
-    image: '/images/shadowbox-cover-opt.png',
-  },
-];
+// Task 8.5: only render tiles that have both a real url and thumbnail --
+// src/data/videos.ts ships with every title but empty url/thumbnail fields
+// for Rainers to fill in.
+const renderableVideos = videos.filter(v => v.url && v.thumbnail);
+
+// Single file path — swap this to replace the hero photo.
+const HERO_IMAGE = '/images/herocropped.webp';
 ---
 <Layout
   title="Thee Rainers · Boxing built on structure."
-  description="Boxing built on structure, full defense, and safer progress. The foundation most gyms skip. Free Footwork Blueprint, live workshops, and coaching.">
+  description="Boxing built on structure, full defense, and safer progress. The foundation most gyms skip. Free Footwork Blueprint, live workshops, and coaching."
+  hidePromoBar>
 
   <!-- ── HERO ──────────────────────────────────────────────────────────── -->
-  <section class="relative bg-white overflow-hidden" style="min-height: 88svh;">
+  <section class="bg-white px-6 md:px-12 lg:px-20 pt-24 pb-16 md:py-24 lg:py-28">
+    <div class="max-w-[1280px] mx-auto flex flex-col md:grid md:grid-cols-12 md:gap-10 lg:gap-16 md:items-center">
 
-    <!-- Grayscale portrait — desktop right anchor -->
-    <div class="absolute right-0 bottom-0 h-full hidden md:block pointer-events-none select-none" aria-hidden="true">
-      <img src="/images/herocropped.webp" alt=""
-        class="h-full w-auto object-contain object-bottom"
-        style="max-height: 88svh;"
-        loading="eager" decoding="async" fetchpriority="high" />
-      <div class="absolute inset-y-0 left-0 w-64" style="background: linear-gradient(to right, #FFFFFF 0%, transparent 100%);"></div>
-    </div>
-
-    <!-- Mobile: fight photo at low opacity -->
-    <div class="absolute inset-0 md:hidden" aria-hidden="true">
-      <picture>
-        <source srcset="/images/coldfightpic2-opt.webp" type="image/webp" />
-        <img src="/images/coldfightpic2-opt.jpg" alt=""
-          class="w-full h-full object-cover object-center opacity-15 grayscale"
-          loading="eager" decoding="async" fetchpriority="high" />
-      </picture>
-      <div class="absolute inset-0" style="background: linear-gradient(to top, #FFFFFF 35%, transparent 100%);"></div>
-    </div>
-
-    <!-- Content -->
-    <div class="relative z-10 flex flex-col justify-end md:justify-center px-6 md:px-12 lg:px-20 pb-16 pt-32 md:py-0"
-      style="min-height: 88svh; max-width: 56%;">
-      <div class="md:max-w-[560px]">
+      <!-- Text -->
+      <div class="md:col-span-7">
         <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">
-          Thee Rainers · Structured Boxing
+          Boxing through structure.
         </p>
         <h1 class="font-black uppercase tracking-tighter text-[#0B0B0C] mb-6"
-          style="font-size: clamp(3.25rem, 7vw, 6rem); line-height: 0.82;">
-          Boxing<br/>through<br/>structure.
+          style="font-size: clamp(3rem, 6.5vw, 5.5rem); line-height: 0.86;">
+          FROM THE BAG<br/>TO SPARRING<br/>READY.
         </h1>
         <div class="h-0.5 w-12 bg-[var(--terra)] mb-8"></div>
-        <p class="text-[#0B0B0C]/60 text-base leading-relaxed mb-12 max-w-[400px]">
+        <p class="text-[#0B0B0C]/60 text-base leading-relaxed mb-8 max-w-[440px]">
           Full offense. Full defense. Minimum unnecessary damage.
         </p>
-        <div class="flex flex-col sm:flex-row flex-wrap gap-3">
-          <a href="/first-training" class="tr-btn">
-            Free Guide
-          </a>
-          <a href="/shop" class="tr-btn tr-btn--secondary">
-            Shop Blueprints
-          </a>
-          <a href="/coaching" class="tr-btn tr-btn--secondary">
-            1-1 Coaching
-          </a>
-        </div>
-        <!-- COPY: trust line, owner supplies verified numbers only -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ── PRODUCT STRIP (image-forward, minimal — sits directly on the hero's black) ── -->
-  <section class="bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-10 md:py-12">
-    <div class="max-w-[1100px] mx-auto grid grid-cols-2 md:grid-cols-[1fr_1fr_auto] gap-5 items-center">
-      {stripProducts.map(p => (
-        <a href={p.href}
-          class="relative overflow-hidden group text-left" style="aspect-ratio: 3/4;">
-          <picture>
-            {p.imageWebp && <source srcset={p.imageWebp} type="image/webp" />}
-            <img src={p.image} alt={p.title} loading="eager" decoding="async"
-              class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]" />
-          </picture>
-          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(11,11,12,0.85) 0%, rgba(11,11,12,0.15) 55%, transparent 100%);"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
-            <p class="font-black text-white uppercase tracking-tight text-sm leading-tight">{p.title}</p>
-          </div>
+        <a href="/first-training" class="tr-btn">
+          Free Guide
         </a>
-      ))}
-      <a href="/shop" class="col-span-2 md:col-span-1 flex items-center justify-center md:justify-start gap-3 py-4 md:py-0 md:pl-2">
-        <span class="text-[#0B0B0C]/70 text-[11px] font-bold tracking-widest uppercase hover:text-[#0B0B0C] transition-colors">See more products</span>
-        <span class="shrink-0 w-8 h-8 rounded-full border border-[var(--terra)] text-[var(--terra)] flex items-center justify-center text-sm" aria-hidden="true">→</span>
-      </a>
+        <p class="text-[#0B0B0C]/40 text-xs mt-3">
+          A free 3-page plan.
+        </p>
+      </div>
+
+      <!-- Photo: cropped to roughly half height on mobile so the next section isn't a long scroll away -->
+      <div class="md:col-span-5 mt-10 md:mt-0">
+        <img src={HERO_IMAGE} alt=""
+          class="w-full h-[230px] object-cover object-top md:h-auto md:object-contain"
+          loading="eager" decoding="async" fetchpriority="high" />
+      </div>
+
     </div>
   </section>
 
-  <!-- ── HOMEPAGE LEAD CAPTURE (name, email, background — 3 fields, minimum friction) ── -->
+  <!-- ── PROOF ─────────────────────────────────────────────────────────── -->
+  <div id="proof" class="scroll-mt-20">
+    <Testimonials heading="What fighters say." kicker="Giancarlo: sparring ready in 2 months." background="white" />
+  </div>
+
+  <!-- ── BEFORE YOU START (old way vs our way) ────────────────────────── -->
+  <Objections />
+
+  <!-- ── THE LADDER (task 8.4): free guide, $30 bundle, Defense Workshop
+       (replay fallback built into OfferStack itself), $79 Masterclass ──── -->
+  <OfferStack />
+
+  <!-- ── GRADES: $347 / $997 / $12,000 ───────────────────────────────── -->
+  <GradePricing />
+
+  <!-- ── APPLY FOR TRAINING (moved directly under Grade pricing per task 8.4,
+       same fields/endpoint as before) ──────────────────────────────────── -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-20 border-b border-[#0A0A0A]/8">
     <div class="max-w-[560px] mx-auto text-center">
       <p class="text-[var(--ink-soft)] text-[11px] tracking-widest uppercase mb-5">Get in touch</p>
@@ -143,29 +109,97 @@ const stripProducts = [
             Submit →
           </button>
         </form>
-        <p id="home-lead-success" class="hidden text-[#0A0A0A] text-sm font-bold tracking-wide mt-5">Thanks. We will be in touch.</p>
+        <div id="home-lead-success" class="hidden" style="scroll-margin-top:96px;">
+          <p class="text-[#0A0A0A] text-sm font-bold tracking-wide mb-4">Got it. Pick a time for your call below.</p>
+          <div id="home-lead-calendly" style="min-width:320px;height:700px;"></div>
+          <p class="text-[11px] text-[#0A0A0A]/40 mt-3">
+            Calendar not loading? <a href="https://calendly.com/theerainers/1-1" target="_blank" rel="noopener" class="underline">Book here</a>.
+          </p>
+        </div>
         <p id="home-lead-error" class="hidden text-[var(--red)] text-sm mt-3">Something went wrong. Try again or email rainers@theerainers.com</p>
-        <p class="text-[11px] text-[#0A0A0A]/60 mt-4">No spam. Unsubscribe any time.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── BEFORE YOU START (old way vs our way) ────────────────────────── -->
-  <Objections />
+  <!-- ── VIDEOS (task 8.5, replaces the deleted /library page) ─────────── -->
+  <section id="videos" class="scroll-mt-20 bg-[var(--warm)] px-6 md:px-12 lg:px-20 py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto">
+      <div class="tr-section-head mb-14">
+        <span class="kicker">Watch</span>
+        <h2 style="font-size: clamp(2rem, 4vw, 3rem);">Short breakdowns.</h2>
+        <span class="divider"></span>
+      </div>
 
-  <!-- ── OFFER STACK ────────────────────────────────────────────────────── -->
-  <OfferStack />
+      {renderableVideos.length > 0 ? (
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          {renderableVideos.map(v => (
+            <a href={v.url} target="_blank" rel="noopener" class="relative overflow-hidden group block" style="aspect-ratio: 4/5;">
+              <img src={v.thumbnail} alt={v.title} loading="lazy" decoding="async"
+                class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]" />
+              <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(11,11,12,0.85) 0%, rgba(11,11,12,0.15) 55%, transparent 100%);"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <p class="font-black text-white uppercase tracking-tight text-xs leading-tight">{v.title}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="text-[#0B0B0C]/40 text-sm">
+          {/* TODO Rainers: fill in url + thumbnail for each entry in src/data/videos.ts to populate this section. */}
+          New videos coming soon.
+        </p>
+      )}
 
-  <!-- ── GRADE PRICING ─────────────────────────────────────────────────── -->
-  <GradePricing />
+      <div class="flex gap-6 mt-10">
+        <a href="https://www.youtube.com/@theerainers" target="_blank" rel="noopener" class="text-[#0B0B0C]/60 text-[11px] font-bold tracking-widest uppercase hover:text-[#0B0B0C] transition-colors">YouTube →</a>
+        <a href="https://www.instagram.com/theerainers" target="_blank" rel="noopener" class="text-[#0B0B0C]/60 text-[11px] font-bold tracking-widest uppercase hover:text-[#0B0B0C] transition-colors">Instagram →</a>
+      </div>
+    </div>
+  </section>
 
-  <!-- ── GRADE COACHING PROOF (null on empty) ─────────────────────────── -->
-  <ProofSection />
-
-  <!-- ── PROOF ─────────────────────────────────────────────────────────── -->
-  <div id="proof" class="scroll-mt-20">
-    <Testimonials heading="What fighters say." kicker="Field Report" background="white" />
-  </div>
+  <!-- ── FAQ (task 8.6, reused from /coaching, plus the payment-plan question) ── -->
+  <section class="bg-white px-6 md:px-12 lg:px-20 py-16 md:py-24">
+    <div class="max-w-[720px] mx-auto">
+      <h2 class="font-black text-[#0B0B0C] uppercase tracking-tighter text-2xl leading-tight mb-10 text-left">Common Questions</h2>
+      <div class="flex flex-col divide-y divide-[#0B0B0C]/10 border-t border-b border-[#0B0B0C]/10">
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            What if I don't know which grade to pick?
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">Start with Grade 1. It's the foundation every fighter needs, and you can move up once you've built it.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            How fast do I hear back after I send footage?
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">Rainers reviews every submission personally. Expect feedback within a few days.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            Can I switch grades later?
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">Yes. Most fighters start at Grade 1 and move up once they've built the foundation.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            Do I need a gym or a training partner?
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">No. The curriculum is built to work solo, with drills you can run in a mirror or on your own footage.</p>
+        </details>
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0B0B0C] text-sm">
+            Can I pay in parts?
+            <span class="shrink-0 text-[#0B0B0C]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
+          </summary>
+          <p class="text-[#0B0B0C]/50 text-xs leading-relaxed mt-3">Yes. Grade 2: 3 payments of $365. Grade 3: 3 payments of $4,400.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 
   <!-- ── FINAL CTA ─────────────────────────────────────────────────────── -->
   <section class="bg-white px-6 md:px-12 lg:px-20 py-20 md:py-28 text-center">
@@ -226,7 +260,45 @@ const stripProducts = [
 
       form.classList.add('hidden');
       success.classList.remove('hidden');
+      showCalendly(full_name, email);
     });
+
+    // Start loading Calendly as soon as they engage with the form, so it's ready on submit.
+    form.addEventListener('focusin', () => { loadCalendly(); }, { once: true });
+  }
+
+  const CALENDLY_URL = 'https://calendly.com/theerainers/1-1?hide_gdpr_banner=1';
+  type CalendlyApi = { initInlineWidget: (o: { url: string; parentElement: HTMLElement }) => void };
+  let calendlyPromise: Promise<void> | null = null;
+
+  function loadCalendly(): Promise<void> {
+    if (calendlyPromise) return calendlyPromise;
+    calendlyPromise = new Promise((resolve, reject) => {
+      if ((window as Window & { Calendly?: CalendlyApi }).Calendly) return resolve();
+      const s = document.createElement('script');
+      s.src = 'https://assets.calendly.com/assets/external/widget.js';
+      s.async = true;
+      s.onload = () => resolve();
+      s.onerror = () => { calendlyPromise = null; reject(); };
+      document.head.appendChild(s);
+    });
+    return calendlyPromise;
+  }
+
+  async function showCalendly(name: string, email: string): Promise<void> {
+    const parent = document.getElementById('home-lead-calendly');
+    if (!parent) return;
+    try {
+      await loadCalendly();
+      const Calendly = (window as Window & { Calendly?: CalendlyApi }).Calendly;
+      if (!Calendly) throw new Error('no calendly');
+      parent.innerHTML = '';
+      const url = `${CALENDLY_URL}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
+      Calendly.initInlineWidget({ url, parentElement: parent });
+      document.getElementById('home-lead-success')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch {
+      window.location.href = CALENDLY_URL;
+    }
   }
 
   wireHomeLeadForm();
