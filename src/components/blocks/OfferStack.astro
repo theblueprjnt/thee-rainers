@@ -1,13 +1,11 @@
 ---
 // OfferStack — three photo cards with overlay titles, Myron card rhythm, TRB terracotta.
-// Event strip beneath driven by workshopState() — no manual prop needed.
-import { workshopState, WORKSHOP_DATE_SHORT } from '../../data/workshop.ts';
-
-const wState = workshopState();
-const showStrip = wState !== 'between';
-// /defense-workshop is unconditionally on sale (early-bird or standard price,
-// never a real waitlist), so the strip always reads as a live seat.
-const stripLabel = `Defense Workshop · Saturday ${WORKSHOP_DATE_SHORT} · Reserve your seat`;
+// Defense Workshop is live Nov 29, 2026 -- the strip below renders both a
+// "before" and "after" version server-side, and a client script (same
+// src/data/defense-workshop.ts end-time check as defense-workshop.astro)
+// shows the right one and hides the other. Done client-side so this never
+// goes stale between deploys.
+import { WORKSHOP_DATE_LABEL } from '../../data/defense-workshop.ts';
 
 // Three distinct entry points: cheapest/lowest-commitment first, then the
 // full shop, then coaching broadly (not anchored to Grade 3 specifically --
@@ -91,19 +89,45 @@ const cards = [
       ))}
     </div>
 
-    <!-- Event strip — shows when selling or waitlist, hidden when between -->
-    {showStrip && (
-      <div class="mt-6 bg-[var(--warm)] border border-[#0B0B0C]/8 px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <div class="flex items-center gap-3">
-          <span class="inline-block w-2 h-2 rounded-full bg-[var(--terra)] shrink-0 animate-pulse" aria-hidden="true"></span>
-          <p class="text-[#0B0B0C]/60 text-[11px] font-bold tracking-widest uppercase">{stripLabel}</p>
-        </div>
-        <a href="/defense-workshop"
-          class="text-[var(--terra)] text-[11px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity shrink-0">
-          Go to Workshop →
-        </a>
+    <!-- Event strip — Defense Workshop, before the event: ticket purchase -->
+    <div id="workshop-strip-before" class="mt-6 bg-[var(--warm)] border border-[#0B0B0C]/8 px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="inline-block w-2 h-2 rounded-full bg-[var(--terra)] shrink-0 animate-pulse" aria-hidden="true"></span>
+        <p class="text-[#0B0B0C]/60 text-[11px] font-bold tracking-widest uppercase">Defense Workshop &middot; {WORKSHOP_DATE_LABEL}</p>
       </div>
-    )}
+      <a href="/defense-workshop#tickets"
+        class="text-[var(--terra)] text-[11px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity shrink-0">
+        Get Your Seat →
+      </a>
+    </div>
+
+    <!-- Event strip — Defense Workshop, after the event: replay fallback -->
+    <div id="workshop-strip-after" class="hidden mt-6 bg-[var(--warm)] border border-[#0B0B0C]/8 px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="inline-block w-2 h-2 rounded-full bg-[var(--terra)] shrink-0" aria-hidden="true"></span>
+        <p class="text-[#0B0B0C]/60 text-[11px] font-bold tracking-widest uppercase">Defense Workshop &middot; Replay available</p>
+      </div>
+      <a href="/workshop-replay"
+        class="text-[var(--terra)] text-[11px] font-bold tracking-widest uppercase hover:opacity-70 transition-opacity shrink-0">
+        Watch the Replay →
+      </a>
+    </div>
 
   </div>
 </section>
+
+<script>
+  import { WORKSHOP_END_MS } from '../../data/defense-workshop.ts';
+
+  function toggleWorkshopStrip(): void {
+    const before = document.getElementById('workshop-strip-before');
+    const after = document.getElementById('workshop-strip-after');
+    if (!before || !after) return;
+    if (Date.now() > WORKSHOP_END_MS) {
+      before.classList.add('hidden');
+      after.classList.remove('hidden');
+    }
+  }
+
+  toggleWorkshopStrip();
+</script>
