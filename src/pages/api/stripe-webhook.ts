@@ -527,6 +527,7 @@ async function sendGradeConfirmation(
   if (!resendKey) return;
   const subject = "You're in. Book your first call.";
   try {
+    const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
@@ -535,6 +536,10 @@ async function sendGradeConfirmation(
         to: [email],
         subject,
         html: buildGradeConfirmationHtml(gradeName, priceLabel, email),
+        headers: {
+          'List-Unsubscribe': `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${unsubUrl}>`,
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+        },
       }),
     });
     if (!res.ok) {
