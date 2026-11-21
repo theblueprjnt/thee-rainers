@@ -29,8 +29,11 @@ test('J1 home renders non-blank with hero and nav', async ({ page }) => {
   expect(consoleErrors).toHaveLength(0);
 });
 
-// ── J2: Nav CTA is red and routes to /foundation ───────────────────────────
-test('J2 nav CTA is red fill and routes to /foundation', async ({ page }) => {
+// ── J2: Nav CTA is blue and routes to /foundation ──────────────────────────
+// Color law changed red (#E11D2A) -> blue (#2348C6) 2026-08-23. /foundation
+// itself moved from a free opt-in to a $19 paid product around the same
+// time; the CTA still points there, now selling the Blueprint directly.
+test('J2 nav CTA is blue fill and routes to /foundation', async ({ page }) => {
   await page.goto(smokeUrl('/'));
 
   const cta = page.locator('a[href="/foundation"]').first();
@@ -39,82 +42,65 @@ test('J2 nav CTA is red fill and routes to /foundation', async ({ page }) => {
   const bg = await cta.evaluate(el =>
     window.getComputedStyle(el).backgroundColor
   );
-  // #E11D2A = rgb(225, 29, 42)
-  expect(bg).toBe('rgb(225, 29, 42)');
+  // #2348C6 = rgb(35, 72, 198)
+  expect(bg).toBe('rgb(35, 72, 198)');
 
   await page.screenshot({ path: `tests/smoke/artifacts/j2-nav-cta-${SMOKE_TS}.png` });
 });
 
-// ── J3: Opt-in end-to-end (foundation form) ────────────────────────────────
-test('J3 opt-in: foundation form submits and redirects to thank-you', async ({ page }) => {
-  await page.goto(smokeUrl('/foundation'));
-  await expect(page.locator('#capture-email')).toBeVisible();
+// ── J3: Opt-in end-to-end (first-training form) ────────────────────────────
+// /foundation no longer has an opt-in form -- it's a paid product page now.
+// The free opt-in path lives on /first-training (email only, no name field,
+// inline success state instead of a thank-you redirect).
+test('J3 opt-in: first-training form submits and shows success', async ({ page }) => {
+  await page.goto(smokeUrl('/first-training'));
+  await expect(page.locator('#ft-email')).toBeVisible();
 
-  await page.fill('#capture-name', 'Smoke Test');
-  await page.fill('#capture-email', SMOKE_EMAIL);
+  await page.fill('#ft-email', SMOKE_EMAIL);
 
   const [response] = await Promise.all([
     page.waitForResponse(r => r.url().includes('/api/lead-capture'), { timeout: 10_000 }),
-    page.locator('#capture-submit').click(),
+    page.locator('#ft-submit').click(),
   ]);
   expect(response.status()).toBe(200);
 
-  // Client-side redirect fires 400ms after fetch — trailing slash normalised by CF
-  await page.waitForURL(/thank-you\/footwork-blueprint/, { timeout: 8000 });
-  await expect(page.locator('h1').first()).toBeVisible();
+  await expect(page.locator('#ft-success')).toBeVisible({ timeout: 8000 });
 
   writeFileSync('tests/smoke/artifacts/j3-smoke-email.txt', SMOKE_EMAIL);
   await page.screenshot({ path: `tests/smoke/artifacts/j3-optin-${SMOKE_TS}.png` });
 });
 
-// ── J4: Popup fires on scroll and suppresses after submit ──────────────────
-test('J4 popup fires on deep scroll and suppresses on reload', async ({ page }) => {
+// ── J4: Popup stays off (deliberately disabled) ────────────────────────────
+// ENTRY_PAGES = [] in Base.astro disables the auto-trigger on purpose
+// (markup/logic kept intact to re-enable later). This guards that
+// invariant: the popup must never self-show on scroll while disabled.
+test('J4 popup markup present but does not self-trigger on deep scroll', async ({ page }) => {
   await page.goto(smokeUrl('/'));
   await page.evaluate(() => localStorage.removeItem('tr_popup_v2'));
   await page.reload();
 
-  // Scroll past 65% threshold
+  await expect(page.locator('#tr-popup')).toBeAttached();
+
+  // Scroll past the old 65% threshold
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
   await page.waitForTimeout(400);
 
-  const popup = page.locator('#tr-popup');
-  await expect(popup).not.toHaveClass(/hidden/, { timeout: 6000 });
-  await page.screenshot({ path: `tests/smoke/artifacts/j4-popup-visible-${SMOKE_TS}.png` });
-
-  // Popup requires BOTH name and email (if (!email || !name) return)
-  const popupEmail = `smoke+${SMOKE_TS}p@theerainers.com`;
-  await page.fill('#tr-popup-name', 'Smoke Test');
-  await page.fill('#tr-popup-email', popupEmail);
-
-  const [popupRes] = await Promise.all([
-    page.waitForResponse(r => r.url().includes('/api/lead-capture'), { timeout: 10_000 }),
-    page.locator('#tr-popup-submit').click(),
-  ]);
-  expect(popupRes.status()).toBe(200);
-  await expect(page.locator('#tr-popup-success')).toBeVisible({ timeout: 3000 });
-  // Popup code calls dismiss() after 3.2 s via setTimeout — wait for that so
-  // localStorage is set before we reload, otherwise suppression check is vacuous
-  await expect(page.locator('#tr-popup')).toHaveClass(/hidden/, { timeout: 5000 });
-
-  // Suppression: reload, scroll — popup must stay hidden
-  await page.reload();
-  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
-  await page.waitForTimeout(500);
   await expect(page.locator('#tr-popup')).toHaveClass(/hidden/);
-
-  await page.screenshot({ path: `tests/smoke/artifacts/j4-popup-suppressed-${SMOKE_TS}.png` });
+  await page.screenshot({ path: `tests/smoke/artifacts/j4-popup-stays-hidden-${SMOKE_TS}.png` });
 });
 
-// ── J5: Buy buttons link to correct Stripe URLs (no charges) ───────────────
-test('J5 paid path: shop Stripe links present; Workshop Replay link present on its page', async ({ page }) => {
-  // Shop page — three direct Stripe links
+// ── J5: Buy buttons present (Checkout Session pattern, no charges) ─────────
+test('J5 paid path: shop checkout buttons present; Workshop Replay link present on its page', async ({ page }) => {
+  // Shop sells Footwork, Shadowboxing, and the Bundle, all via the
+  // site-wide data-checkout -> /api/create-checkout flow, not raw
+  // buy.stripe.com Payment Links. Defense Workshop is not listed on /shop.
   await page.goto(smokeUrl('/shop'));
-  await expect(page.locator('a[href="https://buy.stripe.com/5kQdR91X5dlIeqm8cc6J20l"]').first(),
-    'Shadowboxing Blueprint Stripe link').toBeVisible();
-  await expect(page.locator('a[href="https://buy.stripe.com/14A4gz59hgxUaa65006J20m"]').first(),
-    'Bundle Stripe link').toBeVisible();
-  await expect(page.locator('a[href="https://buy.stripe.com/7sY28r8lt1D06XU6446J20n"]').first(),
-    'Defense Workshop Stripe link').toBeVisible();
+  await expect(page.locator('button[data-checkout="footwork"]').first(),
+    'Footwork Blueprint checkout button').toBeVisible();
+  await expect(page.locator('button[data-checkout="shadowboxing"]').first(),
+    'Shadowboxing Blueprint checkout button').toBeVisible();
+  await expect(page.locator('button[data-checkout="bundle"]').first(),
+    'Bundle checkout button').toBeVisible();
   await page.screenshot({ path: `tests/smoke/artifacts/j5-shop-${SMOKE_TS}.png` });
 
   // Workshop Replay sales page — data-checkout button wired to USD Checkout Session
