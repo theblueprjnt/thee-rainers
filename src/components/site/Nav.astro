@@ -10,9 +10,9 @@ interface Props {
 const { hidePromoBar = false } = Astro.props;
 
 const trainingLinks = [
-  { href: '/shop', label: 'Blueprints' },
-  { href: '/defense-workshop', label: 'Defense Workshop' },
-  { href: '/masterclass', label: 'Masterclass' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/defense-workshop', label: 'Workshop' },
+  { href: '/masterclass', label: 'Step Into The Ring' },
   { href: '/coaching', label: 'Coaching' },
 ];
 ---
@@ -49,23 +49,22 @@ const trainingLinks = [
       </picture>
     </a>
 
-    <nav class="hidden md:flex items-center gap-7 ml-auto" aria-label="Primary">
-      <a href="/" data-nav-path="/"
-        class="text-[#0B0B0C] text-[13px] font-semibold tracking-wide uppercase hover:text-[var(--terra)] transition-colors duration-200">
+    <nav class="hidden md:flex items-center gap-3 ml-auto" aria-label="Primary">
+      <a href="/" data-nav-path="/" class="tr-nav-btn">
         Home
       </a>
 
-      <!-- TRAINING dropdown -->
+      <!-- PROGRAMS dropdown -->
       <div class="relative" id="nav-training">
         <button type="button" id="nav-training-trigger"
           aria-haspopup="true" aria-expanded="false" aria-controls="nav-training-menu"
-          class="flex items-center gap-1.5 text-[#0B0B0C] text-[13px] font-semibold tracking-wide uppercase hover:text-[var(--terra)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--terra)] focus-visible:ring-offset-2">
-          Training
+          class="tr-nav-btn flex items-center gap-1.5">
+          Programs
           <svg id="nav-training-chevron" class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
           </svg>
         </button>
-        <div id="nav-training-menu" role="menu" aria-label="Training"
+        <div id="nav-training-menu" role="menu" aria-label="Programs"
           class="hidden absolute left-0 top-full mt-2 min-w-[220px] bg-white border border-[#0B0B0C]/10 shadow-lg py-2">
           {trainingLinks.map(link => (
             <a href={link.href} role="menuitem" data-nav-path={link.href}
@@ -76,17 +75,11 @@ const trainingLinks = [
         </div>
       </div>
 
-      <a href="/about" data-nav-path="/about"
-        class="text-[#0B0B0C] text-[13px] font-semibold tracking-wide uppercase hover:text-[var(--terra)] transition-colors duration-200">
+      <a href="/about" data-nav-path="/about" class="tr-nav-btn">
         About
       </a>
-      <a href="/contact" data-nav-path="/contact"
-        class="text-[#0B0B0C] text-[13px] font-semibold tracking-wide uppercase hover:text-[var(--terra)] transition-colors duration-200">
+      <a href="/contact" data-nav-path="/contact" class="tr-nav-btn">
         Contact
-      </a>
-
-      <a href="/first-training" class="tr-btn">
-        Free Guide
       </a>
     </nav>
 
@@ -135,7 +128,7 @@ const trainingLinks = [
       <li class="border-b border-[#0B0B0C]/10">
         <button type="button" id="mobile-training-trigger" aria-expanded="false" aria-controls="mobile-training-panel"
           class="w-full flex items-center justify-between py-5 text-3xl font-black uppercase tracking-tighter text-[#0B0B0C] hover:text-[var(--terra)] transition-colors">
-          Training
+          Programs
           <svg id="mobile-training-chevron" class="w-6 h-6 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
           </svg>
@@ -166,6 +159,25 @@ const trainingLinks = [
 </div>
 
 <style>
+  .tr-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    color: #0B0B0C;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(11,11,12,0.15);
+    padding: 0.55rem 1.1rem;
+    background: transparent;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .tr-nav-btn:hover {
+    border-color: var(--terra);
+    color: var(--terra);
+  }
   .tr-mobile-menu {
     position: fixed;
     inset: 0;
