@@ -41,11 +41,16 @@ const LOOKUP_KEY_MAP: Record<string, string> = {
   'footwork':                 'footwork',
   'shadowboxing':             'shadowboxing',
   'bundle':                   'bundle',
-  'defense_workshop_early':   'defense-workshop',
+  // defense_workshop_early removed 2026-11-19 -- $39 price no longer exists
+  // in create-checkout.ts, that early-bird window closed 2026-08-08.
   'defense_workshop_standard':'defense-workshop',
+  'defense_workshop_review':  'defense-workshop-review',
+  'defense_workshop_call':    'defense-workshop-call',
   'grade1':                   'grade1',
   'grade2':                   'grade2',
   'grade3':                   'grade3',
+  'grade2_plan':               'grade2-plan',
+  'grade3_plan':               'grade3-plan',
   'masterclass':              'masterclass',
 };
 
@@ -73,8 +78,22 @@ const KIT_PRODUCT_TAGS: Record<string, string> = {
   'shadowboxing':      '19807641',
   'bundle':            '19807644',
   'defense-workshop':  '19807641', // uses same tag as shadowboxing until a dedicated tag is created
+  // Both upsell tiers also get the shared 'defense-workshop' tag below (see
+  // checkout.session.completed), so "email all tiers the Nov 29 recording"
+  // can target one tag. These two map to the same shared tag for that
+  // reason -- their own distinct per-tier tags are applied separately via
+  // KIT_WORKSHOP_REVIEW_TAG_ID / KIT_WORKSHOP_CALL_TAG_ID below.
+  'defense-workshop-review': '19807641',
+  'defense-workshop-call':   '19807641',
   'greatness':         '19830354',
 };
+
+// Per-tier Defense Workshop tags (task 1) -- TODO Rainers: create these three
+// tags in Kit (Grow > Tags) and set them as Cloudflare secrets, same pattern
+// as KIT_COACHING_TAG_ID. Until set, tagging is skipped and logged, exactly
+// like the existing KIT_TRIAL_TAG_ID / KIT_COACHING_TAG_ID pattern in this
+// file -- Stripe events still process either way.
+
 
 // Grade buyer tag — one shared tag for all three grades (KIT_COACHING_TAG_ID,
 // set as a Cloudflare secret, confirmed live 2026-08-17). Per-grade tags
@@ -120,10 +139,15 @@ const GA4_CATALOG: Record<string, { name: string; price: number; category: strin
   'bundle':            { name: 'Complete Bundle',            price: PRODUCTS.bundle.priceCents / 100,               category: 'one_time' },
   'workshop-replay':   { name: 'Workshop Replay',            price: PRODUCTS['workshop-replay'].priceCents / 100,   category: 'on_demand' },
   'defense-workshop':  { name: 'Defense Workshop',           price: PRODUCTS['defense-workshop'].priceCents / 100,  category: 'one_time' },
+  'defense-workshop-review': { name: 'Defense Workshop + Footage Review', price: 99,  category: 'one_time' },
+  'defense-workshop-call':   { name: 'Defense Workshop + 1:1 Call',       price: 199, category: 'one_time' },
+  'masterclass':       { name: 'Masterclass',                price: PRODUCTS.masterclass.priceCents / 100,          category: 'one_time' },
   'greatness':         { name: 'Greatness Community',        price: PRODUCTS.greatness.priceCents / 100,            category: 'subscription' },
   'grade1':            { name: 'Grade 1 Foundation',         price: 347, category: 'one_time' },
   'grade2':            { name: 'Grade 2 Development',        price: 997, category: 'one_time' },
   'grade3':            { name: 'Grade 3',                    price: 12000, category: 'one_time' },
+  'grade2-plan':       { name: 'Grade 2 Development (payment plan)', price: 365,  category: 'payment_plan' },
+  'grade3-plan':       { name: 'Grade 3 (payment plan)',             price: 4400, category: 'payment_plan' },
 };
 
 // ── GA4 Measurement Protocol — server-side purchase event ──────────────────
@@ -409,7 +433,7 @@ const DELIVERY_SUBJECTS: Record<string, string> = {
   'workshop-replay':   'Your Defense Workshop Replay',
   'defense-workshop':  'Your Defense Workshop Replay',
   'greatness':         'You are in.',
-  'masterclass':       'Your Step Into The Ring Access',
+  'masterclass':       'Your Masterclass Access',
 };
 
 function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Record<string, string>): string {
@@ -446,8 +470,8 @@ function buildDeliveryHtml(slug: string, urls: string[], email: string, env?: Re
   }
   if (slug === 'masterclass') {
     return wrap(
-      `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">Step Into The Ring is ready.</p>` +
-      btn(url, 'Access Step Into The Ring') +
+      `<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">The Masterclass is ready.</p>` +
+      btn(url, 'Access the Masterclass') +
       `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Ten lessons in order, plus the 6-week structure video and the Footwork Blueprint PDF. This link doesn't expire.</p>`,
     );
   }
@@ -549,6 +573,85 @@ async function sendGradeConfirmation(
     }
   } catch (err) {
     console.error('[stripe-webhook] Grade confirmation email fetch error:', String(err));
+  }
+}
+
+// ── Defense Workshop confirmation (Nov 29, 2026) ────────────────────────────
+// Three tiers share this one email builder, each tier adding its own section
+// below the shared Zoom/date block. Copy is limited to what the brief gave:
+// clip-submission window (Dec 6) and 7-day breakdown turnaround for the
+// review tier, Calendly booking for the call tier.
+const WORKSHOP_DATE_LABEL = 'Sunday, Nov 29, 12:00 PM ET';
+const WORKSHOP_CALENDLY_URL = 'https://calendly.com/theerainers/1-1';
+
+function buildWorkshopConfirmationHtml(
+  tier: 'live' | 'review' | 'call',
+  email: string,
+  env: Record<string, string>,
+): string {
+  const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
+  const zoomUrl = env['ZOOM_WORKSHOP_URL'] ?? '';
+  const zoomSection = zoomUrl
+    ? `<p style="margin:0 0 24px;"><a href="${zoomUrl}" style="display:inline-block;background:#E11D2A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Join on Zoom</a></p>`
+    : `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">The Zoom link is on its way in a separate email closer to Nov 29.</p>`;
+
+  let tierSection = '';
+  if (tier === 'review') {
+    tierSection =
+      `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Your footage review</p>` +
+      `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 12px;">Send one clip, an unlisted YouTube or Google Drive link, any time before Dec 6. Reply to this email with the link or submit it on the thank-you page.</p>` +
+      `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 24px;">Your recorded breakdown arrives within 7 days of submitting.</p>`;
+  } else if (tier === 'call') {
+    tierSection =
+      `<p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin:0 0 10px;">Your 1:1 call</p>` +
+      `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 12px;">Book your 30-minute call for any time after Nov 29.</p>` +
+      `<p style="margin:0 0 24px;"><a href="${WORKSHOP_CALENDLY_URL}" style="display:inline-block;background:#0A0A0A;color:#fff;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;">Book Your Call</a></p>`;
+  }
+
+  return (
+    `<div style="font-family:monospace;max-width:540px;margin:0 auto;padding:32px 24px;color:#0A0A0A;">` +
+    `<p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#888;margin:0 0 24px;">Thee Rainers</p>` +
+    `<p style="font-size:15px;line-height:1.6;margin:0 0 8px;">You're in.</p>` +
+    `<p style="font-size:13px;color:#888;line-height:1.6;margin:0 0 24px;">${WORKSHOP_DATE_LABEL}</p>` +
+    zoomSection +
+    `<p style="font-size:13px;color:#0A0A0A;line-height:1.6;margin:0 0 24px;">The replay is included, no matter which tier. If you can't make it live, it's yours after.</p>` +
+    tierSection +
+    `<p style="font-size:12px;color:#888;line-height:1.6;margin:0 0 16px;">Questions: <a href="mailto:rainers@theerainers.com" style="color:#E11D2A;">rainers@theerainers.com</a></p>` +
+    `<p style="font-size:11px;text-align:center;margin:0;"><a href="${unsubUrl}" style="color:#ccc;text-decoration:underline;">Unsubscribe</a></p>` +
+    `</div>`
+  );
+}
+
+async function sendWorkshopConfirmation(
+  resendKey: string,
+  email: string,
+  tier: 'live' | 'review' | 'call',
+  env: Record<string, string>,
+): Promise<void> {
+  if (!resendKey) return;
+  const unsubUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${resendKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'Thee Rainers <rainers@theerainers.com>',
+        to: [email],
+        subject: "You're in. Defense Workshop, Nov 29.",
+        html: buildWorkshopConfirmationHtml(tier, email, env),
+        headers: {
+          'List-Unsubscribe': `<mailto:rainers@theerainers.com?subject=unsubscribe>, <${unsubUrl}>`,
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+        },
+      }),
+    });
+    if (!res.ok) {
+      console.error('[stripe-webhook] Workshop confirmation email failed', res.status, await res.text());
+    } else {
+      console.log('[stripe-webhook] Workshop confirmation email sent for tier', tier);
+    }
+  } catch (err) {
+    console.error('[stripe-webhook] Workshop confirmation email fetch error:', String(err));
   }
 }
 
@@ -768,13 +871,20 @@ export async function POST({ request }: APIContext): Promise<Response> {
       const email   = session.customer_details?.email ?? session.customer_email ?? '';
 
       let productId = '';
+      let lineItemPriceIds: string[] = [];
       try {
         const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { expand: ['data.price.product'] });
         const product = lineItems.data[0]?.price?.product;
         if (product && typeof product === 'object' && 'id' in product) {
           productId = (product as Stripe.Product).id;
         }
+        lineItemPriceIds = lineItems.data.map(li => li.price?.id ?? '').filter(Boolean);
       } catch (err) { console.error('[stripe-webhook] listLineItems error:', String(err)); }
+
+      // Order bump (task 3): the $29 Workshop Replay optional_item, if the
+      // buyer added it on the Blueprint checkout page.
+      const WORKSHOP_REPLAY_BUMP_PRICE_ID = 'price_1UdSi8HzlarU775HTvJw8zvu';
+      const hasReplayBump = lineItemPriceIds.includes(WORKSHOP_REPLAY_BUMP_PRICE_ID);
 
       if (!email || !productId) {
         console.error('[stripe-webhook] checkout.session.completed missing email or productId', { sessionId: session.id, email: !!email, productId: !!productId });
@@ -782,9 +892,14 @@ export async function POST({ request }: APIContext): Promise<Response> {
         const slug = PRODUCT_MAP[productId] ?? LOOKUP_KEY_MAP[session.metadata?.lookup_key ?? ''];
         await deliverProduct(email, productId, e, slug);
         // Grade purchase confirmation — deliverProduct() correctly no-ops for
-        // grade1/2/3 (no ASSET_MAP entry, it's a call not a file), so this is
-        // the actual confirmation + booking email for these three slugs.
-        if (slug === 'grade1' || slug === 'grade2' || slug === 'grade3') {
+        // grade1/2/3 and the two payment-plan slugs (no ASSET_MAP entry,
+        // it's a call not a file), so this is the actual confirmation +
+        // booking email. grade2-plan/grade3-plan get this on their FIRST
+        // payment only -- invoice.payment_succeeded handles payments 2 and 3
+        // without re-sending this email (see below).
+        const isGradePurchase = slug === 'grade1' || slug === 'grade2' || slug === 'grade3'
+          || slug === 'grade2-plan' || slug === 'grade3-plan';
+        if (isGradePurchase) {
           const gradeName  = GA4_CATALOG[slug]?.name ?? slug;
           const priceCents = session.amount_total ?? null;
           const priceLabel = priceCents != null
@@ -797,20 +912,56 @@ export async function POST({ request }: APIContext): Promise<Response> {
           } else {
             console.error('[stripe-webhook] KIT_COACHING_TAG_ID not set — ' + slug + ' buyer ' + email + ' was not tagged in Kit.');
           }
+          // Mark payment 1 of 3 on the subscription itself, so
+          // invoice.payment_succeeded knows not to re-fulfill and can count
+          // up to the 3rd payment before canceling. One-time grade1/2/3
+          // purchases have no subscription, this is a no-op for them.
+          if ((slug === 'grade2-plan' || slug === 'grade3-plan') && session.subscription) {
+            try {
+              await stripe.subscriptions.update(String(session.subscription), {
+                metadata: { lookup_key: session.metadata?.lookup_key ?? '', payments_made: '1' },
+              });
+            } catch (err) {
+              console.error('[stripe-webhook] failed to stamp payments_made=1 on new plan subscription:', String(err));
+            }
+          }
+        }
+        // Defense Workshop confirmation — same reasoning as Grades: no
+        // ASSET_MAP entry, deliverProduct() no-ops, this is the real email.
+        if (slug === 'defense-workshop' || slug === 'defense-workshop-review' || slug === 'defense-workshop-call') {
+          const tier = slug === 'defense-workshop' ? 'live' : slug === 'defense-workshop-review' ? 'review' : 'call';
+          await sendWorkshopConfirmation(resendKey, email, tier, e);
+          const tierTagId = tier === 'review' ? e['KIT_WORKSHOP_REVIEW_TAG_ID']
+            : tier === 'call' ? e['KIT_WORKSHOP_CALL_TAG_ID']
+            : e['KIT_WORKSHOP_LIVE_TAG_ID'];
+          if (tierTagId) {
+            await tagKit(kitKey, email, tierTagId);
+          } else {
+            console.error(`[stripe-webhook] KIT_WORKSHOP_${tier.toUpperCase()}_TAG_ID not set — ${email} was not tagged for the ${tier} tier.`);
+          }
+        }
+        // Order bump: buyer also gets Workshop Replay access on top of their
+        // Blueprint purchase.
+        if (hasReplayBump) {
+          await deliverProduct(email, '', e, 'workshop-replay');
+          if (slug && KIT_REPLAY_SEQ_ID) {
+            await addToKitSequence(kitKey, email, KIT_REPLAY_SEQ_ID);
+          }
         }
         // Telegram sale alert. Awaited: an un-awaited fetch gets cancelled
         // when the Worker returns its response, so the alert never lands.
+        const bumpNote = hasReplayBump ? ' + $29 replay bump' : '';
         await sendTelegramAlert(
           e['TELEGRAM_BOT_TOKEN'] ?? '',
           e['TELEGRAM_CHAT_ID'] ?? '',
-          `SALE: ${slug ?? productId}, $${((session.amount_total ?? 0) / 100).toFixed(0)}, ${email.replace(/(.).*(@.*)/, '$1***$2')}`,
+          `SALE: ${slug ?? productId}${bumpNote}, $${((session.amount_total ?? 0) / 100).toFixed(0)}, ${email.replace(/(.).*(@.*)/, '$1***$2')}`,
         );
         // Sync member into Airtable + tag in Kit
         await upsertAirtable(airtableToken, airtableBase, airtableTable, {
           Email: email,
           Name: session.customer_details?.name ?? '',
           Status: 'active',
-          Product: slug ?? productId,
+          Product: hasReplayBump ? `${slug ?? productId} + replay bump` : (slug ?? productId),
           'Stripe Customer': String(session.customer ?? ''),
           'Stripe Subscription': String(session.subscription ?? ''),
         });
@@ -872,17 +1023,67 @@ export async function POST({ request }: APIContext): Promise<Response> {
       const email = invoice.customer_email ?? '';
       let productId = '';
       const subId = typeof invoice.subscription === 'string' ? invoice.subscription : null;
+      let subMeta: Stripe.Metadata = {};
       if (subId) {
         try {
           const sub = await stripe.subscriptions.retrieve(subId, { expand: ['items.data.price.product'] });
           const product = sub.items.data[0]?.price?.product;
           if (product && typeof product === 'object' && 'id' in product) productId = (product as Stripe.Product).id;
+          subMeta = sub.metadata ?? {};
         } catch (err) { console.error('[stripe-webhook] subscription retrieve error:', String(err)); }
       }
-      if (email && productId) {
+      // Grade payment plans (task 5): PRODUCT_MAP won't resolve these, since
+      // they have no product-ID entry -- fall back to the subscription's own
+      // lookup_key metadata, set at checkout creation.
+      const slug = PRODUCT_MAP[productId] ?? LOOKUP_KEY_MAP[subMeta.lookup_key ?? ''];
+      const isGradePlan = slug === 'grade2-plan' || slug === 'grade3-plan';
+
+      if (email && isGradePlan && subId) {
+        // 3 payments and done -- fulfillment already happened on payment 1
+        // (checkout.session.completed), never again here. Count this
+        // payment, cancel the subscription outright once the 3rd lands so a
+        // 4th charge never happens.
+        const paymentsMade = (parseInt(subMeta.payments_made ?? '1', 10) || 1) + 1;
+        const amountCents = invoice.amount_paid ?? null;
+        await sendGA4Purchase(e, {
+          slug,
+          transactionId: invoice.id,
+          customerEmail: email,
+          customerStripeId: typeof invoice.customer === 'string' ? invoice.customer : '',
+          actualValue: amountCents != null ? amountCents / 100 : undefined,
+        });
+        await upsertAirtable(airtableToken, airtableBase, airtableTable, {
+          Email: email,
+          Status: 'active',
+          Product: `${slug} (payment ${paymentsMade} of 3)`,
+          'Stripe Customer': typeof invoice.customer === 'string' ? invoice.customer : '',
+          'Stripe Subscription': subId,
+        });
+        await sendTelegramAlert(
+          e['TELEGRAM_BOT_TOKEN'] ?? '',
+          e['TELEGRAM_CHAT_ID'] ?? '',
+          `${slug} payment ${paymentsMade} of 3 received, $${((amountCents ?? 0) / 100).toFixed(0)}, ${email.replace(/(.).*(@.*)/, '$1***$2')}`,
+        );
+        if (paymentsMade >= 3) {
+          try {
+            // Stamp plan_completed before canceling -- customer.subscription.deleted
+            // checks this to skip the "Before you go" win-back email, this
+            // is a finished plan, not churn.
+            await stripe.subscriptions.update(subId, { metadata: { ...subMeta, payments_made: String(paymentsMade), plan_completed: 'true' } });
+            await stripe.subscriptions.cancel(subId);
+          } catch (err) {
+            console.error('[stripe-webhook] failed to cancel completed payment plan:', String(err));
+          }
+        } else {
+          try {
+            await stripe.subscriptions.update(subId, { metadata: { ...subMeta, payments_made: String(paymentsMade) } });
+          } catch (err) {
+            console.error('[stripe-webhook] failed to update payments_made on plan subscription:', String(err));
+          }
+        }
+      } else if (email && productId) {
+        // Legacy path -- any other subscription (historically Greatness).
         await deliverProduct(email, productId, e);
-        // Subscription renewal — server-side GA4 purchase event
-        const slug = PRODUCT_MAP[productId];
         if (slug) {
           const amountCents = invoice.amount_paid ?? null;
           await sendGA4Purchase(e, {
@@ -960,7 +1161,8 @@ export async function POST({ request }: APIContext): Promise<Response> {
       const email = !customer.deleted ? customer.email ?? '' : '';
       const product = sub.items.data[0]?.price?.product;
       const productId = product && typeof product === 'object' && 'id' in product ? (product as Stripe.Product).id : String(product ?? '');
-      const slug = PRODUCT_MAP[productId];
+      const slug = PRODUCT_MAP[productId] ?? LOOKUP_KEY_MAP[sub.metadata?.lookup_key ?? ''];
+      const isGradePlan = slug === 'grade2-plan' || slug === 'grade3-plan';
       await upsertAirtable(airtableToken, airtableBase, airtableTable, {
         Email: email,
         Status: sub.status,
@@ -968,7 +1170,12 @@ export async function POST({ request }: APIContext): Promise<Response> {
         'Stripe Customer': String(sub.customer),
         'Stripe Subscription': sub.id,
       });
-      if (email) {
+      // KIT_MEMBER_TAG drives the weekly Community Session Reminder/Recap
+      // re-enrollment cron (trb-session-cron) -- Grade payment-plan buyers
+      // are coaching customers, not Community members, so they're excluded
+      // here. They're tagged with KIT_COACHING_TAG_ID instead, on their
+      // first payment (see checkout.session.completed).
+      if (email && !isGradePlan) {
         if (sub.status === 'active' || sub.status === 'trialing') {
           await tagKit(kitKey, email, KIT_MEMBER_TAG);
         } else if (sub.status === 'canceled' || sub.status === 'unpaid') {
@@ -989,8 +1196,11 @@ export async function POST({ request }: APIContext): Promise<Response> {
         'Stripe Subscription': sub.id,
       });
       if (email) await untagKit(kitKey, email, KIT_MEMBER_TAG);
-      // E12 — why-you-left email + win-back Kit sequence
-      if (email && resendKey) {
+      // E12 — why-you-left email + win-back Kit sequence. Skipped when a
+      // Grade payment plan finished its 3 payments on purpose (see
+      // invoice.payment_succeeded) -- that's a completed plan, not churn.
+      const planCompleted = sub.metadata?.plan_completed === 'true';
+      if (email && resendKey && !planCompleted) {
         try {
           const wlRes = await fetch('https://api.resend.com/emails', {
             method: 'POST',
@@ -1012,7 +1222,7 @@ export async function POST({ request }: APIContext): Promise<Response> {
           console.error('[stripe-webhook] E12 email error:', String(err));
         }
       }
-      if (email && kitKey && KIT_WINBACK_SEQ_ID) {
+      if (email && kitKey && KIT_WINBACK_SEQ_ID && !planCompleted) {
         await addToKitSequence(kitKey, email, KIT_WINBACK_SEQ_ID).catch(() => {});
       }
     }

@@ -5,6 +5,7 @@
 // layout here since this is a glance/summary, not the primary sales moment
 // -- the asymmetric full-width-Grade-1 layout lives on /coaching itself.
 import PricingCard from '../primitives/PricingCard.astro';
+import { GRADE3_MAX_SEATS } from '../../data/grade3-seats.ts';
 ---
 
 <section class="bg-white px-6 md:px-12 lg:px-20 py-20 md:py-28">
@@ -30,6 +31,8 @@ import PricingCard from '../primitives/PricingCard.astro';
           'Boxing psychology: fear, composure, controlled aggression',
           'Unlimited video feedback',
         ]}
+        anchorLine="One private lesson a week until your first sparring: about $1,300 to $2,000. Grade 1: $347."
+        anchorSource="Typical 1:1 rates in the UK, Germany and the US, one lesson a week for 20 weeks, Nov 2026. Gym fees not included."
       />
       <PricingCard
         name="Grade 2 Development"
@@ -42,7 +45,10 @@ import PricingCard from '../primitives/PricingCard.astro';
           'Everything in Grade 1 at a higher technical standard',
           'Structured plans with monthly goals, drills and progress tracking',
           'Weekly 1-1 check-in call',
+          'Bonus: a mystery gift, shipped to you. A tool that improves the snap in your punches.',
         ]}
+        planPriceId="grade2_plan"
+        planLabel="or 3 payments of $365"
       />
       <PricingCard
         name="Grade 3"
@@ -51,11 +57,14 @@ import PricingCard from '../primitives/PricingCard.astro';
         outcome="Full access. A program built entirely around you, two calls a week."
         priceId="grade3"
         ctaLabel="Apply for Grade 3"
+        note={`Application only. ${GRADE3_MAX_SEATS} seats.`}
         features={[
           'Two calls a week, plus a monthly review call on your measurables',
           'Direct access for footage and messages, fast feedback',
           'Fully customised training designed around their week',
         ]}
+        planPriceId="grade3_plan"
+        planLabel="or 3 payments of $4,400"
       />
     </div>
   </div>

@@ -61,9 +61,33 @@ async function addTag(apiKey: string, subId: number, tagId: string): Promise<voi
   });
 }
 
+// Records the check-in timestamp in Airtable Members (fieldsToMergeOn: Email).
+// Read by trb-session-cron to compute the inactivity gap for Community
+// Inactivity Nudge — no Kit custom field equivalent exists (Kit account is on
+// a plan that doesn't allow field creation via the API).
+async function recordCheckinTimestamp(
+  token: string,
+  baseId: string,
+  table: string,
+  email: string,
+): Promise<void> {
+  if (!token || !baseId) return;
+  await fetch(`https://api.airtable.com/v0/${baseId}/${encodeURIComponent(table)}`, {
+    method: 'PATCH',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      performUpsert: { fieldsToMergeOn: ['Email'] },
+      records: [{ fields: { Email: email, 'Last Checked In': new Date().toISOString() } }],
+    }),
+  }).catch((err) => console.error('[checkin] Airtable timestamp write failed', String(err)));
+}
+
 export async function GET({ request }: { request: Request }): Promise<Response> {
   const e = cfEnv as unknown as Record<string, string>;
   const kitKey = e['KIT_API_KEY'] ?? '';
+  const airtableToken = e['AIRTABLE_API_KEY'] ?? '';
+  const airtableBase = e['AIRTABLE_BASE_ID'] ?? '';
+  const airtableTable = e['AIRTABLE_TABLE'] || 'Members';
   const url = new URL(request.url);
   const email = (url.searchParams.get('email') ?? '').trim().toLowerCase();
 
@@ -85,6 +109,8 @@ export async function GET({ request }: { request: Request }): Promise<Response> 
     if (!tagIds.has(KIT_MEMBER_TAG)) {
       return reply('Membership not found for this email. Email rainers@theerainers.com.');
     }
+
+    await recordCheckinTimestamp(airtableToken, airtableBase, airtableTable, email);
 
     if (!tagIds.has(KIT_ATTENDED_TAG)) {
       await addTag(kitKey, subId, KIT_ATTENDED_TAG);

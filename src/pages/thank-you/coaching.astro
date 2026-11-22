@@ -35,3 +35,29 @@ import Base from '../../layouts/Base.astro';
   </section>
 
 </Base>
+
+<script>
+  // Meta Pixel Purchase (task 12). This page is shared by all five Grade
+  // lookupKeys (grade1/2/3, grade2_plan, grade3_plan) at five different
+  // prices, so unlike the single-product thank-you pages there is no one
+  // literal value to pass. /api/session-value does a narrow, read-only
+  // Stripe lookup on the session_id already in this page's own URL
+  // (create-checkout.ts appends it to every success_url) to get the real
+  // amount paid.
+  async function fireMetaPurchase(): Promise<void> {
+    const sessionId = new URLSearchParams(window.location.search).get('session_id');
+    if (!sessionId) return;
+    try {
+      const res = await fetch(`/api/session-value?session_id=${encodeURIComponent(sessionId)}`);
+      if (!res.ok) return;
+      const data = await res.json() as { value?: number };
+      if (typeof data.value === 'number') {
+        (window as Window & { __trbMetaPurchase?: (v: number) => void }).__trbMetaPurchase?.(data.value);
+      }
+    } catch {
+      // Non-blocking -- a missed Purchase event here is not worth surfacing to the visitor.
+    }
+  }
+
+  fireMetaPurchase();
+</script>

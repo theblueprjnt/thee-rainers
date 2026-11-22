@@ -10,6 +10,7 @@ interface Props {
   hideFooterHelp?: boolean;
   hideNav?: boolean;
   hideFooter?: boolean;
+  hidePromoBar?: boolean;
 }
 
 const {
@@ -18,6 +19,7 @@ const {
   hideFooterHelp = false,
   hideNav = false,
   hideFooter = false,
+  hidePromoBar = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
@@ -124,12 +126,57 @@ const siteSchema = JSON.stringify({
     <script type="application/ld+json" set:html={siteSchema} />
     <!-- Cloudflare Web Analytics -->
     <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "6c995d4bc9a446c3b92eba609ef3ba69"}'></script>
+    <!-- Meta Pixel (task 12) — loader only, not loaded yet. It sets
+         third-party advertising cookies, so it only actually runs once the
+         visitor has granted ad_storage through the cookie banner (same
+         trb_consent_v1 key and Consent Mode v2 flow as GTM above). The
+         <noscript> fallback from Meta's own snippet is deliberately
+         dropped -- it can't wait for consent, so including it would fire
+         before the visitor has agreed to anything. -->
+    <script is:inline>
+      window.__trbLoadMetaPixel = function () {
+        if (window.fbq) return; // already loaded this session
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '988825980478625');
+        fbq('track', 'PageView');
+      };
+      // Prior-visit consent, same pattern as the GTM/Consent Mode restore
+      // above: if they already said yes, load immediately on this page too.
+      try {
+        if (localStorage.getItem('trb_consent_v1') === 'granted') {
+          window.__trbLoadMetaPixel();
+        }
+      } catch (_) {}
+      // Fires a Purchase event with value/currency from any thank-you page.
+      // No-ops silently if the pixel hasn't loaded (consent not granted) or
+      // no numeric value was passed -- callers are expected to guard on
+      // their own data being ready, not on consent state.
+      window.__trbMetaPurchase = function (value) {
+        if (typeof window.fbq === 'function' && typeof value === 'number' && !isNaN(value)) {
+          window.fbq('track', 'Purchase', { value: value, currency: 'USD' });
+        }
+      };
+    </script>
     <!-- Funnel event helper — single source of truth for dataLayer pushes -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       window.trackEvent = function(name, data) {
         if (new URLSearchParams(window.location.search).get('smoke') === '1') return;
         try { window.dataLayer.push(Object.assign({ event: name }, data || {})); } catch (e) {}
+        // Meta Pixel Lead event (task 12) -- every successful opt-in already
+        // calls trackEvent('generate_lead', ...) across the site, so this is
+        // the one place that needs to know about Meta at all. No-ops if the
+        // pixel hasn't loaded (consent not granted yet).
+        if (name === 'generate_lead' && typeof window.fbq === 'function') {
+          try { window.fbq('track', 'Lead'); } catch (e) {}
+        }
       };
 
       // Product registry — Stripe Payment Link IDs (live defense workshop only)
@@ -137,15 +184,24 @@ const siteSchema = JSON.stringify({
       // Keep in sync with shop.astro products array and create-checkout.ts.
       var TR_PRODUCTS = {
         // Checkout Session lookup keys — keep in sync with create-checkout.ts PRODUCTS map.
+        // Updated 2026-11-19: removed defense_workshop_early and greatness_monthly/
+        // greatness_annual (both retired, task 6/task 1), masterclass renamed and
+        // repriced $57 -> $79 (task 4), added the two Defense Workshop upsell tiers
+        // (task 1), the two Grade payment plans (task 5), and the base Grade
+        // lookup keys (pre-existing gap, were never tracked here at all).
         'footwork':                    { id: 'footwork_blueprint',      name: 'Footwork Blueprint',          price:   9 },
         'shadowboxing':                { id: 'shadowboxing_blueprint',  name: 'Shadowboxing Blueprint',      price:  19 },
         'bundle':                      { id: 'complete_bundle',         name: 'Complete Bundle',             price:  24 },
-        'defense_workshop_early':      { id: 'defense_workshop',        name: 'Defense Workshop (Early)',    price:  39 },
         'defense_workshop_standard':   { id: 'defense_workshop',        name: 'Defense Workshop',           price:  49 },
+        'defense_workshop_review':     { id: 'defense_workshop_review', name: 'Defense Workshop + Footage Review', price: 99 },
+        'defense_workshop_call':       { id: 'defense_workshop_call',   name: 'Defense Workshop + 1:1 Call', price: 199 },
         'workshop_replay':             { id: 'workshop_replay',         name: 'Workshop Replay',             price:  49 },
-        'greatness_monthly':           { id: 'greatness_monthly',       name: 'The Weekly Session Monthly', price:  39 },
-        'greatness_annual':            { id: 'greatness_annual',        name: 'The Weekly Session Annual',  price: 390 },
-        'masterclass':                 { id: 'masterclass',             name: 'Step Into The Ring',          price:  57 }
+        'masterclass':                 { id: 'masterclass',             name: 'Masterclass',                 price:  79 },
+        'grade1':                      { id: 'grade1',                  name: 'Grade 1 Foundation',          price: 347 },
+        'grade2':                      { id: 'grade2',                  name: 'Grade 2 Development',         price: 997 },
+        'grade3':                      { id: 'grade3',                  name: 'Grade 3',                     price: 12000 },
+        'grade2_plan':                 { id: 'grade2_plan',             name: 'Grade 2 Development (plan)',  price: 365 },
+        'grade3_plan':                 { id: 'grade3_plan',             name: 'Grade 3 (plan)',              price: 4400 }
       };
 
       // Delegated click — fires begin_checkout for ANY buy button site-wide.
@@ -254,9 +310,9 @@ const siteSchema = JSON.stringify({
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LQ7HPXG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    {!hideNav && <Nav />}
-    <!-- pt-14 compensates for the promo bar added above the nav row -->
-    <main class="flex-1 pt-14">
+    {!hideNav && <Nav hidePromoBar={hidePromoBar} />}
+    <!-- pt-14 compensates for the promo bar added above the nav row; dropped when the bar is hidden for a page -->
+    <main class={`flex-1 ${hidePromoBar ? '' : 'pt-14'}`}>
       <slot />
     </main>
     {!hideFooter && <Footer hideHelp={hideFooterHelp} />}

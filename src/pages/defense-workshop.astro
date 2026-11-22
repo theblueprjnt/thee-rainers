@@ -2,23 +2,11 @@
 export const prerender = false;
 
 import Layout from '../layouts/Base.astro';
-import { PRODUCTS } from '../data/products.ts';
-
-// Standard price comes from the single source of truth. The early-bird
-// price ($39, price_6) is a temporary promo variant on top of the
-// canonical price below, not a product fact itself -- not represented in
-// products.ts, kept as a local literal same as before.
-const standardPrice = `$${(PRODUCTS['defense-workshop'].priceCents / 100).toFixed(0)}`;
-
-// Defense Workshop early bird until Aug 8 23:59 Lisbon = Aug 8 22:59 UTC
-const EARLY_BIRD_UNTIL = new Date('2026-08-08T22:59:00Z');
-const isEarlyBird = new Date() < EARLY_BIRD_UNTIL;
-const price = isEarlyBird ? '$39' : standardPrice;
-
+import { WORKSHOP_DATE_LABEL } from '../data/defense-workshop.ts';
 ---
 <Layout
-  title="Defense Workshop | Thee Rainers"
-  description="A live workshop on the five layers of defense in boxing. 60 min + 30 min live Q&A. Replay included.">
+  title="Defense Workshop, Nov 29 | Thee Rainers"
+  description="A live workshop on the five layers of defense in boxing. Sunday, Nov 29, 12:00 PM ET. Replay included on every tier.">
 
   <!-- HERO -->
   <section class="relative overflow-hidden bg-white">
@@ -37,24 +25,21 @@ const price = isEarlyBird ? '$39' : standardPrice;
           Defense<br/>Workshop.
         </h1>
 
-        <p class="text-[#0A0A0A]/65 text-base leading-relaxed mb-10 max-w-[520px]">
-          A live session on the five layers of defense in boxing. 60 min + 30 min live Q&A. Every seat includes the replay.
+        <p class="text-[#0A0A0A]/65 text-base leading-relaxed mb-4 max-w-[520px]">
+          A live session on the five layers of defense in boxing. Live Q&amp;A included. Every seat includes the replay.
         </p>
 
+        <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-1" id="workshop-date-label">{WORKSHOP_DATE_LABEL}</p>
+        <p class="text-[#0A0A0A]/40 text-xs mb-10" id="workshop-local-time"></p>
+
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
-          <button type="button" disabled
-            class="tr-btn w-full sm:w-auto opacity-50 cursor-not-allowed">
-            Currently Unavailable
-          </button>
-          <div class="text-[#0A0A0A]/40 text-[10px] tracking-widest uppercase">
-            One-time payment
-          </div>
+          <a href="#tickets" class="tr-btn w-full sm:w-auto" id="workshop-hero-cta">
+            Get Your Seat
+          </a>
         </div>
 
         <div class="flex flex-wrap gap-x-6 gap-y-2 text-[#0A0A0A]/40 text-[10px] tracking-widest uppercase">
-          <span>Live Online</span>
-          <span aria-hidden="true">·</span>
-          <span>90 Minutes</span>
+          <span>Live on Zoom</span>
           <span aria-hidden="true">·</span>
           <span class="text-[#0A0A0A]/55 font-bold">Replay Included</span>
         </div>
@@ -63,7 +48,7 @@ const price = isEarlyBird ? '$39' : standardPrice;
   </section>
 
   <!-- WHAT YOU GET -->
-  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
     <div class="max-w-[1100px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">What's Inside</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl md:text-4xl leading-[0.88] mb-10">
@@ -76,7 +61,7 @@ const price = isEarlyBird ? '$39' : standardPrice;
         </div>
         <div class="border-t-2 border-[var(--terra)] pt-5">
           <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Live Q&A.</p>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">The last 30 minutes are yours. Bring your own questions and get a direct answer from Rainers in real time.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed">Bring your own questions and get a direct answer from Rainers in real time.</p>
         </div>
         <div class="border-t-2 border-[var(--terra)] pt-5">
           <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-sm mb-3">Replay included.</p>
@@ -87,7 +72,7 @@ const price = isEarlyBird ? '$39' : standardPrice;
   </section>
 
   <!-- WHO THIS IS FOR -->
-  <section class="bg-white px-6 md:px-16 lg:px-24 py-14 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-white px-6 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
     <div class="max-w-[860px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">Who This Is For</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.88] mb-8">
@@ -99,34 +84,61 @@ const price = isEarlyBird ? '$39' : standardPrice;
     </div>
   </section>
 
-  <!-- PRICING + CTA -->
-  <section class="bg-white px-6 md:px-16 lg:px-24 py-14 md:py-20">
-    <div class="max-w-[680px] mx-auto">
+  <!-- TICKETS (shown before the workshop ends) -->
+  <section id="tickets" class="bg-white px-6 md:px-16 lg:px-24 py-16 md:py-24 scroll-mt-20">
+    <div class="max-w-[1100px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">
         Defense Workshop
       </p>
-      <div class="flex items-baseline gap-4 mb-6">
-        <span class="font-black text-[#0A0A0A] text-5xl">{price}</span>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.9] mb-3">
+        Get your seat.
+      </h2>
+      <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-10">{WORKSHOP_DATE_LABEL}. Live on Zoom. Every tier includes the replay.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="border border-[#0A0A0A]/10 p-8 flex flex-col">
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">Live</p>
+          <p class="font-black text-[#0A0A0A] text-3xl mb-4">$49</p>
+          <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-8 flex-1">The live session, plus the replay.</p>
+          <button type="button" data-checkout="defense_workshop_standard" class="tr-btn w-full justify-center">Get the $49 Seat</button>
+        </div>
+        <div class="border-2 border-[var(--terra)] p-8 flex flex-col relative">
+          <span class="absolute -top-3 left-6 bg-[var(--terra)] text-white text-[10px] tracking-widest uppercase font-bold px-3 py-1">Most Popular</span>
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">Live + Footage Review</p>
+          <p class="font-black text-[#0A0A0A] text-3xl mb-4">$99</p>
+          <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-8 flex-1">Your seat, plus a recorded breakdown of one clip you send after the workshop. Clips accepted until Dec 6, breakdown delivered within 7 days.</p>
+          <button type="button" data-checkout="defense_workshop_review" class="tr-btn w-full justify-center">Get the $99 Seat</button>
+        </div>
+        <div class="border border-[#0A0A0A]/10 p-8 flex flex-col">
+          <p class="font-black text-[#0A0A0A] uppercase tracking-tight text-lg mb-2">Live + 1:1 Call</p>
+          <p class="font-black text-[#0A0A0A] text-3xl mb-4">$199</p>
+          <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-8 flex-1">Your seat, plus a 30-minute 1:1 call with Rainers after the workshop.</p>
+          <button type="button" data-checkout="defense_workshop_call" class="tr-btn w-full justify-center">Get the $199 Seat</button>
+        </div>
       </div>
-      <ul class="text-[#0A0A0A]/50 text-sm leading-loose mb-8 space-y-1">
-        <li>Live session</li>
-        <li>90 minutes with Rainers · 60 min + 30 min live Q&A</li>
-        <li>The 5 layers of defense in boxing</li>
-        <li>Replay included · permanent access</li>
-        <li>One-time payment</li>
-      </ul>
-      <button type="button" disabled
-        class="tr-btn w-full sm:w-auto text-base opacity-50 cursor-not-allowed" style="padding: 1rem 2.5rem; font-size: 0.75rem;">
-        Currently Unavailable
-      </button>
-      <p class="text-[#0A0A0A]/40 text-[10px] mt-4">
-        Secure checkout via Stripe · <a href="/legal/refund-policy" class="underline hover:text-[#0A0A0A]/60">Refund Policy</a> · <a href="/legal/terms" class="underline hover:text-[#0A0A0A]/60">Terms</a>
+
+      <p class="text-[#0A0A0A]/40 text-xs mt-8">
+        Already have the replay? <a href="/workshop-replay" class="underline hover:text-[#0A0A0A]/60">Watch the Workshop Replay on demand →</a>
       </p>
     </div>
   </section>
 
+  <!-- REPLAY FALLBACK (shown once the workshop has ended) -->
+  <section id="workshop-ended" class="hidden bg-white px-6 md:px-16 lg:px-24 py-16 md:py-24 scroll-mt-20">
+    <div class="max-w-[640px] mx-auto text-center">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-4">Defense Workshop</p>
+      <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-[0.9] mb-6">
+        The live session has ended.
+      </h2>
+      <p class="text-[#0A0A0A]/55 text-sm leading-relaxed mb-8">
+        The full recording is available now. Same five-layer system, watch on your own time.
+      </p>
+      <a href="/workshop-replay" class="tr-btn">Watch the Workshop Replay</a>
+    </div>
+  </section>
+
   <!-- FAQ -->
-  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-12 md:py-20 border-b border-[#0A0A0A]/8">
+  <section class="bg-[var(--warm)] px-6 md:px-16 lg:px-24 py-16 md:py-24 border-b border-[#0A0A0A]/8">
     <div class="max-w-[800px] mx-auto">
       <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">Questions</p>
       <h2 class="font-black text-[#0A0A0A] uppercase tracking-tighter text-3xl leading-tight mb-10">Common Questions</h2>
@@ -147,41 +159,48 @@ const price = isEarlyBird ? '$39' : standardPrice;
         </details>
         <details class="group py-5">
           <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0A0A0A] text-sm">
-            Is there a refund policy?
-            <span class="shrink-0 text-[#0A0A0A]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
-          </summary>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mt-3">Yes. Email rainers@theerainers.com before the live session date for a full refund. See the <a href="/legal/refund-policy" class="text-[var(--navy)] underline hover:opacity-70">Refund Policy</a>.</p>
-        </details>
-        <details class="group py-5">
-          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none font-bold text-[#0A0A0A] text-sm">
             What platform is this on?
             <span class="shrink-0 text-[#0A0A0A]/30 text-lg group-open:rotate-45 transition-transform duration-200">+</span>
           </summary>
-          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mt-3">Details are sent by email after purchase.</p>
+          <p class="text-[#0A0A0A]/50 text-sm leading-relaxed mt-3">Zoom. The link is sent by email after you get your seat.</p>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- GA4 view_item -->
-  <script is:inline>
-    if (typeof window !== 'undefined' && window.trackEvent) {
-      var earlyBirdUntil = new Date('2026-08-08T22:59:00Z').getTime();
-      var isEarlyBird = Date.now() < earlyBirdUntil;
-      window.trackEvent('view_item', {
-        ecommerce: {
-          currency: 'USD',
-          value: isEarlyBird ? 39 : 49,
-          items: [{
-            item_id: 'defense_workshop',
-            item_name: isEarlyBird ? 'Defense Workshop (Early Bird)' : 'Defense Workshop',
-            price: isEarlyBird ? 39 : 49,
-            quantity: 1,
-            item_category: 'live_event'
-          }]
-        }
-      });
-    }
-  </script>
-
 </Layout>
+
+<script>
+  import { WORKSHOP_START_MS, WORKSHOP_END_MS } from '../data/defense-workshop.ts';
+
+  function showLocalTime(): void {
+    const el = document.getElementById('workshop-local-time');
+    if (!el) return;
+    try {
+      const d = new Date(WORKSHOP_START_MS);
+      const formatted = new Intl.DateTimeFormat(undefined, {
+        weekday: 'long', month: 'short', day: 'numeric',
+        hour: 'numeric', minute: '2-digit', timeZoneName: 'short',
+      }).format(d);
+      el.textContent = `That's ${formatted} in your local time.`;
+    } catch {
+      // Intl not available for some reason -- leave the line empty rather than guess.
+    }
+  }
+
+  function toggleWorkshopEnded(): void {
+    const ended = Date.now() > WORKSHOP_END_MS;
+    const tickets = document.getElementById('tickets');
+    const endedSection = document.getElementById('workshop-ended');
+    const heroCta = document.getElementById('workshop-hero-cta') as HTMLAnchorElement | null;
+    if (!tickets || !endedSection) return;
+    if (ended) {
+      tickets.classList.add('hidden');
+      endedSection.classList.remove('hidden');
+      if (heroCta) { heroCta.href = '/workshop-replay'; heroCta.textContent = 'Watch the Replay'; }
+    }
+  }
+
+  showLocalTime();
+  toggleWorkshopEnded();
+</script>

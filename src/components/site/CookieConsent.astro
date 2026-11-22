@@ -54,6 +54,11 @@
         ad_personalization: 'granted',
       });
     }
+    // Meta Pixel (task 12) -- loads for the first time right here, the
+    // moment ad_storage is actually granted. Defined in Base.astro's head.
+    if (typeof window.__trbLoadMetaPixel === 'function') {
+      window.__trbLoadMetaPixel();
+    }
   }
 
   var choice = stored();
