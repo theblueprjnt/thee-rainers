@@ -29,14 +29,15 @@ test('J1 home renders non-blank with hero and nav', async ({ page }) => {
   expect(consoleErrors).toHaveLength(0);
 });
 
-// ── J2: Nav CTA is blue and routes to /foundation ──────────────────────────
-// Color law changed red (#E11D2A) -> blue (#2348C6) 2026-08-23. /foundation
-// itself moved from a free opt-in to a $19 paid product around the same
-// time; the CTA still points there, now selling the Blueprint directly.
-test('J2 nav CTA is blue fill and routes to /foundation', async ({ page }) => {
+// ── J2: Nav CTA is blue and routes to /first-training ──────────────────────
+// Color law changed red (#E11D2A) -> blue (#2348C6) 2026-08-23. CTA target
+// changed from /foundation to /first-training 2026-11-22 (Myron-audit nav
+// rebuild, task 9) -- /foundation is a $19 paid product now, not a lead
+// magnet, so the nav's "Free Guide" button points at the real one instead.
+test('J2 nav CTA is blue fill and routes to /first-training', async ({ page }) => {
   await page.goto(smokeUrl('/'));
 
-  const cta = page.locator('a[href="/foundation"]').first();
+  const cta = page.locator('a[href="/first-training"]').first();
   await expect(cta).toBeVisible();
 
   const bg = await cta.evaluate(el =>
