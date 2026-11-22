@@ -16,6 +16,10 @@
 
 @import "tailwindcss";
 @import "@fontsource-variable/bricolage-grotesque/index.css";
+/* Nav-only font (src/components/site/Nav.astro's .tr-nav-btn) — matches the
+   Myron Golden reference nav. Does not touch --font-sans / the rest of the site. */
+@import "@fontsource/poppins/600.css";
+@import "@fontsource/poppins/700.css";
 
 :root {
   --paper:    #FFFFFF;
