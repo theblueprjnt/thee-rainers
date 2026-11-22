@@ -38,9 +38,8 @@ const ALL_SHIPPING_COUNTRIES = [
 ] as const;
 
 // $29 Workshop Replay order bump, added as a Stripe optional_item on the
-// three Blueprint checkouts (task 3). UNVERIFIED against live Stripe this
-// session -- Stripe CLI auth is expired, see report. Confirm amount ($29)
-// and type (one-time) before deploying.
+// three Blueprint checkouts (task 3). Verified read-only against live
+// Stripe 2026-11-22: $29.00 USD, one_time, active.
 const WORKSHOP_REPLAY_BUMP_PRICE_ID = 'price_1UdSi8HzlarU775HTvJw8zvu';
 const BLUEPRINT_OPTIONAL_ITEMS = [{ price: WORKSHOP_REPLAY_BUMP_PRICE_ID }];
 
@@ -81,7 +80,8 @@ const PRODUCTS: Record<string, ProductConfig> = {
   // Workshop Replay, on-demand $49 purchase (task 2). Previously had no
   // lookupKey at all -- the page's buttons linked straight to
   // /defense-workshop instead of a working checkout.
-  // UNVERIFIED against live Stripe this session, see report.
+  // Verified read-only against live Stripe 2026-11-22: $49.00 USD,
+  // one_time, active.
   workshop_replay: {
     priceId: 'price_1UdSB9HzlarU775Hq80DQaKd',
     mode: 'payment',
@@ -95,20 +95,25 @@ const PRODUCTS: Record<string, ProductConfig> = {
   // defense_workshop_early ($39, price_6) removed per task 1 -- that
   // early-bird window closed 2026-08-08 and the product no longer exists in
   // this brief's price list.
+  // Verified read-only against live Stripe 2026-11-22: $49.00 USD,
+  // one_time, active. (Yes, "price_5" is a real ID -- this account allows
+  // literal custom price IDs on its older products.)
   defense_workshop_standard: {
     priceId: 'price_5',
     mode: 'payment',
     successPath: '/thank-you/defense-workshop',
     cancelPath: '/defense-workshop',
   },
-  // UNVERIFIED against live Stripe this session, see report.
+  // Verified read-only against live Stripe 2026-11-22: $99.00 USD,
+  // one_time, active.
   defense_workshop_review: {
     priceId: 'price_1UdSbdHzlarU775HtG58zLEo',
     mode: 'payment',
     successPath: '/thank-you/defense-workshop?tier=review',
     cancelPath: '/defense-workshop',
   },
-  // UNVERIFIED against live Stripe this session, see report.
+  // Verified read-only against live Stripe 2026-11-22: $199.00 USD,
+  // one_time, active.
   defense_workshop_call: {
     priceId: 'price_1UdTDzHzlarU775HFyWrH6Vj',
     mode: 'payment',
@@ -146,7 +151,8 @@ const PRODUCTS: Record<string, ProductConfig> = {
   // pays, so no 4th charge ever happens. Fulfillment (confirmation email,
   // Kit tag, Airtable, GA4, Telegram) fires once, on the first payment only
   // -- invoice.payment_succeeded renewals do not re-fulfill.
-  // UNVERIFIED against live Stripe this session, see report.
+  // Verified read-only against live Stripe 2026-11-22: $365.00 USD/month,
+  // recurring, active.
   grade2_plan: {
     priceId: 'price_1UdTFcHzlarU775HnwooM3gk',
     mode: 'subscription',
@@ -156,7 +162,8 @@ const PRODUCTS: Record<string, ProductConfig> = {
   },
   // Counts toward the 5-seat Grade 3 cap, same as the one-time grade3
   // lookupKey -- see the GRADE3_SEATS_TAKEN check below.
-  // UNVERIFIED against live Stripe this session, see report.
+  // Verified read-only against live Stripe 2026-11-22: $4,400.00 USD/month,
+  // recurring, active.
   grade3_plan: {
     priceId: 'price_1UdTH7HzlarU775HTuLyiPhy',
     mode: 'subscription',
@@ -165,7 +172,8 @@ const PRODUCTS: Record<string, ProductConfig> = {
   },
 
   // $79, replaces the old price_1UZbeWHzlarU775Hz6RkaVet (task 4).
-  // UNVERIFIED against live Stripe this session, see report.
+  // Verified read-only against live Stripe 2026-11-22: $79.00 USD,
+  // one_time, active.
   masterclass: {
     priceId: 'price_1UdTErHzlarU775HQrnlmVcX',
     mode: 'payment',

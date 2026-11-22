@@ -78,7 +78,7 @@ export const PRODUCTS: Record<string, Product> = {
     pagePath: '/workshop-replay',
     kitTagId: '',
     status: { state: 'live' },
-    note: 'Fixed 2026-11-19: create-checkout.ts now has a workshop_replay lookupKey (UNVERIFIED against live Stripe this session, see report), and the three former "Reserve Seat" buttons on workshop-replay.astro now point to it instead of /defense-workshop. Price ID above changed from the old price_1U5P9XHzlarU775HZfK91WPb to the brief\'s price_1UdSB9HzlarU775Hq80DQaKd -- confirm these are in fact the same $49 price before relying on this change.',
+    note: 'Fixed 2026-11-19: create-checkout.ts now has a workshop_replay lookupKey, and the three former "Reserve Seat" buttons on workshop-replay.astro now point to it instead of /defense-workshop. Price ID above changed from the old price_1U5P9XHzlarU775HZfK91WPb to price_1UdSB9HzlarU775Hq80DQaKd. Verified read-only against live Stripe 2026-11-22: $49.00 USD, one_time, active.',
   },
   masterclass: {
     key: 'masterclass',
@@ -89,7 +89,7 @@ export const PRODUCTS: Record<string, Product> = {
     pagePath: '/masterclass',
     kitTagId: '',
     status: { state: 'live' },
-    note: 'Added 2026-11-19, price changed from $57 (price_1UZbeWHzlarU775Hz6RkaVet) to $79 (price_1UdTErHzlarU775HQrnlmVcX) per this brief. UNVERIFIED against live Stripe this session, see report. "Masterclass" is the one name used sitewide -- older internal notes called this a mastermind, that wording is gone now.',
+    note: 'Added 2026-11-19, price changed from $57 (price_1UZbeWHzlarU775Hz6RkaVet) to $79 (price_1UdTErHzlarU775HQrnlmVcX) per this brief. Verified read-only against live Stripe 2026-11-22: $79.00 USD, one_time, active. "Masterclass" is the one name used sitewide -- older internal notes called this a mastermind, that wording is gone now.',
   },
   greatness: {
     key: 'greatness',

@@ -21,7 +21,7 @@ import { sendTelegramAlert } from '../../lib/telegram';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Clip links accepted: unlisted YouTube or Google Drive only, per the brief.
 const CLIP_URL_RE = /^https:\/\/(www\.)?(youtube\.com|youtu\.be|drive\.google\.com)\//;
-const REVIEW_TIER_PRICE_ID = 'price_1UdSbdHzlarU775HtG58zLEo'; // UNVERIFIED against live Stripe this session, see report
+const REVIEW_TIER_PRICE_ID = 'price_1UdSbdHzlarU775HtG58zLEo'; // Verified read-only against live Stripe 2026-11-22: $99.00 USD, one_time, active
 
 function corsHeaders(origin: string): Record<string, string> {
   return {
