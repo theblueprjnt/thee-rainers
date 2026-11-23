@@ -1,9 +1,8 @@
 ---
 // FootworkVisualizer — interactive footwork demo ported from the Astra Labs
 // reference build (theerainers.astralabs.store). Four bases (Steps, Gallop,
-// Pivot, Pendulum), each driving an animated SVG foot diagram. Only "Steps"
-// has real video footage (base-steps.mp4) -- the other three bases play the
-// diagram only until Rainers films matching clips.
+// Pivot, Pendulum), each driving an animated SVG foot diagram synced to its
+// own demo video.
 const bases = [
   { id: 'steps', label: 'Steps', text: 'The lead foot goes first, the rear foot follows, the base keeps its width.' },
   { id: 'gallop', label: 'Gallop', text: 'The rear foot pushes up, the lead foot shoots out. Distance closed in one beat.' },
@@ -67,9 +66,6 @@ const bases = [
       <div class="relative bg-[#111] overflow-hidden order-2 md:order-3 col-span-2 md:col-span-1" style="aspect-ratio: 810/952;">
         <video id="fv-video" class="absolute inset-0 w-full h-full object-cover" style="object-position: 50% 20%;"
           muted playsinline preload="metadata" poster="/images/base-steps.jpg" src="/videos/base-steps.mp4"></video>
-        <div id="fv-video-empty" class="hidden absolute inset-0 flex items-center justify-center text-center p-6">
-          <p class="text-white/40 text-sm tracking-wide">Footage for this base is coming soon.</p>
-        </div>
         <div class="absolute inset-x-0 bottom-0 p-5 md:p-6" style="background: linear-gradient(transparent, rgba(11,11,12,0.88));">
           <p id="fv-cap-title" class="font-black uppercase tracking-tighter text-white text-xl leading-none mb-1">Steps.</p>
           <p id="fv-cap-text" class="text-white/70 text-sm leading-snug">The lead foot goes first, the rear foot follows, the base keeps its width.</p>
@@ -153,7 +149,6 @@ const bases = [
     };
 
     const video = document.getElementById('fv-video');
-    const videoEmpty = document.getElementById('fv-video-empty');
     const capTitle = document.getElementById('fv-cap-title');
     const capText = document.getElementById('fv-cap-text');
     const tabs = Array.from(document.querySelectorAll('.fv-tab'));
@@ -174,16 +169,10 @@ const bases = [
       capTitle.textContent = labelById[name] + '.';
       capText.textContent = textById[name];
 
-      if (name === 'steps') {
-        video.classList.remove('hidden');
-        videoEmpty.classList.add('hidden');
-        video.currentTime = 0;
-        video.play().catch(() => {});
-      } else {
-        video.pause();
-        video.classList.add('hidden');
-        videoEmpty.classList.remove('hidden');
-      }
+      video.poster = `/images/base-${name}.jpg`;
+      video.src = `/videos/base-${name}.mp4`;
+      video.currentTime = 0;
+      video.play().catch(() => {});
 
       prepare(name);
       clock0 = performance.now();
@@ -208,7 +197,7 @@ const bases = [
     const tick = (now) => {
       if (floorOn) {
         let p;
-        if (current === 'steps' && !video.paused && video.duration) p = video.currentTime / video.duration;
+        if (!video.paused && video.duration) p = video.currentTime / video.duration;
         else p = ((now - clock0) / 3200) % 1;
         draw(current, p);
       }
@@ -217,7 +206,6 @@ const bases = [
     requestAnimationFrame(tick);
 
     const vio = new IntersectionObserver((es) => es.forEach((e) => {
-      if (current !== 'steps') return;
       if (e.isIntersecting) video.play().catch(() => {});
       else video.pause();
     }), { threshold: 0.15 });

@@ -1,0 +1,182 @@
+---
+// AskRainers — lightweight FAQ chat widget, ported from the Astra Labs
+// reference build. Not an LLM: a plain keyword router against canned
+// answers, verified against this site's real prices/policies (not
+// copied blind from the reference, which had some unverifiable claims).
+// No backend, no tracking, no API cost. Unmatched questions get a
+// pre-filled mailto to Rainers or a booking link, never a guess.
+const chips: [string, string][] = [
+  ['Which grade?', 'Which grade should I pick?'],
+  ['Defense Workshop', 'When is the Defense Workshop?'],
+  ['Blueprints', 'What are the Blueprints?'],
+  ['Pay in parts', 'Can I pay in parts?'],
+  ['Need a gym?', 'Do I need a gym or a partner?'],
+  ['Masterclass', 'What is the Masterclass?'],
+];
+---
+<button id="ar-btn" type="button" aria-expanded="false" aria-controls="ar-panel"
+  class="fixed right-5 bottom-5 z-[130] bg-[var(--terra)] text-white font-black text-[13px] tracking-widest uppercase px-5 py-4 shadow-lg hover:brightness-90 transition-all duration-200">
+  Ask Rainers
+</button>
+
+<aside id="ar-panel" hidden aria-label="Ask Rainers"
+  class="fixed right-5 bottom-5 z-[135] flex flex-col bg-[#0A0A0A] border border-white/15 shadow-2xl"
+  style="width: min(400px, calc(100vw - 24px)); max-height: min(620px, calc(100svh - 110px));">
+
+  <div class="flex items-start justify-between gap-3 px-5 pt-5 pb-4 bg-[var(--terra)]">
+    <p class="text-white text-sm leading-snug">
+      <span class="block font-black uppercase tracking-tight text-lg mb-1">In your corner</span>
+      Answers from Rainers' own pages. Anything else goes straight to his inbox.
+    </p>
+    <button id="ar-close" type="button" aria-label="Close" class="text-white text-2xl leading-none shrink-0 w-8 h-8 flex items-center justify-center hover:opacity-70 transition-opacity">&times;</button>
+  </div>
+
+  <div id="ar-log" class="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-2.5" style="min-height: 120px;" aria-live="polite"></div>
+
+  <div id="ar-chips" class="flex flex-wrap gap-1.5 px-5 pb-3"></div>
+
+  <form id="ar-form" class="flex border-t border-white/10">
+    <input id="ar-input" autocomplete="off" placeholder="Ask about grades, Blueprints, the workshop…"
+      aria-label="Your question"
+      class="flex-1 min-w-0 bg-transparent border-0 text-white text-sm px-4 py-4 placeholder:text-white/40 focus:outline-none" />
+    <button type="submit" aria-label="Send" class="w-14 bg-[var(--terra)] text-white text-xl hover:brightness-90 transition-all duration-200">&rarr;</button>
+  </form>
+</aside>
+
+<style is:global>
+  .ar-msg {
+    max-width: 88%;
+    padding: 11px 14px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: #fff;
+  }
+  .ar-msg-them {
+    background: #1a1b21;
+    align-self: flex-start;
+  }
+  .ar-msg-me {
+    background: var(--terra);
+    align-self: flex-end;
+  }
+  .ar-msg a {
+    color: #8fa6ff;
+    font-weight: 600;
+  }
+  #ar-chips button {
+    font-size: 12px;
+    padding: 7px 11px;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s;
+  }
+  #ar-chips button:hover {
+    background: #fff;
+    color: var(--terra);
+  }
+</style>
+
+<script define:vars={{ chips }}>
+  function initAskRainers() {
+    const btn = document.getElementById('ar-btn');
+    const panel = document.getElementById('ar-panel');
+    const closeBtn = document.getElementById('ar-close');
+    const log = document.getElementById('ar-log');
+    const chipsWrap = document.getElementById('ar-chips');
+    const form = document.getElementById('ar-form');
+    const input = document.getElementById('ar-input');
+    if (!btn || btn.dataset.bound === 'true') return;
+    btn.dataset.bound = 'true';
+
+    const EMAIL = 'rainers@theerainers.com';
+    const BOOKING = 'https://calendly.com/theerainers/1-1';
+
+    const answers = {
+      pick: "Start with Grade 1. It's the foundation every fighter needs, and you can move up once you've built it. <a href=\"/coaching\">See the grades</a>",
+      feedback: 'Rainers reviews every submission personally. Expect feedback within a few days.',
+      switch: "Yes. Most fighters start at Grade 1 and move up once they've built the foundation. <a href=\"/coaching\">See the grades</a>",
+      gym: 'No gym or partner needed. The curriculum is built to work solo, with drills you can run in a mirror or on your own footage.',
+      parts: 'Yes. Grade 2: 3 payments of $365. Grade 3: 3 payments of $4,400.',
+      grades: "Grade 1 Foundation is $347 for 90 days. Grade 2 Development is $997 for 90 days. Grade 3 is $12,000 for 12 months, application only, 5 seats. <a href=\"/coaching\">See the grades</a>",
+      blueprints: 'The Footwork Blueprint and the Shadowboxing Blueprint are $19 each, or $30 together as the Complete Bundle. One-time purchase, instant PDF download.',
+      access: 'A download link is sent to the email you use at checkout, usually within a few minutes.',
+      masterclass: 'The Masterclass is $79: ten step-by-step video lessons on the complete boxing fundamentals, the 6-week structure and the Footwork Blueprint PDF as bonuses, and lifetime access.',
+      workshop: 'The Defense Workshop is live on Zoom, Sunday Nov 29 at 12:00 PM ET. Seats are $49 (live plus replay), $99 (plus a recorded breakdown of one clip you send) and $199 (plus a 1:1 call). Every seat includes the replay.',
+      refund: "Coaching isn't refundable once your first session starts. If it isn't producing clear progress, Rainers keeps working at no charge until it does.",
+      reply: 'Messages get a reply within two business days. We honor the Sabbath, so Saturday messages get a Monday reply.',
+    };
+
+    const routes = [
+      [/which grade|pick|choose|start where|beginner|new to/i, 'pick'],
+      [/feedback|footage|hear back|review|video/i, 'feedback'],
+      [/switch|move up|upgrade|change grade/i, 'switch'],
+      [/gym|partner|equipment|home|solo/i, 'gym'],
+      [/part|instal|payment plan|split|3 payments/i, 'parts'],
+      [/workshop|defen|zoom|live|nov|seat|replay/i, 'workshop'],
+      [/masterclass|course|lesson|\$?79/i, 'masterclass'],
+      [/download|access|pdf|link|after purchase/i, 'access'],
+      [/blueprint|footwork|shadow|bundle|\$?19|\$?30/i, 'blueprints'],
+      [/refund|money back|guarantee/i, 'refund'],
+      [/grade|coach|price|cost|how much|\$|1.?on.?1|private/i, 'grades'],
+      [/reply|respond|contact|email|saturday|sabbath|weekend/i, 'reply'],
+    ];
+
+    const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const mail = (q) => `mailto:${EMAIL}?subject=${encodeURIComponent('A question for Rainers')}&body=${encodeURIComponent('Hi Rainers,\n\n' + q + '\n\n')}`;
+
+    const say = (html, who = 'them') => {
+      const m = document.createElement('div');
+      m.className = 'ar-msg ar-msg-' + who;
+      m.innerHTML = html;
+      log.appendChild(m);
+      log.scrollTop = log.scrollHeight;
+    };
+
+    const ask = (q) => {
+      say(esc(q), 'me');
+      const hit = routes.find(([re]) => re.test(q));
+      setTimeout(() => {
+        if (hit) say(answers[hit[1]]);
+        else say(`That one is best answered by Rainers himself. <a href="${mail(q)}">Send it to his inbox</a>, already written for you, or <a href="${BOOKING}">book a call</a>.`);
+      }, 260);
+    };
+
+    chips.forEach(([label, q]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = label;
+      b.addEventListener('click', () => ask(q));
+      chipsWrap.appendChild(b);
+    });
+
+    let started = false;
+    const open = () => {
+      panel.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+      btn.classList.add('hidden');
+      if (!started) {
+        started = true;
+        say("Hey, I'm here with Rainers' own answers. Ask about the grades, the Blueprints, the Defense Workshop, or how feedback works.");
+      }
+      input.focus();
+    };
+    const close = () => {
+      panel.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.classList.remove('hidden');
+      btn.focus();
+    };
+
+    btn.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) close(); });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const q = input.value.trim();
+      if (q) { ask(q); input.value = ''; }
+    });
+  }
+
+  initAskRainers();
+</script>
