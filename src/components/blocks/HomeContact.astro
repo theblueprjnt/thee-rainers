@@ -1,0 +1,120 @@
+---
+// HomeContact — bottom-of-homepage contact section, ported from the Astra
+// reference (.contact block), merged with the site's existing final-CTA
+// headline. Posts to the same /api/contact endpoint the dedicated /contact
+// page uses (same payload contract: full_name, email, phone, reason,
+// message, website honeypot).
+const fieldClass =
+  'w-full border border-white/20 bg-[#16171C] text-white text-sm px-4 py-3.5 ' +
+  'placeholder:text-white/35 focus:border-white focus:outline-none transition-colors duration-200';
+---
+<section class="bg-[var(--terra)] px-6 md:px-12 lg:px-20 py-16 md:py-24">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+
+    <div>
+      <h2 class="font-black uppercase tracking-tighter text-white mb-6"
+        style="font-size: clamp(2.5rem, 5vw, 5rem); line-height: 0.88;">
+        The system is built. Bring your body.
+      </h2>
+      <p class="text-white/85 leading-relaxed mb-6 max-w-[440px]">
+        For coaching, workshops, partnerships, press, and anything that needs a human reply.
+      </p>
+      <p class="mb-3">
+        <a href="mailto:rainers@theerainers.com" class="text-white font-bold text-xl hover:opacity-80 transition-opacity">rainers@theerainers.com</a>
+      </p>
+      <p class="text-white/70 text-sm">
+        We reply within two business days. We honor the Sabbath, so Saturday messages get a Monday reply.
+      </p>
+    </div>
+
+    <div class="bg-[#0A0A0A] p-6 md:p-10">
+      <form id="home-contact-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4" novalidate>
+        <input type="text" name="website" id="home-contact-website" autocomplete="off" tabindex="-1" class="hidden" aria-hidden="true" />
+
+        <input type="text" name="full_name" id="home-contact-name" required autocomplete="name"
+          placeholder="Full name" class={`${fieldClass} sm:col-span-2`} />
+        <input type="email" name="email" id="home-contact-email" required autocomplete="email"
+          placeholder="Email" class={fieldClass} />
+        <input type="tel" name="phone" id="home-contact-phone" required autocomplete="tel"
+          placeholder="Phone (with country code)" class={fieldClass} />
+
+        <div class="relative sm:col-span-2">
+          <select name="reason" id="home-contact-reason" required
+            class={`${fieldClass} appearance-none pr-10 cursor-pointer`}>
+            <option value="" disabled selected>Select a reason</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Coaching">Coaching</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Press">Press</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/50">
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none" aria-hidden="true">
+              <path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+        </div>
+
+        <textarea name="message" id="home-contact-message" rows={3} required
+          placeholder="Your message" class={`${fieldClass} sm:col-span-2 resize-y`}></textarea>
+
+        <button type="submit" id="home-contact-submit" class="tr-btn sm:col-span-2 justify-self-start">
+          Send
+        </button>
+        <p id="home-contact-done" class="hidden sm:col-span-2 text-white/70 text-sm">Thanks. We will reply within two business days.</p>
+        <p id="home-contact-error" class="hidden sm:col-span-2 text-white text-sm">Something went wrong. Try again or email rainers@theerainers.com</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function initHomeContactForm(): void {
+    const form = document.getElementById('home-contact-form') as HTMLFormElement | null;
+    if (!form || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const submitBtn = document.getElementById('home-contact-submit') as HTMLButtonElement | null;
+    const done  = document.getElementById('home-contact-done')  as HTMLElement;
+    const error = document.getElementById('home-contact-error') as HTMLElement;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+      error.classList.add('hidden');
+
+      const data = new FormData(form);
+      const payload = {
+        full_name: (data.get('full_name') as string ?? '').trim(),
+        email:     (data.get('email')     as string ?? '').trim(),
+        phone:     (data.get('phone')     as string ?? '').trim(),
+        reason:    (data.get('reason')    as string ?? '').trim(),
+        message:   (data.get('message')   as string ?? '').trim(),
+        website:   (data.get('website')   as string ?? '').trim(),
+      };
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const body = await res.json() as { success: boolean; error?: string };
+        if (body.success) {
+          form.classList.add('hidden');
+          done.classList.remove('hidden');
+        } else {
+          error.textContent = body.error || 'Something went wrong. Try again or email rainers@theerainers.com';
+          error.classList.remove('hidden');
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send'; }
+        }
+      } catch {
+        error.classList.remove('hidden');
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send'; }
+      }
+    });
+  }
+
+  initHomeContactForm();
+</script>

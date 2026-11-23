@@ -36,7 +36,7 @@ const bases = [
       </div>
 
       <!-- Floor diagram -->
-      <div class="relative bg-[#121318] border border-white/10 flex flex-col justify-center p-4 order-3 md:order-2 col-span-2 md:col-span-1">
+      <div class="relative bg-[#121318] border border-white/10 flex flex-col justify-center p-3 md:p-4 order-2">
         <svg id="fv-floor" viewBox="0 0 400 400" class="w-full h-auto" style="max-height: 60vh; aspect-ratio: 1/1;" aria-hidden="true">
           <defs>
             <pattern id="fv-canvas" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -63,15 +63,19 @@ const bases = [
       </div>
 
       <!-- Film -->
-      <div class="relative bg-[#111] overflow-hidden order-2 md:order-3 col-span-2 md:col-span-1" style="aspect-ratio: 810/952;">
+      <div class="relative bg-[#111] overflow-hidden order-1" style="aspect-ratio: 810/952;">
         <video id="fv-video" class="absolute inset-0 w-full h-full object-cover" style="object-position: 50% 20%;"
           muted playsinline preload="metadata" poster="/images/base-steps.jpg" src="/videos/base-steps.mp4"></video>
-        <div class="absolute inset-x-0 bottom-0 p-5 md:p-6" style="background: linear-gradient(transparent, rgba(11,11,12,0.88));">
-          <p id="fv-cap-title" class="font-black uppercase tracking-tighter text-white text-xl leading-none mb-1">Steps.</p>
-          <p id="fv-cap-text" class="text-white/70 text-sm leading-snug">The lead foot goes first, the rear foot follows, the base keeps its width.</p>
+        <div class="absolute inset-x-0 bottom-0 p-3 md:p-6" style="background: linear-gradient(transparent, rgba(11,11,12,0.88));">
+          <p id="fv-cap-title" class="font-black uppercase tracking-tighter text-white text-sm md:text-xl leading-none mb-1">Steps.</p>
+          <p id="fv-cap-text" class="hidden md:block text-white/70 text-sm leading-snug">The lead foot goes first, the rear foot follows, the base keeps its width.</p>
         </div>
       </div>
     </div>
+
+    <p id="fv-mobile-caption" class="md:hidden text-white/60 text-sm leading-relaxed mt-4">
+      The lead foot goes first, the rear foot follows, the base keeps its width.
+    </p>
   </div>
 </section>
 
@@ -151,6 +155,7 @@ const bases = [
     const video = document.getElementById('fv-video');
     const capTitle = document.getElementById('fv-cap-title');
     const capText = document.getElementById('fv-cap-text');
+    const mobileCaption = document.getElementById('fv-mobile-caption');
     const tabs = Array.from(document.querySelectorAll('.fv-tab'));
     const textById = Object.fromEntries(basesData.map((b) => [b.id, b.text]));
     const labelById = Object.fromEntries(basesData.map((b) => [b.id, b.label]));
@@ -168,6 +173,7 @@ const bases = [
       });
       capTitle.textContent = labelById[name] + '.';
       capText.textContent = textById[name];
+      if (mobileCaption) mobileCaption.textContent = textById[name];
 
       video.poster = `/images/base-${name}.jpg`;
       video.src = `/videos/base-${name}.mp4`;

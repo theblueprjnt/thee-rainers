@@ -1,0 +1,29 @@
+---
+// BlueprintCallout — single-product "$19 Footwork Blueprint" card, sits
+// right under the footwork visualizer. Ported from the Astra reference
+// (.bp block). Copy verified against /foundation.astro's real claims
+// (56 rounds, 21-page playbook) rather than assumed from the reference.
+---
+<section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-16 md:py-20 border-t border-white/10">
+  <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 md:gap-14 items-center">
+    <picture class="mx-auto md:mx-0 shrink-0">
+      <source srcset="/images/footwork-cover-opt.webp" type="image/webp" />
+      <img src="/images/footwork-cover-opt.jpg" alt="The Footwork Blueprint cover"
+        class="w-[160px] md:w-[200px] h-auto"
+        style="box-shadow: 0 30px 60px rgba(0,0,0,0.5); transform: rotate(-3deg);"
+        loading="lazy" decoding="async" />
+    </picture>
+    <div>
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-3">$19 · The Footwork Blueprint</p>
+      <h3 class="font-black uppercase tracking-tighter text-white mb-4"
+        style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 0.95;">
+        Start with the base.
+      </h3>
+      <p class="text-white/60 max-w-[520px] leading-relaxed mb-6">
+        4 footwork bases, 56 rounds of drills, Orthodox and Southpaw. Full video breakdown included. A 21-page playbook, zero filler.
+      </p>
+      <a href="/foundation" class="tr-btn">Get the Blueprint · $19</a>
+      <p class="text-white/30 text-[11px] mt-4 tracking-wide">One-time purchase. Instant PDF download.</p>
+    </div>
+  </div>
+</section>

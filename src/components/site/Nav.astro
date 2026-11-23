@@ -43,11 +43,12 @@ const trainingLinks = [
   )}
 
   <div class="max-w-[1140px] mx-auto px-6 h-20 flex items-center gap-4 md:gap-8">
-    <a href="/" class="z-[60] flex items-center shrink-0" aria-label="Thee Rainers home">
+    <a href="/" class="z-[60] flex items-center gap-3 shrink-0" aria-label="Thee Rainers home">
       <picture>
         <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
-        <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-12 md:h-14 w-auto" />
+        <img src="/images/trb-logo-nobg-header.png" alt="" width="64" height="80" class="h-12 md:h-14 w-auto" />
       </picture>
+      <span class={`tr-brand-text ${dark ? 'tr-brand-text--dark' : ''}`}>Thee Rainers</span>
     </a>
 
     <nav class="hidden md:flex items-center gap-9 ml-auto" aria-label="Primary">
@@ -102,11 +103,12 @@ const trainingLinks = [
   <div id="menu-backdrop" class="tr-menu-backdrop" aria-hidden="true"></div>
 
   <div class="tr-menu-topbar">
-    <a href="/" class="flex items-center" aria-label="Thee Rainers home">
+    <a href="/" class="flex items-center gap-3" aria-label="Thee Rainers home">
       <picture>
         <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
-        <img src="/images/trb-logo-nobg-header.png" alt="Thee Rainers" width="64" height="80" class="h-11 w-auto" />
+        <img src="/images/trb-logo-nobg-header.png" alt="" width="64" height="80" class="h-11 w-auto" />
       </picture>
+      <span class="tr-brand-text">Thee Rainers</span>
     </a>
     <button id="menu-close" type="button" class="tr-menu-close" aria-label="Close menu">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -184,6 +186,17 @@ const trainingLinks = [
   }
   .tr-nav-btn--dark:hover {
     color: var(--terra);
+  }
+  .tr-brand-text {
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #0B0B0C;
+    white-space: nowrap;
+  }
+  .tr-brand-text--dark {
+    color: #FFFFFF;
   }
   .tr-mobile-menu {
     position: fixed;

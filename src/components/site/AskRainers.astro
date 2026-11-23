@@ -150,11 +150,14 @@ const chips: [string, string][] = [
       chipsWrap.appendChild(b);
     });
 
+    let heroIn = false;
+    const syncBtn = () => btn.classList.toggle('hidden', heroIn || !panel.hidden);
+
     let started = false;
     const open = () => {
       panel.hidden = false;
       btn.setAttribute('aria-expanded', 'true');
-      btn.classList.add('hidden');
+      syncBtn();
       if (!started) {
         started = true;
         say("Hey, I'm here with Rainers' own answers. Ask about the grades, the Blueprints, the Defense Workshop, or how feedback works.");
@@ -164,13 +167,21 @@ const chips: [string, string][] = [
     const close = () => {
       panel.hidden = true;
       btn.setAttribute('aria-expanded', 'false');
-      btn.classList.remove('hidden');
+      syncBtn();
       btn.focus();
     };
 
     btn.addEventListener('click', open);
     closeBtn.addEventListener('click', close);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) close(); });
+
+    const heroEl = document.querySelector('[data-ask-rainers-hide]');
+    if (heroEl) {
+      new IntersectionObserver((entries) => {
+        heroIn = entries[0].isIntersecting;
+        syncBtn();
+      }, { threshold: 0.3 }).observe(heroEl);
+    }
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const q = input.value.trim();

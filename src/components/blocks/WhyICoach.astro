@@ -1,0 +1,52 @@
+---
+// WhyICoach — full-bleed blue "I teach non-damage boxing" section,
+// ported from the Astra Labs reference (.std block).
+const forRows = [
+  { who: 'For beginners', what: 'skill and confidence without gambling your health.' },
+  { who: 'For fighters', what: 'better defense and longer careers.' },
+  { who: 'For parents', what: 'a kid who learns to fight and stays whole.' },
+];
+---
+<section class="relative bg-[var(--terra)] overflow-hidden">
+  <div class="grid grid-cols-1 md:grid-cols-[0.9fr_1fr] md:min-h-[88vh]">
+
+    <div class="order-2 md:order-1 flex items-end justify-center md:justify-end px-6 md:px-0 pb-0">
+      <picture>
+        <source srcset="/images/cutout-800.webp" media="(max-width: 820px)" type="image/webp" />
+        <img src="/images/cutout.webp" alt="Rainers in boxing stance"
+          class="w-[80%] md:w-full max-w-[560px] h-auto"
+          style="filter: drop-shadow(0 30px 40px rgba(0,0,0,0.3));"
+          loading="lazy" decoding="async" />
+      </picture>
+    </div>
+
+    <div class="order-1 md:order-2 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 md:py-24">
+      <div class="max-w-[600px]">
+        <p class="text-white/75 text-[11px] tracking-widest uppercase font-bold mb-5">Why I coach this way</p>
+        <h2 class="font-black uppercase tracking-tighter text-white mb-6"
+          style="font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 0.9;">
+          I teach non-damage boxing.
+        </h2>
+        <p class="text-white font-medium text-lg leading-snug mb-4">
+          15+ years in martial arts. 6+ years coaching boxing across Europe, adults and kids, groups and one-on-one.
+        </p>
+        <p class="text-white/85 leading-relaxed mb-8">
+          So I am putting my standard in writing: Full offense. Full defense. Minimum unnecessary head trauma and structure first.
+        </p>
+        <dl class="border-t border-white/30">
+          {forRows.map(row => (
+            <div class="grid grid-cols-[130px_1fr] sm:grid-cols-[150px_1fr] gap-4 py-3.5 border-b border-white/30">
+              <dt class="font-bold uppercase tracking-wide text-[13px] text-white pt-0.5">{row.who}</dt>
+              <dd class="text-white">{row.what}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="mt-8 font-black uppercase tracking-tighter text-white"
+          style="font-size: clamp(1.5rem, 2.2vw, 2rem); line-height: 1.05;">
+          Boxing should build people, not break them.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>

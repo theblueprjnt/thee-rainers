@@ -1,0 +1,38 @@
+---
+// FollowTheWork — social proof/follow section, ported from the Astra
+// reference (.follow block). Counts from the single shared source of truth.
+import { SOCIAL_STATS } from '../../data/social-stats';
+
+const links = [
+  { label: 'Instagram', stat: SOCIAL_STATS.instagram, href: 'https://www.instagram.com/theerainers' },
+  { label: 'Facebook', stat: SOCIAL_STATS.facebook, href: 'https://www.facebook.com/theerainers' },
+  { label: 'TikTok', stat: SOCIAL_STATS.tiktok, href: 'https://www.tiktok.com/@theerainers' },
+  { label: 'Threads', stat: SOCIAL_STATS.threads, href: 'https://www.threads.com/@theerainers' },
+  { label: 'YouTube', stat: SOCIAL_STATS.youtube, href: 'https://www.youtube.com/@theerainers' },
+];
+---
+<section class="grid grid-cols-1 md:grid-cols-[0.8fr_1.2fr] bg-[#111216]">
+  <figure class="m-0 aspect-[4/3.4] md:aspect-auto md:min-h-[520px] overflow-hidden">
+    <img src="/images/padwork.webp" alt="Rainers on the pads, outdoor session"
+      class="w-full h-full object-cover object-[50%_25%] md:object-center"
+      loading="lazy" decoding="async" />
+  </figure>
+  <div class="px-6 md:px-12 lg:px-16 py-16 md:py-24 flex flex-col justify-center">
+    <h2 class="font-black uppercase tracking-tighter text-white mb-4"
+      style="font-size: clamp(2.5rem, 5vw, 5rem); line-height: 0.88;">
+      Follow the work.
+    </h2>
+    <p class="text-white/60 mb-8">Short breakdowns, setups and drills, most days, on every channel.</p>
+    <ul class="border-t border-white/10">
+      {links.map(l => (
+        <li class="border-b border-white/10">
+          <a href={l.href} target="_blank" rel="noopener"
+            class="flex justify-between items-baseline py-4 hover:pl-3 transition-all duration-200 group">
+            <span class="font-black uppercase tracking-tight text-white text-2xl md:text-3xl group-hover:text-[var(--terra)] transition-colors duration-200">{l.label}</span>
+            <b class="font-semibold text-[var(--terra)] whitespace-nowrap">{l.stat}K</b>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
