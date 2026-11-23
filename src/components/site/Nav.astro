@@ -46,7 +46,7 @@ const trainingLinks = [
     <a href="/" class="z-[60] flex items-center gap-3 shrink-0" aria-label="Thee Rainers home">
       <picture>
         <source srcset="/images/trb-logo-nobg-header.webp" type="image/webp" />
-        <img src="/images/trb-logo-nobg-header.png" alt="" width="64" height="80" class="h-12 md:h-14 w-auto" />
+        <img src="/images/trb-logo-nobg-header.png" alt="" width="64" height="80" class="h-14 md:h-16 w-auto" />
       </picture>
       <span class={`tr-brand-text ${dark ? 'tr-brand-text--dark' : ''}`}>Thee Rainers</span>
     </a>
@@ -194,6 +194,11 @@ const trainingLinks = [
     text-transform: uppercase;
     color: #0B0B0C;
     white-space: nowrap;
+  }
+  @media (min-width: 768px) {
+    .tr-brand-text {
+      font-size: 23px;
+    }
   }
   .tr-brand-text--dark {
     color: #FFFFFF;

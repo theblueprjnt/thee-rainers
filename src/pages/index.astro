@@ -24,24 +24,24 @@ import HomeContact from '../components/blocks/HomeContact.astro';
       <!-- Copy -->
       <div class="relative z-10 order-2 md:order-1 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-14 md:py-0">
         <div class="md:max-w-[560px]">
-          <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-6">
+          <p class="text-[var(--terra)] text-xs md:text-sm tracking-widest uppercase font-bold mb-6">
             Thee Rainers · Structured Boxing
           </p>
           <h1 class="font-black uppercase tracking-tighter text-white mb-8"
-            style="font-size: clamp(2.75rem, 6vw, 5.5rem); line-height: 0.9;">
+            style="font-size: clamp(3.25rem, 7.5vw, 6.75rem); line-height: 0.9;">
             Your<br/><span class="text-[var(--terra)]">first choice</span><br/>for boxing.
           </h1>
-          <p class="text-white/60 text-base leading-relaxed mb-12 max-w-[400px]">
+          <p class="text-white/60 text-base md:text-lg leading-relaxed mb-12 max-w-[440px]">
             Full offense. Full defense. Minimum unnecessary damage.
           </p>
           <div class="flex flex-col sm:flex-row flex-wrap gap-3">
-            <a href="/first-training" class="tr-btn">
+            <a href="/first-training" class="tr-btn md:px-10! md:py-5! md:text-sm!">
               Free Training
             </a>
-            <a href="/shop" class="tr-btn tr-btn--ghost">
+            <a href="/shop" class="tr-btn tr-btn--ghost md:px-10! md:py-5! md:text-sm!">
               Shop
             </a>
-            <a href="/coaching" class="tr-btn tr-btn--ghost">
+            <a href="/coaching" class="tr-btn tr-btn--ghost md:px-10! md:py-5! md:text-sm!">
               1-1 Coaching
             </a>
           </div>
@@ -49,22 +49,22 @@ import HomeContact from '../components/blocks/HomeContact.astro';
       </div>
 
       <!-- Film -->
-      <div class="relative order-1 md:order-2 h-[48vh] md:h-auto">
+      <div class="relative order-1 md:order-2 h-[74vh] md:h-auto">
         <video id="hero-video"
           class="absolute inset-0 w-full h-full object-cover object-top"
           autoplay muted loop playsinline preload="auto"
           aria-label="Rainers training footwork and bag work">
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
-        <p class="absolute bottom-6 left-6 text-white/70 text-[11px] tracking-widest uppercase font-bold">
+        <p class="absolute bottom-6 left-6 text-white/70 text-[11px] md:text-sm tracking-widest uppercase font-bold">
           Rainers, in the work.
         </p>
         <button id="hero-video-toggle" type="button" aria-label="Pause the film"
-          class="absolute bottom-6 right-6 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors duration-200">
-          <svg id="hero-video-icon-pause" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          class="absolute bottom-6 right-6 w-9 h-9 md:w-12 md:h-12 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors duration-200">
+          <svg id="hero-video-icon-pause" class="w-3.5 h-3.5 md:w-5 md:h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M6 4h3v12H6zM11 4h3v12h-3z" />
           </svg>
-          <svg id="hero-video-icon-play" class="w-3.5 h-3.5 hidden" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <svg id="hero-video-icon-play" class="w-3.5 h-3.5 md:w-5 md:h-5 hidden" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path d="M6 4l10 6-10 6z" />
           </svg>
         </button>
