@@ -1,0 +1,228 @@
+---
+// FootworkVisualizer — interactive footwork demo ported from the Astra Labs
+// reference build (theerainers.astralabs.store). Four bases (Steps, Gallop,
+// Pivot, Pendulum), each driving an animated SVG foot diagram. Only "Steps"
+// has real video footage (base-steps.mp4) -- the other three bases play the
+// diagram only until Rainers films matching clips.
+const bases = [
+  { id: 'steps', label: 'Steps', text: 'The lead foot goes first, the rear foot follows, the base keeps its width.' },
+  { id: 'gallop', label: 'Gallop', text: 'The rear foot pushes up, the lead foot shoots out. Distance closed in one beat.' },
+  { id: 'pivot', label: 'Pivot', text: 'Turn on the lead foot and swing the rear foot round. A new angle, same range.' },
+  { id: 'pendulum', label: 'Pendulum', text: 'Rock in and out together on the balls of the feet. Range on a hinge.' },
+];
+---
+<section class="bg-[#0A0A0A] px-6 md:px-12 lg:px-20 py-20 md:py-28">
+  <div class="max-w-[1280px] mx-auto">
+    <div class="mb-12 md:mb-16 max-w-[640px]">
+      <p class="text-[var(--terra)] text-[11px] tracking-widest uppercase font-bold mb-5">Footwork</p>
+      <h2 class="font-black uppercase tracking-tighter text-white mb-6"
+        style="font-size: clamp(2.25rem, 4.5vw, 4.5rem); line-height: 0.9;">
+        Footwork first. <span class="text-white/40">Shadowboxing second.</span>
+      </h2>
+      <p class="text-white/60 leading-relaxed">
+        Stance, then footwork, then how to put it together when nobody is holding pads for you. Four bases carry everything. Pick one and watch it on the canvas and in my feet.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-[200px_1fr_0.82fr] gap-3 md:gap-7 items-stretch">
+      <!-- Tabs -->
+      <div class="col-span-2 md:col-span-1 grid grid-cols-4 md:flex md:flex-col gap-1.5">
+        {bases.map(b => (
+          <button type="button" data-base-tab={b.id}
+            class="fv-tab text-left px-3 py-3 md:px-5 md:py-4 border border-white/15 font-black uppercase tracking-tighter text-sm md:text-[22px] leading-none text-white/55 transition-colors duration-200 text-center md:text-left"
+            aria-selected={b.id === 'steps' ? 'true' : 'false'}>
+            {b.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Floor diagram -->
+      <div class="relative bg-[#121318] border border-white/10 flex flex-col justify-center p-4 order-3 md:order-2 col-span-2 md:col-span-1">
+        <svg id="fv-floor" viewBox="0 0 400 400" class="w-full h-auto" style="max-height: 60vh; aspect-ratio: 1/1;" aria-hidden="true">
+          <defs>
+            <pattern id="fv-canvas" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M20 0H0V20" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1" />
+            </pattern>
+            <path id="fv-foot" d="M0-30c9 0 13 8 13 18 0 9-3 15-4 24-1 7-3 18-9 18s-8-11-9-18c-1-9-4-15-4-24 0-10 4-18 13-18z" />
+          </defs>
+          <rect x="14" y="14" width="372" height="372" fill="url(#fv-canvas)" />
+          <rect x="14" y="14" width="372" height="372" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2" />
+          <rect x="26" y="26" width="348" height="348" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5" />
+          <rect x="38" y="38" width="324" height="324" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="1" />
+          <rect x="6" y="6" width="22" height="22" fill="#2348c6" /><rect x="372" y="6" width="22" height="22" fill="#fff" />
+          <rect x="6" y="372" width="22" height="22" fill="#fff" /><rect x="372" y="372" width="22" height="22" fill="#2348c6" />
+          <g id="fv-ghosts"></g>
+          <path id="fv-trail-l" fill="none" stroke="#2348c6" stroke-width="2" stroke-dasharray="3 6" stroke-linecap="round" />
+          <path id="fv-trail-r" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-dasharray="3 6" stroke-linecap="round" />
+          <use href="#fv-foot" id="fv-foot-r" fill="#fff" />
+          <use href="#fv-foot" id="fv-foot-l" fill="#2348c6" stroke="#fff" stroke-width="1.5" />
+        </svg>
+        <div class="flex gap-6 justify-center mt-3 text-[11px] tracking-widest uppercase text-white/50">
+          <span class="flex items-center gap-2"><span class="w-2.5 h-3.5 rounded-sm bg-[var(--terra)] border border-white inline-block"></span>Lead foot</span>
+          <span class="flex items-center gap-2"><span class="w-2.5 h-3.5 rounded-sm bg-white inline-block"></span>Rear foot</span>
+        </div>
+      </div>
+
+      <!-- Film -->
+      <div class="relative bg-[#111] overflow-hidden order-2 md:order-3 col-span-2 md:col-span-1" style="aspect-ratio: 810/952;">
+        <video id="fv-video" class="absolute inset-0 w-full h-full object-cover" style="object-position: 50% 20%;"
+          muted playsinline preload="metadata" poster="/images/base-steps.jpg" src="/videos/base-steps.mp4"></video>
+        <div id="fv-video-empty" class="hidden absolute inset-0 flex items-center justify-center text-center p-6">
+          <p class="text-white/40 text-sm tracking-wide">Footage for this base is coming soon.</p>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-5 md:p-6" style="background: linear-gradient(transparent, rgba(11,11,12,0.88));">
+          <p id="fv-cap-title" class="font-black uppercase tracking-tighter text-white text-xl leading-none mb-1">Steps.</p>
+          <p id="fv-cap-text" class="text-white/70 text-sm leading-snug">The lead foot goes first, the rear foot follows, the base keeps its width.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fv-tab.is-on {
+    background: var(--terra);
+    border-color: var(--terra);
+    color: #FFFFFF;
+  }
+  .fv-tab:hover {
+    color: #FFFFFF;
+    border-color: rgba(255,255,255,0.4);
+  }
+</style>
+
+<script define:vars={{ basesData: bases }}>
+  function initFootworkVisualizer() {
+    const section = document.getElementById('fv-floor')?.closest('section');
+    if (!section || section.dataset.fvBound === 'true') return;
+    section.dataset.fvBound = 'true';
+
+    const L0 = [180, 190, -12], R0 = [240, 270, 38];
+    const ease = (t) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const keyed = (frames) => (p) => {
+      let i = 0;
+      while (i < frames.length - 2 && p > frames[i + 1][0]) i++;
+      const a = frames[i], b = frames[i + 1];
+      const t = ease(Math.min(1, Math.max(0, (p - a[0]) / ((b[0] - a[0]) || 1))));
+      return a.slice(1).map((v, k) => lerp(v, b[k + 1], t));
+    };
+    const st = (dy1, dy2) => [L0[0], L0[1] + dy1, L0[2], R0[0], R0[1] + dy2, R0[2]];
+
+    const bases = {
+      steps: { f: keyed([[0, ...st(20, 20)], [.2, ...st(-35, 20)], [.4, ...st(-35, -35)], [.55, ...st(-35, -35)], [.75, ...st(-35, 20)], [.95, ...st(20, 20)], [1, ...st(20, 20)]]) },
+      gallop: { f: keyed([[0, ...st(30, 30)], [.22, L0[0], L0[1] + 30, L0[2], 226, 250, 30], [.4, L0[0], L0[1] - 40, L0[2], 226, 250, 30], [.55, ...st(-40, -40)], [.7, ...st(-40, -40)], [.95, ...st(30, 30)], [1, ...st(30, 30)]]) },
+      pivot: {
+        f: (p) => {
+          const k = keyed([[0, 0], [.15, 0], [.5, 1], [.7, 1], [1, 0]])(p)[0];
+          const th = (-Math.PI / 2) * k, dx = R0[0] - L0[0], dy = R0[1] - L0[1];
+          return [L0[0], L0[1], L0[2] - 90 * k, L0[0] + dx * Math.cos(th) - dy * Math.sin(th), L0[1] + dx * Math.sin(th) + dy * Math.cos(th), R0[2] - 90 * k];
+        },
+      },
+      pendulum: { f: keyed([[0, ...st(22, 22)], [.25, ...st(-24, -24)], [.5, ...st(22, 22)], [.75, ...st(-24, -24)], [1, ...st(22, 22)]]) },
+    };
+
+    const footL = document.getElementById('fv-foot-l');
+    const footR = document.getElementById('fv-foot-r');
+    const ghosts = document.getElementById('fv-ghosts');
+    const trailL = document.getElementById('fv-trail-l');
+    const trailR = document.getElementById('fv-trail-r');
+    const NS = 'http://www.w3.org/2000/svg';
+
+    const place = (el, x, y, a) => el.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${a.toFixed(1)}) scale(1.3)`);
+    const draw = (name, p) => { const v = bases[name].f(p); place(footL, v[0], v[1], v[2]); place(footR, v[3], v[4], v[5]); };
+
+    const marksByBase = { steps: [0, .4], gallop: [0, .22, .55], pivot: [0, .5], pendulum: [0, .25] };
+    const prepare = (name) => {
+      const f = bases[name].f, ptsL = [], ptsR = [];
+      for (let i = 0; i <= 60; i++) { const v = f(i / 60); ptsL.push(v.slice(0, 2)); ptsR.push(v.slice(3, 5)); }
+      const toD = (pts) => 'M' + pts.map((p) => p.map((n) => n.toFixed(1)).join(' ')).join('L');
+      trailL.setAttribute('d', toD(ptsL));
+      trailR.setAttribute('d', toD(ptsR));
+      ghosts.innerHTML = '';
+      marksByBase[name].forEach((m) => {
+        const v = f(m);
+        [[v[0], v[1], v[2], 'rgba(35,72,198,.28)'], [v[3], v[4], v[5], 'rgba(255,255,255,.14)']].forEach(([x, y, a, c]) => {
+          const u = document.createElementNS(NS, 'use');
+          u.setAttribute('href', '#fv-foot');
+          u.setAttribute('fill', c);
+          place(u, x, y, a);
+          ghosts.appendChild(u);
+        });
+      });
+    };
+
+    const video = document.getElementById('fv-video');
+    const videoEmpty = document.getElementById('fv-video-empty');
+    const capTitle = document.getElementById('fv-cap-title');
+    const capText = document.getElementById('fv-cap-text');
+    const tabs = Array.from(document.querySelectorAll('.fv-tab'));
+    const textById = Object.fromEntries(basesData.map((b) => [b.id, b.text]));
+    const labelById = Object.fromEntries(basesData.map((b) => [b.id, b.label]));
+
+    let current = 'steps';
+    let clock0 = performance.now();
+
+    const select = (name) => {
+      if (!bases[name]) return;
+      current = name;
+      tabs.forEach((t) => {
+        const on = t.dataset.baseTab === name;
+        t.classList.toggle('is-on', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      capTitle.textContent = labelById[name] + '.';
+      capText.textContent = textById[name];
+
+      if (name === 'steps') {
+        video.classList.remove('hidden');
+        videoEmpty.classList.add('hidden');
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+        video.classList.add('hidden');
+        videoEmpty.classList.remove('hidden');
+      }
+
+      prepare(name);
+      clock0 = performance.now();
+      draw(name, 0);
+    };
+
+    tabs.forEach((t) => {
+      t.addEventListener('click', () => select(t.dataset.baseTab));
+      t.addEventListener('keydown', (e) => {
+        const i = tabs.indexOf(t);
+        const n = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (n) { e.preventDefault(); const nx = tabs[(i + n + tabs.length) % tabs.length]; nx.focus(); select(nx.dataset.baseTab); }
+      });
+    });
+
+    prepare('steps');
+    draw('steps', 0);
+
+    let floorOn = false;
+    new IntersectionObserver((es) => { floorOn = es[0].isIntersecting; }).observe(section);
+
+    const tick = (now) => {
+      if (floorOn) {
+        let p;
+        if (current === 'steps' && !video.paused && video.duration) p = video.currentTime / video.duration;
+        else p = ((now - clock0) / 3200) % 1;
+        draw(current, p);
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+
+    const vio = new IntersectionObserver((es) => es.forEach((e) => {
+      if (current !== 'steps') return;
+      if (e.isIntersecting) video.play().catch(() => {});
+      else video.pause();
+    }), { threshold: 0.15 });
+    vio.observe(video);
+  }
+
+  initFootworkVisualizer();
+</script>

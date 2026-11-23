@@ -4,6 +4,7 @@ import Testimonials from '../components/site/Testimonials.astro';
 import OfferStack from '../components/blocks/OfferStack.astro';
 import ProofSection from '../components/blocks/ProofSection.astro';
 import Objections from '../components/blocks/Objections.astro';
+import FootworkVisualizer from '../components/blocks/FootworkVisualizer.astro';
 import GradePricing from '../components/blocks/GradePricing.astro';
 import { SOCIAL_STATS } from '../data/social-stats';
 import { PRODUCTS } from '../data/products.ts';
@@ -157,6 +158,9 @@ const stripProducts = [
 
   <!-- ── BEFORE YOU START (old way vs our way) ────────────────────────── -->
   <Objections />
+
+  <!-- ── FOOTWORK VISUALIZER (interactive, ported from Astra reference) ── -->
+  <FootworkVisualizer />
 
   <!-- ── OFFER STACK ────────────────────────────────────────────────────── -->
   <OfferStack />
