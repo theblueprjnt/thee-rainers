@@ -11,6 +11,7 @@ interface Props {
   hideNav?: boolean;
   hideFooter?: boolean;
   hidePromoBar?: boolean;
+  navDark?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   hideNav = false,
   hideFooter = false,
   hidePromoBar = false,
+  navDark = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://theerainers.com');
@@ -310,7 +312,7 @@ const siteSchema = JSON.stringify({
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LQ7HPXG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    {!hideNav && <Nav hidePromoBar={hidePromoBar} />}
+    {!hideNav && <Nav hidePromoBar={hidePromoBar} dark={navDark} />}
     <!-- pt-14 compensates for the promo bar added above the nav row; dropped when the bar is hidden for a page -->
     <main class={`flex-1 ${hidePromoBar ? '' : 'pt-14'}`}>
       <slot />
