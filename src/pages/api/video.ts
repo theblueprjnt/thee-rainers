@@ -6,6 +6,16 @@
 // always invoke the Worker, so this proxy is the one place that can
 // actually slice the file and answer Range requests, which mobile
 // Safari requires in order to play video at all.
+//
+// A plain fetch() back to the site's own public URL does not work here --
+// confirmed via a live 522 (Cloudflare's own connection-timeout code): in
+// a Workers-with-assets deployment there is no real origin server behind
+// the zone, so self-fetching over the public internet has nothing to
+// connect to. The ASSETS binding (cloudflare:workers env, same one wired
+// in wrangler.jsonc) is the documented way to read a static asset from
+// inside the Worker itself.
+import { env as cfEnv } from 'cloudflare:workers';
+
 export const prerender = false;
 
 const ALLOWED_FILES = new Set([
@@ -22,15 +32,15 @@ export async function GET({ request, url }: { request: Request; url: URL }): Pro
     return new Response('Not found', { status: 404 });
   }
 
-  const assetUrl = new URL(`/videos/${file}`, url.origin);
-  let assetRes: Response;
-  try {
-    assetRes = await fetch(assetUrl.toString());
-  } catch (err) {
-    return new Response(`DEBUG fetch threw: ${String(err)} | url: ${assetUrl.toString()}`, { status: 500 });
+  const assets = (cfEnv as unknown as { ASSETS?: { fetch(req: Request): Promise<Response> } }).ASSETS;
+  if (!assets) {
+    return new Response('ASSETS binding not available', { status: 500 });
   }
+
+  const assetUrl = new URL(`/videos/${file}`, url.origin);
+  const assetRes = await assets.fetch(new Request(assetUrl.toString()));
   if (!assetRes.ok) {
-    return new Response(`DEBUG asset not ok: ${assetRes.status} ${assetRes.statusText} | url: ${assetUrl.toString()}`, { status: 500 });
+    return new Response('Not found', { status: 404 });
   }
 
   const buf = await assetRes.arrayBuffer();
