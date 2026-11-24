@@ -189,7 +189,8 @@ const siteSchema = JSON.stringify({
         // Checkout Session lookup keys — keep in sync with create-checkout.ts PRODUCTS map.
         // Updated 2026-11-19: removed defense_workshop_early and greatness_monthly/
         // greatness_annual (both retired, task 6/task 1), masterclass renamed and
-        // repriced $57 -> $79 (task 4), added the two Defense Workshop upsell tiers
+        // repriced $57 -> $79 (task 4), then reverted back to $57 2026-11-24 at
+        // owner request. Added the two Defense Workshop upsell tiers
         // (task 1), the two Grade payment plans (task 5), and the base Grade
         // lookup keys (pre-existing gap, were never tracked here at all).
         'footwork':                    { id: 'footwork_blueprint',      name: 'Footwork Blueprint',          price:   9 },
@@ -199,7 +200,7 @@ const siteSchema = JSON.stringify({
         'defense_workshop_review':     { id: 'defense_workshop_review', name: 'Defense Workshop + Footage Review', price: 99 },
         'defense_workshop_call':       { id: 'defense_workshop_call',   name: 'Defense Workshop + 1:1 Call', price: 199 },
         'workshop_replay':             { id: 'workshop_replay',         name: 'Workshop Replay',             price:  49 },
-        'masterclass':                 { id: 'masterclass',             name: 'Masterclass',                 price:  79 },
+        'masterclass':                 { id: 'masterclass',             name: 'Masterclass',                 price:  57 },
         'grade1':                      { id: 'grade1',                  name: 'Grade 1 Foundation',          price: 347 },
         'grade2':                      { id: 'grade2',                  name: 'Grade 2 Development',         price: 997 },
         'grade3':                      { id: 'grade3',                  name: 'Grade 3',                     price: 12000 },

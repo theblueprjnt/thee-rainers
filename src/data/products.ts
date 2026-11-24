@@ -83,13 +83,13 @@ export const PRODUCTS: Record<string, Product> = {
   masterclass: {
     key: 'masterclass',
     displayName: 'Masterclass',
-    priceCents: 7900,
+    priceCents: 5700,
     currency: 'USD',
-    stripePriceId: 'price_1UdTErHzlarU775HQrnlmVcX',
+    stripePriceId: 'price_1UZbeWHzlarU775Hz6RkaVet',
     pagePath: '/masterclass',
     kitTagId: '',
     status: { state: 'live' },
-    note: 'Added 2026-11-19, price changed from $57 (price_1UZbeWHzlarU775Hz6RkaVet) to $79 (price_1UdTErHzlarU775HQrnlmVcX) per this brief. Verified read-only against live Stripe 2026-11-22: $79.00 USD, one_time, active. "Masterclass" is the one name used sitewide -- older internal notes called this a mastermind, that wording is gone now.',
+    note: 'Reverted 2026-11-24 from $79 (price_1UdTErHzlarU775HQrnlmVcX) back to $57 (price_1UZbeWHzlarU775Hz6RkaVet) at owner request. Verified read-only against live Stripe: $57.00 USD, one_time, active. "Masterclass" is the one name used sitewide -- older internal notes called this a mastermind, that wording is gone now.',
   },
   greatness: {
     key: 'greatness',

@@ -171,11 +171,11 @@ const PRODUCTS: Record<string, ProductConfig> = {
     cancelPath: '/coaching',
   },
 
-  // $79, replaces the old price_1UZbeWHzlarU775Hz6RkaVet (task 4).
-  // Verified read-only against live Stripe 2026-11-22: $79.00 USD,
-  // one_time, active.
+  // $57, reverted from the $79 price (price_1UdTErHzlarU775HQrnlmVcX) at
+  // owner request 2026-11-24. Verified read-only against live Stripe:
+  // $57.00 USD, one_time, active.
   masterclass: {
-    priceId: 'price_1UdTErHzlarU775HQrnlmVcX',
+    priceId: 'price_1UZbeWHzlarU775Hz6RkaVet',
     mode: 'payment',
     successPath: '/thank-you/masterclass',
     cancelPath: '/masterclass',
