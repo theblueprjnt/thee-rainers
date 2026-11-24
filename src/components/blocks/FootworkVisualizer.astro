@@ -65,7 +65,7 @@ const bases = [
       <!-- Film -->
       <div class="relative bg-[#111] overflow-hidden order-1" style="aspect-ratio: 810/952;">
         <video id="fv-video" class="absolute inset-0 w-full h-full object-cover" style="object-position: 50% 20%;"
-          muted playsinline preload="metadata" poster="/images/base-steps.jpg" src="/videos/base-steps.mp4"></video>
+          muted playsinline preload="metadata" poster="/images/base-steps.jpg" src="/api/video?file=base-steps.mp4"></video>
         <div class="absolute inset-x-0 bottom-0 p-3 md:p-6" style="background: linear-gradient(transparent, rgba(11,11,12,0.88));">
           <p id="fv-cap-title" class="font-black uppercase tracking-tighter text-white text-sm md:text-xl leading-none mb-1">Steps.</p>
           <p id="fv-cap-text" class="hidden md:block text-white/70 text-sm leading-snug">The lead foot goes first, the rear foot follows, the base keeps its width.</p>
@@ -176,7 +176,7 @@ const bases = [
       if (mobileCaption) mobileCaption.textContent = textById[name];
 
       video.poster = `/images/base-${name}.jpg`;
-      video.src = `/videos/base-${name}.mp4`;
+      video.src = `/api/video?file=base-${name}.mp4`;
       video.currentTime = 0;
       video.play().catch(() => {});
 
