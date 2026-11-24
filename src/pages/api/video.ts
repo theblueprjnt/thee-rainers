@@ -23,9 +23,14 @@ export async function GET({ request, url }: { request: Request; url: URL }): Pro
   }
 
   const assetUrl = new URL(`/videos/${file}`, url.origin);
-  const assetRes = await fetch(assetUrl.toString());
+  let assetRes: Response;
+  try {
+    assetRes = await fetch(assetUrl.toString());
+  } catch (err) {
+    return new Response(`DEBUG fetch threw: ${String(err)} | url: ${assetUrl.toString()}`, { status: 500 });
+  }
   if (!assetRes.ok) {
-    return new Response('Not found', { status: 404 });
+    return new Response(`DEBUG asset not ok: ${assetRes.status} ${assetRes.statusText} | url: ${assetUrl.toString()}`, { status: 500 });
   }
 
   const buf = await assetRes.arrayBuffer();
