@@ -14,6 +14,13 @@
 // connect to. The ASSETS binding (cloudflare:workers env, same one wired
 // in wrangler.jsonc) is the documented way to read a static asset from
 // inside the Worker itself.
+//
+// Forward the incoming Range header straight into the ASSETS fetch and
+// pass its response straight back, rather than buffering the whole file
+// into Worker memory and slicing it by hand on every request (including
+// every small probe range request a browser makes while starting
+// playback). The ASSETS binding is Cloudflare's real static-file layer;
+// it understands Range natively, so there is nothing to reimplement.
 import { env as cfEnv } from 'cloudflare:workers';
 
 export const prerender = false;
@@ -38,47 +45,18 @@ export async function GET({ request, url }: { request: Request; url: URL }): Pro
   }
 
   const assetUrl = new URL(`/videos/${file}`, url.origin);
-  const assetRes = await assets.fetch(new Request(assetUrl.toString()));
-  if (!assetRes.ok) {
+  const forwardedHeaders = new Headers();
+  const range = request.headers.get('range');
+  if (range) forwardedHeaders.set('range', range);
+
+  const assetRes = await assets.fetch(new Request(assetUrl.toString(), { headers: forwardedHeaders }));
+  if (!assetRes.ok && assetRes.status !== 206 && assetRes.status !== 416) {
     return new Response('Not found', { status: 404 });
   }
 
-  const buf = await assetRes.arrayBuffer();
-  const total = buf.byteLength;
-  const range = request.headers.get('range');
+  const headers = new Headers(assetRes.headers);
+  headers.set('Accept-Ranges', 'bytes');
+  headers.set('Cache-Control', 'public, max-age=31536000, immutable');
 
-  const baseHeaders = new Headers({
-    'Content-Type': 'video/mp4',
-    'Accept-Ranges': 'bytes',
-    'Cache-Control': 'public, max-age=31536000, immutable',
-  });
-
-  if (!range) {
-    baseHeaders.set('Content-Length', String(total));
-    return new Response(buf, { status: 200, headers: baseHeaders });
-  }
-
-  const match = /bytes=(\d*)-(\d*)/.exec(range);
-  if (!match) {
-    baseHeaders.set('Content-Length', String(total));
-    return new Response(buf, { status: 200, headers: baseHeaders });
-  }
-
-  let start = match[1] ? parseInt(match[1], 10) : 0;
-  let end = match[2] ? parseInt(match[2], 10) : total - 1;
-  if (Number.isNaN(start) || start < 0) start = 0;
-  if (Number.isNaN(end) || end >= total) end = total - 1;
-
-  if (start > end) {
-    return new Response(null, {
-      status: 416,
-      headers: { 'Content-Range': `bytes */${total}` },
-    });
-  }
-
-  const sliced = buf.slice(start, end + 1);
-  baseHeaders.set('Content-Range', `bytes ${start}-${end}/${total}`);
-  baseHeaders.set('Content-Length', String(sliced.byteLength));
-
-  return new Response(sliced, { status: 206, headers: baseHeaders });
+  return new Response(assetRes.body, { status: assetRes.status, headers });
 }
